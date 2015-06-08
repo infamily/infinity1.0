@@ -5,10 +5,10 @@ from django.views.generic.base import View
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.models import ContentType
 
 from ..systems import PayPal
 from ..models import PayPalTransaction
-from core.models import Goal
 from ..forms import PayPalTransactionForm
 from ..decorators import ForbiddenUser
 
@@ -22,10 +22,12 @@ class PayPalTransactionView(FormView):
     form_class = PayPalTransactionForm
 
     def dispatch(self, *args, **kwargs):
-        # TODO: Needs content type
-        self.article = get_object_or_404(
-            Goal,
-            pk=self.kwargs.get('article_id')
+        ct = ContentType.objects.get(pk=self.kwargs.get('ct_id'))
+        model = ct.model_class()
+
+        self.model = get_object_or_404(
+            model,
+            pk=self.kwargs.get('obj_id')
         )
         return super(PayPalTransactionView, self).dispatch(*args, **kwargs)
 
@@ -49,7 +51,7 @@ class PayPalTransactionView(FormView):
         )
 
         result = paypal.adaptive_payment(
-            content_object=self.article,
+            content_object=self.model,
             receiver_amount=form.cleaned_data.get('amount'),
             receiver_user=User.objects.get(
                 email=form.cleaned_data.get('recipient_username')
