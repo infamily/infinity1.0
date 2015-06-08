@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block title %}Goal detail{% endblock title %}
+
+{% block content %}
+
+<h1>Goal detail</h1>
+<br/>
+<div class="actions">
+<a class="btn btn-success" href="{% url "idea-list1"    object.pk   %}"> 
+    Idea list
+</a>
+<a class="btn btn-warning" href="{% url "goal-update"    object.pk   %}"> 
+    Goal update
+</a>
+<a class="btn btn-success" href="{% url "goal-list1"    object.need.pk    %}"> 
+    Goal list
+</a>
+<a class="btn btn-info" href="{% url "idea-create"    object.pk   %}"> 
+    Idea create
+</a>
+<a class="btn btn-danger" href="{% url "goal-delete"    object.pk   %}"> 
+    Goal delete
+</a>
+</div>
+<br/>
+<div>
+    
+</div>
+<br/>
+
+<table class="table">
+    <tr>
+        <td>Name</td>
+        <td>
+
+        	{{object.name}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Personal</td>
+        <td>
+
+        	{{object.personal}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Created at</td>
+        <td>
+
+        	{{object.created_at}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Updated at</td>
+        <td>
+
+        	{{object.updated_at}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Reason</td>
+        <td>
+
+        	{{object.reason}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>User</td>
+        <td>
+
+        	{{object.user}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Need</td>
+        <td>
+
+        	{{object.need}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Quantity</td>
+        <td>
+
+        	{{object.quantity}}
+	        
+
+        </td>
+    </tr>
+</table>
+
+
+
+{% for object in object_list %}
+<div class="col-sm-12 item list-group-item">
+<div class="thumbnail">
+
+    <div class="">
+        <b>goal</b>: {{object.goal}}
+
+    </div>
+    <div class="">
+        <b>idea</b>: {{object.idea}}
+
+    </div>
+    <div class="">
+        <b>text</b>: {{object.text}}
+
+    </div>
+    <div class="">
+        <b>created_at</b>: {{object.created_at}}
+
+    </div>
+    <div class="">
+        <b>updated_at</b>: {{object.updated_at}}
+
+    </div>
+    <div class="">
+        <b>user</b>: {{object.user}}
+
+    </div>
+    <div class="">
+        <b>plan</b>: {{object.plan}}
+
+    </div>
+    <div class="">
+        <b>step</b>: {{object.step}}
+
+    </div>
+    <div class="">
+        <b>task</b>: {{object.task}}
+
+    </div>
+    <div class="">
+        <b>work</b>: {{object.work}}
+
+    </div>
+
+<div class="actions">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+{% endfor %}
+
+
+
+{% crispy form %}
+
+
+{% endblock content %}

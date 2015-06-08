@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}User detail{% endblock title %}
+
+{% block content %}
+
+<h1>User detail</h1>
+<br/>
+<div class="actions">
+<a class="btn btn-success" href="{% url "comment-list1"   %}"> 
+    Comment list
+</a>
+<a class="btn btn-warning" href="{% url "user-update"   %}"> 
+    User update
+</a>
+<a class="btn btn-success" href="{% url "idea-list2"   %}"> 
+    My ideas
+</a>
+</div>
+<br/>
+<div>
+    
+</div>
+<br/>
+
+<table class="table">
+    <tr>
+        <td>Introduction</td>
+        <td>
+
+        	{{object.introduction}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>
+
+        	{{object.email}}
+	        
+
+        </td>
+    </tr>
+</table>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Work update{% endblock title %}
+
+{% block content %}
+
+<h1>Work update</h1>
+<br/>
+<div class="actions">
+<a class="btn btn-danger" href="{% url "work-delete"    object.pk   %}"> 
+    Work delete
+</a>
+</div>
+<br/>
+<div>
+    
+</div>
+<br/>
+
+{% crispy form %}
+
+{% endblock content %}

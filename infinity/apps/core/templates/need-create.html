@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Need create{% endblock title %}
+
+{% block content %}
+
+<h1>Need create</h1>
+<br/>
+<div class="actions">
+<a class="btn btn-success" href="{% url "need-list"   %}"> 
+    Need list
+</a>
+<a class="btn btn-info" href="{% url "user-detail"   %}"> 
+    User detail
+</a>
+</div>
+<br/>
+<div>
+    
+</div>
+<br/>
+
+{% crispy form %}
+
+{% endblock content %}
