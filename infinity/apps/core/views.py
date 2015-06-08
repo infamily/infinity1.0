@@ -20,16 +20,12 @@ from .forms import SignUpUserForm
 
 from core.models import (
     Comment,
-    Transaction,
     Goal,
-    Currency,
     Work,
     Idea,
-    Platform,
     Step,
     Task,
     User,
-    Address,
     Need,
     Type,
     Plan,

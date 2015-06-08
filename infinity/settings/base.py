@@ -200,7 +200,6 @@ DJANGO_APPS = (
     'storages',
     'autofixture',
     'django_select2',
-    'djstripe',
 )
 
 # DEBUG-specific apps

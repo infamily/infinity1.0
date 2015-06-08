@@ -94,71 +94,6 @@ class Comment(models.Model):
         return "/"
 
 
-class Transaction(models.Model):
-    comment = models.ForeignKey(
-        'Comment',
-        blank=False,
-        null=False,
-    )
-    sender = models.ForeignKey(
-        'User',
-        blank=False,
-        null=False,
-    )
-    transaction_external_id = models.CharField(
-        unique=False,
-        max_length=150,
-        blank=False,
-    )
-    micros = models.PositiveIntegerField(
-        unique=False,
-        null=False,
-        blank=False,
-    )
-    created_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
-    )
-    updated_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
-    )
-    currency = models.ForeignKey(
-        'Currency',
-        blank=False,
-        null=False,
-    )
-    platform = models.ForeignKey(
-        'Platform',
-        blank=False,
-        null=False,
-    )
-    amount = models.DecimalField(
-        null=False,
-        max_digits=16,
-        decimal_places=2,
-        blank=False,
-    )
-    recipient = models.ForeignKey(
-        'User',
-        related_name='user_transactions',
-        blank=False,
-        null=False,
-    )
-
-    def __unicode__(self):
-        return u"Transaction #%s" % self.id
-
-    def get_absolute_url(self):
-        return "/"
-
-
 class Goal(models.Model):
     name = models.CharField(
         unique=False,
@@ -194,25 +129,6 @@ class Goal(models.Model):
     quantity = models.PositiveIntegerField(
         unique=False,
         null=False,
-        blank=False,
-    )
-
-    def __unicode__(self):
-        return unicode(self.name[:50])
-
-    def get_absolute_url(self):
-        return "/"
-
-
-class Currency(models.Model):
-    code = models.CharField(
-        unique=False,
-        max_length=150,
-        blank=False,
-    )
-    name = models.CharField(
-        unique=False,
-        max_length=150,
         blank=False,
     )
 
@@ -317,20 +233,6 @@ class Idea(models.Model):
         related_name='goal_ideas',
         blank=False,
         null=False,
-    )
-
-    def __unicode__(self):
-        return unicode(self.name[:50])
-
-    def get_absolute_url(self):
-        return "/"
-
-
-class Platform(models.Model):
-    name = models.CharField(
-        unique=False,
-        max_length=150,
-        blank=False,
     )
 
     def __unicode__(self):
@@ -463,49 +365,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __unicode__(self):
         return unicode(self.email)
-
-    def get_absolute_url(self):
-        return "/"
-
-
-class Address(models.Model):
-    currency = models.ForeignKey(
-        'Currency',
-        blank=False,
-        null=False,
-    )
-    created_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        auto_now_add=False,
-        unique=False,
-        null=False,
-        blank=False,
-    )
-    platform = models.ForeignKey(
-        'Platform',
-        blank=False,
-        null=False,
-    )
-    user = models.ForeignKey(
-        'User',
-        blank=False,
-        null=False,
-    )
-    address_external_id = models.CharField(
-        unique=False,
-        max_length=150,
-        blank=False,
-    )
-
-    def __unicode__(self):
-        return u"Address #%s" % self.id
 
     def get_absolute_url(self):
         return "/"

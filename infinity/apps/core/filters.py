@@ -6,16 +6,12 @@ from crispy_forms.layout import Layout, Submit, Reset
 
 from core.models import (
     Comment,
-    Transaction,
     Goal,
-    Currency,
     Work,
     Idea,
-    Platform,
     Step,
     Task,
     User,
-    Address,
     Need,
     Type,
     Plan,
@@ -27,19 +23,9 @@ class CommentChoiceField(django_select2.AutoModelSelect2Field):
     search_fields = ['text__icontains', ]
 
 
-class TransactionChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Transaction.objects.all()
-    search_fields = ['transaction_external_id__icontains', ]
-
-
 class GoalChoiceField(django_select2.AutoModelSelect2Field):
     queryset = Goal.objects.all()
     search_fields = ['name__icontains', 'reason__icontains', ]
-
-
-class CurrencyChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Currency.objects.all()
-    search_fields = ['code__icontains', 'name__icontains']
 
 
 class WorkChoiceField(django_select2.AutoModelSelect2Field):
@@ -54,11 +40,6 @@ class IdeaChoiceField(django_select2.AutoModelSelect2Field):
         'name__icontains',
         'summary__icontains',
     ]
-
-
-class PlatformChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Platform.objects.all()
-    search_fields = ['name__icontains']
 
 
 class StepChoiceField(django_select2.AutoModelSelect2Field):
@@ -78,11 +59,6 @@ class TaskChoiceField(django_select2.AutoModelSelect2Field):
 class UserChoiceField(django_select2.AutoModelSelect2Field):
     queryset = User.objects.all()
     search_fields = ['introduction__icontains', ]
-
-
-class AddressChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Address.objects.all()
-    search_fields = ['address_external_id__icontains']
 
 
 class NeedChoiceField(django_select2.AutoModelSelect2Field):
@@ -107,16 +83,8 @@ class CommentChoiceFilter(django_filters.Filter):
     field_class = CommentChoiceField
 
 
-class TransactionChoiceFilter(django_filters.Filter):
-    field_class = TransactionChoiceField
-
-
 class GoalChoiceFilter(django_filters.Filter):
     field_class = GoalChoiceField
-
-
-class CurrencyChoiceFilter(django_filters.Filter):
-    field_class = CurrencyChoiceField
 
 
 class WorkChoiceFilter(django_filters.Filter):
@@ -125,10 +93,6 @@ class WorkChoiceFilter(django_filters.Filter):
 
 class IdeaChoiceFilter(django_filters.Filter):
     field_class = IdeaChoiceField
-
-
-class PlatformChoiceFilter(django_filters.Filter):
-    field_class = PlatformChoiceField
 
 
 class StepChoiceFilter(django_filters.Filter):
@@ -141,10 +105,6 @@ class TaskChoiceFilter(django_filters.Filter):
 
 class UserChoiceFilter(django_filters.Filter):
     field_class = UserChoiceField
-
-
-class AddressChoiceFilter(django_filters.Filter):
-    field_class = AddressChoiceField
 
 
 class NeedChoiceFilter(django_filters.Filter):
@@ -605,16 +565,12 @@ class PlanListViewFilter2(django_filters.FilterSet):
 
 # Have to call it clearly to help django_select2 register fields
 CommentChoiceField()
-TransactionChoiceField()
 GoalChoiceField()
-CurrencyChoiceField()
 WorkChoiceField()
 IdeaChoiceField()
-PlatformChoiceField()
 StepChoiceField()
 TaskChoiceField()
 UserChoiceField()
-AddressChoiceField()
 NeedChoiceField()
 TypeChoiceField()
 PlanChoiceField()

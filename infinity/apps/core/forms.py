@@ -11,16 +11,12 @@ from allauth.account.forms import LoginForm as AllAuthLoginForm
 
 from core.models import (
     Comment,
-    Transaction,
     Goal,
-    Currency,
     Work,
     Idea,
-    Platform,
     Step,
     Task,
     User,
-    Address,
     Need,
     Type,
     Plan,
