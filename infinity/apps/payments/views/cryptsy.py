@@ -1,13 +1,26 @@
 from django.views.generic import FormView
-from ..forms import CryptsyTransactionForm
-from ..systems import CryptsyPay
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import get_object_or_404
+
+from ..forms import CryptsyTransactionForm
+from ..systems import CryptsyPay
 
 
 class CryptsyTransactionView(FormView):
     form_class = CryptsyTransactionForm
     template_name = 'cryptsy-transaction.html'
+
+    def dispatch(self, *args, **kwargs):
+        ct = ContentType.objects.get(name=self.kwargs.get('ct_name'))
+        model = ct.model_class()
+
+        self.model = get_object_or_404(
+            model,
+            pk=self.kwargs.get('obj_id')
+        )
+        return super(CryptsyTransactionView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         address_from = form.cleaned_data.get('address_from')
@@ -16,9 +29,10 @@ class CryptsyTransactionView(FormView):
         currency = form.cleaned_data.get('currency')
         cryptsy = CryptsyPay(publickey=address_from)
         response = cryptsy.make_payment(
+            content_object=self.model,
             address=address_to,
             amount=amount,
-            currency_id=currency
+            currency_id=currency,
         )
         if response["success"]:
             messages.add_message(

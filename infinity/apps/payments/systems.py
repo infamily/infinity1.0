@@ -24,7 +24,7 @@ class CryptsyPay(object):
         self.trade_key = credential.tradekey
         self.notification_token = credential.notificationtoken
 
-    def make_payment(self, address, amount, currency_id):
+    def make_payment(self, content_object, address, amount, currency_id):
         cryptsy = v2.Cryptsy(self.public_key, self.private_key)
         result = cryptsy.withdraw(
             self.trade_key,
@@ -58,7 +58,8 @@ class CryptsyPay(object):
                 timestamp=transaction['timestamp'],
                 datetime=transaction['datetime'],
                 fee=transaction['fee'],
-                timezone=transaction['timezone']
+                timezone=transaction['timezone'],
+                content_object=content_object
             )
 
         return result

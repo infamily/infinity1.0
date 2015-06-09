@@ -22,7 +22,7 @@ class PayPalTransactionView(FormView):
     form_class = PayPalTransactionForm
 
     def dispatch(self, *args, **kwargs):
-        ct = ContentType.objects.get(pk=self.kwargs.get('ct_id'))
+        ct = ContentType.objects.get(name=self.kwargs.get('ct_name'))
         model = ct.model_class()
 
         self.model = get_object_or_404(
@@ -35,7 +35,7 @@ class PayPalTransactionView(FormView):
         current_site = get_current_site(self.request)
         returnUrl = "http://%s%s" % (
             current_site.domain,
-            reverse('payments:transaction_success')
+            reverse('payments:transaction_paypal_success')
         )
 
         currency = int(self.request.POST.get('currency'))
@@ -71,7 +71,7 @@ class PayPalTransactionSuccessView(View):
         current_site = get_current_site(request)
         returnUrl = "http://%s%s" % (
             current_site.domain,
-            reverse('payments:transaction_success')
+            reverse('payments:transaction_paypal_success')
         )
         paypal = PayPal(returnUrl=returnUrl)
         for transaction in PayPalTransaction.objects.filter(

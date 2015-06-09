@@ -8,16 +8,12 @@ from allauth.account.models import EmailAddress
 
 from core.models import (
     Comment,
-    Transaction,
     Goal,
-    Currency,
     Work,
     Idea,
-    Platform,
     Step,
     Task,
     User,
-    Address,
     Need,
     Type,
     Plan,
