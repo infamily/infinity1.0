@@ -23,7 +23,7 @@ def deploy():
     virtualenv('git pull origin %s' % env.branch)
     virtualenv('pip install -r %s%s' % (
         env.directory, env.requirements))
-    virtualenv('python xybid/manage.py syncdb')
-    virtualenv('python xybid/manage.py migrate')
-    virtualenv('python xybid/manage.py collectstatic')
+    virtualenv('python infinity/manage.py syncdb')
+    virtualenv('python infinity/manage.py migrate')
+    virtualenv('python infinity/manage.py collectstatic')
     run('sudo /usr/bin/supervisorctl restart %s' % env.supervisor_app_name)
