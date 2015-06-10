@@ -25,3 +25,6 @@ https://github.com/yrik/django-allauth-multiple/archive/master.zip
 #git+git://github.com/maximzxc/django-select2.git@f637d4ec4971c1f0fecdf08ddb265163558f5adf#egg=django-select2
 https://github.com/maximzxc/django-select2/archive/master.zip
 sendgrid-django
+pyopenssl
+ndg-httpsclient
+pyasn1
