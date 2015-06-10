@@ -5,6 +5,8 @@ import requests
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
+from .models import CryptsyCredential
+
 
 class CryptsyTransactionForm(forms.Form):
     address_from = forms.ChoiceField()
@@ -55,3 +57,18 @@ class PayPalTransactionForm(forms.Form):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-sm-2'
         self.helper.field_class = 'col-sm-8'
+
+
+class CryptsyCredentialForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CryptsyCredentialForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        self.helper.layout.append(Submit('transaction_form', _('Save')))
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-8'
+
+    class Meta:
+        model = CryptsyCredential
+        exclude = ['user']

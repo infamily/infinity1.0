@@ -1,18 +1,73 @@
 from django.views.generic import FormView
+from django.views.generic import UpdateView
+from django.views.generic import ListView
+from django.views.generic import DeleteView
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
+
+from pure_pagination.mixins import PaginationMixin
 
 from ..forms import CryptsyTransactionForm
 from ..systems import CryptsyPay
+from ..forms import CryptsyCredentialForm
+from ..models import CryptsyCredential
 
 from core.models import Comment
 
 
+class CryptsyCredentialUpdateView(UpdateView):
+    form_class = CryptsyCredentialForm
+    slug_field = 'pk'
+    template_name = 'cryptsy/credential/update.html'
+    model = CryptsyCredential
+
+    def form_valid(self, form):
+        form_object = form.save(commit=False)
+        form_object.user = self.request.user
+        form_object.save()
+        return super(CryptsyCredentialUpdateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Credential succesfully updated"))
+        return reverse("payments:cryptsy_credential_list")
+
+
+class CryptsyCredentialListView(PaginationMixin, ListView):
+    model = CryptsyCredential
+    paginate_by = 10
+    template_name = 'cryptsy/credential/list.html'
+
+
+class CryptsyCredentialDeleteView(DeleteView):
+    model = CryptsyCredential
+    slug_field = 'pk'
+    template_name = 'cryptsy/credential/delete.html'
+
+    def get_success_url(self):
+        messages.success(self.request, _("Credential succesfully deleted"))
+        return reverse("payments:cryptsy_credential_list")
+
+
+class CryptsyCredentialCreateView(FormView):
+    form_class = CryptsyCredentialForm
+    template_name = 'cryptsy/credential/create.html'
+
+    def form_valid(self, form):
+        form_object = form.save(commit=False)
+        form_object.user = self.request.user
+        form_object.save()
+        return super(CryptsyCredentialCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Credential succesfully created"))
+        return reverse("payments:cryptsy_credential_list")
+
+
 class CryptsyTransactionView(FormView):
     form_class = CryptsyTransactionForm
-    template_name = 'cryptsy-transaction.html'
+    template_name = 'cryptsy/transaction/create.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.comment_model = get_object_or_404(Comment, pk=kwargs.get('comment_id'))

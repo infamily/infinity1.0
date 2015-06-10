@@ -19,7 +19,7 @@ User = get_user_model()
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class PayPalTransactionView(FormView):
-    template_name = 'transaction.html'
+    template_name = 'paypal/transaction/create.html'
     form_class = PayPalTransactionForm
 
     def dispatch(self, request, *args, **kwargs):
