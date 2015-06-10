@@ -3,8 +3,10 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.views.generic.base import View
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 
 from ..systems import PayPal
 from ..models import PayPalTransaction
@@ -45,12 +47,22 @@ class PayPalTransactionView(FormView):
             currency=currency
         )
 
+        try:
+            user = User.objects.get(
+                email=form.cleaned_data.get('recipient_username')
+            )
+        except ObjectDoesNotExist:
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                'User does not exist'
+            )
+            return super(PayPalTransactionView, self).form_invalid(form)
+
         result = paypal.adaptive_payment(
             comment_object=self.comment_model,
             receiver_amount=form.cleaned_data.get('amount'),
-            receiver_user=User.objects.get(
-                email=form.cleaned_data.get('recipient_username')
-            ),
+            receiver_user=user,
             sender_user=self.request.user
         )
 
