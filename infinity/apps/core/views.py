@@ -18,6 +18,7 @@ from .decorators import ForbiddenUser
 
 from .forms import LoginForm
 from .forms import SignUpUserForm
+from .utils import CommentsContentTypeWrapper
 
 from core.models import (
     Comment,
@@ -50,15 +51,6 @@ from core.forms import (
     PlanUpdateForm,
     PlanCreateForm,
 )
-
-from core.forms import CommentCreateFormDetail
-from core.forms import CommentCreateFormDetail
-from core.forms import CommentCreateFormDetail
-from core.forms import CommentCreateFormDetail
-from core.forms import CommentCreateFormDetail
-from core.forms import CommentCreateFormDetail
-from core.forms import CommentCreateFormDetail
-
 
 from core.filters import (
     CommentListViewFilter1,
@@ -403,28 +395,12 @@ class GoalUpdateView(UpdateView):
         return reverse("goal-list1", args=[self.object.need.pk, ])
 
 
-class GoalDetailView(DetailView, CreateView):
+class GoalDetailView(DetailView, CommentsContentTypeWrapper):
 
     """Goal detail view"""
     model = Goal
     slug_field = "pk"
     template_name = "goal-detail.html"
-
-    model_for_list = Comment
-
-    form_class = CommentCreateFormDetail
-
-    @property
-    def object_list(self):
-        self.goal_content_type = ContentType.objects.get_for_model(
-            self.get_object()
-        )
-        object_list = self.model_for_list.objects.filter(
-            content_type__pk=self.goal_content_type.pk,
-            object_id=self.get_object().id
-        )
-
-        return object_list.order_by('-id')
 
     def get_success_url(self):
         messages.success(
@@ -446,18 +422,6 @@ class GoalDetailView(DetailView, CreateView):
             'object_list': self.object_list,
         })
         return context
-
-    def form_valid(self, form):
-        """
-        If the form is valid, save the associated model.
-        """
-        self.object = form.save(commit=False)
-        self.object.goal = self.get_object()
-        self.object.user = self.request.user
-        self.object.content_type = ContentType.objects.get_for_model(self.get_object())
-        self.object.object_id = self.get_object().id
-        self.object.save()
-        return super(GoalDetailView, self).form_valid(form)
 
 
 class GoalListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
@@ -825,23 +789,12 @@ class WorkListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
         return context
 
 
-class WorkDetailView(DetailView, CreateView):
+class WorkDetailView(DetailView, CommentsContentTypeWrapper):
 
     """Work detail view"""
     model = Work
     slug_field = "pk"
     template_name = "work-detail.html"
-
-    model_for_list = Comment
-
-    form_class = CommentCreateFormDetail
-
-    @property
-    def object_list(self):
-        object_list = self.model_for_list.objects.filter(
-            work=self.get_object(),
-        )
-        return object_list.order_by('-id')
 
     def get_success_url(self):
         messages.success(
@@ -863,16 +816,6 @@ class WorkDetailView(DetailView, CreateView):
             'object_list': self.object_list,
         })
         return context
-
-    def form_valid(self, form):
-        """
-        If the form is valid, save the associated model.
-        """
-        self.object = form.save(commit=False)
-        self.object.work = self.get_object()
-        self.object.user = self.request.user
-        self.object.save()
-        return super(WorkDetailView, self).form_valid(form)
 
 
 class IdeaListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
@@ -1123,23 +1066,12 @@ class IdeaListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
         return context
 
 
-class IdeaDetailView(DetailView, CreateView):
+class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
 
     """Idea detail view"""
     model = Idea
     slug_field = "pk"
     template_name = "idea-detail.html"
-
-    model_for_list = Comment
-
-    form_class = CommentCreateFormDetail
-
-    @property
-    def object_list(self):
-        object_list = self.model_for_list.objects.filter(
-            idea=self.get_object(),
-        )
-        return object_list.order_by('-id')
 
     def get_success_url(self):
         messages.success(
@@ -1161,16 +1093,6 @@ class IdeaDetailView(DetailView, CreateView):
             'object_list': self.object_list,
         })
         return context
-
-    def form_valid(self, form):
-        """
-        If the form is valid, save the associated model.
-        """
-        self.object = form.save(commit=False)
-        self.object.idea = self.get_object()
-        self.object.user = self.request.user
-        self.object.save()
-        return super(IdeaDetailView, self).form_valid(form)
 
 
 class StepListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
@@ -1425,23 +1347,12 @@ class StepListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
         return context
 
 
-class StepDetailView(DetailView, CreateView):
+class StepDetailView(DetailView, CommentsContentTypeWrapper):
 
     """Step detail view"""
     model = Step
     slug_field = "pk"
     template_name = "step-detail.html"
-
-    model_for_list = Comment
-
-    form_class = CommentCreateFormDetail
-
-    @property
-    def object_list(self):
-        object_list = self.model_for_list.objects.filter(
-            step=self.get_object(),
-        )
-        return object_list.order_by('-id')
 
     def get_success_url(self):
         messages.success(
@@ -1463,16 +1374,6 @@ class StepDetailView(DetailView, CreateView):
             'object_list': self.object_list,
         })
         return context
-
-    def form_valid(self, form):
-        """
-        If the form is valid, save the associated model.
-        """
-        self.object = form.save(commit=False)
-        self.object.step = self.get_object()
-        self.object.user = self.request.user
-        self.object.save()
-        return super(StepDetailView, self).form_valid(form)
 
 
 class TaskListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
@@ -1655,23 +1556,12 @@ class TaskListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
         return queryset
 
 
-class TaskDetailView(DetailView, CreateView):
+class TaskDetailView(DetailView, CommentsContentTypeWrapper):
 
     """Task detail view"""
     model = Task
     slug_field = "pk"
     template_name = "task-detail.html"
-
-    model_for_list = Comment
-
-    form_class = CommentCreateFormDetail
-
-    @property
-    def object_list(self):
-        object_list = self.model_for_list.objects.filter(
-            task=self.get_object(),
-        )
-        return object_list.order_by('-id')
 
     def get_success_url(self):
         messages.success(
@@ -1693,16 +1583,6 @@ class TaskDetailView(DetailView, CreateView):
             'object_list': self.object_list,
         })
         return context
-
-    def form_valid(self, form):
-        """
-        If the form is valid, save the associated model.
-        """
-        self.object = form.save(commit=False)
-        self.object.task = self.get_object()
-        self.object.user = self.request.user
-        self.object.save()
-        return super(TaskDetailView, self).form_valid(form)
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -1828,21 +1708,12 @@ class NeedListView(PaginationMixin, OrderableListMixin, ListFilteredView):
         return context
 
 
-class NeedDetailView(DetailView, CreateView):
+class NeedDetailView(DetailView, CommentsContentTypeWrapper):
 
     """Need detail view"""
     model = Need
     slug_field = "pk"
     template_name = "need-detail.html"
-
-    model_for_list = Comment
-
-    form_class = CommentCreateFormDetail
-
-    @property
-    def object_list(self):
-        object_list = self.model_for_list.objects.all()
-        return object_list.order_by('-id')
 
     def get_success_url(self):
         messages.success(
@@ -1864,15 +1735,6 @@ class NeedDetailView(DetailView, CreateView):
             'object_list': self.object_list,
         })
         return context
-
-    def form_valid(self, form):
-        """
-        If the form is valid, save the associated model.
-        """
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(NeedDetailView, self).form_valid(form)
 
 
 class PlanListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
@@ -2122,16 +1984,12 @@ class PlanListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
         return context
 
 
-class PlanDetailView(DetailView, CreateView):
+class PlanDetailView(DetailView, CommentsContentTypeWrapper):
 
     """Plan detail view"""
     model = Plan
     slug_field = "pk"
     template_name = "plan-detail.html"
-
-    model_for_list = Comment
-
-    form_class = CommentCreateFormDetail
 
     @property
     def object_list(self):
@@ -2160,16 +2018,6 @@ class PlanDetailView(DetailView, CreateView):
             'object_list': self.object_list,
         })
         return context
-
-    def form_valid(self, form):
-        """
-        If the form is valid, save the associated model.
-        """
-        self.object = form.save(commit=False)
-        self.object.plan = self.get_object()
-        self.object.user = self.request.user
-        self.object.save()
-        return super(PlanDetailView, self).form_valid(form)
 
 
 def login(request):
