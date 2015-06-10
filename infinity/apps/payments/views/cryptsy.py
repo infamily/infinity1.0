@@ -13,10 +13,12 @@ from ..forms import CryptsyTransactionForm
 from ..systems import CryptsyPay
 from ..forms import CryptsyCredentialForm
 from ..models import CryptsyCredential
+from ..decorators import ForbiddenUser
 
 from core.models import Comment
 
 
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class CryptsyCredentialUpdateView(UpdateView):
     form_class = CryptsyCredentialForm
     slug_field = 'pk'
@@ -34,12 +36,19 @@ class CryptsyCredentialUpdateView(UpdateView):
         return reverse("payments:cryptsy_credential_list")
 
 
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class CryptsyCredentialListView(PaginationMixin, ListView):
     model = CryptsyCredential
     paginate_by = 10
     template_name = 'cryptsy/credential/list.html'
 
+    def get_base_queryset(self):
+        queryset = super(CryptsyCredentialListView, self).get_base_queryset()
+        queryset = queryset.filter(user=self.request.user.pk)
+        return queryset
 
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class CryptsyCredentialDeleteView(DeleteView):
     model = CryptsyCredential
     slug_field = 'pk'
@@ -50,6 +59,7 @@ class CryptsyCredentialDeleteView(DeleteView):
         return reverse("payments:cryptsy_credential_list")
 
 
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class CryptsyCredentialCreateView(FormView):
     form_class = CryptsyCredentialForm
     template_name = 'cryptsy/credential/create.html'
@@ -65,6 +75,7 @@ class CryptsyCredentialCreateView(FormView):
         return reverse("payments:cryptsy_credential_list")
 
 
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class CryptsyTransactionView(FormView):
     form_class = CryptsyTransactionForm
     template_name = 'cryptsy/transaction/create.html'
