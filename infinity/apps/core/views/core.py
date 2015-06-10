@@ -1,74 +1,21 @@
-from django.shortcuts import redirect, render
 from django.utils.translation import ugettext as _
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.views.generic import (
-    DetailView, CreateView, UpdateView, DeleteView, ListView
-)
+from django.views.generic import DetailView
+from django.views.generic import CreateView
+from django.views.generic import UpdateView
+from django.views.generic import DeleteView
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
 from enhanced_cbv.views import ListFilteredView
-from allauth.account.utils import complete_signup
-from allauth.account.app_settings import EMAIL_VERIFICATION
 
-from .decorators import ForbiddenUser
-
-from .forms import LoginForm
-from .forms import SignUpUserForm
-from .utils import CommentsContentTypeWrapper
-
-from core.models import (
-    Comment,
-    Goal,
-    Work,
-    Idea,
-    Step,
-    Task,
-    User,
-    Need,
-    Type,
-    Plan,
-)
-
-from core.forms import (
-    CommentUpdateForm,
-    CommentCreateForm,
-    GoalCreateForm1,
-    GoalUpdateForm,
-    GoalCreateForm2,
-    WorkUpdateForm,
-    WorkCreateForm,
-    IdeaUpdateForm,
-    IdeaCreateForm,
-    StepUpdateForm,
-    StepCreateForm,
-    TaskUpdateForm,
-    TaskCreateForm,
-    UserUpdateForm,
-    NeedCreateForm,
-    PlanUpdateForm,
-    PlanCreateForm,
-)
-
-from core.filters import (
-    CommentListViewFilter1,
-    CommentListViewFilter2,
-    GoalListViewFilter1,
-    GoalListViewFilter2,
-    WorkListViewFilter1,
-    WorkListViewFilter2,
-    IdeaListViewFilter1,
-    IdeaListViewFilter2,
-    StepListViewFilter1,
-    StepListViewFilter2,
-    TaskListViewFilter1,
-    TaskListViewFilter2,
-    NeedListViewFilter,
-    PlanListViewFilter1,
-    PlanListViewFilter2,
-)
+from ..decorators import ForbiddenUser
+from ..utils import CommentsContentTypeWrapper
+from ..models import *
+from ..forms import *
+from ..filters import *
 
 
 class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
@@ -76,8 +23,8 @@ class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Comment list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "comment-list1.html"
-    template_name_blocks = "comment-blocks1.html"
+    template_name_list = "comment/list1.html"
+    template_name_blocks = "comment/blocks1.html"
 
     model = Comment
     paginate_by = 10
@@ -172,7 +119,7 @@ class CommentUpdateView(UpdateView):
     model = Comment
     form_class = CommentUpdateForm
     slug_field = "pk"
-    template_name = "comment-update.html"
+    template_name = "comment/update.html"
 
     def get_success_url(self):
         messages.success(self.request, _("Comment succesfully updated"))
@@ -184,7 +131,7 @@ class CommentDeleteView(DeleteView):
     """Comment delete view"""
     model = Comment
     slug_field = "pk"
-    template_name = "comment-delete.html"
+    template_name = "comment/delete.html"
 
     def get_success_url(self):
         messages.success(self.request, _("Comment succesfully deleted"))
@@ -196,7 +143,7 @@ class CommentListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
 
     """Comment list view"""
 
-    template_name = "comment-list2.html"
+    template_name = "comment/list2.html"
 
     model = Comment
     paginate_by = 10
@@ -226,7 +173,7 @@ class CommentCreateView(CreateView):
     """Comment create view"""
     model = Comment
     form_class = CommentCreateForm
-    template_name = "comment-create.html"
+    template_name = "comment/create.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -245,7 +192,7 @@ class GoalCreateView1(CreateView):
     """Goal create view"""
     model = Goal
     form_class = GoalCreateForm1
-    template_name = "goal-create1.html"
+    template_name = "goal/create1.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -264,8 +211,8 @@ class GoalListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Goal list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "goal-list1.html"
-    template_name_blocks = "goal-blocks1.html"
+    template_name_list = "goal/list1.html"
+    template_name_blocks = "goal/blocks1.html"
 
     model = Goal
     paginate_by = 10
@@ -357,7 +304,7 @@ class GoalDeleteView(DeleteView):
     """Goal delete view"""
     model = Goal
     slug_field = "pk"
-    template_name = "goal-delete.html"
+    template_name = "goal/delete.html"
 
     def get_object(self, queryset=None):
         obj = super(GoalDeleteView, self).get_object(queryset)
@@ -376,7 +323,7 @@ class GoalUpdateView(UpdateView):
     model = Goal
     form_class = GoalUpdateForm
     slug_field = "pk"
-    template_name = "goal-update.html"
+    template_name = "goal/update.html"
 
     def get_object(self, queryset=None):
         obj = super(GoalUpdateView, self).get_object(queryset)
@@ -400,7 +347,7 @@ class GoalDetailView(DetailView, CommentsContentTypeWrapper):
     """Goal detail view"""
     model = Goal
     slug_field = "pk"
-    template_name = "goal-detail.html"
+    template_name = "goal/detail.html"
 
     def get_success_url(self):
         messages.success(
@@ -429,8 +376,8 @@ class GoalListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Goal list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "goal-list2.html"
-    template_name_blocks = "goal-blocks2.html"
+    template_name_list = "goal/list2.html"
+    template_name_blocks = "goal/blocks2.html"
 
     model = Goal
     paginate_by = 10
@@ -523,7 +470,7 @@ class GoalCreateView2(CreateView):
     """Goal create view"""
     model = Goal
     form_class = GoalCreateForm2
-    template_name = "goal-create2.html"
+    template_name = "goal/create2.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -542,8 +489,8 @@ class WorkListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Work list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "work-list1.html"
-    template_name_blocks = "work-blocks1.html"
+    template_name_list = "work/list1.html"
+    template_name_blocks = "work/blocks1.html"
 
     model = Work
     paginate_by = 10
@@ -637,7 +584,7 @@ class WorkUpdateView(UpdateView):
     model = Work
     form_class = WorkUpdateForm
     slug_field = "pk"
-    template_name = "work-update.html"
+    template_name = "work/update.html"
 
     def get_object(self, queryset=None):
         obj = super(WorkUpdateView, self).get_object(queryset)
@@ -662,7 +609,7 @@ class WorkCreateView(CreateView):
     """Work create view"""
     model = Work
     form_class = WorkCreateForm
-    template_name = "work-create.html"
+    template_name = "work/create.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -700,8 +647,8 @@ class WorkListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Work list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "work-list2.html"
-    template_name_blocks = "work-blocks2.html"
+    template_name_list = "work/list2.html"
+    template_name_blocks = "work/blocks2.html"
 
     model = Work
     paginate_by = 10
@@ -794,7 +741,7 @@ class WorkDetailView(DetailView, CommentsContentTypeWrapper):
     """Work detail view"""
     model = Work
     slug_field = "pk"
-    template_name = "work-detail.html"
+    template_name = "work/detail.html"
 
     def get_success_url(self):
         messages.success(
@@ -823,8 +770,8 @@ class IdeaListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Idea list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "idea-list1.html"
-    template_name_blocks = "idea-blocks1.html"
+    template_name_list = "idea/list1.html"
+    template_name_blocks = "idea/blocks1.html"
 
     model = Idea
     paginate_by = 10
@@ -916,7 +863,7 @@ class IdeaUpdateView(UpdateView):
     model = Idea
     form_class = IdeaUpdateForm
     slug_field = "pk"
-    template_name = "idea-update.html"
+    template_name = "idea/update.html"
 
     def get_object(self, queryset=None):
         obj = super(IdeaUpdateView, self).get_object(queryset)
@@ -941,7 +888,7 @@ class IdeaCreateView(CreateView):
     """Idea create view"""
     model = Idea
     form_class = IdeaCreateForm
-    template_name = "idea-create.html"
+    template_name = "idea/create.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -960,7 +907,7 @@ class IdeaDeleteView(DeleteView):
     """Idea delete view"""
     model = Idea
     slug_field = "pk"
-    template_name = "idea-delete.html"
+    template_name = "idea/delete.html"
 
     def get_object(self, queryset=None):
         obj = super(IdeaDeleteView, self).get_object(queryset)
@@ -979,8 +926,8 @@ class IdeaListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Idea list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "idea-list2.html"
-    template_name_blocks = "idea-blocks2.html"
+    template_name_list = "idea/list2.html"
+    template_name_blocks = "idea/blocks2.html"
 
     model = Idea
     paginate_by = 10
@@ -1071,7 +1018,7 @@ class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
     """Idea detail view"""
     model = Idea
     slug_field = "pk"
-    template_name = "idea-detail.html"
+    template_name = "idea/detail.html"
 
     def get_success_url(self):
         messages.success(
@@ -1100,8 +1047,8 @@ class StepListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Step list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "step-list1.html"
-    template_name_blocks = "step-blocks1.html"
+    template_name_list = "step/list1.html"
+    template_name_blocks = "step/blocks1.html"
 
     model = Step
     paginate_by = 10
@@ -1195,7 +1142,7 @@ class StepUpdateView(UpdateView):
     model = Step
     form_class = StepUpdateForm
     slug_field = "pk"
-    template_name = "step-update.html"
+    template_name = "step/update.html"
 
     def get_object(self, queryset=None):
         obj = super(StepUpdateView, self).get_object(queryset)
@@ -1220,7 +1167,7 @@ class StepCreateView(CreateView):
     """Step create view"""
     model = Step
     form_class = StepCreateForm
-    template_name = "step-create.html"
+    template_name = "step/create.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -1239,7 +1186,7 @@ class StepDeleteView(DeleteView):
     """Step delete view"""
     model = Step
     slug_field = "pk"
-    template_name = "step-delete.html"
+    template_name = "step/delete.html"
 
     def get_object(self, queryset=None):
         obj = super(StepDeleteView, self).get_object(queryset)
@@ -1258,8 +1205,8 @@ class StepListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Step list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "step-list2.html"
-    template_name_blocks = "step-blocks2.html"
+    template_name_list = "step/list2.html"
+    template_name_blocks = "step/blocks2.html"
 
     model = Step
     paginate_by = 10
@@ -1352,7 +1299,7 @@ class StepDetailView(DetailView, CommentsContentTypeWrapper):
     """Step detail view"""
     model = Step
     slug_field = "pk"
-    template_name = "step-detail.html"
+    template_name = "step/detail.html"
 
     def get_success_url(self):
         messages.success(
@@ -1381,8 +1328,8 @@ class TaskListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Task list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "task-list1.html"
-    template_name_blocks = "task-blocks1.html"
+    template_name_list = "task/list1.html"
+    template_name_blocks = "task/blocks1.html"
 
     model = Task
     paginate_by = 10
@@ -1474,7 +1421,7 @@ class TaskUpdateView(UpdateView):
     model = Task
     form_class = TaskUpdateForm
     slug_field = "pk"
-    template_name = "task-update.html"
+    template_name = "task/update.html"
 
     def get_object(self, queryset=None):
         obj = super(TaskUpdateView, self).get_object(queryset)
@@ -1499,7 +1446,7 @@ class TaskCreateView(CreateView):
     """Task create view"""
     model = Task
     form_class = TaskCreateForm
-    template_name = "task-create.html"
+    template_name = "task/create.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -1518,7 +1465,7 @@ class TaskDeleteView(DeleteView):
     """Task delete view"""
     model = Task
     slug_field = "pk"
-    template_name = "task-delete.html"
+    template_name = "task/delete.html"
 
     def get_object(self, queryset=None):
         obj = super(TaskDeleteView, self).get_object(queryset)
@@ -1535,7 +1482,7 @@ class TaskListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
 
     """Task list view"""
 
-    template_name = "task-list2.html"
+    template_name = "task/list2.html"
 
     model = Task
     paginate_by = 10
@@ -1561,7 +1508,7 @@ class TaskDetailView(DetailView, CommentsContentTypeWrapper):
     """Task detail view"""
     model = Task
     slug_field = "pk"
-    template_name = "task-detail.html"
+    template_name = "task/detail.html"
 
     def get_success_url(self):
         messages.success(
@@ -1591,7 +1538,7 @@ class UserDetailView(DetailView):
     """User detail view"""
     model = User
     slug_field = "pk"
-    template_name = "user-detail.html"
+    template_name = "user/detail.html"
 
     def get_object(self, queryset=None):
         obj = self.request.user
@@ -1605,7 +1552,7 @@ class UserUpdateView(UpdateView):
     model = User
     form_class = UserUpdateForm
     slug_field = "pk"
-    template_name = "user-update.html"
+    template_name = "user/update.html"
 
     def get_object(self, queryset=None):
         obj = self.request.user
@@ -1622,7 +1569,7 @@ class NeedCreateView(CreateView):
     """Need create view"""
     model = Need
     form_class = NeedCreateForm
-    template_name = "need-create.html"
+    template_name = "need/create.html"
 
     def get_success_url(self):
         messages.success(self.request, _("Need succesfully created"))
@@ -1634,8 +1581,8 @@ class NeedListView(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Need list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "need-list.html"
-    template_name_blocks = "need-blocks.html"
+    template_name_list = "need/list.html"
+    template_name_blocks = "need/blocks.html"
 
     model = Need
     paginate_by = 10
@@ -1713,7 +1660,7 @@ class NeedDetailView(DetailView, CommentsContentTypeWrapper):
     """Need detail view"""
     model = Need
     slug_field = "pk"
-    template_name = "need-detail.html"
+    template_name = "need/detail.html"
 
     def get_success_url(self):
         messages.success(
@@ -1742,8 +1689,8 @@ class PlanListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Plan list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "plan-list1.html"
-    template_name_blocks = "plan-blocks1.html"
+    template_name_list = "plan/list1.html"
+    template_name_blocks = "plan/blocks1.html"
 
     model = Plan
     paginate_by = 10
@@ -1835,7 +1782,7 @@ class PlanUpdateView(UpdateView):
     model = Plan
     form_class = PlanUpdateForm
     slug_field = "pk"
-    template_name = "plan-update.html"
+    template_name = "plan/update.html"
 
     def get_object(self, queryset=None):
         obj = super(PlanUpdateView, self).get_object(queryset)
@@ -1860,7 +1807,7 @@ class PlanCreateView(CreateView):
     """Plan create view"""
     model = Plan
     form_class = PlanCreateForm
-    template_name = "plan-create.html"
+    template_name = "plan/create.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -1879,7 +1826,7 @@ class PlanDeleteView(DeleteView):
     """Plan delete view"""
     model = Plan
     slug_field = "pk"
-    template_name = "plan-delete.html"
+    template_name = "plan/delete.html"
 
     def get_object(self, queryset=None):
         obj = super(PlanDeleteView, self).get_object(queryset)
@@ -1897,8 +1844,8 @@ class PlanListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     """Plan list view"""
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
-    template_name_list = "plan-list2.html"
-    template_name_blocks = "plan-blocks2.html"
+    template_name_list = "plan/list2.html"
+    template_name_blocks = "plan/blocks2.html"
 
     model = Plan
     paginate_by = 10
@@ -1989,7 +1936,7 @@ class PlanDetailView(DetailView, CommentsContentTypeWrapper):
     """Plan detail view"""
     model = Plan
     slug_field = "pk"
-    template_name = "plan-detail.html"
+    template_name = "plan/detail.html"
 
     @property
     def object_list(self):
@@ -2020,43 +1967,3 @@ class PlanDetailView(DetailView, CommentsContentTypeWrapper):
         return context
 
 
-def login(request):
-    login_form = LoginForm()
-
-    redirect_url = '/'
-    redirect_url = request.GET.get('next') or redirect_url
-
-    if request.method == 'POST' and 'login_form' in request.POST:
-        login_form = LoginForm(request.POST)
-
-        if login_form.is_valid():
-            return login_form.login(request, redirect_url=redirect_url)
-
-    return render(request, "login.html", {
-        "login_form": login_form,
-    })
-
-
-def register(request):
-    signup_form_user = SignUpUserForm(prefix="user", request=request)
-
-    redirect_url = '/'
-    redirect_url = request.GET.get('next') or redirect_url
-
-    if request.method == 'POST' and 'signup_user_form' in request.POST:
-        signup_form_user = SignUpUserForm(
-            request.POST,
-            prefix="user",
-            request=request)
-
-        if signup_form_user.is_valid():
-            user = signup_form_user.save(request)
-            return complete_signup(
-                request,
-                user,
-                EMAIL_VERIFICATION,
-                redirect_url)
-
-    return render(request, "register.html", {
-        "signup_form_user": signup_form_user,
-    })
