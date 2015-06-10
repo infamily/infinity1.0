@@ -1,0 +1,54 @@
+{% load crispy_forms_tags %}
+
+{% for object in object_list %}
+<div class="col-sm-12 item list-group-item">
+    <div class="thumbnail">
+
+        <div class="">
+            <b>text</b>: {{object.text}}
+
+        </div>
+        <div class="">
+            <b>created_at</b>: {{object.created_at}}
+
+        </div>
+        <div class="">
+            <b>updated_at</b>: {{object.updated_at}}
+
+        </div>
+        <div class="">
+            <b>user</b>: {{object.user}}
+
+        </div>
+
+        <div class="actions">
+            {% for transaction in object.paypal_transaction.all %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Transaction PayPal ID: {{ transaction.id }}
+                </div>
+            </div>
+            {% endfor %}
+
+            {% for transaction in object.cryptsy_transaction.all %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Transaction Cryptsy ID: {{ transaction.id }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        <div class="actions">
+            <a class="btn btn-default" href="{% url "payments:transaction_paypal" object.id %}">Pay PayPal</a>
+            <a class="btn btn-default" href="{% url "payments:transaction_cryptsy" object.id %}">Pay Cryptsy</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+{% crispy form %}
+

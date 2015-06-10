@@ -2,6 +2,8 @@ from django.contrib.contenttypes.models import ContentType
 from .forms import CommentCreateFormDetail
 from .models import Comment
 from django.views.generic import CreateView
+from payments.models import CryptsyTransaction
+from payments.models import PayPalTransaction
 
 
 class CommentsContentTypeWrapper(CreateView):

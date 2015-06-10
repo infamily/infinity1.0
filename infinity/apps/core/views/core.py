@@ -1533,37 +1533,6 @@ class TaskDetailView(DetailView, CommentsContentTypeWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class UserDetailView(DetailView):
-
-    """User detail view"""
-    model = User
-    slug_field = "pk"
-    template_name = "user/detail.html"
-
-    def get_object(self, queryset=None):
-        obj = self.request.user
-        return obj
-
-
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class UserUpdateView(UpdateView):
-
-    """User update view"""
-    model = User
-    form_class = UserUpdateForm
-    slug_field = "pk"
-    template_name = "user/update.html"
-
-    def get_object(self, queryset=None):
-        obj = self.request.user
-        return obj
-
-    def get_success_url(self):
-        messages.success(self.request, _("User succesfully updated"))
-        return reverse("user-detail", args=[])
-
-
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class NeedCreateView(CreateView):
 
     """Need create view"""

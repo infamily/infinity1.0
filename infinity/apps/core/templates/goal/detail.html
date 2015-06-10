@@ -108,36 +108,8 @@
 </table>
 
 
-
-{% for object in object_list %}
-<div class="col-sm-12 item list-group-item">
-<div class="thumbnail">
-
-    <div class="">
-        <b>text</b>: {{object.text}}
-
-    </div>
-    <div class="">
-        <b>created_at</b>: {{object.created_at}}
-
-    </div>
-    <div class="">
-        <b>updated_at</b>: {{object.updated_at}}
-
-    </div>
-    <div class="">
-        <b>user</b>: {{object.user}}
-
-    </div>
-<div class="actions">
-</div>
-</div>
-</div>
-{% endfor %}
-
-
-
-{% crispy form %}
+{# Include comment list with transactions #}
+{% include "comment/list.html" %}
 
 
 {% endblock content %}
