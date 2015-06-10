@@ -46,7 +46,7 @@ class PayPalTransactionView(FormView):
         )
 
         result = paypal.adaptive_payment(
-            comment_id=self.comment_model,
+            comment_object=self.comment_model,
             receiver_amount=form.cleaned_data.get('amount'),
             receiver_user=User.objects.get(
                 email=form.cleaned_data.get('recipient_username')
