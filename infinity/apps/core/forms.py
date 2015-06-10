@@ -34,147 +34,8 @@ class CommentCreateFormDetail(forms.ModelForm):
 
     class Meta:
         model = Comment
-
         fields = [
-            'task',
-            'text',
-            'work',
-            'idea',
-            'step',
-            'plan',
-        ]
-
-
-class CommentCreateFormDetail(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-
-        self.helper.layout.append(Submit('save', _('Create')))
-
-    class Meta:
-        model = Comment
-
-        fields = [
-            'task',
-            'goal',
-            'text',
-            'idea',
-            'step',
-            'plan',
-        ]
-
-
-class CommentCreateFormDetail(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-
-        self.helper.layout.append(Submit('save', _('Create')))
-
-    class Meta:
-        model = Comment
-
-        fields = [
-            'task',
-            'goal',
-            'text',
-            'work',
-            'step',
-            'plan',
-        ]
-
-
-class CommentCreateFormDetail(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-
-        self.helper.layout.append(Submit('save', _('Create')))
-
-    class Meta:
-        model = Comment
-
-        fields = [
-            'task',
-            'goal',
-            'text',
-            'work',
-            'idea',
-            'plan',
-        ]
-
-
-class CommentCreateFormDetail(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-
-        self.helper.layout.append(Submit('save', _('Create')))
-
-    class Meta:
-        model = Comment
-
-        fields = [
-            'goal',
-            'text',
-            'work',
-            'idea',
-            'step',
-            'plan',
-        ]
-
-
-class CommentCreateFormDetail(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-
-        self.helper.layout.append(Submit('save', _('Create')))
-
-    class Meta:
-        model = Comment
-
-        fields = [
-            'task',
-            'goal',
-            'text',
-            'work',
-            'idea',
-            'step',
-            'plan',
-        ]
-
-
-class CommentCreateFormDetail(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-
-        self.helper.layout.append(Submit('save', _('Create')))
-
-    class Meta:
-        model = Comment
-
-        fields = [
-            'task',
-            'goal',
-            'text',
-            'work',
-            'idea',
-            'step',
+            'text'
         ]
 
 
@@ -189,16 +50,6 @@ class CommentUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = [
-            'goal',
-            'text',
-            'user',
-            'idea',
-            'plan',
-            'step',
-            'task',
-            'work',
-        ]
 
 
 class CommentCreateForm(forms.ModelForm):
@@ -216,15 +67,6 @@ class CommentCreateForm(forms.ModelForm):
             'created_at',
             'updated_at',
             'user',
-        ]
-        fields = [
-            'idea',
-            'text',
-            'plan',
-            'step',
-            'task',
-            'work',
-            'goal',
         ]
 
 

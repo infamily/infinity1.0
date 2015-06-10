@@ -6,6 +6,9 @@ from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
 )
 
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+
 
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
@@ -31,17 +34,10 @@ class CustomUserManager(BaseUserManager):
 
 
 class Comment(models.Model):
-    task = models.ForeignKey(
-        'Task',
-        related_name='task_comments',
-        blank=True,
-        null=True,
-    )
-    goal = models.ForeignKey(
-        'Goal',
-        blank=True,
-        null=True,
-    )
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
     text = models.TextField(blank=False)
     created_at = models.DateTimeField(
         auto_now=False,
@@ -50,12 +46,6 @@ class Comment(models.Model):
         null=False,
         blank=False,
     )
-    work = models.ForeignKey(
-        'Work',
-        related_name='work_comments',
-        blank=True,
-        null=True,
-    )
     updated_at = models.DateTimeField(
         auto_now=True,
         auto_now_add=False,
@@ -63,28 +53,10 @@ class Comment(models.Model):
         null=False,
         blank=False,
     )
-    idea = models.ForeignKey(
-        'Idea',
-        related_name='idea_comments',
-        blank=True,
-        null=True,
-    )
-    step = models.ForeignKey(
-        'Step',
-        related_name='step_comments',
-        blank=True,
-        null=True,
-    )
     user = models.ForeignKey(
         'User',
         blank=False,
         null=False,
-    )
-    plan = models.ForeignKey(
-        'Plan',
-        related_name='plan_comments',
-        blank=True,
-        null=True,
     )
 
     def __unicode__(self):
