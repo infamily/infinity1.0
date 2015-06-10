@@ -6,7 +6,7 @@ from .views import *
 urlpatterns = patterns(
     '',
     url(
-        r'^transaction/paypal/(?P<ct_name>\w+)/(?P<obj_id>\d+)/$',
+        r'^transaction/paypal/(?P<comment_id>\d+)/$',
         PayPalTransactionView.as_view(),
         name='transaction_paypal'
     ),
@@ -16,7 +16,7 @@ urlpatterns = patterns(
         name='transaction_paypal_success'
     ),
     url(
-        r'^transaction/cryptsy/(?P<ct_name>\w+)/(?P<obj_id>\d+)/$',
+        r'^transaction/cryptsy/(?P<comment_id>\d+)/$',
         CryptsyTransactionView.as_view(),
         name='transaction_cryptsy'
     )

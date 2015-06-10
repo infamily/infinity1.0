@@ -5,12 +5,13 @@ from django.views.generic.base import View
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-from django.contrib.contenttypes.models import ContentType
 
 from ..systems import PayPal
 from ..models import PayPalTransaction
 from ..forms import PayPalTransactionForm
 from ..decorators import ForbiddenUser
+
+from core.models import Comment
 
 
 User = get_user_model()
@@ -21,15 +22,9 @@ class PayPalTransactionView(FormView):
     template_name = 'transaction.html'
     form_class = PayPalTransactionForm
 
-    def dispatch(self, *args, **kwargs):
-        ct = ContentType.objects.get(name=self.kwargs.get('ct_name'))
-        model = ct.model_class()
-
-        self.model = get_object_or_404(
-            model,
-            pk=self.kwargs.get('obj_id')
-        )
-        return super(PayPalTransactionView, self).dispatch(*args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        self.comment_model = get_object_or_404(Comment, pk=kwargs.get('comment_id'))
+        return super(PayPalTransactionView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         current_site = get_current_site(self.request)
@@ -51,7 +46,7 @@ class PayPalTransactionView(FormView):
         )
 
         result = paypal.adaptive_payment(
-            content_object=self.model,
+            comment_id=self.comment_model,
             receiver_amount=form.cleaned_data.get('amount'),
             receiver_user=User.objects.get(
                 email=form.cleaned_data.get('recipient_username')

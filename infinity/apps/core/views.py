@@ -3,7 +3,6 @@ from django.utils.translation import ugettext as _
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.contrib.contenttypes.models import ContentType
 from django.views.generic import (
     DetailView, CreateView, UpdateView, DeleteView, ListView
 )
@@ -32,6 +31,7 @@ from core.models import (
     Type,
     Plan,
 )
+
 from core.forms import (
     CommentUpdateForm,
     CommentCreateForm,

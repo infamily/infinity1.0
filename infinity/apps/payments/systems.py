@@ -24,7 +24,7 @@ class CryptsyPay(object):
         self.trade_key = credential.tradekey
         self.notification_token = credential.notificationtoken
 
-    def make_payment(self, content_object, address, amount, currency_id):
+    def make_payment(self, comment_id, address, amount, currency_id):
         cryptsy = v2.Cryptsy(self.public_key, self.private_key)
         result = cryptsy.withdraw(
             self.trade_key,
@@ -59,7 +59,7 @@ class CryptsyPay(object):
                 datetime=transaction['datetime'],
                 fee=transaction['fee'],
                 timezone=transaction['timezone'],
-                content_object=content_object
+                comment=comment_id
             )
 
         return result
@@ -106,7 +106,7 @@ class PayPal(object):
         return data
 
     def adaptive_payment(self,
-                         content_object,
+                         comment_id,
                          receiver_amount,
                          receiver_user,
                          sender_user
@@ -159,7 +159,7 @@ class PayPal(object):
         payKey = data['payKey'][0]
 
         transaction = PayPalTransaction.objects.create(
-            content_object=content_object,
+            comment=comment_id,
             currency=self.currency,
             amount=receiver_amount,
             sender_user=sender_user,

@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
+
+from core.models import Comment
 
 
 class CryptsyTransaction(models.Model):
@@ -19,10 +19,7 @@ class CryptsyTransaction(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     matched_on = models.DateTimeField(null=True, blank=True)
     completed_on = models.DateTimeField(null=True, blank=True)
-
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
+    comment = models.ForeignKey(Comment, related_name='cryptsy_transaction')
 
 
 class CryptsyCredential(models.Model):
