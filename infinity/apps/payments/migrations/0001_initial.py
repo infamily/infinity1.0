@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('contenttypes', '0001_initial'),
+        ('core', '0001_initial'),
     ]
 
     operations = [
@@ -54,6 +54,7 @@ class Migration(migrations.Migration):
                 ('matched_on', models.DateTimeField(null=True, blank=True)),
                 ('completed_on', models.DateTimeField(null=True, blank=True)),
                 ('address', models.ForeignKey(related_name=b'cryptsy_transaction', to='payments.CoinAddress')),
+                ('comment', models.ForeignKey(related_name=b'cryptsy_transaction', to='core.Comment')),
             ],
             options={
             },
@@ -63,13 +64,12 @@ class Migration(migrations.Migration):
             name='PayPalTransaction',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('object_id', models.PositiveIntegerField()),
                 ('payKey', models.CharField(max_length=255)),
                 ('paymentExecStatus', models.CharField(max_length=255, choices=[(b'CREATED', b'Created'), (b'COMPLETED', b'Completed'), (b'INCOMPLETE', b'Incomplete'), (b'ERROR', b'Error'), (b'REVERSALERROR', b'Reversalerror')])),
                 ('currency', models.CharField(max_length=3)),
                 ('created_at', models.DateTimeField(auto_now=True, auto_now_add=True)),
                 ('amount', models.DecimalField(max_digits=16, decimal_places=2)),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('comment', models.ForeignKey(related_name=b'paypal_transaction', to='core.Comment')),
                 ('receiver_user', models.ForeignKey(related_name=b'receiver_user_transaction', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
                 ('sender_user', models.ForeignKey(related_name=b'sender_user_transaction', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],

@@ -11,11 +11,11 @@ from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
 from enhanced_cbv.views import ListFilteredView
 
-from ..decorators import ForbiddenUser
-from ..utils import CommentsContentTypeWrapper
-from ..models import *
-from ..forms import *
-from ..filters import *
+from users.decorators import ForbiddenUser
+from .utils import CommentsContentTypeWrapper
+from .models import *
+from .forms import *
+from .filters import *
 
 
 class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):

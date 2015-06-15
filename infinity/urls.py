@@ -1,18 +1,21 @@
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.conf import settings
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import RedirectView
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns(
-    '', url(r'^$', RedirectView.as_view(pattern_name="need-create")),
+    '',
+    url(r'^$', RedirectView.as_view(pattern_name="need-create")),
     url(r'', include('apps.core.urls')),
-    url(r'^accounts/', include('allauth.urls')),
+    url(r'^allauth/', include('allauth.urls')),
+    url(r'^user/', include('apps.users.urls')),
     url(r'^payments/', include('payments.urls', namespace="payments")),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^ext/', include('django_select2.urls')),)
+    url(r'^ext/', include('django_select2.urls')),
+)
 
 
 if settings.DEBUG:

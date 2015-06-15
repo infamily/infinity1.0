@@ -1,6 +1,7 @@
 LOCAL_APPS = (
+    'users',
     'core',
-    'payments'
+    'payments',
 )
 
 CONSTANCE_CONFIG = {
@@ -13,7 +14,7 @@ CONSTANCE_CONFIG = {
 }
 
 AUTH_USER_MODELS = [
-    "core.User",
+    "users.User",
 ]
 
 """
@@ -21,9 +22,9 @@ AUTH_USER_MODELS = [
     if AUTH_USER_MODELS is empty, set django user model by default
 """
 
-AUTH_USER_MODEL = "core.User"
+AUTH_USER_MODEL = "users.User"
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/user/login/'
 
 # Some autoslag handler that we need to create for make tests runnable
 

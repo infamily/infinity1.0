@@ -8,11 +8,11 @@ from django.contrib import messages
 from allauth.account.utils import complete_signup
 from allauth.account.app_settings import EMAIL_VERIFICATION
 
-from ..forms import LoginForm
-from ..forms import UserUpdateForm
-from ..forms import SignUpUserForm
-from ..models import User
-from ..decorators import ForbiddenUser
+from .forms import LoginForm
+from .forms import UserUpdateForm
+from .forms import SignUpUserForm
+from .models import User
+from .decorators import ForbiddenUser
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])

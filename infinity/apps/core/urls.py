@@ -1,13 +1,10 @@
 from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
 
 from core.views import *
 
 
 urlpatterns = patterns(
     '',
-    url("^login/$", login, name="login"),
-    url("^register/$", register, name="register"),
     url(
         r'^comment/list/1$',
         CommentListView1.as_view(),
@@ -200,17 +197,6 @@ urlpatterns = patterns(
         TaskDetailView.as_view(),
         name="task-detail"
     ),
-    url(
-        r'^user/me/$',
-        UserDetailView.as_view(),
-        name="user-detail"
-    ),
-    url(
-        r'^user/me/update/$',
-        UserUpdateView.as_view(),
-        name="user-update"
-    ),
-
     url(
         r'^need-create/$',
         NeedCreateView.as_view(),

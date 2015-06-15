@@ -2,20 +2,20 @@ import django_filters
 import django_select2
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Reset
+from crispy_forms.layout import Submit
+from django.contrib.auth import get_user_model
 
-from core.models import (
-    Comment,
-    Goal,
-    Work,
-    Idea,
-    Step,
-    Task,
-    User,
-    Need,
-    Type,
-    Plan,
-)
+from .models import Comment
+from .models import Goal
+from .models import Work
+from .models import Idea
+from .models import Step
+from .models import Task
+from .models import Need
+from .models import Type
+from .models import Plan
+
+User = get_user_model()
 
 
 class CommentChoiceField(django_select2.AutoModelSelect2Field):

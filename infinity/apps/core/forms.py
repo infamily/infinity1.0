@@ -1,26 +1,18 @@
 from django.utils.translation import ugettext_lazy as _
 from django import forms
-from django.core.urlresolvers import reverse
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div, Submit, HTML, Button, Row, Field
+from crispy_forms.layout import Submit
 
-from allauth.account.adapter import get_adapter
-from allauth.account.forms import SignupForm as AllAuthSignupForm
-from allauth.account.forms import LoginForm as AllAuthLoginForm
 
-from core.models import (
-    Comment,
-    Goal,
-    Work,
-    Idea,
-    Step,
-    Task,
-    User,
-    Need,
-    Type,
-    Plan,
-)
+from core.models import Comment
+from core.models import Goal
+from core.models import Work
+from core.models import Idea
+from core.models import Step
+from core.models import Task
+from core.models import Need
+from core.models import Plan
 
 
 class CommentCreateFormDetail(forms.ModelForm):
@@ -335,23 +327,6 @@ class TaskCreateForm(forms.ModelForm):
         ]
 
 
-class UserUpdateForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(UserUpdateForm, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-
-        self.helper.layout.append(Submit('save', _('Edit')))
-
-    class Meta:
-        model = User
-        fields = [
-            'email',
-            'introduction',
-        ]
-
-
 class NeedCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -417,39 +392,3 @@ class PlanCreateForm(forms.ModelForm):
         ]
 
 
-class LoginForm(AllAuthLoginForm):
-
-    def __init__(self, *args, **kwargs):
-        super(LoginForm, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-        self.helper.layout.append(Submit('login_form', _('Login')))
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-sm-2'
-        self.helper.field_class = 'col-sm-8'
-
-
-class SignUpUserForm(AllAuthSignupForm):
-
-    email = forms.EmailField(
-        max_length=150,
-        required=True,
-    )
-
-    def __init__(self, *args, **kwargs):
-        request = kwargs.pop('request')
-        super(SignUpUserForm, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-        self.helper.layout.append(Submit('signup_user_form', _('SignUp')))
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-sm-2'
-        self.helper.field_class = 'col-sm-8'
-        self.helper.form_action = reverse('register') + '?user_type=user'
-        self.helper.form_action += "&next=%s" % request.GET.get('next', '')
-
-    def save(self, request):
-        user = super(SignUpUserForm, self).save(request)
-        setattr(user, 'email', self.cleaned_data.get('email'))
-        user.save()
-        return user
