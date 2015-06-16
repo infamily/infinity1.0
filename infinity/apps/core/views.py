@@ -1888,13 +1888,6 @@ class PlanDetailView(DetailView, CommentsContentTypeWrapper):
     slug_field = "pk"
     template_name = "plan/detail.html"
 
-    @property
-    def object_list(self):
-        object_list = self.model_for_list.objects.filter(
-            plan=self.get_object(),
-        )
-        return object_list.order_by('-id')
-
     def get_success_url(self):
         messages.success(
             self.request, _(
