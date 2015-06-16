@@ -42,6 +42,12 @@ class CryptsyCredentialListView(PaginationMixin, ListView):
     paginate_by = 10
     template_name = 'cryptsy/credential/list.html'
 
+    def get_queryset(self):
+        qs = super(CryptsyCredentialListView, self).get_queryset()
+
+        qs = qs.filter(user=self.request.user)
+        return qs
+
     def get_base_queryset(self):
         queryset = super(CryptsyCredentialListView, self).get_base_queryset()
         queryset = queryset.filter(user=self.request.user.pk)

@@ -15,17 +15,32 @@ from .models import User
 from .decorators import ForbiddenUser
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class UserProfileView(DetailView):
+    """ User profile view
+    """
+    model = User
+    slug_field = "username"
+    template_name = "user/profile.html"
+
+
 class UserDetailView(DetailView):
 
     """User detail view"""
     model = User
-    slug_field = "pk"
+    slug_field = "username"
     template_name = "user/detail.html"
 
-    def get_object(self, queryset=None):
-        obj = self.request.user
-        return obj
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        user = kwargs.get('object')
+        context['idea_list'] = user.user_ideas.all()
+        context['plan_list'] = user.user_plans.all()
+        context['step_list'] = user.user_steps.all()
+        context['task_list'] = user.user_tasks.all()
+        context['work_list'] = user.user_works.all()
+        context['need_list'] = user.user_needs.all()
+        context['goal_list'] = user.user_goals.all()
+        return context
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])

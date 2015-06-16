@@ -11,7 +11,7 @@
 <a class="btn btn-success" href="{% url "need-list"   %}"> 
     Need list
 </a>
-<a class="btn btn-info" href="{% url "user-detail"   %}"> 
+<a class="btn btn-info" href="{% url "user-detail" request.user.username %}"> 
     User detail
 </a>
 </div>

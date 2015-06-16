@@ -15,7 +15,7 @@
 <h1>list</h1>
 <br/>
 <div class="actions">
-<a class="btn btn-info" href="{% url "user-detail"   %}"> 
+<a class="btn btn-info" href="{% url "user-detail" request.user.username %}">
     User detail
 </a>
 </div>

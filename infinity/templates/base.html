@@ -65,7 +65,25 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="{% url "idea-list2" %}">Ideas</a>
+              </li>
+              <li>
+                <a href="{% url "plan-list2" %}">Plans</a>
+              </li>
+              <li>
+                <a href="{% url "step-list2" %}">Steps</a>
+              </li>
+              <li>
+                <a href="{% url "task-list2" %}">Tasks</a>
+              </li>
+              <li>
+                <a href="{% url "work-list2" %}">Works</a>
+              </li>
               {% if request.user.is_authenticated %}
+              <li>
+                <a href="{% url "user-detail" request.user.username %}">User</a>
+              </li>
               <li>
                 <a href="{% url "account_logout" %}">Logout ({{ request.user }})</a>
               </li>

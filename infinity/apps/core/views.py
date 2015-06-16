@@ -1544,6 +1544,12 @@ class NeedCreateView(CreateView):
         messages.success(self.request, _("Need succesfully created"))
         return reverse("goal-create1", args=[self.object.pk, ])
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(NeedCreateView, self).form_valid(form)
+
 
 class NeedListView(PaginationMixin, OrderableListMixin, ListFilteredView):
 

@@ -24,7 +24,8 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = [
             'email',
-            'introduction',
+            'username',
+            'about',
         ]
 
 

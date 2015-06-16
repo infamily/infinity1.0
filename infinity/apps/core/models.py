@@ -66,6 +66,7 @@ class Goal(models.Model):
         settings.AUTH_USER_MODEL,
         blank=False,
         null=False,
+        related_name='user_goals'
     )
     need = models.ForeignKey(
         'Need',
@@ -306,6 +307,12 @@ class Need(models.Model):
         unique=False,
         max_length=150,
         blank=False,
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='user_needs',
+        blank=False,
+        null=False,
     )
 
     def __unicode__(self):
