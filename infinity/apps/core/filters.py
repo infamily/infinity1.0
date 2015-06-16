@@ -225,11 +225,6 @@ class GoalListViewFilter1(django_filters.FilterSet):
 
 class GoalListViewFilter2(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
-    reason = django_filters.CharFilter(lookup_type="icontains")
-    user = UserChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'User'}))
 
     @property
     def form(self):
@@ -245,7 +240,7 @@ class GoalListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Goal
 
-        fields = [u'name', u'quantity', u'reason', u'personal', u'user']
+        fields = [u'name']
 
         exclude = []
 
@@ -278,12 +273,7 @@ class WorkListViewFilter1(django_filters.FilterSet):
 
 
 class WorkListViewFilter2(django_filters.FilterSet):
-    task = TaskChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Task'}))
     name = django_filters.CharFilter(lookup_type="icontains")
-    description = django_filters.CharFilter(lookup_type="icontains")
 
     @property
     def form(self):
@@ -299,7 +289,7 @@ class WorkListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Work
 
-        fields = [u'task', u'name', u'description']
+        fields = [u'name']
 
         exclude = []
 
@@ -333,13 +323,7 @@ class IdeaListViewFilter1(django_filters.FilterSet):
 
 
 class IdeaListViewFilter2(django_filters.FilterSet):
-    description = django_filters.CharFilter(lookup_type="icontains")
     name = django_filters.CharFilter(lookup_type="icontains")
-    summary = django_filters.CharFilter(lookup_type="icontains")
-    goal = GoalChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Goal'}))
 
     @property
     def form(self):
@@ -355,9 +339,7 @@ class IdeaListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Idea
 
-        fields = [u'goal', u'name', u'summary', u'description']
-
-        exclude = []
+        fields = [u'name']
 
 
 class StepListViewFilter1(django_filters.FilterSet):
@@ -397,13 +379,6 @@ class StepListViewFilter1(django_filters.FilterSet):
 
 class StepListViewFilter2(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
-    deliverables = django_filters.CharFilter(lookup_type="icontains")
-    plan = PlanChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Plan'}))
-    objective = django_filters.CharFilter(lookup_type="icontains")
-    investables = django_filters.CharFilter(lookup_type="icontains")
 
     @property
     def form(self):
@@ -419,14 +394,7 @@ class StepListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Step
 
-        fields = [
-            u'plan',
-            u'name',
-            u'objective',
-            u'investables',
-            u'deliverables']
-
-        exclude = []
+        fields = [u'name']
 
 
 class TaskListViewFilter1(django_filters.FilterSet):
@@ -457,10 +425,6 @@ class TaskListViewFilter1(django_filters.FilterSet):
 
 class TaskListViewFilter2(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
-    step = StepChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Step'}))
 
     @property
     def form(self):
@@ -476,16 +440,12 @@ class TaskListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Task
 
-        fields = [u'step', u'name']
+        fields = [u'name']
 
         exclude = []
 
 
 class NeedListViewFilter(django_filters.FilterSet):
-    type = TypeChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Type'}))
     name = django_filters.CharFilter(lookup_type="icontains")
 
     @property
@@ -502,7 +462,7 @@ class NeedListViewFilter(django_filters.FilterSet):
     class Meta:
         model = Need
 
-        fields = [u'type', u'name']
+        fields = [u'name']
 
         exclude = []
 
@@ -537,12 +497,6 @@ class PlanListViewFilter1(django_filters.FilterSet):
 
 class PlanListViewFilter2(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
-    idea = IdeaChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Idea'}))
-    deliverable = django_filters.CharFilter(lookup_type="icontains")
-    situation = django_filters.CharFilter(lookup_type="icontains")
 
     @property
     def form(self):
@@ -558,7 +512,7 @@ class PlanListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Plan
 
-        fields = [u'name', u'idea', u'name', u'situation', u'deliverable']
+        fields = [u'name']
 
         exclude = []
 

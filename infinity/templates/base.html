@@ -66,19 +66,25 @@
 
           <ul class="nav navbar-nav navbar-right">
               <li>
-                <a href="{% url "idea-list2" %}">Ideas</a>
+                <a href="{% url "idea-list" %}">Ideas</a>
               </li>
               <li>
-                <a href="{% url "plan-list2" %}">Plans</a>
+                <a href="{% url "goal-list" %}">Goals</a>
               </li>
               <li>
-                <a href="{% url "step-list2" %}">Steps</a>
+                <a href="{% url "need-list" %}">Needs</a>
               </li>
               <li>
-                <a href="{% url "task-list2" %}">Tasks</a>
+                <a href="{% url "plan-list" %}">Plans</a>
               </li>
               <li>
-                <a href="{% url "work-list2" %}">Works</a>
+                <a href="{% url "step-list" %}">Steps</a>
+              </li>
+              <li>
+                <a href="{% url "task-list" %}">Tasks</a>
+              </li>
+              <li>
+                <a href="{% url "work-list" %}">Works</a>
               </li>
               {% if request.user.is_authenticated %}
               <li>

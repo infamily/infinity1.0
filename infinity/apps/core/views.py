@@ -394,11 +394,6 @@ class GoalListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     orderable_columns_default = "-id"
     filter_set = GoalListViewFilter2
 
-    def get_base_queryset(self):
-        queryset = super(GoalListView2, self).get_base_queryset()
-        queryset = queryset.filter(need__pk=self.kwargs['need'])
-        return queryset
-
     def get_template_names(self):
         """
             Override standart method that return template name
@@ -665,11 +660,6 @@ class WorkListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     ]
     orderable_columns_default = "-id"
     filter_set = WorkListViewFilter2
-
-    def get_base_queryset(self):
-        queryset = super(WorkListView2, self).get_base_queryset()
-        queryset = queryset.filter(user=self.request.user.pk)
-        return queryset
 
     def get_template_names(self):
         """
@@ -942,11 +932,6 @@ class IdeaListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     ]
     orderable_columns_default = "-id"
     filter_set = IdeaListViewFilter2
-
-    def get_base_queryset(self):
-        queryset = super(IdeaListView2, self).get_base_queryset()
-        queryset = queryset.filter(user=self.request.user.pk)
-        return queryset
 
     def get_template_names(self):
         """
@@ -1497,11 +1482,6 @@ class TaskListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     orderable_columns_default = "-id"
     filter_set = TaskListViewFilter2
 
-    def get_base_queryset(self):
-        queryset = super(TaskListView2, self).get_base_queryset()
-        queryset = queryset.filter(user=self.request.user.pk)
-        return queryset
-
 
 class TaskDetailView(DetailView, CommentsContentTypeWrapper):
 
@@ -1835,11 +1815,6 @@ class PlanListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     ]
     orderable_columns_default = "-id"
     filter_set = PlanListViewFilter2
-
-    def get_base_queryset(self):
-        queryset = super(PlanListView2, self).get_base_queryset()
-        queryset = queryset.filter(user=self.request.user.pk)
-        return queryset
 
     def get_template_names(self):
         """

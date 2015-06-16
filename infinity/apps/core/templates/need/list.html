@@ -1,69 +1,23 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}Need list{% endblock title %}
+{% block title %}Needs{% endblock title %}
 
 {% block content %}
-<nav class="navbar navbar-default">
-  <ul class="nav navbar-nav">
-  {% for view_type in allowed_view_types %}
-    <li><a class="navbar-brand" href="?view_type={{view_type}}">{{view_type|title}}</a></li>
-  {% endfor %}
-  </ul>
-</nav>
-<br>
-<h1>list</h1>
-<br/>
-<br/>
-<div>
-    
-</div>
-<br/>
+<h1>Needs</h1>
 
-<div class="search-block">
+<div class="search-block" style="text-align: center;">
 {% crispy filter.form %}
 </div>
 <br/>
 
-
-
 {% for object in object_list %}
-<div class="col-sm-12 item list-group-item">
-<div class="thumbnail">
-
-    <div class="">
-        <b>created_at</b>: {{object.created_at}}
-
-    </div>
-    <div class="">
-        <b>type</b>: {{object.type}}
-
-    </div>
-    <div class="">
-        <b>name</b>: {{object.name}}
-
+<div class="panel panel-default">
+    <div class="panel-heading">{{ object.name }}</div>
+    <div class="panel-body">
+        {{ object.objective }}
     </div>
 
-<div class="actions">
-
-
-
-    <a class="btn btn-primary" href="{% url "need-detail" object.pk %}">Need detail</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-</div>
 </div>
 {% endfor %}
 

@@ -23,7 +23,7 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^comment/(?P<goal>.*)/list/2$',
+        r'^comment/(?P<goal>.*)/list/$',
         CommentListView2.as_view(),
         name="comment-list2"
     ),
@@ -65,6 +65,11 @@ urlpatterns = patterns(
         name="goal-list2"
     ),
     url(
+        r'^goal/list/$',
+        GoalListView2.as_view(),
+        name="goal-list"
+    ),
+    url(
         r'^goal-create/(?P<need>.*)/2$',
         GoalCreateView2.as_view(),
         name="goal-create2"
@@ -92,9 +97,9 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^work/list/2$',
+        r'^work/list/$',
         WorkListView2.as_view(),
-        name="work-list2"
+        name="work-list"
     ),
     url(
         r'^work/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',
@@ -124,9 +129,9 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^idea/list/2$',
+        r'^idea/list/$',
         IdeaListView2.as_view(),
-        name="idea-list2"
+        name="idea-list"
     ),
     url(
         r'^idea/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',
@@ -156,9 +161,9 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^step/list/2$',
+        r'^step/list/$',
         StepListView2.as_view(),
-        name="step-list2"
+        name="step-list"
     ),
     url(
         r'^step/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',
@@ -188,9 +193,9 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^task/list/2$',
+        r'^task/list/$',
         TaskListView2.as_view(),
-        name="task-list2"
+        name="task-list"
     ),
     url(
         r'^task/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',
@@ -235,9 +240,9 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^plan/list/2$',
+        r'^plan/list/$',
         PlanListView2.as_view(),
-        name="plan-list2"
+        name="plan-list"
     ),
     url(
         r'^plan/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',

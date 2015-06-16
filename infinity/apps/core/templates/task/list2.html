@@ -1,78 +1,20 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}My tasks{% endblock title %}
+{% block title %}Tasks{% endblock title %}
 
 {% block content %}
+<h1>Tasks</h1>
 
-<h1>My tasks</h1>
-<br/>
-<br/>
-<div>
-    
-</div>
-<br/>
-
-<div class="search-block">
+<div class="search-block" style="text-align: center;">
 {% crispy filter.form %}
 </div>
 <br/>
 
-
-{% if not object_list %}
-<p>
-Nothing is found.
-</p>
-
-{% endif %}
 {% for object in object_list %}
-<div class="col-sm-12 item list-group-item">
-<div class="thumbnail">
+<div class="panel panel-default">
+    <div class="panel-heading">{{ object.name }}</div>
 
-    <div class="">
-        <b>name</b>: {{object.name}}
-
-    </div>
-    <div class="">
-        <b>created_at</b>: {{object.created_at}}
-
-    </div>
-    <div class="">
-        <b>updated_at</b>: {{object.updated_at}}
-
-    </div>
-    <div class="">
-        <b>priority</b>: {{object.priority}}
-
-    </div>
-    <div class="">
-        <b>step</b>: {{object.step}}
-
-    </div>
-    <div class="">
-        <b>user</b>: {{object.user}}
-
-    </div>
-
-<div class="actions">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-</div>
 </div>
 {% endfor %}
 
