@@ -3,6 +3,7 @@ from django.views.generic import UpdateView
 from django.views.generic import ListView
 from django.views.generic import DeleteView
 from django.contrib import messages
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
@@ -48,6 +49,11 @@ class CryptsyCredentialListView(PaginationMixin, ListView):
         qs = qs.filter(user=self.request.user)
         return qs
 
+    def get_context_data(self, **kwargs):
+        context = super(CryptsyCredentialListView, self).get_context_data(**kwargs)
+        context['current_domain'] = Site.objects.get_current().domain
+        return context
+
     def get_base_queryset(self):
         queryset = super(CryptsyCredentialListView, self).get_base_queryset()
         queryset = queryset.filter(user=self.request.user.pk)
@@ -71,8 +77,19 @@ class CryptsyCredentialCreateView(FormView):
     template_name = 'cryptsy/credential/create.html'
 
     def form_valid(self, form):
+        # from django import forms
+        # form.add_error('notificationtoken', forms.ValidationError('asd'))
+        # return super(CryptsyCredentialCreateView, self).form_invalid(form)
         form_object = form.save(commit=False)
         form_object.user = self.request.user
+        current_site = Site.objects.get_current()
+        form_object.save()
+        form_object.notificationtoken = 'http://%s%s' % (
+            current_site.domain, reverse('cryptsy_notification_token', kwargs={
+                'username': self.request.user.username,
+                'credential_id': form_object.id
+            })
+        )
         form_object.save()
         return super(CryptsyCredentialCreateView, self).form_valid(form)
 

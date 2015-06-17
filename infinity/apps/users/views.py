@@ -1,7 +1,10 @@
+import json
 from django.utils.translation import ugettext as _
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.views.generic import UpdateView
+from django.views.generic import View
+from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 
@@ -13,6 +16,11 @@ from .forms import UserUpdateForm
 from .forms import SignUpUserForm
 from .models import User
 from .decorators import ForbiddenUser
+
+
+class UserCryptsyNotificationToken(View):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(json.dumps({'success': True}))
 
 
 class UserProfileView(DetailView):

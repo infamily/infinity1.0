@@ -3,7 +3,7 @@ from users.views import login
 from users.views import register
 from users.views import UserDetailView
 from users.views import UserUpdateView
-from users.views import UserProfileView
+from users.views import UserCryptsyNotificationToken
 
 
 urlpatterns = patterns(
@@ -20,4 +20,9 @@ urlpatterns = patterns(
         UserDetailView.as_view(),
         name="user-detail"
     ),
+    url(
+        r'^(?P<username>\w+)/cryptsy/(?P<credential_id>\d+)/checkpoint/$',
+        UserCryptsyNotificationToken.as_view(),
+        name='cryptsy_notification_token'
+    )
 )

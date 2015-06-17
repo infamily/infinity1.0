@@ -46,8 +46,8 @@
 
 
         <div class="actions">
-            <a class="btn btn-default" href="{% url "payments:transaction_paypal" object.id %}">Pay PayPal</a>
-            <a class="btn btn-default" href="{% url "payments:transaction_cryptsy" object.id %}">Pay Cryptsy</a>
+            <a class="btn btn-default" href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> Pay PayPal</a>
+            <a class="btn btn-default" href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Pay Cryptsy</a>
         </div>
     </div>
 </div>

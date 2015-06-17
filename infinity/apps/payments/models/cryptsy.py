@@ -30,4 +30,3 @@ class CryptsyCredential(models.Model):
         settings.AUTH_USER_MODEL,
         related_name='credential'
     )
-    notificationtoken = models.CharField(max_length=255)
