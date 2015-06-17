@@ -13,19 +13,16 @@ from enhanced_cbv.views import ListFilteredView
 
 from users.decorators import ForbiddenUser
 from .utils import CommentsContentTypeWrapper
+from .utils import ViewTypeWrapper
 from .models import *
 from .forms import *
 from .filters import *
 
 
-class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
+class CommentListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    """Comment list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
     template_name_list = "comment/list1.html"
     template_name_blocks = "comment/blocks1.html"
-
     model = Comment
     paginate_by = 10
     orderable_columns = [
@@ -47,70 +44,6 @@ class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
         queryset = super(CommentListView1, self).get_base_queryset()
         queryset = queryset.filter(user=self.request.user.pk)
         return queryset
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(CommentListView1, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class CommentUpdateView(UpdateView):
@@ -139,10 +72,12 @@ class CommentDeleteView(DeleteView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class CommentListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
+class CommentListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
     """Comment list view"""
 
+    template_name_list = "comment/list2.html"
+    template_name_blocks = "comment/blocks2.html"
     template_name = "comment/list2.html"
 
     model = Comment
@@ -206,14 +141,9 @@ class GoalCreateView1(CreateView):
         return reverse("goal-detail", args=[self.object.pk, ])
 
 
-class GoalListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    """Goal list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
+class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "goal/list1.html"
     template_name_blocks = "goal/blocks1.html"
-
     model = Goal
     paginate_by = 10
     orderable_columns = [
@@ -233,70 +163,6 @@ class GoalListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
         queryset = super(GoalListView1, self).get_base_queryset()
         queryset = queryset.filter(need__pk=self.kwargs['need'])
         return queryset
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(GoalListView1, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class GoalDeleteView(DeleteView):
@@ -371,14 +237,9 @@ class GoalDetailView(DetailView, CommentsContentTypeWrapper):
         return context
 
 
-class GoalListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    """Goal list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
+class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "goal/list2.html"
     template_name_blocks = "goal/blocks2.html"
-
     model = Goal
     paginate_by = 10
     orderable_columns = [
@@ -393,70 +254,6 @@ class GoalListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     ]
     orderable_columns_default = "-id"
     filter_set = GoalListViewFilter2
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(GoalListView2, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -479,14 +276,9 @@ class GoalCreateView2(CreateView):
         return "/"
 
 
-class WorkListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    """Work list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
+class WorkListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "work/list1.html"
     template_name_blocks = "work/blocks1.html"
-
     model = Work
     paginate_by = 10
     orderable_columns = [
@@ -507,70 +299,6 @@ class WorkListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
         queryset = super(WorkListView1, self).get_base_queryset()
         queryset = queryset.filter(task__pk=self.kwargs['task'])
         return queryset
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(WorkListView1, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class WorkUpdateView(UpdateView):
@@ -637,14 +365,9 @@ class WorkDeleteView(DeleteView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class WorkListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    """Work list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
+class WorkListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "work/list2.html"
     template_name_blocks = "work/blocks2.html"
-
     model = Work
     paginate_by = 10
     orderable_columns = [
@@ -660,70 +383,6 @@ class WorkListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     ]
     orderable_columns_default = "-id"
     filter_set = WorkListViewFilter2
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(WorkListView2, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class WorkDetailView(DetailView, CommentsContentTypeWrapper):
@@ -755,14 +414,9 @@ class WorkDetailView(DetailView, CommentsContentTypeWrapper):
         return context
 
 
-class IdeaListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    """Idea list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
+class IdeaListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "idea/list1.html"
     template_name_blocks = "idea/blocks1.html"
-
     model = Idea
     paginate_by = 10
     orderable_columns = [
@@ -781,70 +435,6 @@ class IdeaListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
         queryset = super(IdeaListView1, self).get_base_queryset()
         queryset = queryset.filter(goal__pk=self.kwargs['goal'])
         return queryset
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(IdeaListView1, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class IdeaUpdateView(UpdateView):
@@ -911,14 +501,9 @@ class IdeaDeleteView(DeleteView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class IdeaListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    """Idea list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
+class IdeaListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "idea/list2.html"
     template_name_blocks = "idea/blocks2.html"
-
     model = Idea
     paginate_by = 10
     orderable_columns = [
@@ -932,70 +517,6 @@ class IdeaListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     ]
     orderable_columns_default = "-id"
     filter_set = IdeaListViewFilter2
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(IdeaListView2, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
@@ -1027,14 +548,9 @@ class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
         return context
 
 
-class StepListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    """Step list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
+class StepListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "step/list1.html"
     template_name_blocks = "step/blocks1.html"
-
     model = Step
     paginate_by = 10
     orderable_columns = [
@@ -1055,70 +571,6 @@ class StepListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
         queryset = super(StepListView1, self).get_base_queryset()
         queryset = queryset.filter(plan__pk=self.kwargs['plan'])
         return queryset
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(StepListView1, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class StepUpdateView(UpdateView):
@@ -1185,14 +637,10 @@ class StepDeleteView(DeleteView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class StepListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
+class StepListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    """Step list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
     template_name_list = "step/list2.html"
     template_name_blocks = "step/blocks2.html"
-
     model = Step
     paginate_by = 10
     orderable_columns = [
@@ -1213,70 +661,6 @@ class StepListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
         queryset = super(StepListView2, self).get_base_queryset()
         queryset = queryset.filter(user=self.request.user.pk)
         return queryset
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(StepListView2, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class StepDetailView(DetailView, CommentsContentTypeWrapper):
@@ -1308,14 +692,10 @@ class StepDetailView(DetailView, CommentsContentTypeWrapper):
         return context
 
 
-class TaskListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
+class TaskListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    """Task list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
     template_name_list = "task/list1.html"
     template_name_blocks = "task/blocks1.html"
-
     model = Task
     paginate_by = 10
     orderable_columns = [
@@ -1333,70 +713,6 @@ class TaskListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
         queryset = super(TaskListView1, self).get_base_queryset()
         queryset = queryset.filter(step__pk=self.kwargs['step'])
         return queryset
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(TaskListView1, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -1463,11 +779,13 @@ class TaskDeleteView(DeleteView):
         return reverse("task-list1", args=[self.object.step.pk, ])
 
 
-class TaskListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
+class TaskListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
     """Task list view"""
 
     template_name = "task/list2.html"
+    template_name_list = "task/list2.html"
+    template_name_blocks = "task/blocks2.html"
 
     model = Task
     paginate_by = 10
@@ -1531,83 +849,15 @@ class NeedCreateView(CreateView):
         return super(NeedCreateView, self).form_valid(form)
 
 
-class NeedListView(PaginationMixin, OrderableListMixin, ListFilteredView):
+class NeedListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    """Need list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
     template_name_list = "need/list.html"
     template_name_blocks = "need/blocks.html"
-
     model = Need
     paginate_by = 10
     orderable_columns = ["created_at", "type", "name", ]
     orderable_columns_default = "-id"
     filter_set = NeedListViewFilter
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(NeedListView, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class NeedDetailView(DetailView, CommentsContentTypeWrapper):
@@ -1639,14 +889,10 @@ class NeedDetailView(DetailView, CommentsContentTypeWrapper):
         return context
 
 
-class PlanListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
+class PlanListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    """Plan list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
     template_name_list = "plan/list1.html"
     template_name_blocks = "plan/blocks1.html"
-
     model = Plan
     paginate_by = 10
     orderable_columns = [
@@ -1665,70 +911,6 @@ class PlanListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
         queryset = super(PlanListView1, self).get_base_queryset()
         queryset = queryset.filter(idea__pk=self.kwargs['idea'])
         return queryset
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(PlanListView1, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class PlanUpdateView(UpdateView):
@@ -1794,14 +976,10 @@ class PlanDeleteView(DeleteView):
         return reverse("plan-list1", args=[self.object.idea.pk, ])
 
 
-class PlanListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
+class PlanListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    """Plan list view"""
-    default_view_type = 'list'
-    allowed_view_types = [u'list', u'blocks']
     template_name_list = "plan/list2.html"
     template_name_blocks = "plan/blocks2.html"
-
     model = Plan
     paginate_by = 10
     orderable_columns = [
@@ -1815,70 +993,6 @@ class PlanListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
     ]
     orderable_columns_default = "-id"
     filter_set = PlanListViewFilter2
-
-    def get_template_names(self):
-        """
-            Override standart method that return template name
-
-            In view_type transferred the display type
-            (value on the basis of which will be decided what kind
-            of template to choose: a table, block or gallery).
-
-            This value is stored in the session, and passed to a
-            get_template_by_view_type method that returns template
-            based on the transmitted view_type
-        """
-
-        view_type = self.get_view_type()
-
-        return self.get_template_by_view_type(view_type)
-
-    def get_view_type(self):
-        """
-        Returns view_type based on the get parameter from session.
-        We record a view_type in session,
-        if in the get parameter are passed new value
-
-        In get paramater we get view type
-        check whether there is a resulting string in the list of allowed view_type
-        if the value of view_type correspondence list, then save this value
-        back default view_type in session
-        """
-        view_type = self.request.GET.get('view_type')
-
-        if view_type in self.allowed_view_types:
-            self.request.session['view_type'] = view_type
-            self.request.session.save()
-            return view_type
-
-        view_type = self.request.session.get('view_type')
-
-        return view_type or self.default_view_type
-
-    def get_template_by_view_type(self, view_type):
-        """
-            Return template name by view type
-
-            :param view_type: on the basis
-            of this parameter we define
-            how to display the content
-
-            view_type can receive three values: map, gallery, table.
-            Depending on the view type.
-            For example, if we give view_type value "table",
-            then we display page as a table
-        """
-
-        if view_type not in self.allowed_view_types:
-            view_type = self.default_view_type
-
-        return getattr(self, 'template_name_%s' % view_type, None)
-
-    def get_context_data(self, **kwargs):
-        context = super(PlanListView2, self).get_context_data(
-            **kwargs)
-        context['allowed_view_types'] = self.allowed_view_types
-        return context
 
 
 class PlanDetailView(DetailView, CommentsContentTypeWrapper):

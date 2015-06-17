@@ -87,6 +87,7 @@ class Goal(models.Model):
 
 
 class Work(models.Model):
+    personal = models.BooleanField(default=True)
     task = models.ForeignKey(
         'Task',
         related_name='task_works',
@@ -145,6 +146,7 @@ class Work(models.Model):
 
 class Idea(models.Model):
     description = models.TextField(blank=False)
+    personal = models.BooleanField(default=True)
     name = models.CharField(
         unique=False,
         max_length=150,
@@ -190,6 +192,7 @@ class Idea(models.Model):
 
 
 class Step(models.Model):
+    personal = models.BooleanField(default=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_steps',
@@ -246,6 +249,7 @@ class Step(models.Model):
 
 
 class Task(models.Model):
+    personal = models.BooleanField(default=True)
     name = models.CharField(
         unique=False,
         max_length=150,
@@ -337,6 +341,7 @@ class Type(models.Model):
 
 
 class Plan(models.Model):
+    personal = models.BooleanField(default=True)
     name = models.CharField(
         unique=False,
         max_length=150,
