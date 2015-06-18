@@ -3,6 +3,10 @@ import urlparse
 import collections
 import httplib
 
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
+
 from .models import PayPalTransaction
 from .models import CryptsyCredential
 from .models import CoinAddress
@@ -10,7 +14,6 @@ from .models import CryptsyTransaction
 from .cryptsy import v2
 
 from constance import config
-from django.core.exceptions import ObjectDoesNotExist
 
 
 class CryptsyPay(object):
@@ -22,7 +25,14 @@ class CryptsyPay(object):
         self.private_key = credential.privatekey
         self.public_key = credential.publickey
         self.trade_key = credential.tradekey
-        self.notification_token = credential.notificationtoken
+        current_site = Site.objects.get_current()
+        notificationtoken = 'http://%s%s' % (
+            current_site.domain, reverse('cryptsy_notification_token', kwargs={
+                'username': credential.user.username,
+                'credential_id': credential.id
+            })
+        )
+        self.notification_token = notificationtoken
 
     def make_payment(self, comment_object, address, amount, currency_id):
         cryptsy = v2.Cryptsy(self.public_key, self.private_key)
