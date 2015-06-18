@@ -17,20 +17,12 @@ class UserCryptsyNotificationToken(View):
         return HttpResponse(json.dumps({'success': True}))
 
 
-class UserProfileView(DetailView):
-    """ User profile view
-    """
-    model = User
-    slug_field = "username"
-    template_name = "user/profile.html"
-
-
 class UserDetailView(DetailView):
 
     """User detail view"""
     model = User
     slug_field = "username"
-    template_name = "user/detail.html"
+    template_name = "account/detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
@@ -52,7 +44,7 @@ class UserUpdateView(UpdateView):
     model = User
     form_class = UserUpdateForm
     slug_field = "pk"
-    template_name = "user/update.html"
+    template_name = "account/update.html"
 
     def get_object(self, queryset=None):
         obj = self.request.user
