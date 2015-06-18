@@ -13,8 +13,10 @@
   <div class="form-group">
     {% for error in form.email.errors %}
       <div class="alert alert-danger">{{ error }}</div>
-    {% endfor %}
-    {{ success_message }}
+      {% endfor %}
+      {% if success_message %}
+      <div class="alert alert-success" role="alert">{{ success_message }}</div>
+      {% endif %}
   </div>
   <input type="submit" value="Send Invite" class="btn btn-primary generic-ajax-submit">  
 </form>  
