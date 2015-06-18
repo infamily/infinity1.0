@@ -5,8 +5,6 @@ from django.views.generic import CreateView
 
 
 class ViewTypeWrapper(object):
-    template_name_list = "idea/list2.html"
-    template_name_blocks = "idea/blocks2.html"
     default_view_type = 'list'
     allowed_view_types = [u'list', u'blocks']
 

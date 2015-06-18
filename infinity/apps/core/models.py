@@ -295,6 +295,7 @@ class Task(models.Model):
 
 
 class Need(models.Model):
+    personal = models.BooleanField(default=True)
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,

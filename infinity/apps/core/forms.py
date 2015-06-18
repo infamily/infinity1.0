@@ -156,6 +156,7 @@ class WorkUpdateForm(forms.ModelForm):
             'url',
             'parent_work_id',
             'task',
+            'personal'
         ]
 
 
@@ -180,6 +181,7 @@ class WorkCreateForm(forms.ModelForm):
             'url',
             'file',
             'parent_work_id',
+            'personal'
         ]
 
 
@@ -203,6 +205,7 @@ class IdeaUpdateForm(forms.ModelForm):
             'summary',
             'description',
             'goal',
+            'personal'
         ]
 
 
@@ -226,6 +229,7 @@ class IdeaCreateForm(forms.ModelForm):
             'name',
             'summary',
             'description',
+            'personal'
         ]
 
 
@@ -252,6 +256,7 @@ class StepUpdateForm(forms.ModelForm):
             'investables',
             'deliverables',
             'plan',
+            'personal'
         ]
 
 
@@ -278,6 +283,7 @@ class StepCreateForm(forms.ModelForm):
             'priority',
             'investables',
             'deliverables',
+            'personal'
         ]
 
 
@@ -301,6 +307,7 @@ class TaskUpdateForm(forms.ModelForm):
             'name',
             'priority',
             'step',
+            'personal'
         ]
 
 
@@ -324,6 +331,7 @@ class TaskCreateForm(forms.ModelForm):
         fields = [
             'name',
             'priority',
+            'personal'
         ]
 
 
@@ -341,6 +349,7 @@ class NeedCreateForm(forms.ModelForm):
         fields = [
             'type',
             'name',
+            'personal'
         ]
 
 
@@ -366,6 +375,7 @@ class PlanUpdateForm(forms.ModelForm):
             'deliverable',
             'name',
             'idea',
+            'personal'
         ]
 
 
@@ -389,6 +399,7 @@ class PlanCreateForm(forms.ModelForm):
             'situation',
             'deliverable',
             'name',
+            'personal'
         ]
 
 

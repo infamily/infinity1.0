@@ -1022,5 +1022,3 @@ class PlanDetailView(DetailView, CommentsContentTypeWrapper):
             'object_list': self.object_list,
         })
         return context
-
-
