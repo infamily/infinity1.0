@@ -15,6 +15,7 @@ urlpatterns = patterns(
     url(r'^payments/', include('payments.urls', namespace="payments")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ext/', include('django_select2.urls')),
+    url(r'^invitations/', include('invitations.urls', namespace='invitations')),
 )
 
 

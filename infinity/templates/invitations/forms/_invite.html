@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1 class="title">{% trans "Invite" %}</h1>
+<h4>{% trans "Please add an email below. The user will recieve an email with instructions." %}</h4>
+
+<form id="invite-form" method="POST" action="{% url 'invitations:send-invite' %}">
+  {% csrf_token %}
+  <div class="form-group">
+      <input type="text" name="email" id="id_email" class="form-control validate-email" placeholder="Email">
+  </div>
+  <div class="form-group">
+    {% for error in form.email.errors %}
+      <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+    {{ success_message }}
+  </div>
+  <input type="submit" value="Send Invite" class="btn btn-primary generic-ajax-submit">  
+</form>  
+
+{% endblock content %}

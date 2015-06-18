@@ -29,3 +29,4 @@ pyopenssl
 ndg-httpsclient
 pyasn1
 fabric
+django-invitations

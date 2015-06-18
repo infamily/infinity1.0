@@ -200,6 +200,7 @@ DJANGO_APPS = (
     'storages',
     'autofixture',
     'django_select2',
+    'invitations',
 )
 
 # DEBUG-specific apps
@@ -287,6 +288,9 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_PASSWORD_MIN_LENGTH = 3
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+INVITATIONS_ALLOWED_GROUPS = ['invite']
+INVITATIONS_INVITATION_ONLY = True
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 
 
