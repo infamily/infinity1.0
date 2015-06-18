@@ -57,7 +57,6 @@ class Cryptsy:
                                params=query,
                                headers=headers,
                                verify=False)
-        print ret.text
         try:
             jsonRet = ret.json()
             return jsonRet
