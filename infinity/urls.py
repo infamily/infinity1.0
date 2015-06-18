@@ -10,7 +10,7 @@ urlpatterns = patterns(
     '',
     url(r'^$', RedirectView.as_view(pattern_name="need-create")),
     url(r'', include('apps.core.urls')),
-    url(r'^allauth/', include('allauth.urls')),
+    url(r'^user/', include('allauth.urls')),
     url(r'^user/', include('apps.users.urls')),
     url(r'^payments/', include('payments.urls', namespace="payments")),
     url(r'^admin/', include(admin.site.urls)),
