@@ -18,18 +18,18 @@ from constance import config
 
 class CryptsyPay(object):
     def __init__(self, publickey):
-        credential = CryptsyCredential.objects.get(
+        self.credential = CryptsyCredential.objects.get(
             publickey=publickey
         )
 
-        self.private_key = credential.privatekey
-        self.public_key = credential.publickey
-        self.trade_key = credential.tradekey
+        self.private_key = self.credential.privatekey
+        self.public_key = self.credential.publickey
+        self.trade_key = self.credential.tradekey
         current_site = Site.objects.get_current()
         notificationtoken = 'http://%s%s' % (
             current_site.domain, reverse('cryptsy_notification_token', kwargs={
-                'username': credential.user.username,
-                'credential_id': credential.id
+                'username': self.credential.user.username,
+                'credential_id': self.credential.id
             })
         )
         self.notification_token = notificationtoken
@@ -61,7 +61,7 @@ class CryptsyPay(object):
         transaction = transaction["data"][0]
 
         if result['success']:
-            transaction_object = CryptsyTransaction.objects.create(
+            CryptsyTransaction.objects.create(
                 address=destination_address,
                 amount=amount,
                 message=result['data']['withdraw_id'],
@@ -69,7 +69,8 @@ class CryptsyPay(object):
                 datetime=transaction['datetime'],
                 fee=transaction['fee'],
                 timezone=transaction['timezone'],
-                comment=comment_object
+                comment=comment_object,
+                sender_credential=self.credential
             )
 
         return result

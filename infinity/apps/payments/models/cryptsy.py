@@ -9,6 +9,9 @@ class CryptsyTransaction(models.Model):
         'CoinAddress',
         related_name='cryptsy_transaction'
     )
+    sender_credential = models.ForeignKey(
+        'CryptsyCredential', related_name='cryptsy_transaction'
+    )
     amount = models.PositiveIntegerField()
     fee = models.PositiveIntegerField()
     timestamp = models.PositiveIntegerField()
