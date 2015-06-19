@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['.infinity.7webpages.com']
 
 # EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-DEFAULT_EMAIL_FROM = "noreply@infinity.xyz"
+DEFAULT_FROM_EMAIL = "noreply@infinity.xyz"
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
 SENDGRID_USER = "ironcoder-demo"
 SENDGRID_PASSWORD = "123456789a"
