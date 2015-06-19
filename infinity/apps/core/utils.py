@@ -71,6 +71,15 @@ class ViewTypeWrapper(object):
         context['allowed_view_types'] = self.allowed_view_types
         return context
 
+    def get_base_queryset(self):
+        """
+        Show entries with personal = True for content owners only
+        """
+        qs = super(ViewTypeWrapper, self).get_base_queryset()
+        qs = (qs.filter(personal=False) |
+              qs.filter(personal=True, user=self.request.user))
+        return qs
+
 
 class CommentsContentTypeWrapper(CreateView):
     model_for_list = Comment
