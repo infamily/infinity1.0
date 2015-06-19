@@ -21,8 +21,7 @@ from .filters import *
 
 class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    template_name_list = "comment/list1.html"
-    template_name_blocks = "comment/blocks1.html"
+    template_name = "comment/list1.html"
     model = Comment
     paginate_by = 10
     orderable_columns = [
@@ -76,8 +75,6 @@ class CommentListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
 
     """Comment list view"""
 
-    template_name_list = "comment/list2.html"
-    template_name_blocks = "comment/blocks2.html"
     template_name = "comment/list2.html"
 
     model = Comment
