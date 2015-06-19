@@ -14,7 +14,10 @@ from .decorators import ForbiddenUser
 
 class UserCryptsyNotificationToken(View):
     def get(self, request, *args, **kwargs):
-        return HttpResponse(json.dumps({'success': True}))
+        content = json.dumps({
+            'result': True
+        })
+        return HttpResponse(content, content_type='application/liquid')
 
 
 class UserDetailView(DetailView):
