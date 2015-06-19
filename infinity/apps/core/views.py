@@ -19,7 +19,7 @@ from .forms import *
 from .filters import *
 
 
-class CommentListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
+class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
 
     template_name_list = "comment/list1.html"
     template_name_blocks = "comment/blocks1.html"
@@ -72,7 +72,7 @@ class CommentDeleteView(DeleteView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class CommentListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
+class CommentListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
 
     """Comment list view"""
 
