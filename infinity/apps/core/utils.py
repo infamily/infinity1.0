@@ -74,10 +74,14 @@ class ViewTypeWrapper(object):
     def get_base_queryset(self):
         """
         Show entries with personal = True for content owners only
+        Show entries with personal = False for anonymous users
         """
         qs = super(ViewTypeWrapper, self).get_base_queryset()
-        qs = (qs.filter(personal=False) |
-              qs.filter(personal=True, user=self.request.user))
+        if self.request.user.is_anonymous():
+            qs = qs.filter(personal=False)
+        else:
+            qs = (qs.filter(personal=False) |
+                  qs.filter(personal=True, user=self.request.user))
         return qs
 
 
@@ -88,11 +92,11 @@ class CommentsContentTypeWrapper(CreateView):
 
     @property
     def object_list(self):
-        goal_content_type = ContentType.objects.get_for_model(
+        content_type = ContentType.objects.get_for_model(
             self.get_object()
         )
         object_list = self.model_for_list.objects.filter(
-            content_type__pk=goal_content_type.pk,
+            content_type__pk=content_type.pk,
             object_id=self.get_object().id
         )
 
