@@ -29,7 +29,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    about = models.TextField(blank=False)
+    about = models.TextField(blank=True)
 
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
