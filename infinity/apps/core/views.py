@@ -234,7 +234,6 @@ class GoalDetailView(DetailView, CommentsContentTypeWrapper):
         return context
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "goal/list2.html"
     template_name_blocks = "goal/blocks2.html"
@@ -363,7 +362,6 @@ class WorkDeleteView(DeleteView):
         return reverse("work-list1", args=[self.object.task.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class WorkListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "work/list2.html"
     template_name_blocks = "work/blocks2.html"
@@ -500,7 +498,6 @@ class IdeaDeleteView(DeleteView):
         return reverse("idea-list1", args=[self.object.goal.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class IdeaListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "idea/list2.html"
     template_name_blocks = "idea/blocks2.html"
@@ -637,7 +634,6 @@ class StepDeleteView(DeleteView):
         return reverse("step-list1", args=[self.object.plan.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class StepListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
     template_name_list = "step/list2.html"
@@ -781,7 +777,6 @@ class TaskDeleteView(DeleteView):
         return reverse("task-list1", args=[self.object.step.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class TaskListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
     """Task list view"""
@@ -852,7 +847,6 @@ class NeedCreateView(CreateView):
         return super(NeedCreateView, self).form_valid(form)
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class NeedListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
     template_name_list = "need/list.html"
@@ -981,7 +975,6 @@ class PlanDeleteView(DeleteView):
         return reverse("plan-list1", args=[self.object.idea.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class PlanListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
     template_name_list = "plan/list2.html"
