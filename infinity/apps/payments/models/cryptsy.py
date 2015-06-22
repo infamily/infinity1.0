@@ -26,10 +26,11 @@ class CryptsyTransaction(models.Model):
 
 
 class CryptsyCredential(models.Model):
-    privatekey = models.CharField(max_length=255)
+    privatekey = models.CharField(max_length=255, unique=True)
     publickey = models.CharField(max_length=255)
     tradekey = models.CharField(max_length=255)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name='credential'
+        related_name='credential',
+        unique=True
     )

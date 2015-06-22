@@ -100,7 +100,7 @@ class CommentsContentTypeWrapper(CreateView):
             object_id=self.get_object().id
         )
 
-        return object_list.order_by('-id')
+        return object_list.order_by('id')
 
     def form_valid(self, form):
         """

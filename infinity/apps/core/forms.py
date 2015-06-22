@@ -347,7 +347,6 @@ class NeedCreateForm(forms.ModelForm):
     class Meta:
         model = Need
         fields = [
-            'type',
             'name',
             'personal'
         ]
