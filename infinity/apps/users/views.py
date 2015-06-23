@@ -55,4 +55,4 @@ class UserUpdateView(UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, _("User succesfully updated"))
-        return reverse("user-detail", args=[])
+        return reverse("user-detail", kwargs={'slug': self.request.user.username})
