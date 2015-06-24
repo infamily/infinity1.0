@@ -6,10 +6,10 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 from .models import CryptsyCredential
+from .cryptsy.v2 import Cryptsy
 
 
 class CryptsyTransactionForm(forms.Form):
-    address_from = forms.ChoiceField()
     address_to = forms.CharField()
     amount = forms.DecimalField()
     currency = forms.ChoiceField()
@@ -17,16 +17,18 @@ class CryptsyTransactionForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         super(CryptsyTransactionForm, self).__init__(*args, **kwargs)
-        self.fields['address_from'].choices = [
-            (x.publickey, x.publickey)
-            for x in self.request.user.credential.all()
-        ]
+        cryptsy_credential = self.request.user.credential.get(default=True)
+        cryptsy = Cryptsy(
+            cryptsy_credential.publickey,
+            cryptsy_credential.privatekey
+        )
         response = requests.get('https://api.cryptsy.com/api/v2/currencies')
+        balances = cryptsy.balances()
 
         self.fields['currency'].choices = [
-            (currency['id'], currency['code'])
-            for i, currency in enumerate(response.json()['data'])
-        ]
+            (currency['id'], '%s (%s)' %
+             (currency['code'], balances['data']['available'][currency['id']]))
+            for i, currency in enumerate(response.json()['data'])]
 
         self.helper = FormHelper(self)
         self.helper.layout.append(Submit('transaction_form', _('Pay')))
@@ -71,4 +73,4 @@ class CryptsyCredentialForm(forms.ModelForm):
 
     class Meta:
         model = CryptsyCredential
-        exclude = ['user']
+        exclude = ['user', 'default']

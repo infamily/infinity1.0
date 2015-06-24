@@ -31,6 +31,6 @@ class CryptsyCredential(models.Model):
     tradekey = models.CharField(max_length=255)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name='credential',
-        unique=True
+        related_name='credential'
     )
+    default = models.BooleanField(default=False)

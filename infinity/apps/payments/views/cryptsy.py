@@ -7,6 +7,7 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 
 from pure_pagination.mixins import PaginationMixin
 
@@ -42,6 +43,20 @@ class CryptsyCredentialListView(PaginationMixin, ListView):
     model = CryptsyCredential
     paginate_by = 10
     template_name = 'cryptsy/credential/list.html'
+
+    def post(self, request, *args, **kwargs):
+        user_credential = self.request.user.credential
+        # Set all credentials to False
+        user_credential.filter(default=True).update(default=False)
+
+        # Set the obtained by id credential "default" field in False
+        credential_id = int(request.POST.get('credential_id'))
+        credential = user_credential.get(id=credential_id)
+        credential.default = True
+        credential.save()
+
+        # Redirect to the current page
+        return redirect(reverse("payments:cryptsy_credential_list"))
 
     def get_queryset(self):
         qs = super(CryptsyCredentialListView, self).get_queryset()
@@ -106,14 +121,20 @@ class CryptsyTransactionView(FormView):
     def dispatch(self, request, *args, **kwargs):
         self.comment_id = kwargs.get('comment_id')
         self.comment_model = get_object_or_404(Comment, pk=self.comment_id)
+        cryptsy_credential = request.user.credential.filter(default=True)
+        if not cryptsy_credential.exists():
+            messages.add_message(self.request, messages.INFO, _('You have not added any credential. Please create a Credential or select default'))
+            return redirect(reverse('payments:cryptsy_credential_list'))
+        else:
+            cryptsy_credential = request.user.credential.get(default=True)
+            self.cryptsy_publickey = cryptsy_credential.publickey
         return super(CryptsyTransactionView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        address_from = form.cleaned_data.get('address_from')
         address_to = form.cleaned_data.get('address_to')
         amount = form.cleaned_data.get('amount')
         currency = form.cleaned_data.get('currency')
-        cryptsy = CryptsyPay(publickey=address_from)
+        cryptsy = CryptsyPay(publickey=self.cryptsy_publickey)
         response = cryptsy.make_payment(
             comment_object=self.comment_model,
             address=address_to,
