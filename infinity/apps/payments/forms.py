@@ -37,7 +37,7 @@ class CryptsyTransactionForm(forms.Form):
         self.fields['currency'].choices = [
             (currency['id'], '%s (%s)' %
              (currency['code'], balances['data']['available'][currency['id']]))
-            for i, currency in enumerate(response.json()['data'])]
+            for i, currency in enumerate(response.json())]
 
         self.helper = FormHelper(self)
         self.helper.layout.append(Submit('transaction_form', _('Pay')))
