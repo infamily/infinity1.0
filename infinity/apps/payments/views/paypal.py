@@ -49,7 +49,7 @@ class PayPalTransactionView(FormView):
 
         try:
             user = User.objects.get(
-                email=form.cleaned_data.get('recipient_username')
+                email=form.cleaned_data.get('recipient_email')
             )
         except ObjectDoesNotExist:
             messages.add_message(

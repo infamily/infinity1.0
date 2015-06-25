@@ -1,12 +1,21 @@
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import get_user_model
 from django import forms
 
 import requests
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django_select2.fields import AutoModelSelect2Field
 
 from .models import CryptsyCredential
 from .cryptsy.v2 import Cryptsy
+
+User = get_user_model()
+
+
+class UserChoiceField(AutoModelSelect2Field):
+    queryset = User.objects.all()
+    search_fields = ['email__icontains', ]
 
 
 class CryptsyTransactionForm(forms.Form):
@@ -38,7 +47,7 @@ class CryptsyTransactionForm(forms.Form):
 
 
 class PayPalTransactionForm(forms.Form):
-    recipient_username = forms.CharField()
+    recipient_email = UserChoiceField()
     amount = forms.IntegerField()
 
     USD = 0
