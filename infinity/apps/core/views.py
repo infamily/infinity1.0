@@ -12,6 +12,8 @@ from braces.views import OrderableListMixin
 from enhanced_cbv.views import ListFilteredView
 
 from users.decorators import ForbiddenUser
+from users.mixins import OwnerMixin
+
 from .utils import CommentsContentTypeWrapper
 from .utils import ViewTypeWrapper
 from .models import *
@@ -162,37 +164,25 @@ class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class GoalDeleteView(DeleteView):
+class GoalDeleteView(OwnerMixin, DeleteView):
 
     """Goal delete view"""
     model = Goal
     slug_field = "pk"
     template_name = "goal/delete.html"
 
-    def get_object(self, queryset=None):
-        obj = super(GoalDeleteView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can delete Goal")
-        return obj
-
     def get_success_url(self):
         messages.success(self.request, _("Goal succesfully deleted"))
         return reverse("goal-list1", args=[self.object.need.pk, ])
 
 
-class GoalUpdateView(UpdateView):
+class GoalUpdateView(OwnerMixin, UpdateView):
 
     """Goal update view"""
     model = Goal
     form_class = GoalUpdateForm
     slug_field = "pk"
     template_name = "goal/update.html"
-
-    def get_object(self, queryset=None):
-        obj = super(GoalUpdateView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can update Goal")
-        return obj
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -299,19 +289,13 @@ class WorkListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class WorkUpdateView(UpdateView):
+class WorkUpdateView(OwnerMixin, UpdateView):
 
     """Work update view"""
     model = Work
     form_class = WorkUpdateForm
     slug_field = "pk"
     template_name = "work/update.html"
-
-    def get_object(self, queryset=None):
-        obj = super(WorkUpdateView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can update Work")
-        return obj
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -344,18 +328,12 @@ class WorkCreateView(CreateView):
         return reverse("work-detail", args=[self.object.pk, ])
 
 
-class WorkDeleteView(DeleteView):
+class WorkDeleteView(OwnerMixin, DeleteView):
 
     """Work delete view"""
     model = Work
     slug_field = "pk"
     template_name = "work-delete.html"
-
-    def get_object(self, queryset=None):
-        obj = super(WorkDeleteView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can delete Work")
-        return obj
 
     def get_success_url(self):
         messages.success(self.request, _("Work succesfully deleted"))
@@ -435,19 +413,13 @@ class IdeaListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class IdeaUpdateView(UpdateView):
+class IdeaUpdateView(OwnerMixin, UpdateView):
 
     """Idea update view"""
     model = Idea
     form_class = IdeaUpdateForm
     slug_field = "pk"
     template_name = "idea/update.html"
-
-    def get_object(self, queryset=None):
-        obj = super(IdeaUpdateView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can update Idea")
-        return obj
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -480,18 +452,12 @@ class IdeaCreateView(CreateView):
         return reverse("idea-detail", args=[self.object.pk, ])
 
 
-class IdeaDeleteView(DeleteView):
+class IdeaDeleteView(OwnerMixin, DeleteView):
 
     """Idea delete view"""
     model = Idea
     slug_field = "pk"
     template_name = "idea/delete.html"
-
-    def get_object(self, queryset=None):
-        obj = super(IdeaDeleteView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can delete Idea")
-        return obj
 
     def get_success_url(self):
         messages.success(self.request, _("Idea succesfully deleted"))
@@ -571,19 +537,13 @@ class StepListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class StepUpdateView(UpdateView):
+class StepUpdateView(OwnerMixin, UpdateView):
 
     """Step update view"""
     model = Step
     form_class = StepUpdateForm
     slug_field = "pk"
     template_name = "step/update.html"
-
-    def get_object(self, queryset=None):
-        obj = super(StepUpdateView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can update Step")
-        return obj
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -616,18 +576,12 @@ class StepCreateView(CreateView):
         return reverse("step-detail", args=[self.object.pk, ])
 
 
-class StepDeleteView(DeleteView):
+class StepDeleteView(OwnerMixin, DeleteView):
 
     """Step delete view"""
     model = Step
     slug_field = "pk"
     template_name = "step/delete.html"
-
-    def get_object(self, queryset=None):
-        obj = super(StepDeleteView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can delete Step")
-        return obj
 
     def get_success_url(self):
         messages.success(self.request, _("Step succesfully deleted"))
@@ -713,20 +667,13 @@ class TaskListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(OwnerMixin, UpdateView):
 
     """Task update view"""
     model = Task
     form_class = TaskUpdateForm
     slug_field = "pk"
     template_name = "task/update.html"
-
-    def get_object(self, queryset=None):
-        obj = super(TaskUpdateView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can update Task")
-        return obj
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -759,18 +706,12 @@ class TaskCreateView(CreateView):
         return reverse("task-detail", args=[self.object.pk, ])
 
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(OwnerMixin, DeleteView):
 
     """Task delete view"""
     model = Task
     slug_field = "pk"
     template_name = "task/delete.html"
-
-    def get_object(self, queryset=None):
-        obj = super(TaskDeleteView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can delete Task")
-        return obj
 
     def get_success_url(self):
         messages.success(self.request, _("Task succesfully deleted"))
@@ -912,19 +853,13 @@ class PlanListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class PlanUpdateView(UpdateView):
+class PlanUpdateView(OwnerMixin, UpdateView):
 
     """Plan update view"""
     model = Plan
     form_class = PlanUpdateForm
     slug_field = "pk"
     template_name = "plan/update.html"
-
-    def get_object(self, queryset=None):
-        obj = super(PlanUpdateView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can update Plan")
-        return obj
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -957,18 +892,12 @@ class PlanCreateView(CreateView):
         return reverse("plan-detail", args=[self.object.pk, ])
 
 
-class PlanDeleteView(DeleteView):
+class PlanDeleteView(OwnerMixin, DeleteView):
 
     """Plan delete view"""
     model = Plan
     slug_field = "pk"
     template_name = "plan/delete.html"
-
-    def get_object(self, queryset=None):
-        obj = super(PlanDeleteView, self).get_object(queryset)
-        if obj.user.pk != self.request.user.pk:
-            raise Http404("Only owner can delete Plan")
-        return obj
 
     def get_success_url(self):
         messages.success(self.request, _("Plan succesfully deleted"))

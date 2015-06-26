@@ -17,7 +17,7 @@ urlpatterns = patterns(
     ),
     url(
         r'^cryptsy/(?P<comment_id>\d+)/$',
-        CryptsyTransactionView.as_view(),
+        CryptsyTransactionCreateView.as_view(),
         name='transaction_cryptsy'
     ),
     url(
@@ -39,5 +39,25 @@ urlpatterns = patterns(
         r'^cryptsy/credential/delete/(?P<pk>\d+)/$',
         CryptsyCredentialDeleteView.as_view(),
         name='cryptsy_credential_delete'
-    )
+    ),
+    url(
+        r'^coin/address/list/$',
+        CoinAddressListView.as_view(),
+        name='coin_address_list'
+    ),
+    url(
+        r'^coin/address/create/$',
+        CoinAddressCreateView.as_view(),
+        name='coin_address_create'
+    ),
+    url(
+        r'coin/address/update/(?P<slug>\d+)/$',
+        CoinAddressUpdateView.as_view(),
+        name='coin_address_update'
+    ),
+    url(
+        r'coin/address/delete/(?P<slug>\d+)/$',
+        CoinAddressDeleteView.as_view(),
+        name='coin_address_delete'
+    ),
 )

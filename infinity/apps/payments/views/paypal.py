@@ -11,8 +11,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from ..systems import PayPal
 from ..models import PayPalTransaction
 from ..forms import PayPalTransactionForm
-from ..decorators import ForbiddenUser
 
+from users.decorators import ForbiddenUser
 from core.models import Comment
 
 

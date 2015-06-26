@@ -15,13 +15,42 @@ from ..forms import CryptsyTransactionForm
 from ..systems import CryptsyPay
 from ..forms import CryptsyCredentialForm
 from ..models import CryptsyCredential
-from ..decorators import ForbiddenUser
+from ..models import CoinAddress
 
+from users.decorators import ForbiddenUser
 from core.models import Comment
+from core.mixins import OwnerMixin
+
+
+class CoinAddressUpdateView(OwnerMixin, UpdateView):
+    model = CoinAddress
+    # form_class = CoinAddressUpdateForm
+    # slug_field = "pk"
+    template_name = "coin/update.html"
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class CryptsyCredentialUpdateView(UpdateView):
+class CoinAddressCreateView(FormView):
+    pass
+
+
+class CoinAddressDeleteView(OwnerMixin, DeleteView):
+    pass
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class CoinAddressListView(PaginationMixin, ListView):
+    template_name = "coin/list.html"
+    model = CoinAddress
+    paginate_by = 10
+
+    def get_base_queryset(self):
+        qs = super(CoinAddressListView, self).get_base_queryset()
+        qs = qs.filter(user=self.request.user)
+        return qs
+
+
+class CryptsyCredentialUpdateView(OwnerMixin, UpdateView):
     form_class = CryptsyCredentialForm
     slug_field = 'pk'
     template_name = 'cryptsy/credential/update.html'
@@ -75,8 +104,7 @@ class CryptsyCredentialListView(PaginationMixin, ListView):
         return queryset
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class CryptsyCredentialDeleteView(DeleteView):
+class CryptsyCredentialDeleteView(OwnerMixin, DeleteView):
     model = CryptsyCredential
     slug_field = 'pk'
     template_name = 'cryptsy/credential/delete.html'
@@ -114,7 +142,7 @@ class CryptsyCredentialCreateView(FormView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class CryptsyTransactionView(FormView):
+class CryptsyTransactionCreateView(FormView):
     form_class = CryptsyTransactionForm
     template_name = 'cryptsy/transaction/create.html'
 
@@ -128,7 +156,7 @@ class CryptsyTransactionView(FormView):
         else:
             cryptsy_credential = request.user.credential.get(default=True)
             self.cryptsy_publickey = cryptsy_credential.publickey
-        return super(CryptsyTransactionView, self).dispatch(request, *args, **kwargs)
+        return super(CryptsyTransactionCreateView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         address_to = form.cleaned_data.get('address_to')
