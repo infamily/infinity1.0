@@ -6,8 +6,22 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 from .models import CryptsyCredential
+from .models import CoinAddress
 from .fields import UserChoiceField
 from .cryptsy.v2 import Cryptsy
+
+
+class CoinAddressForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CoinAddressForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.layout.append(Submit('save', _('Save')))
+
+    class Meta:
+        model = CoinAddress
+        exclude = [
+            'user'
+        ]
 
 
 class CryptsyTransactionForm(forms.Form):

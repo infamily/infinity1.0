@@ -14,6 +14,7 @@ from pure_pagination.mixins import PaginationMixin
 from ..forms import CryptsyTransactionForm
 from ..systems import CryptsyPay
 from ..forms import CryptsyCredentialForm
+from ..forms import CoinAddressForm
 from ..models import CryptsyCredential
 from ..models import CoinAddress
 
@@ -24,18 +25,40 @@ from core.mixins import OwnerMixin
 
 class CoinAddressUpdateView(OwnerMixin, UpdateView):
     model = CoinAddress
-    # form_class = CoinAddressUpdateForm
-    # slug_field = "pk"
+    form_class = CoinAddressForm
+    slug_field = "pk"
     template_name = "coin/update.html"
+
+    def get_success_url(self):
+        messages.success(self.request, _("Coin address succesfully updated"))
+        return reverse("payments:coin_address_list")
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class CoinAddressCreateView(FormView):
-    pass
+    model = CoinAddress
+    form_class = CoinAddressForm
+    template_name = "coin/create.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(CoinAddressCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("CoinAddress succesfully created"))
+        return reverse("payments:coin_address_list")
 
 
 class CoinAddressDeleteView(OwnerMixin, DeleteView):
-    pass
+    model = CoinAddress
+    slug_field = "pk"
+    template_name = "coin/delete.html"
+
+    def get_success_url(self):
+        messages.success(self.request, _("CoinAddress succesfully deleted"))
+        return reverse("payments:coin_address_list")
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
