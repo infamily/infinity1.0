@@ -19,8 +19,8 @@ from ..models import CryptsyCredential
 from ..models import CoinAddress
 
 from users.decorators import ForbiddenUser
+from users.mixins import OwnerMixin
 from core.models import Comment
-from core.mixins import OwnerMixin
 
 
 class CoinAddressUpdateView(OwnerMixin, UpdateView):
