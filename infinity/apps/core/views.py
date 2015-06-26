@@ -47,7 +47,7 @@ class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
         return queryset
 
 
-class CommentUpdateView(UpdateView):
+class CommentUpdateView(OwnerMixin, UpdateView):
 
     """Comment update view"""
     model = Comment
@@ -56,7 +56,10 @@ class CommentUpdateView(UpdateView):
     template_name = "comment/update.html"
 
     def get_success_url(self):
+        next_url = self.request.GET.get('next')
         messages.success(self.request, _("Comment succesfully updated"))
+        if next_url:
+            return next_url
         return "/"
 
 
