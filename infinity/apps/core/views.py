@@ -349,7 +349,7 @@ class WorkDeleteView(DeleteView):
     """Work delete view"""
     model = Work
     slug_field = "pk"
-    template_name = "work-delete.html"
+    template_name = "work/delete.html"
 
     def get_object(self, queryset=None):
         obj = super(WorkDeleteView, self).get_object(queryset)
