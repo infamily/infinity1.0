@@ -93,7 +93,6 @@ class CommentTest(WebTest, AuthTestMixin):
 
         form = resp.form
         form['text'] = comment_compare.text
-        form['user'] = comment_compare.user.pk
         form.submit()
 
         comment_updated = Comment.objects.get(pk=comment.pk)
@@ -947,7 +946,7 @@ class TaskTest(WebTest, AuthTestMixin):
             'slug': task.pk, })
 
         # Access forbidden for AnonymousUser
-        resp = self.app.get(url, status=302)
+        resp = self.app.get(url, status=404)
 
         self.login(self.user.email, 'test')
 
