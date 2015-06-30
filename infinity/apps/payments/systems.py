@@ -100,7 +100,10 @@ class PayPal(object):
     def get_payment_information(self, payKey):
         """ Get payment information by payKey
         """
-        conn = httplib.HTTPSConnection("svcs.sandbox.paypal.com")
+        if self.sandbox:
+            conn = httplib.HTTPSConnection("svcs.sandbox.paypal.com")
+        else:
+            conn = httplib.HTTPSConnection("svcs.paypal.com")
         params = collections.OrderedDict()
         params['payKey'] = payKey
         params['requestEnvelope.errorLanguage'] = self.error_language
