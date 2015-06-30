@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url
 from users.views import UserDetailView
 from users.views import UserUpdateView
 from users.views import UserCryptsyNotificationToken
+from users.views import FriendFollowingView
 
 
 urlpatterns = patterns(
@@ -10,6 +11,11 @@ urlpatterns = patterns(
         r'^update/$',
         UserUpdateView.as_view(),
         name="user-update"
+    ),
+    url(
+        r'^(?P<slug>\w+)/friends/$',
+        FriendFollowingView.as_view(),
+        name="friend-following"
     ),
     url(
         r'^(?P<slug>\w+)/$',

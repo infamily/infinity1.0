@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
 from django.views.generic import UpdateView
 from django.views.generic import View
+from django.views.generic import ListView
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib import messages
@@ -10,6 +11,14 @@ from django.contrib import messages
 from .forms import UserUpdateForm
 from .models import User
 from .decorators import ForbiddenUser
+
+
+class FriendFollowingView(ListView):
+    template_name = "account/friends/following.html"
+
+    def get_queryset(self):
+        qs = None
+        return qs
 
 
 class UserCryptsyNotificationToken(View):
