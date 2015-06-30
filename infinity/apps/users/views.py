@@ -10,7 +10,7 @@ from django.contrib import messages
 
 from .forms import UserUpdateForm
 from .models import User
-from payments.decorators import ForbiddenUser
+from .decorators import ForbiddenUser
 
 
 class FriendFollowingView(ListView):
