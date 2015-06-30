@@ -336,7 +336,7 @@ class WorkDeleteView(OwnerMixin, DeleteView):
     """Work delete view"""
     model = Work
     slug_field = "pk"
-    template_name = "work-delete.html"
+    template_name = "work/delete.html"
 
     def get_success_url(self):
         messages.success(self.request, _("Work succesfully deleted"))
