@@ -1,9 +1,11 @@
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse_lazy
 from django import forms
 
 import requests
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from clever_selects.form_fields import ChainedModelChoiceField
 
 from .models import CryptsyCredential
 from .models import CoinAddress
@@ -22,13 +24,6 @@ class CoinAddressForm(forms.ModelForm):
         exclude = [
             'user'
         ]
-
-
-from clever_selects.form_fields import ChainedModelChoiceField
-from django.core.urlresolvers import reverse_lazy
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
 
 
 class CryptsyTransactionForm(forms.Form):

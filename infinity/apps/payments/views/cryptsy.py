@@ -67,8 +67,8 @@ class CoinAddressListView(PaginationMixin, ListView):
     model = CoinAddress
     paginate_by = 10
 
-    def get_base_queryset(self):
-        qs = super(CoinAddressListView, self).get_base_queryset()
+    def get_queryset(self):
+        qs = super(CoinAddressListView, self).get_queryset()
         qs = qs.filter(user=self.request.user)
         return qs
 
