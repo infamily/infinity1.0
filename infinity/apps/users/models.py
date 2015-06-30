@@ -30,6 +30,7 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractUser):
     about = models.TextField(blank=True)
+    following = models.ManyToManyField('self')
 
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'

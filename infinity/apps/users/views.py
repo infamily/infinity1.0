@@ -5,12 +5,22 @@ from django.views.generic import UpdateView
 from django.views.generic import View
 from django.views.generic import ListView
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 
 from .forms import UserUpdateForm
 from .models import User
 from .decorators import ForbiddenUser
+
+
+class FollowView(View):
+    def post(self, request, *args, **kwargs):
+        destination_user_id = int(request.POST.get('destination_user_id'))
+        destination_user = User.objects.get(pk=destination_user_id)
+        destination_user.following.add(request.user)
+        destination_user.save()
+        return redirect(reverse('user-detail', kwargs={'slug': destination_user.username}))
 
 
 class FriendFollowingView(ListView):
