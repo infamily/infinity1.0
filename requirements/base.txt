@@ -30,3 +30,4 @@ ndg-httpsclient
 pyasn1
 fabric
 django-invitations
+django-clever-selects==0.6.9

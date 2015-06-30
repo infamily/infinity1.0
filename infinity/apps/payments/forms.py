@@ -24,10 +24,22 @@ class CoinAddressForm(forms.ModelForm):
         ]
 
 
+from clever_selects.form_fields import ChainedModelChoiceField
+from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+
 class CryptsyTransactionForm(forms.Form):
-    address_to = forms.CharField()
     amount = forms.DecimalField()
     currency = forms.ChoiceField()
+    recipient_email = UserChoiceField()
+    recipient_address = ChainedModelChoiceField(
+        parent_field='recipient_email',
+        ajax_url=reverse_lazy('ajax_chained_view'),
+        model=CoinAddress
+    )
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')

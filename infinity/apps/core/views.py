@@ -1,11 +1,13 @@
 from django.utils.translation import ugettext as _
-from django.http import Http404
+import json
+from django.http import Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic.detail import BaseDetailView
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
@@ -19,6 +21,23 @@ from .utils import ViewTypeWrapper
 from .models import *
 from .forms import *
 from .filters import *
+
+from clever_selects.views import ChainedSelectChoicesView
+
+class AjaxChainedView(ChainedSelectChoicesView):
+    def get_choices(self):
+        vals_list = []
+        for x in range(1, 6):
+            vals_list.append(x*int(self.parent_value))
+        result = tuple(zip(vals_list, vals_list))
+        address = User.objects.get(pk=self.parent_value).address.all()
+        res = tuple(
+            zip(
+                [x.pk for x in address],
+                ['(%s) %s' % (x.currency_code, x.address) for x in address]
+            )
+        )
+        return res
 
 
 class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):

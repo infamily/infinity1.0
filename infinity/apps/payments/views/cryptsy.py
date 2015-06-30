@@ -182,13 +182,13 @@ class CryptsyTransactionCreateView(FormView):
         return super(CryptsyTransactionCreateView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        address_to = form.cleaned_data.get('address_to')
+        recipient_address = form.cleaned_data.get('recipient_address')
         amount = form.cleaned_data.get('amount')
         currency = form.cleaned_data.get('currency')
         cryptsy = CryptsyPay(publickey=self.cryptsy_publickey)
         response = cryptsy.make_payment(
             comment_object=self.comment_model,
-            address=address_to,
+            address=recipient_address.address,
             amount=amount,
             currency_id=currency,
         )
@@ -204,12 +204,12 @@ class CryptsyTransactionCreateView(FormView):
                 messages.ERROR,
                 response["error"][0]
             )
-        return super(CryptsyTransactionView, self).form_valid(form)
+        return super(CryptsyTransactionCreateView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse('payments:transaction_cryptsy', kwargs={'comment_id': self.comment_id})
 
     def get_form_kwargs(self):
-        kwargs = super(CryptsyTransactionView, self).get_form_kwargs()
+        kwargs = super(CryptsyTransactionCreateView, self).get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
