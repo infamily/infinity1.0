@@ -6,7 +6,6 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-from django.core.exceptions import ObjectDoesNotExist
 
 from ..systems import PayPal
 from ..models import PayPalTransaction
@@ -51,7 +50,7 @@ class PayPalTransactionView(FormView):
             user = User.objects.get(
                 email=form.cleaned_data.get('recipient_email')
             )
-        except ObjectDoesNotExist:
+        except User.DoesNotExist:
             messages.add_message(
                 self.request,
                 messages.ERROR,

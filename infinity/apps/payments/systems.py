@@ -3,7 +3,6 @@ import urlparse
 import collections
 import httplib
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 
@@ -51,7 +50,7 @@ class CryptsyPay(object):
             destination_address = CoinAddress.objects.get(
                 address=address
             )
-        except ObjectDoesNotExist:
+        except CoinAddress.DoesNotExist:
             destination_address = CoinAddress.objects.create(
                 address=address,
                 currency_code=currency['code']
@@ -175,7 +174,8 @@ class PayPal(object):
             amount=receiver_amount,
             sender_user=sender_user,
             receiver_user=receiver_user,
-            paymentExecStatus=getattr(PayPalTransaction, data['paymentExecStatus'][0]),
+            paymentExecStatus=getattr(PayPalTransaction,
+                                      data['paymentExecStatus'][0]),
             payKey=data['payKey'][0]
         )
 

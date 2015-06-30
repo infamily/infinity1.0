@@ -9,7 +9,7 @@ from django.contrib import messages
 
 from .forms import UserUpdateForm
 from .models import User
-from .decorators import ForbiddenUser
+from payments.decorators import ForbiddenUser
 
 
 class UserCryptsyNotificationToken(View):
