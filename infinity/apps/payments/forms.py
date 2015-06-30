@@ -1,21 +1,27 @@
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth import get_user_model
 from django import forms
 
 import requests
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from django_select2.fields import AutoModelSelect2Field
 
 from .models import CryptsyCredential
+from .models import CoinAddress
+from .fields import UserChoiceField
 from .cryptsy.v2 import Cryptsy
 
-User = get_user_model()
 
+class CoinAddressForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CoinAddressForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.layout.append(Submit('save', _('Save')))
 
-class UserChoiceField(AutoModelSelect2Field):
-    queryset = User.objects.all()
-    search_fields = ['email__icontains', ]
+    class Meta:
+        model = CoinAddress
+        exclude = [
+            'user'
+        ]
 
 
 class CryptsyTransactionForm(forms.Form):

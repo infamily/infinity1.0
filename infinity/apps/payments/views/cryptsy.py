@@ -14,14 +14,66 @@ from pure_pagination.mixins import PaginationMixin
 from ..forms import CryptsyTransactionForm
 from ..systems import CryptsyPay
 from ..forms import CryptsyCredentialForm
+from ..forms import CoinAddressForm
 from ..models import CryptsyCredential
-from ..decorators import ForbiddenUser
+from ..models import CoinAddress
 
+from users.decorators import ForbiddenUser
+from users.mixins import OwnerMixin
 from core.models import Comment
 
 
+class CoinAddressUpdateView(OwnerMixin, UpdateView):
+    model = CoinAddress
+    form_class = CoinAddressForm
+    slug_field = "pk"
+    template_name = "coin/update.html"
+
+    def get_success_url(self):
+        messages.success(self.request, _("Coin address succesfully updated"))
+        return reverse("payments:coin_address_list")
+
+
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class CryptsyCredentialUpdateView(UpdateView):
+class CoinAddressCreateView(FormView):
+    model = CoinAddress
+    form_class = CoinAddressForm
+    template_name = "coin/create.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(CoinAddressCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("CoinAddress succesfully created"))
+        return reverse("payments:coin_address_list")
+
+
+class CoinAddressDeleteView(OwnerMixin, DeleteView):
+    model = CoinAddress
+    slug_field = "pk"
+    template_name = "coin/delete.html"
+
+    def get_success_url(self):
+        messages.success(self.request, _("CoinAddress succesfully deleted"))
+        return reverse("payments:coin_address_list")
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class CoinAddressListView(PaginationMixin, ListView):
+    template_name = "coin/list.html"
+    model = CoinAddress
+    paginate_by = 10
+
+    def get_base_queryset(self):
+        qs = super(CoinAddressListView, self).get_base_queryset()
+        qs = qs.filter(user=self.request.user)
+        return qs
+
+
+class CryptsyCredentialUpdateView(OwnerMixin, UpdateView):
     form_class = CryptsyCredentialForm
     slug_field = 'pk'
     template_name = 'cryptsy/credential/update.html'
@@ -75,8 +127,7 @@ class CryptsyCredentialListView(PaginationMixin, ListView):
         return queryset
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class CryptsyCredentialDeleteView(DeleteView):
+class CryptsyCredentialDeleteView(OwnerMixin, DeleteView):
     model = CryptsyCredential
     slug_field = 'pk'
     template_name = 'cryptsy/credential/delete.html'
@@ -114,7 +165,7 @@ class CryptsyCredentialCreateView(FormView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class CryptsyTransactionView(FormView):
+class CryptsyTransactionCreateView(FormView):
     form_class = CryptsyTransactionForm
     template_name = 'cryptsy/transaction/create.html'
 
@@ -128,7 +179,7 @@ class CryptsyTransactionView(FormView):
         else:
             cryptsy_credential = request.user.credential.get(default=True)
             self.cryptsy_publickey = cryptsy_credential.publickey
-        return super(CryptsyTransactionView, self).dispatch(request, *args, **kwargs)
+        return super(CryptsyTransactionCreateView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         address_to = form.cleaned_data.get('address_to')

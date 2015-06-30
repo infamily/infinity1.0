@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}CoinAddress list{% endblock title %}
+
+{% block content %}
+<h1>CoinAddress list</h1>
+<div class="actions">
+    <a class="btn btn-success" href="{% url "payments:coin_address_create" %}">
+        Add new
+    </a>
+</div>
+<br/>
+<br/>
+<div>
+    
+</div>
+<br/>
+
+<div class="search-block">
+</div>
+<br/>
+
+
+
+{% for object in object_list %}
+<div class="col-sm-12 item list-group-item">
+<div class="thumbnail">
+
+    <div class="">
+        <b>Currency Code</b>: {{object.currency_code}}
+
+    </div>
+    <div class="">
+        <b>Address</b>: {{object.address}}
+
+    </div>
+
+<div class="actions">
+    <a class="btn btn-primary" href="{% url "payments:coin_address_update" object.pk %}">Update</a>
+    <a class="btn btn-primary btn-danger" href="{% url "payments:coin_address_delete" object.pk %}">Delete</a>
+</div>
+</div>
+</div>
+{% endfor %}
+
+
+<div class="widget-footer bordered">
+    {% include "paginator.html" %}
+</div>
+
+{% endblock content %}
