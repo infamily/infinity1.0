@@ -201,6 +201,7 @@ DJANGO_APPS = (
     'autofixture',
     'django_select2',
     'invitations',
+    'clever_selects',
 )
 
 # DEBUG-specific apps

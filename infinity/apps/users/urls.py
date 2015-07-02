@@ -3,6 +3,7 @@ from users.views import UserDetailView
 from users.views import UserUpdateView
 from users.views import UserCryptsyNotificationToken
 from users.views import FriendFollowingView
+from users.views import FollowView
 
 
 urlpatterns = patterns(
@@ -16,6 +17,11 @@ urlpatterns = patterns(
         r'^(?P<slug>\w+)/friends/$',
         FriendFollowingView.as_view(),
         name="friend-following"
+    ),
+    url(
+        r'^follow/$',
+        FollowView.as_view(),
+        name='follow'
     ),
     url(
         r'^(?P<slug>\w+)/$',

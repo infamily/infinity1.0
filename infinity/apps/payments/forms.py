@@ -1,9 +1,11 @@
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse_lazy
 from django import forms
 
 import requests
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from clever_selects.form_fields import ChainedModelChoiceField
 
 from .models import CryptsyCredential
 from .models import CoinAddress
@@ -25,9 +27,14 @@ class CoinAddressForm(forms.ModelForm):
 
 
 class CryptsyTransactionForm(forms.Form):
-    address_to = forms.CharField()
     amount = forms.DecimalField()
     currency = forms.ChoiceField()
+    recipient_email = UserChoiceField()
+    recipient_address = ChainedModelChoiceField(
+        parent_field='recipient_email',
+        ajax_url=reverse_lazy('ajax_chained_view'),
+        model=CoinAddress
+    )
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
