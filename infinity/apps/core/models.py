@@ -46,6 +46,11 @@ class Goal(models.Model):
         max_length=150,
         blank=False,
     )
+    language = models.ForeignKey(
+        'Language',
+        blank=True,
+        null=True,
+    )
     personal = models.BooleanField(default=True)
     created_at = models.DateTimeField(
         auto_now=False,
@@ -88,6 +93,11 @@ class Goal(models.Model):
 
 class Work(models.Model):
     personal = models.BooleanField(default=True)
+    language = models.ForeignKey(
+        'Language',
+        blank=True,
+        null=True,
+    )
     task = models.ForeignKey(
         'Task',
         related_name='task_works',
@@ -146,6 +156,11 @@ class Work(models.Model):
 
 class Idea(models.Model):
     description = models.TextField(blank=False)
+    language = models.ForeignKey(
+        'Language',
+        blank=True,
+        null=True,
+    )
     personal = models.BooleanField(default=True)
     name = models.CharField(
         unique=False,
@@ -193,6 +208,11 @@ class Idea(models.Model):
 
 class Step(models.Model):
     personal = models.BooleanField(default=True)
+    language = models.ForeignKey(
+        'Language',
+        blank=True,
+        null=True,
+    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_steps',
@@ -250,6 +270,11 @@ class Step(models.Model):
 
 class Task(models.Model):
     personal = models.BooleanField(default=True)
+    language = models.ForeignKey(
+        'Language',
+        blank=True,
+        null=True,
+    )
     name = models.CharField(
         unique=False,
         max_length=150,
@@ -303,8 +328,15 @@ class Need(models.Model):
         null=False,
         blank=False,
     )
+    defined_meaning_id = models.PositiveIntegerField(null=True, blank=True)
+    definition = models.CharField(max_length=255)
     type = models.ForeignKey(
         'Type',
+        blank=True,
+        null=True,
+    )
+    language = models.ForeignKey(
+        'Language',
         blank=True,
         null=True,
     )
@@ -343,6 +375,11 @@ class Type(models.Model):
 
 class Plan(models.Model):
     personal = models.BooleanField(default=True)
+    language = models.ForeignKey(
+        'Language',
+        blank=True,
+        null=True,
+    )
     name = models.CharField(
         unique=False,
         max_length=150,
@@ -382,3 +419,16 @@ class Plan(models.Model):
 
     def get_absolute_url(self):
         return "/"
+
+
+class Language(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    http_accept_language = models.CharField(max_length=255, blank=True,
+                                            null=True)
+    omegawiki_language_id = models.PositiveIntegerField(null=True, blank=True)
+
+    def __unicode__(self):
+        try:
+            return unicode(self.name[:50])
+        except TypeError:
+            return unicode(self.pk)

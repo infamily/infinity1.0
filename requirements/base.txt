@@ -29,4 +29,5 @@ pyopenssl
 ndg-httpsclient
 pyasn1
 fabric
+MySQL-python==1.2.5
 django-invitations

@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block extra_js %}
+  <script src="{% static 'js/create_need.js' %}"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+{% endblock extra_js %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+{% endblock extra_css %}
 
 {% block title %}Need create{% endblock title %}
 
@@ -14,7 +24,7 @@
     
 </div>
 <br/>
-
+<h3 align="center">Type what you need</h3>
 {% crispy form %}
 
 {% endblock content %}

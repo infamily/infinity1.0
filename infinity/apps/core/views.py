@@ -1,3 +1,5 @@
+import json
+
 from django.utils.translation import ugettext as _
 from django.http import Http404
 from django.core.urlresolvers import reverse
@@ -6,6 +8,9 @@ from django.views.generic import DetailView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
@@ -780,15 +785,48 @@ class NeedCreateView(CreateView):
     form_class = NeedCreateForm
     template_name = "need/create.html"
 
-    def get_success_url(self):
-        messages.success(self.request, _("Need succesfully created"))
-        return reverse("goal-create1", args=[self.object.pk, ])
+    def get(self, request, **kwargs):
+        if request.is_ajax():
+            search_names = Need.objects.filter(
+                language__pk=request.REQUEST['language'],
+                name__startswith=request.REQUEST['name']
+            ).values_list('name', flat=True)
+            search_names = list(set(search_names))
+            results = []
+            for r in search_names:
+                results.append(r)
+            resp = request.REQUEST['callback'] + '(' + json.dumps(results) + ');'
+            similar_needs = Need.objects.filter(
+                language__pk=request.REQUEST['language'],
+                name=request.REQUEST['name']
+            )
+            if not similar_needs:
+                return HttpResponse(resp, content_type='application/json')
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(NeedCreateView, self).form_valid(form)
+            hints = []
+            for need in similar_needs:
+                if need.definition:
+                    hints.append([need.definition,
+                                  reverse('need-detail', args=[need.pk])])
+            # add hints info to the results
+            results = [hints] + results
+            resp = request.REQUEST['callback'] + '(' + json.dumps(results) + ');'
+            return HttpResponse(resp, content_type='application/json')
+        form = NeedCreateForm()
+        return render(request, 'need/create.html',
+                      {'form': form})
+
+    def post(self, request, **kwargs):
+        form = NeedCreateForm(request.POST)
+        if form.is_valid():
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
+            self.object.save()
+            messages.success(self.request, _("Need succesfully created"))
+            return HttpResponseRedirect(reverse('need-detail', args=[
+                self.object.pk]))
+        return render(request, 'need/create.html',
+                      {'form': form})
 
 
 class NeedListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
