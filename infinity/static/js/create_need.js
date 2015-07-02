@@ -37,7 +37,7 @@ function searchOpen(name, language) {
 
 
 function searchResult(data) {
-    if (data && typeof data[0] != 'string') {
+    if (data && data[0] && typeof data[0] != 'string') {
         showProposals(data[0]);
         data.splice(0,1);
     } else {
