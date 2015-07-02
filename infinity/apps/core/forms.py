@@ -348,17 +348,17 @@ class NeedCreateForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Div(
-                Div('language', css_class='col-xs-2',),
+                Div('language', css_class='col-sm-2',),
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder', 'Name'), onkeyup="searchOpen()"),
-                    css_class='col-xs-10',
+                    css_class='col-sm-10',
                 ),
                 css_class='row'
             ),
             Div(
                 Div(
                     Field('personal'),
-                    css_class='col-xs-2',
+                    css_class='col-sm-2',
                 ),
                 Div(
                     Div(
@@ -366,14 +366,14 @@ class NeedCreateForm(forms.ModelForm):
                             'definition', placeholder=kwargs.pop('query_placeholder', 'Type your own definition'),
                             # type="hidden",
                         ),
-                        css_class='col-xs-10',
+                        css_class='col-sm-10',
                     ),
                     Div(
                         Field(Submit('submit', _('Add & Go'))),
-                        # css_class='col-xs-2 hidden create-button',
-                        css_class='col-xs-2 create-button',
+                        # css_class='col-sm-2 hidden create-button',
+                        css_class='col-sm-2 create-button',
                     ),
-                    css_class='col-xs-10 hints-block',
+                    css_class='col-sm-10 hints-block',
                 ),
                 css_class='row'
             ),
