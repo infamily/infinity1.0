@@ -16,7 +16,7 @@ class Command(BaseCommand):
                              db="omegawiki", charset='utf8')
         cur = db.cursor()
         Language.objects.all().delete()
-        cur.execute("select language_id, language_name from language_names where name_language_id = language_id;")
+        # cur.execute("select language_id, language_name from language_names where name_language_id = language_id;")
         for row in cur.fetchall():
             if row[1]:
                 Language.objects.create(omegawiki_language_id=int(row[0]),
