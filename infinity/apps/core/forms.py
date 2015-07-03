@@ -358,10 +358,6 @@ class NeedCreateForm(forms.ModelForm):
             ),
             Div(
                 Div(
-                    Field('personal'),
-                    css_class='col-sm-2',
-                ),
-                Div(
                     Div(
                         Field(
                             'definition', placeholder=kwargs.pop('query_placeholder', 'Type your own definition'),
@@ -374,12 +370,11 @@ class NeedCreateForm(forms.ModelForm):
                         # css_class='col-sm-2 hidden create-button',
                         css_class='col-sm-2 create-button',
                     ),
-                    css_class='col-sm-10 hints-block',
+                    css_class='col-sm-12 hints-block',
                 ),
                 css_class='row'
             ),
         )
-        self.fields['personal'].label = "Personal"
         self.fields['name'].label = ''
         self.fields['language'].label = ''
         self.fields['definition'].label = ''
@@ -390,7 +385,6 @@ class NeedCreateForm(forms.ModelForm):
             'name',
             'language',
             'definition',
-            'personal'
         ]
 
 

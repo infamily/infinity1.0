@@ -320,7 +320,6 @@ class Task(models.Model):
 
 
 class Need(models.Model):
-    personal = models.BooleanField(default=True)
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
@@ -357,6 +356,10 @@ class Need(models.Model):
 
     def get_absolute_url(self):
         return "/"
+
+    class Meta:
+        unique_together = ('language', 'name', 'definition')
+
 
 
 class Type(models.Model):
