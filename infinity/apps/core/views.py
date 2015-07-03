@@ -805,6 +805,16 @@ class NeedCreateView(CreateView):
 
     def get(self, request, **kwargs):
         if request.is_ajax():
+            find_language = request.REQUEST.get('find_language', None)
+            if find_language:
+                try:
+                    language = Language.objects.get(
+                        http_accept_language=find_language)
+                except Language.DoesNotExist:
+                    language = Language.objects.get(
+                        name='English')
+                return HttpResponse(language.pk)
+
             search_names = Need.objects.filter(
                 language__pk=request.REQUEST['language'],
                 name__startswith=request.REQUEST['name']

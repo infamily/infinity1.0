@@ -37,6 +37,17 @@ function searchOpen(name, language) {
 
 
 function searchResult(data) {
+    if(!$('#id_language').val()) {
+        var language = window.navigator.userLanguage || window.navigator.language;
+        $.ajax({
+            url: ".",
+            data: {
+                'find_language': language
+            },
+        }).done(function(lang_pk) {
+            document.getElementById('id_language').value = lang_pk;
+        });
+    }
     if (data && data[0] && typeof data[0] != 'string') {
         showProposals(data[0]);
         data.splice(0,1);
@@ -70,7 +81,7 @@ function showProposals(data) {
 
 
 $(document).ready(function() {
-    document.getElementById('id_language').value = getCookie('infinity_search_lang') || 1322;
+    document.getElementById('id_language').value = getCookie('infinity_search_lang');
     $('#id_language').bind('input', function() { 
         setCookie('infinity_search_lang', $(this).val(), 365);
         searchOpen($('#id_name').val(), $(this).val());
