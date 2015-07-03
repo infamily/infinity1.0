@@ -240,7 +240,7 @@ class GoalListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Goal
 
-        fields = [u'name']
+        fields = ['name']
 
         exclude = []
 
@@ -289,7 +289,7 @@ class WorkListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Work
 
-        fields = [u'name']
+        fields = ['name']
 
         exclude = []
 
@@ -339,7 +339,7 @@ class IdeaListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Idea
 
-        fields = [u'name']
+        fields = ['name']
 
 
 class StepListViewFilter1(django_filters.FilterSet):
@@ -394,7 +394,7 @@ class StepListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Step
 
-        fields = [u'name']
+        fields = ['name']
 
 
 class TaskListViewFilter1(django_filters.FilterSet):
@@ -440,7 +440,7 @@ class TaskListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Task
 
-        fields = [u'name']
+        fields = ['name']
 
         exclude = []
 
@@ -455,14 +455,14 @@ class NeedListViewFilter(django_filters.FilterSet):
         form.helper.form_method = 'get'
         form.helper.form_class = 'form-inline'
         form.helper.field_template = 'bootstrap3/layout/inline_field.html'
-        form.helper.add_input(Submit('submit', 'Search'))
+        form.helper.add_input(Submit('submit', 'Lookup'))
 
         return form
 
     class Meta:
         model = Need
 
-        fields = [u'name']
+        fields = ['name']
 
         exclude = []
 
@@ -512,7 +512,7 @@ class PlanListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Plan
 
-        fields = [u'name']
+        fields = ['name']
 
         exclude = []
 

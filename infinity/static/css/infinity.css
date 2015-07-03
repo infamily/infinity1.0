@@ -90,3 +90,28 @@ table.table.centered
 }
 
 /* end of item list */
+
+.choose-need, .create-button > .btn{
+    float: right;
+    width: 100%;
+}
+
+.hints-block {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.hint {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.hint-text {
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+    padding: 7px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+}

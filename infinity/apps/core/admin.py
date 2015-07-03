@@ -9,6 +9,11 @@ from .models import Task
 from .models import Need
 from .models import Type
 from .models import Plan
+from .models import Language
+
+
+class LanguageAdmin(admin.ModelAdmin):
+    list_display = ('omegawiki_language_id', 'name',)
 
 
 admin.site.register(Comment)
@@ -20,3 +25,4 @@ admin.site.register(Task)
 admin.site.register(Need)
 admin.site.register(Type)
 admin.site.register(Plan)
+admin.site.register(Language, LanguageAdmin)

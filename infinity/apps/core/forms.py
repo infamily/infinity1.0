@@ -2,7 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout, Field, Div
 
 
 from core.models import Comment
@@ -13,6 +13,7 @@ from core.models import Step
 from core.models import Task
 from core.models import Need
 from core.models import Plan
+from core.models import Language
 
 
 class CommentCreateFormDetail(forms.ModelForm):
@@ -346,13 +347,44 @@ class NeedCreateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Create')))
+        self.helper.layout = Layout(
+            Div(
+                Div('language', css_class='col-sm-2',),
+                Div(
+                    Field('name', placeholder=kwargs.pop('query_placeholder', 'Name'), onkeyup="searchOpen()"),
+                    css_class='col-sm-10',
+                ),
+                css_class='row'
+            ),
+            Div(
+                Div(
+                    Div(
+                        Field(
+                            'definition', placeholder=kwargs.pop('query_placeholder', 'Type your own definition'),
+                            # type="hidden",
+                        ),
+                        css_class='col-sm-10',
+                    ),
+                    Div(
+                        Field(Submit('submit', _('Add & Go'))),
+                        # css_class='col-sm-2 hidden create-button',
+                        css_class='col-sm-2 create-button',
+                    ),
+                    css_class='col-sm-12 hints-block',
+                ),
+                css_class='row'
+            ),
+        )
+        self.fields['name'].label = ''
+        self.fields['language'].label = ''
+        self.fields['definition'].label = ''
 
     class Meta:
         model = Need
         fields = [
             'name',
-            'personal'
+            'language',
+            'definition',
         ]
 
 

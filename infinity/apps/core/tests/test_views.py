@@ -514,7 +514,6 @@ class WorkTest(WebTest, AuthTestMixin):
 
         url = reverse('work-list')
 
-        url = reverse('work-list')
         resp = self.app.get(url)
 
         for work in work_list:
@@ -1206,7 +1205,7 @@ class NeedTest(WebTest, AuthTestMixin):
         resp = self.app.get(url)
 
         for need in need_list:
-            self.assertContains(resp, need.name)
+            self.assertContains(resp, need.definition)
 
     def test_detail(self):
         """Create Need in database,
