@@ -15,8 +15,16 @@ class Command(BaseCommand):
         db = MySQLdb.connect(host="localhost", user="root", passwd="pwd",
                              db="omegawiki", charset='utf8')
         cur = db.cursor()
+        Language.objects.all().delete()
         cur.execute("select language_id, language_name from language_names where name_language_id = language_id;")
-        # Language.objects.all().delete()
         for row in cur.fetchall():
-            Language.objects.create(omegawiki_language_id=int(row[0]),
-                                    name=row[1])
+            if row[1]:
+                Language.objects.create(omegawiki_language_id=int(row[0]),
+                                        name=row[1])
+        cur.execute("select language_id, language_name from language_names where name_language_id = 85;")
+        for row in cur.fetchall():
+            try:
+                Language.objects.get(omegawiki_language_id=int(row[0]))
+            except Language.DoesNotExist:
+                Language.objects.create(omegawiki_language_id=int(row[0]),
+                                        name=row[1])

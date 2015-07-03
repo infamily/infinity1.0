@@ -429,6 +429,7 @@ class Language(models.Model):
 
     def __unicode__(self):
         try:
-            return unicode(self.name[:50])
+            return unicode(self.omegawiki_language_id)
         except TypeError:
-            return unicode(self.pk)
+            return unicode(
+                'no omegawiki_language_id but pk is:' + str(self.pk))
