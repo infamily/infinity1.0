@@ -2,6 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from .forms import CommentCreateFormDetail
 from .models import Comment
 from django.views.generic import CreateView
+from django.core.exceptions import FieldError
 
 
 class ViewTypeWrapper(object):
@@ -78,10 +79,16 @@ class ViewTypeWrapper(object):
         """
         qs = super(ViewTypeWrapper, self).get_base_queryset()
         if self.request.user.is_anonymous():
-            qs = qs.filter(personal=False)
+            try:
+                qs = qs.filter(personal=False)
+            except FieldError:
+                pass
         else:
-            qs = (qs.filter(personal=False) |
-                  qs.filter(personal=True, user=self.request.user))
+            try:
+                qs = (qs.filter(personal=False) |
+                      qs.filter(personal=True, user=self.request.user))
+            except FieldError:
+                pass
         return qs
 
 
