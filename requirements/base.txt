@@ -12,7 +12,7 @@ django-webtest
 https://github.com/vandersonmota/model_mommy/archive/master.zip
 django-crispy-forms
 # django-constance for 1.8, https://github.com/jezdez/django-constance/issues/93
-https://github.com/jezdez/django-constance/archive/master.zip
+https://github.com/jonzlin95/django-constance/archive/master.zip
 django-picklefield
 django-storages
 django-allauth
