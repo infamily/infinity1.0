@@ -5,7 +5,6 @@
 
 {% for idea in ideas %}
 
-{% for idea in idea.all %}
 <div class="col-sm-12 item list-group-item">
     <div class="thumbnail">
         <div class="">
@@ -14,112 +13,82 @@
         <div class="">
             <b>user</b>: {{idea.user}}
         </div>
+        <div class="">
+            <b>personal</b>: {{idea.personal}}
+        </div>
     </div>
 </div>
 
 {% endfor %}
 
-{% endfor %}
 {% for plan in plans %}
-
-{% for object in plan.all %}
 <div class="col-sm-12 item list-group-item">
     <div class="thumbnail">
         <div class="">
-            <b>name</b>: {{object.name}}
+            <b>name</b>: {{plan.name}}
         </div>
         <div class="">
-            <b>user</b>: {{object.user}}
+            <b>user</b>: {{plan.user}}
+        </div>
+        <div class="">
+            <b>personal</b>: {{plan.personal}}
         </div>
     </div>
 </div>
 
-{% endfor %}
 
 {% endfor %}
 {% for step in steps %}
 
-{% for object in step.all %}
 <div class="col-sm-12 item list-group-item">
     <div class="thumbnail">
         <div class="">
-            <b>name</b>: {{object.name}}
+            <b>name</b>: {{step.name}}
         </div>
         <div class="">
-            <b>user</b>: {{object.user}}
+            <b>user</b>: {{step.user}}
+        </div>
+        <div class="">
+            <b>personal</b>: {{step.personal}}
         </div>
     </div>
 </div>
 
-{% endfor %}
-
-{% endfor %}
-{% for step in steps %}
-
-{% for object in step.all %}
-<div class="col-sm-12 item list-group-item">
-    <div class="thumbnail">
-        <div class="">
-            <b>name</b>: {{object.name}}
-        </div>
-        <div class="">
-            <b>user</b>: {{object.user}}
-        </div>
-    </div>
-</div>
-
-{% endfor %}
 
 {% endfor %}
 {% for task in tasks %}
 
-{% for object in task.all %}
 <div class="col-sm-12 item list-group-item">
     <div class="thumbnail">
         <div class="">
-            <b>name</b>: {{object.name}}
+            <b>name</b>: {{task.name}}
         </div>
         <div class="">
-            <b>user</b>: {{object.user}}
+            <b>user</b>: {{task.user}}
+        </div>
+        <div class="">
+            <b>personal</b>: {{task.personal}}
         </div>
     </div>
 </div>
 
 {% endfor %}
 
-{% endfor %}
-{% for need in needs %}
+{% for goal in goals %}
 
-{% for object in need.all %}
 <div class="col-sm-12 item list-group-item">
     <div class="thumbnail">
         <div class="">
-            <b>name</b>: {{object.name}}
+            <b>name</b>: {{goal.name}}
         </div>
         <div class="">
-            <b>user</b>: {{object.user}}
+            <b>user</b>: {{goal.user}}
+        </div>
+        <div class="">
+            <b>personal</b>: {{goal.personal}}
         </div>
     </div>
 </div>
-
-{% endfor %}
-
-{% endfor %}
-{% for plan in plans %}
-
-{% for object in plan.all %}
-<div class="col-sm-12 item list-group-item">
-    <div class="thumbnail">
-        <div class="">
-            <b>name</b>: {{object.name}}
-        </div>
-        <div class="">
-            <b>user</b>: {{object.user}}
-        </div>
-    </div>
-</div>
-
-{% endfor %}
 
 {% endfor %}
 {% endblock content %}

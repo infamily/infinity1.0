@@ -35,15 +35,21 @@ class FriendFollowingView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(FriendFollowingView, self).get_context_data(**kwargs)
-        following = self.get_object().following
-        following_user = following.all()
-        context['ideas'] = [x.user_ideas.filter() for x in following_user]
-        context['plans'] = [x.user_plans for x in following_user]
-        context['steps'] = [x.user_steps for x in following_user]
-        context['tasks'] = [x.user_tasks for x in following_user]
-        context['works'] = [x.user_works for x in following_user]
-        context['needs'] = [x.user_needs for x in following_user]
-        context['goals'] = [x.user_goals for x in following_user]
+
+        following_user = self.get_object()
+        if self.request.user.have_relationship_with(self.get_object()):
+            context['ideas'] = following_user.user_ideas.all()
+            context['plans'] = following_user.user_plans.all()
+            context['steps'] = following_user.user_steps.all()
+            context['tasks'] = following_user.user_tasks.all()
+            context['goals'] = following_user.user_goals.all()
+        else:
+            context['ideas'] = following_user.user_ideas.filter(personal=False)
+            context['plans'] = following_user.user_plans.filter(personal=False)
+            context['steps'] = following_user.user_steps.filter(personal=False)
+            context['tasks'] = following_user.user_tasks.filter(personal=False)
+            context['goals'] = following_user.user_goals.filter(personal=False)
+
         return context
 
 
