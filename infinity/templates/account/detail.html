@@ -38,7 +38,7 @@
         </a>
         <form action="{% url "follow" %}" method="post">{% csrf_token %}
             <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />
-            <button type="submit" {% if request.user in object.following.all %} disabled {% endif %} class="btn btn-success" id="submit">Follow</button>
+            <button type="submit" class="btn btn-success" id="submit">{% if guest_follow_me %}Unfollow{% else %}Follow{% endif %}</button>
         </form>
     </div>
 {% endif %}

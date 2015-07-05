@@ -15,11 +15,15 @@ from .decorators import ForbiddenUser
 
 
 class FollowView(View):
+    """ Follow/unfollow view
+    """
     def post(self, request, *args, **kwargs):
         destination_user_id = int(request.POST.get('destination_user_id'))
         destination_user = User.objects.get(pk=destination_user_id)
-        request.user.following.add(destination_user)
-        request.user.save()
+        if request.user.get_relationships().filter(pk=destination_user_id).exists():
+            request.user.remove_relationship(destination_user)
+        else:
+            request.user.add_relationship(destination_user)
         return redirect(reverse('user-detail', kwargs={'slug': destination_user.username}))
 
 
@@ -68,6 +72,8 @@ class UserDetailView(DetailView):
         context['work_list'] = user.user_works.all()
         context['need_list'] = user.user_needs.all()
         context['goal_list'] = user.user_goals.all()
+
+        context['guest_follow_me'] = self.request.user.get_relationships().filter(pk=user.pk)
         return context
 
 

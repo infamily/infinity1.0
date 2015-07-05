@@ -78,7 +78,7 @@ class User(AbstractUser):
             person.remove_relationship(self, True)
 
     def get_relationships(self):
-        """ Get all user relationship
+        """ Get all user relationships
         """
         return self.friends.filter(
             to_people__from_person=self
