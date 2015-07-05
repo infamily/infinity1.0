@@ -30,7 +30,7 @@ class Command(BaseCommand):
              and uw_translated_content.remove_transaction_id is NULL 
              and uw_syntrans.remove_transaction_id is NULL;''' % (lang_id,lang_id)
 
-        user = User.objects.filter(id=1).first()
+        user = User.objects.get(id=1)
         for language in Language.objects.all():
             cur.execute(query(language.omegawiki_language_id))
             for row in cur.fetchall():
