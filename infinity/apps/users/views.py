@@ -73,7 +73,8 @@ class UserDetailView(DetailView):
         context['need_list'] = user.user_needs.all()
         context['goal_list'] = user.user_goals.all()
 
-        context['guest_follow_me'] = self.request.user.get_relationships().filter(pk=user.pk)
+        context['guest_follow_me'] = self.request.user.get_relationships(
+        ).filter(pk=user.pk).exists()
         return context
 
 
