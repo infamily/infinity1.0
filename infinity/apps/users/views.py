@@ -18,17 +18,28 @@ class FollowView(View):
     def post(self, request, *args, **kwargs):
         destination_user_id = int(request.POST.get('destination_user_id'))
         destination_user = User.objects.get(pk=destination_user_id)
-        destination_user.following.add(request.user)
-        destination_user.save()
+        request.user.following.add(destination_user)
+        request.user.save()
         return redirect(reverse('user-detail', kwargs={'slug': destination_user.username}))
 
 
-class FriendFollowingView(ListView):
+class FriendFollowingView(DetailView):
     template_name = "account/friends/following.html"
+    model = User
+    slug_field = "username"
+    slug_url_kwarg = "username"
 
-    def get_queryset(self):
-        qs = None
-        return qs
+    def get_context_data(self, **kwargs):
+        context = super(FriendFollowingView, self).get_context_data(**kwargs)
+        following_user = self.get_object().following.all()
+        context['ideas'] = [x.user_ideas for x in following_user]
+        context['plans'] = [x.user_plans for x in following_user]
+        context['steps'] = [x.user_steps for x in following_user]
+        context['tasks'] = [x.user_tasks for x in following_user]
+        context['works'] = [x.user_works for x in following_user]
+        context['needs'] = [x.user_needs for x in following_user]
+        context['goals'] = [x.user_goals for x in following_user]
+        return context
 
 
 class UserCryptsyNotificationToken(View):

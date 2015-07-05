@@ -26,4 +26,5 @@ def deploy():
     virtualenv('python infinity/manage.py syncdb')
     virtualenv('python infinity/manage.py migrate')
     virtualenv('python infinity/manage.py collectstatic')
+    virtualenv('python infinity/manage.py loaddata fixtures/languages.json')
     run('sudo /usr/bin/supervisorctl restart %s' % env.supervisor_app_name)

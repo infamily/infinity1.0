@@ -14,7 +14,7 @@ urlpatterns = patterns(
         name="user-update"
     ),
     url(
-        r'^(?P<slug>\w+)/friends/$',
+        r'^(?P<username>\w+)/friends/$',
         FriendFollowingView.as_view(),
         name="friend-following"
     ),

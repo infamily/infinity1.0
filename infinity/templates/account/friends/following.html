@@ -3,4 +3,123 @@
 
 {% block content %}
 
+{% for idea in ideas %}
+
+{% for idea in idea.all %}
+<div class="col-sm-12 item list-group-item">
+    <div class="thumbnail">
+        <div class="">
+            <b>description</b>: {{idea.description}}
+        </div>
+        <div class="">
+            <b>user</b>: {{idea.user}}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endfor %}
+{% for plan in plans %}
+
+{% for object in plan.all %}
+<div class="col-sm-12 item list-group-item">
+    <div class="thumbnail">
+        <div class="">
+            <b>name</b>: {{object.name}}
+        </div>
+        <div class="">
+            <b>user</b>: {{object.user}}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endfor %}
+{% for step in steps %}
+
+{% for object in step.all %}
+<div class="col-sm-12 item list-group-item">
+    <div class="thumbnail">
+        <div class="">
+            <b>name</b>: {{object.name}}
+        </div>
+        <div class="">
+            <b>user</b>: {{object.user}}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endfor %}
+{% for step in steps %}
+
+{% for object in step.all %}
+<div class="col-sm-12 item list-group-item">
+    <div class="thumbnail">
+        <div class="">
+            <b>name</b>: {{object.name}}
+        </div>
+        <div class="">
+            <b>user</b>: {{object.user}}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endfor %}
+{% for task in tasks %}
+
+{% for object in task.all %}
+<div class="col-sm-12 item list-group-item">
+    <div class="thumbnail">
+        <div class="">
+            <b>name</b>: {{object.name}}
+        </div>
+        <div class="">
+            <b>user</b>: {{object.user}}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endfor %}
+{% for need in needs %}
+
+{% for object in need.all %}
+<div class="col-sm-12 item list-group-item">
+    <div class="thumbnail">
+        <div class="">
+            <b>name</b>: {{object.name}}
+        </div>
+        <div class="">
+            <b>user</b>: {{object.user}}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endfor %}
+{% for plan in plans %}
+
+{% for object in plan.all %}
+<div class="col-sm-12 item list-group-item">
+    <div class="thumbnail">
+        <div class="">
+            <b>name</b>: {{object.name}}
+        </div>
+        <div class="">
+            <b>user</b>: {{object.user}}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endfor %}
 {% endblock content %}
