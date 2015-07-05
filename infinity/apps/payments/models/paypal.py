@@ -30,7 +30,6 @@ class PayPalTransaction(models.Model):
 
     created_at = models.DateTimeField(
         auto_now=True,
-        auto_now_add=True,
         unique=False,
         null=False,
         blank=False,

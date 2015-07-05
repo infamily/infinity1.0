@@ -31,8 +31,9 @@ class FriendFollowingView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(FriendFollowingView, self).get_context_data(**kwargs)
-        following_user = self.get_object().following.all()
-        context['ideas'] = [x.user_ideas for x in following_user]
+        following = self.get_object().following
+        following_user = following.all()
+        context['ideas'] = [x.user_ideas.filter() for x in following_user]
         context['plans'] = [x.user_plans for x in following_user]
         context['steps'] = [x.user_steps for x in following_user]
         context['tasks'] = [x.user_tasks for x in following_user]

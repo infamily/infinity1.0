@@ -28,9 +28,14 @@ class CustomUserManager(BaseUserManager):
         return self._create_user(email, password, True, **extra_fields)
 
 
+class Relationship(models.Model):
+    from_person = models.ForeignKey('User', related_name='from_people')
+    to_person = models.ForeignKey('User', related_name='to_people')
+
+
 class User(AbstractUser):
     about = models.TextField(blank=True)
-    following = models.ManyToManyField('self')
+    friends = models.ManyToManyField('self', symmetrical=False, through='Relationship')
 
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
@@ -47,6 +52,48 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return "/"
+
+    def add_relationship(self, person, symm=False):
+        """ Add relationship with symmetrical False by default
+        """
+        relationship, created = Relationship.objects.get_or_create(
+            from_person=self,
+            to_person=person,
+        )
+
+        if symm:
+            person.add_relationship(self, True)
+
+        return relationship
+
+    def remove_relationship(self, person, symm=False):
+        """ Remove relationship with symmetrical False
+        """
+        Relationship.objects.filter(
+            from_person=self,
+            to_person=person,
+        ).delete()
+        if symm:
+            # avoid recursion by passing `symm=True`
+            person.remove_relationship(self, True)
+
+    def get_relationships(self):
+        """ Get all user relationship
+        """
+        return self.friends.filter(
+            to_people__from_person=self
+        )
+
+    def have_relationship_with(self, person):
+        """ Get relationship between users
+        """
+        rel = self.get_relationships().filter(
+            to_people__to_person=person,
+            from_people__from_person=person
+        )
+
+        return rel.exists()
+
 
 from .signals import user_post_save
 signals.post_save.connect(user_post_save, sender=User)
