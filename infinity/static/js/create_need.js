@@ -49,9 +49,7 @@ function searchResult(data) {
         });
     }
     if (data && data[0]) {
-        setTimeout(function() {
-            showProposals(data);
-        }, 350);
+        showProposals(data);
     } else {
         $('.hint').remove();
     }
@@ -77,8 +75,9 @@ $(document).ready(function() {
         setCookie('infinity_search_lang', $(this).val(), 365);
         searchOpen($('#id_name').val(), $(this).val());
     });
-    searchResult()
-    $("#id_name").bind("autocompleteselect", function(event, ui) {
-        searchOpen(ui.item.value, $('#id_language').val());
+    $('#id_name').bind('input', function() { 
+        console.log($('#id_name').val() + ' ' + $('#id_language').val());
+        searchOpen();
     });
+    searchResult()
 });
