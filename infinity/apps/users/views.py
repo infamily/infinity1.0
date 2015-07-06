@@ -37,12 +37,20 @@ class FriendFollowingView(DetailView):
         context = super(FriendFollowingView, self).get_context_data(**kwargs)
 
         following_user = self.get_object()
-        if self.request.user.have_relationship_with(self.get_object()):
-            context['ideas'] = following_user.user_ideas.all()
-            context['plans'] = following_user.user_plans.all()
-            context['steps'] = following_user.user_steps.all()
-            context['tasks'] = following_user.user_tasks.all()
-            context['goals'] = following_user.user_goals.all()
+        user = self.request.user
+        if user.is_authenticated():
+            if user.have_relationship_with(self.get_object()):
+                context['ideas'] = following_user.user_ideas.all()
+                context['plans'] = following_user.user_plans.all()
+                context['steps'] = following_user.user_steps.all()
+                context['tasks'] = following_user.user_tasks.all()
+                context['goals'] = following_user.user_goals.all()
+            else:
+                context['ideas'] = following_user.user_ideas.filter(personal=False)
+                context['plans'] = following_user.user_plans.filter(personal=False)
+                context['steps'] = following_user.user_steps.filter(personal=False)
+                context['tasks'] = following_user.user_tasks.filter(personal=False)
+                context['goals'] = following_user.user_goals.filter(personal=False)
         else:
             context['ideas'] = following_user.user_ideas.filter(personal=False)
             context['plans'] = following_user.user_plans.filter(personal=False)
@@ -79,8 +87,9 @@ class UserDetailView(DetailView):
         context['need_list'] = user.user_needs.all()
         context['goal_list'] = user.user_goals.all()
 
-        context['guest_follow_me'] = self.request.user.get_relationships(
-        ).filter(pk=user.pk).exists()
+        if self.request.user.is_authenticated():
+            context['guest_follow_me'] = self.request.user.get_relationships(
+            ).filter(pk=user.pk).exists()
         return context
 
 
