@@ -13,7 +13,7 @@
 <a class="btn btn-success" href="{% url "goal-list2"    object.pk   %}"> 
     Goal list
 </a>
-<a class="btn btn-info" href="{% url "goal-create2"    object.pk   %}"> 
+<a class="btn btn-info" href="{% url "goal-create1"    object.pk   %}"> 
     Goal create
 </a>
 </div>
@@ -47,6 +47,15 @@
         <td>
 
         	{{object.name}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Definition</td>
+        <td>
+
+        	{{object.definition}}
 	        
 
         </td>

@@ -815,30 +815,16 @@ class NeedCreateView(CreateView):
                         name='English')
                 return HttpResponse(language.pk)
 
-            search_names = Need.objects.filter(
-                language__pk=request.REQUEST['language'],
-                name__startswith=request.REQUEST['name']
-            ).values_list('name', flat=True)
-            search_names = list(set(search_names))
-            results = []
-            for r in search_names:
-                results.append(r)
-            resp = request.REQUEST['callback'] + '(' + json.dumps(results) + ');'
+            hints = []
             similar_needs = Need.objects.filter(
                 language__pk=request.REQUEST['language'],
                 name=request.REQUEST['name']
             )
-            if not similar_needs:
-                return HttpResponse(resp, content_type='application/json')
-
-            hints = []
             for need in similar_needs:
                 if need.definition:
                     hints.append([need.definition,
                                   reverse('need-detail', args=[need.pk])])
-            # add hints info to the results
-            results = [hints] + results
-            resp = request.REQUEST['callback'] + '(' + json.dumps(results) + ');'
+            resp = request.REQUEST['callback'] + '(' + json.dumps(hints) + ');'
             return HttpResponse(resp, content_type='application/json')
         form = NeedCreateForm()
         return render(request, 'need/create.html',
