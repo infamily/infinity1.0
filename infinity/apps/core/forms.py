@@ -351,7 +351,7 @@ class NeedCreateForm(forms.ModelForm):
             Div(
                 Div('language', css_class='col-sm-2',),
                 Div(
-                    Field('name', placeholder=kwargs.pop('query_placeholder', 'Name'), onkeyup="searchOpen()"),
+                    Field('name', placeholder=kwargs.pop('query_placeholder', 'Name'), oninput="searchOpen()"),
                     css_class='col-sm-10',
                 ),
                 css_class='row'
