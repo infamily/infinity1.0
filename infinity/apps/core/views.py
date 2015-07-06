@@ -805,7 +805,7 @@ class NeedCreateView(CreateView):
 
     def get(self, request, **kwargs):
         if request.is_ajax():
-            find_language = request.REQUEST.get('find_language', None)
+            find_language = request.GET.get('find_language', None)
             if find_language:
                 try:
                     language = Language.objects.get(
@@ -817,14 +817,14 @@ class NeedCreateView(CreateView):
 
             hints = []
             similar_needs = Need.objects.filter(
-                language__pk=request.REQUEST['language'],
-                name=request.REQUEST['name']
+                language__pk=request.GET['language'],
+                name=request.GET['name']
             )
             for need in similar_needs:
                 if need.definition:
                     hints.append([need.definition,
                                   reverse('need-detail', args=[need.pk])])
-            resp = request.REQUEST['callback'] + '(' + json.dumps(hints) + ');'
+            resp = request.GET['callback'] + '(' + json.dumps(hints) + ');'
             return HttpResponse(resp, content_type='application/json')
         form = NeedCreateForm()
         return render(request, 'need/create.html',

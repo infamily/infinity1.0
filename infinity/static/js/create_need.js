@@ -26,6 +26,7 @@ function searchOpen(name, language) {
         name: name,
         language: language,
     };
+    console.log(name);
     $.ajax({
         url: '.',
         data: data,
@@ -47,12 +48,12 @@ function searchResult(data) {
         }).done(function(lang_pk) {
             document.getElementById('id_language').value = lang_pk;
         });
-    }
+    };
     if (data && data[0]) {
         showProposals(data);
     } else {
         $('.hint').remove();
-    }
+    };
 }
 
 
@@ -75,9 +76,17 @@ $(document).ready(function() {
         setCookie('infinity_search_lang', $(this).val(), 365);
         searchOpen($('#id_name').val(), $(this).val());
     });
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
     $('#id_name').bind('input', function() { 
-        console.log($('#id_name').val() + ' ' + $('#id_language').val());
-        searchOpen();
+        delay(function(){
+            searchOpen();
+        }, 1000);
     });
     searchResult()
 });
