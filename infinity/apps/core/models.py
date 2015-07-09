@@ -387,6 +387,7 @@ class Plan(models.Model):
         unique=False,
         max_length=150,
         blank=False,
+        verbose_name='means'
     )
     created_at = models.DateTimeField(
         auto_now=False,

@@ -209,6 +209,11 @@ urlpatterns = patterns(
         name="need-create"
     ),
     url(
+        r'^need/(?P<slug>.*)/update$',
+        NeedUpdateView.as_view(),
+        name="need-update"
+    ),
+    url(
         r'^need/list/$',
         NeedListView.as_view(),
         name="need-list"

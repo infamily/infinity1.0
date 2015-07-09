@@ -12,6 +12,7 @@ from django.views.generic import DeleteView
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.detail import BaseDetailView
+from django.shortcuts import redirect
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
@@ -796,6 +797,33 @@ class TaskDetailView(DetailView, CommentsContentTypeWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class NeedUpdateView(OwnerMixin, UpdateView):
+
+    """Need update view"""
+    model = Need
+    form_class = NeedUpdateForm
+    slug_field = "pk"
+    template_name = "need/update.html"
+
+    def dispatch(self, *args, **kwargs):
+        owner = Need.objects.get(pk=self.kwargs['slug']).user
+        if self.request.user != owner:
+            return redirect(reverse('need-detail',
+                                    kwargs={'slug': self.kwargs['slug']}))
+        return super(NeedUpdateView, self).dispatch(*args, **kwargs)
+
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(NeedUpdateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully updated"))
+        return reverse("need-detail", args=[self.object.pk, ])
+
+
 class NeedCreateView(CreateView):
 
     """Need create view"""
@@ -804,6 +832,8 @@ class NeedCreateView(CreateView):
     template_name = "need/create.html"
 
     def get(self, request, **kwargs):
+        if self.request.user.__class__.__name__ == u'AnonymousUser':
+            return render(request, 'about.html')
         if request.is_ajax():
             find_language = request.GET.get('find_language', None)
             if find_language:

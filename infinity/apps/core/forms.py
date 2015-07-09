@@ -389,6 +389,24 @@ class NeedCreateForm(forms.ModelForm):
         ]
 
 
+class NeedUpdateForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(NeedUpdateForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+
+        self.helper.layout.append(Submit('save', _('Edit')))
+
+    class Meta:
+        model = Need
+        fields = [
+            'name',
+            'language',
+            'definition',
+        ]
+
+
 class PlanUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
