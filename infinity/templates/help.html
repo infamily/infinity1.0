@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not found{% endblock %}
+
+{% block page_title %}Page Not found{% endblock page_title %}
+
+{% block content %}
+<h1>What is Infty?</h1>
+
+<p>A structure to openly talk about our needs, goals, ideas, plans, their steps, tasks, and works, and to display and manage the sharing of the relevant resources from person to person.</p>
+
+<p>It is a platform for casual friendly discussion and free, non-obliging support to systematically define and pursue goals.</p>
+
+<h1>What it is not?</h1>
+
+<p>Infty is not a business platform. No profits are made. People talk about needs, goals, ideas, plans, steps, tasks, works, and publicly display the resources they shared with someone else for the public to see, in the hope that the resources help in the main pursuit.</p>
+
+<p>Infty is not a crowd-funding platform. No projects are funded here. People talk and share their resources freely from person to person, without obligating anyone to work for anyone. If someone gave you resources, great, it's yours -- it means they trust you, use it wisely.</p>
+
+<h1>How does Infty work?</h1>
+
+<p><b>If you want something, you set a goal, and think how to achieve it. This thinking leads to ideas, based on which, you construct a plan defining it in terms of steps, and break it down to tasks, and document any works you do. Talk about it.</b></p>
+
+<p>If your friends like what you do, or trust your judgement, they can share resources either by joining the planning and work, or talking about it in both words and transactions as parts of their speech.</p>
+
+<!--<p>Infty relies on 3 core concepts central to computer science, statistics and economics: <i>list</i>, <i>random variable</i>, <i>asset</i>.</p>-->
+
+<h2>Needs</h2>
+
+<p>A <i>need</i> in Infty is a reference to concept -- <i><u>something that could be desired, and is defined in some language</u></i>. For example: <br><b>Need("English", "Sky", "Outer space visible from the Earth's surface, infinitely extending above us and limited by the horizon.")</b>.</p>
+
+<p>Economically, a need is a reference to asset type; statistically, it is a reference to a random variable. You will find Infty already pre-filled with Needs based on concepts from <a href="http://www.omegawiki.org/">Ω-Wiki</a>, an inter-lingual concept map. To define a need, it is sufficient to provide the head word, and a definition in some language of choice.</p>
+
+Although you can always define your own need, we will do our best that you would not have to. Each need based on Ω-Wiki has a .defined_meaning_id attribute, which makes it possible to display all goals created on the basis of the same concept in one place (no matter what language was used to create the need refering to it), making it possible to find goals described in all languages aimed at fullfilling the demand for things referred to by a need.
+
+<h2>Goals</h2>
+
+<p>A <i>goal</i> in Infty is a need with a name and quantity -- <i><u>something that could be requested, and quantified</u></i>. Think of it as a request. It has to refer a need, and specify request name, quantity, and reason. For example:<br>
+<b>Goal(Need="kittens", name="My pursuit for a black siamese", quantity=1, reason="loneliness at home")</b>.
+
+<p>Mathematically, a Goal is a set of conditions to satisfy, e.g., set of random variables with desired ranges of their values to consider the goal "achieved". In the first iterations of Infty, we simplify this to one variable and value -- a need with quantity. We look forward to implementing more complex definitions of goals in the future.</p>
+
+<p><i>-When to create a new need?</i><br>
+&nbsp;If some words begin to repeat often in the names of a Goal, consider creating a new need. For example, define <b>black siamese kitten</b> as a Need, and then create a Goal with it.</p>
+
+<h2>Ideas</h2>
+
+<p>An <i>idea</i> in Infty is a principle to influence the concept represented by the need to get us to the goal (<i>principle</i> to get <i>random variable, asset</i> into a range) -- <i><u>something that redefines or amplifies</u></i>. Think of it as a trick or leverage, or just a good suggestion.</p>
+<b>Idea(Goal="Fly man to the Moon", name="Chemical Propulsion To Fly to The Moon", summary="Combine 3-stage booster rockets with instrument unit, LEM-adapter, and spacecraft to get a reliable space vehicle that could fly men to the Moon", description="...(long text)...")</b>.
+
+<p>Mathematically speaking, an idea is a map that promises to take a random variable/asset into a desired range. A great idea is a configurable map that takes a broad class of commonly seen situations, and promises to convert them into a broad class of desired situations at a relatively low cost. It often comes from setting a personal goal, and then generalizing it by thinking how to solve it once and for all.</p>
+
+<h2>Plans</h2>
+
+<p>A <i>plan</i> in Infty is a quintuplet (<i>idea, means, situation, deliverable, steps</i>) -- <u>something that realistically would take a particular person or group from a specific situation to a specific destination</u>. Think of it as an instance of an idea.</p>
+
+<p>We can have an idea of a car, but to build a car for someone who is in <i>(situation=south pole)</i>, and <i>(deliverable=snow roadster)</i>, when they have just <i>(means=ice printer, liquid nitrogen tanks)</i> is a totally different instantiation of the same idea of "car", than for someone making a car in the continental China from metal.</p>
+
+<p><b>Plan(Idea="Car", name="ice printer, liquid nitrogen tanks", situation="we are 3 friends in south pole", deliverable="we will have a snow roadster with ice engines that we can drive")</b>.</p>
+
+<p>As you may notice, a plan may instantiate multiple ideas. We could easily have said, Plan(Idea("Car"), Idea("Combustion Engine")). Right now, Infty does not yet support creating a Plan based on many ideas, therefore, please, re-define or define new (more abstract, elaborate and complex) Ideas, and then create Plans based on them.</p>
+
+<p>Also notice that the Infty concept of a Plan most closely coincides with what colloquially people call "Project", or "Company". In fact, by adjusting the parameters of a plan, you could technically obtain many things -- from a company in a stock market, to a kickstarter project, therefore, keep in mind, that depending on your plan, your activities may be a subject to local regulations!</p>
+
+<h2>Steps</h2>
+
+<p>A <i>step</i> in Infty is a first level decomposition of a Plan. Think of it as a milestone in getting a Plan's deliverable.</p>
+
+<p><b>Step(Plan="...", priority=1, name="getting algorithms to work", objective="have at least least one algorithm do performance", investables="statistician hours 50\100, domain specialist hours 50\100", deliverables="a working algorithm 1\2")</b>.</p>
+
+<p>Note that priority gives possibility to sort the steps in a plan, and the <u>.investables, .deliverables</u> allows to do automatic expected value over time analyses, as explained in <a href="https://github.com/Mindey/IdeaLib">IdeaLib</a>. Right now, the analyses are considered only for the "steps" level, but we could extend it to include deeper levels of the <a href="http://arxiv.org/abs/1403.7426">hierarchical task network</a> below the Plan in the future to let people automatically make decisions about -- which Plan will give what they want.</p>
+
+<p>Also note, that, if we include statistical data about subjects and objects in the world (such as <a href="http://www.worldometers.info/">worldometers.info</a>, or personal smartphone), we could formally define <b>Problem</b> as a mismatch between the observed data and the Goals, and <b>Solving</b> as choosing and executing the Plans with highest expectation to bring the <i>random variables</i> we are concerned about to the desired ranges.</p>
+
+
+<h2>Tasks</h2>
+
+<p>A <i>task</i> in Infty is a second level decomposition of a Plan. Think of it as a model of a job that has to be done.</p>
+
+<p><b>Task(Step="...", priority=1, name="set up development environment")</b>.</p>
+
+<h2>Works</h2>
+
+<p>A <i>work</i> in Infty is a result of an attempt to work on a Task. Think of it as an instance of a task.</p>
+
+<p>Multiple people can freely attempt to do a task of other people, and display/upload their results by adding works to tasks.</p>
+
+<p><b>Work(Task="...", name="made the measurements of size of observable universe", description="the results were 93 Gly", url="...", attachment="...", parent=None)</b>.</p>
+
+<p>Note that work, unlike other objects, can have follow-up works (foreign-key to itself), making it possible to have a potentially infinite hierarchy of follow-up works.</p>
+{% endblock content %}

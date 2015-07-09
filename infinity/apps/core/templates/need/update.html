@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Need update{% endblock title %}
+
+{% block content %}
+
+<h1>Need update</h1>
+<br/>
+<div class="actions">
+<a class="btn btn-info" href="{% url "need-detail" object.pk   %}"> 
+    Need detail 
+</a>
+</div>
+<br/>
+<div>
+    
+</div>
+<br/>
+
+{% crispy form %}
+
+{% endblock content %}
