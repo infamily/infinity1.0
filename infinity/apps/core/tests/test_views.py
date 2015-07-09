@@ -1165,9 +1165,6 @@ class NeedTest(WebTest, AuthTestMixin):
         url = reverse('need-create', kwargs={
         })
 
-        # Access forbidden for AnonymousUser
-        resp = self.app.get(url, status=302)
-
         self.login(self.user.email, 'test')
 
         resp = self.app.get(url)
