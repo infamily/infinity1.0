@@ -29,9 +29,9 @@ class CoinAddressForm(forms.ModelForm):
 class CryptsyTransactionForm(forms.Form):
     amount = forms.DecimalField()
     currency = forms.ChoiceField()
-    recipient_email = UserChoiceField()
+    recipient_username = UserChoiceField()
     recipient_address = ChainedModelChoiceField(
-        parent_field='recipient_email',
+        parent_field='recipient_username',
         ajax_url=reverse_lazy('ajax_chained_view'),
         model=CoinAddress
     )
@@ -61,7 +61,7 @@ class CryptsyTransactionForm(forms.Form):
 
 
 class PayPalTransactionForm(forms.Form):
-    recipient_email = UserChoiceField()
+    recipient_username = UserChoiceField()
     amount = forms.IntegerField()
 
     USD = 0

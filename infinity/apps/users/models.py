@@ -48,7 +48,7 @@ class User(AbstractUser):
         return unicode(self)
 
     def __unicode__(self):
-        return unicode(self.email)
+        return unicode(self.username)
 
     def get_absolute_url(self):
         return "/"
@@ -95,5 +95,5 @@ class User(AbstractUser):
         return rel.exists()
 
 
-from .signals import user_post_save
-signals.post_save.connect(user_post_save, sender=User)
+from .signals import user_pre_save
+signals.post_save.connect(user_pre_save, sender=User)

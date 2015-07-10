@@ -1,4 +1,4 @@
-def user_post_save(sender, instance, created, *args, **kwargs):
+def user_pre_save(sender, instance, created, *args, **kwargs):
     """ Get username from email
     sender - The model class.
     instance - The actual instance being saved.

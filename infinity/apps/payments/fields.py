@@ -6,4 +6,4 @@ User = get_user_model()
 
 class UserChoiceField(AutoModelSelect2Field):
     queryset = User.objects.all()
-    search_fields = ['email__icontains', ]
+    search_fields = ['username__icontains', ]
