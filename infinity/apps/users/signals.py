@@ -1,4 +1,4 @@
-def user_post_save(sender, instance, created, *args, **kwargs):
+def user_pre_save(sender, instance, *args, **kwargs):
     """ Get username from email
     sender - The model class.
     instance - The actual instance being saved.
@@ -15,7 +15,7 @@ def user_post_save(sender, instance, created, *args, **kwargs):
         """
         return ''.join(random.choice(string.lowercase) for i in range(length))
 
-    if created:
-        username = "{0}-{1}" % (randomword(4), instance.email.split('@')[0])
+    if not instance.username:
+        username = '%s-%s' % (randomword(10), instance.email.split('@')[0])
         instance.username = username
         instance.save()

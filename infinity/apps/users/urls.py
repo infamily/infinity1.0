@@ -14,7 +14,7 @@ urlpatterns = patterns(
         name="user-update"
     ),
     url(
-        r'^(?P<username>\w+)/friends/$',
+        r'^(?P<username>.*)/friends/$',
         FriendFollowingView.as_view(),
         name="friend-following"
     ),
@@ -24,12 +24,12 @@ urlpatterns = patterns(
         name='follow'
     ),
     url(
-        r'^(?P<slug>\w+)/$',
+        r'^(?P<slug>.*)/$',
         UserDetailView.as_view(),
         name="user-detail"
     ),
     url(
-        r'^(?P<username>\w+)/cryptsy/(?P<credential_id>\d+)/checkpoint/$',
+        r'^(?P<username>.*)/cryptsy/(?P<credential_id>\d+)/checkpoint/$',
         UserCryptsyNotificationToken.as_view(),
         name='cryptsy_notification_token'
     )
