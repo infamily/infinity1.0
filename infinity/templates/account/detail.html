@@ -37,10 +37,12 @@
         <a class="btn btn-success" href="{% url "invitations:send-invite"  %}"> 
             Send Invite
         </a>
+        {% if not request.user.id == object.id %}
         <form action="{% url "follow" %}" method="post">{% csrf_token %}
             <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />
             <button type="submit" class="btn btn-success" id="submit">{% if guest_follow_me %}Unfollow{% else %}Follow{% endif %}</button>
         </form>
+        {% endif %}
     </div>
 {% endif %}
 <br/>
