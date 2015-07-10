@@ -6,7 +6,16 @@ def user_post_save(sender, instance, created, *args, **kwargs):
 
     *args, **kwargs - Capture the unneeded `raw` and `using` arguments.
     """
+    import random
+    import string
+
+    def randomword(length):
+        """
+        Random string generator
+        """
+        return ''.join(random.choice(string.lowercase) for i in range(length))
+
     if created:
-        username = instance.email.split('@')[0]
+        username = "{0}-{1}" % (randomword(4), instance.email.split('@')[0])
         instance.username = username
         instance.save()
