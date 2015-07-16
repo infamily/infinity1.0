@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.http import HttpResponseForbidden
 
 from pure_pagination.mixins import PaginationMixin
 
@@ -179,7 +180,13 @@ class CryptsyTransactionCreateView(FormView):
         else:
             cryptsy_credential = request.user.credential.get(default=True)
             self.cryptsy_publickey = cryptsy_credential.publickey
-        return super(CryptsyTransactionCreateView, self).dispatch(request, *args, **kwargs)
+        if self.comment_model.user == self.request.user:
+            # Adding Transactions to Comment should only be possible
+            # only by the comment owner.
+            return super(CryptsyTransactionCreateView, self).dispatch(
+                request, *args, **kwargs)
+        else:
+            return HttpResponseForbidden()
 
     def form_valid(self, form):
         recipient_address = form.cleaned_data.get('recipient_address')

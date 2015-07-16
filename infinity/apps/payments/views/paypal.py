@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.views.generic.base import View
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 
@@ -24,8 +25,15 @@ class PayPalTransactionView(FormView):
     form_class = PayPalTransactionForm
 
     def dispatch(self, request, *args, **kwargs):
-        self.comment_model = get_object_or_404(Comment, pk=kwargs.get('comment_id'))
-        return super(PayPalTransactionView, self).dispatch(request, *args, **kwargs)
+        comment_id = kwargs.get('comment_id')
+        self.comment_model = get_object_or_404(Comment, pk=comment_id)
+        if self.comment_model.user == self.request.user:
+            # Adding Transactions to Comment should only be possible
+            # only by the comment owner.
+            return super(PayPalTransactionView, self).dispatch(
+                request, *args, **kwargs)
+        else:
+            return HttpResponseForbidden()
 
     def form_valid(self, form):
         current_site = get_current_site(self.request)
