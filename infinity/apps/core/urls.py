@@ -67,7 +67,7 @@ urlpatterns = patterns(
     ),
     url(
         r'^goal/list/$',
-        GoalListView2.as_view(),
+        GoalListView1.as_view(),
         name="goal-list"
     ),
     url(

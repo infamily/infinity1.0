@@ -89,6 +89,62 @@
     </tr>
 </table>
 
+{% for object in plan_list %}
+<div class="col-sm-12 item list-group-item">
+<div class="thumbnail">
+
+    <div class="">
+        <b>name</b>: {{object.name}}
+
+    </div>
+    <div class="">
+        <b>created_at</b>: {{object.created_at}}
+
+    </div>
+    <div class="">
+        <b>updated_at</b>: {{object.updated_at}}
+
+    </div>
+    <div class="">
+        <b>idea</b>: {{object.idea}}
+
+    </div>
+    <div class="">
+        <b>deliverable</b>: {{object.deliverable}}
+
+    </div>
+    <div class="">
+        <b>user</b>: {{object.user}}
+
+    </div>
+    <div class="">
+        <b>situation</b>: {{object.situation}}
+
+    </div>
+
+<div class="actions">
+
+
+
+    <a class="btn btn-primary" href="{% url "plan-detail" object.pk %}">Plan detail</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+{% endfor %}
+
 {# Include comment list with transactions #}
 {% include "comment/list.html" %}
 

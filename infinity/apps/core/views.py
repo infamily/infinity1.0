@@ -185,11 +185,6 @@ class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     orderable_columns_default = "-id"
     filter_set = GoalListViewFilter1
 
-    def get_base_queryset(self):
-        queryset = super(GoalListView1, self).get_base_queryset()
-        queryset = queryset.filter(need__pk=self.kwargs['need'])
-        return queryset
-
 
 class GoalDeleteView(OwnerMixin, DeleteView):
 
@@ -248,6 +243,9 @@ class GoalDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'object_list': self.object_list,
         })
+        context.update({
+            'idea_list': Idea.objects.filter(goal=kwargs.get('object')).order_by('-id')
+        })
         return context
 
 
@@ -257,17 +255,15 @@ class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     model = Goal
     paginate_by = 10
     orderable_columns = [
-        "name",
-        "personal",
-        "created_at",
-        "updated_at",
-        "reason",
-        "user",
-        "need",
-        "quantity",
+        "id",
     ]
     orderable_columns_default = "-id"
     filter_set = GoalListViewFilter2
+
+    def get_base_queryset(self):
+        queryset = super(GoalListView2, self).get_base_queryset()
+        queryset = queryset.filter(need=self.kwargs.get('need'))
+        return queryset
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -413,6 +409,9 @@ class WorkDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'object_list': self.object_list,
         })
+        context.update({
+            'work_list': Work.objects.filter(parent_work_id=kwargs.get('object').id).order_by('-id')
+        })
         return context
 
 
@@ -534,6 +533,9 @@ class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
         })
         context.update({
             'object_list': self.object_list,
+        })
+        context.update({
+            'plan_list': Plan.objects.filter(idea=kwargs.get('object')).order_by('-id')
         })
         return context
 
@@ -667,6 +669,9 @@ class StepDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'object_list': self.object_list,
         })
+        context.update({
+            'task_list': Task.objects.filter(step=kwargs.get('object')).order_by('-id')
+        })
         return context
 
 
@@ -793,6 +798,9 @@ class TaskDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'object_list': self.object_list,
         })
+        context.update({
+            'work_list': Work.objects.filter(task=kwargs.get('object')).order_by('-id')
+        })
         return context
 
 
@@ -908,7 +916,10 @@ class NeedDetailView(DetailView, CommentsContentTypeWrapper):
             'form': form,
         })
         context.update({
-            'object_list': self.object_list,
+            'comment_list': self.object_list,
+        })
+        context.update({
+            'goal_list': Goal.objects.filter(need=kwargs.get('object')).order_by('-id')
         })
         return context
 
@@ -1033,5 +1044,8 @@ class PlanDetailView(DetailView, CommentsContentTypeWrapper):
         })
         context.update({
             'object_list': self.object_list,
+        })
+        context.update({
+            'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('-id')
         })
         return context
