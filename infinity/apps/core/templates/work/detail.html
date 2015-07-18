@@ -110,24 +110,23 @@
     </tr>
 </table>
 
+<div class="panel panel-default">
+<div class="panel-heading">Follow-up Works</div>
+<div class="panel-body">
 {% for object in work_list %}
-<div class="col-sm-12 item list-group-item">
-<div class="thumbnail">
-    <div class="">
-        <b>name</b>: {{object.name}}
-
-    </div>
-    <div class="">
-        <b>description</b>: {{object.description}}
-
-    </div>
-
-<div class="actions">
-    <a class="btn btn-primary" href="{% url "work-detail" object.pk %}">Work detail</a>
-</div>
-</div>
-</div>
+    <ul class="list-group">
+      <li class="list-group-item">
+         <a href="{% url "work-detail" object.pk %}">{{object.name}}</a> 
+         <p>{{object.description}}</p>
+      </li>
+    </ul>
 {% endfor %}
+<a class="btn btn-info" href="{% url "work-create"    object.task.pk   %}"> 
+    Work create
+</a>
+
+</div>
+</div>
 
 
 {# Include comment list with transactions #}

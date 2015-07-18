@@ -25,9 +25,6 @@
 <a class="btn btn-success" href="{% url "task-list1"    object.pk   %}"> 
     Task list
 </a>
-<a class="btn btn-success" href="{% url "task-create"    object.pk   %}"> 
-    Task create
-</a>
 </div>
 <br/>
 <div>
@@ -101,19 +98,21 @@
     </tr>
 </table>
 
+<div class="panel panel-default">
+<div class="panel-heading">Tasks</div>
+<div class="panel-body">
 {% for object in task_list %}
-<div class="col-sm-12 item list-group-item">
-<div class="thumbnail">
-    <div class="">
-        <b>name</b>: {{object.name}}
-
-    </div>
-<div class="actions">
-    <a class="btn btn-primary" href="{% url "task-detail" object.pk %}">Task detail</a>
-</div>
-</div>
-</div>
+    <ul class="list-group">
+      <li class="list-group-item">
+         <a href="{% url "task-detail" object.pk %}">{{object.name}}</a> 
+      </li>
+    </ul>
 {% endfor %}
+<a class="btn btn-success" href="{% url "task-create"    object.pk   %}"> 
+    Task create
+</a>
+</div>
+</div>
 
 
 {# Include comment list with transactions #}

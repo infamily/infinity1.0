@@ -16,9 +16,6 @@
 <a class="btn btn-success" href="{% url "plan-list1"    object.pk   %}"> 
     Plan list
 </a>
-<a class="btn btn-success" href="{% url "plan-create"    object.pk   %}"> 
-    Plan create
-</a>
 <a class="btn btn-warning" href="{% url "idea-update"    object.pk   %}"> 
     Idea update
 </a>
@@ -89,21 +86,22 @@
     </tr>
 </table>
 
+<div class="panel panel-default">
+<div class="panel-heading">Plans</div>
+<div class="panel-body">
 {% for object in plan_list %}
-<div class="col-sm-12 item list-group-item">
-<div class="thumbnail">
-
-    <div class="">
-        <b>name</b>: {{object.name}}
-
-    </div>
-
-<div class="actions">
-    <a class="btn btn-primary" href="{% url "plan-detail" object.pk %}">Plan detail</a>
-</div>
-</div>
-</div>
+    <ul class="list-group">
+      <li class="list-group-item">
+         <a href="{% url "plan-detail" object.pk %}">{{object.name}}</a> 
+         <p>{{object.situation}}</p>
+      </li>
+    </ul>
 {% endfor %}
+<a class="btn btn-success" href="{% url "plan-create"    object.pk   %}"> 
+    Plan create
+</a>
+</div>
+</div>
 
 {# Include comment list with transactions #}
 {% include "comment/list.html" %}

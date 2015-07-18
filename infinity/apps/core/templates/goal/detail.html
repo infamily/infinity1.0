@@ -19,9 +19,6 @@
 <a class="btn btn-success" href="{% url "goal-list1"    object.need.pk    %}"> 
     Goal list
 </a>
-<a class="btn btn-info" href="{% url "idea-create"    object.pk   %}"> 
-    Idea create
-</a>
 <a class="btn btn-danger" href="{% url "goal-delete"    object.pk   %}"> 
     Goal delete
 </a>
@@ -98,25 +95,22 @@
     </tr>
 </table>
 
+<div class="panel panel-default">
+<div class="panel-heading">Ideas</div>
+<div class="panel-body">
 {% for object in idea_list %}
-<div class="col-sm-12 item list-group-item">
-<div class="thumbnail">
-
-    <div class="">
-        <b>description</b>: {{object.description}}
-
-    </div>
-    <div class="">
-        <b>name</b>: {{object.name}}
-
-    </div>
-
-<div class="actions">
-    <a class="btn btn-primary" href="{% url "idea-detail" object.pk %}">Idea detail</a>
-</div>
-</div>
-</div>
+    <ul class="list-group">
+      <li class="list-group-item"> 
+         <a href="{% url "idea-detail" object.pk %}">{{object.name}}</a>
+         <p>{{object.description}}</p>
+      </li>
+    </ul>
 {% endfor %}
+<a class="btn btn-info" href="{% url "idea-create"    object.pk   %}"> 
+    Idea create
+</a>
+</div>
+</div>
 
 {# Include comment list with transactions #}
 {% include "comment/list.html" %}

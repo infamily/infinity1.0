@@ -10,9 +10,6 @@
 <h1>Need detail</h1>
 <br/>
 <div class="actions">
-<a class="btn btn-info" href="{% url "goal-create1"    object.pk   %}"> 
-    Goal create
-</a>
 <a class="btn btn-warning" href="{% url "need-update"    object.pk   %}"> 
     Edit
 </a>
@@ -44,20 +41,22 @@
     </tr>
 </table>
 
+<div class="panel panel-default">
+<div class="panel-heading">Goals</div>
+<div class="panel-body">
 {% for object in goal_list %}
-<div class="col-sm-12 item list-group-item">
-<div class="thumbnail">
-
-    <div class="">
-        <b>name</b>: {{object.name}}
-
-    </div>
-<div class="actions">
-    <a class="btn btn-primary" href="{% url "goal-detail" object.pk %}">Goal detail</a>
-</div>
-</div>
-</div>
+    <ul class="list-group">
+      <li class="list-group-item">
+         <a href="{% url "goal-detail" object.pk %}">{{object.name}}</a>
+         <p>{{object.reason}}</p>
+      </li>
+    </ul>
 {% endfor %}
+<a class="btn btn-info" href="{% url "goal-create1"    object.pk   %}"> 
+    Goal create
+</a>
+</div>
+</div>
 
 
 {% for object in comment_list %}
