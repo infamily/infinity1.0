@@ -49,15 +49,6 @@
         </td>
     </tr>
     <tr>
-        <td>Idea</td>
-        <td>
-
-        	{{object.idea}}
-	        
-
-        </td>
-    </tr>
-    <tr>
         <td>Deliverable</td>
         <td>
 
@@ -80,6 +71,15 @@
         <td>
 
         	{{object.situation}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Idea</td>
+        <td>
+
+            <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea}}</a>
 	        
 
         </td>

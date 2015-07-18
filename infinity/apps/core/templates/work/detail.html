@@ -28,15 +28,6 @@
 
 <table class="table">
     <tr>
-        <td>Task</td>
-        <td>
-
-        	{{object.task}}
-	        
-
-        </td>
-    </tr>
-    <tr>
         <td>Name</td>
         <td>
 
@@ -104,6 +95,15 @@
         <td>
 
         	{{object.description}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Task</td>
+        <td>
+
+            <a href="{% url "task-detail" object.task.pk %}">{{object.task}}</a>
 	        
 
         </td>

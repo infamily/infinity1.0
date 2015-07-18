@@ -70,15 +70,6 @@
         </td>
     </tr>
     <tr>
-        <td>Plan</td>
-        <td>
-
-        	{{object.plan}}
-	        
-
-        </td>
-    </tr>
-    <tr>
         <td>Objective</td>
         <td>
 
@@ -92,6 +83,15 @@
         <td>
 
         	{{object.investables}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Plan</td>
+        <td>
+
+            <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a>
 	        
 
         </td>

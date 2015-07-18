@@ -49,19 +49,19 @@
         </td>
     </tr>
     <tr>
-        <td>Step</td>
+        <td>User</td>
         <td>
 
-        	{{object.step}}
+        	{{object.user}}
 	        
 
         </td>
     </tr>
     <tr>
-        <td>User</td>
+        <td>Step</td>
         <td>
 
-        	{{object.user}}
+            <a href="{% url "step-detail" object.step.pk %}">{{object.step}}</a>
 	        
 
         </td>

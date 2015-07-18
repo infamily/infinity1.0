@@ -76,19 +76,19 @@
         </td>
     </tr>
     <tr>
-        <td>Need</td>
+        <td>Quantity</td>
         <td>
 
-        	{{object.need}}
+        	{{object.quantity}}
 	        
 
         </td>
     </tr>
     <tr>
-        <td>Quantity</td>
+        <td>Need</td>
         <td>
 
-        	{{object.quantity}}
+        	<a href="{% url "need-detail" object.need.pk %}">{{object.need}}</a>
 	        
 
         </td>
