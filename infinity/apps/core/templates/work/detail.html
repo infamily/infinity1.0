@@ -22,6 +22,14 @@
 </div>
 <br/>
 <div>
+<ol class="breadcrumb">
+            <li>need: <a href="{% url "need-detail" object.task.step.plan.idea.goal.need.pk %}">{{object.task.step.plan.idea.goal.need }}</a></li>
+            <li>goal: <a href="{% url "goal-detail" object.task.step.plan.idea.goal.pk %}">{{object.task.step.plan.idea.goal }}</a></li>
+            <li>idea: <a href="{% url "idea-detail" object.task.step.plan.idea.pk %}">{{object.task.step.plan.idea }}</a>
+            <li>plan: <a href="{% url "plan-detail" object.task.step.plan.pk %}">{{object.task.step.plan}}</a>
+            <li>step: <a href="{% url "step-detail" object.task.step.pk %}">{{object.task.step}}</a>
+            <li>task: <a href="{% url "task-detail" object.task.pk %}">{{object.task}}</a></li>
+</ol>
     
 </div>
 <br/>

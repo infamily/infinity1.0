@@ -25,7 +25,10 @@
 </div>
 <br/>
 <div>
-    
+<ol class="breadcrumb">
+            <li>need: <a href="{% url "need-detail" object.goal.need.pk %}">{{object.goal.need }}</a></li>
+            <li>goal: <a href="{% url "goal-detail" object.goal.pk %}">{{object.goal }}</a></li>
+</ol>
 </div>
 <br/>
 
