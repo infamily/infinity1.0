@@ -65,3 +65,5 @@ ln -s /home/infty/infinity/conf/prod/supervisor.conf /etc/supervisor/conf.d/inft
 Reload supervisor
 
 supervisorctl reload
+
+Make fab dev deploy from your local repository
