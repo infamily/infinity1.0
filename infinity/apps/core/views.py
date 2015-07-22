@@ -166,6 +166,13 @@ class GoalCreateView1(CreateView):
         messages.success(self.request, _("Goal succesfully created"))
         return reverse("goal-detail", args=[self.object.pk, ])
 
+    def get_context_data(self, **kwargs):
+        context = super(GoalCreateView1, self).get_context_data(**kwargs)
+        context.update({
+                    'need_object': Need.objects.get(pk=self.kwargs['need']),
+        })
+        return context
+
 
 class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name_list = "goal/list1.html"
@@ -350,6 +357,13 @@ class WorkCreateView(CreateView):
         messages.success(self.request, _("Work succesfully created"))
         return reverse("work-detail", args=[self.object.pk, ])
 
+    def get_context_data(self, **kwargs):
+        context = super(WorkCreateView, self).get_context_data(**kwargs)
+        context.update({
+                    'task_object': Task.objects.get(pk=self.kwargs['task']),
+        })
+        return context
+
 
 class WorkDeleteView(OwnerMixin, DeleteView):
 
@@ -477,6 +491,13 @@ class IdeaCreateView(CreateView):
         messages.success(self.request, _("Idea succesfully created"))
         return reverse("idea-detail", args=[self.object.pk, ])
 
+    def get_context_data(self, **kwargs):
+        context = super(IdeaCreateView, self).get_context_data(**kwargs)
+        context.update({
+                    'goal_object': Goal.objects.get(pk=self.kwargs['goal']),
+        })
+        return context
+
 
 class IdeaDeleteView(OwnerMixin, DeleteView):
 
@@ -603,6 +624,13 @@ class StepCreateView(CreateView):
     def get_success_url(self):
         messages.success(self.request, _("Step succesfully created"))
         return reverse("step-detail", args=[self.object.pk, ])
+
+    def get_context_data(self, **kwargs):
+        context = super(StepCreateView, self).get_context_data(**kwargs)
+        context.update({
+                    'plan_object': Plan.objects.get(pk=self.kwargs['plan']),
+        })
+        return context
 
 
 class StepDeleteView(OwnerMixin, DeleteView):
@@ -736,6 +764,13 @@ class TaskCreateView(CreateView):
     def get_success_url(self):
         messages.success(self.request, _("Task succesfully created"))
         return reverse("task-detail", args=[self.object.pk, ])
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskCreateView, self).get_context_data(**kwargs)
+        context.update({
+                    'step_object': Step.objects.get(pk=self.kwargs['step']),
+        })
+        return context
 
 
 class TaskDeleteView(OwnerMixin, DeleteView):
@@ -986,6 +1021,13 @@ class PlanCreateView(CreateView):
     def get_success_url(self):
         messages.success(self.request, _("Plan succesfully created"))
         return reverse("plan-detail", args=[self.object.pk, ])
+
+    def get_context_data(self, **kwargs):
+        context = super(PlanCreateView, self).get_context_data(**kwargs)
+        context.update({
+                    'idea_object': Idea.objects.get(pk=self.kwargs['idea']),
+        })
+        return context
 
 
 class PlanDeleteView(OwnerMixin, DeleteView):

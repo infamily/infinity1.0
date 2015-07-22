@@ -16,9 +16,6 @@
 <a class="btn btn-warning" href="{% url "plan-update"    object.pk   %}"> 
     Plan update
 </a>
-<a class="btn btn-info" href="{% url "step-create"    object.pk   %}"> 
-    Step create
-</a>
 <a class="btn btn-danger" href="{% url "plan-delete"    object.pk   %}"> 
     Plan delete
 </a>
@@ -28,7 +25,11 @@
 </div>
 <br/>
 <div>
-    
+<ol class="breadcrumb">
+            <li>need: <a href="{% url "need-detail" object.idea.goal.need.pk %}">{{object.idea.goal.need }}</a></li>
+            <li>goal: <a href="{% url "goal-detail" object.idea.goal.pk %}">{{object.idea.goal }}</a></li>
+            <li>idea: <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a>
+</ol>
 </div>
 <br/>
 
@@ -47,15 +48,6 @@
         <td>
 
         	{{object.created_at}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Idea</td>
-        <td>
-
-        	{{object.idea}}
 	        
 
         </td>
@@ -87,21 +79,33 @@
 
         </td>
     </tr>
+    <tr>
+        <td>Idea</td>
+        <td>
+
+            <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea}}</a>
+	        
+
+        </td>
+    </tr>
 </table>
 
+<div class="panel panel-default">
+<div class="panel-heading">Steps</div>
+<div class="panel-body">
 {% for object in step_list %}
-<div class="col-sm-12 item list-group-item">
-<div class="thumbnail">
-    <div class="">
-        <b>name</b>: {{object.name}}
-
-    </div>
-<div class="actions">
-    <a class="btn btn-primary" href="{% url "step-detail" object.pk %}">Step detail</a>
-</div>
-</div>
-</div>
+    <ul class="list-group">
+      <li class="list-group-item">
+         <a href="{% url "step-detail" object.pk %}">{{object.name}}</a> 
+         <p>{{object.objective}}</p>
+      </li>
+    </ul>
 {% endfor %}
+<a class="btn btn-info" href="{% url "step-create"    object.pk   %}"> 
+    Step create
+</a>
+</div>
+</div>
 
 
 {# Include comment list with transactions #}
