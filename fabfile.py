@@ -8,7 +8,7 @@ def dev():
     env.hosts = ['7webpages@7webpages.com']
     env.directory = '/home/7webpages/ironcoderprojects/infinity/'
     env.activate = 'source ' + os.path.join(env.directory, '.env/bin/activate')
-    env.branch = 'master'
+    env.branch = 'dev'
     env.supervisor_app_name = 'infinity'
     env.requirements = 'requirements.txt'
 
