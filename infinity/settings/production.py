@@ -24,7 +24,7 @@ from .base import *
 DEBUG = True
 # See:
 # https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = ['.infinity.7webpages.com']
+ALLOWED_HOSTS = ['.infinity.xyz', 'infty.xzy']
 # END HOST CONFIGURATION
 
 # EMAIL CONFIGURATION
