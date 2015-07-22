@@ -13,6 +13,15 @@ def dev():
     env.requirements = 'requirements.txt'
 
 
+def prod():
+    env.hosts = ['infty@infty.xyz']
+    env.directory = '/home/infty/infinity/'
+    env.activate = 'source ' + os.path.join(env.directory, '.env/bin/activate')
+    env.branch = 'master'
+    env.supervisor_app_name = 'infty'
+    env.requirements = 'requirements.txt'
+
+
 def virtualenv(command):
     with cd(env.directory):
         run(env.activate + '&&' + command)
