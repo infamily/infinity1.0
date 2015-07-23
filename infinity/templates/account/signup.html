@@ -3,6 +3,7 @@
 {% load url from future %}
 {% load i18n %}
 {% load crispy_forms_tags %}
+{% load socialaccount %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
@@ -20,6 +21,14 @@
   <button type="submit" class="btn btn-default">{% trans "Sign Up" %} &raquo;</button>
 </form>
 
+<br/>
+<br/>
+or sign up with github
+
+<br/>
+<br/>
+
+<a href="{% provider_login_url "github"  %}" class="btn btn-primary">github</a>
 
 {% endblock %}
 
