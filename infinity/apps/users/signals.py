@@ -26,6 +26,6 @@ def user_post_save(sender, instance, created, *args, **kwargs):
     """
     from django.contrib.auth.models import Group
     if created:
-        group_created, group = Group.objects.get_or_create('invite')
+        group, group_created = Group.objects.get_or_create(name='invite')
         instance.groupd.add(group)
         instance.save()
