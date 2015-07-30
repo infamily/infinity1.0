@@ -28,8 +28,8 @@ def send_mail_template(
     subject = render_to_string(subject_template_path, context)
     subject = ''.join(subject.splitlines())
     email = strip_tags(render_to_string(email_template_path, context))
-    message = render_to_string(email_template_path, context)
-    send_mail(subject, email, from_email, recipient_list, html_message=message)
+    html_message = render_to_string(email_template_path, context)
+    send_mail(subject, email, from_email, recipient_list, html_message=None)
 
 
 class ViewTypeWrapper(object):

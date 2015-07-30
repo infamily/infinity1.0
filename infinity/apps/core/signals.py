@@ -20,11 +20,13 @@ def _comment_post_save(sender, instance, created, *args, **kwargs):
 
         if users.exists():
 
+            from .utils import send_mail_template
+            from django.contrib.sites.models import Site
+
             url = "%s/%s/detail/#" % (instance.content_type,
                                       instance.content_object.id)
-            link = path.join(instance.content_object.get_absolute_url(), url)
-
-            from .utils import send_mail_template
+            link = path.join(path.join('http://', Site.objects.get_current().domain), url)
+            
 
             for user in users.iterator():
 
