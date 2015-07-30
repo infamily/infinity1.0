@@ -10,25 +10,27 @@ def _comment_post_save(sender, instance, created, *args, **kwargs):
     subject_template_path='mail/comments/mention_notification_subject.txt'
     email_template_path='mail/comments/mention_notification.html'
 
-    comment = instance.text
-    usernames = [m.group(1) for m in finditer('\[([^]]+)\]', comment)]
-    usernames = usernames[:config.MAX_MENTIONS_PER_COMMENT]
+    if instance.notify:
 
-    users = User.objects.filter(username__in=usernames)
+        comment = instance.text
+        usernames = [m.group(1) for m in finditer('\[([^]]+)\]', comment)]
+        usernames = usernames[:config.MAX_MENTIONS_PER_COMMENT]
 
-    if users.exists():
+        users = User.objects.filter(username__in=usernames)
 
-        url = "%s/%s/detail/#" % (instance.content_type,
-                                  instance.content_object.id)
-        link = path.join(instance.content_object.get_absolute_url(), url)
+        if users.exists():
 
-        from .utils import send_mail_template
+            url = "%s/%s/detail/#" % (instance.content_type,
+                                      instance.content_object.id)
+            link = path.join(instance.content_object.get_absolute_url(), url)
 
-        for user in users.iterator():
+            from .utils import send_mail_template
 
-            send_mail_template(subject_template_path,
-                                email_template_path,
-                                recipient_list=[user.email],
-                                context={'user': instance.user.username,
-                                         'comment': instance.text,
-                                         'link': link})
+            for user in users.iterator():
+
+                send_mail_template(subject_template_path,
+                                    email_template_path,
+                                    recipient_list=[user.email],
+                                    context={'user': instance.user.username,
+                                             'comment': instance.text,
+                                             'link': link})

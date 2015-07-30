@@ -16,6 +16,7 @@ class Comment(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     text = models.TextField(blank=False)
+    notify = models.BooleanField(default=True)
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,

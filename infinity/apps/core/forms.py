@@ -22,6 +22,7 @@ class CommentCreateFormDetail(forms.ModelForm):
         super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
 
         self.fields['text'].label = _('Comment')
+        self.fields['notify'].label = _('Notify mentioned users by e-mail.')
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
@@ -29,7 +30,8 @@ class CommentCreateFormDetail(forms.ModelForm):
     class Meta:
         model = Comment
         fields = [
-            'text'
+            'text',
+            'notify'
         ]
 
 
@@ -38,6 +40,7 @@ class CommentUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CommentUpdateForm, self).__init__(*args, **kwargs)
         self.fields['text'].label = _('Comment')
+        self.fields['notify'].label = _('Notify mentioned users by e-mail.')
 
         self.helper = FormHelper(self)
 
@@ -45,7 +48,10 @@ class CommentUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ['text']
+        fields = [
+            'text',
+            'notify'
+        ]
 
 
 class CommentCreateForm(forms.ModelForm):
@@ -53,6 +59,7 @@ class CommentCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CommentCreateForm, self).__init__(*args, **kwargs)
         self.fields['text'].label = _('Comment')
+        self.fields['notify'].label = _('Notify mentioned users by e-mail.')
 
         self.helper = FormHelper(self)
 

@@ -7,6 +7,7 @@ from django.core.exceptions import FieldError
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.conf import settings
+from django.utils.html import strip_tags
 
 
 def send_mail_template(
@@ -26,9 +27,9 @@ def send_mail_template(
     """
     subject = render_to_string(subject_template_path, context)
     subject = ''.join(subject.splitlines())
-    email = render_to_string(email_template_path, context)
-    html_email = render_to_string(email_template_path, context)
-    send_mail(subject, email, from_email, recipient_list, html_message=html_email)
+    email = strip_tags(render_to_string(email_template_path, context))
+    message = render_to_string(email_template_path, context)
+    send_mail(subject, email, from_email, recipient_list, html_message=message)
 
 
 class ViewTypeWrapper(object):

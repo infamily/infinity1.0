@@ -18,7 +18,7 @@ TEMPLATE_DEBUG = DEBUG
 
 # EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-DEFAULT_FROM_EMAIL = "noreply@infinity.xyz"
+DEFAULT_FROM_EMAIL = "noreply@infty.xyz"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # END EMAIL CONFIGURATION
 
