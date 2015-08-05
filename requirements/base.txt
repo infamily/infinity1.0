@@ -15,7 +15,7 @@ django-crispy-forms
 https://github.com/jonzlin95/django-constance/archive/master.zip
 django-picklefield
 django-storages
-django-allauth
+django-allauth==0.21.0
 django-avatar
 django-autofixture
 django-filter
