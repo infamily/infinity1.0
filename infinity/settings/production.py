@@ -24,12 +24,12 @@ from .base import *
 DEBUG = True
 # See:
 # https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = ['.infinity.xyz', 'infty.xzy']
+ALLOWED_HOSTS = ['.infty.xyz', 'infty.xzy']
 # END HOST CONFIGURATION
 
 # EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-DEFAULT_FROM_EMAIL = "noreply@infinity.xyz"
+DEFAULT_FROM_EMAIL = "noreply@infty.xyz"
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
 SENDGRID_USER = "ironcoder-demo"
 SENDGRID_PASSWORD = "123456789a"

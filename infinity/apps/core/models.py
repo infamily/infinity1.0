@@ -1,10 +1,13 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
+from django.db.models.signals import post_save
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
+
+from .signals import _comment_post_save
 
 
 class Comment(models.Model):
@@ -13,6 +16,7 @@ class Comment(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     text = models.TextField(blank=False)
+    notify = models.BooleanField(default=True)
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
@@ -436,3 +440,6 @@ class Language(models.Model):
             return unicode(self.name[:50])
         except TypeError:
             return unicode(self.pk)
+
+# Signals register place
+post_save.connect(_comment_post_save, sender=Comment)
