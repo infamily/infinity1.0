@@ -55,7 +55,7 @@ class Goal(models.Model):
         blank=True,
         null=True,
     )
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
@@ -96,7 +96,7 @@ class Goal(models.Model):
 
 
 class Work(models.Model):
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
         blank=True,
@@ -165,7 +165,7 @@ class Idea(models.Model):
         blank=True,
         null=True,
     )
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     name = models.CharField(
         unique=False,
         max_length=150,
@@ -211,7 +211,7 @@ class Idea(models.Model):
 
 
 class Step(models.Model):
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
         blank=True,
@@ -273,7 +273,7 @@ class Step(models.Model):
 
 
 class Task(models.Model):
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
         blank=True,
@@ -381,7 +381,7 @@ class Type(models.Model):
 
 
 class Plan(models.Model):
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
         blank=True,
