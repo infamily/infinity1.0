@@ -470,7 +470,7 @@ class NeedListViewFilter(django_filters.FilterSet):
         (10000, '10000'),
     )
     name = django_filters.CharFilter(lookup_type="icontains")
-    number_of_needs = NeedLimitChoiceFilter(choices=OBJECTS_LIMITS, default=100)
+    number_of_needs = NeedLimitChoiceFilter(choices=OBJECTS_LIMITS)
 
     @property
     def form(self):
