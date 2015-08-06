@@ -188,6 +188,7 @@ class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         "user",
         "need",
         "quantity",
+        "unit",
     ]
     orderable_columns_default = "-id"
     filter_set = GoalListViewFilter1

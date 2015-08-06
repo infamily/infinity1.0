@@ -87,6 +87,11 @@ class Goal(models.Model):
         null=False,
         blank=False,
     )
+    unit = models.CharField(
+        unique=False,
+        max_length=50,
+        blank=True,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
