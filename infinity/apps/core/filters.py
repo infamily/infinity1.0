@@ -459,12 +459,14 @@ class NeedLimitChoiceFilter(django_filters.Filter):
             values = qs.values_list('pk')[:value]
             qs = qs.filter(pk__in=values)
             return qs
+        values = qs.values_list('pk')[:100]
+        qs = qs.filter(pk__in=values)
         return qs
 
 
 class NeedListViewFilter(django_filters.FilterSet):
     OBJECTS_LIMITS = (
-        (None, 'ALL'),
+        (-1, 'ALL'),
         (100, '100'),
         (1000, '1000'),
         (10000, '10000'),
