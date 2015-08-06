@@ -83,6 +83,8 @@ class GoalCreateForm1(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Create')))
 
+        self.fields['name'].label = 'Description'
+
     class Meta:
         model = Goal
         exclude = [
@@ -106,6 +108,8 @@ class GoalUpdateForm(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Edit')))
 
+        self.fields['name'].label = 'Description'
+
     class Meta:
         model = Goal
         exclude = [
@@ -117,7 +121,6 @@ class GoalUpdateForm(forms.ModelForm):
             'quantity',
             'reason',
             'personal',
-            'need',
         ]
 
 
