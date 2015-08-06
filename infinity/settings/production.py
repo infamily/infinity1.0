@@ -57,3 +57,8 @@ CACHES = {
     }
 }
 # END CACHE CONFIGURATION
+
+try:
+    from .secret import *
+except ImportError:
+    pass
