@@ -464,12 +464,13 @@ class NeedLimitChoiceFilter(django_filters.Filter):
 
 class NeedListViewFilter(django_filters.FilterSet):
     OBJECTS_LIMITS = (
+        (None, 'ALL'),
         (100, '100'),
         (1000, '1000'),
         (10000, '10000'),
     )
     name = django_filters.CharFilter(lookup_type="icontains")
-    number_of_needs = NeedLimitChoiceFilter(choices=OBJECTS_LIMITS)
+    number_of_needs = NeedLimitChoiceFilter(choices=OBJECTS_LIMITS, default=100)
 
     @property
     def form(self):
