@@ -2,8 +2,14 @@ import django_filters
 import django_select2
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from crispy_forms.layout import Field
+from crispy_forms.layout import HTML
+from crispy_forms.bootstrap import StrictButton
+from crispy_forms.bootstrap import FieldWithButtons
 from django.contrib.auth import get_user_model
+
+from django import forms
 
 from .models import Comment
 from .models import Goal
@@ -445,7 +451,6 @@ class TaskListViewFilter2(django_filters.FilterSet):
         exclude = []
 
 
-from django import forms
 class NeedLimitChoiceFilter(django_filters.Filter):
     field_class = forms.ChoiceField
 
@@ -465,7 +470,7 @@ class NeedListViewFilter(django_filters.FilterSet):
         (10000, '10000'),
     )
     name = django_filters.CharFilter(lookup_type="icontains")
-    object_count = NeedLimitChoiceFilter(choices=OBJECTS_LIMITS)
+    number_of_needs = NeedLimitChoiceFilter(choices=OBJECTS_LIMITS)
 
     @property
     def form(self):
@@ -474,7 +479,10 @@ class NeedListViewFilter(django_filters.FilterSet):
         form.helper.form_method = 'get'
         form.helper.form_class = 'form-inline'
         form.helper.field_template = 'bootstrap3/layout/inline_field.html'
-        form.helper.add_input(Submit('submit', 'Lookup'))
+        form.helper.layout = Layout(
+            FieldWithButtons(Field('name'), Submit('submit', 'Search', css_class='button white')),
+            Field('number_of_needs'),
+        )
 
         return form
 
