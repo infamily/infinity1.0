@@ -445,8 +445,27 @@ class TaskListViewFilter2(django_filters.FilterSet):
         exclude = []
 
 
+from django import forms
+class NeedLimitChoiceFilter(django_filters.Filter):
+    field_class = forms.ChoiceField
+
+    def filter(self, qs, value):
+        if value:
+            values = qs.values_list('pk')[:value]
+            qs = qs.filter(pk__in=values)
+            return qs
+        return qs
+
+
 class NeedListViewFilter(django_filters.FilterSet):
+    OBJECTS_LIMITS = (
+        (None, 'ALL'),
+        (100, '100'),
+        (1000, '1000'),
+        (10000, '10000'),
+    )
     name = django_filters.CharFilter(lookup_type="icontains")
+    object_count = NeedLimitChoiceFilter(choices=OBJECTS_LIMITS)
 
     @property
     def form(self):
