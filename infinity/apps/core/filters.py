@@ -464,7 +464,6 @@ class NeedLimitChoiceFilter(django_filters.Filter):
 
 class NeedListViewFilter(django_filters.FilterSet):
     OBJECTS_LIMITS = (
-        (None, 'ALL'),
         (100, '100'),
         (1000, '1000'),
         (10000, '10000'),
