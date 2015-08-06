@@ -83,6 +83,13 @@ class GoalCreateForm1(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Create')))
 
+        self.fields['name'].label = _('<b>Description:</b> (used in title, e.g., "Our community in Nepal needs water this summer.")')
+        self.fields['quantity'].label = _('<b>Quantity:</b> (appears next to Goal title, e.g., 50000)')
+        self.fields['unit'].label = _('<b>Unit:</b> (appears next to quantity, e.g., "liters")')
+        self.fields['reason'].label = _('<b>Reason:</b> (appears after the title, write full description here)')
+        self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your friends)')
+
+
     class Meta:
         model = Goal
         exclude = [
@@ -92,6 +99,7 @@ class GoalCreateForm1(forms.ModelForm):
         fields = [
             'name',
             'quantity',
+            'unit',
             'reason',
             'personal',
         ]
@@ -106,6 +114,8 @@ class GoalUpdateForm(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Edit')))
 
+        self.fields['name'].label = 'Description'
+
     class Meta:
         model = Goal
         exclude = [
@@ -115,9 +125,9 @@ class GoalUpdateForm(forms.ModelForm):
         fields = [
             'name',
             'quantity',
+            'unit',
             'reason',
             'personal',
-            'need',
         ]
 
 
@@ -141,6 +151,7 @@ class GoalCreateForm2(forms.ModelForm):
         fields = [
             'name',
             'quantity',
+            'unit',
             'reason',
             'personal',
         ]
