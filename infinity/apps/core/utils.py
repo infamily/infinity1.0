@@ -8,6 +8,39 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.html import strip_tags
+from constance import config
+from users.models import User
+from os import path
+from re import finditer
+
+
+def notify_mentioned_users(comment_instance):
+    """
+    """
+    comment = comment_instance.text
+    usernames = [m.group(1) for m in finditer('\[([^]]+)\]', comment)]
+    usernames = usernames[:config.MAX_MENTIONS_PER_COMMENT]
+    subject_template_path = 'mail/comments/mention_notification_subject.txt'
+    email_template_path = 'mail/comments/mention_notification.html'
+
+    users = User.objects.filter(username__in=usernames)
+
+    if users.exists():
+
+        from .utils import send_mail_template
+        from django.contrib.sites.models import Site
+
+        url = "%s/%s/detail/#" % (comment_instance.content_type,
+                                  comment_instance.content_object.id)
+        link = path.join(path.join('http://', Site.objects.get_current().domain), url)
+
+        for user in users.iterator():
+            send_mail_template(subject_template_path,
+                               email_template_path,
+                               recipient_list=[user.email],
+                               context={'user': comment_instance.user.username,
+                                        'comment': comment_instance.text,
+                                        'link': link})
 
 
 def send_mail_template(
@@ -145,5 +178,5 @@ class CommentsContentTypeWrapper(CreateView):
         self.object.content_type = ContentType.objects.get_for_model(self.get_object())
         self.object.object_id = self.get_object().id
         self.object.save()
+        notify_mentioned_users(self.object)
         return super(CommentsContentTypeWrapper, self).form_valid(form)
-
