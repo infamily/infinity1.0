@@ -927,13 +927,6 @@ class NeedListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFil
     orderable_columns_default = "-id"
     filter_set = NeedListViewFilter
 
-    def get_filter_set(self):
-        if self.filter_set:
-            return self.filter_set(initial={'number_of_needs': 100})
-        else:
-            raise ImproperlyConfigured(
-                "ListFilterMixin requires either a definition of "
-                "'filter_set' or an implementation of 'get_filter()'")
 
 class NeedDetailView(DetailView, CommentsContentTypeWrapper):
 
