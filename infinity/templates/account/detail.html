@@ -22,11 +22,11 @@
 <br/>
 {% if request.user.is_authenticated %}
     <div class="actions">
+        <a class="btn btn-warning" href="{% url "user-update"   %}">
+            User Edit
+        </a>
         <a class="btn btn-success" href="{% url "comment-list1"   %}">
             My Comments
-        </a>
-        <a class="btn btn-warning" href="{% url "user-update"   %}">
-            User update
         </a>
         <a class="btn btn-success" href="{% url "payments:cryptsy_credential_list"  %}"> 
             My Cryptsy Credentials
