@@ -7,8 +7,8 @@ def _comment_post_save(sender, instance, created, *args, **kwargs):
     from os import path
     from re import finditer
 
-    subject_template_path='mail/comments/mention_notification_subject.txt'
-    email_template_path='mail/comments/mention_notification.html'
+    subject_template_path = 'mail/comments/mention_notification_subject.txt'
+    email_template_path = 'mail/comments/mention_notification.html'
 
     if instance.notify:
 
@@ -26,13 +26,14 @@ def _comment_post_save(sender, instance, created, *args, **kwargs):
             url = "%s/%s/detail/#" % (instance.content_type,
                                       instance.content_object.id)
             link = path.join(path.join('http://', Site.objects.get_current().domain), url)
-            
 
             for user in users.iterator():
-
                 send_mail_template(subject_template_path,
-                                    email_template_path,
-                                    recipient_list=[user.email],
-                                    context={'user': instance.user.username,
-                                             'comment': instance.text,
-                                             'link': link})
+                                   email_template_path,
+                                   recipient_list=[user.email],
+                                   context={'user': instance.user.username,
+                                            'comment': instance.text,
+                                            'link': link})
+
+            instance.notify = False
+            instance.save()
