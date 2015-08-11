@@ -91,22 +91,20 @@
               <li>
                 <a href="{% url "work-list" %}">Works</a>
               </li>
-              {% if request.user.is_authenticated %}
-              <li>
-                <a href="{% url "user-detail" request.user.username %}">User</a>
-              </li>
               <li>
                 <a href="{% url "help" %}">Help</a>
               </li>
+
+              {% if request.user.is_authenticated %}
               <li>
-                <a href="{% url "account_logout" %}">Logout ({{ request.user }})</a>
+                <a href="{% url "account_logout" %}">Logout</a>
+              </li>
+              <li>
+              <a href="{% url "user-detail" request.user.username %}"><b>[{{ request.user }}]</b></a>
               </li>
 
               {% else %}
 
-              <li>
-                <a href="{% url "help" %}">Help</a>
-              </li>
               <li>
                 <a href="{% url "account_login" %}">Sign in</a>
               </li>
