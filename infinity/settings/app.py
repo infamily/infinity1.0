@@ -9,8 +9,8 @@ CONSTANCE_CONFIG = {
     'PAYPAL_SECURITY_USERID': ('shamkir-facilitator_api1.gmail.com', 'PayPal security user id'),
     'PAYPAL_SECURITY_PASSWORD': ('HATJ3CEGRHZVQTZV', 'PayPal security password'),
     'PAYPAL_SECURITY_SIGNATURE': ('AFcWxV21C7fd0v3bYYYRCpSSRl31AU7eDuvOQwePEQhUEjtkBesDYrC.', 'PayPal security signature'),
-    'PAYPAL_CANCEL_URL': ('http://localhost:3000/', 'PayPal cancel URL')
-
+    'PAYPAL_CANCEL_URL': ('http://localhost:3000/', 'PayPal cancel URL'),
+    'MAX_MENTIONS_PER_COMMENT': (10, '_comment_post_save email notifications per comment')
 }
 
 AUTH_USER_MODELS = [

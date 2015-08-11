@@ -188,6 +188,7 @@ class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         "user",
         "need",
         "quantity",
+        "unit",
     ]
     orderable_columns_default = "-id"
     filter_set = GoalListViewFilter1
@@ -897,7 +898,7 @@ class NeedCreateView(CreateView):
                 if need.definition:
                     hints.append([need.definition,
                                   reverse('need-detail', args=[need.pk])])
-            resp = request.GET['callback'] + '(' + json.dumps(hints) + ');'
+            resp = json.dumps(hints)
             return HttpResponse(resp, content_type='application/json')
         form = NeedCreateForm()
         return render(request, 'need/create.html',

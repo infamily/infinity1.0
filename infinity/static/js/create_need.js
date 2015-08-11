@@ -30,9 +30,8 @@ function searchOpen(name, language) {
     $.ajax({
         url: '.',
         data: data,
-        dataType: 'jsonp',
-        jsonp: 'callback',
-        jsonpCallback: 'searchResult',
+    }).success(function(data){
+        searchResult(data);
     });
 }
 
@@ -49,10 +48,13 @@ function searchResult(data) {
             document.getElementById('id_language').value = lang_pk;
         });
     };
+    console.log(data);
     if (data && data[0]) {
+        console.log('show', data)
         showProposals(data);
     } else {
         $('.hint').remove();
+        console.log('remove')
     };
 }
 
@@ -84,9 +86,7 @@ $(document).ready(function() {
         };
     })();
     $('#id_name').bind('input', function() { 
-        delay(function(){
-            searchOpen();
-        }, 1000);
+        searchOpen();
     });
     searchResult()
 });

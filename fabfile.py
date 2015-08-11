@@ -8,8 +8,17 @@ def dev():
     env.hosts = ['7webpages@7webpages.com']
     env.directory = '/home/7webpages/ironcoderprojects/infinity/'
     env.activate = 'source ' + os.path.join(env.directory, '.env/bin/activate')
-    env.branch = 'master'
+    env.branch = 'dev'
     env.supervisor_app_name = 'infinity'
+    env.requirements = 'requirements.txt'
+
+
+def prod():
+    env.hosts = ['infty@infty.xyz']
+    env.directory = '/home/infty/infinity/'
+    env.activate = 'source ' + os.path.join(env.directory, '.env/bin/activate')
+    env.branch = 'master'
+    env.supervisor_app_name = 'infty'
     env.requirements = 'requirements.txt'
 
 

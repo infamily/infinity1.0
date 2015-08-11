@@ -1,10 +1,13 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
+from django.db.models.signals import post_save
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
+
+from .signals import _comment_post_save
 
 
 class Comment(models.Model):
@@ -13,6 +16,7 @@ class Comment(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     text = models.TextField(blank=False)
+    notify = models.BooleanField(default=True)
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
@@ -51,7 +55,7 @@ class Goal(models.Model):
         blank=True,
         null=True,
     )
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
@@ -83,6 +87,11 @@ class Goal(models.Model):
         null=False,
         blank=False,
     )
+    unit = models.CharField(
+        unique=False,
+        max_length=50,
+        blank=True,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -92,7 +101,7 @@ class Goal(models.Model):
 
 
 class Work(models.Model):
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
         blank=True,
@@ -161,7 +170,7 @@ class Idea(models.Model):
         blank=True,
         null=True,
     )
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     name = models.CharField(
         unique=False,
         max_length=150,
@@ -207,7 +216,7 @@ class Idea(models.Model):
 
 
 class Step(models.Model):
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
         blank=True,
@@ -269,7 +278,7 @@ class Step(models.Model):
 
 
 class Task(models.Model):
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
         blank=True,
@@ -377,7 +386,7 @@ class Type(models.Model):
 
 
 class Plan(models.Model):
-    personal = models.BooleanField(default=True)
+    personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
         blank=True,
@@ -436,3 +445,6 @@ class Language(models.Model):
             return unicode(self.name[:50])
         except TypeError:
             return unicode(self.pk)
+
+# Signals register place
+post_save.connect(_comment_post_save, sender=Comment)

@@ -13,7 +13,7 @@
         <td>Plan</td>
         <td>
 
-            <a href="{% url "plan-detail" plan_object.pk %}">{{plan_object}}</a>
+            <b>The</b> <a href="{% url "plan-detail" plan_object.pk %}">{{plan_object}}</a> <b>approach for</b> <a href="{% url "idea-detail" plan_object.idea.pk %}">{{ plan_object.idea.name }}</a> <b>idea.</b>
 
         </td>
     </tr>

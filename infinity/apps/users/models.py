@@ -96,4 +96,6 @@ class User(AbstractUser):
 
 
 from .signals import user_pre_save
+from .signals import user_post_save
 signals.pre_save.connect(user_pre_save, sender=User)
+signals.post_save.connect(user_post_save, sender=User)

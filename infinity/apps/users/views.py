@@ -79,13 +79,14 @@ class UserDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         user = kwargs.get('object')
-        context['idea_list'] = user.user_ideas.all()
-        context['plan_list'] = user.user_plans.all()
-        context['step_list'] = user.user_steps.all()
-        context['task_list'] = user.user_tasks.all()
-        context['work_list'] = user.user_works.all()
-        context['need_list'] = user.user_needs.all()
-        context['goal_list'] = user.user_goals.all()
+        if not user.is_superuser:
+            context['idea_list'] = user.user_ideas.all()
+            context['plan_list'] = user.user_plans.all()
+            context['step_list'] = user.user_steps.all()
+            context['task_list'] = user.user_tasks.all()
+            context['work_list'] = user.user_works.all()
+            context['need_list'] = user.user_needs.all()
+            context['goal_list'] = user.user_goals.all()
 
         if self.request.user.is_authenticated():
             context['guest_follow_me'] = self.request.user.get_relationships(
