@@ -898,7 +898,7 @@ class NeedCreateView(CreateView):
                 if need.definition:
                     hints.append([need.definition,
                                   reverse('need-detail', args=[need.pk])])
-            resp = request.GET['callback'] + '(' + json.dumps(hints) + ');'
+            resp = json.dumps(hints)
             return HttpResponse(resp, content_type='application/json')
         form = NeedCreateForm()
         return render(request, 'need/create.html',
