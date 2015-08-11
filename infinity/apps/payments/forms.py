@@ -38,7 +38,9 @@ class CryptsyTransactionForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
+        self.comment_model = kwargs.pop('comment_model')
         super(CryptsyTransactionForm, self).__init__(*args, **kwargs)
+        self.initial['recipient_username'] = self.comment_model.content_object.user.id
         cryptsy_credential = self.request.user.credential.get(default=True)
         cryptsy = Cryptsy(
             cryptsy_credential.publickey,

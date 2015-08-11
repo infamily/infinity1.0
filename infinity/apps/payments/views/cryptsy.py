@@ -219,4 +219,5 @@ class CryptsyTransactionCreateView(FormView):
     def get_form_kwargs(self):
         kwargs = super(CryptsyTransactionCreateView, self).get_form_kwargs()
         kwargs['request'] = self.request
+        kwargs['comment_model'] = self.comment_model
         return kwargs
