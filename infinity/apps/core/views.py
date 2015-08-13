@@ -952,7 +952,7 @@ class NeedDetailView(DetailView, CommentsContentTypeWrapper):
             'form': form,
         })
         context.update({
-            'comment_list': self.object_list,
+            'object_list': self.object_list,
         })
         context.update({
             'goal_list': Goal.objects.filter(need=kwargs.get('object')).order_by('-id')
