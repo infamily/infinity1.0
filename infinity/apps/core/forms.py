@@ -404,7 +404,7 @@ class NeedCreateForm(forms.ModelForm):
                 Div('language', css_class='col-sm-2',),
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder',
-                                                         "Noun expression in the language of your choice, e.g., 'electric cat toothbrush'")),
+                                                         "Noun expression, e.g., cat toothbrush.")),
                     css_class='col-sm-10',
                 ),
                 css_class='row'
@@ -413,7 +413,7 @@ class NeedCreateForm(forms.ModelForm):
                 Div(
                     Div(
                         Field(
-                            'definition', placeholder=kwargs.pop('query_placeholder', "Not found? Type your own definition in the language, e.g., 'a tooth brush suited for cleaning the teeth of a cat'"),
+                            'definition', placeholder=kwargs.pop('query_placeholder', "Type your own definition (optional)."),
                             # type="hidden",
                         ),
                         css_class='col-sm-10',

@@ -48,6 +48,11 @@ class SignUpUserForm(AllAuthSignupForm):
         required=True,
     )
 
+    username = forms.CharField(
+        max_length=100,
+        required=True,
+    )
+
     def __init__(self, *args, **kwargs):
         request = kwargs.pop('request')
         super(SignUpUserForm, self).__init__(*args, **kwargs)
@@ -63,5 +68,6 @@ class SignUpUserForm(AllAuthSignupForm):
     def save(self, request):
         user = super(SignUpUserForm, self).save(request)
         setattr(user, 'email', self.cleaned_data.get('email'))
+        setattr(user, 'username', self.cleaned_data.get('username'))
         user.save()
         return user

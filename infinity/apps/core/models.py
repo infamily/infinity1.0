@@ -447,4 +447,4 @@ class Language(models.Model):
             return unicode(self.pk)
 
 # Signals register place
-post_save.connect(_comment_post_save, sender=Comment)
+#post_save.connect(_comment_post_save, sender=Comment)
