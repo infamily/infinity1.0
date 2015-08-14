@@ -30,8 +30,9 @@ def notify_mentioned_users(comment_instance):
         from .utils import send_mail_template
         from django.contrib.sites.models import Site
 
-        url = "%s/%s/detail/#" % (comment_instance.content_type,
-                                  comment_instance.content_object.id)
+        url = "%s/%s/detail/#comment-%s" % (comment_instance.content_type,
+                                  comment_instance.content_object.id,
+                                  comment_instance.id)
         link = path.join(path.join('http://', Site.objects.get_current().domain), url)
 
         for user in users.iterator():
@@ -62,7 +63,7 @@ def send_mail_template(
     subject = ''.join(subject.splitlines())
     email = strip_tags(render_to_string(email_template_path, context))
     html_message = render_to_string(email_template_path, context)
-    send_mail(subject, email, from_email, recipient_list, html_message=None)
+    send_mail(subject, email, from_email, recipient_list, html_message=html_message)
 
 
 class ViewTypeWrapper(object):
