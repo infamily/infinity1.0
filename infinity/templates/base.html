@@ -61,7 +61,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">infinity</a>
+          <a class="navbar-brand" href="/">https://infty.xyz</a>
         </div>
 
         <div class="collapse navbar-collapse">
@@ -92,12 +92,12 @@
                 <a href="{% url "work-list" %}">Works</a>
               </li>
               <li>
-                <a href="{% url "help" %}">Help</a>
+              <a href="{% url "help" %}"><b>Help</b></a>
               </li>
 
               {% if request.user.is_authenticated %}
               <li>
-                <a href="{% url "account_logout" %}">Logout</a>
+              <a href="{% url "account_logout" %}"><b>Logout</b></a>
               </li>
               <li>
               <a href="{% url "user-detail" request.user.username %}"><b>[{{ request.user }}]</b></a>
@@ -106,10 +106,10 @@
               {% else %}
 
               <li>
-                <a href="{% url "account_login" %}">Sign in</a>
+              <a href="{% url "account_login" %}"><b>Sign in</b></a>
               </li>
               <li>
-                <a href="{% url "account_signup" %}">Sign up</a>
+              <a href="{% url "account_signup" %}"><b>Sign up</b></a>
               </li>
 
               {% endif %}
