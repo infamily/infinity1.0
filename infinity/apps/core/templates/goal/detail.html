@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load crispy_forms_tags %}
-
+{% load django_markdown %}
 
 {% block title %}Goal detail{% endblock title %}
 
@@ -63,7 +63,7 @@
         <td>Reason</td>
         <td>
 
-        	{{object.reason|linebreaks}}
+        	{{object.reason|markdown}}
 	        
 
         </td>

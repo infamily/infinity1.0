@@ -1,11 +1,12 @@
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 {% for object in object_list %}
 <div id="comment-{{object.id}}" class="col-sm-12 item list-group-item">
     <div class="thumbnail">
 
         <div class="">
-            <b>text</b>: {{object.text|linebreaks}}
+            <b>text</b>: {{object.text|markdown}}
 
         </div>
         <div class="">
@@ -50,7 +51,7 @@
         <div class="actions">
             <a class="btn btn-default" href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> Pay PayPal</a>
             <a class="btn btn-default" href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Pay Cryptsy</a>
-            <a class="btn btn-default" href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id}}"><i class="fa fa-pencil-square-o"></i> Edit</a>
+            <a class="btn btn-default" href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}"><i class="fa fa-pencil-square-o"></i> Edit</a>
         </div>
         {% endif %}
     </div>

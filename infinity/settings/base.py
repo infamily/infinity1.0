@@ -202,6 +202,7 @@ DJANGO_APPS = (
     'django_select2',
     'invitations',
     'clever_selects',
+    'django_markdown',
 )
 
 # DEBUG-specific apps

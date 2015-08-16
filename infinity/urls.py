@@ -20,6 +20,7 @@ urlpatterns = patterns(
     url(r'^invitations/', include('invitations.urls', namespace='invitations')),
     url(r'^help/$', TemplateView.as_view(template_name='help.html'),
         name="help"),
+    url('^markdown/', include( 'django_markdown.urls')),
 )
 
 

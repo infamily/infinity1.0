@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 {% block title %}Ideas{% endblock title %}
 
@@ -15,7 +16,7 @@
 <div class="panel panel-default">
     <div class="panel-heading"><a href="{% url "idea-detail" object.id %}">{{ object.name }}</a></div>
     <div class="panel-body">
-        {{ object.description }}
+        {{ object.description|markdown }}
     </div>
 
 </div>

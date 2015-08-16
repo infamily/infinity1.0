@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 {% block title %}Comment list{% endblock title %}
 
@@ -45,7 +46,7 @@
 
     </div>
     <div class="">
-        <b>text</b>: {{object.text|linebreaks}}
+        <b>text</b>: {{object.text|markdown}}
 
     </div>
     <div class="">

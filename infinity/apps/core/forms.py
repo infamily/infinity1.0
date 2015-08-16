@@ -15,6 +15,7 @@ from core.models import Need
 from core.models import Plan
 from core.models import Language
 
+from django_markdown.widgets import MarkdownWidget
 
 class CommentCreateFormDetail(forms.ModelForm):
 
@@ -33,6 +34,9 @@ class CommentCreateFormDetail(forms.ModelForm):
             'text',
             'notify'
         ]
+        widgets = {
+            'text': MarkdownWidget,
+        }
 
 
 class CommentUpdateForm(forms.ModelForm):
@@ -52,6 +56,9 @@ class CommentUpdateForm(forms.ModelForm):
             'text',
             'notify'
         ]
+        widgets = {
+            'text': MarkdownWidget,
+        }
 
 
 class CommentCreateForm(forms.ModelForm):
@@ -72,6 +79,9 @@ class CommentCreateForm(forms.ModelForm):
             'updated_at',
             'user',
         ]
+        widgets = {
+            'text': MarkdownWidget,
+        }
 
 
 class GoalCreateForm1(forms.ModelForm):
@@ -105,6 +115,9 @@ class GoalCreateForm1(forms.ModelForm):
             'unit',
             'personal',
         ]
+        widgets = {
+            'reason': MarkdownWidget,
+        }
 
 
 class GoalUpdateForm(forms.ModelForm):
@@ -114,9 +127,10 @@ class GoalUpdateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Edit')))
+        self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['name'].label = 'Description'
+
 
     class Meta:
         model = Goal
@@ -131,6 +145,9 @@ class GoalUpdateForm(forms.ModelForm):
             'reason',
             'personal',
         ]
+        widgets = {
+            'reason': MarkdownWidget,
+        }
 
 
 class GoalCreateForm2(forms.ModelForm):
@@ -157,6 +174,9 @@ class GoalCreateForm2(forms.ModelForm):
             'reason',
             'personal',
         ]
+        widgets = {
+            'reason': MarkdownWidget,
+        }
 
 
 class WorkUpdateForm(forms.ModelForm):
@@ -183,6 +203,9 @@ class WorkUpdateForm(forms.ModelForm):
             'task',
             'personal'
         ]
+        widgets = {
+            'description': MarkdownWidget,
+        }
 
 
 class WorkCreateForm(forms.ModelForm):
@@ -220,6 +243,9 @@ class WorkCreateForm(forms.ModelForm):
             'parent_work_id',
             'personal'
         ]
+        widgets = {
+            'description': MarkdownWidget,
+        }
 
 
 class IdeaUpdateForm(forms.ModelForm):
@@ -244,6 +270,9 @@ class IdeaUpdateForm(forms.ModelForm):
             'goal',
             'personal'
         ]
+        widgets = {
+            'description': MarkdownWidget,
+        }
 
 
 class IdeaCreateForm(forms.ModelForm):
@@ -273,6 +302,9 @@ class IdeaCreateForm(forms.ModelForm):
             'description',
             'personal'
         ]
+        widgets = {
+            'description': MarkdownWidget,
+        }
 
 
 class StepUpdateForm(forms.ModelForm):
@@ -300,6 +332,9 @@ class StepUpdateForm(forms.ModelForm):
             'plan',
             'personal'
         ]
+        widgets = {
+            'objective': MarkdownWidget,
+        }
 
 
 class StepCreateForm(forms.ModelForm):
@@ -338,6 +373,9 @@ class StepCreateForm(forms.ModelForm):
             'deliverables',
             'personal'
         ]
+        widgets = {
+            'objective': MarkdownWidget,
+        }
 
 
 class TaskUpdateForm(forms.ModelForm):
@@ -483,6 +521,10 @@ class PlanUpdateForm(forms.ModelForm):
             'idea',
             'personal'
         ]
+        widgets = {
+            'situation': MarkdownWidget,
+            'deliverable': MarkdownWidget,
+        }
 
 
 class PlanCreateForm(forms.ModelForm):
@@ -515,5 +557,9 @@ class PlanCreateForm(forms.ModelForm):
             'name',
             'personal'
         ]
+        widgets = {
+            'situation': MarkdownWidget,
+            'deliverable': MarkdownWidget,
+        }
 
 

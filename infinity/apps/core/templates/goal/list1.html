@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 {% block title %}Goal list{% endblock title %}
 
@@ -20,7 +21,7 @@
 </div>
 <br/>
 
-<div class="search-block">
+<div class="search-block" style="text-align: center;">
 {% crispy filter.form %}
 </div>
 <br/>
@@ -48,7 +49,7 @@
 
     </div>
     <div class="">
-        <b>reason</b>: {{object.reason}}
+        <b>reason</b>: {{object.reason|markdown}}
 
     </div>
     <div class="">

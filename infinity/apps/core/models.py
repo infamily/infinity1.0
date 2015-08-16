@@ -1,21 +1,22 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
-from django.db.models.signals import post_save
+#from django.db.models.signals import post_save
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 
-from .signals import _comment_post_save
+#from .signals import _comment_post_save
 
+from django_markdown.models import MarkdownField
 
 class Comment(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    text = models.TextField(blank=False)
+    text = MarkdownField(blank=False)
     notify = models.BooleanField(default=True)
     created_at = models.DateTimeField(
         auto_now=False,
@@ -70,7 +71,7 @@ class Goal(models.Model):
         null=False,
         blank=False,
     )
-    reason = models.TextField(blank=False)
+    reason = MarkdownField(blank=False)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         blank=False,
@@ -154,7 +155,7 @@ class Work(models.Model):
         null=True,
         blank=True,
     )
-    description = models.TextField(blank=True)
+    description = MarkdownField(blank=False)
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -164,7 +165,7 @@ class Work(models.Model):
 
 
 class Idea(models.Model):
-    description = models.TextField(blank=False)
+    description = MarkdownField(blank=False)
     language = models.ForeignKey(
         'Language',
         blank=True,
@@ -263,7 +264,7 @@ class Step(models.Model):
         blank=False,
         null=False,
     )
-    objective = models.TextField(blank=False)
+    objective = MarkdownField(blank=False)
     investables = models.CharField(
         unique=False,
         max_length=150,
@@ -418,14 +419,14 @@ class Plan(models.Model):
         blank=False,
         null=False,
     )
-    deliverable = models.TextField(blank=False)
+    deliverable = MarkdownField(blank=False)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_plans',
         blank=False,
         null=False,
     )
-    situation = models.TextField(blank=False)
+    situation = MarkdownField(blank=False)
 
     def __unicode__(self):
         return unicode(self.name[:50])
