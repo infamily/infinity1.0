@@ -56,7 +56,7 @@ class CryptsyTransactionForm(forms.Form):
             for i, currency in enumerate(currencies['data'])]
 
         self.helper = FormHelper(self)
-        self.helper.layout.append(Submit('transaction_form', _('Pay')))
+        self.helper.layout.append(Submit('transaction_form', _('Send')))
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-sm-2'
         self.helper.field_class = 'col-sm-8'
@@ -80,7 +80,7 @@ class PayPalTransactionForm(forms.Form):
         super(PayPalTransactionForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
-        self.helper.layout.append(Submit('transaction_form', _('Pay')))
+        self.helper.layout.append(Submit('transaction_form', _('Send')))
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-sm-2'
         self.helper.field_class = 'col-sm-8'
