@@ -4,13 +4,14 @@ from django.conf import settings
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
+from core.views import NeedCreateView
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', RedirectView.as_view(pattern_name="need-create")),
+    url(r'^$', NeedCreateView.as_view(), name='home'),
     url(r'', include('apps.core.urls')),
     url(r'^user/', include('allauth.urls')),
     url(r'^user/', include('apps.users.urls')),
