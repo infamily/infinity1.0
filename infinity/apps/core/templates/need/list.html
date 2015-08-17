@@ -13,7 +13,7 @@
 
 {% for object in object_list %}
 <div class="panel panel-default">
-    <div class="panel-heading"><a href="{% url "need-detail" object.id %}">{{ object.name }}</a><p>{{ object.definition }}</p></div>
+    <div class="panel-heading">(lang:{{object.language.id}}) <a href="{% url "need-detail" object.id %}">{{ object.name }}</a><p>{{ object.definition }}</p></div>
     <div class="panel-body">
         {{ object.objective }}
     </div>

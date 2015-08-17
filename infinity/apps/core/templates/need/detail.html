@@ -7,8 +7,8 @@
 
 {% block content %}
 
-<h1>Topic: {{object.name}}</h1>
-<h2>Definition: {{object.definition}}</h2>
+<h1><u>Topic</u>: {{object.name}} (<u>lang</u>: {{object.language.id}})</h1>
+<h2><u>Definition</u>: {{object.definition}}</h2>
 <h3>Defined Meaning ID: {{object.defined_meaning_id}}</h3> 
 <h3>Created By: [<a href="{% url "user-detail" object.user.username%}">{{object.user.username}}</a>]</h3> 
 <div class="actions" align="right">

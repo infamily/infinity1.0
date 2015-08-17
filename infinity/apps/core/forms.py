@@ -442,7 +442,7 @@ class NeedCreateForm(forms.ModelForm):
                 Div('language', css_class='col-sm-2',),
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder',
-                                                         "name, e.g., 'interstellar spaceflight', 'water quality on Earth'")),
+                                                         "expression, e.g., 'interstellar spaceflight', 'water quality on Earth'")),
                     css_class='col-sm-10',
                 ),
                 css_class='row'
