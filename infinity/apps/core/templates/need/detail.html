@@ -3,46 +3,29 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %}Need detail{% endblock title %}
+{% block title %}{{object.name}}{% endblock title %}
 
 {% block content %}
 
-<h1>Need detail</h1>
-<br/>
-<div class="actions">
+<h1>Topic: {{object.name}}</h1>
+<h2>Definition: {{object.definition}}</h2>
+<h3>Defined Meaning ID: {{object.defined_meaning_id}}</h3> 
+<h3>Created By: [<a href="{% url "user-detail" object.user.username%}">{{object.user.username}}</a>]</h3> 
+<div class="actions" align="right">
 <a class="btn btn-warning" href="{% url "need-update"    object.pk   %}"> 
     Edit
 </a>
 </div>
+<br/>
 <br/>
 <div>
     
 </div>
 <br/>
 
-<table class="table">
-    <tr>
-        <td>Name</td>
-        <td>
-
-        	{{object.name}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Definition</td>
-        <td>
-
-        	{{object.definition}}
-	        
-
-        </td>
-    </tr>
-</table>
 
 <div class="panel panel-default">
-<div class="panel-heading">Goals</div>
+<div class="panel-heading">Related needs</div>
 <div class="panel-body">
 {% for object in goal_list %}
     <ul class="list-group">
@@ -53,7 +36,7 @@
     </ul>
 {% endfor %}
 <a class="btn btn-info" href="{% url "goal-create1"    object.pk   %}"> 
-    Goal create
+    Add new
 </a>
 </div>
 </div>
