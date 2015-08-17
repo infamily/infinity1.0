@@ -6,22 +6,9 @@
     <div class="thumbnail">
 
         <div class="">
-            <b>text</b>: {{object.text|markdown}}
+           {{object.text|markdown}}
 
         </div>
-        <div class="">
-            <b>created_at</b>: {{object.created_at}}
-
-        </div>
-        <div class="">
-            <b>updated_at</b>: {{object.updated_at}}
-
-        </div>
-        <div class="">
-            <b>user</b>: {{object.user}}
-
-        </div>
-
 
         <br />
         <div class="actions">
@@ -47,13 +34,17 @@
         </div>
 
 
-        {% if object.user == request.user %}
         <div class="actions">
-            <a class="btn btn-default" href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> Pay PayPal</a>
-            <a class="btn btn-default" href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Pay Cryptsy</a>
-            <a class="btn btn-default" href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}"><i class="fa fa-pencil-square-o"></i> Edit</a>
-        </div>
+        {% if object.user == request.user %}
+            <a class="btn" href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> PayPal</a>
+            <a class="btn" href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Cryptsy</a>
+            <a class="btn" href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}"><i class="fa fa-pencil-square-o"></i> Edit</a>
         {% endif %}
+        <div class="alignright">
+            <b>[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}</b>
+        </div>
+        </div>
+        <div style="clear: both;"></div>
     </div>
 </div>
 {% endfor %}

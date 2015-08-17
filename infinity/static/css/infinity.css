@@ -115,3 +115,9 @@ table.table.centered
     font-size: 14px;
     line-height: 1.42857143;
 }
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
