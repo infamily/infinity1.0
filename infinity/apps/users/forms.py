@@ -18,7 +18,7 @@ class UserUpdateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Edit')))
+        self.helper.layout.append(Submit('save', _('Update')))
 
     class Meta:
         model = User

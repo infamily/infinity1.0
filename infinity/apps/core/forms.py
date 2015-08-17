@@ -48,7 +48,7 @@ class CommentUpdateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Edit')))
+        self.helper.layout.append(Submit('save', _('Update')))
 
     class Meta:
         model = Comment
@@ -186,7 +186,7 @@ class WorkUpdateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Edit')))
+        self.helper.layout.append(Submit('save', _('Update')))
 
     class Meta:
         model = Work
@@ -255,7 +255,7 @@ class IdeaUpdateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Edit')))
+        self.helper.layout.append(Submit('save', _('Update')))
 
     class Meta:
         model = Idea
@@ -314,7 +314,7 @@ class StepUpdateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Edit')))
+        self.helper.layout.append(Submit('save', _('Update')))
 
     class Meta:
         model = Step
@@ -385,7 +385,7 @@ class TaskUpdateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Edit')))
+        self.helper.layout.append(Submit('save', _('Update')))
 
     class Meta:
         model = Task
@@ -486,7 +486,7 @@ class NeedUpdateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Edit')))
+        self.helper.layout.append(Submit('save', _('Update')))
 
     class Meta:
         model = Need
@@ -504,7 +504,7 @@ class PlanUpdateForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Edit')))
+        self.helper.layout.append(Submit('save', _('Update')))
 
     class Meta:
         model = Plan
