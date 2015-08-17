@@ -268,10 +268,10 @@ class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     orderable_columns_default = "-id"
     filter_set = GoalListViewFilter2
 
-    def get_base_queryset(self):
-        queryset = super(GoalListView2, self).get_base_queryset()
-        queryset = queryset.filter(need=self.kwargs.get('need'))
-        return queryset
+    # def get_base_queryset(self):
+    #     queryset = super(GoalListView2, self).get_base_queryset()
+    #     queryset = queryset.filter(need=self.kwargs.get('need'))
+    #     return queryset
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])

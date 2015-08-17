@@ -15,6 +15,9 @@
 {% for object in object_list %}
 <div class="panel panel-default">
     <div class="panel-heading"><a href="{% url "goal-detail" object.id %}">{{ object.name }}</a></div>
+    <div class="panel-body">
+        {{ object.reason|markdown }}
+    </div>
 
 </div>
 {% endfor %}
