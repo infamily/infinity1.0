@@ -121,3 +121,22 @@ table.table.centered
 .alignright {
     float: right;
 }
+
+/* for the logo */
+.infin {
+    position: relative;
+    top: 2px;
+    padding-left: 7px;
+    font-size: 26px;
+    color: black;
+    transform:scale(3,1);
+    -webkit-transform:scale(3,1);
+    display:inline-block;
+}
+.ity {
+    padding-left: 26px;
+    font-size: 24px;
+    transform:scale(2,1);
+    -webkit-transform:scale(2,1);
+    display:inline-block;
+}
