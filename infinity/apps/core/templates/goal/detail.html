@@ -3,21 +3,18 @@
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
-{% block title %}Goal detail{% endblock title %}
+{% block title %}{{object.name}}{% endblock title %}
 
 {% block content %}
 
-<h1>Goal detail</h1>
+<h1>{{object.name}}</h1>
 <br/>
+
+	        
+
 <div class="actions">
-<a class="btn btn-success" href="{% url "idea-list1"    object.pk   %}"> 
-    Idea list
-</a>
 <a class="btn btn-warning" href="{% url "goal-update"    object.pk   %}"> 
     Goal update
-</a>
-<a class="btn btn-success" href="{% url "goal-list1"    object.need.pk    %}"> 
-    Goal list
 </a>
 <a class="btn btn-danger" href="{% url "goal-delete"    object.pk   %}"> 
     Goal delete
@@ -26,30 +23,13 @@
 <br/>
 <div>
 <ol class="breadcrumb">
-            <li>need: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a></li>
+    <li>topic: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a>, quantity: {{object.quantity}}</li>
 </ol>    
 </div>
 <br/>
+{{object.reason|markdown}}
 
 <table class="table">
-    <tr>
-        <td>Name</td>
-        <td>
-
-        	{{object.name}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Personal</td>
-        <td>
-
-        	{{object.personal}}
-	        
-
-        </td>
-    </tr>
     <tr>
         <td>Created at</td>
         <td>
@@ -60,37 +40,10 @@
         </td>
     </tr>
     <tr>
-        <td>Reason</td>
-        <td>
-
-        	{{object.reason|markdown}}
-	        
-
-        </td>
-    </tr>
-    <tr>
         <td>User</td>
         <td>
 
         	{{object.user}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Quantity</td>
-        <td>
-
-        	{{object.quantity}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Need</td>
-        <td>
-
-        	<a href="{% url "need-detail" object.need.pk %}">{{object.need}}</a>
 	        
 
         </td>
