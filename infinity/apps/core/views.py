@@ -699,7 +699,7 @@ class StepDetailView(DetailView, CommentsContentTypeWrapper):
             'object_list': self.object_list,
         })
         context.update({
-            'task_list': Task.objects.filter(step=kwargs.get('object')).order_by('-id')
+            'task_list': Task.objects.filter(step=kwargs.get('object')).order_by('id')
         })
         return context
 
@@ -835,7 +835,7 @@ class TaskDetailView(DetailView, CommentsContentTypeWrapper):
             'object_list': self.object_list,
         })
         context.update({
-            'work_list': Work.objects.filter(task=kwargs.get('object')).order_by('-id')
+            'work_list': Work.objects.filter(task=kwargs.get('object')).order_by('id')
         })
         return context
 
@@ -1089,6 +1089,6 @@ class PlanDetailView(DetailView, CommentsContentTypeWrapper):
             'object_list': self.object_list,
         })
         context.update({
-            'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('-id')
+            'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('id')
         })
         return context
