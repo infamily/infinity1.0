@@ -3,11 +3,11 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %}Step detail{% endblock title %}
+{% block title %}{{object.name}}{% endblock title %}
 
 {% block content %}
 
-<h1>Step detail</h1>
+<h1>{{object.name}}</h1>
 <br/>
 <div class="actions">
 <a class="btn btn-success" href="{% url "step-list1"    object.plan.pk    %}"> 
@@ -39,28 +39,10 @@
 
 <table class="table">
     <tr>
-        <td>User</td>
+        <td>Objective</td>
         <td>
 
-        	{{object.user}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Name</td>
-        <td>
-
-        	{{object.name}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Created at</td>
-        <td>
-
-        	{{object.created_at}}
+        	{{object.objective}}
 	        
 
         </td>
@@ -75,15 +57,6 @@
         </td>
     </tr>
     <tr>
-        <td>Objective</td>
-        <td>
-
-        	{{object.objective}}
-	        
-
-        </td>
-    </tr>
-    <tr>
         <td>Investables</td>
         <td>
 
@@ -93,10 +66,19 @@
         </td>
     </tr>
     <tr>
-        <td>Plan</td>
+        <td>Created by</td>
         <td>
 
-            <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a>
+        	{{object.user}}
+	        
+
+        </td>
+    </tr>
+    <tr>
+        <td>Created at</td>
+        <td>
+
+        	{{object.created_at}}
 	        
 
         </td>
