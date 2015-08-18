@@ -151,7 +151,7 @@ class CryptsyCredentialCreateView(FormView):
         form_object.user = self.request.user
         current_site = Site.objects.get_current()
         form_object.save()
-        form_object.notificationtoken = 'http://%s%s' % (
+        form_object.notificationtoken = 'https://%s%s' % (
             current_site.domain, reverse('cryptsy_notification_token', kwargs={
                 'username': self.request.user.username,
                 'credential_id': form_object.id

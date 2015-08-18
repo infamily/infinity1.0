@@ -66,7 +66,7 @@ class UserCryptsyNotificationToken(View):
         content = json.dumps({
             'result': True
         })
-        return HttpResponse(content, content_type='application/liquid')
+        return HttpResponse(content, content_type='application/json')
 
 
 class UserDetailView(DetailView):

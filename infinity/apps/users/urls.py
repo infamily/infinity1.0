@@ -24,13 +24,13 @@ urlpatterns = patterns(
         name='follow'
     ),
     url(
+        r'^(?P<username>.*)/cryptsy/(?P<credential_id>\d+)/checkpoint/$',
+        UserCryptsyNotificationToken.as_view(),
+        name='cryptsy_notification_token'
+    ),
+    url(
         r'^(?P<slug>.*)/$',
         UserDetailView.as_view(),
         name="user-detail"
     ),
-    url(
-        r'^(?P<username>.*)/cryptsy/(?P<credential_id>\d+)/checkpoint/$',
-        UserCryptsyNotificationToken.as_view(),
-        name='cryptsy_notification_token'
-    )
 )
