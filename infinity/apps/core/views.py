@@ -203,7 +203,7 @@ class GoalDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Goal succesfully deleted"))
-        return reverse("goal-list1", args=[self.object.need.pk, ])
+        return reverse("need-detail", args=[self.object.need.pk, ])
 
 
 class GoalUpdateView(OwnerMixin, UpdateView):
@@ -222,7 +222,7 @@ class GoalUpdateView(OwnerMixin, UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Goal succesfully updated"))
-        return reverse("goal-list1", args=[self.object.need.pk, ])
+        return reverse("goal-detail", args=[self.object.pk, ])
 
 
 class GoalDetailView(DetailView, CommentsContentTypeWrapper):
@@ -336,7 +336,7 @@ class WorkUpdateView(OwnerMixin, UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Work succesfully updated"))
-        return reverse("work-list1", args=[self.object.task.pk, ])
+        return reverse("work-detail", args=[self.object.pk, ])
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -470,7 +470,7 @@ class IdeaUpdateView(OwnerMixin, UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Idea succesfully updated"))
-        return reverse("idea-list1", args=[self.object.goal.pk, ])
+        return reverse("idea-detail", args=[self.object.pk, ])
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -604,7 +604,7 @@ class StepUpdateView(OwnerMixin, UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Step succesfully updated"))
-        return reverse("step-list1", args=[self.object.plan.pk, ])
+        return reverse("plan-detail", args=[self.object.plan.pk, ])
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -624,7 +624,7 @@ class StepCreateView(CreateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Step succesfully created"))
-        return reverse("step-detail", args=[self.object.pk, ])
+        return reverse("plan-detail", args=[self.object.plan.pk, ])
 
     def get_context_data(self, **kwargs):
         context = super(StepCreateView, self).get_context_data(**kwargs)
@@ -744,7 +744,7 @@ class TaskUpdateView(OwnerMixin, UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Task succesfully updated"))
-        return reverse("task-list1", args=[self.object.step.pk, ])
+        return reverse("step-detail", args=[self.object.step.pk, ])
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -764,7 +764,7 @@ class TaskCreateView(CreateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Task succesfully created"))
-        return reverse("task-detail", args=[self.object.pk, ])
+        return reverse("step-detail", args=[self.object.step.pk, ])
 
     def get_context_data(self, **kwargs):
         context = super(TaskCreateView, self).get_context_data(**kwargs)
@@ -1001,7 +1001,7 @@ class PlanUpdateView(OwnerMixin, UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Plan succesfully updated"))
-        return reverse("plan-list1", args=[self.object.idea.pk, ])
+        return reverse("plan-detail", args=[self.object.pk, ])
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
