@@ -925,6 +925,7 @@ class NeedListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFil
     paginate_by = 10
     orderable_columns = ["created_at", "type", "name", ]
     orderable_columns_default = "-id"
+    ordering = ["-id"]
     filter_set = NeedListViewFilter
 
 
