@@ -911,8 +911,7 @@ class NeedCreateView(CreateView):
             self.object.user = self.request.user
             self.object.save()
             messages.success(self.request, _("Need succesfully created"))
-            return HttpResponseRedirect(reverse('need-detail', args=[
-                self.object.pk]))
+            return HttpResponseRedirect(reverse('need-list', args=[]))
         return render(request, 'need/create.html',
                       {'form': form})
 
