@@ -33,6 +33,11 @@ LOGIN_URL = '/user/login/'
 def auto_slag_handler():
     return 'auto_slug'
 
+
+def auto_markdown_field_gen():
+    return 'auto_markdown'
+
 MOMMY_CUSTOM_FIELDS_GEN = {
     'django_extensions.db.fields.AutoSlugField': auto_slag_handler,
+    'django_markdown.models.MarkdownField': auto_markdown_field_gen
 }

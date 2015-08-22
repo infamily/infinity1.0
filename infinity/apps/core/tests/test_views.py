@@ -7,25 +7,23 @@ from model_mommy import mommy
 from allauth.account.models import EmailAddress
 
 from users.models import User
-
-from core.models import (
-    Comment,
-    Goal,
-    Work,
-    Idea,
-    Step,
-    Task,
-    Need,
-    Type,
-    Plan,
-)
+from core.models import Comment
+from core.models import Goal
+from core.models import Work
+from core.models import Idea
+from core.models import Step
+from core.models import Task
+from core.models import Need
+from core.models import Type
+from core.models import Plan
 
 
 class AuthTestMixin(object):
 
     def init_users(self):
         # Create User object
-        self.user = User.objects.create(email='user@mail.com')
+        self.user, created = User.objects.get_or_create(
+            username='asd', email='user@mail.com')
         self.user.set_password('test')
         self.user.save()
         # confirmation - sometimes it's required
