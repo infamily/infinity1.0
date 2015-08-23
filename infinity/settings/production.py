@@ -21,7 +21,7 @@ from .base import *
 #         raise ImproperlyConfigured(error_msg)
 
 # HOST CONFIGURATION
-DEBUG = False
+DEBUG = True
 # See:
 # https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
 ALLOWED_HOSTS = ['*']
