@@ -54,12 +54,8 @@ class CryptsyTransactionForm(forms.Form):
 
         for i, currency in enumerate(currencies['data']):
             if balances[currency['id']] > 0:
-                balances_with_currencies.append(
-                    currency['id'], '%s (%s)' % (
-                        currency['code'],
-                        balances[currency['id']]
-                    )
-                )
+                tmp = currency['id'], '%s (%s)' % (currency['code'], balances[currency['id']])
+                balances_with_currencies.append(tmp)
 
         self.fields['currency'].choices = balances_with_currencies
 
