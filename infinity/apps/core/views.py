@@ -1,8 +1,8 @@
 import json
 
 from django.utils.translation import ugettext as _
-import json
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.views.generic import DetailView
@@ -10,24 +10,20 @@ from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
-from django.views.generic.detail import BaseDetailView
 from django.shortcuts import redirect
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
 from enhanced_cbv.views import ListFilteredView
+from clever_selects.views import ChainedSelectChoicesView
 
 from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
-
 from .utils import CommentsContentTypeWrapper
 from .utils import ViewTypeWrapper
 from .models import *
 from .forms import *
 from .filters import *
-
-from clever_selects.views import ChainedSelectChoicesView
 
 
 class AjaxChainedView(ChainedSelectChoicesView):
@@ -35,7 +31,6 @@ class AjaxChainedView(ChainedSelectChoicesView):
         vals_list = []
         for x in range(1, 6):
             vals_list.append(x*int(self.parent_value))
-        result = tuple(zip(vals_list, vals_list))
         address = User.objects.get(pk=self.parent_value).address.all()
         res = tuple(
             zip(
