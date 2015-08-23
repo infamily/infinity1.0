@@ -48,12 +48,20 @@ class CryptsyTransactionForm(forms.Form):
         )
         response = requests.get('https://api.cryptsy.com/api/v2/currencies')
         currencies = response.json()
-        balances = cryptsy.balances()
+        balances = cryptsy.balances()['data']['available']
 
-        self.fields['currency'].choices = [
-            (currency['id'], '%s (%s)' %
-             (currency['code'], balances['data']['available'][currency['id']]))
-            for i, currency in enumerate(currencies['data'])]
+        balances_with_currencies = []
+
+        for i, currency in enumerate(currencies['data']):
+            if balances[currency['id']] > 0:
+                balances_with_currencies.append(
+                    currency['id'], '%s (%s)' % (
+                        currency['code'],
+                        balances[currency['id']]
+                    )
+                )
+
+        self.fields['currency'].choices = balances_with_currencies
 
         self.helper = FormHelper(self)
         self.helper.layout.append(Submit('transaction_form', _('Send')))

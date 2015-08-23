@@ -29,6 +29,7 @@ from .filters import *
 
 from clever_selects.views import ChainedSelectChoicesView
 
+
 class AjaxChainedView(ChainedSelectChoicesView):
     def get_choices(self):
         vals_list = []
