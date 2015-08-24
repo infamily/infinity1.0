@@ -3,19 +3,21 @@ from django import forms
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div
-
-
-from core.models import Comment
-from core.models import Goal
-from core.models import Work
-from core.models import Idea
-from core.models import Step
-from core.models import Task
-from core.models import Need
-from core.models import Plan
-from core.models import Language
-
 from django_markdown.widgets import MarkdownWidget
+from django_select2.widgets import AutoHeavySelect2Widget
+
+from .models import Comment
+from .models import Goal
+from .models import Work
+from .models import Idea
+from .models import Step
+from .models import Task
+from .models import Need
+from .models import Plan
+from .models import Type
+from .fields import NeedChoiceField
+from .fields import TypeChoiceField
+
 
 class CommentCreateFormDetail(forms.ModelForm):
 
@@ -84,14 +86,29 @@ class CommentCreateForm(forms.ModelForm):
         }
 
 
-class GoalCreateForm1(forms.ModelForm):
+class GoalCreateForm(forms.ModelForm):
+    type = TypeChoiceField(queryset=Type.objects.all())
+    reason = forms.CharField(widget=MarkdownWidget())
 
     def __init__(self, *args, **kwargs):
-        super(GoalCreateForm1, self).__init__(*args, **kwargs)
+        super(GoalCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
+        self.fields['need'] = NeedChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            )
+        )
 
         self.fields['name'].label = _('<b>Description:</b> (e.g., "Our community in Nepal needs potable water this summer", used in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Who, what kind of, to where?')})
@@ -101,23 +118,20 @@ class GoalCreateForm1(forms.ModelForm):
         self.fields['reason'].label = _('<b>Reason:</b> (write full description here, used as body.)')
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
 
-
     class Meta:
         model = Goal
         exclude = [
-            'need',
             'user',
         ]
         fields = [
+            'type',
+            'need',
             'name',
             'reason',
             'quantity',
             'unit',
             'personal',
         ]
-        widgets = {
-            'reason': MarkdownWidget,
-        }
 
 
 class GoalUpdateForm(forms.ModelForm):
@@ -136,35 +150,6 @@ class GoalUpdateForm(forms.ModelForm):
         model = Goal
         exclude = [
             'created_at',
-            'user',
-        ]
-        fields = [
-            'name',
-            'quantity',
-            'unit',
-            'reason',
-            'personal',
-        ]
-        widgets = {
-            'reason': MarkdownWidget,
-        }
-
-
-class GoalCreateForm2(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(GoalCreateForm2, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper(self)
-
-        self.helper.layout.append(Submit('save', _('Create')))
-
-    class Meta:
-        model = Goal
-        exclude = [
-            'created_at',
-            'updated_at',
-            'need',
             'user',
         ]
         fields = [

@@ -34,11 +34,6 @@ urlpatterns = patterns(
         name="comment-create"
     ),
     url(
-        r'^goal-create/(?P<need>.*)/1$',
-        GoalCreateView1.as_view(),
-        name="goal-create1"
-    ),
-    url(
         r'^goal/(?P<need>.*)/list/1$',
         GoalListView1.as_view(),
         name="goal-list1"
@@ -71,9 +66,9 @@ urlpatterns = patterns(
         name="goal-list"
     ),
     url(
-        r'^goal-create/(?P<need>.*)/2$',
-        GoalCreateView2.as_view(),
-        name="goal-create2"
+        r'^goal-create/$',
+        GoalCreateView.as_view(),
+        name="goal-create"
     ),
     url(
         r'^work/(?P<task>.*)/list/1$',

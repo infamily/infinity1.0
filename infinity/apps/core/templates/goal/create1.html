@@ -9,16 +9,6 @@
 <h1>Goal create</h1>
 <br/>
 <br/>
-<table class="table">
-    <tr>
-        <td>Need</td>
-        <td>
-
-            <a href="{% url "need-detail" need_object.pk %}">{{need_object}}</a>
-
-        </td>
-    </tr>
-</table>
 <div>
     
 </div>
@@ -27,3 +17,15 @@
 {% crispy form %}
 
 {% endblock content %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    var s2_endpoints_param_gen = function(term, page) {
+        var proxFunc = $.proxy(django_select2.get_url_params, this);
+        // no need for a custom func here.
+        var results = proxFunc(term, page, 'django_select2.process_results');
+        results.type = $('#id_type').val()
+        return results;
+    };
+</script>
+{% endblock %}

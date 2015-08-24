@@ -143,29 +143,29 @@ class CommentCreateView(CreateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class GoalCreateView1(CreateView):
+class GoalCreateView(CreateView):
 
     """Goal create view"""
     model = Goal
-    form_class = GoalCreateForm1
+    form_class = GoalCreateForm
     template_name = "goal/create1.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.need = Need.objects.get(pk=self.kwargs['need'])
+        self.object.need = form.cleaned_data.get('need')
         self.object.save()
-        return super(GoalCreateView1, self).form_valid(form)
+        return super(GoalCreateView, self).form_valid(form)
 
     def get_success_url(self):
         messages.success(self.request, _("Goal succesfully created"))
         return reverse("goal-detail", args=[self.object.pk, ])
 
     def get_context_data(self, **kwargs):
-        context = super(GoalCreateView1, self).get_context_data(**kwargs)
-        context.update({
-                    'need_object': Need.objects.get(pk=self.kwargs['need']),
-        })
+        context = super(GoalCreateView, self).get_context_data(**kwargs)
+        # context.update({
+        #     'need_object': Need.objects.get(pk=self.kwargs['need']),
+        # })
         return context
 
 
@@ -267,26 +267,6 @@ class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     #     queryset = super(GoalListView2, self).get_base_queryset()
     #     queryset = queryset.filter(need=self.kwargs.get('need'))
     #     return queryset
-
-
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class GoalCreateView2(CreateView):
-
-    """Goal create view"""
-    model = Goal
-    form_class = GoalCreateForm2
-    template_name = "goal/create2.html"
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.need = Need.objects.get(pk=self.kwargs['need'])
-        self.object.save()
-        return super(GoalCreateView2, self).form_valid(form)
-
-    def get_success_url(self):
-        messages.success(self.request, _("Goal succesfully created"))
-        return "/"
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])

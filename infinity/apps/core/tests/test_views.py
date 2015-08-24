@@ -271,7 +271,7 @@ class GoalTest(WebTest, AuthTestMixin):
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
 
-        url = reverse('goal-create2', kwargs={
+        url = reverse('goal-create', kwargs={
             'need': goal.need.pk,
         })
 

@@ -371,7 +371,6 @@ class Need(models.Model):
         unique_together = ('language', 'name', 'definition')
 
 
-
 class Type(models.Model):
     name = models.CharField(
         unique=False,
