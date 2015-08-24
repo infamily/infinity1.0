@@ -42,7 +42,6 @@ class AjaxChainedView(ChainedSelectChoicesView):
 
 
 class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
-
     template_name = "comment/list1.html"
     model = Comment
     paginate_by = 10
