@@ -87,7 +87,15 @@ class CommentCreateForm(forms.ModelForm):
 
 
 class GoalCreateForm(forms.ModelForm):
-    type = TypeChoiceField(queryset=Type.objects.all())
+    type = TypeChoiceField(
+        queryset=Type.objects.all(),
+        widget=AutoHeavySelect2Widget(
+            select2_options={
+                'minimumInputLength': 0,
+                'placeholder': 'Select type first',
+            }
+        )
+    )
     reason = forms.CharField(widget=MarkdownWidget())
 
     def __init__(self, *args, **kwargs):
@@ -100,6 +108,7 @@ class GoalCreateForm(forms.ModelForm):
             widget=AutoHeavySelect2Widget(
                 select2_options={
                     'minimumInputLength': 1,
+                    'placeholder': 'Select need',
                     'ajax': {
                         'dataType': 'json',
                         'quietMillis': 100,
@@ -107,8 +116,7 @@ class GoalCreateForm(forms.ModelForm):
                         'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
                     },
                 }
-            ),
-            required=False
+            )
         )
 
         self.fields['name'].label = _('<b>Description:</b> (e.g., "Our community in Nepal needs potable water this summer", used in title.)')

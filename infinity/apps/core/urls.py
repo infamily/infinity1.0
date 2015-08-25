@@ -235,6 +235,11 @@ urlpatterns = patterns(
         name="plan-create"
     ),
     url(
+        r'^need-ajax-create/$',
+        NeedAjaxCreateView.as_view(),
+        name="need-ajax-create"
+    ),
+    url(
         r'^plan/(?P<slug>[a-zA-Z-_0-9]+)/delete/$',
         PlanDeleteView.as_view(),
         name="plan-delete"

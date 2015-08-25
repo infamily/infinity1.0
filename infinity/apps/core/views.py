@@ -3,6 +3,8 @@ import json
 from django.utils.translation import ugettext as _
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.views.generic import View
+from django.http import JsonResponse
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.views.generic import DetailView
@@ -140,6 +142,18 @@ class CommentCreateView(CreateView):
     def get_success_url(self):
         messages.success(self.request, _("Comment succesfully created"))
         return "/"
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class NeedAjaxCreateView(View):
+    def post(self, request, *args, **kwargs):
+        type_id = request.POST.get('type_id', '')
+        need_name = request.POST.get('need_name', '')
+        need_type = Type.objects.get(id=int(type_id))
+        need, created = Need.objects.get_or_create(name=need_name,
+                                                   type=need_type,
+                                                   user=self.request.user)
+        return JsonResponse({'need_id': need.id})
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
