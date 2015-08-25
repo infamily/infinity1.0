@@ -107,7 +107,7 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['need'] = NeedChoiceField(
             widget=AutoHeavySelect2Widget(
                 select2_options={
-                    'minimumInputLength': 0,
+                    'minimumInputLength': 1,
                     'placeholder': 'Select need',
                     'ajax': {
                         'dataType': 'json',
