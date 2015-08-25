@@ -271,9 +271,7 @@ class GoalTest(WebTest, AuthTestMixin):
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
 
-        url = reverse('goal-create', kwargs={
-            'need': goal.need.pk,
-        })
+        url = reverse('goal-create')
 
         # Access forbidden for AnonymousUser
         resp = self.app.get(url, status=302)
@@ -287,6 +285,8 @@ class GoalTest(WebTest, AuthTestMixin):
         form['personal'] = goal.personal
         form['reason'] = goal.reason
         form['quantity'] = goal.quantity
+        form['type'] = type.pk
+        form['need'] = goal.need.pk
         form.submit()
 
         goal_created = Goal.objects.latest('id')
