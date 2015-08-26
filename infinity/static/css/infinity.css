@@ -140,3 +140,9 @@ table.table.centered
     -webkit-transform:scale(2,1);
     display:inline-block;
 }
+
+/* for menu item links */
+
+.nav>li>a {
+    display: inline-block;
+}

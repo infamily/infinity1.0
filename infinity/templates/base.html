@@ -71,25 +71,29 @@
 
           <ul class="nav navbar-nav navbar-right">
               <li>
-                <a href="{% url "need-list" %}">Topics</a>
+                <a href="{% url "need-list" %}">Needs</a>
+                <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></a></i></a>
               </li>
               <li>
-                <a href="{% url "goal-list" %}">Needs</a>
+                <a href="{% url "goal-list" %}">Goals</a>
+                <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></a>
               </li>
               <li>
                 <a href="{% url "idea-list" %}">Ideas</a>
+                <a href=""><i class="fa fa-plus-circle"></a></i></a>
               </li>
               <li>
-                <a href="{% url "plan-list" %}">Approaches</a>
+                <a href="{% url "plan-list" %}">Plans</a>
+                <a href=""><i class="fa fa-plus-circle"></a></i></a>
               </li>
               <li>
-                <a href="{% url "step-list" %}">Milestones</a>
+                <a href="{% url "step-list" %}">Steps</a>
               </li>
               <li>
                 <a href="{% url "task-list" %}">Tasks</a>
               </li>
               <li>
-                <a href="{% url "work-list" %}">Attempts</a>
+                <a href="{% url "work-list" %}">Works</a>
               </li>
               <li>
               <a href="{% url "help" %}"><b>Help</b></a>
