@@ -2,10 +2,8 @@ import json
 
 from django.utils.translation import ugettext as _
 from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-from django.views.generic import View
-from django.http import JsonResponse
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.views.generic import DetailView
@@ -13,7 +11,6 @@ from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from django.shortcuts import render
-from django.shortcuts import redirect
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
@@ -143,30 +140,6 @@ class CommentCreateView(CreateView):
     def get_success_url(self):
         messages.success(self.request, _("Comment succesfully created"))
         return "/"
-
-
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class NeedAjaxCreateView(View):
-    def post(self, request, *args, **kwargs):
-        type_id = request.POST.get('type_id', '')
-        need_name = request.POST.get('need_name', '')
-        need_type = Type.objects.get(id=int(type_id))
-        need, created = Need.objects.get_or_create(name=need_name,
-                                                   type=need_type,
-                                                   user=self.request.user)
-        return JsonResponse({'need_id': need.id})
-
-
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class GoalAjaxCreateView(View):
-    def post(self, request, *args, **kwargs):
-        need_id = request.POST.get('need_id', '')
-        goal_name = request.POST.get('goal_name', '')
-        need = Need.objects.get(pk=need_id)
-        goal, created = Goal.objects.get_or_create(name=goal_name, need=need,
-                                                   quantity=1,
-                                                   user=self.request.user)
-        return JsonResponse({'goal_id': goal.id})
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -376,7 +349,7 @@ class WorkCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(WorkCreateView, self).get_context_data(**kwargs)
         context.update({
-                    'task_object': Task.objects.get(pk=self.kwargs['task']),
+            'task_object': Task.objects.get(pk=self.kwargs['task']),
         })
         return context
 
@@ -497,10 +470,10 @@ class IdeaCreateView(CreateView):
     template_name = "idea/create.html"
 
     def dispatch(self, *args, **kwargs):
-        if kwargs.get('goal_id'):
-            self.goal_instance = get_object_or_404(Goal, pk=kwargs['goal_id'])
+        if kwargs.get('need_id'):
+            self.need_instance = get_object_or_404(Need, pk=kwargs['need_id'])
         else:
-            self.goal_instance = None
+            self.need_instance = None
         return super(IdeaCreateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
@@ -516,15 +489,15 @@ class IdeaCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(IdeaCreateView, self).get_context_data(**kwargs)
-        if self.goal_instance:
-            context.update({'goal_object': self.goal_instance})
+        if self.need_instance:
+            context.update({'need_object': self.need_instance})
         else:
-            context.update({'goal_object': False})
+            context.update({'need_object': False})
         return context
 
     def get_form_kwargs(self):
         kwargs = super(IdeaCreateView, self).get_form_kwargs()
-        kwargs['goal_instance'] = self.goal_instance
+        kwargs['need_instance'] = self.need_instance
         return kwargs
 
 
@@ -937,9 +910,23 @@ class NeedCreateView(CreateView):
         if form.is_valid():
             self.object = form.save(commit=False)
             self.object.user = self.request.user
+            type_instance, created = Type.objects.get_or_create(pk=1, name='Default')
+            self.object.type = type_instance
             self.object.save()
+            Goal.objects.get_or_create(
+                reason='',
+                personal=False,
+                name='Default',
+                quantity=0,
+                need=self.object,
+                user=User.objects.get(pk=1)
+            )
             messages.success(self.request, _("Need succesfully created"))
-            return HttpResponseRedirect(reverse('need-list', args=[]))
+            if request.path == reverse('need-create-for-idea'):
+                return redirect(reverse('idea-create', kwargs={'need_id': self.object.pk}))
+            elif request.path == reverse('need-create-for-goal'):
+                return redirect(reverse('goal-create', kwargs={'need_id': self.object.pk}))
+            return redirect(reverse('need-list', args=[]))
         return render(request, 'need/create.html',
                       {'form': form})
 

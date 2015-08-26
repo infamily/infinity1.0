@@ -124,7 +124,7 @@ urlpatterns = patterns(
         name="idea-create"
     ),
     url(
-        r'^idea-create/(?P<goal_id>\d+)/$',
+        r'^idea-create/(?P<need_id>\d+)/$',
         IdeaCreateView.as_view(),
         name="idea-create"
     ),
@@ -214,6 +214,16 @@ urlpatterns = patterns(
         name="need-create"
     ),
     url(
+        r'^need-create/for-goal/$',
+        NeedCreateView.as_view(),
+        name="need-create-for-goal"
+    ),
+    url(
+        r'^need-create/for-idea/$',
+        NeedCreateView.as_view(),
+        name="need-create-for-idea"
+    ),
+    url(
         r'^need/(?P<slug>.*)/update$',
         NeedUpdateView.as_view(),
         name="need-update"
@@ -243,16 +253,6 @@ urlpatterns = patterns(
         r'^plan-create/(?P<idea>.*)/$',
         PlanCreateView.as_view(),
         name="plan-create"
-    ),
-    url(
-        r'^need-ajax-create/$',
-        NeedAjaxCreateView.as_view(),
-        name="need-ajax-create"
-    ),
-    url(
-        r'^goal-ajax-create/$',
-        GoalAjaxCreateView.as_view(),
-        name="goal-ajax-create"
     ),
     url(
         r'^plan/(?P<slug>[a-zA-Z-_0-9]+)/delete/$',

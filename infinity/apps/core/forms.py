@@ -96,7 +96,8 @@ class GoalCreateForm(forms.ModelForm):
                 'minimumInputLength': 0,
                 'placeholder': 'Select type first',
             }
-        )
+        ),
+        required=False
     )
     reason = forms.CharField(widget=MarkdownWidget())
 
@@ -287,19 +288,21 @@ class IdeaCreateForm(forms.ModelForm):
                 'minimumInputLength': 0,
                 'placeholder': 'Select type first',
             }
-        )
+        ),
+        required=False
     )
 
     def __init__(self, *args, **kwargs):
-        goal_instance = kwargs.pop('goal_instance')
+        need_instance = kwargs.pop('need_instance')
         super(IdeaCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
 
-        if goal_instance:
-            self.initial['goal'] = goal_instance
+        if need_instance:
+            self.initial['type'] = need_instance.type
+            self.initial['need'] = need_instance
 
         self.fields['goal'] = GoalChoiceField(
             widget=AutoHeavySelect2Widget(

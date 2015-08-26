@@ -39,25 +39,5 @@
         results.type = $('#id_type').val();
         return results;
     };
-
-    $(function() {
-        $("#id_need").change(function(data) {
-            var need_name = data.added.text;
-            var type_id = $('#id_type').val();
-            $.ajax({
-                method: 'POST',
-                url: '{% url "need-ajax-create" %}',
-                data: {
-                    'need_name': need_name,
-                    'type_id': type_id,
-                    'csrfmiddlewaretoken': document.getElementsByName('csrfmiddlewaretoken')[0].value
-                },
-                success: function(data) {
-                    $("#id_need").val(data.need_id);
-                }
-            });
-            console.log(data.added.text);
-        });
-    });
 </script>
 {% endblock %}

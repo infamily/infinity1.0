@@ -12,8 +12,6 @@ class NeedChoiceField(AutoModelSelect2Field):
         _type = request.GET.get('type', '')
         needs = Need.objects.filter(type=_type, name__istartswith=term)
         s2_results = [(n.id, n.name, {}) for n in needs]
-        if not s2_results:
-            return ('nil', False, [(None, term, {})])
         return ('nil', False, s2_results)
 
 
