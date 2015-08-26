@@ -19,6 +19,7 @@ from .models import Type
 from .fields import NeedChoiceField
 from .fields import TypeChoiceField
 from .fields import GoalChoiceField
+from .fields import IdeaChoiceField
 
 
 class CommentCreateFormDetail(forms.ModelForm):
@@ -592,13 +593,69 @@ class PlanUpdateForm(forms.ModelForm):
 
 
 class PlanCreateForm(forms.ModelForm):
+    type = TypeChoiceField(
+        queryset=Type.objects.all(),
+        widget=AutoHeavySelect2Widget(
+            select2_options={
+                'minimumInputLength': 0,
+                'placeholder': 'Select type first',
+            }
+        ),
+        required=False
+    )
+    need = NeedChoiceField()
+    goal = GoalChoiceField()
 
     def __init__(self, *args, **kwargs):
         super(PlanCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
-
         self.helper.layout.append(Submit('save', _('Create')))
+
+        self.fields['goal'] = GoalChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 0,
+                    'placeholder': 'Select goal',
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_goal, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            )
+        )
+
+        self.fields['need'] = NeedChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select need',
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_need, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            )
+        )
+
+        self.fields['idea'] = IdeaChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 0,
+                    'placeholder': 'Select idea',
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_idea, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            )
+        )
 
         self.fields['name'].label = _('<b>Means:</b> (e.g., "computer-aided design software, good CAD skills, electric soldering iron, glue, aluminium solder", used in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _("Main tools and/or methods you will use, comma-separated.")})
@@ -611,10 +668,13 @@ class PlanCreateForm(forms.ModelForm):
     class Meta:
         model = Plan
         exclude = [
-            'idea',
             'user',
         ]
         fields = [
+            'type',
+            'need',
+            'goal',
+            'idea',
             'name',
             'situation',
             'deliverable',

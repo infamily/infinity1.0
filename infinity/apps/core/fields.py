@@ -3,6 +3,7 @@ from django_select2.fields import AutoModelSelect2Field
 from .models import Need
 from .models import Type
 from .models import Goal
+from .models import Idea
 
 
 class NeedChoiceField(AutoModelSelect2Field):
@@ -31,4 +32,14 @@ class GoalChoiceField(AutoModelSelect2Field):
         need = request.GET.get('need', '')
         goals = Goal.objects.filter(need=need)
         s2_results = [(n.id, n.name, {}) for n in goals]
+        return ('nil', False, s2_results)
+
+
+class IdeaChoiceField(AutoModelSelect2Field):
+    queryset = Idea.objects
+
+    def get_results(self, request, term, page, context):
+        goal = request.GET.get('goal', '')
+        ideas = Idea.objects.filter(goal=goal)
+        s2_results = [(n.id, n.name, {}) for n in ideas]
         return ('nil', False, s2_results)
