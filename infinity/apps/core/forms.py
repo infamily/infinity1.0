@@ -483,6 +483,16 @@ class TaskCreateForm(forms.ModelForm):
 
 
 class NeedCreateForm(forms.ModelForm):
+    type = TypeChoiceField(
+        queryset=Type.objects.all(),
+        widget=AutoHeavySelect2Widget(
+            select2_options={
+                'minimumInputLength': 0,
+                'placeholder': 'Select type first',
+            }
+        ),
+        required=False
+    )
 
     def __init__(self, *args, **kwargs):
         super(NeedCreateForm, self).__init__(*args, **kwargs)
@@ -490,6 +500,7 @@ class NeedCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout = Layout(
+            Field('type'),
             Div(
                 Div('language', css_class='col-sm-2',),
                 Div(
@@ -525,6 +536,7 @@ class NeedCreateForm(forms.ModelForm):
     class Meta:
         model = Need
         fields = [
+            'type',
             'name',
             'language',
             'definition',

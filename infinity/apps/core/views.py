@@ -910,8 +910,12 @@ class NeedCreateView(CreateView):
         if form.is_valid():
             self.object = form.save(commit=False)
             self.object.user = self.request.user
-            type_instance, created = Type.objects.get_or_create(pk=1, name='Default')
-            self.object.type = type_instance
+            if request.POST.get('type'):
+                type_instance = Type.objects.get(pk=request.POST['type'])
+                self.object.type = type_instance
+            else:
+                type_instance, created = Type.objects.get_or_create(pk=1, name='Default')
+                self.object.type = type_instance
             self.object.save()
             Goal.objects.get_or_create(
                 reason='',
