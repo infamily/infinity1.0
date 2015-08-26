@@ -3,6 +3,7 @@ import json
 from django.utils.translation import ugettext as _
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.views.generic import View
 from django.http import JsonResponse
 from django.core.urlresolvers import reverse
@@ -157,6 +158,18 @@ class NeedAjaxCreateView(View):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class GoalAjaxCreateView(View):
+    def post(self, request, *args, **kwargs):
+        need_id = request.POST.get('need_id', '')
+        goal_name = request.POST.get('goal_name', '')
+        need = Need.objects.get(pk=need_id)
+        goal, created = Goal.objects.get_or_create(name=goal_name, need=need,
+                                                   quantity=1,
+                                                   user=self.request.user)
+        return JsonResponse({'goal_id': goal.id})
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class GoalCreateView(CreateView):
 
     """Goal create view"""
@@ -177,10 +190,23 @@ class GoalCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(GoalCreateView, self).get_context_data(**kwargs)
-        # context.update({
-        #     'need_object': Need.objects.get(pk=self.kwargs['need']),
-        # })
+        if self.need_instance:
+            context.update({'need_object': self.need_instance})
+        else:
+            context.update({'need_object': False})
         return context
+
+    def dispatch(self, *args, **kwargs):
+        if kwargs.get('need_id'):
+            self.need_instance = get_object_or_404(Need, pk=int(kwargs['need_id']))
+        else:
+            self.need_instance = None
+        return super(GoalCreateView, self).dispatch(*args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(GoalCreateView, self).get_form_kwargs()
+        kwargs['need_instance'] = self.need_instance
+        return kwargs
 
 
 class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
@@ -470,10 +496,17 @@ class IdeaCreateView(CreateView):
     form_class = IdeaCreateForm
     template_name = "idea/create.html"
 
+    def dispatch(self, *args, **kwargs):
+        if kwargs.get('goal_id'):
+            self.goal_instance = get_object_or_404(Goal, pk=kwargs['goal_id'])
+        else:
+            self.goal_instance = None
+        return super(IdeaCreateView, self).dispatch(*args, **kwargs)
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.goal = Goal.objects.get(pk=self.kwargs['goal'])
+        self.object.goal = form.cleaned_data.get('goal')
         self.object.save()
         return super(IdeaCreateView, self).form_valid(form)
 
@@ -483,10 +516,16 @@ class IdeaCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(IdeaCreateView, self).get_context_data(**kwargs)
-        context.update({
-                    'goal_object': Goal.objects.get(pk=self.kwargs['goal']),
-        })
+        if self.goal_instance:
+            context.update({'goal_object': self.goal_instance})
+        else:
+            context.update({'goal_object': False})
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super(IdeaCreateView, self).get_form_kwargs()
+        kwargs['goal_instance'] = self.goal_instance
+        return kwargs
 
 
 class IdeaDeleteView(OwnerMixin, DeleteView):

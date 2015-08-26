@@ -9,6 +9,7 @@
 <h1>Idea create</h1>
 <br/>
 <br/>
+{% if goal_object %}
 <table class="table">
     <tr>
         <td>Goal</td>
@@ -19,6 +20,7 @@
         </td>
     </tr>
 </table>
+{% endif %}
 <div>
     
 </div>
@@ -27,3 +29,42 @@
 {% crispy form %}
 
 {% endblock content %}
+{% block extra_js %}
+<script type="text/javascript">
+    var s2_endpoints_param_gen_for_need = function(term, page) {
+        var proxFunc = $.proxy(django_select2.get_url_params, this);
+        // no need for a custom func here.
+        var results = proxFunc(term, page, 'django_select2.process_results');
+        results.type = $('#id_type').val();
+        return results;
+    };
+
+    var s2_endpoints_param_gen_for_goal = function(term, page) {
+        var proxFunc = $.proxy(django_select2.get_url_params, this);
+        // no need for a custom func here.
+        var results = proxFunc(term, page, 'django_select2.process_results');
+        results.need = $('#id_need').val();
+        return results;
+    };
+
+    $(function() {
+        $("#id_need").change(function(data) {
+            var need_name = data.added.text;
+            var type_id = $('#id_type').val();
+            $.ajax({
+                method: 'POST',
+                url: '{% url "need-ajax-create" %}',
+                data: {
+                    'need_name': need_name,
+                    'type_id': type_id,
+                    'csrfmiddlewaretoken': document.getElementsByName('csrfmiddlewaretoken')[0].value
+                },
+                success: function(data) {
+                    $("#id_need").val(data.need_id);
+                }
+            });
+            console.log(data.added.text);
+        });
+    });
+</script>
+{% endblock extra_js %}

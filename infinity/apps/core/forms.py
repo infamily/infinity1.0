@@ -5,6 +5,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div
 from django_markdown.widgets import MarkdownWidget
 from django_select2.widgets import AutoHeavySelect2Widget
+from django_select2.fields import AutoModelSelect2Field
 
 from .models import Comment
 from .models import Goal
@@ -17,6 +18,7 @@ from .models import Plan
 from .models import Type
 from .fields import NeedChoiceField
 from .fields import TypeChoiceField
+from .fields import GoalChoiceField
 
 
 class CommentCreateFormDetail(forms.ModelForm):
@@ -99,11 +101,17 @@ class GoalCreateForm(forms.ModelForm):
     reason = forms.CharField(widget=MarkdownWidget())
 
     def __init__(self, *args, **kwargs):
+        need_instance = kwargs.pop('need_instance')
         super(GoalCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
+
+        if need_instance:
+            self.initial['need'] = need_instance
+            self.initial['type'] = need_instance.type
+
         self.fields['need'] = NeedChoiceField(
             widget=AutoHeavySelect2Widget(
                 select2_options={
@@ -270,13 +278,58 @@ class IdeaUpdateForm(forms.ModelForm):
 
 
 class IdeaCreateForm(forms.ModelForm):
+    need = NeedChoiceField()
+    goal = GoalChoiceField()
+    type = TypeChoiceField(
+        queryset=Type.objects.all(),
+        widget=AutoHeavySelect2Widget(
+            select2_options={
+                'minimumInputLength': 0,
+                'placeholder': 'Select type first',
+            }
+        )
+    )
 
     def __init__(self, *args, **kwargs):
+        goal_instance = kwargs.pop('goal_instance')
         super(IdeaCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
+
+        if goal_instance:
+            self.initial['goal'] = goal_instance
+
+        self.fields['goal'] = GoalChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 0,
+                    'placeholder': 'Select need',
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_goal, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            )
+        )
+
+        self.fields['need'] = NeedChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select need',
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_need, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            )
+        )
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "Solar Water Condenser", used in title.)')
         self.fields['summary'].label = _('<b>Summary:</b> (e.g., "Use solar panels and Peltier effect to extract water from air.", appears as subtitle.)')
@@ -287,10 +340,12 @@ class IdeaCreateForm(forms.ModelForm):
         model = Idea
         exclude = [
             'created_at',
-            'goal',
             'user',
         ]
         fields = [
+            'type',
+            'need',
+            'goal',
             'name',
             'summary',
             'description',
