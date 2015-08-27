@@ -163,17 +163,14 @@ class GoalCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(GoalCreateView, self).get_context_data(**kwargs)
-        if self.need_instance:
-            context.update({'need_object': self.need_instance})
-        else:
-            context.update({'need_object': False})
+        context.update({'need_object': self.need_instance})
         return context
 
     def dispatch(self, *args, **kwargs):
         if kwargs.get('need_id'):
             self.need_instance = get_object_or_404(Need, pk=int(kwargs['need_id']))
         else:
-            self.need_instance = None
+            self.need_instance = False
         return super(GoalCreateView, self).dispatch(*args, **kwargs)
 
     def get_form_kwargs(self):
@@ -470,10 +467,10 @@ class IdeaCreateView(CreateView):
     template_name = "idea/create.html"
 
     def dispatch(self, *args, **kwargs):
-        if kwargs.get('need_id'):
-            self.need_instance = get_object_or_404(Need, pk=kwargs['need_id'])
+        if kwargs.get('goal_id'):
+            self.goal_instance = get_object_or_404(Goal, pk=kwargs['goal_id'])
         else:
-            self.need_instance = None
+            self.goal_instance = False
         return super(IdeaCreateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
@@ -489,15 +486,12 @@ class IdeaCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(IdeaCreateView, self).get_context_data(**kwargs)
-        if self.need_instance:
-            context.update({'need_object': self.need_instance})
-        else:
-            context.update({'need_object': False})
+        context.update({'goal_object': self.goal_instance})
         return context
 
     def get_form_kwargs(self):
         kwargs = super(IdeaCreateView, self).get_form_kwargs()
-        kwargs['need_instance'] = self.need_instance
+        kwargs['goal_instance'] = self.goal_instance
         return kwargs
 
 
@@ -917,20 +911,8 @@ class NeedCreateView(CreateView):
                 type_instance, created = Type.objects.get_or_create(pk=1, name='Default')
                 self.object.type = type_instance
             self.object.save()
-            Goal.objects.get_or_create(
-                reason='',
-                personal=False,
-                name='Default',
-                quantity=0,
-                need=self.object,
-                user=User.objects.get(pk=1)
-            )
             messages.success(self.request, _("Need succesfully created"))
-            if request.path == reverse('need-create-for-idea'):
-                return redirect(reverse('idea-create', kwargs={'need_id': self.object.pk}))
-            elif request.path == reverse('need-create-for-goal'):
-                return redirect(reverse('goal-create', kwargs={'need_id': self.object.pk}))
-            return redirect(reverse('need-list', args=[]))
+            return redirect(reverse('goal-create', kwargs={'need_id': self.object.pk}))
         return render(request, 'need/create.html',
                       {'form': form})
 
@@ -1042,14 +1024,21 @@ class PlanCreateView(CreateView):
         messages.success(self.request, _("Plan succesfully created"))
         return reverse("plan-detail", args=[self.object.pk, ])
 
+    def dispatch(self, request, *args, **kwargs):
+        if kwargs.get('idea'):
+            self.idea_instance = get_object_or_404(Idea, pk=kwargs['idea'])
+        else:
+            self.idea_instance = False
+        return super(PlanCreateView, self).dispatch(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(PlanCreateView, self).get_form_kwargs()
+        kwargs['idea_instance'] = self.idea_instance
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super(PlanCreateView, self).get_context_data(**kwargs)
-        context.update({
-            'idea_object': False
-        })
-        # context.update({
-        #     'idea_object': Idea.objects.get(pk=self.kwargs['idea']),
-        # })
+        context.update({'idea_object': self.idea_instance})
         return context
 
 

@@ -294,16 +294,17 @@ class IdeaCreateForm(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
-        need_instance = kwargs.pop('need_instance')
+        goal_instance = kwargs.pop('goal_instance')
         super(IdeaCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
 
-        if need_instance:
-            self.initial['type'] = need_instance.type
-            self.initial['need'] = need_instance
+        if goal_instance:
+            self.initial['need'] = goal_instance.need
+            self.initial['type'] = goal_instance.need.type
+            self.initial['goal'] = goal_instance
 
         self.fields['goal'] = GoalChoiceField(
             widget=AutoHeavySelect2Widget(
@@ -607,10 +608,17 @@ class PlanCreateForm(forms.ModelForm):
     goal = GoalChoiceField()
 
     def __init__(self, *args, **kwargs):
+        idea_instance = kwargs.pop('idea_instance')
         super(PlanCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
         self.helper.layout.append(Submit('save', _('Create')))
+
+        if idea_instance:
+            self.initial['idea'] = idea_instance
+            self.initial['goal'] = idea_instance.goal
+            self.initial['need'] = idea_instance.goal.need
+            self.initial['type'] = idea_instance.goal.need.type
 
         self.fields['goal'] = GoalChoiceField(
             widget=AutoHeavySelect2Widget(

@@ -124,7 +124,7 @@ urlpatterns = patterns(
         name="idea-create"
     ),
     url(
-        r'^idea-create/(?P<need_id>\d+)/$',
+        r'^idea-create/(?P<goal_id>\d+)/$',
         IdeaCreateView.as_view(),
         name="idea-create"
     ),
@@ -212,16 +212,6 @@ urlpatterns = patterns(
         r'^need-create/$',
         NeedCreateView.as_view(),
         name="need-create"
-    ),
-    url(
-        r'^need-create/for-goal/$',
-        NeedCreateView.as_view(),
-        name="need-create-for-goal"
-    ),
-    url(
-        r'^need-create/for-idea/$',
-        NeedCreateView.as_view(),
-        name="need-create-for-idea"
     ),
     url(
         r'^need/(?P<slug>.*)/update$',

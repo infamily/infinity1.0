@@ -9,12 +9,12 @@
 <h1>Idea create</h1>
 <br/>
 <br/>
-{% if need_object %}
+{% if goal_object %}
 <table class="table">
     <tr>
-        <td>Need</td>
+        <td>Goal</td>
         <td>
-            <a href="{% url "need-detail" need_object.pk %}">{{need_object}}</a>
+            <a href="{% url "goal-detail" goal_object.pk %}">{{goal_object}}</a>
         </td>
     </tr>
 </table>
