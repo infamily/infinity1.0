@@ -637,7 +637,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
 
         url = reverse('idea-create', kwargs={
-            'goal': idea.goal.pk,
+            'goal_id': idea.goal.pk,
         })
 
         # Access forbidden for AnonymousUser
