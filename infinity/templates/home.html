@@ -5,6 +5,7 @@
 {% block page_title %}About{% endblock page_title %}
 
 {% block content %}
+{% if user.is_anonymous %}
 <h1>The Infinity Project</h1>
 
 <p>The Infinity Project (Infty.XYZ) is a <i>think tank</i> to openly talk about our needs, goals, ideas, plans, their steps, tasks, and works, and to display and manage the sharing of the relevant resources from person to person. (To learn more, what each content type is about, see the <a href="/help/">help section</a>.)</p>
@@ -25,5 +26,10 @@
 
 <h1>How do I sign up?</h1>
 <p>Currently, you need an invitation. If you have a friend who uses the service, you can ask for an invite.</p>
+{% else %}
+<h1>index</h1>
 
+The aggregation of the latest <u>goals</u>, <u>ideas</u> and <u>plans</u>.
+
+{% endif %}
 {% endblock content %}

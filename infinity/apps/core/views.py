@@ -869,8 +869,6 @@ class NeedCreateView(CreateView):
     template_name = "need/create.html"
 
     def get(self, request, **kwargs):
-        if self.request.user.__class__.__name__ == u'AnonymousUser':
-            return render(request, 'about.html')
         if request.is_ajax():
             find_language = request.GET.get('find_language', None)
             if find_language:
