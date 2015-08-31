@@ -224,7 +224,7 @@ class GoalListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Goal
 
-        fields = [u'reason', u'name', u'quantity', u'user']
+        fields = [u'reason', u'name', u'user']
 
         exclude = []
 

@@ -12,7 +12,7 @@
 <h3>Defined Meaning ID: {{object.defined_meaning_id}}</h3> 
 <h3>Created By: [<a href="{% url "user-detail" object.user.username%}">{{object.user.username}}</a>]</h3> 
 <div class="actions" align="right">
-<a class="btn btn-warning" href="{% url "need-update"    object.pk   %}"> 
+<a class="btn btn-warning" href="{% url "need-update" object.pk %}">
     Edit
 </a>
 </div>

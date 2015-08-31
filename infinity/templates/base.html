@@ -71,10 +71,6 @@
 
           <ul class="nav navbar-nav navbar-right">
               <li>
-                <a href="{% url "need-list" %}">Needs</a>
-                <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></a></i></a>
-              </li>
-              <li>
                 <a href="{% url "goal-list" %}">Goals</a>
                 <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></a>
               </li>
@@ -88,12 +84,15 @@
               </li>
               <li>
                 <a href="{% url "step-list" %}">Steps</a>
+                <a href="{% url "step-list" %}"><i class="fa fa-star-o"></a></i></a>
               </li>
               <li>
                 <a href="{% url "task-list" %}">Tasks</a>
+                <a href="{% url "task-list" %}"><i class="fa fa-star-half-o"></a></i></a>
               </li>
               <li>
                 <a href="{% url "work-list" %}">Works</a>
+                <a href="{% url "work-list" %}"><i class="fa fa-star"></a></i></a>
               </li>
               <li>
               <a href="{% url "help" %}"><b>Help</b></a>

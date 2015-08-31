@@ -3,24 +3,27 @@ from django import forms
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div
-from django_markdown.widgets import MarkdownWidget
 from django_select2.widgets import AutoHeavySelect2Widget
 from django_select2.fields import AutoModelSelect2Field
 
-from .models import Comment
-from .models import Goal
-from .models import Work
-from .models import Idea
-from .models import Step
-from .models import Task
-from .models import Need
-from .models import Plan
-from .models import Type
+
+from core.models import Comment
+from core.models import Type
+from core.models import Goal
+from core.models import Work
+from core.models import Idea
+from core.models import Step
+from core.models import Task
+from core.models import Need
+from core.models import Plan
+from core.models import Language
 from .fields import NeedChoiceField
 from .fields import TypeChoiceField
 from .fields import GoalChoiceField
 from .fields import IdeaChoiceField
 
+
+from django_markdown.widgets import MarkdownWidget
 
 class CommentCreateFormDetail(forms.ModelForm):
 
@@ -90,16 +93,18 @@ class CommentCreateForm(forms.ModelForm):
 
 
 class GoalCreateForm(forms.ModelForm):
+
     type = TypeChoiceField(
         queryset=Type.objects.all(),
         widget=AutoHeavySelect2Widget(
             select2_options={
                 'minimumInputLength': 0,
-                'placeholder': 'Select type first',
+                'placeholder': 'Select the type of your need...',
             }
         ),
         required=False
     )
+
     reason = forms.CharField(widget=MarkdownWidget())
 
     def __init__(self, *args, **kwargs):
@@ -118,7 +123,7 @@ class GoalCreateForm(forms.ModelForm):
             widget=AutoHeavySelect2Widget(
                 select2_options={
                     'minimumInputLength': 1,
-                    'placeholder': 'Select need',
+                    'placeholder': 'Select the thing that you need...',
                     'ajax': {
                         'dataType': 'json',
                         'quietMillis': 100,
@@ -129,13 +134,15 @@ class GoalCreateForm(forms.ModelForm):
             )
         )
 
-        self.fields['name'].label = _('<b>Description:</b> (e.g., "Our community in Nepal needs potable water this summer", used in title.)')
-        self.fields['name'].widget.attrs.update({'placeholder': _('Who, what kind of, to where?')})
-        self.fields['quantity'].label = _('<b>Quantity:</b> (e.g., 50000, appears next to Goal title.)')
-        self.fields['unit'].label = _('<b>Unit:</b> (enter, if applicable, e.g., "liters", appears next to quantity.)')
-        self.fields['unit'].widget.attrs.update({'placeholder': _('optional')})
-        self.fields['reason'].label = _('<b>Reason:</b> (write full description here, used as body.)')
+        self.fields['need'].label = _('''<b>Object:</b> (if you can't find it, <a href="/need-create/">click here</a> to add)''')
+        self.fields['type'].label = _("<b>Category:</b> (of your goal or need)")
+        self.fields['name'].label = _('<b>Title:</b> (e.g., "Our community in Nepal needs water for drinking this summer", used in title.)')
+        self.fields['name'].widget.attrs.update({'placeholder': _('We need ... for ...')})
+        self.fields['reason'].label = _('<b>Description:</b> (reason and conditions of satisfaction.)')
+        self.fields['reason'].widget.attrs.update({'placeholder': \
+        _('Water shortage. Satisfied, if the supply of 10 liters a day is achieved.')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
+
 
     class Meta:
         model = Goal
@@ -147,8 +154,6 @@ class GoalCreateForm(forms.ModelForm):
             'need',
             'name',
             'reason',
-            'quantity',
-            'unit',
             'personal',
         ]
 
@@ -172,9 +177,8 @@ class GoalUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'type',
             'name',
-            'quantity',
-            'unit',
             'reason',
             'personal',
         ]
@@ -280,21 +284,12 @@ class IdeaUpdateForm(forms.ModelForm):
 
 
 class IdeaCreateForm(forms.ModelForm):
-    need = NeedChoiceField()
+
     goal = GoalChoiceField()
-    type = TypeChoiceField(
-        queryset=Type.objects.all(),
-        widget=AutoHeavySelect2Widget(
-            select2_options={
-                'minimumInputLength': 0,
-                'placeholder': 'Select type first',
-            }
-        ),
-        required=False
-    )
 
     def __init__(self, *args, **kwargs):
         goal_instance = kwargs.pop('goal_instance')
+
         super(IdeaCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
@@ -303,14 +298,12 @@ class IdeaCreateForm(forms.ModelForm):
 
         if goal_instance:
             self.initial['goal'] = goal_instance
-            self.initial['need'] = goal_instance.need
-            self.initial['type'] = goal_instance.need.type
 
         self.fields['goal'] = GoalChoiceField(
             widget=AutoHeavySelect2Widget(
                 select2_options={
                     'minimumInputLength': 0,
-                    'placeholder': 'Select need',
+                    'placeholder': 'Select a goal',
                     'ajax': {
                         'dataType': 'json',
                         'quietMillis': 100,
@@ -321,20 +314,6 @@ class IdeaCreateForm(forms.ModelForm):
             )
         )
 
-        self.fields['need'] = NeedChoiceField(
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': 'Select need',
-                    'ajax': {
-                        'dataType': 'json',
-                        'quietMillis': 100,
-                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_need, selector)*END*',
-                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-                    },
-                }
-            )
-        )
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "Solar Water Condenser", used in title.)')
         self.fields['summary'].label = _('<b>Summary:</b> (e.g., "Use solar panels and Peltier effect to extract water from air.", appears as subtitle.)')
@@ -348,8 +327,6 @@ class IdeaCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
-            'type',
-            'need',
             'goal',
             'name',
             'summary',
@@ -485,16 +462,6 @@ class TaskCreateForm(forms.ModelForm):
 
 
 class NeedCreateForm(forms.ModelForm):
-    type = TypeChoiceField(
-        queryset=Type.objects.all(),
-        widget=AutoHeavySelect2Widget(
-            select2_options={
-                'minimumInputLength': 0,
-                'placeholder': 'Select type first',
-            }
-        ),
-        required=False
-    )
 
     def __init__(self, *args, **kwargs):
         super(NeedCreateForm, self).__init__(*args, **kwargs)
@@ -502,7 +469,6 @@ class NeedCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout = Layout(
-            Field('type'),
             Div(
                 Div('language', css_class='col-sm-2',),
                 Div(
@@ -538,7 +504,6 @@ class NeedCreateForm(forms.ModelForm):
     class Meta:
         model = Need
         fields = [
-            'type',
             'name',
             'language',
             'definition',
@@ -565,12 +530,14 @@ class NeedUpdateForm(forms.ModelForm):
 
 class PlanUpdateForm(forms.ModelForm):
 
+
     def __init__(self, *args, **kwargs):
         super(PlanUpdateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
+
 
     class Meta:
         model = Plan
@@ -583,8 +550,6 @@ class PlanUpdateForm(forms.ModelForm):
             'name',
             'situation',
             'deliverable',
-            'name',
-            'idea',
             'personal'
         ]
         widgets = {
@@ -594,17 +559,7 @@ class PlanUpdateForm(forms.ModelForm):
 
 
 class PlanCreateForm(forms.ModelForm):
-    type = TypeChoiceField(
-        queryset=Type.objects.all(),
-        widget=AutoHeavySelect2Widget(
-            select2_options={
-                'minimumInputLength': 0,
-                'placeholder': 'Select type first',
-            }
-        ),
-        required=False
-    )
-    need = NeedChoiceField()
+
     goal = GoalChoiceField()
 
     def __init__(self, *args, **kwargs):
@@ -612,13 +567,12 @@ class PlanCreateForm(forms.ModelForm):
         super(PlanCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
+
         self.helper.layout.append(Submit('save', _('Create')))
 
         if idea_instance:
             self.initial['idea'] = idea_instance
             self.initial['goal'] = idea_instance.goal
-            self.initial['need'] = idea_instance.goal.need
-            self.initial['type'] = idea_instance.goal.need.type
 
         self.fields['goal'] = GoalChoiceField(
             widget=AutoHeavySelect2Widget(
@@ -635,20 +589,6 @@ class PlanCreateForm(forms.ModelForm):
             )
         )
 
-        self.fields['need'] = NeedChoiceField(
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': 'Select need',
-                    'ajax': {
-                        'dataType': 'json',
-                        'quietMillis': 100,
-                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_need, selector)*END*',
-                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-                    },
-                }
-            )
-        )
 
         self.fields['idea'] = IdeaChoiceField(
             widget=AutoHeavySelect2Widget(
@@ -679,8 +619,6 @@ class PlanCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
-            'type',
-            'need',
             'goal',
             'idea',
             'name',

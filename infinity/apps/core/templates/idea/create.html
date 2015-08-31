@@ -14,7 +14,9 @@
     <tr>
         <td>Goal</td>
         <td>
+
             <a href="{% url "goal-detail" goal_object.pk %}">{{goal_object}}</a>
+
         </td>
     </tr>
 </table>
@@ -27,6 +29,7 @@
 {% crispy form %}
 
 {% endblock content %}
+
 {% block extra_js %}
 <script type="text/javascript">
     var s2_endpoints_param_gen_for_need = function(term, page) {

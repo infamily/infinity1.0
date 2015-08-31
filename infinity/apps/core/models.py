@@ -46,6 +46,16 @@ class Comment(models.Model):
 
 
 class Goal(models.Model):
+    type = models.ForeignKey(
+        'Type',
+        blank=False,
+        null=False,
+    )
+    need = models.ForeignKey(
+        'Need',
+        blank=False,
+        null=False,
+    )
     name = models.CharField(
         unique=False,
         max_length=150,
@@ -77,21 +87,6 @@ class Goal(models.Model):
         blank=False,
         null=False,
         related_name='user_goals'
-    )
-    need = models.ForeignKey(
-        'Need',
-        blank=False,
-        null=False,
-    )
-    quantity = models.PositiveIntegerField(
-        unique=False,
-        null=False,
-        blank=False,
-    )
-    unit = models.CharField(
-        unique=False,
-        max_length=50,
-        blank=True,
     )
 
     def __unicode__(self):

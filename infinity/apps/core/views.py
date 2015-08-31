@@ -192,8 +192,6 @@ class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         "reason",
         "user",
         "need",
-        "quantity",
-        "unit",
     ]
     orderable_columns_default = "-id"
     filter_set = GoalListViewFilter1
@@ -472,7 +470,7 @@ class IdeaCreateView(CreateView):
         else:
             self.goal_instance = False
         return super(IdeaCreateView, self).dispatch(*args, **kwargs)
-
+ 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
@@ -904,15 +902,10 @@ class NeedCreateView(CreateView):
         if form.is_valid():
             self.object = form.save(commit=False)
             self.object.user = self.request.user
-            if request.POST.get('type'):
-                type_instance = Type.objects.get(pk=request.POST['type'])
-                self.object.type = type_instance
-            else:
-                type_instance, created = Type.objects.get_or_create(pk=1, name='Default')
-                self.object.type = type_instance
             self.object.save()
             messages.success(self.request, _("Need succesfully created"))
             return redirect(reverse('goal-create', kwargs={'need_id': self.object.pk}))
+
         return render(request, 'need/create.html',
                       {'form': form})
 
@@ -1016,7 +1009,7 @@ class PlanCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.idea = Idea.objects.get(pk=self.kwargs['idea'])
+        self.object.idea = form.cleaned_data.get('idea')
         self.object.save()
         return super(PlanCreateView, self).form_valid(form)
 
@@ -1025,8 +1018,8 @@ class PlanCreateView(CreateView):
         return reverse("plan-detail", args=[self.object.pk, ])
 
     def dispatch(self, request, *args, **kwargs):
-        if kwargs.get('idea'):
-            self.idea_instance = get_object_or_404(Idea, pk=kwargs['idea'])
+        if kwargs.get('idea_id'):
+            self.idea_instance = get_object_or_404(Idea, pk=kwargs['idea_id'])
         else:
             self.idea_instance = False
         return super(PlanCreateView, self).dispatch(request, *args, **kwargs)

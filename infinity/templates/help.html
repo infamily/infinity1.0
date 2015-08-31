@@ -25,36 +25,43 @@
 
 <!--<p><i>Infty.XYZ</i> relies on 3 core concepts central to computer science, statistics and economics: <i>list</i>, <i>random variable</i>, <i>asset</i>.</p>-->
 
-<h2>Needs</h2>
+<h2>Concepts</h2>
 
-<p>A <i>need</i> in <i>Infty.XYZ</i> is a reference to concept -- <i><u>something that could be desired, and is defined in some language</u></i>. For example:
+<p>A <i>concept</i> in <i>Infty.XYZ</i> is <i><u>an expression and definition of a thing in some language</u></i>. For example:
 
 
-<pre><b>Need</b>(<b>Language</b>="English",
+<pre><b>Concept</b>(<b>Language</b>="English",
      <u>name</u>="Sky",
      <u>definition</u>="Outer space visible from the Earth's surface, infinitely extending above us and limited by the horizon.")</pre>
 </p>
 
-<p>Economically, a need is a reference to asset type; statistically, it is a reference to a random variable. You will find <i>Infty.XYZ</i> already pre-filled with Needs based on concepts from <a href="http://www.omegawiki.org/">Ω-Wiki</a>, an inter-lingual concept map. To define a need, it is sufficient to provide the head word, and a definition in some language of choice.</p>
+<p>Economically, a concept is a reference to asset type; statistically, it is a reference to a random variable. People formulate goals in terms of well-defined concepts. You will find <i>Infty.XYZ</i> already pre-filled with Concepts from <a href="http://www.omegawiki.org/">Ω-Wiki</a>, an inter-lingual concept map. To define a Concept, it is sufficient to provide the head word, and a definition in some language of choice.</p>
 
-Although you can always define your own need, we will do our best that you would not have to. Each need based on Ω-Wiki has a <u>.defined_meaning_id</u> attribute, which makes it possible to display all goals created on the basis of the same concept in one place (no matter what language was used to create the need refering to it), making it possible to find goals described in all languages aimed at fullfilling the demand for things referred to by a need.
+Although you can always define your own Concept, we will do our best that you would not have to. Each need based on Ω-Wiki has a <u>.defined_meaning_id</u> attribute, which makes it possible to display all goals created on the basis of the same concept in one place (no matter what language was used to create the need refering to it), making it possible to find goals described in all languages aimed at fullfilling the demand for things referred to by a Concept.
+
+
+<h2>Categories</h2>
+
+<pre><b>Category</b>(<u>name</u>="Emotional: Partner")
+</pre>
+
+<p>Categories are the high level classes of <a href="http://www.systemsthinker.com/interests/systemsthinking/humansystems/humanneeds.shtml">needs</a>. There are broad categories like <b>Physical</b>, <b>Intellectual</b>, <b>Emotional</b>, <b>Spiritual</b> (and possibly others) and narrower categories like <b>Physical: Food</b>, <b>Intellectual: Gaming</b>, and narrower like <b>Emotional: Partner: Soulmate</b></p>
+
+<p>The pair of <b>(Concept, Category)</b> describes the object and purpose of a volition, and is used in defining <b>Goals</b>. So, for example, a pair <b>('Dog', 'Emotional: Pet')</b> describes the desire for a home pet, while <b>('Dog', 'Physical: Hunting')</b> describes the desire for a hunting assistant.</p>
 
 <h2>Goals</h2>
 
-<p>A <i>goal</i> in <i>Infty.XYZ</i> is a need with a name and quantity -- <i><u>something that could be requested, and quantified</u></i>. Think of it as a request. It has to refer a need, and specify request name, quantity, and reason. For example:<br>
-<pre><b>Goal</b>(<b>Need</b>="kittens",
-     <u>name</u>="My pursuit for a black siamese",
-     <u>quantity</u>=1,
-     <u>reason</u>="loneliness at home")</pre>
+<p>A <i>goal</i> in <i>Infty.XYZ</i> is a need with a name -- <i><u>something that could be requested, and quantified</u></i>. Think of it as a request. It has to refer a need, and specify request name, and reason. For example:<br>
+<pre><b>Goal</b>(<b>Category</b>="Emotional: Pet",
+                 <b>Concept</b>="Cat",
+     <u>name</u>="Cute Vivid Black Siamese",
+     <u>conditions</u>="Satisfied, if it is younger than 3 years, healthy, etc.")</pre>
 
-<p>Mathematically, a Goal is a set of conditions to satisfy, e.g., set of random variables with desired ranges of their values to consider the goal "achieved". In the first iterations of <i>Infty.XYZ</i>, we simplify this to one variable and value -- a need with quantity. We look forward to implementing more complex definitions of goals in the future.</p>
-
-<p><i>-When to create a new need?</i><br>
-&nbsp;If some words begin to repeat often in the names of a Goal, consider creating a new need. For example, define <b>black siamese kitten</b> as a Need, and then create a Goal with it.</p>
+<p>Mathematically, a Goal is a set of conditions to satisfy, e.g., set of random variables with desired ranges of their values to consider the goal "achieved". In the first iterations of <i>Infty.XYZ</i>, we simplify this by providing a text field to describe <u>conditions</u> of acceptance. We look forward to implementing more complex and formal conditions options in the future.</p>
 
 <h2>Ideas</h2>
 
-<p>An <i>idea</i> in <i>Infty.XYZ</i> is a principle to influence the concept represented by the need to get us to the goal (<i>principle</i> to get <i>random variable, asset</i> into a range) -- <i><u>something that redefines or amplifies</u></i>. Think of it as a trick or leverage, or just a good suggestion.</p>
+<p>An <i>idea</i> in <i>Infty.XYZ</i> is a principle to realize a Goal (i.e., a <i>principle</i> to get the<i>random variables of goal conditions</i> into a multi-dimensional desired range).</p>
 <pre><b>Idea</b>(<b>Goal</b>="Fly man to the Moon",
      <u>name</u>="Chemical Propulsion To Fly to The Moon",
      <u>summary</u>="Combine 3-stage booster rockets with instrument unit, 

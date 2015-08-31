@@ -117,7 +117,6 @@ urlpatterns = patterns(
         IdeaUpdateView.as_view(),
         name="idea-update"
     ),
-
     url(
         r'^idea-create/$',
         IdeaCreateView.as_view(),
@@ -238,14 +237,14 @@ urlpatterns = patterns(
         PlanUpdateView.as_view(),
         name="plan-update"
     ),
+
     url(
         r'^plan-create/$',
         PlanCreateView.as_view(),
         name="plan-create"
     ),
-
     url(
-        r'^plan-create/(?P<idea>.*)/$',
+        r'^plan-create/(?P<idea_id>\d+)/$',
         PlanCreateView.as_view(),
         name="plan-create"
     ),
