@@ -2,6 +2,7 @@ LOCAL_APPS = (
     'users',
     'core',
     'payments',
+    'invitation',
 )
 
 CONSTANCE_CONFIG = {

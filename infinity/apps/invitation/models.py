@@ -2,7 +2,9 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
 
+from users.models import User
 from core.models import Language
 
 
@@ -26,7 +28,7 @@ class InvitationOption(models.Model):
         blank=True,
     )
 
-    invitations_left = models.PositiveIntegerField()
+    invitations_left = models.PositiveIntegerField(default=3)
 
 
 class Invitation(models.Model):
@@ -50,6 +52,14 @@ class Invitation(models.Model):
     email = models.EmailField()
     status = models.PositiveIntegerField(choices=STATUSES, default=PENDING)
 
+    def user_is_invited(self, email):
+        try:
+            User.objects.get(email=email)
+        except User.ObjectsDoesNotExist:
+            return False
+        else:
+            return True
+
     def __unicode__(self):
         return "Sender: %s, Recipient: %s, Status: %s, Email: %s" (
             self.sender,
@@ -57,3 +67,15 @@ class Invitation(models.Model):
             self.email,
             self.status
         )
+
+
+def _user_created(sender, instance, created, *args, **kwargs):
+    from uuid import uuid4
+    if created:
+        invitation = InvitationOption.objects.create(
+            user=instance,
+            token=uuid4().hex
+        )
+        invitation.save()
+
+post_save.connect(_user_created, sender=User)
