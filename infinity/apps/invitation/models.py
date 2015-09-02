@@ -32,13 +32,6 @@ class InvitationOption(models.Model):
 
 
 class Invitation(models.Model):
-    PENDING = 0
-    JOINED = 1
-    STATUSES = (
-        (PENDING, 'Pending'),
-        (JOINED, 'Joined')
-    )
-
     sender = models.ForeignKey(
         UserModelName,
         related_name='sender_invites'
@@ -50,9 +43,8 @@ class Invitation(models.Model):
         blank=True
     )
     email = models.EmailField()
-    status = models.PositiveIntegerField(choices=STATUSES, default=PENDING)
 
-    def user_is_invited(self, email):
+    def check_user_invited(self, email):
         try:
             User.objects.get(email=email)
         except User.ObjectsDoesNotExist:
@@ -60,12 +52,19 @@ class Invitation(models.Model):
         else:
             return True
 
+    def has_accepted_invitation(self):
+        if self.recipient:
+            return True
+        else:
+            return False
+
+    has_accepted_invitation.boolean = True
+
     def __unicode__(self):
-        return "Sender: %s, Recipient: %s, Status: %s, Email: %s" (
+        return "Sender: %s, Recipient: %s, Email: %s" % (
             self.sender,
             self.recipient,
-            self.email,
-            self.status
+            self.email
         )
 
 
