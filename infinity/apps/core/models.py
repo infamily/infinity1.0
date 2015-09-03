@@ -44,6 +44,24 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return "/"
 
+    def save(self, *args, **kwargs):
+        "Save comment created date to parent object."
+        super(Comment, self).save(*args, **kwargs)
+        self.content_object.commented_at = self.created_at
+        self.content_object.save()
+
+    def delete(self, *args, **kwargs):
+        "Update comment created date for parent object."
+        super(Comment, self).delete(*args, **kwargs)
+        comments = Comment.objects.filter(object_id=self.object_id)
+        if comments:
+            self.content_object.commented_at = \
+                comments.latest('created_at').created_at
+        else:
+            self.content_object.commented_at = \
+                self.content_object.created_at
+        self.content_object.save()
+
 
 class Goal(models.Model):
     type = models.ForeignKey(
@@ -77,6 +95,13 @@ class Goal(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True,
         auto_now_add=False,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    commented_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
         unique=False,
         null=False,
         blank=False,
@@ -134,6 +159,13 @@ class Work(models.Model):
         null=False,
         blank=False,
     )
+    commented_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_works',
@@ -180,6 +212,13 @@ class Idea(models.Model):
         blank=False,
     )
     updated_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    commented_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
         unique=False,
@@ -243,6 +282,13 @@ class Step(models.Model):
         null=False,
         blank=False,
     )
+    commented_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
     deliverables = models.CharField(
         unique=False,
         max_length=150,
@@ -299,6 +345,13 @@ class Task(models.Model):
         null=False,
         blank=False,
     )
+    commented_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
     priority = models.IntegerField(
         unique=False,
         null=False,
@@ -326,6 +379,13 @@ class Task(models.Model):
 
 class Need(models.Model):
     created_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    commented_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
         unique=False,
@@ -401,6 +461,13 @@ class Plan(models.Model):
         blank=False,
     )
     updated_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    commented_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
         unique=False,
