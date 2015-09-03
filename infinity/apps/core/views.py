@@ -41,7 +41,7 @@ class IndexView(TemplateView):
         ideas = Idea.objects.order_by('-commented_at')[:items]
         plans = Plan.objects.order_by('-commented_at')[:items]
 
-        dates = [obj.created_at for obj in list(goals)+list(ideas)+list(plans)]
+        dates = [obj.commented_at for obj in list(goals)+list(ideas)+list(plans)]
 
         start = min(dates)
             
