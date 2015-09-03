@@ -18,8 +18,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('email', models.EmailField(max_length=254)),
-                ('status', models.PositiveIntegerField(default=0, choices=[(0, 'Pending'), (1, 'Joined')])),
-                ('recipient', models.ForeignKey(related_name='recipient_invites', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('invited', models.BooleanField(default=False)),
+                ('token', models.CharField(max_length=255, null=True, blank=True)),
                 ('sender', models.ForeignKey(related_name='sender_invites', to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -35,7 +35,6 @@ class Migration(migrations.Migration):
             name='InvitationOption',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('token', models.CharField(max_length=255, null=True, blank=True)),
                 ('invitations_left', models.PositiveIntegerField(default=3)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
