@@ -29,13 +29,13 @@
 {% else %}
 <h1>index</h1>
 
-<p>Recent items. Items in <b>bold</b> had been created in last <b>8.93</b> days.</p>
+<p>The recent {{ number_of_items }} items. Items in <b>bold</b> had been created in last <b>{{last_days}}</b> days.</p>
 
 <div class="panel panel-default">
     <div class="panel-heading"><a href="{% url "goal-list" %}">Goals</a>&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></a></div>
     <div class="panel-body">
     {% for goal in goal_list %}
-    { amount } <a href="{% url "goal-detail" goal.pk %}">{{ goal.name }}</a>
+    { amount } {% if goal.1 %}<b>{% endif %}<a href="{% url "goal-detail" goal.0.pk %}">{{ goal.0.name }}</a>{% if goal.1 %}</b>{% endif %}
     <br>
     {% endfor %}
     </div>
@@ -45,7 +45,7 @@
     <div class="panel-heading"><a href="{% url "idea-list" %}">Ideas</a>&nbsp;<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></a></i></a></div>
     <div class="panel-body">
     {% for idea in idea_list %}
-    { amount } <a href="{% url "idea-detail" idea.pk %}">{{ idea.name }}</a>
+    { amount } {% if idea.1 %}<b>{% endif %}<a href="{% url "idea-detail" idea.0.pk %}">{{ idea.0.name }}</a>{% if idea.1 %}</b>{% endif %}
     <br>
     {% endfor %}
     </div>
@@ -55,7 +55,7 @@
     <div class="panel-heading"><a href="{% url "plan-list" %}">Plans</a>&nbsp;<a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></a></i></a></div>
     <div class="panel-body">
     {% for plan in plan_list %}
-    { amount } <a href="{% url "plan-detail" plan.pk %}">{{ plan.name }}</a>
+    { amount } {% if plan.1 %}<b>{% endif %}<a href="{% url "plan-detail" plan.0.pk %}">{{ plan.0.name }}</a>{% if plan.1 %}</b>{% endif %}
     <br>
     {% endfor %}
     </div>

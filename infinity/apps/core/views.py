@@ -26,15 +26,34 @@ from .models import *
 from .forms import *
 from .filters import *
 
+from django.utils import timezone
+
 class IndexView(TemplateView):
     template_name = 'home.html'
 
     def get_context_data(self, **kwargs):
+        
+        items = 5
+
+        now = timezone.now()
+
+        goals = Goal.objects.order_by('-commented_at')[:items]
+        ideas = Idea.objects.order_by('-commented_at')[:items]
+        plans = Plan.objects.order_by('-commented_at')[:items]
+
+        dates = [obj.created_at for obj in list(goals)+list(ideas)+list(plans)]
+
+        start = min(dates)
+            
+        days = float((now-start).seconds/86400.)
+
 
         context = {
-            'goal_list': Goal.objects.order_by('-id')[:5],
-            'idea_list': Idea.objects.order_by('-id')[:5],
-            'plan_list': Plan.objects.order_by('-id')[:5]
+            'goal_list': [(goal, goal.created_at > start) for goal in goals],
+            'idea_list': [(idea, idea.created_at > start) for idea in ideas],
+            'plan_list': [(plan, plan.created_at > start) for plan in plans],
+            'last_days': '%0.2f' % days,
+            'number_of_items': 3*items,
         }
 
         context.update(kwargs)
