@@ -42,6 +42,15 @@ class Invitation(models.Model):
         blank=True,
     )
 
+    def get_invitation_url(self):
+        from django.contrib.sites.models import Site
+        from django.core.urlresolvers import reverse
+        site = Site.objects.get_current()
+        return "http://%s%s" % (
+            site.domain,
+            reverse('invite:token', kwargs={'token': self.token})
+        )
+
 
 class InvitationsAdapter(DefaultAccountAdapter):
 

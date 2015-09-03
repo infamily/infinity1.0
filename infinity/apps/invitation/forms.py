@@ -17,16 +17,10 @@ class InvitationForm(forms.Form):
         user = kwargs.pop('user')
         super(InvitationForm, self).__init__(*args, **kwargs)
 
-        self.fields['members_emails'] = MultipleEmailsField(
-            widget=forms.TextInput(
-                {
-                    'placeholder': _('Enter one or more email addresses, '
-                                     'separated by commas')
-                }
-            )
-        )
+        self.fields['member_email'] = forms.EmailField()
 
         self.fields['email_body'] = forms.CharField(widget=forms.Textarea)
+        self.fields['email_body'].help_text = _("You can use {{ invitation_url }} tag to past invitation url")
         self.fields['language'] = LanguageChoiceField(
             queryset=Language.objects.all(),
             widget=AutoHeavySelect2Widget
@@ -35,8 +29,8 @@ class InvitationForm(forms.Form):
         self.helper = FormHelper(self)
         self.helper.layout = Layout(
             Fieldset(
-                '',
-                'members_emails',
+                'Send Invitation',
+                'member_email',
                 'language',
                 'email_body',
                 HTML("Invitations left: %s" % user.invitationoption.invitations_left),
