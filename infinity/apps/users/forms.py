@@ -4,7 +4,6 @@ from django.utils.translation import ugettext as _
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-
 from allauth.account.forms import SignupForm as AllAuthSignupForm
 from allauth.account.forms import LoginForm as AllAuthLoginForm
 

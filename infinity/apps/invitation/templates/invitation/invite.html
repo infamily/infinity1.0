@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Invitation" %}</h1>
+
+{% crispy form %}
+
+{% endblock content %}
+
+{% block extra_js %}
+<script type="text/javascript">
+
+    $(function() {
+        $("#id_language").change(function(data) {
+            var language_id = data.val;
+            $.ajax({
+                method: "GET",
+                url: "/invite/letter/detail/" + language_id,
+                success: function(data) {
+                    $("#id_email_body").val(data);
+                }
+            });
+        });
+    });
+</script>
+{% endblock extra_js %}
