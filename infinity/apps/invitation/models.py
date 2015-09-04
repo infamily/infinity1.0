@@ -25,6 +25,9 @@ class InvitationOption(models.Model):
     user = models.OneToOneField(UserModelName)
     invitations_left = models.PositiveIntegerField(default=3)
 
+    def __unicode__(self):
+        return "User: %s, Invitations left: %s" % (self.user, self.invitations_left)
+
 
 class Invitation(models.Model):
     sender = models.ForeignKey(
