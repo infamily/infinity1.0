@@ -45,6 +45,9 @@ class Invitation(models.Model):
         blank=True,
     )
 
+    def __unicode__(self):
+        return "Invitation for: %s" % self.email
+
     def get_invitation_url(self):
         from django.contrib.sites.models import Site
         from django.core.urlresolvers import reverse
