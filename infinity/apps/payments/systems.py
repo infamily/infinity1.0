@@ -15,6 +15,10 @@ from .cryptsy import v2
 from constance import config
 
 
+class PayPalException(Exception):
+    pass
+
+
 class CryptsyPay(object):
     def __init__(self, publickey):
         self.credential = CryptsyCredential.objects.get(
@@ -171,6 +175,9 @@ class PayPal(object):
 
         # Get the reply and print it out.
         data = urlparse.parse_qs(response.read())
+
+        if data.get('error(0).message'):
+            raise PayPalException(data.get('error(0).message'))
 
         # Set pay key
 
