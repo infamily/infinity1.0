@@ -9,6 +9,7 @@ from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 
 from ..systems import PayPal
+from ..systems import PayPalException
 from ..models import PayPalTransaction
 from ..forms import PayPalTransactionForm
 
@@ -49,10 +50,14 @@ class PayPalTransactionView(FormView):
         elif currency == PayPalTransactionForm.EUR:
             currency = 'EUR'
 
-        paypal = PayPal(
-            returnUrl=returnUrl,
-            currency=currency
-        )
+        try:
+            paypal = PayPal(
+                returnUrl=returnUrl,
+                currency=currency
+            )
+        except PayPalException as e:
+            messages.error(self.request, e)
+            return super(PayPalTransactionView, self).form_invalid(form)
 
         try:
             user = User.objects.get(
