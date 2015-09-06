@@ -76,7 +76,7 @@ class CryptsyPay(object):
 
 
 class PayPal(object):
-    def __init__(self, returnUrl, currency='USD', error_language='en_US', sandbox=True):
+    def __init__(self, returnUrl, currency='USD', error_language='en_US'):
         # Set our headers
         self.headers = {
             'X-PAYPAL-SECURITY-USERID': config.PAYPAL_SECURITY_USERID,
@@ -87,15 +87,20 @@ class PayPal(object):
             'X-PAYPAL-RESPONSE-DATA-FORMAT': 'NV'
         }
 
-        if sandbox:
+        if config.PAYPAL_MODE == 'live':
+            self.sandbox = False
+        elif config.PAYPAL_MODE == 'sandbox':
+            self.sandbox = True
+
+        if self.sandbox:
             self.headers['X-PAYPAL-APPLICATION-ID'] = 'APP-80W284485P519543T'
         else:
             self.headers['X-PAYPAL-APPLICATION-ID'] = config.PAYPAL_APPLICATION_ID
+
         self.returnUrl = returnUrl
         self.cancelUrl = config.PAYPAL_CANCEL_URL
         self.currency = currency
         self.error_language = error_language
-        self.sandbox = sandbox
 
     def get_payment_information(self, payKey):
         """ Get payment information by payKey
