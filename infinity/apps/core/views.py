@@ -43,17 +43,19 @@ class IndexView(TemplateView):
 
         dates = [obj.commented_at for obj in list(goals)+list(ideas)+list(plans)]
 
-        start = min(dates)
-            
-        days = float((now-start).seconds/86400.)
-
+        if dates:
+            start = min(dates)
+            days = float((now-start).seconds/86400.)
+        else:
+            start = timezone.now()
+            days = 0.
 
         context = {
             'goal_list': [(goal, goal.created_at > start) for goal in goals],
             'idea_list': [(idea, idea.created_at > start) for idea in ideas],
             'plan_list': [(plan, plan.created_at > start) for plan in plans],
             'last_days': '%0.2f' % days,
-            'number_of_items': 3*items,
+            'number_of_items': goals.count()+ideas.count()+plans.count(),
         }
 
         context.update(kwargs)

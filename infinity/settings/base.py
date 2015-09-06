@@ -203,6 +203,7 @@ DJANGO_APPS = (
     #'invitations',
     'clever_selects',
     'django_markdown',
+    'djmoney_rates',
 )
 
 # DEBUG-specific apps
@@ -297,6 +298,39 @@ INVITATIONS_INVITATION_EXPIRY = 1
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_FORMS = {'login': 'users.forms.LoginForm'}
 
+# djmoney_rates
+DJANGO_MONEY_RATES = {
+    'DEFAULT_BACKEND': 'djmoney_rates.backends.OpenExchangeBackend',
+    'OPENEXCHANGE_URL': 'https://openexchangerates.org/api/latest.json',
+    'OPENEXCHANGE_APP_ID': '4d6a086f4e904ce787b649ead3d67215',
+    'OPENEXCHANGE_BASE_CURRENCY': 'USD',
+    'MEDIAN_CURRENCY_NAME': 'MMV',
+    'MEDIAN_CURRENCY_CODES': ['USD', 'EUR', 'CNY', 'JPY', 'RUB', 'COP', 'MYR',
+                              'TMT', 'DZD', 'NAD', 'GHS', 'SZL', 'EGP', 'IDR',
+                              'HNL', 'BGN', 'FJD', 'ETB', 'XCD', 'PAB', 'BZD',
+                              'ILS', 'MGA', 'BOB', 'DKK', 'BWP', 'LBP', 'TZS',
+                              'VND', 'GGP', 'AOA', 'WST', 'KHR', 'MUR', 'KYD',
+                              'LYD', 'UAH', 'UGX', 'JOD', 'ZMW', 'AWG', 'SAR',
+                              'SEK', 'TOP', 'HKD', 'ZMK', 'JEP', 'MDL', 'AUD',
+                              'CHF', 'CUP', 'BBD', 'BYR', 'CDF', 'GMD', 'VEF',
+                              'BSD', 'ARS', 'CUC', 'TND', 'HRK', 'DJF', 'UYU',
+                              'YER', 'SYP', 'CLP', 'THB', 'XAF', 'BND', 'ISK',
+                              'ALL', 'SRD', 'NIO', 'KZT', 'LAK', 'NOK', 'PYG',
+                              'PEN', 'RON', 'OMR', 'BRL', 'MAD', 'MMK', 'PLN',
+                              'MZN', 'PHP', 'KES', 'SVC', 'NPR', 'STD', 'MKD',
+                              'ZWL', 'AZN', 'NGN', 'MVR', 'VUV', 'CRC', 'GNF',
+                              'AED', 'GBP', 'MWK', 'IQD', 'ERN', 'BAM', 'LKR',
+                              'DOP', 'TTD', 'CAD', 'PKR', 'MXN', 'HUF', 'CVE',
+                              'KWD', 'BMD', 'BIF', 'LSL', 'GIP', 'MNT', 'AMD',
+                              'UZS', 'SOS', 'SDG', 'QAR', 'KRW', 'SGD', 'JMD',
+                              'GEL', 'SHP', 'AFN', 'SBD', 'KPW', 'IRR', 'SCR',
+                              'KMF', 'BDT', 'XOF', 'GYD', 'MTL', 'NZD', 'FKP',
+                              'PGK', 'TRY', 'XPF', 'IMP', 'HTG', 'SLL', 'KGS',
+                              'ANG', 'LRD', 'RWF', 'GTQ', 'RSD', 'ZAR', 'MOP',
+                              'BHD', 'INR', 'CZK', 'TJS', 'MRO', 'TWD', 'BTN']
+
+
+}
 
 # END AUTHORISATION/AUTHENTICATION CONFIGURATION
 
