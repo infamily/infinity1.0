@@ -50,14 +50,10 @@ class PayPalTransactionView(FormView):
         elif currency == PayPalTransactionForm.EUR:
             currency = 'EUR'
 
-        try:
-            paypal = PayPal(
-                returnUrl=returnUrl,
-                currency=currency
-            )
-        except PayPalException as e:
-            messages.error(self.request, e)
-            return super(PayPalTransactionView, self).form_invalid(form)
+        paypal = PayPal(
+            returnUrl=returnUrl,
+            currency=currency
+        )
 
         try:
             user = User.objects.get(
@@ -71,12 +67,16 @@ class PayPalTransactionView(FormView):
             )
             return super(PayPalTransactionView, self).form_invalid(form)
 
-        result = paypal.adaptive_payment(
-            comment_object=self.comment_model,
-            receiver_amount=form.cleaned_data.get('amount'),
-            receiver_user=user,
-            sender_user=self.request.user
-        )
+        try:
+            result = paypal.adaptive_payment(
+                comment_object=self.comment_model,
+                receiver_amount=form.cleaned_data.get('amount'),
+                receiver_user=user,
+                sender_user=self.request.user
+            )
+        except PayPalException as e:
+            messages.error(self.request, e)
+            return super(PayPalTransactionView, self).form_invalid(form)
 
         self.payUrl = result['pay_url']
         return super(PayPalTransactionView, self).form_valid(form)
