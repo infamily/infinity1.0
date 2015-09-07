@@ -11,6 +11,10 @@ from django.conf import settings
 
 from django_markdown.models import MarkdownField
 
+from djmoney_rates.utils import convert_money
+
+from re import finditer
+
 class Comment(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
@@ -37,7 +41,18 @@ class Comment(models.Model):
         blank=False,
         null=False,
     )
-
+    money = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours = models.DecimalField(
+        default=0.,
+        decimal_places=5,
+        max_digits=20,
+        blank=False,
+    )
     def __unicode__(self):
         return u"Comment #%s" % self.id
 
@@ -46,6 +61,7 @@ class Comment(models.Model):
 
     def save(self, *args, **kwargs):
         "Save comment created date to parent object."
+        self.compute_hours()
         super(Comment, self).save(*args, **kwargs)
         self.content_object.commented_at = self.created_at
         self.content_object.save()
@@ -61,7 +77,19 @@ class Comment(models.Model):
             self.content_object.commented_at = \
                 self.content_object.created_at
         self.content_object.save()
-
+    def compute_money(self):
+        self.money = sum([convert_money(tx.amount, tx.currency, 'MMV')
+                           for tx in self.paypal_transaction.all()])
+#       self.money = sum([tx.amount for tx in self.cryptsy_transaction.all()])
+        self.save()
+    def compute_hours(self):
+        self.hours = 0.
+        for m in finditer('\{([^}]+)\}', self.text):
+            try:
+                hours = float(m.group(1))
+                self.hours += hours
+            except:
+                pass
 
 class Goal(models.Model):
     type = models.ForeignKey(
