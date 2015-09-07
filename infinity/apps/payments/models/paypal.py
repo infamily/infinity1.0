@@ -62,3 +62,10 @@ class PayPalTransaction(models.Model):
 
     def get_absolute_url(self):
         return "/"
+
+    def save(self, *args, **kwargs):
+        "Save comment created date to parent object."
+        self.comment.compute_money()
+        self.comment.save()
+        self.comment.content_object.sum_comment_values()
+        super(PayPalTransaction, self).save(*args, **kwargs)

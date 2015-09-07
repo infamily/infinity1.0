@@ -14,6 +14,7 @@ from django_markdown.models import MarkdownField
 from djmoney_rates.utils import convert_money
 
 from re import finditer
+from decimal import Decimal
 
 class Comment(models.Model):
     content_type = models.ForeignKey(ContentType)
@@ -65,6 +66,7 @@ class Comment(models.Model):
         super(Comment, self).save(*args, **kwargs)
         self.content_object.commented_at = self.created_at
         self.content_object.save()
+        self.content_object.sum_comment_values()
 
     def delete(self, *args, **kwargs):
         "Update comment created date for parent object."
@@ -141,12 +143,33 @@ class Goal(models.Model):
         null=False,
         related_name='user_goals'
     )
+    money = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours = models.DecimalField(
+        default=0.,
+        decimal_places=5,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
 
     def get_absolute_url(self):
         return "/"
+
+    def sum_comment_values(self):
+        self.money = Decimal(0.)
+        self.hours = Decimal(0.)
+        for comment in Comment.objects.filter(content_type__pk=\
+            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+            self.money += comment.money
+            self.hours += comment.hours
+        self.save()
 
 
 class Work(models.Model):
@@ -211,12 +234,33 @@ class Work(models.Model):
         blank=True,
     )
     description = MarkdownField(blank=False)
+    money = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours = models.DecimalField(
+        default=0.,
+        decimal_places=5,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
 
     def get_absolute_url(self):
         return "/"
+
+    def sum_comment_values(self):
+        self.money = Decimal(0.)
+        self.hours = Decimal(0.)
+        for comment in Comment.objects.filter(content_type__pk=\
+            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+            self.money += comment.money
+            self.hours += comment.hours
+        self.save()
 
 
 class Idea(models.Model):
@@ -270,12 +314,33 @@ class Idea(models.Model):
         blank=False,
         null=False,
     )
+    money = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours = models.DecimalField(
+        default=0.,
+        decimal_places=5,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
 
     def get_absolute_url(self):
         return "/"
+
+    def sum_comment_values(self):
+        self.money = Decimal(0.)
+        self.hours = Decimal(0.)
+        for comment in Comment.objects.filter(content_type__pk=\
+            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+            self.money += comment.money
+            self.hours += comment.hours
+        self.save()
 
 
 class Step(models.Model):
@@ -339,12 +404,33 @@ class Step(models.Model):
         max_length=150,
         blank=False,
     )
+    money = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours = models.DecimalField(
+        default=0.,
+        decimal_places=5,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
 
     def get_absolute_url(self):
         return "/"
+
+    def sum_comment_values(self):
+        self.money = Decimal(0.)
+        self.hours = Decimal(0.)
+        for comment in Comment.objects.filter(content_type__pk=\
+            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+            self.money += comment.money
+            self.hours += comment.hours
+        self.save()
 
 
 class Task(models.Model):
@@ -397,12 +483,33 @@ class Task(models.Model):
         blank=False,
         null=False,
     )
+    money = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours = models.DecimalField(
+        default=0.,
+        decimal_places=5,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
 
     def get_absolute_url(self):
         return "/"
+
+    def sum_comment_values(self):
+        self.money = Decimal(0.)
+        self.hours = Decimal(0.)
+        for comment in Comment.objects.filter(content_type__pk=\
+            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+            self.money += comment.money
+            self.hours += comment.hours
+        self.save()
 
 
 class Need(models.Model):
@@ -443,6 +550,18 @@ class Need(models.Model):
         blank=False,
         null=False,
     )
+    money = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours = models.DecimalField(
+        default=0.,
+        decimal_places=5,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -452,6 +571,15 @@ class Need(models.Model):
 
     class Meta:
         unique_together = ('language', 'name', 'definition')
+
+    def sum_comment_values(self):
+        self.money = Decimal(0.)
+        self.hours = Decimal(0.)
+        for comment in Comment.objects.filter(content_type__pk=\
+            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+            self.money += comment.money
+            self.hours += comment.hours
+        self.save()
 
 
 class Type(models.Model):
@@ -516,12 +644,33 @@ class Plan(models.Model):
         null=False,
     )
     situation = MarkdownField(blank=False)
+    money = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours = models.DecimalField(
+        default=0.,
+        decimal_places=5,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
 
     def get_absolute_url(self):
         return "/"
+
+    def sum_comment_values(self):
+        self.money = Decimal(0.)
+        self.hours = Decimal(0.)
+        for comment in Comment.objects.filter(content_type__pk=\
+            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+            self.money += comment.money
+            self.hours += comment.hours
+        self.save()
 
 
 class Language(models.Model):
