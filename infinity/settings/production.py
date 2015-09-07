@@ -58,6 +58,63 @@ CACHES = {
 }
 # END CACHE CONFIGURATION
 
+# LOGGING CONFIGURATION
+# FOR SENTRY
+# http://raven.readthedocs.org/en/latest/integrations/django.html#integration-with-logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}
+
+# END LOGGING CONFIGURATION
+
+# RAVEN CONFIGURATION
+RAVEN_CONFIG = {
+    'dsn': 'http://166c925c5d5c4059acd204ecf9b89627:292f0cf418ce46b4bd49e4406bc04d9e@sentry.7webpages.com/9',
+}
+DJANGO_APPS += (
+    'raven.contrib.django.raven_compat',
+)
+# END RAVEN CONFIGURATION
+
+
 try:
     from .secret import *
 except ImportError:
