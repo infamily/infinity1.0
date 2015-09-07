@@ -109,7 +109,7 @@ LOGGING = {
 RAVEN_CONFIG = {
     'dsn': 'http://166c925c5d5c4059acd204ecf9b89627:292f0cf418ce46b4bd49e4406bc04d9e@sentry.7webpages.com/9',
 }
-DJANGO_APPS += (
+INSTALLED_APPS += (
     'raven.contrib.django.raven_compat',
 )
 # END RAVEN CONFIGURATION
