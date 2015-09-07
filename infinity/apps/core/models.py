@@ -11,6 +11,7 @@ from django.conf import settings
 
 from django_markdown.models import MarkdownField
 
+
 class Comment(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
