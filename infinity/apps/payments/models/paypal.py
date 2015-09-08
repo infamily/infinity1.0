@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 
 from core.models import Comment
+from djmoney_rates.utils import convert_money
 
 
 class PayPalTransaction(models.Model):
@@ -55,6 +56,14 @@ class PayPalTransaction(models.Model):
         null=True
     )
 
+    hours = models.DecimalField(
+        null=False,
+        max_digits=16,
+        decimal_places=2,
+        blank=False,
+        default=0,
+    )
+
     comment = models.ForeignKey(Comment, related_name='paypal_transaction')
 
     def __unicode__(self):
@@ -63,9 +72,13 @@ class PayPalTransaction(models.Model):
     def get_absolute_url(self):
         return "/"
 
+    def compute_hours(self):
+        self.hours = convert_money(self.amount, self.currency,
+                                   'USD')/settings.HOUR_VALUE_IN_USD
+
     def save(self, *args, **kwargs):
         "Save comment created date to parent object."
-        self.comment.compute_money()
-        self.comment.save()
-        self.comment.content_object.sum_comment_values()
+        self.compute_hours()
         super(PayPalTransaction, self).save(*args, **kwargs)
+        self.comment.sum_hours_donated()
+        self.comment.content_object.sum_hours()

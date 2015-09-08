@@ -3,6 +3,7 @@
 
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
+from decimal import Decimal
 
 import dj_database_url
 
@@ -329,8 +330,9 @@ DJANGO_MONEY_RATES = {
                               'ANG', 'LRD', 'RWF', 'GTQ', 'RSD', 'ZAR', 'MOP',
                               'BHD', 'INR', 'CZK', 'TJS', 'MRO', 'TWD', 'BTN']
 
-
 }
+
+HOUR_VALUE_IN_USD = Decimal(25.09)
 
 # END AUTHORISATION/AUTHENTICATION CONFIGURATION
 

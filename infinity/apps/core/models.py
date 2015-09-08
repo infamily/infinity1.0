@@ -42,13 +42,13 @@ class Comment(models.Model):
         blank=False,
         null=False,
     )
-    money = models.DecimalField(
+    hours_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
         blank=False,
     )
-    hours = models.DecimalField(
+    hours_claimed = models.DecimalField(
         default=0.,
         decimal_places=5,
         max_digits=20,
@@ -62,11 +62,11 @@ class Comment(models.Model):
 
     def save(self, *args, **kwargs):
         "Save comment created date to parent object."
-        self.compute_hours()
+        self.sum_hours_claimed()
         super(Comment, self).save(*args, **kwargs)
         self.content_object.commented_at = self.created_at
         self.content_object.save()
-        self.content_object.sum_comment_values()
+        self.content_object.sum_hours()
 
     def delete(self, *args, **kwargs):
         "Update comment created date for parent object."
@@ -79,19 +79,23 @@ class Comment(models.Model):
             self.content_object.commented_at = \
                 self.content_object.created_at
         self.content_object.save()
-    def compute_money(self):
-        self.money = sum([convert_money(tx.amount, tx.currency, 'MMV')
-                           for tx in self.paypal_transaction.all()])
-#       self.money = sum([tx.amount for tx in self.cryptsy_transaction.all()])
+
+    def sum_hours_donated(self):
+        self.hours_donated = sum([tx.hours for tx in self.paypal_transaction.all()])
+        #+= sum([tx.amount for tx in self.cryptsy_transaction.all()])
         self.save()
-    def compute_hours(self):
-        self.hours = 0.
+
+    def sum_hours_claimed(self):
+        self.hours_claimed = 0.
         for m in finditer('\{([^}]+)\}', self.text):
             try:
                 hours = float(m.group(1))
-                self.hours += hours
+                self.hours_claimed += hours
             except:
                 pass
+
+    def get_usd(self):
+        return self.hours_donated*settings.HOUR_VALUE_IN_USD
 
 class Goal(models.Model):
     type = models.ForeignKey(
@@ -143,13 +147,13 @@ class Goal(models.Model):
         null=False,
         related_name='user_goals'
     )
-    money = models.DecimalField(
+    hours_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
         blank=False,
     )
-    hours = models.DecimalField(
+    hours_claimed = models.DecimalField(
         default=0.,
         decimal_places=5,
         max_digits=20,
@@ -162,14 +166,17 @@ class Goal(models.Model):
     def get_absolute_url(self):
         return "/"
 
-    def sum_comment_values(self):
-        self.money = Decimal(0.)
-        self.hours = Decimal(0.)
+    def sum_hours(self):
+        self.hours_donated = Decimal(0.)
+        self.hours_claimed = Decimal(0.)
         for comment in Comment.objects.filter(content_type__pk=\
             ContentType.objects.get_for_model(self).pk,object_id=self.id):
-            self.money += comment.money
-            self.hours += comment.hours
+            self.hours_donated += comment.hours_donated
+            self.hours_claimed += comment.hours_claimed
         self.save()
+
+    def get_usd(self):
+        return self.hours_donated*settings.HOUR_VALUE_IN_USD
 
 
 class Work(models.Model):
@@ -234,13 +241,13 @@ class Work(models.Model):
         blank=True,
     )
     description = MarkdownField(blank=False)
-    money = models.DecimalField(
+    hours_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
         blank=False,
     )
-    hours = models.DecimalField(
+    hours_claimed = models.DecimalField(
         default=0.,
         decimal_places=5,
         max_digits=20,
@@ -253,14 +260,17 @@ class Work(models.Model):
     def get_absolute_url(self):
         return "/"
 
-    def sum_comment_values(self):
-        self.money = Decimal(0.)
-        self.hours = Decimal(0.)
+    def sum_hours(self):
+        self.hours_donated = Decimal(0.)
+        self.hours_claimed = Decimal(0.)
         for comment in Comment.objects.filter(content_type__pk=\
             ContentType.objects.get_for_model(self).pk,object_id=self.id):
-            self.money += comment.money
-            self.hours += comment.hours
+            self.hours_donated += comment.hours_donated
+            self.hours_claimed += comment.hours_claimed
         self.save()
+
+    def get_usd(self):
+        return self.hours_donated*settings.HOUR_VALUE_IN_USD
 
 
 class Idea(models.Model):
@@ -314,13 +324,13 @@ class Idea(models.Model):
         blank=False,
         null=False,
     )
-    money = models.DecimalField(
+    hours_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
         blank=False,
     )
-    hours = models.DecimalField(
+    hours_claimed = models.DecimalField(
         default=0.,
         decimal_places=5,
         max_digits=20,
@@ -333,14 +343,17 @@ class Idea(models.Model):
     def get_absolute_url(self):
         return "/"
 
-    def sum_comment_values(self):
-        self.money = Decimal(0.)
-        self.hours = Decimal(0.)
+    def sum_hours(self):
+        self.hours_donated = Decimal(0.)
+        self.hours_claimed = Decimal(0.)
         for comment in Comment.objects.filter(content_type__pk=\
             ContentType.objects.get_for_model(self).pk,object_id=self.id):
-            self.money += comment.money
-            self.hours += comment.hours
+            self.hours_donated += comment.hours_donated
+            self.hours_claimed += comment.hours_claimed
         self.save()
+
+    def get_usd(self):
+        return self.hours_donated*settings.HOUR_VALUE_IN_USD
 
 
 class Step(models.Model):
@@ -404,13 +417,13 @@ class Step(models.Model):
         max_length=150,
         blank=False,
     )
-    money = models.DecimalField(
+    hours_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
         blank=False,
     )
-    hours = models.DecimalField(
+    hours_claimed = models.DecimalField(
         default=0.,
         decimal_places=5,
         max_digits=20,
@@ -423,14 +436,17 @@ class Step(models.Model):
     def get_absolute_url(self):
         return "/"
 
-    def sum_comment_values(self):
-        self.money = Decimal(0.)
-        self.hours = Decimal(0.)
+    def sum_hours(self):
+        self.hours_donated = Decimal(0.)
+        self.hours_claimed = Decimal(0.)
         for comment in Comment.objects.filter(content_type__pk=\
             ContentType.objects.get_for_model(self).pk,object_id=self.id):
-            self.money += comment.money
-            self.hours += comment.hours
+            self.hours_donated += comment.hours_donated
+            self.hours_claimed += comment.hours_claimed
         self.save()
+
+    def get_usd(self):
+        return self.hours_donated*settings.HOUR_VALUE_IN_USD
 
 
 class Task(models.Model):
@@ -483,13 +499,13 @@ class Task(models.Model):
         blank=False,
         null=False,
     )
-    money = models.DecimalField(
+    hours_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
         blank=False,
     )
-    hours = models.DecimalField(
+    hours_claimed = models.DecimalField(
         default=0.,
         decimal_places=5,
         max_digits=20,
@@ -502,14 +518,17 @@ class Task(models.Model):
     def get_absolute_url(self):
         return "/"
 
-    def sum_comment_values(self):
-        self.money = Decimal(0.)
-        self.hours = Decimal(0.)
+    def sum_hours(self):
+        self.hours_donated = Decimal(0.)
+        self.hours_claimed = Decimal(0.)
         for comment in Comment.objects.filter(content_type__pk=\
             ContentType.objects.get_for_model(self).pk,object_id=self.id):
-            self.money += comment.money
-            self.hours += comment.hours
+            self.hours_donated += comment.hours_donated
+            self.hours_claimed += comment.hours_claimed
         self.save()
+
+    def get_usd(self):
+        return self.hours_donated*settings.HOUR_VALUE_IN_USD
 
 
 class Need(models.Model):
@@ -550,13 +569,13 @@ class Need(models.Model):
         blank=False,
         null=False,
     )
-    money = models.DecimalField(
+    hours_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
         blank=False,
     )
-    hours = models.DecimalField(
+    hours_claimed = models.DecimalField(
         default=0.,
         decimal_places=5,
         max_digits=20,
@@ -572,14 +591,17 @@ class Need(models.Model):
     class Meta:
         unique_together = ('language', 'name', 'definition')
 
-    def sum_comment_values(self):
-        self.money = Decimal(0.)
-        self.hours = Decimal(0.)
+    def sum_hours(self):
+        self.hours_donated = Decimal(0.)
+        self.hours_claimed = Decimal(0.)
         for comment in Comment.objects.filter(content_type__pk=\
             ContentType.objects.get_for_model(self).pk,object_id=self.id):
-            self.money += comment.money
-            self.hours += comment.hours
+            self.hours_donated += comment.hours_donated
+            self.hours_claimed += comment.hours_claimed
         self.save()
+
+    def get_usd(self):
+        return self.hours_donated*settings.HOUR_VALUE_IN_USD
 
 
 class Type(models.Model):
@@ -644,13 +666,13 @@ class Plan(models.Model):
         null=False,
     )
     situation = MarkdownField(blank=False)
-    money = models.DecimalField(
+    hours_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
         blank=False,
     )
-    hours = models.DecimalField(
+    hours_claimed = models.DecimalField(
         default=0.,
         decimal_places=5,
         max_digits=20,
@@ -663,14 +685,17 @@ class Plan(models.Model):
     def get_absolute_url(self):
         return "/"
 
-    def sum_comment_values(self):
-        self.money = Decimal(0.)
-        self.hours = Decimal(0.)
+    def sum_hours(self):
+        self.hours_donated = Decimal(0.)
+        self.hours_claimed = Decimal(0.)
         for comment in Comment.objects.filter(content_type__pk=\
             ContentType.objects.get_for_model(self).pk,object_id=self.id):
-            self.money += comment.money
-            self.hours += comment.hours
+            self.hours_donated += comment.hours_donated
+            self.hours_claimed += comment.hours_claimed
         self.save()
+
+    def get_usd(self):
+        return self.hours_donated*settings.HOUR_VALUE_IN_USD
 
 
 class Language(models.Model):
