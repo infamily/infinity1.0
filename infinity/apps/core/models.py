@@ -15,6 +15,7 @@ from djmoney_rates.utils import convert_money
 
 from re import finditer
 from decimal import Decimal
+from hours.models import HourValue
 
 class Comment(models.Model):
     content_type = models.ForeignKey(ContentType)
@@ -95,7 +96,7 @@ class Comment(models.Model):
                 pass
 
     def get_usd(self):
-        return self.hours_donated*settings.HOUR_VALUE_IN_USD
+        return self.hours_donated*HourValue.objects.latest('created_at').value
 
 class Goal(models.Model):
     type = models.ForeignKey(
@@ -176,7 +177,7 @@ class Goal(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*settings.HOUR_VALUE_IN_USD
+        return self.hours_donated*HourValue.objects.latest('created_at').value
 
 
 class Work(models.Model):
@@ -270,7 +271,7 @@ class Work(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*settings.HOUR_VALUE_IN_USD
+        return self.hours_donated*HourValue.objects.latest('created_at').value
 
 
 class Idea(models.Model):
@@ -353,7 +354,7 @@ class Idea(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*settings.HOUR_VALUE_IN_USD
+        return self.hours_donated*HourValue.objects.latest('created_at').value
 
 
 class Step(models.Model):
@@ -446,7 +447,7 @@ class Step(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*settings.HOUR_VALUE_IN_USD
+        return self.hours_donated*HourValue.objects.latest('created_at').value
 
 
 class Task(models.Model):
@@ -528,7 +529,7 @@ class Task(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*settings.HOUR_VALUE_IN_USD
+        return self.hours_donated*HourValue.objects.latest('created_at').value
 
 
 class Need(models.Model):
@@ -601,7 +602,7 @@ class Need(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*settings.HOUR_VALUE_IN_USD
+        return self.hours_donated*HourValue.objects.latest('created_at').value
 
 
 class Type(models.Model):
@@ -695,7 +696,7 @@ class Plan(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*settings.HOUR_VALUE_IN_USD
+        return self.hours_donated*HourValue.objects.latest('created_at').value
 
 
 class Language(models.Model):

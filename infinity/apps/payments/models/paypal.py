@@ -3,6 +3,7 @@ from django.conf import settings
 
 from core.models import Comment
 from djmoney_rates.utils import convert_money
+from hours.models import HourValue
 
 
 class PayPalTransaction(models.Model):
@@ -74,7 +75,7 @@ class PayPalTransaction(models.Model):
 
     def compute_hours(self):
         self.hours = convert_money(self.amount, self.currency,
-                                   'USD')/settings.HOUR_VALUE_IN_USD
+                                   'USD')/HourValue.objects.latest('created_at').value
 
     def save(self, *args, **kwargs):
         "Save comment created date to parent object."

@@ -27,6 +27,7 @@ from .forms import *
 from .filters import *
 
 from django.utils import timezone
+from hours.models import HourValue
 
 class IndexView(TemplateView):
     template_name = 'home.html'
@@ -84,6 +85,7 @@ class IndexView(TemplateView):
             'last_days': '%0.2f' % days,
             'number_of_items': goals.count()+ideas.count()+plans.count()+
             steps.count()+tasks.count(),
+            'hour_value': HourValue.objects.latest('created_at'),
         }
 
         context.update(kwargs)

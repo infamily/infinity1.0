@@ -12,9 +12,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
             fred.key(settings.FRED_KEY)
-            print settings.FRED_KEY
-            print settings.FRED_SERIES
-
             last_observation = fred.observations(settings.FRED_SERIES)['observations'][-1]
 
             HourValue(value=Decimal(last_observation['value']),
@@ -23,4 +20,3 @@ class Command(BaseCommand):
             self.stdout.write('Written HourValue update.')
         except:
             self.stdout.write('Problem writing HourValue.')
-            pass
