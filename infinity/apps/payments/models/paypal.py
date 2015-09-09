@@ -59,10 +59,17 @@ class PayPalTransaction(models.Model):
 
     hours = models.DecimalField(
         null=False,
-        max_digits=16,
-        decimal_places=2,
+        max_digits=20,
+        decimal_places=8,
         blank=False,
         default=0,
+    )
+
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
     )
 
     comment = models.ForeignKey(Comment, related_name='paypal_transaction')

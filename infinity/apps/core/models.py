@@ -51,7 +51,13 @@ class Comment(models.Model):
     )
     hours_claimed = models.DecimalField(
         default=0.,
-        decimal_places=5,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
         max_digits=20,
         blank=False,
     )
@@ -94,6 +100,19 @@ class Comment(models.Model):
                 self.hours_claimed += hours
             except:
                 pass
+
+    def match_hours(self):
+        if self.hours_claimed >= self.hours_donated:
+            ratio = Decimal(1.)
+        elif self.hours_claimed < self.hours_donated:
+            ratio = (self.hours_claimed/self.hours_donated)
+
+        self.hours_matched = Decimal(0.)
+        for tx in self.paypal_transaction.all():
+            tx.hours_matched = tx.hours * ratio
+            tx.save()
+            self.hours_matched += tx.hours_matched
+        self.save()
 
     def get_usd(self):
         return self.hours_donated*HourValue.objects.latest('created_at').value
@@ -156,7 +175,13 @@ class Goal(models.Model):
     )
     hours_claimed = models.DecimalField(
         default=0.,
-        decimal_places=5,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
         max_digits=20,
         blank=False,
     )
@@ -250,7 +275,13 @@ class Work(models.Model):
     )
     hours_claimed = models.DecimalField(
         default=0.,
-        decimal_places=5,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
         max_digits=20,
         blank=False,
     )
@@ -333,7 +364,13 @@ class Idea(models.Model):
     )
     hours_claimed = models.DecimalField(
         default=0.,
-        decimal_places=5,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
         max_digits=20,
         blank=False,
     )
@@ -426,7 +463,13 @@ class Step(models.Model):
     )
     hours_claimed = models.DecimalField(
         default=0.,
-        decimal_places=5,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
         max_digits=20,
         blank=False,
     )
@@ -508,7 +551,13 @@ class Task(models.Model):
     )
     hours_claimed = models.DecimalField(
         default=0.,
-        decimal_places=5,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
         max_digits=20,
         blank=False,
     )
@@ -578,7 +627,13 @@ class Need(models.Model):
     )
     hours_claimed = models.DecimalField(
         default=0.,
-        decimal_places=5,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
         max_digits=20,
         blank=False,
     )
@@ -675,7 +730,13 @@ class Plan(models.Model):
     )
     hours_claimed = models.DecimalField(
         default=0.,
-        decimal_places=5,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
         max_digits=20,
         blank=False,
     )
@@ -694,6 +755,7 @@ class Plan(models.Model):
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
         self.save()
+    
 
     def get_usd(self):
         return self.hours_donated*HourValue.objects.latest('created_at').value
