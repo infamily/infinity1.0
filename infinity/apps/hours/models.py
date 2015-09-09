@@ -4,10 +4,17 @@ from django.conf import settings
 UserModelName = settings.AUTH_USER_MODEL
 
 class HourValue(models.Model):
+
     value = models.DecimalField(
         default=25.,
         decimal_places=8,
         max_digits=20,
+        blank=False,
+    )
+
+    date = models.CharField(
+        unique=False,
+        max_length=15,
         blank=False,
     )
 
@@ -27,4 +34,4 @@ class HourValue(models.Model):
     )
 
     def __unicode__(self):
-        return "date: %s, value: %s" % (self.created_at, self.value)
+        return "%s, value: (%s, %s)" % (self.created_at, self.date, self.value)
