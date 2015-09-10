@@ -80,11 +80,9 @@ class Comment(models.Model):
         super(Comment, self).delete(*args, **kwargs)
         comments = Comment.objects.filter(object_id=self.object_id)
         if comments:
-            self.content_object.commented_at = \
-                comments.latest('created_at').created_at
+            self.content_object.commented_at = comments.latest('created_at').created_at
         else:
-            self.content_object.commented_at = \
-                self.content_object.created_at
+            self.content_object.commented_at = self.content_object.created_at
         self.content_object.save()
 
     def sum_hours_donated(self):
@@ -195,8 +193,12 @@ class Goal(models.Model):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
         self.hours_matched = Decimal(0.)
-        for comment in Comment.objects.filter(content_type__pk=\
-            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        comments = Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        )
+        for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
             self.hours_matched += Decimal(2.)*comment.hours_matched
@@ -297,8 +299,12 @@ class Work(models.Model):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
         self.hours_matched = Decimal(0.)
-        for comment in Comment.objects.filter(content_type__pk=\
-            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        comments = Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        )
+        for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
             self.hours_matched += Decimal(2.)*comment.hours_matched
@@ -388,8 +394,12 @@ class Idea(models.Model):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
         self.hours_matched = Decimal(0.)
-        for comment in Comment.objects.filter(content_type__pk=\
-            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        comments = Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        )
+        for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
             self.hours_matched += Decimal(2.)*comment.hours_matched
@@ -489,8 +499,12 @@ class Step(models.Model):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
         self.hours_matched = Decimal(0.)
-        for comment in Comment.objects.filter(content_type__pk=\
-            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        comments = Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        )
+        for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
             self.hours_matched += Decimal(2.)*comment.hours_matched
@@ -579,8 +593,12 @@ class Task(models.Model):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
         self.hours_matched = Decimal(0.)
-        for comment in Comment.objects.filter(content_type__pk=\
-            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        comments = Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        )
+        for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_matched += Decimal(2.)*comment.hours_matched
             self.hours_claimed += comment.hours_claimed
@@ -660,8 +678,12 @@ class Need(models.Model):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
         self.hours_matched = Decimal(0.)
-        for comment in Comment.objects.filter(content_type__pk=\
-            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        comments = Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        )
+        for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
             self.hours_matched += Decimal(2.)*comment.hours_matched
@@ -762,13 +784,16 @@ class Plan(models.Model):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
         self.hours_matched = Decimal(0.)
-        for comment in Comment.objects.filter(content_type__pk=\
-            ContentType.objects.get_for_model(self).pk,object_id=self.id):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        comments = Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        )
+        for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
             self.hours_matched += Decimal(2.)*comment.hours_matched
         self.save()
-    
 
     def get_usd(self):
         return self.hours_donated*HourValue.objects.latest('created_at').value
