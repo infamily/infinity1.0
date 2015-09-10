@@ -10,6 +10,7 @@ from django.views.generic import DetailView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic import TemplateView
 from django.shortcuts import render
 
 from pure_pagination.mixins import PaginationMixin
@@ -24,6 +25,72 @@ from .utils import ViewTypeWrapper
 from .models import *
 from .forms import *
 from .filters import *
+
+from django.utils import timezone
+from hours.models import HourValue
+
+class IndexView(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        
+        items = {'goals': 2,
+                 'ideas': 3,
+                 'plans': 5,
+                 'steps': 7,
+                 'tasks': 11}
+
+        now = timezone.now()
+        in_days = lambda x: float(x.seconds/86400.)
+
+        goals = Goal.objects.order_by('-commented_at')[:items['goals']]
+        ideas = Idea.objects.order_by('-commented_at')[:items['ideas']]
+        plans = Plan.objects.order_by('-commented_at')[:items['plans']]
+        steps = Step.objects.order_by('-commented_at')[:items['steps']]
+        tasks = Task.objects.order_by('-commented_at')[:items['tasks']]
+
+        commented_at = lambda items: [obj.commented_at for obj in items]
+
+        dates = commented_at(list(goals)+list(ideas)+list(plans)+
+                             list(steps)+list(tasks))
+
+        if dates:
+            start = min(dates)
+            days = in_days(now-start)
+        else:
+            start = timezone.now()
+            days = 0.
+
+        context = {
+            'goal_list': [(goal, goal.created_at > start) for goal in goals],
+            'idea_list': [(idea, idea.created_at > start) for idea in ideas],
+            'plan_list': [(plan, plan.created_at > start) for plan in plans],
+            'step_list': [(step, step.created_at > start) for step in steps],
+            'task_list': [(task, task.created_at > start) for task in tasks],
+            'goal_days': goals and 
+                         '%0.2f' % in_days(now-min(commented_at(list(goals))))
+                         or 0.,
+            'idea_days': ideas and
+                         '%0.2f' % in_days(now-min(commented_at(list(ideas))))
+                         or 0.,
+            'plan_days': plans and
+                         '%0.2f' % in_days(now-min(commented_at(list(plans))))
+                         or 0,
+            'step_days': steps and
+                         '%0.2f' % in_days(now-min(commented_at(list(steps))))
+                         or 0,
+            'task_days': tasks and
+                         '%0.2f' % in_days(now-min(commented_at(list(tasks))))
+                         or 0,
+            'last_days': '%0.2f' % days,
+            'number_of_items': goals.count()+ideas.count()+plans.count()+
+            steps.count()+tasks.count(),
+            'hour_value': HourValue.objects.latest('created_at'),
+        }
+
+        context.update(kwargs)
+
+        return context
 
 
 class AjaxChainedView(ChainedSelectChoicesView):

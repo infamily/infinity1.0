@@ -3,6 +3,7 @@
 
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
+from decimal import Decimal
 
 import dj_database_url
 
@@ -203,6 +204,7 @@ DJANGO_APPS = (
     #'invitations',
     'clever_selects',
     'django_markdown',
+    'djmoney_rates',
 )
 
 # DEBUG-specific apps
@@ -297,6 +299,18 @@ INVITATIONS_INVITATION_EXPIRY = 1
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_FORMS = {'login': 'users.forms.LoginForm'}
 
+# djmoney_rates
+DJANGO_MONEY_RATES = {
+    'DEFAULT_BACKEND': 'djmoney_rates.backends.OpenExchangeBackend',
+    'OPENEXCHANGE_URL': 'https://openexchangerates.org/api/latest.json',
+    'OPENEXCHANGE_APP_ID': '4d6a086f4e904ce787b649ead3d67215',
+    'OPENEXCHANGE_BASE_CURRENCY': 'USD',
+}
+
+# hours
+# api.stlouisfed.org
+FRED_KEY = '0a90ca7b5204b2ed6e998d9f6877187e'
+FRED_SERIES = 'CES0500000003'
 
 # END AUTHORISATION/AUTHENTICATION CONFIGURATION
 
