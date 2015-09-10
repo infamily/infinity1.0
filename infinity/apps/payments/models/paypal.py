@@ -89,4 +89,5 @@ class PayPalTransaction(models.Model):
         self.compute_hours()
         super(PayPalTransaction, self).save(*args, **kwargs)
         self.comment.sum_hours_donated()
+        self.comment.match_hours()
         self.comment.content_object.sum_hours()
