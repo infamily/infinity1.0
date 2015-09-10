@@ -7,48 +7,17 @@
 
 {% block content %}
 
-<h1>{{object.name}}</h1>
-<br/>
 
-	        
-
-<div class="actions">
-<a class="btn btn-warning" href="{% url "goal-update"    object.pk   %}"> 
-    Goal update
-</a>
-<a class="btn btn-danger" href="{% url "goal-delete"    object.pk   %}"> 
-    Goal delete
-</a>
-</div>
+<div class="panel panel-default">
+<div class="panel-body">
+<h1>{{object.name}}</h1>[<a href="{% url "goal-update" object.pk %}">edit</a>, <a href="{% url "goal-delete" object.pk %}">delete</a>]
 <br/>
-<div>
-<ol class="breadcrumb">
-    <li>topic: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a></li>
-</ol>    
-</div>
 <br/>
 {{object.reason|markdown}}
-
-<table class="table">
-    <tr>
-        <td>Created at</td>
-        <td>
-
-        	{{object.created_at}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>User</td>
-        <td>
-
-        	{{object.user}}
-	        
-
-        </td>
-    </tr>
-</table>
+<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
+</div>
+</div>
+        	
 
 <div class="panel panel-default">
 <div class="panel-heading">Ideas</div>
@@ -61,9 +30,7 @@
       </li>
     </ul>
 {% endfor %}
-<a class="btn btn-info" href="{% url "idea-create"    object.pk   %}"> 
-    Idea create
-</a>
+<a  href="{% url "idea-create" object.pk %}">+New Idea</a>
 </div>
 </div>
 
