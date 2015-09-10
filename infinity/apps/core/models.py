@@ -10,7 +10,6 @@ from django.conf import settings
 #from .signals import _comment_post_save
 
 from django_markdown.models import MarkdownField
-
 from djmoney_rates.utils import convert_money
 
 from re import finditer
