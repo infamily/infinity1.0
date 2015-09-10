@@ -29,6 +29,7 @@ urlpatterns = patterns(
         name="comment-list2"
     ),
     url(
+        # TODO: Need to remove, including dependencies
         r'^comment-create/$',
         CommentCreateView.as_view(),
         name="comment-create"

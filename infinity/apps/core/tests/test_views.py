@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.models import ContentType
 from django.utils import formats
 
 from django_webtest import WebTest
@@ -57,15 +58,25 @@ class CommentTest(WebTest, AuthTestMixin):
         self.login(self.user.email, 'test')
 
         comment_list = []
-        comment = mommy.make('core.Comment', user=self.user, _fill_optional=True)
+        goal = mommy.make('core.Goal')
+        goal_type = ContentType.objects.get_for_model(Goal)
+        goal_model = goal_type.model_class()
+        comment = mommy.make(
+            'core.Comment',
+            content_type=goal_type,
+            object_id=goal_model.objects.first().pk,
+            user=self.user, _fill_optional=True
+        )
         comment_list.append(comment)
 
         url = reverse('comment-list1')
 
         comment = mommy.make(
             'core.Comment',
-            user=self.user,
-            _fill_optional=True)
+            content_type=goal_type,
+            object_id=goal_model.objects.first().pk,
+            user=self.user, _fill_optional=True
+        )
         comment_list.append(comment)
 
         resp = self.app.get(url)
@@ -80,12 +91,25 @@ class CommentTest(WebTest, AuthTestMixin):
         self.init_users()
         self.login(self.user.email, 'test')
 
-        comment = mommy.make('core.Comment', user=self.user, _fill_optional=True)
+        goal = mommy.make('core.Goal')
+        goal_type = ContentType.objects.get_for_model(Goal)
+        goal_model = goal_type.model_class()
+        comment = mommy.make(
+            'core.Comment',
+            content_type=goal_type,
+            object_id=goal_model.objects.first().pk,
+            user=self.user, _fill_optional=True
+        )
 
         url = reverse('comment-update', kwargs={
             'slug': comment.pk, })
 
-        comment_compare = mommy.make('core.Comment', user=self.user, _fill_optional=True)
+        comment_compare = mommy.make(
+            'core.Comment',
+            content_type=goal_type,
+            object_id=goal_model.objects.first().pk,
+            user=self.user, _fill_optional=True
+        )
 
         resp = self.app.get(url)
 
@@ -108,7 +132,16 @@ class CommentTest(WebTest, AuthTestMixin):
         self.init_users()
         self.login(self.user.email, 'test')
 
-        comment = mommy.make('core.Comment', user=self.user, _fill_optional=True)
+        goal = mommy.make('core.Goal')
+        goal_type = ContentType.objects.get_for_model(Goal)
+        goal_model = goal_type.model_class()
+        comment = mommy.make(
+            'core.Comment',
+            content_type=goal_type,
+            object_id=goal_model.objects.first().pk,
+            user=self.user, _fill_optional=True
+        )
+
         self.assertEqual(Comment.objects.count(), 1)
         url = reverse('comment-delete', args=(comment.pk,))
 
@@ -123,7 +156,16 @@ class CommentTest(WebTest, AuthTestMixin):
         self.init_users()
         self.login(self.user.email, 'test')
 
-        comment = mommy.make('core.Comment', user=self.user, _fill_optional=True)
+        goal = mommy.make('core.Goal')
+        goal_type = ContentType.objects.get_for_model(Goal)
+        goal_model = goal_type.model_class()
+        comment = mommy.make(
+            'core.Comment',
+            content_type=goal_type,
+            object_id=goal_model.objects.first().pk,
+            user=self.user, _fill_optional=True
+        )
+
 
         url = reverse('comment-create', kwargs={
         })
