@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
 
 from core.models import Comment
 from djmoney_rates.utils import convert_money
@@ -84,10 +85,11 @@ class PayPalTransaction(models.Model):
         self.hours = convert_money(self.amount, self.currency,
                                    'USD')/HourValue.objects.latest('created_at').value
 
-    def save(self, *args, **kwargs):
-        "Save comment created date to parent object."
-        self.compute_hours()
-        super(PayPalTransaction, self).save(*args, **kwargs)
-        self.comment.sum_hours_donated()
-        self.comment.match_hours()
-        self.comment.content_object.sum_hours()
+
+def comment_save_signal(sender, instance, **kwargs):
+    instance.compute_hours()
+    instance.comment.sum_hours_donated()
+    instance.comment.match_hours()
+    instance.comment.content_object.sum_hours()
+
+post_save.connect(comment_save_signal, sender=PayPalTransaction)

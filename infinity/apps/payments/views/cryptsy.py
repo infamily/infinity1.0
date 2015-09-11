@@ -211,7 +211,10 @@ class CryptsyTransactionCreateView(FormView):
                 messages.ERROR,
                 response["error"][0]
             )
-        return super(CryptsyTransactionCreateView, self).form_valid(form)
+
+        return redirect("%s#comment-%s" % (
+            reverse("%s-detail" % self.comment_model.content_type.name,
+                    kwargs={'slug': self.comment_model.object_id}), self.comment_model.id))
 
     def get_success_url(self):
         return reverse('payments:transaction_cryptsy', kwargs={'comment_id': self.comment_id})
