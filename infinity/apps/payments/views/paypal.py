@@ -1,6 +1,8 @@
 from django.views.generic import FormView
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 from django.views.generic.base import View
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
@@ -74,6 +76,7 @@ class PayPalTransactionView(FormView):
         )
 
         self.payUrl = result['pay_url']
+        self.request.session['paypal_comment_id'] = self.kwargs.get('comment_id')
         return super(PayPalTransactionView, self).form_valid(form)
 
     def get_success_url(self):
@@ -100,5 +103,12 @@ class PayPalTransactionSuccessView(View):
                 transaction.paymentExecStatus = paymentExecStatus
 
                 transaction.save()
-                return HttpResponse('success transaction')
-        return HttpResponse('no transactions')
+
+        if self.request.session.get('paypal_comment_id'):
+            comment = Comment.objects.get(id=self.request.session.get('paypal_comment_id'))
+            del self.request.session['paypal_comment_id']
+            return redirect("%s#comment-%s" % (
+                reverse("%s-detail" % comment.content_type.name,
+                        kwargs={'slug': comment.object_id}), comment.id))
+
+        return redirect('/')

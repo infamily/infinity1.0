@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
 
 from core.models import Comment
 
@@ -24,12 +25,6 @@ class CryptsyTransaction(models.Model):
     completed_on = models.DateTimeField(null=True, blank=True)
     comment = models.ForeignKey(Comment, related_name='cryptsy_transaction')
 
-    def save(self, *args, **kwargs):
-        "Save comment created date to parent object."
-        self.comment.compute_money()
-        self.comment.content_object.sum_comment_values()
-        super(CryptsyTransaction, self).save(*args, **kwargs)
-
 
 class CryptsyCredential(models.Model):
     privatekey = models.CharField(max_length=255, unique=True)
@@ -40,3 +35,10 @@ class CryptsyCredential(models.Model):
         related_name='credential'
     )
     default = models.BooleanField(default=False)
+
+
+def cryptsy_transaction_post_save_signal(sender, instance, **kwargs):
+    instance.comment.sum_hours_donated()
+    instance.comment.content_object.sum_hours()
+
+post_save.connect(cryptsy_transaction_post_save_signal, sender=CryptsyTransaction)

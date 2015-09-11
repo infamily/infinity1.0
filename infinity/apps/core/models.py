@@ -71,9 +71,10 @@ class Comment(models.Model):
         self.sum_hours_claimed()
         self.match_hours()
         super(Comment, self).save(*args, **kwargs)
-        self.content_object.commented_at = self.created_at
-        self.content_object.save()
-        self.content_object.sum_hours()
+        if self.content_object:
+            self.content_object.commented_at = self.created_at
+            self.content_object.save()
+            self.content_object.sum_hours()
 
     def delete(self, *args, **kwargs):
         "Update comment created date for parent object."
