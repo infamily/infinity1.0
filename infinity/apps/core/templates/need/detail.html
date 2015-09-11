@@ -9,10 +9,14 @@
 
 <div class="panel panel-default">
 <div class="panel-body">
+
+    <div align="right">[<u>assumed</u> {{ object.hours_assumed|floatformat:1 }} h, <u>donated</u> {{ object.hours_donated|floatformat:1 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:1 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
+
 <u>expression</u>: {{object.name}} (<u>lang_id</u>: {{object.language.id}}) 
 
 <h2><u>Definition</u>: {{object.definition}}</h2>
 [<a href="{% url "need-update" object.pk %}">Edit</a>]
+
 <br/>
 <br/>
 <div class="breadcrumb">
