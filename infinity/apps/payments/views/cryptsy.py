@@ -180,9 +180,9 @@ class CryptsyTransactionCreateView(FormView):
         else:
             cryptsy_credential = request.user.credential.get(default=True)
             self.cryptsy_publickey = cryptsy_credential.publickey
-        if self.comment_model.user == self.request.user:
+        if self.comment_model.hours_claimed:
             # Adding Transactions to Comment should only be possible
-            # only by the comment owner.
+            # if the comment has hours claimed.
             return super(CryptsyTransactionCreateView, self).dispatch(
                 request, *args, **kwargs)
         else:

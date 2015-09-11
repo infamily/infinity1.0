@@ -35,9 +35,12 @@
 
 
         <div class="actions">
-        {% if object.user == request.user %}
+        {% if object.hours_claimed %}
+
             <a class="btn" href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> PayPal</a>
             <a class="btn" href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Cryptsy</a>
+        {% endif %}
+        {% if object.user == request.user %}
             <a class="btn" href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}"><i class="fa fa-pencil-square-o"></i> Edit</a>
         {% endif %}
         <div class="alignright">
