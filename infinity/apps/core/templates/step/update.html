@@ -1,20 +1,12 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 {% block title %}Step update{% endblock title %}
 
 {% block content %}
 
 <h1>Step update</h1>
-<br/>
-<div class="actions">
-<a class="btn btn-danger" href="{% url "step-delete"    object.pk   %}"> 
-    Step delete
-</a>
-<a class="btn btn-info" href="{% url "task-create"    object.pk   %}"> 
-    Task create
-</a>
-</div>
 <br/>
 <div>
     

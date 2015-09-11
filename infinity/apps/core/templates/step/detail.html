@@ -1,91 +1,35 @@
 {% extends "base.html" %}
 
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 
-{% block title %}{{object.name}}{% endblock title %}
+{% block title %}s: {{ object.name }}{% endblock title %}
 
 {% block content %}
-
-<h1>{{object.name}}</h1>
-<br/>
-<div class="actions">
-<a class="btn btn-success" href="{% url "step-list1"    object.plan.pk    %}"> 
-    Step list
-</a>
-<a class="btn btn-warning" href="{% url "step-update"    object.pk   %}"> 
-    Step update
-</a>
-<a class="btn btn-info" href="{% url "step-create"    object.plan.pk    %}"> 
-    Step create
-</a>
-<a class="btn btn-danger" href="{% url "step-delete"    object.pk   %}"> 
-    Step delete
-</a>
-<a class="btn btn-success" href="{% url "task-list1"    object.pk   %}"> 
-    Task list
-</a>
-</div>
-<br/>
-<div>
-<ol class="breadcrumb">
-            <li>need: <a href="{% url "need-detail" object.plan.idea.goal.need.pk %}">{{object.plan.idea.goal.need }}</a></li>
-            <li>goal: <a href="{% url "goal-detail" object.plan.idea.goal.pk %}">{{object.plan.idea.goal }}</a></li>
-            <li>idea: <a href="{% url "idea-detail" object.plan.idea.pk %}">{{object.plan.idea }}</a>
-            <li>plan: <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a>
-</ol>
-</div>
-<br/>
-
-<table class="table">
-    <tr>
-        <td>Objective</td>
-        <td>
-
-        	{{object.objective}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Deliverables</td>
-        <td>
-
-        	{{object.deliverables}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Investables</td>
-        <td>
-
-        	{{object.investables}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Created by</td>
-        <td>
-
-        	{{object.user}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Created at</td>
-        <td>
-
-        	{{object.created_at}}
-	        
-
-        </td>
-    </tr>
-</table>
-
 <div class="panel panel-default">
+<div class="panel-body">
+
+step of plan <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a>
+<h1>{{object.name}}</h1>[<a href="{% url "step-update" object.pk %}">edit</a>, <a href="{% url "step-delete" object.pk %}">delete</a>]
+<br/>
+<br/>
+
+{{object.objective|markdown}}
+
+<br/>
+<br/>
+<div class="breadcrumb">
+<i>input:</i> {{object.investables}}
+</div>
+
+<div class="breadcrumb">
+<i>output:</i> {{object.deliverables}}
+</div>
+
+<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
+
+
 <div class="panel-heading">Tasks</div>
 <div class="panel-body">
 {% for object in task_list %}
@@ -95,9 +39,7 @@
       </li>
     </ul>
 {% endfor %}
-<a class="btn btn-success" href="{% url "task-create"    object.pk   %}"> 
-    Task create
-</a>
+<a href="{% url "task-create" object.pk %}">+New Task</a>
 </div>
 </div>
 

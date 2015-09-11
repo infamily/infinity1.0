@@ -3,95 +3,32 @@
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
-
-{% block title %}Plan detail{% endblock title %}
+{% block title %}p: {{ object.name }}{% endblock title %}
 
 {% block content %}
 
-<h1>Plan detail</h1>
-<br/>
-<div class="actions">
-<a class="btn btn-success" href="{% url "plan-list1"    object.idea.pk    %}"> 
-    Plan list
-</a>
-<a class="btn btn-warning" href="{% url "plan-update"    object.pk   %}"> 
-    Plan update
-</a>
-<a class="btn btn-danger" href="{% url "plan-delete"    object.pk   %}"> 
-    Plan delete
-</a>
-<a class="btn btn-success" href="{% url "step-list1"    object.pk   %}"> 
-    Step list
-</a>
-</div>
-<br/>
-<div>
-<ol class="breadcrumb">
-            <li>need: <a href="{% url "need-detail" object.idea.goal.need.pk %}">{{object.idea.goal.need }}</a></li>
-            <li>goal: <a href="{% url "goal-detail" object.idea.goal.pk %}">{{object.idea.goal }}</a></li>
-            <li>idea: <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a>
-</ol>
-</div>
-<br/>
-
-<table class="table">
-    <tr>
-        <td>Name</td>
-        <td>
-
-        	{{object.name}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Created at</td>
-        <td>
-
-        	{{object.created_at}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Deliverable</td>
-        <td>
-
-        	{{object.deliverable}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>User</td>
-        <td>
-
-        	{{object.user}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Situation</td>
-        <td>
-
-        	{{object.situation}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Idea</td>
-        <td>
-
-            <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea}}</a>
-	        
-
-        </td>
-    </tr>
-</table>
-
 <div class="panel panel-default">
+<div class="panel-body">
+approach to realizing idea <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a>
+<h1>{{ object.name }}</h1>[<a href="{% url "plan-update" object.pk %}">edit</a>, <a href="{% url "plan-delete" object.pk %}">delete</a>]
+<br/>
+<br/>
+
+<center>situation</center>
+<div class="breadcrumb">
+{{object.situation|markdown}}
+</div>
+
+<center>deliverable</center>
+<div class="breadcrumb">
+{{object.deliverable|markdown}}
+</div>
+
+<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
+</div>
+
+
+
 <div class="panel-heading">Steps</div>
 <div class="panel-body">
 {% for object in step_list %}
@@ -102,10 +39,9 @@
       </li>
     </ul>
 {% endfor %}
-<a class="btn btn-info" href="{% url "step-create"    object.pk   %}"> 
-    Step create
-</a>
+<a href="{% url "step-create" object.pk %}">+New Step</a>
 </div>
+
 </div>
 
 

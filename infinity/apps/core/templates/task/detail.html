@@ -3,78 +3,19 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %}Task detail{% endblock title %}
+{% block title %}t: {{ object.name }}{% endblock title %}
 
 {% block content %}
 
-<h1>Task detail</h1>
-<br/>
-<div class="actions">
-<a class="btn btn-success" href="{% url "task-list1"    object.step.pk    %}"> 
-    Task list
-</a>
-<a class="btn btn-warning" href="{% url "task-update"    object.pk   %}"> 
-    Task update
-</a>
-<a class="btn btn-danger" href="{% url "task-delete"    object.pk   %}"> 
-    Task delete
-</a>
-<a class="btn btn-success" href="{% url "work-list1"    object.pk   %}"> 
-    Work list
-</a>
-</div>
-<br/>
-<div>
-<ol class="breadcrumb">
-            <li>need: <a href="{% url "need-detail" object.step.plan.idea.goal.need.pk %}">{{object.step.plan.idea.goal.need }}</a></li>
-            <li>goal: <a href="{% url "goal-detail" object.step.plan.idea.goal.pk %}">{{object.step.plan.idea.goal }}</a></li>
-            <li>idea: <a href="{% url "idea-detail" object.step.plan.idea.pk %}">{{object.step.plan.idea }}</a>
-            <li>plan: <a href="{% url "plan-detail" object.step.plan.pk %}">{{object.step.plan}}</a>
-            <li>step: <a href="{% url "step-detail" object.step.pk %}">{{object.step}}</a>
-</ol>
-</div>
-<br/>
-
-<table class="table">
-    <tr>
-        <td>Name</td>
-        <td>
-
-        	{{object.name}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Created at</td>
-        <td>
-
-        	{{object.created_at}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>User</td>
-        <td>
-
-        	{{object.user}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Step</td>
-        <td>
-
-            <a href="{% url "step-detail" object.step.pk %}">{{object.step}}</a>
-	        
-
-        </td>
-    </tr>
-</table>
-
 <div class="panel panel-default">
+<div class="panel-body">
+    todo for milestone <a href="{% url "step-detail" object.step.pk %}">{{object.step}}</a>
+<h1>{{ object.name }}</h1>[<a href="{% url "task-update" object.pk %}">edit</a>, <a href="{% url "task-delete" object.pk %}">delete</a>]
+
+<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
+</div>
+
+
 <div class="panel-heading">Works</div>
 <div class="panel-body">
 {% for object in work_list %}
@@ -85,9 +26,7 @@
       </li>
     </ul>
 {% endfor %}
-<a class="btn btn-info" href="{% url "work-create"    object.pk   %}"> 
-    Work create
-</a>
+<a href="{% url "work-create"    object.pk   %}">+New Work</a>
 </div>
 </div>
 

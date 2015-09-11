@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
-{% block title %}{{object.name}}{% endblock title %}
+{% block title %}g: {{object.name}}{% endblock title %}
 
 {% block content %}
 
@@ -14,9 +14,11 @@
 <h1>{{object.name}}</h1>[<a href="{% url "goal-update" object.pk %}">edit</a>, <a href="{% url "goal-delete" object.pk %}">delete</a>]
 <br/>
 <br/>
+
 {{object.reason|markdown}}
 <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 </div>
+
 <div class="panel-heading">Ideas</div>
 <div class="panel-body">
 {% for object in idea_list %}
@@ -32,8 +34,6 @@
 </div>
         	
 
-<div class="panel panel-default">
-</div>
 
 {# Include comment list with transactions #}
 {% include "comment/list.html" %}
