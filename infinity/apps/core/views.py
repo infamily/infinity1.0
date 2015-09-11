@@ -1,4 +1,5 @@
 import json
+from itertools import chain
 
 from django.utils.translation import ugettext as _
 from django.http import HttpResponse
@@ -29,16 +30,42 @@ from .filters import *
 from django.utils import timezone
 from hours.models import HourValue
 
+
 class IndexView(TemplateView):
     template_name = 'home.html'
+    dropdown_list = [2, 4, 8, 16, 32, 64, 128, 512, 1024]
+
+    def post(self, request, *args, **kwargs):
+        if self.request.POST.get('goals'):
+            self.request.session['goals_number'] = int(self.request.POST['goals'])
+        if self.request.POST.get('ideas'):
+            self.request.session['ideas_number'] = int(self.request.POST['ideas'])
+        if self.request.POST.get('plans'):
+            self.request.session['plans_number'] = int(self.request.POST['plans'])
+        if self.request.POST.get('steps'):
+            self.request.session['steps_number'] = int(self.request.POST['steps'])
+        if self.request.POST.get('tasks'):
+            self.request.session['tasks_number'] = int(self.request.POST['tasks'])
+
+        return redirect(reverse('home'))
 
     def get_context_data(self, **kwargs):
-        
         items = {'goals': 2,
-                 'ideas': 3,
-                 'plans': 5,
-                 'steps': 7,
-                 'tasks': 11}
+                 'ideas': 4,
+                 'plans': 8,
+                 'steps': 16,
+                 'tasks': 32}
+
+        if self.request.session.get('goals_number'):
+            items['goals'] = self.request.session['goals_number']
+        if self.request.session.get('ideas_number'):
+            items['ideas'] = self.request.session['ideas_number']
+        if self.request.session.get('plans_number'):
+            items['plans'] = self.request.session['plans_number']
+        if self.request.session.get('steps_number'):
+            items['steps'] = self.request.session['steps_number']
+        if self.request.session.get('tasks_number'):
+            items['tasks'] = self.request.session['tasks_number']
 
         now = timezone.now()
         in_days = lambda x: float(x.seconds/86400.)
@@ -51,8 +78,7 @@ class IndexView(TemplateView):
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
-        dates = commented_at(list(goals)+list(ideas)+list(plans)+
-                             list(steps)+list(tasks))
+        dates = commented_at(chain(goals, ideas, plans, steps, tasks))
 
         if dates:
             start = min(dates)
@@ -86,6 +112,7 @@ class IndexView(TemplateView):
             'number_of_items': goals.count()+ideas.count()+plans.count()+
             steps.count()+tasks.count(),
             'hour_value': HourValue.objects.latest('created_at'),
+            'dropdown_list': self.dropdown_list,
         }
 
         context.update(kwargs)
