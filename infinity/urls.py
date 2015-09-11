@@ -4,14 +4,14 @@ from django.conf import settings
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
-#from core.views import GoalCreateView
+from core.views import IndexView
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url(r'^$', IndexView.as_view(), name='home'),
     url(r'', include('apps.core.urls')),
     url(r'^user/', include('allauth.urls')),
     url(r'^user/', include('apps.users.urls')),

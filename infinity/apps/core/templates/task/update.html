@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 {% block title %}Task update{% endblock title %}
 
@@ -7,20 +8,12 @@
 
 <h1>Task update</h1>
 <br/>
-<div class="actions">
-<a class="btn btn-info" href="{% url "work-create"    object.pk   %}"> 
-    Work create
-</a>
-<a class="btn btn-danger" href="{% url "task-delete"    object.pk   %}"> 
-    Task delete
-</a>
-</div>
-<br/>
 <div>
     
 </div>
 <br/>
 
 {% crispy form %}
+{% markdown_media %}
 
 {% endblock content %}

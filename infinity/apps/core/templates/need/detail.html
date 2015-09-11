@@ -3,19 +3,29 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %}{{object.name}}{% endblock title %}
+{% block title %}n: {{object.name}}{% endblock title %}
 
 {% block content %}
 
-<h1><u>Topic</u>: {{object.name}} (<u>lang</u>: {{object.language.id}})</h1>
+<div class="panel panel-default">
+<div class="panel-body">
+
+    <div align="right">[<u>assumed</u> {{ object.hours_assumed|floatformat:1 }} h, <u>donated</u> {{ object.hours_donated|floatformat:1 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:1 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
+
+<u>expression</u>: {{object.name}} (<u>lang_id</u>: {{object.language.id}}) 
+
 <h2><u>Definition</u>: {{object.definition}}</h2>
-<h3>Defined Meaning ID: {{object.defined_meaning_id}}</h3> 
-<h3>Created By: [<a href="{% url "user-detail" object.user.username%}">{{object.user.username}}</a>]</h3> 
-<div class="actions" align="right">
-<a class="btn btn-warning" href="{% url "need-update" object.pk %}">
-    Edit
-</a>
+[<a href="{% url "need-update" object.pk %}">Edit</a>]
+
+<br/>
+<br/>
+<div class="breadcrumb">
+Defined Meaning ID: {{object.defined_meaning_id}}
 </div>
+
+<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
+</div>
+
 <br/>
 <br/>
 <div>
@@ -39,6 +49,8 @@
     Add new
 </a>
 </div>
+</div>
+
 </div>
 
 {% include "comment/list.html" %}

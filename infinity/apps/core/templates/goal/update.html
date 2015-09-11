@@ -8,17 +8,12 @@
 
 <h1>Goal update</h1>
 <br/>
-<div class="actions">
-<a class="btn btn-info" href="{% url "idea-create"    object.pk   %}"> 
-    Idea create
-</a>
-</div>
-<br/>
 <div>
     
 </div>
 <br/>
 
 {% crispy form %}
+{% markdown_media %}
 
 {% endblock content %}

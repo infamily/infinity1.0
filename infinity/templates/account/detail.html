@@ -34,9 +34,11 @@
         <a class="btn btn-success" href="{% url "payments:coin_address_list"  %}"> 
             My Coin Addresses
         </a>
+        {% if request.user.invitationoption.invitations_left %}
         <a class="btn btn-success" href="{% url "invite:send"  %}"> 
             Send Invite
         </a>
+        {% endif %}
         {% if not request.user.id == object.id %}
         <form action="{% url "follow" %}" method="post">{% csrf_token %}
             <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 {% block title %}Work create{% endblock title %}
 
@@ -24,5 +25,6 @@
 <br/>
 
 {% crispy form %}
+{% markdown_media %}
 
 {% endblock content %}

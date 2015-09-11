@@ -30,7 +30,11 @@ class CommentCreateFormDetail(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
 
-        self.fields['text'].label = _('Comment')
+        self.fields['text'].label = _("""<b>Comment</b> (to claim hours, just
+                                      enclose a number within curly braces, e.g.,
+                                      {1.5} h. You can do it multiple times in
+                                      one comment, and use {?1.5} to indicate
+                                      estimates.""")
         self.fields['notify'].label = _('Notify mentioned users (e.g., <i>Hi [User], how are you?</i>) by e-mail.')
         self.helper = FormHelper(self)
 

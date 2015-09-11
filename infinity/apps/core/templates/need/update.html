@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 {% block title %}Need update{% endblock title %}
 
@@ -19,5 +20,6 @@
 <br/>
 
 {% crispy form %}
+{% markdown_media %}
 
 {% endblock content %}

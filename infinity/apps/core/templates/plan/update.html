@@ -8,20 +8,12 @@
 
 <h1>Plan update</h1>
 <br/>
-<div class="actions">
-<a class="btn btn-info" href="{% url "step-create"    object.pk   %}"> 
-    Step create
-</a>
-<a class="btn btn-danger" href="{% url "plan-delete"    object.pk   %}"> 
-    Plan delete
-</a>
-</div>
-<br/>
 <div>
     
 </div>
 <br/>
 
 {% crispy form %}
+{% markdown_media %}
 
 {% endblock content %}

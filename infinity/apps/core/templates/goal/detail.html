@@ -3,54 +3,24 @@
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
-{% block title %}{{object.name}}{% endblock title %}
+{% block title %}g: {{object.name}}{% endblock title %}
 
 {% block content %}
 
-<h1>{{object.name}}</h1>
-<br/>
-
-	        
-
-<div class="actions">
-<a class="btn btn-warning" href="{% url "goal-update"    object.pk   %}"> 
-    Goal update
-</a>
-<a class="btn btn-danger" href="{% url "goal-delete"    object.pk   %}"> 
-    Goal delete
-</a>
-</div>
-<br/>
-<div>
-<ol class="breadcrumb">
-    <li>topic: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a></li>
-</ol>    
-</div>
-<br/>
-{{object.reason|markdown}}
-
-<table class="table">
-    <tr>
-        <td>Created at</td>
-        <td>
-
-        	{{object.created_at}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>User</td>
-        <td>
-
-        	{{object.user}}
-	        
-
-        </td>
-    </tr>
-</table>
 
 <div class="panel panel-default">
+<div class="panel-body">
+    <div align="right">[<u>assumed</u> {{ object.hours_assumed|floatformat:1 }} h, <u>donated</u> {{ object.hours_donated|floatformat:1 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:1 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
+
+    need: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a> for: <a href="">{{ object.type }}</a>
+<h1>{{object.name}}</h1>[<a href="{% url "goal-update" object.pk %}">edit</a>, <a href="{% url "goal-delete" object.pk %}">delete</a>]
+<br/>
+<br/>
+
+{{object.reason|markdown}}
+<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
+</div>
+
 <div class="panel-heading">Ideas</div>
 <div class="panel-body">
 {% for object in idea_list %}
@@ -61,11 +31,11 @@
       </li>
     </ul>
 {% endfor %}
-<a class="btn btn-info" href="{% url "idea-create"    object.pk   %}"> 
-    Idea create
-</a>
+<a  href="{% url "idea-create" object.pk %}">+New Idea</a>
 </div>
 </div>
+        	
+
 
 {# Include comment list with transactions #}
 {% include "comment/list.html" %}

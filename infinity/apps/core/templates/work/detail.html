@@ -4,81 +4,33 @@
 {% load django_markdown %}
 
 
-{% block title %}Work detail{% endblock title %}
+{% block title %}w: {{ object.name }}{% endblock title %}
 
 {% block content %}
 
-<h1>Work detail</h1>
+<div class="panel panel-default">
+<div class="panel-body">
+
+    <div align="right">[<u>assumed</u> {{ object.hours_assumed|floatformat:1 }} h, <u>donated</u> {{ object.hours_donated|floatformat:1 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:1 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
+
+attempt on task <a href="{% url "task-detail" object.task.pk %}">{{object.task}}</a>
+
+<h1>{{ object.name }}</h1>[<a href="{% url "work-update" object.pk %}">edit</a>, <a href="{% url "work-delete" object.pk %}">delete</a>]
 <br/>
-<div class="actions">
-<a class="btn btn-success" href="{% url "work-list1"    object.task.pk    %}"> 
-    Work list
-</a>
-<a class="btn btn-warning" href="{% url "work-update"    object.pk   %}"> 
-    Work update
-</a>
-<a class="btn btn-danger" href="{% url "work-delete"    object.pk   %}"> 
-    Work delete
-</a>
-</div>
 <br/>
-<div>
-<ol class="breadcrumb">
-            <li>need: <a href="{% url "need-detail" object.task.step.plan.idea.goal.need.pk %}">{{object.task.step.plan.idea.goal.need }}</a></li>
-            <li>goal: <a href="{% url "goal-detail" object.task.step.plan.idea.goal.pk %}">{{object.task.step.plan.idea.goal }}</a></li>
-            <li>idea: <a href="{% url "idea-detail" object.task.step.plan.idea.pk %}">{{object.task.step.plan.idea }}</a>
-            <li>plan: <a href="{% url "plan-detail" object.task.step.plan.pk %}">{{object.task.step.plan}}</a>
-            <li>step: <a href="{% url "step-detail" object.task.step.pk %}">{{object.task.step}}</a>
-            <li>task: <a href="{% url "task-detail" object.task.pk %}">{{object.task}}</a></li>
-</ol>
-    
+
+{{object.description|markdown}}
+<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 </div>
 <br/>
 
+<div class="panel-body">
 <table class="table">
-    <tr>
-        <td>Name</td>
-        <td>
-
-        	{{object.name}}
-	        
-
-        </td>
-    </tr>
     <tr>
         <td>Url</td>
         <td>
 
         	{{object.url}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Created at</td>
-        <td>
-
-        	{{object.created_at}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Updated at</td>
-        <td>
-
-        	{{object.updated_at}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>User</td>
-        <td>
-
-        	{{object.user}}
-	        
-
         </td>
     </tr>
     <tr>
@@ -86,40 +38,11 @@
         <td>
 
         	{{object.file}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Parent work id</td>
-        <td>
-
-        	{{object.parent_work_id}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Description</td>
-        <td>
-
-        	{{object.description}}
-	        
-
-        </td>
-    </tr>
-    <tr>
-        <td>Task</td>
-        <td>
-
-            <a href="{% url "task-detail" object.task.pk %}">{{object.task}}</a>
-	        
-
         </td>
     </tr>
 </table>
+</div>
 
-<div class="panel panel-default">
 <div class="panel-heading">Follow-up Works</div>
 <div class="panel-body">
 {% for object in work_list %}
@@ -130,10 +53,7 @@
       </li>
     </ul>
 {% endfor %}
-<a class="btn btn-info" href="{% url "work-create"    object.task.pk   %}"> 
-    Work create
-</a>
-
+<a href="{% url "work-create" object.task.pk %}">+New Work</a>
 </div>
 </div>
 

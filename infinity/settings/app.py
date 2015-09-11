@@ -3,6 +3,7 @@ LOCAL_APPS = (
     'core',
     'payments',
     'invitation',
+    'hours',
 )
 
 CONSTANCE_CONFIG = {

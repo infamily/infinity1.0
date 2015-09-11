@@ -1,7 +1,10 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
 
 from core.models import Comment
+from djmoney_rates.utils import convert_money
+from hours.models import HourValue
 
 
 class PayPalTransaction(models.Model):
@@ -55,6 +58,21 @@ class PayPalTransaction(models.Model):
         null=True
     )
 
+    hours = models.DecimalField(
+        null=False,
+        max_digits=20,
+        decimal_places=8,
+        blank=False,
+        default=0,
+    )
+
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+
     comment = models.ForeignKey(Comment, related_name='paypal_transaction')
 
     def __unicode__(self):
@@ -62,3 +80,16 @@ class PayPalTransaction(models.Model):
 
     def get_absolute_url(self):
         return "/"
+
+    def compute_hours(self):
+        self.hours = convert_money(self.amount, self.currency,
+                                   'USD')/HourValue.objects.latest('created_at').value
+
+
+def comment_save_signal(sender, instance, **kwargs):
+    instance.compute_hours()
+    instance.comment.sum_hours_donated()
+    instance.comment.match_hours()
+    instance.comment.content_object.sum_hours()
+
+post_save.connect(comment_save_signal, sender=PayPalTransaction)

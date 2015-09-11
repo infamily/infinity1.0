@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load staticfiles %}
+{% load django_markdown %}
 
 {% block extra_js %}
   <script src="{% static 'js/create_need.js' %}"></script>
@@ -28,6 +29,7 @@
 <h3 align="center">define a topic to talk about</h3>
 <br/>
 {% crispy form %}
+{% markdown_media %}
 <br/>
 <div>
     <center><b>note:</b> a topic is a triplet <i>(language, expression, definition)</i>. Topics are being inter-lingually linked via <a href="http://www.omegawiki.org/">Ω-wiki</a> data.</center>
