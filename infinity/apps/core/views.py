@@ -78,7 +78,8 @@ class IndexView(TemplateView):
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
-        dates = commented_at(chain(goals, ideas, plans, steps, tasks))
+        objects_list = list(chain(goals, ideas, plans, steps, tasks))
+        dates = commented_at(objects_list)
 
         if dates:
             start = min(dates)
@@ -109,8 +110,7 @@ class IndexView(TemplateView):
                          '%0.2f' % in_days(now-min(commented_at(list(tasks))))
                          or 0,
             'last_days': '%0.2f' % days,
-            'number_of_items': goals.count()+ideas.count()+plans.count()+
-            steps.count()+tasks.count(),
+            'number_of_items': len(objects_list),
             'hour_value': HourValue.objects.latest('created_at'),
             'dropdown_list': self.dropdown_list,
         }
