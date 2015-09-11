@@ -113,6 +113,7 @@ class IndexView(TemplateView):
             'number_of_items': len(objects_list),
             'hour_value': HourValue.objects.latest('created_at'),
             'dropdown_list': self.dropdown_list,
+            'items': items,
         }
 
         context.update(kwargs)
