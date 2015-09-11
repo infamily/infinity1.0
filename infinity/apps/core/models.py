@@ -54,6 +54,12 @@ class Comment(models.Model):
         max_digits=20,
         blank=False,
     )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     hours_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
@@ -94,12 +100,22 @@ class Comment(models.Model):
 
     def sum_hours_claimed(self):
         self.hours_claimed = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
         for m in finditer('\{([^}]+)\}', self.text):
-            try:
-                hours = float(m.group(1))
-                self.hours_claimed += Decimal(hours)
-            except:
-                pass
+            token = m.group(1)
+            if token:
+                if token[0] == u'?':
+                    try:
+                        hours = float(token[1:])
+                        self.hours_assumed += Decimal(hours)
+                    except:
+                        pass
+                else:
+                    try:
+                        hours = float(m.group(1))
+                        self.hours_claimed += Decimal(hours)
+                    except:
+                        pass
 
     def match_hours(self):
         if self.hours_claimed >= self.hours_donated:
@@ -177,6 +193,12 @@ class Goal(models.Model):
         max_digits=20,
         blank=False,
     )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     hours_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
@@ -193,6 +215,7 @@ class Goal(models.Model):
     def sum_hours(self):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
         self.hours_matched = Decimal(0.)
         comment_content_type = ContentType.objects.get_for_model(self)
         comments = Comment.objects.filter(
@@ -202,6 +225,7 @@ class Goal(models.Model):
         for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
+            self.hours_assumed += comment.hours_assumed
             self.hours_matched += Decimal(2.)*comment.hours_matched
         self.save()
 
@@ -283,6 +307,12 @@ class Work(models.Model):
         max_digits=20,
         blank=False,
     )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     hours_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
@@ -300,6 +330,7 @@ class Work(models.Model):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
         self.hours_matched = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
         comment_content_type = ContentType.objects.get_for_model(self)
         comments = Comment.objects.filter(
             content_type__pk=comment_content_type.pk,
@@ -308,6 +339,7 @@ class Work(models.Model):
         for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
+            self.hours_assumed += comment.hours_assumed
             self.hours_matched += Decimal(2.)*comment.hours_matched
         self.save()
 
@@ -378,6 +410,12 @@ class Idea(models.Model):
         max_digits=20,
         blank=False,
     )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     hours_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
@@ -394,6 +432,7 @@ class Idea(models.Model):
     def sum_hours(self):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
         self.hours_matched = Decimal(0.)
         comment_content_type = ContentType.objects.get_for_model(self)
         comments = Comment.objects.filter(
@@ -403,6 +442,7 @@ class Idea(models.Model):
         for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
+            self.hours_assumed += comment.hours_assumed
             self.hours_matched += Decimal(2.)*comment.hours_matched
         self.save()
 
@@ -483,6 +523,12 @@ class Step(models.Model):
         max_digits=20,
         blank=False,
     )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     hours_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
@@ -499,6 +545,7 @@ class Step(models.Model):
     def sum_hours(self):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
         self.hours_matched = Decimal(0.)
         comment_content_type = ContentType.objects.get_for_model(self)
         comments = Comment.objects.filter(
@@ -508,6 +555,7 @@ class Step(models.Model):
         for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
+            self.hours_assumed += comment.hours_assumed
             self.hours_matched += Decimal(2.)*comment.hours_matched
         self.save()
 
@@ -577,6 +625,12 @@ class Task(models.Model):
         max_digits=20,
         blank=False,
     )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     hours_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
@@ -593,6 +647,7 @@ class Task(models.Model):
     def sum_hours(self):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
         self.hours_matched = Decimal(0.)
         comment_content_type = ContentType.objects.get_for_model(self)
         comments = Comment.objects.filter(
@@ -601,8 +656,9 @@ class Task(models.Model):
         )
         for comment in comments:
             self.hours_donated += comment.hours_donated
-            self.hours_matched += Decimal(2.)*comment.hours_matched
             self.hours_claimed += comment.hours_claimed
+            self.hours_claimed += comment.hours_assumed
+            self.hours_matched += Decimal(2.)*comment.hours_matched
         self.save()
 
     def get_usd(self):
@@ -659,6 +715,12 @@ class Need(models.Model):
         max_digits=20,
         blank=False,
     )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     hours_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
@@ -678,6 +740,7 @@ class Need(models.Model):
     def sum_hours(self):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
         self.hours_matched = Decimal(0.)
         comment_content_type = ContentType.objects.get_for_model(self)
         comments = Comment.objects.filter(
@@ -687,6 +750,7 @@ class Need(models.Model):
         for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
+            self.hours_assumed += comment.hours_assumed
             self.hours_matched += Decimal(2.)*comment.hours_matched
         self.save()
 
@@ -768,6 +832,12 @@ class Plan(models.Model):
         max_digits=20,
         blank=False,
     )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     hours_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
@@ -784,6 +854,7 @@ class Plan(models.Model):
     def sum_hours(self):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
         self.hours_matched = Decimal(0.)
         comment_content_type = ContentType.objects.get_for_model(self)
         comments = Comment.objects.filter(
@@ -793,6 +864,7 @@ class Plan(models.Model):
         for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
+            self.hours_assumed += comment.hours_assumed
             self.hours_matched += Decimal(2.)*comment.hours_matched
         self.save()
 
