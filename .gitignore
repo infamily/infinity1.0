@@ -16,6 +16,7 @@ infinity/settings/secret.py
 Virtualenv
 .env
 env
+.vimrc
 
 # Sphinx docs:
 build
