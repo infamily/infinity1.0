@@ -13,7 +13,7 @@
     <div align="right">[<u>assumed</u> {{ object.hours_assumed|floatformat:1 }} h, <u>donated</u> {{ object.hours_donated|floatformat:1 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:1 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
 
     todo for milestone <a href="{% url "step-detail" object.step.pk %}">{{object.step}}</a>
-<h1>{{ object.name }}</h1>[<a href="{% url "task-update" object.pk %}">edit</a>, <a href="{% url "task-delete" object.pk %}">delete</a>]
+    <h1>{{ object.name }}</h1>{% if object.user == request.user %}[<a href="{% url "task-update" object.pk %}">edit</a>, <a href="{% url "task-delete" object.pk %}">delete</a>]{% endif %}
 
 <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 </div>

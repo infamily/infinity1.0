@@ -15,7 +15,7 @@
 
 attempt on task <a href="{% url "task-detail" object.task.pk %}">{{object.task}}</a>
 
-<h1>{{ object.name }}</h1>[<a href="{% url "work-update" object.pk %}">edit</a>, <a href="{% url "work-delete" object.pk %}">delete</a>]
+<h1>{{ object.name }}</h1>{% if object.user == request.user %}[<a href="{% url "work-update" object.pk %}">edit</a>, <a href="{% url "work-delete" object.pk %}">delete</a>]{% endif %}
 <br/>
 <br/>
 
