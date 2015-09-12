@@ -27,7 +27,7 @@
     <ul class="list-group">
       <li class="list-group-item"> 
          <a href="{% url "idea-detail" object.pk %}">{{object.name}}</a>
-         <p>{{object.description}}</p>
+         <p>{{object.description|truncatechars:120}}</p>
       </li>
     </ul>
 {% endfor %}
