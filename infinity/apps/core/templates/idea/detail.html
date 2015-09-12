@@ -16,7 +16,7 @@ want: <a href="{% url "goal-detail" object.goal.pk %}">{{object.goal }}</a></li>
 <br/>
 <br/>
 
-{{object.reason|markdown}}
+{{object.description|markdown}}
 <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 </div>
 
