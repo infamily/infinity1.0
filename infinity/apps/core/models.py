@@ -112,7 +112,7 @@ class Comment(models.Model):
                         pass
                 else:
                     try:
-                        hours = float(m.group(1))
+                        hours = float(token)
                         self.hours_claimed += Decimal(hours)
                     except:
                         pass
