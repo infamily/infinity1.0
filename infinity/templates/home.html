@@ -27,10 +27,10 @@
 <h1>How do I sign up?</h1>
 <p>Currently, you need an invitation. If you have a friend who uses the service, you can ask for an invite.</p>
 {% else %}
+<div align="right">{% if user.invitationoption.invitations_left %}<b>[You have got <a href="{% url "invite:send"  %}">{{user.invitationoption.invitations_left}} invitations</a> left.]</b>{% else %}<i>Mention [admin] for invitations.</i>{% endif %}</div>
 <div align="right">Write bugs and suggestions <a href="/step/2/detail/">here</a>.</div>
 <div align="right">Current time value: 1 ħ = <a href="https://research.stlouisfed.org/fred2/series/CES0500000003">{{ hour_value.value|floatformat:2 }}</a> $</a>.</div>
 <div align="right">Please note that: 1 ħ + 1 h = 2 ḥ.</div>
-<div align="right">{% if user.invitationoption.invitations_left %}<b>You have got <a href="{% url "invite:send"  %}">{{user.invitationoption.invitations_left}} invitations</a> left.</b>{% else %}<i>Mention [admin] for invitations.</i>{% endif %}</div>
 <br/>
 <p>The recent {{ number_of_items }} items. Items in <b>bold</b> had been created in last <b>{{last_days}}</b> days.</p>
 
