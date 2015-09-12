@@ -140,11 +140,11 @@ class GoalCreateForm(forms.ModelForm):
 
         self.fields['need'].label = _('''<b>Object:</b> (if you can't find it, <a href="/need-create/">click here</a> to add)''')
         self.fields['type'].label = _("<b>Category:</b> (of your goal or need)")
-        self.fields['name'].label = _('<b>Title:</b> (e.g., "Our community in Nepal needs water for drinking this summer", used in title.)')
-        self.fields['name'].widget.attrs.update({'placeholder': _('We need ... for ...')})
-        self.fields['reason'].label = _('<b>Description:</b> (reason and conditions of satisfaction.)')
+        self.fields['name'].label = _("""<b>Title:</b> (e.g., Potable Water Shortage)""")
+        self.fields['name'].widget.attrs.update({'placeholder': _('')})
+        self.fields['reason'].label = _('<b>Description:</b> (e.g., Many people in the world lack clean potable water.)')
         self.fields['reason'].widget.attrs.update({'placeholder': \
-        _('Water shortage. Satisfied, if the supply of 10 liters a day is achieved.')})
+        _('')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
 
 
