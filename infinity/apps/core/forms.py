@@ -138,9 +138,13 @@ class GoalCreateForm(forms.ModelForm):
             )
         )
 
-        self.fields['need'].label = _('''<b>Object:</b> (if you can't find it, <a href="/need-create/">click here</a> to add)''')
-        self.fields['type'].label = _("<b>Category:</b> (of your goal or need)")
-        self.fields['name'].label = _("""<b>Title:</b> (e.g., Potable Water Shortage)""")
+        self.fields['need'].label = _("""<b>Object:</b> (relevant to problem,
+                                      <a href="/need-create/">click here</a> to
+                                      add if you can't find it.)""")
+        self.fields['type'].label = _("<b>Category:</b> (of the problem)")
+        self.fields['name'].label = _("""<b>Title:</b> (e.g., Potable Water
+                                      Shortage, <a href="/goal/list/">check</a> if the problem is not
+                                      defined yet.)""")
         self.fields['name'].widget.attrs.update({'placeholder': _('')})
         self.fields['reason'].label = _('<b>Description:</b> (e.g., Many people in the world lack clean potable water.)')
         self.fields['reason'].widget.attrs.update({'placeholder': \
