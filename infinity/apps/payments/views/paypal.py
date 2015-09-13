@@ -30,13 +30,8 @@ class PayPalTransactionView(FormView):
     def dispatch(self, request, *args, **kwargs):
         comment_id = kwargs.get('comment_id')
         self.comment_model = get_object_or_404(Comment, pk=comment_id)
-        if self.comment_model.user == self.request.user:
-            # Adding Transactions to Comment should only be possible
-            # if the comment has hours claimed.
-            return super(PayPalTransactionView, self).dispatch(
-                request, *args, **kwargs)
-        else:
-            return HttpResponseForbidden()
+        return super(PayPalTransactionView, self).dispatch(
+            request, *args, **kwargs)
 
     def form_valid(self, form):
         current_site = get_current_site(self.request)
