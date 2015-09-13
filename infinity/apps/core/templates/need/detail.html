@@ -15,7 +15,7 @@
 <u>expression</u>: {{object.name}} (<u>lang_id</u>: {{object.language.id}}) 
 
 <h2><u>Definition</u>: {{object.definition}}</h2>
-[<a href="{% url "need-update" object.pk %}">Edit</a>]
+{% if object.user == request.user %}[<a href="{% url "need-update" object.pk %}">Edit</a>]{%endif%}
 
 <br/>
 <br/>

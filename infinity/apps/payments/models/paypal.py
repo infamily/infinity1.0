@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
+from django.db.models.signals import pre_save
 
 from core.models import Comment
 from djmoney_rates.utils import convert_money
@@ -86,10 +87,13 @@ class PayPalTransaction(models.Model):
                                    'USD')/HourValue.objects.latest('created_at').value
 
 
-def comment_save_signal(sender, instance, **kwargs):
+def comment_pre_save_signal(sender, instance, **kwargs):
     instance.compute_hours()
+
+def comment_save_signal(sender, instance, **kwargs):
     instance.comment.sum_hours_donated()
     instance.comment.match_hours()
     instance.comment.content_object.sum_hours()
 
+pre_save.connect(comment_pre_save_signal, sender=PayPalTransaction)
 post_save.connect(comment_save_signal, sender=PayPalTransaction)
