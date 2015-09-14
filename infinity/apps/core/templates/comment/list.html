@@ -13,22 +13,12 @@
         <br />
         <div class="actions">
             {% for transaction in object.paypal_transaction.all %}
-            <div class="panel panel-default">
-                <div class="panel-heading">PayPal #{{transaction.id}} {{transaction.paymentExecStatus}}</div>
-                <div class="panel-body">
-                    <p>Amount: {{transaction.amount}} {{transaction.currency}}</p>
-                    <p>{{transaction.created_at}}</p>
+            <div class="breadcrumb" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}] <b>via</b> PayPal [{{transaction.paymentExecStatus}}]
                 </div>
-            </div>
             {% endfor %}
 
             {% for transaction in object.cryptsy_transaction.all %}
-            <div class="panel panel-default">
-                <div class="panel-heading">Cryptsy #{{transaction.id}}</div>
-                <div class="panel-body">
-                    <p>Amount: {{transaction.amount}} {{transaction.address.currency_code}}</p>
-                    <p>{{transaction.created_on}}</p>
-                </div>
+            <div class="breadcrumb" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.address.currency_code}}</b> [{{transaction.sender_credential.user}}] → [{{transaction.address.user}}] <b>via</b> Cryptsy [{{transaction.created_on}}]
             </div>
             {% endfor %}
         </div>
