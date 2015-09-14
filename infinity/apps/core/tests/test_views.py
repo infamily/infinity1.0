@@ -577,8 +577,6 @@ class WorkTest(WebTest, AuthTestMixin):
 
         self.assertContains(resp, work.file or "")
 
-        self.assertContains(resp, work.parent_work_id or "")
-
         self.assertContains(resp, work.description)
 
 
@@ -740,8 +738,6 @@ class IdeaTest(WebTest, AuthTestMixin):
         self.assertContains(resp, idea.description)
 
         self.assertContains(resp, idea.name)
-
-        self.assertContains(resp, idea.summary)
 
         self.assertContains(resp, idea.user)
 
