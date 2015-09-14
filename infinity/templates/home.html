@@ -35,7 +35,7 @@
 <p>The recent {{ number_of_items }} items. Items in <b>bold</b> had been created in last <b>{{last_days}}</b> days.</p>
 
 <div class="panel panel-default">
-    <div class="panel-heading"><a href="{% url "goal-list" %}">Goals</a>&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - define a problem
+    <div class="panel-heading"><a href="{% url "goal-list" %}">Goals</a>&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - <b>define a problem</b> <i>(to own <u>0.01%</u> of all ḥ under it)</i>
     
     <div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="goals" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.goals == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form> items commented in last {{ goal_days }} days.</div></div>
     <div class="panel-body">
@@ -47,7 +47,7 @@
 </div>
 
 <div class="panel panel-default">
-    <div class="panel-heading"><a href="{% url "idea-list" %}">Ideas</a>&nbsp;<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - suggest a solution<div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="ideas" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.ideas == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form> items commented in last {{ idea_days }} days.</div></div>
+    <div class="panel-heading"><a href="{% url "idea-list" %}">Ideas</a>&nbsp;<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - <b>suggest a solution</b> <i>(to own <u>0.1%</u> of all ḥ under it)</i><div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="ideas" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.ideas == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form> items commented in last {{ idea_days }} days.</div></div>
     <div class="panel-body">
     {% for idea in idea_list %}
     <b>$ {{ idea.0.get_usd|floatformat:2 }} </b> {% if idea.1 %}<b>{% endif %}<a href="{% url "idea-detail" idea.0.pk %}">{{ idea.0.name }}</a>{% if idea.1 %}</b>{% endif %} <br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ idea.0.hours_donated|floatformat:2 }} ħ donated, {{ idea.0.hours_claimed|floatformat:1 }} h claimed, {{ idea.0.hours_assumed|floatformat:1 }} h assumed, {{ idea.0.hours_matched|floatformat:2 }} <a href="">ḥ</a> matched]
@@ -58,7 +58,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="{% url "plan-list" %}">Plans</a>&nbsp;<a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - start a project <div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="plans" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.plans == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form> items commented in last {{ plan_days }} days.</div>
+        <a href="{% url "plan-list" %}">Plans</a>&nbsp;<a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - <b>start a project</b> <i>(to own <u>1%</u> of all ḥ under it)</i><div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="plans" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.plans == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form> items commented in last {{ plan_days }} days.</div>
     </div>
     <div class="panel-body">
     {% for plan in plan_list %}
