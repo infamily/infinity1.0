@@ -41,7 +41,9 @@ class IdeaChoiceField(AutoModelSelect2Field):
 
     def get_results(self, request, term, page, context):
         goal = request.GET.get('goal', '')
-        ideas = Idea.objects.filter(goal=goal,name__icontains=term)
+        if goal:
+            ideas = Idea.objects.filter(goal=goal, name__icontains=term)
+        else:
+            ideas = Idea.objects.all()
         s2_results = [(n.id, n.name, {}) for n in ideas]
         return ('nil', False, s2_results)
-
