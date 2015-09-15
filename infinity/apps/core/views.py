@@ -88,6 +88,11 @@ class IndexView(TemplateView):
             start = timezone.now()
             days = 0.
 
+        try:
+            hour_value = HourValue.objects.latest('created_at')
+        except HourValue.ObjectDoesNotExist:
+            hour_value = 0
+
         context = {
             'goal_list': [(goal, goal.created_at > start) for goal in goals],
             'idea_list': [(idea, idea.created_at > start) for idea in ideas],
@@ -111,7 +116,7 @@ class IndexView(TemplateView):
                          or 0,
             'last_days': '%0.2f' % days,
             'number_of_items': len(objects_list),
-            'hour_value': HourValue.objects.latest('created_at'),
+            'hour_value': hour_value,
             'dropdown_list': self.dropdown_list,
             'items': items,
         }
