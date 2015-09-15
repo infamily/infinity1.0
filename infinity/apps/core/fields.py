@@ -16,14 +16,8 @@ class TypeChoiceField(AutoModelSelect2Field):
 
 
 class NeedChoiceField(AutoModelSelect2Field):
-    queryset = Need.objects
-
-    def get_results(self, request, term, page, context):
-        # _type = request.GET.get('type', '')
-        needs = Need.objects.filter(name__istartswith=term)
-        s2_results = [(n.id, "(%s) %s: %s" %
-                       (n.language.name,n.name,n.definition), {}) for n in needs]
-        return ('nil', False, s2_results)
+    queryset = Need.objects.all()
+    search_fields = ['name__icontains']
 
 
 class GoalChoiceField(AutoModelSelect2Field):
