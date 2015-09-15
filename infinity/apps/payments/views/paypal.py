@@ -11,6 +11,7 @@ from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 
 from ..systems import PayPal
+from ..systems import PayPalException
 from ..models import PayPalTransaction
 from ..forms import PayPalTransactionForm
 
@@ -29,13 +30,8 @@ class PayPalTransactionView(FormView):
     def dispatch(self, request, *args, **kwargs):
         comment_id = kwargs.get('comment_id')
         self.comment_model = get_object_or_404(Comment, pk=comment_id)
-        if self.comment_model.user == self.request.user:
-            # Adding Transactions to Comment should only be possible
-            # if the comment has hours claimed.
-            return super(PayPalTransactionView, self).dispatch(
-                request, *args, **kwargs)
-        else:
-            return HttpResponseForbidden()
+        return super(PayPalTransactionView, self).dispatch(
+            request, *args, **kwargs)
 
     def form_valid(self, form):
         current_site = get_current_site(self.request)
@@ -68,12 +64,16 @@ class PayPalTransactionView(FormView):
             )
             return super(PayPalTransactionView, self).form_invalid(form)
 
-        result = paypal.adaptive_payment(
-            comment_object=self.comment_model,
-            receiver_amount=form.cleaned_data.get('amount'),
-            receiver_user=user,
-            sender_user=self.request.user
-        )
+        try:
+            result = paypal.adaptive_payment(
+                comment_object=self.comment_model,
+                receiver_amount=form.cleaned_data.get('amount'),
+                receiver_user=user,
+                sender_user=self.request.user
+            )
+        except PayPalException as e:
+            messages.error(self.request, e)
+            return super(PayPalTransactionView, self).form_invalid(form)
 
         self.payUrl = result['pay_url']
         self.request.session['paypal_comment_id'] = self.kwargs.get('comment_id')
