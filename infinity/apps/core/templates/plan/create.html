@@ -40,14 +40,6 @@
         return results;
     };
 
-    var s2_endpoints_param_gen_for_goal = function(term, page) {
-        var proxFunc = $.proxy(django_select2.get_url_params, this);
-        // no need for a custom func here.
-        var results = proxFunc(term, page, 'django_select2.process_results');
-        results.need = $('#id_need').val();
-        return results;
-    };
-
     var s2_endpoints_param_gen_for_idea = function(term, page) {
         var proxFunc = $.proxy(django_select2.get_url_params, this);
         // no need for a custom func here.
