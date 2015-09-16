@@ -4,6 +4,9 @@ from django.contrib.auth.models import (
     AbstractUser, BaseUserManager, PermissionsMixin
 )
 
+from .signals import user_pre_save
+from .signals import user_post_save
+
 
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
@@ -95,7 +98,12 @@ class User(AbstractUser):
         return rel.exists()
 
 
-from .signals import user_pre_save
-from .signals import user_post_save
+class ConversationInvite(models.Model):
+    token = models.CharField(max_length=255)
+    redirect_to_page = models.URLField()
+    user = models.ForeignKey(User)
+    expired = models.BooleanField(default=False)
+
+
 signals.pre_save.connect(user_pre_save, sender=User)
 signals.post_save.connect(user_post_save, sender=User)
