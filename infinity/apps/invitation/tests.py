@@ -2,12 +2,16 @@ from django_webtest import WebTest
 from model_mommy import mommy
 from django.core.urlresolvers import reverse
 from allauth.account.models import EmailAddress, EmailConfirmation
+from core.models import Language
+from django.core import mail
 
 
 class InvitationTest(WebTest):
     def setUp(self):
         self.user_with_invitations = mommy.make('users.User')
         self.user_without_invitations = mommy.make('users.User')
+
+        self.language = mommy.make(Language)
 
         self.user_with_invitations.set_password('test')
         self.user_with_invitations.save()
@@ -37,4 +41,13 @@ class InvitationTest(WebTest):
 
         self.login(self.email_first.email, 'test')
         response = self.app.get(invitation_form_view_url)
-        import ipdb; ipdb.set_trace()
+        form = response.form
+        form['member_email'] = 'shamkir@gmail.com'
+        form['language'] = self.language.id
+        form['email_body'] = 'Hello, World {{ invitation_url }}'
+        form_response = form.submit()
+
+        self.assertIn(
+            "Invitation",
+            [x.subject for x in mail.outbox]
+        )
