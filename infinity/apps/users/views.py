@@ -1,6 +1,8 @@
 import json
 
 from django.contrib.auth import login
+from django.core.mail import EmailMessage
+from django.template import Context, Template
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
 from django.views.generic import UpdateView
@@ -13,6 +15,7 @@ from django.contrib import messages
 from django import forms
 
 from allauth.account.models import EmailAddress
+from constance import config
 
 from .forms import UserUpdateForm
 from .forms import ConversationInviteForm
@@ -52,8 +55,9 @@ class ConversationInviteView(FormView):
             return super(ConversationInviteView, self).form_invalid(form)
 
         user = User.objects.create(username=form.cleaned_data.get('name'))
-
-        # Send email and password here
+        password = User.objects.make_random_password()
+        user.set_password(password)
+        user.save()
 
         EmailAddress.objects.create(
             user=user,
@@ -64,6 +68,26 @@ class ConversationInviteView(FormView):
         self.object.redirect_url = self.request.build_absolute_uri()
         self.object.user = user
         self.object.save()
+
+        ctx = {
+            'user_password': password,
+            'user': user,
+            'conversation_url': self.object.get_conversation_url()
+        }
+
+        template = Template(config.CONVERSATION_EMAIL_TEMPLATE)
+        context = Context(ctx)
+        subject = config.CONVERSATION_SUBJECT
+        from_email = config.CONVERSATION_FROM_EMAIL
+        message = template.render(context)
+
+        EmailMessage(
+            subject,
+            message,
+            to=[form.cleaned_data.get('email')],
+            from_email=from_email
+        ).send()
+
         return super(ConversationInviteView, self).form_valid(form)
 
     def get(self, request, *args, **kwargs):

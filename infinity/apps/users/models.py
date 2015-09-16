@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models import signals
+from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 from django.contrib.auth.models import (
     AbstractUser, BaseUserManager, PermissionsMixin
 )
@@ -106,6 +108,13 @@ class ConversationInvite(models.Model):
     expired = models.BooleanField(default=False)
     name = models.CharField(max_length=255)
     email = models.EmailField()
+
+    def get_conversation_url(self):
+        current_site_instance = Site.objects.get_current()
+        return "http://{0}/{1}" % (
+            current_site_instance.domain,
+            reverse('user-conversation-invite', kwargs={'token': self.token})
+        )
 
 
 signals.pre_save.connect(user_pre_save, sender=User)
