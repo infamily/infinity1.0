@@ -8,6 +8,23 @@ from allauth.account.forms import SignupForm as AllAuthSignupForm
 from allauth.account.forms import LoginForm as AllAuthLoginForm
 
 from .models import User
+from .models import ConversationInvite
+
+
+class ConversationInviteForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request')
+        super(ConversationInviteForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        self.helper.layout.append(Submit('invite', _('Invite to this conversation')))
+
+    class Meta:
+        model = ConversationInvite
+        fields = [
+            'name',
+            'email'
+        ]
 
 
 class UserUpdateForm(forms.ModelForm):

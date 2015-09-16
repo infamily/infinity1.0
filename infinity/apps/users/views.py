@@ -1,17 +1,83 @@
 import json
+
+from django.contrib.auth import login
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
 from django.views.generic import UpdateView
 from django.views.generic import View
-from django.views.generic import ListView
+from django.views.generic import FormView
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from django import forms
+
+from allauth.account.models import EmailAddress
 
 from .forms import UserUpdateForm
+from .forms import ConversationInviteForm
 from .models import User
 from .decorators import ForbiddenUser
+from .models import ConversationInvite
+
+
+class ConversationInviteView(FormView):
+    form_class = ConversationInviteForm
+    template_name = "account/invite.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ConversationInviteView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+
+        try:
+            email_exists = EmailAddress.objects.get(email=form.cleaned_data.get('email'))
+        except EmailAddress.DoesNotExist:
+            email_exists = False
+
+        try:
+            user_exists = User.objects.get(username=form.cleaned_data.get('name'))
+        except User.DoesNotExist:
+            user_exists = False
+
+        if email_exists:
+            form.add_error('email', forms.ValidationError(_('User with this email already exists')))
+            return super(ConversationInviteView, self).form_invalid(form)
+
+        if user_exists:
+            form.add_error('name', forms.ValidationError(_('User with this name already exists')))
+            return super(ConversationInviteView, self).form_invalid(form)
+
+        user = User.objects.create(username=form.cleaned_data.get('name'))
+
+        # Send email and password here
+
+        EmailAddress.objects.create(
+            user=user,
+            email=form.cleaned_data.get('email'),
+            verified=True
+        )
+
+        self.object.redirect_url = self.request.build_absolute_uri()
+        self.object.user = user
+        self.object.save()
+        return super(ConversationInviteView, self).form_valid(form)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            conversation_invite = ConversationInvite.objects.get(
+                token=kwargs.get('token'),
+                expired=False
+            )
+            user = conversation_invite.user
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            login(request, user)
+            return redirect(conversation_invite.redirect_url)
+        except ConversationInvite.DoesNotExist:
+            return redirect(reverse('account_login'))
 
 
 class FollowView(View):

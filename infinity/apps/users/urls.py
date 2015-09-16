@@ -1,9 +1,5 @@
 from django.conf.urls import patterns, url
-from users.views import UserDetailView
-from users.views import UserUpdateView
-from users.views import UserCryptsyNotificationToken
-from users.views import FriendFollowingView
-from users.views import FollowView
+from users.views import *
 
 
 urlpatterns = patterns(
@@ -27,6 +23,16 @@ urlpatterns = patterns(
         r'^(?P<username>.*)/cryptsy/(?P<credential_id>\d+)/checkpoint/$',
         UserCryptsyNotificationToken.as_view(),
         name='cryptsy_notification_token'
+    ),
+    url(
+        r'^i/$',
+        ConversationInviteView.as_view(),
+        name="user-conversation-invite"
+    ),
+    url(
+        r'^i/(?P<token>.*)/$',
+        ConversationInviteView.as_view(),
+        name="user-conversation-invite"
     ),
     url(
         r'^(?P<slug>.*)/$',

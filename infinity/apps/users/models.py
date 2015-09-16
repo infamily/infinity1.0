@@ -6,6 +6,7 @@ from django.contrib.auth.models import (
 
 from .signals import user_pre_save
 from .signals import user_post_save
+from .signals import conversation_post_save
 
 
 class CustomUserManager(BaseUserManager):
@@ -100,10 +101,13 @@ class User(AbstractUser):
 
 class ConversationInvite(models.Model):
     token = models.CharField(max_length=255)
-    redirect_to_page = models.URLField()
-    user = models.ForeignKey(User)
+    redirect_url = models.URLField()
+    user = models.OneToOneField(User)
     expired = models.BooleanField(default=False)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
 
 
 signals.pre_save.connect(user_pre_save, sender=User)
 signals.post_save.connect(user_post_save, sender=User)
+signals.post_save.connect(conversation_post_save, sender=ConversationInvite)
