@@ -519,6 +519,12 @@ class WorkDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'work_list': Work.objects.filter(parent_work_id=kwargs.get('object').id).order_by('-id')
         })
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        context.update({
+            'conversation_form': conversation_form
+        })
         return context
 
 
@@ -579,7 +585,7 @@ class IdeaCreateView(CreateView):
         else:
             self.goal_instance = False
         return super(IdeaCreateView, self).dispatch(*args, **kwargs)
- 
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
@@ -649,9 +655,6 @@ class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
     def get_context_data(self, **kwargs):
         context = super(IdeaDetailView, self).get_context_data(**kwargs)
         obj = self.get_object()
-        conversation_form = ConversationInviteForm()
-        next_url = "?next=%s" % self.request.path
-        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
         form = None
         if self.request.user.__class__.__name__ not in [u'AnonymousUser']:
             form = self.get_form_class()
@@ -664,6 +667,10 @@ class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'plan_list': Plan.objects.filter(idea=kwargs.get('object')).order_by('-id')
         })
+
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
         context.update({
             'conversation_form': conversation_form
         })
@@ -1079,6 +1086,12 @@ class NeedDetailView(DetailView, CommentsContentTypeWrapper):
         })
         context.update({
             'goal_list': Goal.objects.filter(need=kwargs.get('object')).order_by('-id')
+        })
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        context.update({
+            'conversation_form': conversation_form
         })
         return context
 
