@@ -21,6 +21,7 @@ from clever_selects.views import ChainedSelectChoicesView
 
 from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
+from users.forms import ConversationInviteForm
 from .utils import CommentsContentTypeWrapper
 from .utils import ViewTypeWrapper
 from .models import *
@@ -88,6 +89,11 @@ class IndexView(TemplateView):
             start = timezone.now()
             days = 0.
 
+        try:
+            hour_value = HourValue.objects.latest('created_at')
+        except HourValue.ObjectDoesNotExist:
+            hour_value = 0
+
         context = {
             'goal_list': [(goal, goal.created_at > start) for goal in goals],
             'idea_list': [(idea, idea.created_at > start) for idea in ideas],
@@ -111,7 +117,7 @@ class IndexView(TemplateView):
                          or 0,
             'last_days': '%0.2f' % days,
             'number_of_items': len(objects_list),
-            'hour_value': HourValue.objects.latest('created_at'),
+            'hour_value': hour_value,
             'dropdown_list': self.dropdown_list,
             'items': items,
         }
@@ -352,6 +358,14 @@ class GoalDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'idea_list': Idea.objects.filter(goal=kwargs.get('object')).order_by('-id')
         })
+
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        context.update({
+            'conversation_form': conversation_form
+        })
+
         return context
 
 
@@ -635,6 +649,9 @@ class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
     def get_context_data(self, **kwargs):
         context = super(IdeaDetailView, self).get_context_data(**kwargs)
         obj = self.get_object()
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
         form = None
         if self.request.user.__class__.__name__ not in [u'AnonymousUser']:
             form = self.get_form_class()
@@ -646,6 +663,9 @@ class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
         })
         context.update({
             'plan_list': Plan.objects.filter(idea=kwargs.get('object')).order_by('-id')
+        })
+        context.update({
+            'conversation_form': conversation_form
         })
         return context
 
@@ -789,6 +809,14 @@ class StepDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'task_list': Task.objects.filter(step=kwargs.get('object')).order_by('id')
         })
+
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        context.update({
+            'conversation_form': conversation_form
+        })
+
         return context
 
 
@@ -925,6 +953,14 @@ class TaskDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'work_list': Work.objects.filter(task=kwargs.get('object')).order_by('id')
         })
+
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        context.update({
+            'conversation_form': conversation_form
+        })
+
         return context
 
 
@@ -1188,4 +1224,12 @@ class PlanDetailView(DetailView, CommentsContentTypeWrapper):
         context.update({
             'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('id')
         })
+
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        context.update({
+            'conversation_form': conversation_form
+        })
+
         return context

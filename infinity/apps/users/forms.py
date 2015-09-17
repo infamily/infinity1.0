@@ -3,11 +3,41 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import (
+    Submit, HTML, Layout, Fieldset, ButtonHolder
+)
 from allauth.account.forms import SignupForm as AllAuthSignupForm
 from allauth.account.forms import LoginForm as AllAuthLoginForm
 
 from .models import User
+from .models import ConversationInvite
+
+
+class ConversationInviteForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ConversationInviteForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        self.helper.layout = Layout(
+            Fieldset(
+                'Invite to this conversation',
+                'name',
+                'email',
+                ButtonHolder(
+                    Submit('invite', _('Send invite'))
+                )
+            )
+        )
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-8'
+
+    class Meta:
+        model = ConversationInvite
+        fields = [
+            'name',
+            'email'
+        ]
 
 
 class UserUpdateForm(forms.ModelForm):

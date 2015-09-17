@@ -1,3 +1,10 @@
+def conversation_post_save(sender, instance, created, *args, **kwargs):
+    from uuid import uuid4
+    if created:
+        instance.token = uuid4().hex
+        instance.save()
+
+
 def user_pre_save(sender, instance, *args, **kwargs):
     """ Get username from email
     sender - The model class.

@@ -23,7 +23,11 @@ class InvitationForm(forms.Form):
         self.fields['email_body'].help_text = _("You can use {{ invitation_url }} tag to past invitation url")
         self.fields['language'] = LanguageChoiceField(
             queryset=Language.objects.all(),
-            widget=AutoHeavySelect2Widget
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 0
+                }
+            )
         )
 
         self.helper = FormHelper(self)

@@ -1,8 +1,14 @@
 from django.db import models
 from django.db.models import signals
+from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 from django.contrib.auth.models import (
     AbstractUser, BaseUserManager, PermissionsMixin
 )
+
+from .signals import user_pre_save
+from .signals import user_post_save
+from .signals import conversation_post_save
 
 
 class CustomUserManager(BaseUserManager):
@@ -95,7 +101,22 @@ class User(AbstractUser):
         return rel.exists()
 
 
-from .signals import user_pre_save
-from .signals import user_post_save
+class ConversationInvite(models.Model):
+    token = models.CharField(max_length=255)
+    redirect_url = models.URLField()
+    user = models.OneToOneField(User)
+    expired = models.BooleanField(default=False)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+
+    def get_conversation_url(self):
+        current_site_instance = Site.objects.get_current()
+        return "http://%s%s" % (
+            current_site_instance.domain,
+            reverse('user-conversation-invite', kwargs={'token': self.token})
+        )
+
+
 signals.pre_save.connect(user_pre_save, sender=User)
 signals.post_save.connect(user_post_save, sender=User)
+signals.post_save.connect(conversation_post_save, sender=ConversationInvite)
