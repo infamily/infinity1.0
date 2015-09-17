@@ -32,6 +32,8 @@ AUTH_USER_MODEL = "users.User"
 
 LOGIN_URL = '/user/login/'
 
+INVITATIONS_INVITATION_ONLY = True
+
 # Some autoslag handler that we need to create for make tests runnable
 
 
