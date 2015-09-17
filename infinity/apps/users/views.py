@@ -28,10 +28,8 @@ class ConversationInviteView(FormView):
     form_class = ConversationInviteForm
     template_name = "account/invite.html"
 
-    def get_form_kwargs(self):
-        kwargs = super(ConversationInviteView, self).get_form_kwargs()
-        kwargs['request'] = self.request
-        return kwargs
+    def get_success_url(self):
+        return self.request.GET.get('next')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -65,7 +63,7 @@ class ConversationInviteView(FormView):
             verified=True
         )
 
-        self.object.redirect_url = self.request.build_absolute_uri()
+        self.object.redirect_url = self.request.GET.get('next')
         self.object.user = user
         self.object.save()
 

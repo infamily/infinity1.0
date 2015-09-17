@@ -111,7 +111,7 @@ class ConversationInvite(models.Model):
 
     def get_conversation_url(self):
         current_site_instance = Site.objects.get_current()
-        return "http://{0}/{1}" % (
+        return "http://%s%s" % (
             current_site_instance.domain,
             reverse('user-conversation-invite', kwargs={'token': self.token})
         )
