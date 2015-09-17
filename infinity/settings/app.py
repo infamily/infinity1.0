@@ -14,8 +14,8 @@ CONSTANCE_CONFIG = {
     'PAYPAL_SECURITY_SIGNATURE': ('AFcWxV21C7fd0v3bYYYRCpSSRl31AU7eDuvOQwePEQhUEjtkBesDYrC.', 'PayPal security signature'),
     'PAYPAL_CANCEL_URL': ('http://localhost:3000/', 'PayPal cancel URL'),
     'MAX_MENTIONS_PER_COMMENT': (10, '_comment_post_save email notifications per comment'),
-    'CONVERSATION_EMAIL_TEMPLATE': ('Hello, your conversation url: { conversation_url }, Your password: { user_password }', ''),
-    'CONVERSATION_SUBJECT': ('', ''),
+    'CONVERSATION_EMAIL_TEMPLATE': ('Hello, your conversation url: {{conversation_url}}, Your password: {{user_password}}', ''),
+    'CONVERSATION_SUBJECT': ('Invitation to conversation', ''),
     'CONVERSATION_FROM_EMAIL': ('noreply@infty.xyz', ''),
 }
 
