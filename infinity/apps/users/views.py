@@ -29,6 +29,7 @@ class ConversationInviteView(FormView):
     template_name = "account/invite.html"
 
     def get_success_url(self):
+        messages.info(self.request, _('Invitation to conversation has been sent'))
         return self.request.GET.get('next')
 
     def form_valid(self, form):
