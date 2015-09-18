@@ -44,9 +44,16 @@
 
 
 <div class="panel panel-default">
-<div class="panel-body">
-{% crispy form %}
-{% crispy conversation_form %}
+    <div class="panel-body">
+        {% crispy form %}
+        {% markdown_media %}
+    </div>
 </div>
+
+{% if reqquest.user.is_authenticated %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        {% crispy conversation_form %}
+    </div>
 </div>
-{% markdown_media %}
+{% endif %}
