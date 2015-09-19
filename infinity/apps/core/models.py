@@ -675,7 +675,7 @@ class Task(models.Model):
         for comment in comments:
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
-            self.hours_claimed += comment.hours_assumed
+            self.hours_assumed += comment.hours_assumed
             self.hours_matched += Decimal(2.)*comment.hours_matched
         self.save()
 
