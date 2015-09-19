@@ -4,6 +4,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div
 from django_select2.widgets import AutoHeavySelect2Widget
+from django_select2.widgets import AutoHeavySelect2MultipleWidget
 from django_select2.fields import AutoModelSelect2Field
 
 
@@ -21,9 +22,12 @@ from .fields import NeedChoiceField
 from .fields import TypeChoiceField
 from .fields import GoalChoiceField
 from .fields import IdeaChoiceField
+from .fields import MembersChoiceField
 
 
 from django_markdown.widgets import MarkdownWidget
+
+from decimal import Decimal
 
 class CommentCreateFormDetail(forms.ModelForm):
 
@@ -111,6 +115,8 @@ class GoalCreateForm(forms.ModelForm):
 
     reason = forms.CharField(widget=MarkdownWidget())
 
+    hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
+
     def __init__(self, *args, **kwargs):
         need_instance = kwargs.pop('need_instance')
         super(GoalCreateForm, self).__init__(*args, **kwargs)
@@ -162,11 +168,14 @@ class GoalCreateForm(forms.ModelForm):
             'need',
             'name',
             'reason',
+            'hyper_equity',
             'personal',
         ]
 
 
 class GoalUpdateForm(forms.ModelForm):
+
+    hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
 
     def __init__(self, *args, **kwargs):
         super(GoalUpdateForm, self).__init__(*args, **kwargs)
@@ -187,6 +196,7 @@ class GoalUpdateForm(forms.ModelForm):
         fields = [
             'type',
             'name',
+            'hyper_equity',
             'reason',
             'personal',
         ]
@@ -266,6 +276,10 @@ class WorkCreateForm(forms.ModelForm):
 
 class IdeaUpdateForm(forms.ModelForm):
 
+    super_equity = forms.ChoiceField(
+        choices=[(Decimal(x*0.01), '%.0f' % (x*1.)+ '%') for x in range(1,11)]
+    )
+
     def __init__(self, *args, **kwargs):
         super(IdeaUpdateForm, self).__init__(*args, **kwargs)
 
@@ -284,6 +298,7 @@ class IdeaUpdateForm(forms.ModelForm):
             'summary',
             'description',
             'goal',
+            'super_equity',
             'personal'
         ]
         widgets = {
@@ -294,6 +309,10 @@ class IdeaUpdateForm(forms.ModelForm):
 class IdeaCreateForm(forms.ModelForm):
 
     goal = GoalChoiceField()
+
+    super_equity = forms.ChoiceField(
+        choices=[(Decimal(x*0.01), '%.0f' % (x*1.)+ '%') for x in range(1,11)]
+    )
 
     def __init__(self, *args, **kwargs):
         goal_instance = kwargs.pop('goal_instance')
@@ -339,6 +358,7 @@ class IdeaCreateForm(forms.ModelForm):
             'name',
             'summary',
             'description',
+            'super_equity',
             'personal'
         ]
         widgets = {
@@ -538,11 +558,23 @@ class NeedUpdateForm(forms.ModelForm):
 
 class PlanUpdateForm(forms.ModelForm):
 
+    plain_equity = forms.ChoiceField(
+        choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
+    )
 
     def __init__(self, *args, **kwargs):
         super(PlanUpdateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
+
+        self.fields['members'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the members for the equity...',
+                }
+            )
+        )
 
         self.helper.layout.append(Submit('save', _('Update')))
 
@@ -558,7 +590,9 @@ class PlanUpdateForm(forms.ModelForm):
             'name',
             'situation',
             'deliverable',
-            'personal'
+            'plain_equity',
+            'members',
+            'personal',
         ]
         widgets = {
             'situation': MarkdownWidget,
@@ -569,6 +603,10 @@ class PlanUpdateForm(forms.ModelForm):
 class PlanCreateForm(forms.ModelForm):
 
     goal = GoalChoiceField()
+
+    plain_equity = forms.ChoiceField(
+        choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
+    )
 
     def __init__(self, *args, **kwargs):
         idea_instance = kwargs.pop('idea_instance')
@@ -613,6 +651,15 @@ class PlanCreateForm(forms.ModelForm):
             )
         )
 
+        self.fields['members'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the members for the equity...',
+                }
+            )
+        )
+
         self.fields['name'].label = _('<b>Means:</b> (e.g., "computer-aided design software, good CAD skills, electric soldering iron, glue, aluminium solder", used in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _("Main tools and/or methods you will use, comma-separated.")})
         self.fields['situation'].label = _('<b>Situation:</b> (Describe your current situation by listing the things that you have, including access.)')
@@ -633,6 +680,8 @@ class PlanCreateForm(forms.ModelForm):
             'situation',
             'deliverable',
             'name',
+            'plain_equity',
+            'members',
             'personal'
         ]
         widgets = {

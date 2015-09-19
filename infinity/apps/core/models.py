@@ -205,6 +205,12 @@ class Goal(models.Model):
         max_digits=20,
         blank=False,
     )
+    hyper_equity = models.DecimalField(
+        default=0.0001,
+        decimal_places=8,
+        max_digits=20,
+        blank=False
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -231,6 +237,9 @@ class Goal(models.Model):
 
     def get_usd(self):
         return self.hours_donated*HourValue.objects.latest('created_at').value
+
+    def get_equity(self):
+        return self.hyper_equity*100
 
 
 class Work(models.Model):
@@ -422,6 +431,12 @@ class Idea(models.Model):
         max_digits=20,
         blank=False,
     )
+    super_equity = models.DecimalField(
+        default=0.01,
+        decimal_places=8,
+        max_digits=20,
+        blank=False
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -448,6 +463,9 @@ class Idea(models.Model):
 
     def get_usd(self):
         return self.hours_donated*HourValue.objects.latest('created_at').value
+
+    def get_equity(self):
+        return self.super_equity*100
 
 
 class Step(models.Model):
@@ -844,6 +862,18 @@ class Plan(models.Model):
         max_digits=20,
         blank=False,
     )
+    plain_equity = models.DecimalField(
+        default=0.1,
+        decimal_places=8,
+        max_digits=20,
+        blank=False
+    )
+    members = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='user_members',
+        blank=False,
+        null=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -870,6 +900,9 @@ class Plan(models.Model):
 
     def get_usd(self):
         return self.hours_donated*HourValue.objects.latest('created_at').value
+
+    def get_equity(self):
+        return self.plain_equity*100
 
 
 class Language(models.Model):

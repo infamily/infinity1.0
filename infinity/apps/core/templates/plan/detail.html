@@ -9,7 +9,10 @@
 
 <div class="panel panel-default">
 <div class="panel-body">
-    <div align="right">[<u>assumed</u> {{ object.hours_assumed|floatformat:2 }} h, <u>donated</u> {{ object.hours_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:2 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
+    <div align="right">[<u>assumed</u> {{ object.hours_assumed|floatformat:2 }} h, <u>donated</u> {{ object.hours_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:2 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]<br/>
+[<u>shareholders:</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %}<u>equity</u>: {{ object.get_equity|floatformat:0 }}% ḥ]<br/>
+    
+    </div>
 
 approach to realizing idea <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a>
 <h1>{{ object.name }}</h1>{% if object.user == request.user %}[<a href="{% url "plan-update" object.pk %}">edit</a>, <a href="{% url "plan-delete" object.pk %}">delete</a>]{% endif %}
