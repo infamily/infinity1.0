@@ -1300,6 +1300,8 @@ class PlanTest(WebTest, AuthTestMixin):
             user=self.user,
             _fill_optional=True)
 
+        member = mommy.make('users.User')
+
         resp = self.app.get(url)
 
         form = resp.form
@@ -1307,6 +1309,7 @@ class PlanTest(WebTest, AuthTestMixin):
         #form['idea'] = plan_compare.idea.pk
         form['deliverable'] = plan_compare.deliverable
         form['situation'] = plan_compare.situation
+        form['members'] = [member.pk, ]
         form.submit()
 
         plan_updated = Plan.objects.get(pk=plan.pk)
@@ -1345,10 +1348,13 @@ class PlanTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
+        member = mommy.make('users.User')
+
         form = resp.form
         form['name'] = plan.name
         form['deliverable'] = plan.deliverable
         form['situation'] = plan.situation
+        form['members'] = [member.pk, ]
         form.submit()
 
         plan_created = Plan.objects.latest('id')
