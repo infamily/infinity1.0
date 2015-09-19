@@ -205,6 +205,30 @@ class Goal(models.Model):
         max_digits=20,
         blank=False,
     )
+    total_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     hyper_equity = models.DecimalField(
         default=0.0001,
         decimal_places=8,
@@ -431,6 +455,30 @@ class Idea(models.Model):
         max_digits=20,
         blank=False,
     )
+    total_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
     super_equity = models.DecimalField(
         default=0.01,
         decimal_places=8,
@@ -553,6 +601,30 @@ class Step(models.Model):
         max_digits=20,
         blank=False,
     )
+    total_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -655,6 +727,30 @@ class Task(models.Model):
         max_digits=20,
         blank=False,
     )
+    total_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -740,6 +836,30 @@ class Need(models.Model):
         blank=False,
     )
     hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
@@ -857,6 +977,30 @@ class Plan(models.Model):
         blank=False,
     )
     hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_matched = models.DecimalField(
         default=0.,
         decimal_places=8,
         max_digits=20,
