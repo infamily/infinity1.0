@@ -1,9 +1,11 @@
 from django_select2.fields import AutoModelSelect2Field
+from django_select2.fields import AutoModelSelect2MultipleField
 
 from .models import Need
 from .models import Type
 from .models import Goal
 from .models import Idea
+from users.models import User
 
 
 class TypeChoiceField(AutoModelSelect2Field):
@@ -49,3 +51,8 @@ class IdeaChoiceField(AutoModelSelect2Field):
 
         s2_results = [(n.id, n.name, {}) for n in ideas]
         return ('nil', False, s2_results)
+
+
+class MembersChoiceField(AutoModelSelect2MultipleField):
+    queryset = User.objects.all()
+    search_fields = ['username__icontains']
