@@ -131,7 +131,7 @@ class Comment(models.Model):
             self.hours_matched += tx.hours_matched
 
     def get_usd(self):
-        return self.hours_donated*HourValue.objects.latest('created_at').value
+        return self.total_donated*HourValue.objects.latest('created_at').value
 
 class Goal(models.Model):
     type = models.ForeignKey(
@@ -275,7 +275,7 @@ class Goal(models.Model):
 
 
     def get_usd(self):
-        return self.hours_donated*HourValue.objects.latest('created_at').value
+        return self.total_donated*HourValue.objects.latest('created_at').value
 
     def get_equity(self):
         return self.hyper_equity*100
@@ -395,7 +395,7 @@ class Work(models.Model):
         pass
 
     def get_usd(self):
-        return self.hours_donated*HourValue.objects.latest('created_at').value
+        return self.total_donated*HourValue.objects.latest('created_at').value
 
 
 class Idea(models.Model):
@@ -540,7 +540,7 @@ class Idea(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*HourValue.objects.latest('created_at').value
+        return self.total_donated*HourValue.objects.latest('created_at').value
 
     def get_equity(self):
         return self.super_equity*100
@@ -692,7 +692,7 @@ class Step(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*HourValue.objects.latest('created_at').value
+        return self.total_donated*HourValue.objects.latest('created_at').value
 
 
 class Task(models.Model):
@@ -830,7 +830,7 @@ class Task(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*HourValue.objects.latest('created_at').value
+        return self.total_donated*HourValue.objects.latest('created_at').value
 
 
 class Need(models.Model):
@@ -959,7 +959,7 @@ class Need(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*HourValue.objects.latest('created_at').value
+        return self.total_donated*HourValue.objects.latest('created_at').value
 
 
 class Type(models.Model):
@@ -1121,7 +1121,7 @@ class Plan(models.Model):
         self.save()
 
     def get_usd(self):
-        return self.hours_donated*HourValue.objects.latest('created_at').value
+        return self.total_donated*HourValue.objects.latest('created_at').value
 
     def get_equity(self):
         return self.plain_equity*100
