@@ -5,7 +5,7 @@
 {% block title %}Plans{% endblock title %}
 
 {% block content %}
-<h1>Plans</h1>
+<h1>Plans <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></a></i></h1>
 
 <div class="search-block" style="text-align: center;">
 {% crispy filter.form %}
