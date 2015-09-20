@@ -267,10 +267,10 @@ class Goal(models.Model):
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
         for idea in self.goal_ideas.all():
-            self.total_donated += idea.hours_donated
-            self.total_claimed += idea.hours_claimed
-            self.total_assumed += idea.hours_assumed
-            self.total_matched += idea.hours_matched
+            self.total_donated += idea.total_donated
+            self.total_claimed += idea.total_claimed
+            self.total_assumed += idea.total_assumed
+            self.total_matched += idea.total_matched
         self.save()
 
 
@@ -367,6 +367,30 @@ class Work(models.Model):
         max_digits=20,
         blank=False,
     )
+    total_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -392,7 +416,11 @@ class Work(models.Model):
         self.save()
 
     def sum_totals(self):
-        pass
+        self.total_donated = self.hours_donated
+        self.total_claimed = self.hours_claimed
+        self.total_assumed = self.hours_assumed
+        self.total_matched = self.hours_matched
+        self.save()
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
