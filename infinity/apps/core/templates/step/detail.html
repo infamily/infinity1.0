@@ -37,7 +37,7 @@ step of plan <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a
 {% for object in task_list %}
     <ul class="list-group">
       <li class="list-group-item">
-         <a href="{% url "task-detail" object.pk %}">{{object.name}}</a> 
+      <b>[{{object.hours_claimed|floatformat:1}}/{{object.hours_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}">{{object.name}}</a>
       </li>
     </ul>
 {% endfor %}

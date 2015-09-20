@@ -561,10 +561,10 @@ class Idea(models.Model):
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
         for plan in self.idea_plans.all():
-            self.total_donated += plan.hours_donated
-            self.total_claimed += plan.hours_claimed
-            self.total_assumed += plan.hours_assumed
-            self.total_matched += plan.hours_matched
+            self.total_donated += plan.total_donated
+            self.total_claimed += plan.total_claimed
+            self.total_assumed += plan.total_assumed
+            self.total_matched += plan.total_matched
         self.save()
 
     def get_usd(self):
@@ -713,10 +713,10 @@ class Step(models.Model):
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
         for task in self.step_tasks.all():
-            self.total_donated += task.hours_donated
-            self.total_claimed += task.hours_claimed
-            self.total_assumed += task.hours_assumed
-            self.total_matched += task.hours_matched
+            self.total_donated += task.total_donated
+            self.total_claimed += task.total_claimed
+            self.total_assumed += task.total_assumed
+            self.total_matched += task.total_matched
         self.save()
 
     def get_usd(self):
@@ -851,10 +851,10 @@ class Task(models.Model):
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
         for work in self.task_works.all():
-            self.total_donated += work.hours_donated
-            self.total_claimed += work.hours_claimed
-            self.total_assumed += work.hours_assumed
-            self.total_matched += work.hours_matched
+            self.total_donated += work.total_donated
+            self.total_claimed += work.total_claimed
+            self.total_assumed += work.total_assumed
+            self.total_matched += work.total_matched
         self.save()
 
     def get_usd(self):
@@ -1142,10 +1142,10 @@ class Plan(models.Model):
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
         for step in self.plan_steps.all():
-            self.total_donated += step.hours_donated
-            self.total_claimed += step.hours_claimed
-            self.total_assumed += step.hours_assumed
-            self.total_matched += step.hours_matched
+            self.total_donated += step.total_donated
+            self.total_claimed += step.total_claimed
+            self.total_assumed += step.total_assumed
+            self.total_matched += step.total_matched
         self.save()
 
     def get_usd(self):
