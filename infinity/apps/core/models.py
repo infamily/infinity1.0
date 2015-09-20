@@ -280,6 +280,13 @@ class Goal(models.Model):
     def get_equity(self):
         return self.hyper_equity*100
 
+    def comment_count(self):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        return Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        ).count()
+
 
 class Work(models.Model):
     personal = models.BooleanField(default=False)
@@ -424,6 +431,13 @@ class Work(models.Model):
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
+
+    def comment_count(self):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        return Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        ).count()
 
 
 class Idea(models.Model):
@@ -572,6 +586,13 @@ class Idea(models.Model):
 
     def get_equity(self):
         return self.super_equity*100
+
+    def comment_count(self):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        return Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        ).count()
 
 
 class Step(models.Model):
@@ -722,6 +743,13 @@ class Step(models.Model):
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
+    def comment_count(self):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        return Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        ).count()
+
 
 class Task(models.Model):
     personal = models.BooleanField(default=False)
@@ -860,6 +888,13 @@ class Task(models.Model):
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
+    def comment_count(self):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        return Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        ).count()
+
 
 class Need(models.Model):
     created_at = models.DateTimeField(
@@ -988,6 +1023,13 @@ class Need(models.Model):
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
+
+    def comment_count(self):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        return Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        ).count()
 
 
 class Type(models.Model):
@@ -1153,6 +1195,13 @@ class Plan(models.Model):
 
     def get_equity(self):
         return self.plain_equity*100
+
+    def comment_count(self):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        return Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        ).count()
 
 
 class Language(models.Model):
