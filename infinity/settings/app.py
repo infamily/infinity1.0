@@ -6,6 +6,21 @@ LOCAL_APPS = (
     'hours',
 )
 
+CONVERSATION_EMAIL_TEMPLATE = """
+Hi [{{invited_user}}],
+
+Your friend [{{existing_user}}] has posted a milestone [{{object.name}}] to solve a problem [{{object.plan.idea.goal.name}}], and invites you to help.
+
+Use this unique link to see the milestone:
+{{ invitation_link }}
+
+Your password for future logins: {{user_password}}
+
+The Infinity Project, Inc.
+
+>> {{ invitation_text }}
+"""
+
 CONSTANCE_CONFIG = {
     'PAYPAL_MODE': ('sandbox', 'sandbox or live'),
     'PAYPAL_APPLICATION_ID': ('APP-80W284485P519543T', 'PayPal application ID'),
@@ -15,13 +30,13 @@ CONSTANCE_CONFIG = {
     'PAYPAL_CANCEL_URL': ('http://localhost:3000/', 'PayPal cancel URL'),
     'MAX_MENTIONS_PER_COMMENT': (10, '_comment_post_save email notifications per comment'),
     'CONVERSATION_EMAIL_TEMPLATE': ('Hello, your conversation url: {{conversation_url}}, Your password: {{user_password}}', ''),
-    'NEED_CONVERSATION_EMAIL_TEMPLATE': ('', 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
-    'GOAL_CONVERSATION_EMAIL_TEMPLATE': ('', 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
-    'IDEA_CONVERSATION_EMAIL_TEMPLATE': ('', 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
-    'PLAN_CONVERSATION_EMAIL_TEMPLATE': ('', 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
-    'STEP_CONVERSATION_EMAIL_TEMPLATE': ('', 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
-    'TASK_CONVERSATION_EMAIL_TEMPLATE': ('', 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
-    'WORK_CONVERSATION_EMAIL_TEMPLATE': ('', 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
+    'NEED_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
+    'GOAL_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
+    'IDEA_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
+    'PLAN_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
+    'STEP_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
+    'TASK_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
+    'WORK_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
     'CONVERSATION_SUBJECT': ('Invitation to conversation', ''),
     'CONVERSATION_FROM_EMAIL': ('noreply@infty.xyz', ''),
 }
