@@ -71,7 +71,8 @@ class ConversationInviteView(FormView):
         ctx = {
             'user_password': password,
             'user': user,
-            'conversation_url': self.object.get_conversation_url()
+            'conversation_url': self.object.get_conversation_url(),
+            'invitation_text': form.cleaned_data.get('invitation_text')
         }
 
         template = Template(config.CONVERSATION_EMAIL_TEMPLATE)
