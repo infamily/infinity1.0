@@ -361,7 +361,11 @@ class GoalDetailView(DetailView, CommentsContentTypeWrapper):
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
-        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
         context.update({
             'conversation_form': conversation_form
         })
@@ -521,7 +525,11 @@ class WorkDetailView(DetailView, CommentsContentTypeWrapper):
         })
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
-        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
         context.update({
             'conversation_form': conversation_form
         })
@@ -670,7 +678,11 @@ class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
-        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
         context.update({
             'conversation_form': conversation_form
         })
@@ -819,7 +831,11 @@ class StepDetailView(DetailView, CommentsContentTypeWrapper):
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
-        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
         context.update({
             'conversation_form': conversation_form
         })
@@ -963,7 +979,11 @@ class TaskDetailView(DetailView, CommentsContentTypeWrapper):
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
-        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
         context.update({
             'conversation_form': conversation_form
         })
@@ -1089,7 +1109,11 @@ class NeedDetailView(DetailView, CommentsContentTypeWrapper):
         })
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
-        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
         context.update({
             'conversation_form': conversation_form
         })
@@ -1240,7 +1264,11 @@ class PlanDetailView(DetailView, CommentsContentTypeWrapper):
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
-        conversation_form.helper.form_action = reverse('user-conversation-invite') + next_url
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
         context.update({
             'conversation_form': conversation_form
         })

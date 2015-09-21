@@ -3,6 +3,7 @@ import json
 from django.contrib.auth import login
 from django.core.mail import EmailMessage
 from django.template import Context, Template
+from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
 from django.views.generic import UpdateView
@@ -31,6 +32,18 @@ class ConversationInviteView(FormView):
     def get_success_url(self):
         messages.info(self.request, _('Invitation to conversation has been sent'))
         return self.request.GET.get('next')
+
+    def get_email_template_by_ct(self):
+        """
+        Get email template by content type
+        """
+        ct_name = self.kwargs.get('object_name')
+        upper_ct_name = ct_name.upper()
+        try:
+            ct_email_template = getattr('config', upper_ct_name + '_CONVERSATION_EMAIL_TEMPLATE')
+        except AttributeError:
+            ct_email_template = ''
+        return ct_email_template
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -68,14 +81,21 @@ class ConversationInviteView(FormView):
         self.object.user = user
         self.object.save()
 
+        model_instance = ContentType.objects.get(
+            model=self.kwargs.get('object_name').lower
+        ).model_class()
+        model_instance.objects.get(pk=self.kwargs.get('object_id'))
+
         ctx = {
             'user_password': password,
-            'user': user,
+            'invited_user': user,
+            'existing_user': self.request.user,
             'conversation_url': self.object.get_conversation_url(),
-            'invitation_text': form.cleaned_data.get('invitation_text')
+            'invitation_text': form.cleaned_data.get('invitation_text'),
+            'object': model_instance
         }
 
-        template = Template(config.CONVERSATION_EMAIL_TEMPLATE)
+        template = Template(self.get_email_template_by_ct())
         context = Context(ctx)
         subject = config.CONVERSATION_SUBJECT
         from_email = config.CONVERSATION_FROM_EMAIL

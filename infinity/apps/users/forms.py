@@ -15,6 +15,7 @@ from .models import ConversationInvite
 
 class ConversationInviteForm(forms.ModelForm):
     invitation_text = forms.CharField()
+
     def __init__(self, *args, **kwargs):
         super(ConversationInviteForm, self).__init__(*args, **kwargs)
 
