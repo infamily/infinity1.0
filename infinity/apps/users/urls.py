@@ -25,7 +25,7 @@ urlpatterns = patterns(
         name='cryptsy_notification_token'
     ),
     url(
-        r'^i/$',
+        r'^i/(?P<object_name>.*)/(?P<object_id>\d+)/$',
         ConversationInviteView.as_view(),
         name="user-conversation-invite"
     ),
