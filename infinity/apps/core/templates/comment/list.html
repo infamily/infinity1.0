@@ -2,8 +2,8 @@
 {% load django_markdown %}
 
 {% for object in object_list %}
-<div id="comment-{{object.id}}" class="col-sm-12 item list-group-item">
-    <div class="thumbnail">
+<div id="comment-{{object.id}}" class="col-sm-12 item list-group-item comment">
+    <div>
 
         <div class="">
            {{object.text|markdown}}

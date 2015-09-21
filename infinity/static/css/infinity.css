@@ -154,3 +154,12 @@ table.table.centered
     border-color: #ff1103;
     color: #ffffff;
 }
+.box{
+    float: left;
+    background-color: red;
+    z-index: 10;
+}
+.list-group-item.comment{
+    width: auto;
+    display: inline-block;
+}
