@@ -383,7 +383,7 @@ class WorkTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -443,7 +443,7 @@ class WorkTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -502,7 +502,7 @@ class WorkTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -528,7 +528,7 @@ class WorkTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -558,7 +558,7 @@ class WorkTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -596,10 +596,10 @@ class IdeaTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal,], user=self.user, _fill_optional=True)
         idea_list.append(idea)
 
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         idea_list.append(idea)
 
         url = reverse('idea-list')
@@ -619,7 +619,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
 
         url = reverse('idea-update', kwargs={
             'slug': idea.pk, })
@@ -627,7 +627,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         idea_compare = mommy.make(
             'core.Idea',
             user=self.user,
-            goal=goal,
+            goal=[goal, ],
             _fill_optional=True)
 
         resp = self.app.get(url)
@@ -663,7 +663,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
 
         url = reverse('idea-create', kwargs={
             'goal_id': idea.goal.pk,
@@ -708,7 +708,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         self.assertEqual(Idea.objects.count(), 1)
         url = reverse('idea-delete', args=(idea.pk,))
 
@@ -728,10 +728,10 @@ class IdeaTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         url = reverse('idea-detail', args=(idea.pk,))
 
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal,], user=self.user, _fill_optional=True)
         url = reverse('idea-detail', args=(idea.pk,))
 
         resp = self.app.get(url)
@@ -757,7 +757,7 @@ class StepTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
 
@@ -813,7 +813,7 @@ class StepTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal,], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
 
@@ -871,7 +871,7 @@ class StepTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
 
@@ -897,7 +897,7 @@ class StepTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         step_list.append(step)
@@ -926,7 +926,7 @@ class StepTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
 
@@ -960,7 +960,7 @@ class TaskTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -1007,7 +1007,7 @@ class TaskTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -1051,7 +1051,7 @@ class TaskTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -1076,7 +1076,7 @@ class TaskTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -1107,7 +1107,7 @@ class TaskTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         step = mommy.make('core.Step', plan=plan, user=self.user, _fill_optional=True)
         task = mommy.make('core.Task', step=step, user=self.user, _fill_optional=True)
@@ -1262,7 +1262,7 @@ class PlanTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
         plan_list.append(plan)
 
@@ -1288,7 +1288,7 @@ class PlanTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
 
         url = reverse('plan-update', kwargs={
@@ -1336,7 +1336,7 @@ class PlanTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, type=type, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
 
         url = reverse('plan-create')
@@ -1383,7 +1383,7 @@ class PlanTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
 
         self.assertEqual(Plan.objects.count(), 1)
@@ -1404,7 +1404,7 @@ class PlanTest(WebTest, AuthTestMixin):
         type = mommy.make('core.Type', _fill_optional=True)
         need = mommy.make('core.Need', type=type, _fill_optional=True)
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
-        idea = mommy.make('core.Idea', goal=goal, user=self.user, _fill_optional=True)
+        idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
         plan = mommy.make('core.Plan', idea=idea, user=self.user, _fill_optional=True)
 
         url = reverse('plan-detail', args=(plan.pk,))

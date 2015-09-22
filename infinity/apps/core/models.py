@@ -485,7 +485,7 @@ class Idea(models.Model):
         blank=False,
         null=False,
     )
-    goal = models.ForeignKey(
+    goal = models.ManyToManyField(
         'Goal',
         related_name='goal_ideas',
         blank=False,

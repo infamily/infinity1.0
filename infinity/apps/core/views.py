@@ -597,7 +597,9 @@ class IdeaCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.goal = form.cleaned_data.get('goal')
+        self.object.save()
+        for goal in form.cleaned_data.get('goal'):
+            self.object.goal.add(goal)
         self.object.save()
         return super(IdeaCreateView, self).form_valid(form)
 

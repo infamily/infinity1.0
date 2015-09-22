@@ -13,7 +13,9 @@
         <br/>[<u>super-equity</u>: {{ object.get_equity|floatformat:0 }}% ḥ]
     </div>
 
-want: <a href="{% url "goal-detail" object.goal.pk %}">{{object.goal }}</a></li>
+{% for goal in object.goal.all %}
+want: <a href="{% url "goal-detail" goal.pk %}">{{ goal }}</a></li>
+{% endfor %}
 <h1>{{ object.name }}</h1>{% if object.user == request.user %}[<a href="{% url "idea-update" object.pk %}">edit</a>, <a href="{% url "idea-delete" object.pk %}">delete</a>]{% endif %}
 <br/>
 <br/>

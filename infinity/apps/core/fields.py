@@ -22,7 +22,7 @@ class NeedChoiceField(AutoModelSelect2Field):
     search_fields = ['name__icontains']
 
 
-class GoalChoiceField(AutoModelSelect2Field):
+class GoalChoiceField(AutoModelSelect2MultipleField):
     queryset = Goal.objects
 
     def get_results(self, request, term, page, context):

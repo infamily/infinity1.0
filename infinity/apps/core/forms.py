@@ -327,7 +327,7 @@ class IdeaCreateForm(forms.ModelForm):
             self.initial['goal'] = goal_instance
 
         self.fields['goal'] = GoalChoiceField(
-            widget=AutoHeavySelect2Widget(
+            widget=AutoHeavySelect2MultipleWidget(
                 select2_options={
                     'minimumInputLength': 0,
                     'placeholder': 'Select a goal',
