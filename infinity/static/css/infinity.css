@@ -157,12 +157,14 @@ table.table.centered
 }
 .box{
     float: left;
-    background-color: red;
     padding: 10px;
     margin: 5px 50px 20px 5px;
 }
 
-.list-group-item.comment{
+.comment{
     display: inline;
+}
+.panel{
+    border-width: 1px 1px 4px 1px;
 }
 
