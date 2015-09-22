@@ -2,43 +2,40 @@
 {% load django_markdown %}
 
 {% for object in object_list %}
-<div id="comment-{{object.id}}" class="col-sm-12 item list-group-item comment">
+<div id="comment-{{object.id}}" class="comment">
+
     <div>
+       {{object.text|markdown}}
 
-        <div class="">
-           {{object.text|markdown}}
-
-        </div>
-
-        <br />
-        <div class="actions">
-            {% for transaction in object.paypal_transaction.all %}
-            <div class="breadcrumb" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}] <b>via</b> PayPal [{{transaction.paymentExecStatus}}]
-                </div>
-            {% endfor %}
-
-            {% for transaction in object.cryptsy_transaction.all %}
-            <div class="breadcrumb" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.address.currency_code}}</b> [{{transaction.sender_credential.user}}] → [{{transaction.address.user}}] <b>via</b> Cryptsy [{{transaction.created_on}}]
-            </div>
-            {% endfor %}
-        </div>
-
-
-        <div class="actions">
-        {% if object.hours_claimed %}
-
-            <a class="btn" href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> PayPal</a>
-            <a class="btn" href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Cryptsy</a>
-        {% endif %}
-        {% if object.user == request.user %}
-            <a class="btn" href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}"><i class="fa fa-pencil-square-o"></i> Edit</a>
-        {% endif %}
-        <div class="alignright">
-            <b>[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}</b>
-        </div>
-        </div>
-        <div style="clear: both;"></div>
     </div>
+
+    <div class="actions">
+        {% for transaction in object.paypal_transaction.all %}
+        <div class="breadcrumb" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}] <b>via</b> PayPal [{{transaction.paymentExecStatus}}]
+            </div>
+        {% endfor %}
+
+        {% for transaction in object.cryptsy_transaction.all %}
+        <div class="breadcrumb" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.address.currency_code}}</b> [{{transaction.sender_credential.user}}] → [{{transaction.address.user}}] <b>via</b> Cryptsy [{{transaction.created_on}}]
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="actions">
+    {% if object.hours_claimed %}
+
+        <a class="btn" href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> PayPal</a>
+        <a class="btn" href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Cryptsy</a>
+    {% endif %}
+    {% if object.user == request.user %}
+        <a class="btn" href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}"><i class="fa fa-pencil-square-o"></i> Edit</a>
+    {% endif %}
+    <div class="alignright">
+        <b>[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}</b>
+    </div>
+    </div>
+    <hr>
 </div>
 {% endfor %}
 
