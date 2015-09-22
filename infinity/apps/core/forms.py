@@ -144,7 +144,7 @@ class GoalCreateForm(forms.ModelForm):
             )
         )
 
-        self.fields['need'].label = _("""<b>Object:</b> (relevant to problem,
+        self.fields['need'].label = _("""<b>Topic:</b> (relevant to problem,
                                       <a href="/need-create/">click here</a> to
                                       add if you can't find it.)""")
         self.fields['type'].label = _("<b>Category:</b> (of the problem)")
