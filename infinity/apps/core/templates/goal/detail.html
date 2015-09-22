@@ -10,7 +10,7 @@
 
 <div class="panel panel-default box col-sm-12 col-md-7">
   <div class="panel-body">
-      <div align="right">[<u>assumed</u> {{ object.hours_assumed|floatformat:2 }} h, <u>donated</u> {{ object.hours_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:2 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
+      <div>[<u>assumed</u> {{ object.hours_assumed|floatformat:2 }} h, <u>donated</u> {{ object.hours_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:2 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
 
       category: <a href="">{{ object.type }}</a>, related object: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a>, 
       <h1>{{object.name}}</h1>{% if object.user == request.user %}[<a href="{% url "goal-update" object.pk %}">edit</a>, <a href="{% url "goal-delete" object.pk %}">delete</a>]{% endif %}
