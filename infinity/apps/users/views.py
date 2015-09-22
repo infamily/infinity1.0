@@ -40,7 +40,7 @@ class ConversationInviteView(FormView):
         ct_name = self.kwargs.get('object_name')
         upper_ct_name = ct_name.upper()
         try:
-            ct_email_template = getattr('config', upper_ct_name + '_CONVERSATION_EMAIL_TEMPLATE')
+            ct_email_template = getattr(config, upper_ct_name + '_CONVERSATION_EMAIL_TEMPLATE')
         except AttributeError:
             ct_email_template = ''
         return ct_email_template
