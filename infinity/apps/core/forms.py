@@ -157,6 +157,7 @@ class GoalCreateForm(forms.ModelForm):
         _('')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.initial['language'] = 85 # English
 
 
     class Meta:
@@ -262,6 +263,7 @@ class WorkCreateForm(forms.ModelForm):
         self.fields['parent_work_id'].widget.attrs.update({'placeholder': _('optional')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.initial['language'] = 85 # English
 
     class Meta:
         model = Work
@@ -359,6 +361,7 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['description'].label = _('<b>Description:</b> (write full description here, used as body.)')
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.initial['language'] = 85 # English
 
     class Meta:
         model = Idea
@@ -433,6 +436,7 @@ class StepCreateForm(forms.ModelForm):
         self.fields['deliverables'].widget.attrs.update({'placeholder': _('complete solar assembly drawings 0\\1, solar cell assembly 1\\2')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.initial['language'] = 85 # English
 
     class Meta:
         model = Step
@@ -496,6 +500,7 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the task.')})
         self.fields['priority'].label = _("<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number means the task has to be done earlier)")
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.initial['language'] = 85 # English
 
     class Meta:
         model = Task
@@ -694,6 +699,7 @@ class PlanCreateForm(forms.ModelForm):
         self.fields['deliverable'].widget.attrs.update({'placeholder': _("Example:\n\nA working prototype of solar water condenser, and high quality open designs published on GitHub, so others could easily replicate.")})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.initial['language'] = 85 # English
 
     class Meta:
         model = Plan
