@@ -11,19 +11,21 @@
 
     <div class="actions">
         {% for transaction in object.paypal_transaction.all %}
-        <div class="breadcrumb" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}] <b>via</b> PayPal [{{transaction.paymentExecStatus}}]
+        <div class="transaction" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}] <b>via</b> PayPal [{{transaction.paymentExecStatus}}]
             </div>
         {% endfor %}
 
         {% for transaction in object.cryptsy_transaction.all %}
-        <div class="breadcrumb" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.address.currency_code}}</b> [{{transaction.sender_credential.user}}] → [{{transaction.address.user}}] <b>via</b> Cryptsy [{{transaction.created_on}}]
+        <div class="transaction" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.address.currency_code}}</b> [{{transaction.sender_credential.user}}] → [{{transaction.address.user}}] <b>via</b> Cryptsy [{{transaction.created_on}}]
         </div>
         {% endfor %}
     </div>
 
 
     <div class="actions">
-    {% if object.hours_claimed %}
+    {% if not object.hours_claimed %}
+    {#delete not#}
+
 
         <a class="btn" href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> PayPal</a>
         <a class="btn" href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Cryptsy</a>
@@ -35,8 +37,8 @@
         <b>[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}</b>
     </div>
     </div>
+
     <hr>
-    <br>
 </div>
 {% endfor %}
 

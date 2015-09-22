@@ -174,4 +174,10 @@ table.table.centered
 .top-space{
     padding-top: 25px;
 }
-
+.transaction{
+    border: 1px solid #c5c5c5;
+    display: flex;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    background-color: rgb(248, 245, 237);
+}

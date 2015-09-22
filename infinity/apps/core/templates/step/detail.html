@@ -16,6 +16,7 @@
 	<h1>{{object.name}}</h1>{% if object.user == request.user %}[<a href="{% url "step-update" object.pk %}">edit</a>, <a href="{% url "step-delete" object.pk %}">delete</a>]{% endif %}
 	<br/>
 	<br/>
+	
 
 	{{object.objective|markdown}}
 
