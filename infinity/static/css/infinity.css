@@ -181,3 +181,7 @@ table.table.centered
     margin-bottom: 5px;
     background-color: rgb(248, 245, 237);
 }
+
+.break{
+    clear: both;
+}
