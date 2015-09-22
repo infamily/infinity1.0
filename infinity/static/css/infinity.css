@@ -157,7 +157,7 @@ table.table.centered
 }
 .box{
     float: left;
-    padding: 10px;
+    padding: 20px;
     margin: 5px 100px 80px 5px;
 }
 .comment{
@@ -170,5 +170,8 @@ table.table.centered
 }
 .input-comment{
     display: inline-block;
+}
+.top-space{
+    padding-top: 25px;
 }
 
