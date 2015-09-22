@@ -156,6 +156,7 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['reason'].widget.attrs.update({'placeholder': \
         _('')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
 
     class Meta:
@@ -187,6 +188,7 @@ class GoalUpdateForm(forms.ModelForm):
 
         self.fields['name'].label = 'Description'
 
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
     class Meta:
         model = Goal
@@ -215,6 +217,8 @@ class WorkUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
+
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
     class Meta:
         model = Work
@@ -257,6 +261,7 @@ class WorkCreateForm(forms.ModelForm):
         self.fields['parent_work_id'].label = _('<b>Parent Work Id:</b> (integer referring to other work)')
         self.fields['parent_work_id'].widget.attrs.update({'placeholder': _('optional')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
     class Meta:
         model = Work
@@ -290,6 +295,8 @@ class IdeaUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
+
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
     class Meta:
         model = Idea
@@ -351,6 +358,7 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['summary'].label = _('<b>Summary:</b> (e.g., "Use solar panels and Peltier effect to extract water from air.", appears as subtitle.)')
         self.fields['description'].label = _('<b>Description:</b> (write full description here, used as body.)')
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
     class Meta:
         model = Idea
@@ -380,6 +388,8 @@ class StepUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
+
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
     class Meta:
         model = Step
@@ -422,6 +432,7 @@ class StepCreateForm(forms.ModelForm):
         self.fields['deliverables'].label = _('<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to have by completion of this milestone in <a href="https://github.com/mindey/IdeaLib#minimal">IDL syntax</a>, used used for value computation.)')
         self.fields['deliverables'].widget.attrs.update({'placeholder': _('complete solar assembly drawings 0\\1, solar cell assembly 1\\2')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
     class Meta:
         model = Step
@@ -454,6 +465,8 @@ class TaskUpdateForm(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Update')))
 
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+
     class Meta:
         model = Task
         exclude = [
@@ -482,6 +495,7 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['name'].label = _('<b>Task:</b> (e.g., "Purchase solar cells", text in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the task.')})
         self.fields['priority'].label = _("<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number means the task has to be done earlier)")
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
     class Meta:
         model = Task
@@ -587,6 +601,7 @@ class PlanUpdateForm(forms.ModelForm):
         )
 
         self.helper.layout.append(Submit('save', _('Update')))
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
 
     class Meta:
@@ -678,6 +693,7 @@ class PlanCreateForm(forms.ModelForm):
         self.fields['deliverable'].label = _('<b>Deliverable:</b> (Describe what do you expect to get.)')
         self.fields['deliverable'].widget.attrs.update({'placeholder': _("Example:\n\nA working prototype of solar water condenser, and high quality open designs published on GitHub, so others could easily replicate.")})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to your mutual friends)')
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
     class Meta:
         model = Plan
