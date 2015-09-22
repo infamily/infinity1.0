@@ -81,16 +81,16 @@ class ConversationInviteView(FormView):
         self.object.user = user
         self.object.save()
 
-        model_instance = ContentType.objects.get(
+        model_class = ContentType.objects.get(
             model=self.kwargs.get('object_name').lower
         ).model_class()
-        model_instance.objects.get(pk=self.kwargs.get('object_id'))
+        model_instance = model_class.objects.get(pk=self.kwargs.get('object_id'))
 
         ctx = {
             'user_password': password,
             'invited_user': user,
             'existing_user': self.request.user,
-            'conversation_url': self.object.get_conversation_url(),
+            'invitation_link': self.object.get_conversation_url(),
             'invitation_text': form.cleaned_data.get('invitation_text'),
             'object': model_instance
         }
