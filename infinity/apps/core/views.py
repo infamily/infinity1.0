@@ -627,7 +627,7 @@ class IdeaDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Idea succesfully deleted"))
-        return reverse("idea-list1", args=[self.object.goal.pk, ])
+        return reverse('idea-list')
 
 
 class IdeaListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):

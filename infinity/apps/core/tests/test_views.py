@@ -636,7 +636,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         form['description'] = idea_compare.description
         form['name'] = idea_compare.name
         form['summary'] = idea_compare.summary
-        form['goal'] = idea_compare.goal.pk
+        form['goal'] = [goal.id for goal in idea_compare.goal.all()]
         form.submit()
 
         idea_updated = Idea.objects.get(pk=idea.pk)
@@ -665,9 +665,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         goal = mommy.make('core.Goal', need=need, user=self.user, _fill_optional=True)
         idea = mommy.make('core.Idea', goal=[goal, ], user=self.user, _fill_optional=True)
 
-        url = reverse('idea-create', kwargs={
-            'goal_id': idea.goal.pk,
-        })
+        url = reverse('idea-create')
 
         # Access forbidden for AnonymousUser
         resp = self.app.get(url, status=302)
@@ -680,6 +678,8 @@ class IdeaTest(WebTest, AuthTestMixin):
         form['description'] = idea.description
         form['name'] = idea.name
         form['summary'] = idea.summary
+        form['goal'] = [goal.id, ]
+        form['super_equity'] = form['super_equity'].options[0][0]
         form.submit()
 
         idea_created = Idea.objects.latest('id')
@@ -740,8 +740,6 @@ class IdeaTest(WebTest, AuthTestMixin):
         self.assertContains(resp, idea.name)
 
         self.assertContains(resp, idea.user)
-
-        self.assertContains(resp, idea.goal)
 
 
 class StepTest(WebTest, AuthTestMixin):
