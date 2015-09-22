@@ -16,12 +16,13 @@
 	<h1>{{object.name}}</h1>{% if object.user == request.user %}[<a href="{% url "step-update" object.pk %}">edit</a>, <a href="{% url "step-delete" object.pk %}">delete</a>]{% endif %}
 	<br/>
 	<br/>
-	
+
 
 	{{object.objective|markdown}}
 
 	<br/>
 	<br/>
+
 	<div class="breadcrumb">
 	<i>input:</i> {{object.investables}}
 	</div>
@@ -34,6 +35,7 @@
 
 
 	<div class="panel-heading">Tasks</div>
+	
 	<div class="panel-body">
 	{% for object in task_list %}
 	    <ul class="list-group">
@@ -44,8 +46,9 @@
 	{% endfor %}
 	<a href="{% url "task-create" object.pk %}">+New Task</a>
 	</div>
-</div>
 
+</div>
+</div>
 
 {# Include comment list with transactions #}
 {% include "comment/list.html" %}
