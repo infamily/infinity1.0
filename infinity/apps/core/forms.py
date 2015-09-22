@@ -169,6 +169,7 @@ class GoalCreateForm(forms.ModelForm):
             'name',
             'reason',
             'hyper_equity',
+            'language',
             'personal',
         ]
 
@@ -198,6 +199,7 @@ class GoalUpdateForm(forms.ModelForm):
             'name',
             'hyper_equity',
             'reason',
+            'language',
             'personal',
         ]
         widgets = {
@@ -227,6 +229,7 @@ class WorkUpdateForm(forms.ModelForm):
             'url',
             'parent_work_id',
             'task',
+            'language',
             'personal'
         ]
         widgets = {
@@ -267,6 +270,7 @@ class WorkCreateForm(forms.ModelForm):
             'url',
             'file',
             'parent_work_id',
+            'language',
             'personal'
         ]
         widgets = {
@@ -299,6 +303,7 @@ class IdeaUpdateForm(forms.ModelForm):
             'description',
             'goal',
             'super_equity',
+            'language',
             'personal'
         ]
         widgets = {
@@ -359,6 +364,7 @@ class IdeaCreateForm(forms.ModelForm):
             'summary',
             'description',
             'super_equity',
+            'language',
             'personal'
         ]
         widgets = {
@@ -389,6 +395,7 @@ class StepUpdateForm(forms.ModelForm):
             'investables',
             'deliverables',
             'plan',
+            'language',
             'personal'
         ]
         widgets = {
@@ -430,6 +437,7 @@ class StepCreateForm(forms.ModelForm):
             'priority',
             'investables',
             'deliverables',
+            'language',
             'personal'
         ]
         widgets = {
@@ -457,6 +465,7 @@ class TaskUpdateForm(forms.ModelForm):
             'name',
             'priority',
             'step',
+            'language',
             'personal'
         ]
 
@@ -485,6 +494,7 @@ class TaskCreateForm(forms.ModelForm):
         fields = [
             'name',
             'priority',
+            'language',
             'personal'
         ]
 
@@ -592,6 +602,7 @@ class PlanUpdateForm(forms.ModelForm):
             'deliverable',
             'plain_equity',
             'members',
+            'language',
             'personal',
         ]
         widgets = {
@@ -682,6 +693,7 @@ class PlanCreateForm(forms.ModelForm):
             'name',
             'plain_equity',
             'members',
+            'language',
             'personal'
         ]
         widgets = {
