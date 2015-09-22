@@ -158,10 +158,11 @@ table.table.centered
 .box{
     float: left;
     padding: 10px;
-    margin: 5px 55px 26px 5px;
+    margin: 5px 100px 80px 5px;
 }
 .comment{
     display: inline;
+
 }
 .panel{
     border-color: #ccc;
