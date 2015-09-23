@@ -99,6 +99,8 @@ STATICFILES_DIRS = (
     normpath(join(DJANGO_ROOT, 'static')),
 )
 
+MARKDOWN_SET_PATH = normpath(join(DJANGO_ROOT, 'static/markdown'))
+
 # See:
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = (
