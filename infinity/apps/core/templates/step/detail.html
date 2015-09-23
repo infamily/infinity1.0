@@ -7,30 +7,45 @@
 {% block title %}s: {{ object.name }}{% endblock title %}
 
 {% block content %}
-<div class="panel panel-default">
+<div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
 
-    <div align="right">[<u>assumed</u> {{ object.hours_assumed|floatformat:2 }} h, <u>donated</u> {{ object.hours_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:2 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
+    <div>[<u>assumed</u> {{ object.hours_assumed|floatformat:2 }} h, <u>donated</u> {{ object.hours_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.hours_claimed|floatformat:2 }}, <u>matched</u> {{ object.hours_matched|floatformat:2}} ḥ]</div>
 
-step of plan <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a>
-<h1>{{object.name}}</h1>{% if object.user == request.user %}[<a href="{% url "step-update" object.pk %}">edit</a>, <a href="{% url "step-delete" object.pk %}">delete</a>]{% endif %}
-<br/>
-<br/>
+	step of plan <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a>
+	<h1>{{object.name}}</h1>{% if object.user == request.user %}[<a href="{% url "step-update" object.pk %}">edit</a>, <a href="{% url "step-delete" object.pk %}">delete</a>]{% endif %}
+	<br/>
+	<br/>
 
-{{object.objective|markdown}}
 
-<br/>
-<br/>
-<div class="breadcrumb">
-<i>input:</i> {{object.investables}}
-</div>
+	{{object.objective|markdown}}
 
-<div class="breadcrumb">
-<i>output:</i> {{object.deliverables}}
-</div>
+	<br/>
+	<br/>
 
-<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
+	<div class="breadcrumb">
+	<i>input:</i> {{object.investables}}
+	</div>
 
+	<div class="breadcrumb">
+	<i>output:</i> {{object.deliverables}}
+	</div>
+
+	<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
+
+
+	<div class="panel-heading">Tasks</div>
+
+	<div class="panel-body">
+	{% for object in task_list %}
+	    <ul class="list-group">
+	      <li class="list-group-item">
+	         <a href="{% url "task-detail" object.pk %}">{{object.name}}</a> 
+	      </li>
+	    </ul>
+	{% endfor %}
+	<a href="{% url "task-create" object.pk %}">+New Task</a>
+	</div>
 
 <div class="panel-heading"><a href="{% url "task-create" object.pk %}">+New Task</a></div>
 <div class="panel-body">
@@ -43,7 +58,6 @@ step of plan <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a
 {% endfor %}
 </div>
 </div>
-
 
 {# Include comment list with transactions #}
 {% include "comment/list.html" %}
