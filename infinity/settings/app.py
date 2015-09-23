@@ -56,7 +56,7 @@ LOGIN_URL = '/user/login/'
 
 INVITATIONS_INVITATION_ONLY = True
 
-MARKDOWN_EDITOR_SKIN = 'simple'
+MARKDOWN_EDITOR_SKIN = 'markitup'
 
 # Some autoslag handler that we need to create for make tests runnable
 
