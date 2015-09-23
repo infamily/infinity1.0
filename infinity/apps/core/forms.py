@@ -338,7 +338,7 @@ class IdeaCreateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Create')))
 
         if goal_instance:
-            self.initial['goal'] = goal_instance
+            self.initial['goal'] = [goal_instance, ]
 
         self.fields['goal'] = GoalChoiceField(
             widget=AutoHeavySelect2MultipleWidget(
