@@ -183,3 +183,17 @@ table.table.centered
     border-color: transparent;
 }
 
+.markItUp {
+    /* width: 700px; */
+    margin: 5px 0 5px 0;
+}
+
+.markItUpEditor {
+    font: 12px 'Courier New', Courier, monospace;
+    padding: 5px;
+    /* width: 690px; */
+    height: 320px;
+    clear: both;
+    line-height: 18px;
+    overflow: auto;
+}
