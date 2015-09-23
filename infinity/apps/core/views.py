@@ -1037,7 +1037,7 @@ class NeedCreateView(CreateView):
                         http_accept_language=find_language)
                 except Language.DoesNotExist:
                     language = Language.objects.get(
-                        name='English')
+                        pk=85)
                 return HttpResponse(language.pk)
 
             hints = []
