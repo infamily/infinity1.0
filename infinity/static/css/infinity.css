@@ -2,6 +2,7 @@
 
 * {
     font-size: 17.5px;
+    /*word-break: break-all;*/
 }
 img{
   max-width: 100%;
@@ -153,4 +154,40 @@ table.table.centered
     background-color: #ff4136;
     border-color: #ff1103;
     color: #ffffff;
+}
+.box{
+    float: left;
+    padding: 20px;
+    margin: 5px 100px 80px 5px;
+}
+.comment{
+    display: inline;
+
+}
+.panel{
+    border-color: #ccc;
+    border-width: 2px 2px 4px 2px;
+}
+.input-comment{
+    display: inline-block;
+}
+.top-space{
+    padding-top: 25px;
+}
+.transaction{
+    border: 1px solid #c5c5c5;
+    display: table;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    background-color: rgb(248, 245, 237);
+}
+
+date, .date b, .date a{
+    font-size: 0.7em; 
+    color: #999;
+}
+
+.date a{
+    font-size: 1em; 
+    color: #999;
 }
