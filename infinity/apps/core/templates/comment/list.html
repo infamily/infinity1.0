@@ -32,7 +32,7 @@
 
         --[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}<br/>
         <div align="right">
-            [{% if object.user == request.user %}<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">edit</a>]
+            {% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">edit</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">delete</a>]
             {% endif %}
         </div>
     </div>
