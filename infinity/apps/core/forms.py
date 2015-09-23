@@ -649,7 +649,7 @@ class PlanCreateForm(forms.ModelForm):
 
         if idea_instance:
             self.initial['idea'] = idea_instance
-            self.initial['goal'] = idea_instance.goal
+            self.initial['goal'] = idea_instance.goal.first()
 
         self.fields['goal'] = GoalChoiceField(
             widget=AutoHeavySelect2Widget(

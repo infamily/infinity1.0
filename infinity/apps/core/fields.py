@@ -28,8 +28,7 @@ class GoalChoiceField(AutoModelSelect2MultipleField):
     def get_results(self, request, term, page, context):
         idea = request.GET.get('idea', '')
         if idea:
-            goal = Idea.objects.get(pk=idea).goal
-            return ('nil', False, [(goal.id, goal.name, {})])
+            goals = Idea.objects.get(pk=idea).goal.all()
         else:
             # If idea not present show all goals
             goals = Goal.objects.all()
