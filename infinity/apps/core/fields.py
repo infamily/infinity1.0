@@ -22,7 +22,21 @@ class NeedChoiceField(AutoModelSelect2Field):
     search_fields = ['name__icontains']
 
 
-class GoalChoiceField(AutoModelSelect2MultipleField):
+class GoalChoiceField(AutoModelSelect2Field):
+    queryset = Goal.objects
+
+    def get_results(self, request, term, page, context):
+        idea = request.GET.get('idea', '')
+        if idea:
+            goals = Idea.objects.get(pk=idea).goal.all()
+        else:
+            # If idea not present show all goals
+            goals = Goal.objects.all()
+        s2_results = [(n.id, n.name, {}) for n in goals]
+        return ('nil', False, s2_results)
+
+
+class GoalChoiceFieldMultiple(AutoModelSelect2MultipleField):
     queryset = Goal.objects
 
     def get_results(self, request, term, page, context):

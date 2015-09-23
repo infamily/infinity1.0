@@ -21,6 +21,7 @@ from core.models import Language
 from .fields import NeedChoiceField
 from .fields import TypeChoiceField
 from .fields import GoalChoiceField
+from .fields import GoalChoiceFieldMultiple
 from .fields import IdeaChoiceField
 from .fields import MembersChoiceField
 
@@ -28,6 +29,7 @@ from .fields import MembersChoiceField
 from django_markdown.widgets import MarkdownWidget
 
 from decimal import Decimal
+
 
 class CommentCreateFormDetail(forms.ModelForm):
 
@@ -322,7 +324,7 @@ class IdeaUpdateForm(forms.ModelForm):
 
 class IdeaCreateForm(forms.ModelForm):
 
-    goal = GoalChoiceField()
+    goal = GoalChoiceFieldMultiple()
 
     super_equity = forms.ChoiceField(
         choices=[(Decimal(x*0.01), '%.0f' % (x*1.)+ '%') for x in range(1,11)]
@@ -340,7 +342,7 @@ class IdeaCreateForm(forms.ModelForm):
         if goal_instance:
             self.initial['goal'] = [goal_instance, ]
 
-        self.fields['goal'] = GoalChoiceField(
+        self.fields['goal'] = GoalChoiceFieldMultiple(
             widget=AutoHeavySelect2MultipleWidget(
                 select2_options={
                     'minimumInputLength': 0,
