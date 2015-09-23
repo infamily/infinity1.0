@@ -44,14 +44,14 @@
 {% endfor %}
 
 
+{% if request.user.is_authenticated %}
 <div class="panel panel-default input-comment">
 <div class="panel-body">
 {% crispy form %}
 {% markdown_media %}
-{% crispy conversation_form %}
+</div>
 </div>
 
-{% if request.user.is_authenticated %}
 <div class="panel panel-default">
     <div class="panel-body">
         {% crispy conversation_form %}
