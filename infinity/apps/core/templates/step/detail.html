@@ -33,20 +33,7 @@
 
 	<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 
-
-	<div class="panel-heading"><a href="{% url "task-create" object.pk %}">+New Task</a></div>
-
-	<div class="panel-body">
-	{% for object in task_list %}
-	    <ul class="list-group">
-	      <li class="list-group-item">
-	         <a href="{% url "task-detail" object.pk %}">{{object.name}}</a> 
-	      </li>
-	    </ul>
-	{% endfor %}	
-	</div>
-
-<div class="panel-heading">
+<div class="panel-heading"></div>
 <div class="panel-body">
 {% for object in task_list %}
     <ul class="list-group">
@@ -55,6 +42,7 @@
       </li>
     </ul>
 {% endfor %}
+</div>
 </div>
 </div>
 
