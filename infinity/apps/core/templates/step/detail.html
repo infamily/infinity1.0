@@ -35,7 +35,7 @@
 
 <div class="panel-heading"><a href="{% url "task-create" object.pk %}">+New Task</a></div>
 <div class="panel-body">
-{% for object in task_list %}
+{% for object in task_list reversed %}
     <ul class="list-group">
       <li class="list-group-item">
       <b>[{{object.hours_claimed|floatformat:1}}/{{object.hours_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}">{{object.name}}</a>
