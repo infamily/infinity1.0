@@ -280,6 +280,13 @@ class Goal(models.Model):
     def get_equity(self):
         return self.hyper_equity*100
 
+    def get_remain_usd(self):
+        return ((self.total_assumed+self.total_claimed)-self.total_donated)*\
+            HourValue.objects.latest('created_at').value
+
+    def not_funded_hours(self):
+        return self.total_assumed+self.total_claimed-self.total_matched
+
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
         return Comment.objects.filter(
@@ -431,6 +438,13 @@ class Work(models.Model):
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
+
+    def get_remain_usd(self):
+        return ((self.total_assumed+self.total_claimed)-self.total_donated)*\
+            HourValue.objects.latest('created_at').value
+
+    def not_funded_hours(self):
+        return self.total_assumed+self.total_claimed-self.total_matched
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
@@ -586,6 +600,13 @@ class Idea(models.Model):
 
     def get_equity(self):
         return self.super_equity*100
+
+    def get_remain_usd(self):
+        return ((self.total_assumed+self.total_claimed)-self.total_donated)*\
+            HourValue.objects.latest('created_at').value
+
+    def not_funded_hours(self):
+        return self.total_assumed+self.total_claimed-self.total_matched
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
@@ -743,6 +764,13 @@ class Step(models.Model):
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
+    def get_remain_usd(self):
+        return ((self.total_assumed+self.total_claimed)-self.total_donated)*\
+            HourValue.objects.latest('created_at').value
+
+    def not_funded_hours(self):
+        return self.total_assumed+self.total_claimed-self.total_matched
+
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
         return Comment.objects.filter(
@@ -888,6 +916,13 @@ class Task(models.Model):
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
+    def get_remain_usd(self):
+        return ((self.total_assumed+self.total_claimed)-self.total_donated)*\
+            HourValue.objects.latest('created_at').value
+
+    def not_funded_hours(self):
+        return self.total_assumed+self.total_claimed-self.total_matched
+
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
         return Comment.objects.filter(
@@ -1023,6 +1058,13 @@ class Need(models.Model):
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
+
+    def get_remain_usd(self):
+        return ((self.total_assumed+self.total_claimed)-self.total_donated)*\
+            HourValue.objects.latest('created_at').value
+
+    def not_funded_hours(self):
+        return self.total_assumed+self.total_claimed-self.total_matched
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
@@ -1195,6 +1237,13 @@ class Plan(models.Model):
 
     def get_equity(self):
         return self.plain_equity*100
+
+    def get_remain_usd(self):
+        return ((self.total_assumed+self.total_claimed)-self.total_donated)*\
+            HourValue.objects.latest('created_at').value
+
+    def not_funded_hours(self):
+        return self.total_assumed+self.total_claimed-self.total_matched
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)

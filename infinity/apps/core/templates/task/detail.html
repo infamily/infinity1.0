@@ -7,10 +7,21 @@
 
 {% block content %}
 
+<script>
+function showMore(){
+    document.getElementById("stats").innerHTML = "<span onmouseout='showLess()'>[<u>assumed</u> {{ object.total_assumed|floatformat:2 }} h, <u>donated</u> {{ object.total_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.total_claimed|floatformat:2 }}, <u>matched</u> {{ object.total_matched|floatformat:2}} ḥ]</span>";
+}
+
+function showLess(){
+    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>";
+}
+</script>
+
 <div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
-
-    <div align="right">[<u>assumed</u> {{ object.total_assumed|floatformat:2 }} h, <u>donated</u> {{ object.total_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.total_claimed|floatformat:2 }}, <u>matched</u> {{ object.total_matched|floatformat:2}} ḥ]</div>
+    <div align="right" id="stats">
+        <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
+      </div>
 
     todo for milestone <a href="{% url "step-detail" object.step.pk %}">{{object.step}}</a>
     <h1>{{ object.name }}</h1>{% if object.user == request.user %}[<a href="{% url "task-update" object.pk %}">edit</a>, <a href="{% url "task-delete" object.pk %}">delete</a>]{% endif %}

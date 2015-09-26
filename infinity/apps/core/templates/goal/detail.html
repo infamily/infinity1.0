@@ -7,16 +7,28 @@
 
 {% block content %}
 
+<script>
+function showMore(){
+    document.getElementById("stats").innerHTML = "<span onmouseout='showLess()'>[<u>assumed</u> {{ object.total_assumed|floatformat:2 }} h, <u>donated</u> {{ object.total_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.total_claimed|floatformat:2 }}, <u>matched</u> {{ object.total_matched|floatformat:2}} ḥ]</span>";
+}
+
+function showLess(){
+    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>";
+}
+</script>
 
 <div class="panel panel-default box col-sm-12 col-md-7">
   <div class="panel-body">
-    <div align="right">[<u>assumed</u> {{ object.total_assumed|floatformat:2 }} h, <u>donated</u> {{ object.total_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.total_claimed|floatformat:2 }}, <u>matched</u> {{ object.total_matched|floatformat:2}} ḥ]
-        <br/>
+      <div align="right" id="stats">
+        <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
+      </div>
+      <div align="right">
         [<u>hyper-equity</u>: {{ object.get_equity|floatformat:2 }}% ḥ]
-    </div>
-
-      category: <a href="">{{ object.type }}</a>, related object: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a>, 
-      <h1>{{object.name}}</h1>{% if object.user == request.user %}[<a href="{% url "goal-update" object.pk %}">edit</a>, <a href="{% url "goal-delete" object.pk %}">delete</a>]{% endif %}
+      </div>
+ 
+    category: <a href="">{{ object.type }}</a>, related object: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a><br/>
+    <h1>{{object.name}}</h1>{% if object.user == request.user %}
+    [<a href="{% url "goal-update" object.pk %}">edit</a>, <a href="{% url "goal-delete" object.pk %}">delete</a>]{% endif %}
   <br/>
   <br/>
 
