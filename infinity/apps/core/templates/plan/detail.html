@@ -68,7 +68,7 @@ approach to realizing idea <a href="{% url "idea-detail" object.idea.pk %}">{{ob
 {% for object in step_list %}
     <ul class="list-group">
       <li class="list-group-item">
-         <a href="{% url "step-detail" object.pk %}">{{object.name}}</a> 
+         <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "step-detail" object.pk %}">{{object.name}}</a> 
          <p>{{object.objective}}</p>
       </li>
     </ul>

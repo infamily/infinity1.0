@@ -51,7 +51,7 @@ function showLess(){
 {% for object in task_list reversed %}
     <ul class="list-group">
       <li class="list-group-item">
-      <b>[{{object.hours_claimed|floatformat:1}}/{{object.hours_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}">{{object.name}}</a>
+      <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}">{{object.name}}</a>
       </li>
     </ul>
 {% endfor %}
