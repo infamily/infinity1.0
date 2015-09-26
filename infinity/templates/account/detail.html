@@ -1,11 +1,18 @@
 {% extends "base.html" %}
-
+{% load django_markdown %}
 
 
 {% block title %}User detail{% endblock title %}
 
 {% block content %}
-
+<h1>{{object.username}}</h1>
+{% if request.user.username == object.username %}[<a href="{% url "user-update" %}">edit</a>]{%endif%}
+<br/>
+<br/>
+<div>
+{{ object.about|markdown}}
+</div>
+<!--
 <nav class="navbar navbar-default" role="navigation">
 <ul class="nav navbar-nav">
     <li><a class="navbar-brand" href="#needs">My Needs</a></li>
@@ -18,7 +25,10 @@
     <li><a class="navbar-brand" href="{% url "friend-following" object.username %}">My Friends</a></li>
 </ul>
 </nav>
+-->
 
+
+<!--
 <br/>
 {% if request.user.is_authenticated %}
     <div class="actions">
@@ -47,19 +57,17 @@
         {% endif %}
     </div>
 {% endif %}
+-->
+
+
+
 <br/>
 <div>
 
 </div>
 <br/>
 
-<div class="panel panel-default">
-  <div class="panel-heading">About Me</div>
-  <div class="panel-body">
-      {{ object.about }}
-  </div>
-</div>
-
+<!--
 <div class="panel panel-default">
     <div class="panel-heading">My Needs<a name="needs"></a></div>
     <div class="panel-body">
@@ -150,4 +158,5 @@
         {% endfor %}
     </div>
 </div>
+-->
 {% endblock content %}
