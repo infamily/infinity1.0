@@ -285,7 +285,7 @@ class Goal(models.Model):
             HourValue.objects.latest('created_at').value
 
     def not_funded_hours(self):
-        return self.total_assumed+self.total_claimed-self.total_matched
+        return self.total_assumed+self.total_claimed-self.total_donated
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
@@ -444,7 +444,7 @@ class Work(models.Model):
             HourValue.objects.latest('created_at').value
 
     def not_funded_hours(self):
-        return self.total_assumed+self.total_claimed-self.total_matched
+        return self.total_assumed+self.total_claimed-self.total_donated
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
@@ -606,7 +606,7 @@ class Idea(models.Model):
             HourValue.objects.latest('created_at').value
 
     def not_funded_hours(self):
-        return self.total_assumed+self.total_claimed-self.total_matched
+        return self.total_assumed+self.total_claimed-self.total_donated
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
@@ -769,7 +769,7 @@ class Step(models.Model):
             HourValue.objects.latest('created_at').value
 
     def not_funded_hours(self):
-        return self.total_assumed+self.total_claimed-self.total_matched
+        return self.total_assumed+self.total_claimed-self.total_donated
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
@@ -921,7 +921,7 @@ class Task(models.Model):
             HourValue.objects.latest('created_at').value
 
     def not_funded_hours(self):
-        return self.total_assumed+self.total_claimed-self.total_matched
+        return self.total_assumed+self.total_claimed-self.total_donated
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
@@ -1064,7 +1064,7 @@ class Need(models.Model):
             HourValue.objects.latest('created_at').value
 
     def not_funded_hours(self):
-        return self.total_assumed+self.total_claimed-self.total_matched
+        return self.total_assumed+self.total_claimed-self.total_donated
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
@@ -1243,7 +1243,7 @@ class Plan(models.Model):
             HourValue.objects.latest('created_at').value
 
     def not_funded_hours(self):
-        return self.total_assumed+self.total_claimed-self.total_matched
+        return self.total_assumed+self.total_claimed-self.total_donated
 
     def comment_count(self):
         comment_content_type = ContentType.objects.get_for_model(self)
