@@ -190,3 +190,18 @@ table.table.centered
 .markItUp {
     width: 100% !important;
 }
+
+.tiptext {
+    background:#ffffff;
+    padding:5px;
+    width:100px;
+}
+.description {
+    display:none;
+    position:absolute;
+    left: 230px;
+    border:1px solid #000;
+    width:400px;
+    background: #ffffff;
+    padding: 5px;
+}

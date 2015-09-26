@@ -3,6 +3,11 @@
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
+{% load staticfiles %}
+{% block extra_js %}
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+{% endblock extra_js %}
+
 {% block title %}p: {{ object.name }}{% endblock title %}
 
 {% block content %}
@@ -17,14 +22,25 @@ function showLess(){
 }
 </script>
 
+<script>
+$(document).ready( function() {
+    $(".tiptext").mouseover(function() {
+        $(this).children(".description").show();
+    }).mouseout(function() {
+        $(this).children(".description").hide();
+    });
+});
+</script>
+
 <div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
     <div align="right" id="stats">
         <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
     </div>
     <div align="right">
-[<u>shareholders:</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %}<u>equity</u>: {{ object.get_equity|floatformat:0 }}% ḥ]<br/>
-    
+    [<u>shareholders:</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %} <span class="tiptext"><u>equity</u>: {{ object.get_equity|floatformat:0 }}% ḥ]<br/>
+    <div class="description" align="left">A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much project <u>shareholders</u> own of all results under this project. The rest is owned by contributing users.</div>
+    </span>
     </div>
 
 approach to realizing idea <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a>
