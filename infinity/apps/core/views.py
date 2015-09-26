@@ -51,11 +51,11 @@ class IndexView(TemplateView):
         return redirect(reverse('home'))
 
     def get_context_data(self, **kwargs):
-        items = {'goals': 8,
-                 'ideas': 4,
-                 'plans': 2,
-                 'steps': 0,
-                 'tasks': 0}
+        items = {'goals': 1024,
+                 'ideas': 1024,
+                 'plans': 1024,
+                 'steps': 1024,
+                 'tasks': 1024}
 
         if self.request.session.get('goals_number'):
             items['goals'] = self.request.session['goals_number']
