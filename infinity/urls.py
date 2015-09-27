@@ -21,6 +21,8 @@ urlpatterns = patterns(
     url(r'^invite/', include('invitation.urls', namespace='invite')),
     url(r'^help/$', TemplateView.as_view(template_name='help.html'),
         name="help"),
+    url(r'^story/$', TemplateView.as_view(template_name='story.html'),
+        name="story"),
     url(r'^policy/$', TemplateView.as_view(template_name='policy.html'),
         name="policy"),
     url('^markdown/', include( 'django_markdown.urls')),
