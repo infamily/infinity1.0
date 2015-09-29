@@ -70,7 +70,7 @@ class CryptsyTransactionForm(forms.Form):
 
 class PayPalTransactionForm(forms.Form):
     recipient_username = UserChoiceField()
-    amount = forms.IntegerField()
+    amount = forms.DecimalField()
 
     USD = 0
     EUR = 1
