@@ -205,3 +205,21 @@ table.table.centered
     background: #ffffff;
     padding: 5px;
 }
+
+.invite_fd {
+    background:#28b62c;
+    color:#ffffff;
+    height:2.4em;
+    padding:.5em;
+    position:absolute;
+    bottom:5px;
+    width:13em;
+    right:5px;
+    border: 1px solid;
+    border-radius: 4px;
+}
+
+.invite_fx {
+    position:fixed;
+    bottom:0;
+}

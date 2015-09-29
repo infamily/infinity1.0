@@ -1,6 +1,27 @@
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
+<script>
+/* Dynamic top menu positioning */
+
+var num = 0; //number of pixels before modifying styles
+
+$(window).bind('scroll', function () {
+    if ($(window).scrollTop() > num) {
+        $('.invite_fd').addClass('invite_fx');
+    } else {
+        $('.invite_fd').removeClass('invite_fx');
+    }
+});
+</script>
+
+<script>
+function getfocus() {
+    document.getElementById("id_name").focus();
+}
+</script>
+
+
 {% for object in object_list %}
 <div id="comment-{{object.id}}" class="comment">
 
@@ -58,3 +79,6 @@
     </div>
 </div>
 {% endif %}
+
+
+<div class="invite_fd"><b><a href="#id_name" onclick="getfocus()" style="color:white; text-decoration: none;">Invite a friend to help!</a></b></div>
