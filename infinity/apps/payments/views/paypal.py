@@ -28,10 +28,9 @@ class PayPalTransactionView(FormView):
     form_class = PayPalTransactionForm
 
     def dispatch(self, request, *args, **kwargs):
-        comment_id = kwargs.get('comment_id')
-        self.comment_model = get_object_or_404(Comment, pk=comment_id)
-        return super(PayPalTransactionView, self).dispatch(
-            request, *args, **kwargs)
+        self.comment_id = kwargs.get('comment_id')
+        self.comment_model = get_object_or_404(Comment, pk=self.comment_id)
+        return super(PayPalTransactionView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         current_site = get_current_site(self.request)
@@ -81,6 +80,12 @@ class PayPalTransactionView(FormView):
 
     def get_success_url(self):
         return self.payUrl
+
+    def get_form_kwargs(self):
+        kwargs = super(PayPalTransactionView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        kwargs['comment_model'] = self.comment_model
+        return kwargs
 
 
 class PayPalTransactionSuccessView(View):

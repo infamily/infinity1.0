@@ -12,6 +12,8 @@ from .models import CoinAddress
 from .fields import UserChoiceField
 from .cryptsy.v2 import Cryptsy
 
+from decimal import Decimal
+from hours.models import HourValue
 
 class CoinAddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -40,7 +42,7 @@ class CryptsyTransactionForm(forms.Form):
         self.request = kwargs.pop('request')
         self.comment_model = kwargs.pop('comment_model')
         super(CryptsyTransactionForm, self).__init__(*args, **kwargs)
-        self.initial['recipient_username'] = self.comment_model.content_object.user.id
+        self.initial['recipient_username'] = self.comment_model.user.id
         cryptsy_credential = self.request.user.credential.get(default=True)
         cryptsy = Cryptsy(
             cryptsy_credential.publickey,
@@ -81,7 +83,15 @@ class PayPalTransactionForm(forms.Form):
     currency = forms.ChoiceField(choices=CURRENCIES)
 
     def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request')
+        self.comment_model = kwargs.pop('comment_model')
         super(PayPalTransactionForm, self).__init__(*args, **kwargs)
+        self.initial['recipient_username'] = self.comment_model.user.id
+        self.initial['amount'] = max(Decimal(0), round((self.comment_model.hours_assumed+\
+                                                 self.comment_model.hours_claimed-\
+                                                 self.comment_model.hours_donated)*\
+                                                 HourValue.objects.latest('created_at').value,2))
+                                
 
         self.helper = FormHelper(self)
         self.helper.layout.append(Submit('transaction_form', _('Send')))
