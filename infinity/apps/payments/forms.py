@@ -81,7 +81,10 @@ class PayPalTransactionForm(forms.Form):
     currency = forms.ChoiceField(choices=CURRENCIES)
 
     def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request')
+        self.comment_model = kwargs.pop('comment_model')
         super(PayPalTransactionForm, self).__init__(*args, **kwargs)
+        self.initial['recipient_username'] = self.comment_model.content_object.user.id
 
         self.helper = FormHelper(self)
         self.helper.layout.append(Submit('transaction_form', _('Send')))

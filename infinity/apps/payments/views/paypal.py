@@ -28,8 +28,8 @@ class PayPalTransactionView(FormView):
     form_class = PayPalTransactionForm
 
     def dispatch(self, request, *args, **kwargs):
-        comment_id = kwargs.get('comment_id')
-        self.comment_model = get_object_or_404(Comment, pk=comment_id)
+        self.comment_id = kwargs.get('comment_id')
+        self.comment_model = get_object_or_404(Comment, pk=self.comment_id)
         return super(PayPalTransactionView, self).dispatch(
             request, *args, **kwargs)
 
