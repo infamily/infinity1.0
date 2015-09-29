@@ -11,12 +11,9 @@ from .models import CryptsyCredential
 from .models import CoinAddress
 from .models import CryptsyTransaction
 from .cryptsy import v2
+from .exceptions import PayPalException
 
 from constance import config
-
-
-class PayPalException(Exception):
-    pass
 
 
 class CryptsyPay(object):
