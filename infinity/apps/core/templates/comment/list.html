@@ -1,6 +1,7 @@
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
+{% if request.user.is_authenticated %}
 <script>
 /* Dynamic top menu positioning */
 
@@ -20,7 +21,7 @@ function getfocus() {
     document.getElementById("id_name").focus();
 }
 </script>
-
+{% endif %}
 
 {% for object in object_list %}
 <div id="comment-{{object.id}}" class="comment">
@@ -81,4 +82,6 @@ function getfocus() {
 {% endif %}
 
 
+{% if request.user.is_authenticated %}
 <div class="invite_fd"><b><a href="#id_name" onclick="getfocus()" style="color:white; text-decoration: none;">Invite a friend to help!</a></b></div>
+{% endif %}
