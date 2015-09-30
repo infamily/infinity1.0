@@ -82,5 +82,5 @@ def _user_created(sender, instance, created, *args, **kwargs):
     if created:
         InvitationOption.objects.create(user=instance)
 
-post_save.connect(_invitation_created, sender=Invitation)
-post_save.connect(_user_created, sender=User)
+#post_save.connect(_invitation_created, sender=Invitation)
+#post_save.connect(_user_created, sender=User)

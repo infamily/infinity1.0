@@ -91,7 +91,7 @@ class IndexView(TemplateView):
 
         try:
             hour_value = HourValue.objects.latest('created_at')
-        except HourValue.ObjectDoesNotExist:
+        except HourValue.DoesNotExist:
             hour_value = 0
 
         context = {

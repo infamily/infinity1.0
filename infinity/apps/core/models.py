@@ -947,7 +947,7 @@ class Need(models.Model):
         blank=False,
     )
     defined_meaning_id = models.PositiveIntegerField(null=True, blank=True)
-    definition = models.CharField(max_length=255)
+    definition = models.TextField()
     type = models.ForeignKey(
         'Type',
         blank=True,
@@ -958,11 +958,7 @@ class Need(models.Model):
         blank=True,
         null=True,
     )
-    name = models.CharField(
-        unique=False,
-        max_length=150,
-        blank=False,
-    )
+    name = models.TextField()
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_needs',
