@@ -79,6 +79,8 @@ function getfocus() {
         {% crispy conversation_form %}
     </div>
 </div>
+{% else %}
+<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#id_text"><button type="button">comment</button></a>
 {% endif %}
 
 
