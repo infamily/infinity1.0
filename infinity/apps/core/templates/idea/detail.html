@@ -46,7 +46,9 @@ $(document).ready( function() {
 {% for goal in object.goal.all %}
 want: <a href="{% url "goal-detail" goal.pk %}">{{ goal }}</a></li>
 {% endfor %}
-<h1>{{ object.name }}</h1>{% if object.user == request.user %}[<a href="{% url "idea-update" object.pk %}">edit</a>, <a href="{% url "idea-delete" object.pk %}">delete</a>]{% endif %}
+<h1>{{ object.name }}</h1>
+<h2 style="font-size:22px;">{{ object.summary }}</h2>
+{% if object.user == request.user %}[<a href="{% url "idea-update" object.pk %}">edit</a>, <a href="{% url "idea-delete" object.pk %}">delete</a>]{% endif %}
 <br/>
 <br/>
 
