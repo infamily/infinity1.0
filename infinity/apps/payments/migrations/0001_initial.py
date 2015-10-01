@@ -61,6 +61,8 @@ class Migration(migrations.Migration):
                 ('currency', models.CharField(max_length=3)),
                 ('created_at', models.DateTimeField(auto_now=True)),
                 ('amount', models.DecimalField(max_digits=16, decimal_places=2)),
+                ('hours', models.DecimalField(default=0, max_digits=20, decimal_places=8)),
+                ('hours_matched', models.DecimalField(default=0.0, max_digits=20, decimal_places=8)),
                 ('comment', models.ForeignKey(related_name='paypal_transaction', to='core.Comment')),
                 ('receiver_user', models.ForeignKey(related_name='receiver_user_transaction', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
                 ('sender_user', models.ForeignKey(related_name='sender_user_transaction', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
