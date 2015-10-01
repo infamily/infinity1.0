@@ -223,3 +223,7 @@ table.table.centered
     position:fixed;
     bottom:0;
 }
+
+a:visited{
+         color: #000000;
+}

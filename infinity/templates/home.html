@@ -21,7 +21,7 @@
     <div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="goals" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.goals == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form> items commented in last {{ goal_days }} days.</div></div>
     <div class="panel-body">
     {% for goal in goal_list %}
-    <b>$ {{ goal.0.get_usd|floatformat:2 }} </b> {% if goal.1 %}<b>{% endif %}<a href="{% url "goal-detail" goal.0.pk %}">{{ goal.0.name }}</a>{% if goal.1 %}</b>{% endif %} (<a href="{% url "goal-detail" goal.0.pk %}">{{goal.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ goal.0.total_donated|floatformat:2 }} ħ donated, {{ goal.0.total_claimed|floatformat:1 }} h claimed, {{ goal.0.total_assumed|floatformat:1}} h assumed, {{ goal.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
+    <b>$ {{ goal.0.get_usd|floatformat:2 }} </b> {% if goal.1 %}<b>{% endif %}<a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{ goal.0.name }}</a>{% if goal.1 %}</b>{% endif %} (<a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{goal.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ goal.0.total_donated|floatformat:2 }} ħ donated, {{ goal.0.total_claimed|floatformat:1 }} h claimed, {{ goal.0.total_assumed|floatformat:1}} h assumed, {{ goal.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
     <br>
     {% endfor %}
     <a href="{% url "goal-list" %}">see more</a>
@@ -32,7 +32,7 @@
     <div class="panel-heading"><a href="{% url "idea-list" %}">Ideas</a>&nbsp;<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - <b>suggest a solution</b><div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="ideas" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.ideas == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form> items commented in last {{ idea_days }} days.</div></div>
     <div class="panel-body">
     {% for idea in idea_list %}
-    <b>$ {{ idea.0.get_usd|floatformat:2 }} </b> {% if idea.1 %}<b>{% endif %}<a href="{% url "idea-detail" idea.0.pk %}">{{ idea.0.name }}</a>{% if idea.1 %}</b>{% endif %} (<a href="{% url "idea-detail" idea.0.pk %}">{{idea.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ idea.0.total_donated|floatformat:2 }} ħ donated, {{ idea.0.total_claimed|floatformat:1 }} h claimed, {{ idea.0.total_assumed|floatformat:1 }} h assumed, {{ idea.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
+    <b>$ {{ idea.0.get_usd|floatformat:2 }} </b> {% if idea.1 %}<b>{% endif %}<a href="{% url "idea-detail" idea.0.pk %}#{{idea.0.commented_at|date:"U"}}">{{ idea.0.name }}</a>{% if idea.1 %}</b>{% endif %} (<a href="{% url "idea-detail" idea.0.pk %}#{{idea.0.commented_at|date:"U"}}">{{idea.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ idea.0.total_donated|floatformat:2 }} ħ donated, {{ idea.0.total_claimed|floatformat:1 }} h claimed, {{ idea.0.total_assumed|floatformat:1 }} h assumed, {{ idea.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
     <br>
     {% endfor %}
     <a href="{% url "idea-list" %}">see more</a>
@@ -45,7 +45,7 @@
     </div>
     <div class="panel-body">
     {% for plan in plan_list %}
-    <b>$ {{ plan.0.get_usd|floatformat:2 }} </b> {% if plan.1 %}<b>{% endif %}<a href="{% url "plan-detail" plan.0.pk %}">{{ plan.0.name }}</a>{% if plan.1 %}</b>{% endif %} (<a href="{% url "plan-detail" plan.0.pk %}">{{plan.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ plan.0.total_donated|floatformat:2}} ħ donated, {{ plan.0.total_claimed|floatformat:1 }} h claimed, {{ plan.0.total_assumed|floatformat:1 }} h assumed, {{ plan.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
+    <b>$ {{ plan.0.get_usd|floatformat:2 }} </b> {% if plan.1 %}<b>{% endif %}<a href="{% url "plan-detail" plan.0.pk %}#{{plan.0.commented_at|date:"U"}}">{{ plan.0.name }}</a>{% if plan.1 %}</b>{% endif %} (<a href="{% url "plan-detail" plan.0.pk %}#{{plan.0.commented_at|date:"U"}}">{{plan.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ plan.0.total_donated|floatformat:2}} ħ donated, {{ plan.0.total_claimed|floatformat:1 }} h claimed, {{ plan.0.total_assumed|floatformat:1 }} h assumed, {{ plan.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
     <br>
     {% endfor %}
     <a href="{% url "plan-list" %}">see more</a>
@@ -59,7 +59,7 @@
 
     <div class="panel-body">
     {% for step in step_list %}
-    <b>$ {{ step.0.get_usd|floatformat:2 }} </b> {% if step.1 %}<b>{% endif %}<a href="{% url "step-detail" step.0.pk %}">{{ step.0.name }}</a>{% if step.1 %}</b>{% endif %} (<a href="{% url "step-detail" step.0.pk %}">{{step.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ step.0.total_donated|floatformat:2 }} ħ donated, {{ step.0.total_claimed|floatformat:1 }} h claimed, {{ step.0.total_assumed|floatformat:1 }} h assumed, {{ step.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
+    <b>$ {{ step.0.get_usd|floatformat:2 }} </b> {% if step.1 %}<b>{% endif %}<a href="{% url "step-detail" step.0.pk %}#{{step.0.commented_at|date:"U"}}">{{ step.0.name }}</a>{% if step.1 %}</b>{% endif %} (<a href="{% url "step-detail" step.0.pk %}#{{step.0.commented_at|date:"U"}}">{{step.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ step.0.total_donated|floatformat:2 }} ħ donated, {{ step.0.total_claimed|floatformat:1 }} h claimed, {{ step.0.total_assumed|floatformat:1 }} h assumed, {{ step.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
     <br>
     {% endfor %}
     <a href="{% url "step-list" %}">see more</a>
@@ -73,7 +73,7 @@
 
     <div class="panel-body">
     {% for task in task_list %}
-    <b>$ {{ task.0.get_usd|floatformat:2 }} </b> {% if task.1 %}<b>{% endif %}<a href="{% url "task-detail" task.0.pk %}">{{ task.0.name }}</a>{% if task.1 %}</b>{% endif %} (<a href="{% url "task-detail" task.0.pk %}">{{task.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ task.0.total_donated|floatformat:2 }} ħ donated, {{ task.0.total_claimed|floatformat:2 }} h claimed, {{ task.0.total_assumed|floatformat:2 }} h assumed, {{ task.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
+    <b>$ {{ task.0.get_usd|floatformat:2 }} </b> {% if task.1 %}<b>{% endif %}<a href="{% url "task-detail" task.0.pk %}#{{task.0.commented_at|date:"U"}}">{{ task.0.name }}</a>{% if task.1 %}</b>{% endif %} (<a href="{% url "task-detail" task.0.pk %}#{{task.0.commented_at|date:"U"}}">{{task.0.comment_count}} comments</a>)<br/>&nbsp; &nbsp; &nbsp; &nbsp; [{{ task.0.total_donated|floatformat:2 }} ħ donated, {{ task.0.total_claimed|floatformat:2 }} h claimed, {{ task.0.total_assumed|floatformat:2 }} h assumed, {{ task.0.total_matched|floatformat:2 }} <a href="">ḥ</a> matched]
     <br>
     {% endfor %}
     <a href="{% url "task-list" %}">see more</a>
