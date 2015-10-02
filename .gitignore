@@ -4,6 +4,8 @@ assets
 media
 # file with secret information
 infinity/settings/secret.py
+infinity/settings/local.py
+infinity/settings/production.py
 
 
 # General stuff

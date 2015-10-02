@@ -41,6 +41,18 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='ConversationInvite',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('token', models.CharField(max_length=255)),
+                ('redirect_url', models.URLField()),
+                ('expired', models.BooleanField(default=False)),
+                ('name', models.CharField(max_length=255)),
+                ('email', models.EmailField(max_length=254)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Relationship',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),

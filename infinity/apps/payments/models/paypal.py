@@ -95,5 +95,5 @@ def comment_save_signal(sender, instance, **kwargs):
     instance.comment.match_hours()
     instance.comment.content_object.sum_hours()
 
-pre_save.connect(comment_pre_save_signal, sender=PayPalTransaction)
-post_save.connect(comment_save_signal, sender=PayPalTransaction)
+#pre_save.connect(comment_pre_save_signal, sender=PayPalTransaction)
+#post_save.connect(comment_save_signal, sender=PayPalTransaction)
