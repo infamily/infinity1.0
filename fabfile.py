@@ -32,7 +32,6 @@ def deploy():
     virtualenv('git pull origin %s' % env.branch)
     virtualenv('pip install -r %s%s' % (
         env.directory, env.requirements))
-    virtualenv('python infinity/manage.py syncdb')
     virtualenv('python infinity/manage.py migrate')
     virtualenv('python infinity/manage.py collectstatic')
     # uncomment it when deploy project first time
