@@ -5,11 +5,11 @@ from fabric.contrib.console import confirm
 
 
 def dev():
-    env.hosts = ['7webpages@7webpages.com']
-    env.directory = '/home/7webpages/ironcoderprojects/infinity/'
+    env.hosts = ['infty@api.infty.xyz']
+    env.directory = '/home/infty/infinity/'
     env.activate = 'source ' + os.path.join(env.directory, '.env/bin/activate')
-    env.branch = 'dev'
-    env.supervisor_app_name = 'infinity'
+    env.branch = 'master'
+    env.supervisor_app_name = 'infty'
     env.requirements = 'requirements.txt'
 
 
@@ -32,7 +32,6 @@ def deploy():
     virtualenv('git pull origin %s' % env.branch)
     virtualenv('pip install -r %s%s' % (
         env.directory, env.requirements))
-    virtualenv('python infinity/manage.py syncdb')
     virtualenv('python infinity/manage.py migrate')
     virtualenv('python infinity/manage.py collectstatic')
     # uncomment it when deploy project first time

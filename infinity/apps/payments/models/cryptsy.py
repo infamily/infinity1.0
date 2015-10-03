@@ -41,4 +41,4 @@ def cryptsy_transaction_post_save_signal(sender, instance, **kwargs):
     instance.comment.sum_hours_donated()
     instance.comment.content_object.sum_hours()
 
-#post_save.connect(cryptsy_transaction_post_save_signal, sender=CryptsyTransaction)
+post_save.connect(cryptsy_transaction_post_save_signal, sender=CryptsyTransaction)
