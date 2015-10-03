@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<div class="panel panel-default col-md-3">
+<div class="panel panel-default col-md-3 block-content">
     <div class="panel-heading"><a href="{% url "idea-list" %}">Ideas</a>&nbsp;<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - <b>suggest a solution</b><div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="ideas" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.ideas == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form></div></div>
     <div class="panel-body">
     <p align="center"><i>(ideas commented in last {{ idea_days }} days)</i></p>
@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<div class="panel panel-default col-md-3">
+<div class="panel panel-default col-md-3 block-content">
     <div class="panel-heading">
         <a href="{% url "plan-list" %}">Plans</a>&nbsp;<a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - <b>start a project</b> <div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="plans" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.plans == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form></div>
     </div>
@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<div class="panel panel-default col-md-3">
+<div class="panel panel-default col-md-3 block-content">
     <div class="panel-heading">
         <a href="{% url "step-list" %}">Steps</a>&nbsp;<i class="fa fa-minus-square-o"></i>&nbsp; - <b>break it down</b><div style="display:inline-block; float: right;"> <form method="post" style="display:inline;">{% csrf_token %}<select name="steps" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.steps == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form></div>
     </div>
@@ -74,7 +74,7 @@
     </div>
 </div>
 
-<div class="panel panel-default col-md-3">
+<div class="panel panel-default col-md-3 block-content">
     <div class="panel-heading">
         <a href="{% url "task-list" %}">Tasks</a>&nbsp;<i class="fa fa-minus-square-o"></i>&nbsp; - <b>execute it</b><div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="tasks" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.tasks == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form></div>
     </div>
