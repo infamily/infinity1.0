@@ -34,7 +34,7 @@ from hours.models import HourValue
 
 class IndexView(TemplateView):
     template_name = 'home.html'
-    dropdown_list = [0,2, 4, 8, 16, 32, 64, 128, 512, 1024]
+    dropdown_list = [0,2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
 
     def post(self, request, *args, **kwargs):
         if self.request.POST.get('goals'):
@@ -51,11 +51,11 @@ class IndexView(TemplateView):
         return redirect(reverse('home'))
 
     def get_context_data(self, **kwargs):
-        items = {'goals': 8,
-                 'ideas': 16,
-                 'plans': 32,
-                 'steps': 64,
-                 'tasks': 128}
+        items = {'goals': 64,
+                 'ideas': 128,
+                 'plans': 256,
+                 'steps': 512,
+                 'tasks': 1024}
 
         if self.request.session.get('goals_number'):
             items['goals'] = self.request.session['goals_number']
