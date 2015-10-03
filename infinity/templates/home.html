@@ -24,7 +24,7 @@
 
 <div class="row row-horizon">
 
-<div class="panel panel-default col-md-3">
+<div class="panel panel-default col-md-3 block-content">
     <div class="panel-heading"><a href="{% url "goal-list" %}">Goals</a>&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></a>&nbsp; - <b>define a problem</b>
     
     <div style="display:inline-block; float: right;"><form method="post" style="display:inline;">{% csrf_token %}<select name="goals" onchange="this.form.submit()">{% for value in dropdown_list %}<option value="{{ value }}" {% if items.goals == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></form></div></div>

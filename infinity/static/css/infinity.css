@@ -227,3 +227,7 @@ table.table.centered
 a:visited{
          color: #551a8b;
 }
+
+.panel.panel-default.col-md-3.block-content {
+    word-break: break-all;
+}
