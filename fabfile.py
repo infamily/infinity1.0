@@ -8,7 +8,7 @@ def dev():
     env.hosts = ['infty@api.infty.xyz']
     env.directory = '/home/infty/infinity/'
     env.activate = 'source ' + os.path.join(env.directory, '.env/bin/activate')
-    env.branch = 'master'
+    env.branch = 'dev'
     env.supervisor_app_name = 'infty'
     env.requirements = 'requirements.txt'
 
