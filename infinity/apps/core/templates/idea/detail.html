@@ -34,9 +34,11 @@ $(document).ready( function() {
 
 <div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
-      <div align="right" id="stats">
+    <div class="alignleft"><a href="#id_name"><i class="fa fa-share"></i></a></div>
+      <div class="alignright" id="stats">
         <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
       </div>
+      <div style="clear:both;"></div>
       <div align="right">
         <span class="tiptext">[<u>super-equity</u>: {{ object.get_equity|floatformat:2 }}% ḥ]
         <div class="description" align="left">A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much idea creator owns of all projects under this idea.</div>

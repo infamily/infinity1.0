@@ -34,7 +34,7 @@ from hours.models import HourValue
 
 class IndexView(TemplateView):
     template_name = 'home.html'
-    dropdown_list = [0,2, 4, 8, 16, 32, 64, 128, 512, 1024]
+    dropdown_list = [0,2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
 
     def post(self, request, *args, **kwargs):
         if self.request.POST.get('goals'):
@@ -51,11 +51,11 @@ class IndexView(TemplateView):
         return redirect(reverse('home'))
 
     def get_context_data(self, **kwargs):
-        items = {'goals': 8,
-                 'ideas': 16,
-                 'plans': 32,
-                 'steps': 64,
-                 'tasks': 128}
+        items = {'goals': 64,
+                 'ideas': 128,
+                 'plans': 256,
+                 'steps': 512,
+                 'tasks': 1024}
 
         if self.request.session.get('goals_number'):
             items['goals'] = self.request.session['goals_number']
@@ -70,6 +70,7 @@ class IndexView(TemplateView):
 
         now = timezone.now()
         in_days = lambda x: float(x.seconds/86400.)
+        in_hours = lambda x: float(x.seconds/3600.)
 
         goals = Goal.objects.order_by('-commented_at')[:items['goals']]
         ideas = Idea.objects.order_by('-commented_at')[:items['ideas']]
@@ -100,20 +101,20 @@ class IndexView(TemplateView):
             'plan_list': [(plan, plan.created_at > start) for plan in plans],
             'step_list': [(step, step.created_at > start) for step in steps],
             'task_list': [(task, task.created_at > start) for task in tasks],
-            'goal_days': goals and 
-                         '%0.2f' % in_days(now-min(commented_at(list(goals))))
+            'goal_hours': goals and 
+                         '%0.2f' % in_hours(now-max(commented_at(list(goals))))
                          or 0.,
-            'idea_days': ideas and
-                         '%0.2f' % in_days(now-min(commented_at(list(ideas))))
+            'idea_hours': ideas and
+                         '%0.2f' % in_hours(now-max(commented_at(list(ideas))))
                          or 0.,
-            'plan_days': plans and
-                         '%0.2f' % in_days(now-min(commented_at(list(plans))))
+            'plan_hours': plans and
+                         '%0.2f' % in_hours(now-max(commented_at(list(plans))))
                          or 0,
-            'step_days': steps and
-                         '%0.2f' % in_days(now-min(commented_at(list(steps))))
+            'step_hours': steps and
+                         '%0.2f' % in_hours(now-max(commented_at(list(steps))))
                          or 0,
-            'task_days': tasks and
-                         '%0.2f' % in_days(now-min(commented_at(list(tasks))))
+            'task_hours': tasks and
+                         '%0.2f' % in_hours(now-max(commented_at(list(tasks))))
                          or 0,
             'last_days': '%0.2f' % days,
             'number_of_items': len(objects_list),
