@@ -34,7 +34,7 @@ $(document).ready( function() {
 
 <div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
-    <div class="alignleft"><a href="#id_name"><i class="fa fa-share"></i></a></div>
+    <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
     <div class="alignright" id="stats">
         <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
     </div>
