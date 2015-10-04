@@ -16,6 +16,12 @@ from re import finditer
 from decimal import Decimal
 from hours.models import HourValue
 
+
+class PersonalManager(models.Manager):
+    def get_queryset(self):
+        return super(PersonalManager, self).get_queryset().filter(personal=False)
+
+
 class Comment(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
@@ -294,6 +300,9 @@ class Goal(models.Model):
             object_id=self.id
         ).count()
 
+    objects = PersonalManager()
+    default_objects = models.Manager()
+
 
 class Work(models.Model):
     personal = models.BooleanField(default=False)
@@ -452,6 +461,9 @@ class Work(models.Model):
             content_type__pk=comment_content_type.pk,
             object_id=self.id
         ).count()
+
+    objects = PersonalManager()
+    default_objects = models.Manager()
 
 
 class Idea(models.Model):
@@ -614,6 +626,9 @@ class Idea(models.Model):
             content_type__pk=comment_content_type.pk,
             object_id=self.id
         ).count()
+
+    objects = PersonalManager()
+    default_objects = models.Manager()
 
 
 class Step(models.Model):
@@ -778,6 +793,9 @@ class Step(models.Model):
             object_id=self.id
         ).count()
 
+    objects = PersonalManager()
+    default_objects = models.Manager()
+
 
 class Task(models.Model):
     personal = models.BooleanField(default=False)
@@ -929,6 +947,9 @@ class Task(models.Model):
             content_type__pk=comment_content_type.pk,
             object_id=self.id
         ).count()
+
+    objects = PersonalManager()
+    default_objects = models.Manager()
 
 
 class Need(models.Model):
@@ -1247,6 +1268,9 @@ class Plan(models.Model):
             content_type__pk=comment_content_type.pk,
             object_id=self.id
         ).count()
+
+    objects = PersonalManager()
+    default_objects = models.Manager()
 
 
 class Language(models.Model):
