@@ -231,3 +231,7 @@ a:visited{
 .block-content {
     word-break: break-all;
 }
+
+#div_id_sharewith {
+    display: none;
+}
