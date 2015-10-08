@@ -255,6 +255,7 @@ class GoalTest(WebTest, AuthTestMixin):
         form['name'] = goal_compare.name
         form['personal'] = goal_compare.personal
         form['reason'] = goal_compare.reason
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         goal_updated = Goal.objects.get(pk=goal.pk)
@@ -322,6 +323,7 @@ class GoalTest(WebTest, AuthTestMixin):
         form['reason'] = goal.reason
         form['type'] = type.pk
         form['need'] = goal.need.pk
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         goal_created = Goal.objects.latest('id')
@@ -637,6 +639,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         form['name'] = idea_compare.name
         form['summary'] = idea_compare.summary
         form['goal'] = [goal.id for goal in idea_compare.goal.all()]
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         idea_updated = Idea.objects.get(pk=idea.pk)
@@ -680,6 +683,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         form['summary'] = idea.summary
         form['goal'] = [goal.id, ]
         form['super_equity'] = form['super_equity'].options[0][0]
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         idea_created = Idea.objects.latest('id')
@@ -777,6 +781,7 @@ class StepTest(WebTest, AuthTestMixin):
         form['plan'] = step_compare.plan.pk
         form['objective'] = step_compare.objective
         form['investables'] = step_compare.investables
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         step_updated = Step.objects.get(pk=step.pk)
@@ -832,6 +837,7 @@ class StepTest(WebTest, AuthTestMixin):
         form['priority'] = step.priority
         form['objective'] = step.objective
         form['investables'] = step.investables
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         step_created = Step.objects.latest('id')
@@ -983,6 +989,7 @@ class TaskTest(WebTest, AuthTestMixin):
         form['name'] = task_compare.name
         form['priority'] = task_compare.priority
         form['step'] = task_compare.step.pk
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         task_updated = Task.objects.get(pk=task.pk)
@@ -1024,6 +1031,7 @@ class TaskTest(WebTest, AuthTestMixin):
         form = resp.form
         form['name'] = task.name
         form['priority'] = task.priority
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         task_created = Task.objects.latest('id')
@@ -1193,6 +1201,7 @@ class NeedTest(WebTest, AuthTestMixin):
 
         form = resp.form
         form['name'] = need.name
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         need_created = Need.objects.latest('id')
@@ -1308,6 +1317,7 @@ class PlanTest(WebTest, AuthTestMixin):
         form['deliverable'] = plan_compare.deliverable
         form['situation'] = plan_compare.situation
         form['members'] = [member.pk, ]
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         plan_updated = Plan.objects.get(pk=plan.pk)
@@ -1353,6 +1363,7 @@ class PlanTest(WebTest, AuthTestMixin):
         form['deliverable'] = plan.deliverable
         form['situation'] = plan.situation
         form['members'] = [member.pk, ]
+        form['sharewith'] = [self.user.id,]
         form.submit()
 
         plan_created = Plan.objects.latest('id')
