@@ -152,7 +152,7 @@ class GoalCreateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.fields['need'].label = _("""<b>Topic:</b> (relevant to problem,
@@ -184,7 +184,6 @@ class GoalCreateForm(forms.ModelForm):
             'hyper_equity',
             'language',
             'personal',
-            'sharewith',
         ]
 
 
@@ -206,7 +205,7 @@ class GoalUpdateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
@@ -224,7 +223,6 @@ class GoalUpdateForm(forms.ModelForm):
             'reason',
             'language',
             'personal',
-            'sharewith',
         ]
         widgets = {
             'reason': MarkdownWidget,
@@ -245,7 +243,7 @@ class WorkUpdateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
@@ -264,8 +262,7 @@ class WorkUpdateForm(forms.ModelForm):
             'parent_work_id',
             'task',
             'language',
-            'personal',
-            'sharewith',
+            'personal'
         ]
         widgets = {
             'description': MarkdownWidget,
@@ -286,7 +283,7 @@ class WorkCreateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "First attempt to assemble solar cells.", used in title.)')
@@ -316,8 +313,7 @@ class WorkCreateForm(forms.ModelForm):
             'file',
             'parent_work_id',
             'language',
-            'personal',
-            'sharewith',
+            'personal'
         ]
         widgets = {
             'description': MarkdownWidget,
@@ -340,7 +336,7 @@ class IdeaUpdateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.helper.layout.append(Submit('save', _('Update')))
@@ -360,8 +356,7 @@ class IdeaUpdateForm(forms.ModelForm):
             'goal',
             'super_equity',
             'language',
-            'personal',
-            'sharewith',
+            'personal'
         ]
         widgets = {
             'description': MarkdownWidget,
@@ -408,7 +403,7 @@ class IdeaCreateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
 
@@ -454,7 +449,7 @@ class StepUpdateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
@@ -496,7 +491,7 @@ class StepCreateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.fields['name'].label = _('<b>Milestone:</b> (e.g., "assemble solar panels", used in title.)')
@@ -549,7 +544,7 @@ class TaskUpdateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
@@ -585,7 +580,7 @@ class TaskCreateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.fields['name'].label = _('<b>Task:</b> (e.g., "Purchase solar cells", text in title.)')
@@ -623,7 +618,7 @@ class NeedCreateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.helper.layout = Layout(
@@ -681,7 +676,7 @@ class NeedUpdateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.helper.layout.append(Submit('save', _('Update')))
@@ -721,7 +716,7 @@ class PlanUpdateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.helper.layout.append(Submit('save', _('Update')))
@@ -770,7 +765,7 @@ class PlanCreateForm(forms.ModelForm):
                     'minimumInputLength': 1,
                     'placeholder': 'Select the users to share with:',
                 }
-            ), required=False
+            )
         )
 
         self.helper.layout.append(Submit('save', _('Create')))
