@@ -282,8 +282,7 @@ class GoalCreateView(CreateView):
 
 
 class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name_list = "goal/list1.html"
-    template_name_blocks = "goal/blocks1.html"
+    template_name = "goal/list1.html"
     model = Goal
     paginate_by = 10
     orderable_columns = [
@@ -375,8 +374,7 @@ class GoalDetailView(DetailView, CommentsContentTypeWrapper):
 
 
 class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name_list = "goal/list2.html"
-    template_name_blocks = "goal/blocks2.html"
+    template_name = "goal/list2.html"
     model = Goal
     paginate_by = 10
     orderable_columns = [
@@ -393,8 +391,7 @@ class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class WorkListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name_list = "work/list1.html"
-    template_name_blocks = "work/blocks1.html"
+    template_name = "work/list1.html"
     model = Work
     paginate_by = 10
     orderable_columns = [
@@ -476,8 +473,7 @@ class WorkDeleteView(OwnerMixin, DeleteView):
 
 
 class WorkListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name_list = "work/list2.html"
-    template_name_blocks = "work/blocks2.html"
+    template_name = "work/list2.html"
     model = Work
     paginate_by = 10
     orderable_columns = [
@@ -539,8 +535,7 @@ class WorkDetailView(DetailView, CommentsContentTypeWrapper):
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class IdeaListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name_list = "idea/list1.html"
-    template_name_blocks = "idea/blocks1.html"
+    template_name = "idea/list1.html"
     model = Idea
     paginate_by = 10
     orderable_columns = [
@@ -632,8 +627,7 @@ class IdeaDeleteView(OwnerMixin, DeleteView):
 
 
 class IdeaListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name_list = "idea/list2.html"
-    template_name_blocks = "idea/blocks2.html"
+    template_name = "idea/list2.html"
     model = Idea
     paginate_by = 10
     orderable_columns = [
@@ -694,8 +688,7 @@ class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class StepListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name_list = "step/list1.html"
-    template_name_blocks = "step/blocks1.html"
+    template_name = "step/list1.html"
     model = Step
     paginate_by = 10
     orderable_columns = [
@@ -778,8 +771,7 @@ class StepDeleteView(OwnerMixin, DeleteView):
 
 class StepListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    template_name_list = "step/list2.html"
-    template_name_blocks = "step/blocks2.html"
+    template_name = "step/list2.html"
     model = Step
     paginate_by = 10
     orderable_columns = [
@@ -849,8 +841,7 @@ class StepDetailView(DetailView, CommentsContentTypeWrapper):
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class TaskListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    template_name_list = "task/list1.html"
-    template_name_blocks = "task/blocks1.html"
+    template_name = "task/list1.html"
     model = Task
     paginate_by = 10
     orderable_columns = [
@@ -933,8 +924,6 @@ class TaskListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     """Task list view"""
 
     template_name = "task/list2.html"
-    template_name_list = "task/list2.html"
-    template_name_blocks = "task/blocks2.html"
 
     model = Task
     paginate_by = 10
@@ -1071,8 +1060,7 @@ class NeedCreateView(CreateView):
 
 class NeedListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    template_name_list = "need/list.html"
-    template_name_blocks = "need/blocks.html"
+    template_name = "need/list.html"
     model = Need
     paginate_by = 10
     orderable_columns = ["created_at", "type", "name", ]
@@ -1126,8 +1114,7 @@ class NeedDetailView(DetailView, CommentsContentTypeWrapper):
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class PlanListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    template_name_list = "plan/list1.html"
-    template_name_blocks = "plan/blocks1.html"
+    template_name = "plan/list1.html"
     model = Plan
     paginate_by = 10
     orderable_columns = [
@@ -1218,8 +1205,7 @@ class PlanDeleteView(OwnerMixin, DeleteView):
 
 class PlanListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    template_name_list = "plan/list2.html"
-    template_name_blocks = "plan/blocks2.html"
+    template_name = "plan/list2.html"
     model = Plan
     paginate_by = 10
     orderable_columns = [
