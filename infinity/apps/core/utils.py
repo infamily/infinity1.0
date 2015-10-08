@@ -5,7 +5,10 @@ from django.views.generic import CreateView
 from django.core.exceptions import FieldError
 
 from django.template.loader import render_to_string
+from django.views.generic import DetailView
 from django.db.models import Q
+from django.contrib import messages
+from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.html import strip_tags
@@ -84,6 +87,16 @@ class ViewTypeWrapper(object):
                 Q(personal=True, sharewith=self.request.user)
             )
         return qs
+
+
+class DetailViewWrapper(DetailView):
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if not obj.user == request.user:
+            if obj.personal and not request.user in obj.sharewith.all():
+                messages.error(request, 'You don\'t have access for this page')
+                return redirect('/')
+        return super(DetailViewWrapper, self).dispatch(request, *args, **kwargs)
 
 
 class CommentsContentTypeWrapper(CreateView):

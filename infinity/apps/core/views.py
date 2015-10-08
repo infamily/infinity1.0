@@ -14,6 +14,7 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from django.views.generic import TemplateView
 from django.shortcuts import render
+from django.utils import timezone
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
@@ -25,11 +26,11 @@ from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 from .utils import CommentsContentTypeWrapper
 from .utils import ViewTypeWrapper
+from .utils import DetailViewWrapper
 from .models import *
 from .forms import *
 from .filters import *
 
-from django.utils import timezone
 from hours.models import HourValue
 
 
@@ -350,7 +351,7 @@ class GoalUpdateView(OwnerMixin, UpdateView):
         return reverse("goal-detail", args=[self.object.pk, ])
 
 
-class GoalDetailView(DetailView, CommentsContentTypeWrapper):
+class GoalDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     """Goal detail view"""
     model = Goal
@@ -512,7 +513,7 @@ class WorkListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     filter_set = WorkListViewFilter2
 
 
-class WorkDetailView(DetailView, CommentsContentTypeWrapper):
+class WorkDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     """Work detail view"""
     model = Work
@@ -664,7 +665,7 @@ class IdeaListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     filter_set = IdeaListViewFilter2
 
 
-class IdeaDetailView(DetailView, CommentsContentTypeWrapper):
+class IdeaDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     """Idea detail view"""
     model = Idea
@@ -815,7 +816,7 @@ class StepListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class StepDetailView(DetailView, CommentsContentTypeWrapper):
+class StepDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     """Step detail view"""
     model = Step
@@ -960,7 +961,7 @@ class TaskListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     filter_set = TaskListViewFilter2
 
 
-class TaskDetailView(DetailView, CommentsContentTypeWrapper):
+class TaskDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     """Task detail view"""
     model = Task
@@ -1090,7 +1091,7 @@ class NeedListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFil
     filter_set = NeedListViewFilter
 
 
-class NeedDetailView(DetailView, CommentsContentTypeWrapper):
+class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     """Need detail view"""
     model = Need
@@ -1242,7 +1243,7 @@ class PlanListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     filter_set = PlanListViewFilter2
 
 
-class PlanDetailView(DetailView, CommentsContentTypeWrapper):
+class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     """Plan detail view"""
     model = Plan
