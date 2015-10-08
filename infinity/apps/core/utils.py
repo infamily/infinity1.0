@@ -5,6 +5,7 @@ from django.views.generic import CreateView
 from django.core.exceptions import FieldError
 
 from django.template.loader import render_to_string
+from django.db.models import Q
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.html import strip_tags
@@ -68,22 +69,20 @@ def send_mail_template(
 
 class ViewTypeWrapper(object):
     def get_base_queryset(self):
-        """
-        Show entries with personal = True for content owners only
-        Show entries with personal = False for anonymous users
-        """
         qs = super(ViewTypeWrapper, self).get_base_queryset()
         if self.request.user.is_anonymous():
-            try:
-                qs = qs.filter(personal=False)
-            except FieldError:
-                pass
+            # Show entries with personal = False for anonymous users
+            qs = qs.filter(personal=False)
         else:
-            try:
-                qs = (qs.filter(personal=False) |
-                      qs.filter(personal=True, user=self.request.user))
-            except FieldError:
-                pass
+            # Conditions description
+            # Show entries with personal = False
+            # Show entries with personal = True for content owners only
+            # Show entries with personal = True if content shared with current user
+            qs = qs.filter(
+                Q(personal=False) |
+                Q(personal=True, user=self.request.user) |
+                Q(personal=True, sharewith=self.request.user)
+            )
         return qs
 
 
