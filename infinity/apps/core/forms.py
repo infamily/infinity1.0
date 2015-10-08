@@ -146,6 +146,15 @@ class GoalCreateForm(forms.ModelForm):
             )
         )
 
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
+
         self.fields['need'].label = _("""<b>Topic:</b> (relevant to problem,
                                       <a href="/need-create/">click here</a> to
                                       add if you can't find it.)""")
@@ -190,6 +199,14 @@ class GoalUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['name'].label = 'Description'
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
@@ -220,6 +237,14 @@ class WorkUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
@@ -252,6 +277,14 @@ class WorkCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "First attempt to assemble solar cells.", used in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Give a title to your work.')})
@@ -297,6 +330,14 @@ class IdeaUpdateForm(forms.ModelForm):
         super(IdeaUpdateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.helper.layout.append(Submit('save', _('Update')))
 
@@ -356,6 +397,14 @@ class IdeaCreateForm(forms.ModelForm):
                 }
             )
         )
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "Solar Water Condenser", used in title.)')
@@ -393,6 +442,14 @@ class StepUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
@@ -426,6 +483,14 @@ class StepCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.fields['name'].label = _('<b>Milestone:</b> (e.g., "assemble solar panels", used in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the milestone.')})
@@ -470,6 +535,14 @@ class TaskUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
@@ -497,6 +570,14 @@ class TaskCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.fields['name'].label = _('<b>Task:</b> (e.g., "Purchase solar cells", text in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the task.')})
@@ -526,6 +607,14 @@ class NeedCreateForm(forms.ModelForm):
         super(NeedCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.helper.layout = Layout(
             Div(
@@ -575,6 +664,14 @@ class NeedUpdateForm(forms.ModelForm):
         super(NeedUpdateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.helper.layout.append(Submit('save', _('Update')))
 
@@ -603,6 +700,14 @@ class PlanUpdateForm(forms.ModelForm):
                 select2_options={
                     'minimumInputLength': 1,
                     'placeholder': 'Select the members for the equity...',
+                }
+            )
+        )
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
                 }
             )
         )
@@ -646,6 +751,14 @@ class PlanCreateForm(forms.ModelForm):
         super(PlanCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            )
+        )
 
         self.helper.layout.append(Submit('save', _('Create')))
 

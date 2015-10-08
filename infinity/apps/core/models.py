@@ -239,6 +239,12 @@ class Goal(models.Model):
         blank=False
     )
 
+    sharewith = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
+    )
+
     def __unicode__(self):
         return unicode(self.name[:50])
 
@@ -406,6 +412,11 @@ class Work(models.Model):
         max_digits=20,
         blank=False,
     )
+    sharewith = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -559,6 +570,11 @@ class Idea(models.Model):
         decimal_places=8,
         max_digits=20,
         blank=False
+    )
+    sharewith = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
     )
 
     def __unicode__(self):
@@ -726,6 +742,11 @@ class Step(models.Model):
         max_digits=20,
         blank=False,
     )
+    sharewith = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -878,6 +899,11 @@ class Task(models.Model):
         max_digits=20,
         blank=False,
     )
+    sharewith = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
+    )
 
     def __unicode__(self):
         return unicode(self.name[:50])
@@ -1013,6 +1039,11 @@ class Need(models.Model):
         decimal_places=8,
         max_digits=20,
         blank=False,
+    )
+    sharewith = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
     )
 
     def __unicode__(self):
@@ -1192,6 +1223,11 @@ class Plan(models.Model):
         related_name='user_members',
         blank=False,
         null=False,
+    )
+    sharewith = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
     )
 
     def __unicode__(self):
