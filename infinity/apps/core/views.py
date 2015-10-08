@@ -74,31 +74,20 @@ class IndexView(TemplateView):
         in_days = lambda x: float(x.seconds/86400.)
         in_hours = lambda x: float(x.seconds/3600.)
 
-        goals = Goal.objects.filter(
-            Q(personal=False) |
-            Q(personal=True, user=self.request.user) |
-            Q(personal=True, sharewith=self.request.user)
-        ).order_by('-commented_at')[:items['goals']]
-        ideas = Idea.objects.filter(
-            Q(personal=False) |
-            Q(personal=True, user=self.request.user) |
-            Q(personal=True, sharewith=self.request.user)
-        ).order_by('-commented_at')[:items['ideas']]
-        plans = Plan.objects.filter(
-            Q(personal=False) |
-            Q(personal=True, user=self.request.user) |
-            Q(personal=True, sharewith=self.request.user)
-        ).order_by('-commented_at')[:items['plans']]
-        steps = Step.objects.filter(
-            Q(personal=False) |
-            Q(personal=True, user=self.request.user) |
-            Q(personal=True, sharewith=self.request.user)
-        ).order_by('-commented_at')[:items['steps']]
-        tasks = Task.objects.filter(
-            Q(personal=False) |
-            Q(personal=True, user=self.request.user) |
-            Q(personal=True, sharewith=self.request.user)
-        ).order_by('-commented_at')[:items['tasks']]
+        if self.request.user.is_authenticated():
+            q_object = (
+                Q(personal=False) |
+                Q(personal=True, user=self.request.user) |
+                Q(personal=True, sharewith=self.request.user)
+            )
+        else:
+            q_object = Q(personal=False)
+
+        goals = Goal.objects.filter(q_object).order_by('-commented_at')[:items['goals']]
+        ideas = Idea.objects.filter(q_object).order_by('-commented_at')[:items['ideas']]
+        plans = Plan.objects.filter(q_object).order_by('-commented_at')[:items['plans']]
+        steps = Step.objects.filter(q_object).order_by('-commented_at')[:items['steps']]
+        tasks = Task.objects.filter(q_object).order_by('-commented_at')[:items['tasks']]
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
