@@ -3,6 +3,7 @@ from itertools import chain
 
 from django.utils.translation import ugettext as _
 from django.http import HttpResponse
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
@@ -72,11 +73,31 @@ class IndexView(TemplateView):
         in_days = lambda x: float(x.seconds/86400.)
         in_hours = lambda x: float(x.seconds/3600.)
 
-        goals = Goal.objects.order_by('-commented_at')[:items['goals']]
-        ideas = Idea.objects.order_by('-commented_at')[:items['ideas']]
-        plans = Plan.objects.order_by('-commented_at')[:items['plans']]
-        steps = Step.objects.order_by('-commented_at')[:items['steps']]
-        tasks = Task.objects.order_by('-commented_at')[:items['tasks']]
+        goals = Goal.objects.filter(
+            Q(personal=False) |
+            Q(personal=True, user=self.request.user) |
+            Q(personal=True, sharewith=self.request.user)
+        ).order_by('-commented_at')[:items['goals']]
+        ideas = Idea.objects.filter(
+            Q(personal=False) |
+            Q(personal=True, user=self.request.user) |
+            Q(personal=True, sharewith=self.request.user)
+        ).order_by('-commented_at')[:items['ideas']]
+        plans = Plan.objects.filter(
+            Q(personal=False) |
+            Q(personal=True, user=self.request.user) |
+            Q(personal=True, sharewith=self.request.user)
+        ).order_by('-commented_at')[:items['plans']]
+        steps = Step.objects.filter(
+            Q(personal=False) |
+            Q(personal=True, user=self.request.user) |
+            Q(personal=True, sharewith=self.request.user)
+        ).order_by('-commented_at')[:items['steps']]
+        tasks = Task.objects.filter(
+            Q(personal=False) |
+            Q(personal=True, user=self.request.user) |
+            Q(personal=True, sharewith=self.request.user)
+        ).order_by('-commented_at')[:items['tasks']]
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 

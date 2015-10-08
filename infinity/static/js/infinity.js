@@ -11,9 +11,8 @@ try{
 
 $(function() {
   $("#id_personal").change(function() {$("#div_id_sharewith").toggle()});
-  var id_personal_checked = $("#id_personal").prop('checked', true);
 
-  if (id_personal_checked) {
+  if ($("#id_personal").is(":checked")) {
     // Show if Personal checkbox is checked
     $("#div_id_sharewith").show();
   }
