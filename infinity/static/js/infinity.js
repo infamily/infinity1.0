@@ -8,3 +8,7 @@ try{
   },
   300)
 }catch(e){}
+
+$(function() {
+  $("#id_personal").change(function() {$("#div_id_sharewith").toggle()});
+});
