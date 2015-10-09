@@ -65,6 +65,14 @@ class CommentUpdateForm(forms.ModelForm):
         self.fields['notify'].label = _('Notify mentioned users by e-mail.')
 
         self.helper = FormHelper(self)
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            ), required=False
+        )
 
         self.helper.layout.append(Submit('save', _('Update')))
 
@@ -617,6 +625,14 @@ class NeedCreateForm(forms.ModelForm):
         super(NeedCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': 'Select the users to share with:',
+                }
+            ), required=False
+        )
 
         self.helper.layout = Layout(
             Div(

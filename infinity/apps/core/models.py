@@ -985,6 +985,7 @@ class Need(models.Model):
         blank=True,
         null=True,
     )
+    personal = models.BooleanField(default=False)
     name = models.TextField()
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
