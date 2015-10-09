@@ -10,6 +10,7 @@ from .models import Need
 from .models import Type
 from .models import Plan
 from .models import Language
+from .models import Translation
 
 
 class LanguageAdmin(admin.ModelAdmin):
@@ -26,3 +27,4 @@ admin.site.register(Need)
 admin.site.register(Type)
 admin.site.register(Plan)
 admin.site.register(Language, LanguageAdmin)
+admin.site.register(Translation)

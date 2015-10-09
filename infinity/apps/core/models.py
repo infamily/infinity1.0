@@ -1287,11 +1287,36 @@ class Plan(models.Model):
         ).count()
 
 
+class Translation(models.Model):
+    name = models.TextField(blank=True, null=True)
+    summary = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    reason = models.TextField(blank=True, null=True)
+    objective = models.TextField(blank=True, null=True)
+    situation = models.TextField(blank=True, null=True)
+    deliverable = models.TextField(blank=True, null=True)
+    investables = models.TextField(blank=True, null=True)
+    deliverables = models.TextField(blank=True, null=True)
+    language = models.ForeignKey('Language')
+
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    def __unicode__(self):
+        return "Language: %s, Content Type: %s, Object ID: %d" % (
+            self.language.name,
+            self.content_type,
+            self.object_id
+        )
+
+
 class Language(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     http_accept_language = models.CharField(max_length=255, blank=True,
                                             null=True)
     omegawiki_language_id = models.PositiveIntegerField(null=True, blank=True)
+    language_code = models.CharField(max_length=4)
 
     def __unicode__(self):
         try:

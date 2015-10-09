@@ -47,7 +47,7 @@ $(document).ready( function() {
       </div>
  
     category: <a href="">{{ object.type }}</a>, related object: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a><br/>
-    <h1>{{object.name}}</h1>{% if object.user == request.user %}
+    <h1>{% if not translation %}{{object.name}}{% else %} {{ translation.name }} {% endif %}</h1>{% if object.user == request.user %}
     [<a href="{% url "goal-update" object.pk %}">edit</a>, <a href="{% url "goal-delete" object.pk %}">delete</a>]{% endif %}
   <br/>
   <br/>
