@@ -410,6 +410,8 @@ class WorkTest(WebTest, AuthTestMixin):
             form['file'] = Upload(work_compare.file.path)
         form['parent_work_id'] = str(work_compare.parent_work_id)
         form['description'] = work_compare.description
+        form['personal'] = False
+        form['sharewith'] = '1'
         form.submit()
 
         work_updated = Work.objects.get(pk=work.pk)
@@ -470,6 +472,8 @@ class WorkTest(WebTest, AuthTestMixin):
             form['file'] = Upload(work.file.path)
         form['parent_work_id'] = str(work.parent_work_id)
         form['description'] = work.description
+        form['personal'] = work.personal
+        form['sharewith'] = str(1)
         form.submit()
 
         work_created = Work.objects.latest('id')
