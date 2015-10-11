@@ -1297,7 +1297,7 @@ class TranslationCreateView(CreateView):
         url = "%s-detail" % self.kwargs.get('model_name')
         url = "%s?lang=%s" % (
             reverse(url, kwargs={'slug': self.content_type_instance.id}),
-            self.object.language__language_code
+            self.object.language.language_code
         )
         return url
 

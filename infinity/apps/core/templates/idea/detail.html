@@ -8,7 +8,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 {% endblock extra_js %}
 
-{% block title %}i: {{ object.name }}{% endblock title %}
+{% block title %}i: {% if not translation %}{{ object.name }}{% else %}{{ translation.name }}{% endif %}{% endblock title %}
 
 {% block content %}
 
@@ -35,6 +35,17 @@ $(document).ready( function() {
 <div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
     <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
+    <a href="{% url "idea-detail" object.id %}">
+        [en]
+    </a>
+    {% for translation in translations %}
+    {% if translation.language.language_code %}
+    <a href="{% url "idea-detail" object.id %}?lang={{translation.language.language_code }}">
+        [{{ translation.language.language_code }}]
+    </a>
+    {% endif %}
+    {% endfor %}
+    <a href="{{ translate_url }}">[+]</a>
       <div class="alignright" id="stats">
         <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
       </div>
@@ -49,12 +60,16 @@ $(document).ready( function() {
 want: <a href="{% url "goal-detail" goal.pk %}">{{ goal }}</a></li>
 {% endfor %}
 <h1>{{ object.name }}</h1>
-<h2 style="font-size:22px;">{{ object.summary }}</h2>
+<h2 style="font-size:22px;">{% if not translation %}{{ object.summary }}{% else %}{{ translation.summary}} {% endif %}</h2>
 {% if object.user == request.user %}[<a href="{% url "idea-update" object.pk %}">edit</a>, <a href="{% url "idea-delete" object.pk %}">delete</a>]{% endif %}
 <br/>
 <br/>
 
+{% if not translation %}
 {{object.description|markdown}}
+{% else %}
+{{translation.description|markdown}}
+{% endif %}
 <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 </div>
 
