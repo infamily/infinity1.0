@@ -33,6 +33,12 @@ from core.models import Translation
 
 
 class TranslationCreateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(TranslationCreateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+
+        self.helper.layout.append(Submit('save', _('Create')))
+
     class Meta:
         model = Translation
         exclude = ['language', 'content_type', 'object_id', 'content_object']

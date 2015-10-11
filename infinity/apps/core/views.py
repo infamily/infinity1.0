@@ -1282,3 +1282,23 @@ class TranslationCreateView(CreateView):
     model = Translation
     form_class = TranslationCreateForm
     template_name = 'translation/create.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            self.language = Language.objects.get(language_code=kwargs.get('language_id'))
+        except Language.DoesNotExist:
+            # Raise 404 if Language does not exist
+            raise Http404
+        return super(TranslationCreateView, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.language = self.language
+
+        from django.db.models.loading import get_model
+
+        model = get_model(app_label='core', model_name=self.kwargs.get('model_name'))
+        content_type = ContentType.objects.get_for_model(model)
+        self.object.content_type = content_type
+        self.object.object_id = self.kwargs.get('object_id')
+        self.object.save()
