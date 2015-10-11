@@ -1284,21 +1284,35 @@ class TranslationCreateView(CreateView):
     template_name = 'translation/create.html'
 
     def dispatch(self, request, *args, **kwargs):
+        from django.db.models.loading import get_model
+        from django.http import Http404
         try:
             self.language = Language.objects.get(language_code=kwargs.get('language_id'))
         except Language.DoesNotExist:
             # Raise 404 if Language does not exist
             raise Http404
+
+        self.content_type_model = get_model(app_label='core', model_name=self.kwargs.get('model_name'))
+        self.content_type = ContentType.objects.get_for_model(self.content_type_model)
+        self.content_type_instance = self.content_type_model.objects.get(pk=kwargs.get('object_id'))
+
         return super(TranslationCreateView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.language = self.language
 
-        from django.db.models.loading import get_model
-
-        model = get_model(app_label='core', model_name=self.kwargs.get('model_name'))
-        content_type = ContentType.objects.get_for_model(model)
-        self.object.content_type = content_type
-        self.object.object_id = self.kwargs.get('object_id')
+        self.object.content_type = self.content_type
+        self.object.object_id = self.content_type_instance.id
         self.object.save()
+
+    def get_form(self, form_class):
+        form = super(TranslationCreateView, self).get_form(form_class)
+
+        model_fields = [x.name for x in self.content_type_model._meta.fields]
+
+        for field in form.fields:
+            if field not in model_fields:
+                form.fields.pop(field)
+
+        return form

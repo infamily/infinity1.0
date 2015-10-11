@@ -42,7 +42,6 @@ class TranslationCreateForm(forms.ModelForm):
     class Meta:
         model = Translation
         exclude = ['language', 'content_type', 'object_id', 'content_object']
-        fields = ['name', 'summary']
 
 
 class CommentCreateFormDetail(forms.ModelForm):
