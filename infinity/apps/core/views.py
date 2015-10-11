@@ -1298,6 +1298,10 @@ class TranslationCreateView(CreateView):
 
         return super(TranslationCreateView, self).dispatch(request, *args, **kwargs)
 
+    def get_success_url(self):
+        url = "%s-detail" % self.kwargs.get('model_name')
+        return reverse(url, kwargs={'slug': self.content_type_instance.id})
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.language = self.language
@@ -1305,6 +1309,8 @@ class TranslationCreateView(CreateView):
         self.object.content_type = self.content_type
         self.object.object_id = self.content_type_instance.id
         self.object.save()
+
+        return super(TranslationCreateView, self).form_valid(form)
 
     def get_form(self, form_class):
         form = super(TranslationCreateView, self).get_form(form_class)
