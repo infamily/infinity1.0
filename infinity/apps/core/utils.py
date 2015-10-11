@@ -95,9 +95,7 @@ class ViewTypeWrapper(object):
 
 
 class DetailViewWrapper(DetailView):
-    def get_context_data(self, **kwargs):
-        context = super(DetailViewWrapper, self).get_context_data(**kwargs)
-
+    def translation(self):
         obj = self.get_object()
         content_type = ContentType.objects.get_for_model(obj.__class__)
 
@@ -116,9 +114,15 @@ class DetailViewWrapper(DetailView):
         except Translation.DoesNotExist:
             translation = None
 
-        context.update({
-            'translation': translation
-        })
+        return translation
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailViewWrapper, self).get_context_data(**kwargs)
+
+        if self.request.GET.get('lang'):
+            context.update({
+                'translation': self.translation
+            })
 
         return context
 
