@@ -265,4 +265,10 @@ urlpatterns = patterns(
         PlanDetailView.as_view(),
         name="plan-detail"
     ),
+
+    url(
+        r'^translation/create/$',
+        TranslationCreateView.as_view(),
+        name="create-translation"
+    )
 )

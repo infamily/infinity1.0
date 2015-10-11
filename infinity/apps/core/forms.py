@@ -29,6 +29,14 @@ from .fields import MembersChoiceField
 from django_markdown.widgets import MarkdownWidget
 
 from decimal import Decimal
+from core.models import Translation
+
+
+class TranslationCreateForm(forms.ModelForm):
+    class Meta:
+        model = Translation
+        exclude = ['language', 'content_type', 'object_id', 'content_object']
+        fields = ['name', 'summary']
 
 
 class CommentCreateFormDetail(forms.ModelForm):

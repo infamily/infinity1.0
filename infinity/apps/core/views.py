@@ -1275,3 +1275,10 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
 
         return context
+
+from core.forms import TranslationCreateForm
+
+class TranslationCreateView(CreateView):
+    model = Translation
+    form_class = TranslationCreateForm
+    template_name = 'translation/create.html'
