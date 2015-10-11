@@ -1,6 +1,6 @@
+from os import path
+from re import finditer
 from django.contrib.contenttypes.models import ContentType
-from .forms import CommentCreateFormDetail
-from .models import Comment
 from django.views.generic import CreateView
 from django.core.exceptions import FieldError
 
@@ -12,10 +12,13 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.html import strip_tags
+
 from constance import config
 from users.models import User
-from os import path
-from re import finditer
+
+from .forms import CommentCreateFormDetail
+from .models import Comment
+from .models import Translation
 
 
 def notify_mentioned_users(comment_instance):
@@ -90,6 +93,27 @@ class ViewTypeWrapper(object):
 
 
 class DetailViewWrapper(DetailView):
+    def get_context_data(self, **kwargs):
+        context = super(DetailViewWrapper, self).get_context_data(**kwargs)
+
+        obj = self.get_object()
+        content_type = ContentType.objects.get_for_model(obj.__class__)
+
+        try:
+            translation = Translation.objects.get(
+                language__language_code=self.request.GET.get('lang'),
+                object_id=obj.id,
+                content_type=content_type
+            )
+        except Translation.DoesNotExist:
+            translation = None
+
+        context.update({
+            'translation': translation
+        })
+
+        return context
+
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
         if not obj.user == request.user:

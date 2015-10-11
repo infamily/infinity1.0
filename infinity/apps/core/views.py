@@ -359,24 +359,10 @@ class GoalDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         obj = self.get_object()
         form = None
 
-        content_type = ContentType.objects.get_for_model(obj.__class__)
-
-        try:
-            translation = Translation.objects.get(
-                language__language_code=self.request.GET.get('lang'),
-                object_id=obj.id,
-                content_type=content_type
-            )
-        except Translation.DoesNotExist:
-            translation = None
-
         if self.request.user.__class__.__name__ not in [u'AnonymousUser']:
             form = self.get_form_class()
         context.update({
             'form': form,
-        })
-        context.update({
-            'translation': translation
         })
         context.update({
             'object_list': self.object_list,
