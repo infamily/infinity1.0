@@ -5,6 +5,8 @@ from django.utils.translation import ugettext as _
 from django.http import HttpResponse
 from django.db.models import Q
 from django.shortcuts import redirect
+from django.db.models.loading import get_model
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib import messages
@@ -1278,20 +1280,13 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
 from core.forms import TranslationCreateForm
 
+
 class TranslationCreateView(CreateView):
     model = Translation
     form_class = TranslationCreateForm
     template_name = 'translation/create.html'
 
     def dispatch(self, request, *args, **kwargs):
-        from django.db.models.loading import get_model
-        from django.http import Http404
-        try:
-            self.language = Language.objects.get(language_code=kwargs.get('language_id'))
-        except Language.DoesNotExist:
-            # Raise 404 if Language does not exist
-            raise Http404
-
         self.content_type_model = get_model(app_label='core', model_name=self.kwargs.get('model_name'))
         self.content_type = ContentType.objects.get_for_model(self.content_type_model)
         self.content_type_instance = self.content_type_model.objects.get(pk=kwargs.get('object_id'))
@@ -1302,14 +1297,12 @@ class TranslationCreateView(CreateView):
         url = "%s-detail" % self.kwargs.get('model_name')
         url = "%s?lang=%s" % (
             reverse(url, kwargs={'slug': self.content_type_instance.id}),
-            self.kwargs.get('language_id')
+            self.object.language__language_code
         )
         return url
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.language = self.language
-
         self.object.content_type = self.content_type
         self.object.object_id = self.content_type_instance.id
         self.object.save()

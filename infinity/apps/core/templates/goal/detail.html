@@ -36,6 +36,17 @@ $(document).ready( function() {
 <div class="panel panel-default box col-sm-12 col-md-7">
   <div class="panel-body">
       <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
+      <a href="{% url "goal-detail" object.id %}">
+          [en]
+      </a>
+      {% for translation in translations %}
+      {% if translation.language.language_code %}
+      <a href="{% url "goal-detail" object.id %}?lang={{translation.language.language_code }}">
+          [{{ translation.language.language_code }}]
+      </a>
+      {% endif %}
+      {% endfor %}
+      <a href="{{ translate_url }}">[+]</a>
       <div class="alignright" id="stats">
       <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
       </div>
@@ -52,7 +63,11 @@ $(document).ready( function() {
   <br/>
   <br/>
 
+  {% if not translation %}
   {{object.reason|markdown}}
+  {% else %}
+  {{translation.reason|markdown}}
+  {% endif %}
   <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
   </div>
 

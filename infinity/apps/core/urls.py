@@ -267,7 +267,7 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^translation/create/(?P<model_name>\w+)/(?P<object_id>\d+)/(?P<language_id>\w+)/$',
+        r'^translation/create/(?P<model_name>\w+)/(?P<object_id>\d+)/$',
         TranslationCreateView.as_view(),
         name="create-translation"
     )

@@ -6,6 +6,7 @@ from django.core.exceptions import FieldError
 
 from django.template.loader import render_to_string
 from django.views.generic import DetailView
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404
 from django.contrib import messages
@@ -95,6 +96,7 @@ class ViewTypeWrapper(object):
 
 
 class DetailViewWrapper(DetailView):
+    @property
     def translation(self):
         obj = self.get_object()
         content_type = ContentType.objects.get_for_model(obj.__class__)
@@ -118,6 +120,22 @@ class DetailViewWrapper(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(DetailViewWrapper, self).get_context_data(**kwargs)
+
+        context.update({
+            'translations': Translation.objects.filter(
+                object_id=self.get_object().id,
+                content_type=ContentType.objects.get_for_model(
+                    self.get_object().__class__
+                )
+            )
+        })
+
+        context.update({
+            'translate_url': reverse('create-translation', kwargs={
+                'model_name': self.get_object().__class__.__name__.lower(),
+                'object_id': self.get_object().id
+            })
+        })
 
         if self.request.GET.get('lang'):
             context.update({
