@@ -7,6 +7,7 @@ from django.core.exceptions import FieldError
 from django.template.loader import render_to_string
 from django.views.generic import DetailView
 from django.db.models import Q
+from django.http import Http404
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.core.mail import send_mail
@@ -15,6 +16,7 @@ from django.utils.html import strip_tags
 
 from constance import config
 from users.models import User
+from core.models import Language
 
 from .forms import CommentCreateFormDetail
 from .models import Comment
@@ -100,8 +102,14 @@ class DetailViewWrapper(DetailView):
         content_type = ContentType.objects.get_for_model(obj.__class__)
 
         try:
+            language = Language.objects.get(language_code=self.request.GET.get('lang'))
+        except Language.DoesNotExist:
+            # Raise 404 if Language does not exist
+            raise Http404
+
+        try:
             translation = Translation.objects.get(
-                language__language_code=self.request.GET.get('lang'),
+                language=language,
                 object_id=obj.id,
                 content_type=content_type
             )
