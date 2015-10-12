@@ -5,6 +5,7 @@ from .models import Need
 from .models import Type
 from .models import Goal
 from .models import Idea
+from .models import Language
 from users.models import User
 
 
@@ -69,3 +70,8 @@ class IdeaChoiceField(AutoModelSelect2Field):
 class MembersChoiceField(AutoModelSelect2MultipleField):
     queryset = User.objects.all()
     search_fields = ['username__icontains']
+
+
+class LanguageChoiceField(AutoModelSelect2Field):
+    queryset = Language.objects.all()
+    search_fields = ['name__icontains']

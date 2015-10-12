@@ -37,6 +37,9 @@ class TranslationCreateForm(forms.ModelForm):
         super(TranslationCreateForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
 
+        from .fields import LanguageChoiceField
+        self.fields['language'] = LanguageChoiceField()
+
         self.helper.layout.append(Submit('save', _('Create')))
 
     class Meta:
