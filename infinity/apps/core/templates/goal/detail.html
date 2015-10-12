@@ -37,7 +37,7 @@ $(document).ready( function() {
   <div class="panel-body">
       <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
       <a href="{% url "goal-detail" object.id %}">
-          [en]
+          [{{object.language.language_code}}]
       </a>
       {% for translation in translations %}
       {% if translation.language.language_code %}
