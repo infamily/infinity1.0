@@ -1309,6 +1309,11 @@ class TranslationCreateView(CreateView):
 
         return super(TranslationCreateView, self).form_valid(form)
 
+    def get_form_kwargs(self):
+        kwargs = super(TranslationCreateView, self).get_form_kwargs()
+        kwargs['content_type_instance'] = self.content_type_instance
+        return kwargs
+
     def get_form(self, form_class):
         form = super(TranslationCreateView, self).get_form(form_class)
 

@@ -25,6 +25,8 @@ from .fields import GoalChoiceFieldMultiple
 from .fields import IdeaChoiceField
 from .fields import MembersChoiceField
 
+import django_select2
+from django.contrib.contenttypes.models import ContentType
 
 from django_markdown.widgets import MarkdownWidget
 
@@ -34,12 +36,21 @@ from core.models import Translation
 
 class TranslationCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        content_type_instance = kwargs.pop('content_type_instance')
         super(TranslationCreateForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
 
-        from .fields import LanguageChoiceField
-        self.fields['language'] = LanguageChoiceField()
+        content_type = ContentType.objects.get_for_model(content_type_instance)
+        translations = Translation.objects.filter(
+            content_type=content_type,
+            object_id=content_type_instance.pk
+        )
 
+        self.fields['language'] = django_select2.ModelSelect2Field(
+            queryset=Language.objects.all().exclude(id__in=[
+                translation.language.id for translation in translations
+            ])
+        )
         self.helper.layout.append(Submit('save', _('Create')))
 
     class Meta:
