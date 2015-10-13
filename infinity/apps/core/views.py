@@ -26,6 +26,8 @@ from clever_selects.views import ChainedSelectChoicesView
 from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
+from core.forms import TranslationCreateForm
+from core.forms import TranslationUpdateForm
 from .utils import CommentsContentTypeWrapper
 from .utils import ViewTypeWrapper
 from .utils import DetailViewWrapper
@@ -1205,6 +1207,7 @@ class PlanCreateView(CreateView):
         return context
 
 
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class PlanDeleteView(OwnerMixin, DeleteView):
 
     """Plan delete view"""
@@ -1278,9 +1281,8 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
         return context
 
-from core.forms import TranslationCreateForm
 
-
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class TranslationCreateView(CreateView):
     model = Translation
     form_class = TranslationCreateForm
@@ -1325,9 +1327,8 @@ class TranslationCreateView(CreateView):
 
         return form
 
-from core.forms import TranslationUpdateForm
 
-
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class TranslationUpdateView(UpdateView):
     model = Translation
     form_class = TranslationUpdateForm
@@ -1364,6 +1365,7 @@ class TranslationUpdateView(UpdateView):
         return form
 
 
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class TranslationDeleteView(DeleteView):
 
     """Goal delete view"""
@@ -1372,14 +1374,9 @@ class TranslationDeleteView(DeleteView):
     template_name = "translation/delete.html"
 
     def get_success_url(self):
-        messages.success(self.request, _("Translation succesfully deleted"))
-        return reverse("need-detail", args=[self.object.need.pk, ])
-
-    def get_success_url(self):
         url = "%s-detail" % self.object.content_type.model
         url = "%s" % (
             reverse(url, kwargs={'slug': self.object.object_id}),
         )
         messages.success(self.request, _("Translation succesfully deleted"))
         return url
-
