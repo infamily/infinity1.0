@@ -36,7 +36,7 @@ $(document).ready( function() {
 <div class="panel-body">
     <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
     <a href="{% url "idea-detail" object.id %}">
-        [en]
+        [{{object.language.language_code}}]
     </a>
     {% for translation in translations %}
     {% if translation.language.language_code %}
@@ -59,9 +59,9 @@ $(document).ready( function() {
 {% for goal in object.goal.all %}
 want: <a href="{% url "goal-detail" goal.pk %}">{{ goal }}</a></li>
 {% endfor %}
-<h1>{{ object.name }}</h1>
-<h2 style="font-size:22px;">{% if not translation %}{{ object.summary }}{% else %}{{ translation.summary}} {% endif %}</h2>
-{% if object.user == request.user %}[<a href="{% url "idea-update" object.pk %}">edit</a>, <a href="{% url "idea-delete" object.pk %}">delete</a>]{% endif %}
+<h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>
+<h2 style="font-size:22px;">{% if not translation %}{{ object.summary }}{% else %}{{ translation.summary}}{% endif %}</h2>
+{% if object.user == request.user %}[<a href="{% if not translation %}{% url "idea-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% url "idea-delete" object.pk %}">delete</a>]{% endif %}
 <br/>
 <br/>
 

@@ -20,12 +20,23 @@ function showLess(){
 <div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
     <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
+    <a href="{% url "task-detail" object.id %}">
+        [{{object.language.language_code}}]
+    </a>
+    {% for translation in translations %}
+    {% if translation.language.language_code %}
+    <a href="{% url "task-detail" object.id %}?lang={{translation.language.language_code }}">
+        [{{ translation.language.language_code }}]
+    </a>
+    {% endif %}
+    {% endfor %}
+    <a href="{{ translate_url }}">[+]</a>
     <div class="alignright" id="stats">
         <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
       </div>
    <div style="clear:both;"></div>
     todo for milestone <a href="{% url "step-detail" object.step.pk %}">{{object.step}}</a>
-    <h1>{{ object.name }}</h1>{% if object.user == request.user %}[<a href="{% url "task-update" object.pk %}">edit</a>, <a href="{% url "task-delete" object.pk %}">delete</a>]{% endif %}
+    <h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>{% if object.user == request.user %}[<a href="{% if not translation %}{% url "task-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% url "task-delete" object.pk %}">delete</a>]{% endif %}
 
 <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 </div>
