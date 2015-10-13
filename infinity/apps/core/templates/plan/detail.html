@@ -35,6 +35,19 @@ $(document).ready( function() {
 <div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
     <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
+    <div class="alignright" id="stats">
+        <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
+    </div>
+    <div style="clear:both;"></div>
+    <div align="right">
+    [<u>shareholders:</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %} <span class="tiptext"><u>equity</u>: {{ object.get_equity|floatformat:0 }}% ḥ]<br/>
+    <div class="description" align="left">A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much project <u>shareholders</u> own of all results under this project. The rest is owned by contributing users.</div>
+    </span>
+    </div>
+
+approach to realizing idea <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a><br/>
+translations:
+    <!-- translations -->
     <a href="{% url "plan-detail" object.id %}">
         [{{object.language.language_code}}]
     </a>
@@ -46,17 +59,7 @@ $(document).ready( function() {
     {% endif %}
     {% endfor %}
     <a href="{{ translate_url }}">[+]</a>
-    <div class="alignright" id="stats">
-        <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
-    </div>
-    <div style="clear:both;"></div>
-    <div align="right">
-    [<u>shareholders:</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %} <span class="tiptext"><u>equity</u>: {{ object.get_equity|floatformat:0 }}% ḥ]<br/>
-    <div class="description" align="left">A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much project <u>shareholders</u> own of all results under this project. The rest is owned by contributing users.</div>
-    </span>
-    </div>
-
-approach to realizing idea <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a>
+    <!-- /translations -->
 <h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>{% if object.user == request.user %}[<a href="{% if not translation %}{% url "plan-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% if not translation %}{% url "plan-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">delete</a>]{% endif %}
 <br/>
 <br/>
