@@ -38,7 +38,7 @@ function showLess(){
       <div style="clear:both;"></div>
 attempt on task <a href="{% url "task-detail" object.task.pk %}">{{object.task}}</a>
 
-<h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>{% if object.user == request.user %}[<a href="{% if not translation %}{% url "work-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% url "work-delete" object.pk %}">delete</a>]{% endif %}
+<h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>{% if object.user == request.user %}[<a href="{% if not translation %}{% url "work-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% if not translation %}{% url "work-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">delete</a>]{% endif %}
 <br/>
 <br/>
 {% if not translation %}

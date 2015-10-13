@@ -275,5 +275,10 @@ urlpatterns = patterns(
         r'^translation/(?P<slug>.*)/update/$',
         TranslationUpdateView.as_view(),
         name="update-translation"
-    )
+    ),
+    url(
+        r'^translation/(?P<slug>[a-zA-Z-_0-9]+)/delete/$',
+        TranslationDeleteView.as_view(),
+        name="delete-translation"
+    ),
 )

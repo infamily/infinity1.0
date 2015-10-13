@@ -1362,3 +1362,24 @@ class TranslationUpdateView(UpdateView):
                 form.fields.pop(field)
 
         return form
+
+
+class TranslationDeleteView(DeleteView):
+
+    """Goal delete view"""
+    model = Translation
+    slug_field = "pk"
+    template_name = "translation/delete.html"
+
+    def get_success_url(self):
+        messages.success(self.request, _("Translation succesfully deleted"))
+        return reverse("need-detail", args=[self.object.need.pk, ])
+
+    def get_success_url(self):
+        url = "%s-detail" % self.object.content_type.model
+        url = "%s" % (
+            reverse(url, kwargs={'slug': self.object.object_id}),
+        )
+        messages.success(self.request, _("Translation succesfully deleted"))
+        return url
+
