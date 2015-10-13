@@ -41,12 +41,14 @@ $(document).ready( function() {
       </a>
       {% for translation in translations %}
       {% if translation.language.language_code %}
-      <a href="{% url "goal-detail" object.id %}?lang={{translation.language.language_code }}">
+      <a title="{{ translation.language.name }}" href="{% url "goal-detail" object.id %}?lang={{translation.language.language_code }}">
           [{{ translation.language.language_code }}]
       </a>
+      <a title="Update Translation" href="{% url "update-translation" translation.pk %}">[✎]</a>
+      <a title="Delete Translation" href="{% url "delete-translation" translation.pk %}">[-]</a>
       {% endif %}
       {% endfor %}
-      <a href="{{ translate_url }}">[+]</a>
+      <a title="Create new Translation" href="{{ translate_url }}">[+]</a>
       <div class="alignright" id="stats">
       <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
       </div>

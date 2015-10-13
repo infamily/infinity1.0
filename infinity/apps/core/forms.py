@@ -57,6 +57,7 @@ class TranslationCreateForm(forms.ModelForm):
         model = Translation
         exclude = ['content_type', 'object_id', 'content_object']
 
+
 class TranslationUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         #content_type_instance = kwargs.pop('content_type_instance')
@@ -66,7 +67,7 @@ class TranslationUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Translation
-        exclude = []
+        exclude = ['language', ]
 
 
 class CommentCreateFormDetail(forms.ModelForm):

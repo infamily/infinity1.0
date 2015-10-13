@@ -29,6 +29,8 @@ function showLess(){
         [{{ translation.language.language_code }}]
     </a>
     {% endif %}
+    <a title="Update Translation" href="{% url "update-translation" translation.pk %}">[✎]</a>
+    <a title="Delete Translation" href="{% url "delete-translation" translation.pk %}">[-]</a>
     {% endfor %}
     <a href="{{ translate_url }}">[+]</a>
     <div class="alignright" id="stats">

@@ -1353,12 +1353,6 @@ class TranslationUpdateView(UpdateView):
         messages.success(self.request, _("Translation succesfully updated"))
         return url
 
-    def dispatch(self, request, *args, **kwargs):
-        if self.content_type_instance.user.id != self.request.user.id:
-            messages.error(request, 'You don\'t have access for this page')
-            return redirect(reverse(self.detail_url, kwargs={'slug': self.content_type_instance.id}))
-        return super(TranslationUpdateView, self).dispatch(request, *args, **kwargs)
-
     def get_form(self, form_class):
         self.content_type_model = get_model(app_label='core', model_name=self.object.content_type.model)
         self.content_type = ContentType.objects.get_for_model(self.content_type_model)
