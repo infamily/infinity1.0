@@ -44,8 +44,6 @@ $(document).ready( function() {
       <a title="{{ translation.language.name }}" href="{% url "goal-detail" object.id %}?lang={{translation.language.language_code }}">
           [{{ translation.language.language_code }}]
       </a>
-      <a title="Update Translation" href="{% url "update-translation" translation.pk %}">[✎]</a>
-      <a title="Delete Translation" href="{% url "delete-translation" translation.pk %}">[-]</a>
       {% endif %}
       {% endfor %}
       <a title="Create new Translation" href="{{ translate_url }}">[+]</a>

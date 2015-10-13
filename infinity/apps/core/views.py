@@ -1353,11 +1353,17 @@ class TranslationUpdateView(UpdateView):
         messages.success(self.request, _("Translation succesfully updated"))
         return url
 
-    def get_form(self, form_class):
-        self.content_type_model = get_model(app_label='core', model_name=self.object.content_type.model)
+    def dispatch(self, request, *args, **kwargs):
+        self.content_type_model = get_model(app_label='core', model_name=self.get_object().content_type.model)
         self.content_type = ContentType.objects.get_for_model(self.content_type_model)
-        self.content_type_instance = self.content_type_model.objects.get(pk=self.object.content_object.pk)
+        self.content_type_instance = self.content_type_model.objects.get(pk=self.get_object().content_object.pk)
+        self.detail_url = "%s-detail" % self.get_object().content_type.model
 
+        if self.content_type_instance.user.id != self.request.user.id:
+            messages.error(request, 'You don\'t have access for this page')
+            return redirect(reverse(self.detail_url, kwargs={'slug': self.content_type_instance.id}))
+
+    def get_form(self, form_class):
         form = super(TranslationUpdateView, self).get_form(form_class)
 
         model_fields = [x.name for x in self.content_type_model._meta.fields]
@@ -1376,6 +1382,16 @@ class TranslationDeleteView(DeleteView):
     model = Translation
     slug_field = "pk"
     template_name = "translation/delete.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        self.content_type_model = get_model(app_label='core', model_name=self.get_object().content_type.model)
+        self.content_type = ContentType.objects.get_for_model(self.content_type_model)
+        self.content_type_instance = self.content_type_model.objects.get(pk=self.get_object().content_object.pk)
+        self.detail_url = "%s-detail" % self.get_object().content_type.model
+
+        if self.content_type_instance.user.id != self.request.user.id:
+            messages.error(request, 'You don\'t have access for this page')
+            return redirect(reverse(self.detail_url, kwargs={'slug': self.content_type_instance.id}))
 
     def get_success_url(self):
         url = "%s-detail" % self.object.content_type.model
