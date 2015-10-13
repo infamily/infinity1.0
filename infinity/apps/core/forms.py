@@ -57,6 +57,17 @@ class TranslationCreateForm(forms.ModelForm):
         model = Translation
         exclude = ['content_type', 'object_id', 'content_object']
 
+class TranslationUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        #content_type_instance = kwargs.pop('content_type_instance')
+        super(TranslationUpdateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.layout.append(Submit('save', _('Update')))
+
+    class Meta:
+        model = Translation
+        exclude = []
+
 
 class CommentCreateFormDetail(forms.ModelForm):
 

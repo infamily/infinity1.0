@@ -270,5 +270,10 @@ urlpatterns = patterns(
         r'^translation/create/(?P<model_name>\w+)/(?P<object_id>\d+)/$',
         TranslationCreateView.as_view(),
         name="create-translation"
+    ),
+    url(
+        r'^translation/(?P<slug>.*)/update/$',
+        TranslationUpdateView.as_view(),
+        name="update-translation"
     )
 )

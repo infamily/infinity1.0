@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load django_markdown %}
+
+{% block title %}Translation update{% endblock title %}
+
+{% block content %}
+
+<h1>Translation update</h1>
+<br/>
+<div>
+    
+</div>
+<br/>
+
+{% crispy form %}
+{% markdown_media %}
+
+{% endblock content %}

@@ -1324,3 +1324,26 @@ class TranslationCreateView(CreateView):
                 form.fields.pop(field)
 
         return form
+
+from core.forms import TranslationUpdateForm
+
+
+class TranslationUpdateView(UpdateView):
+    model = Translation
+    form_class = TranslationUpdateForm
+    slug_field = "pk"
+    template_name = 'translation/update.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return super(TranslationUpdateView, self).form_valid(form)
+
+    def get_success_url(self):
+        url = "%s-detail" % self.object.content_type.model
+        url = "%s?lang=%s" % (
+            reverse(url, kwargs={'slug': self.object.object_id}),
+            self.object.language.language_code
+        )
+        messages.success(self.request, _("Translation succesfully updated"))
+        return url
