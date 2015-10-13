@@ -1362,6 +1362,7 @@ class TranslationUpdateView(UpdateView):
         if self.content_type_instance.user.id != self.request.user.id:
             messages.error(request, 'You don\'t have access for this page')
             return redirect(reverse(self.detail_url, kwargs={'slug': self.content_type_instance.id}))
+        return super(TranslationUpdateView, self).dispatch(request, *args, **kwargs)
 
     def get_form(self, form_class):
         form = super(TranslationUpdateView, self).get_form(form_class)
@@ -1392,6 +1393,7 @@ class TranslationDeleteView(DeleteView):
         if self.content_type_instance.user.id != self.request.user.id:
             messages.error(request, 'You don\'t have access for this page')
             return redirect(reverse(self.detail_url, kwargs={'slug': self.content_type_instance.id}))
+        return super(TranslationDeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         url = "%s-detail" % self.object.content_type.model
