@@ -1347,3 +1347,18 @@ class TranslationUpdateView(UpdateView):
         )
         messages.success(self.request, _("Translation succesfully updated"))
         return url
+
+    def get_form(self, form_class):
+        self.content_type_model = get_model(app_label='core', model_name=self.object.content_type.model)
+        self.content_type = ContentType.objects.get_for_model(self.content_type_model)
+        self.content_type_instance = self.content_type_model.objects.get(pk=self.object.content_object.pk)
+
+        form = super(TranslationUpdateView, self).get_form(form_class)
+
+        model_fields = [x.name for x in self.content_type_model._meta.fields]
+
+        for field in form.fields:
+            if field not in model_fields:
+                form.fields.pop(field)
+
+        return form
