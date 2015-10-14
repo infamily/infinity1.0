@@ -40,7 +40,7 @@ from hours.models import HourValue
 
 class IndexView(TemplateView):
     template_name = 'home.html'
-    dropdown_list = [0,2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+    dropdown_list = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
 
     def post(self, request, *args, **kwargs):
         if self.request.POST.get('goals'):
@@ -79,11 +79,17 @@ class IndexView(TemplateView):
         in_hours = lambda x: float(x.seconds/3600.)
 
         if self.request.user.is_authenticated():
-            q_object = (
-                Q(personal=False) |
-                Q(personal=True, user=self.request.user) |
-                Q(personal=True, sharewith=self.request.user)
-            )
+            if self.request.resolver_match.url_name == 'home':
+                q_object = (
+                    Q(user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
+                )
+            else:
+                q_object = (
+                    Q(personal=False) |
+                    Q(personal=True, user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
+                )
         else:
             q_object = Q(personal=False)
 

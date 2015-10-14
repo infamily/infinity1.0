@@ -14,7 +14,7 @@
 </style>
 {% if user.is_anonymous %}{% else %}<div class="alignright">{% if user.invitationoption.invitations_left %}<b>[<a href="{% url "invite:send"  %}">{{user.invitationoption.invitations_left}} invitations</a>, <a href="/step/2/detail/">write bugs</a>, time value: 1 ħ = <a href="https://research.stlouisfed.org/fred2/series/CES0500000003">{{ hour_value.value|floatformat:2 }}</a>]</b>{% endif %}</div>
 {% endif %}
-<div class="alignleft"><!--<input autocomplete="off" tabindex="-1" type="url" aria-hidden="true" size="35" disabled><input type="submit" value="lookup" style="color: GrayText;" disabled>--></div>
+<div class="alignleft"><b>[{% if request.resolver_match.url_name == 'wider' %}<a href="{% url "home" %}">my index</a>{% else %}<a href="{% url "wider" %}">wider index</a>{% endif %}]</b> <!--<input autocomplete="off" tabindex="-1" type="url" aria-hidden="true" size="35" disabled><input type="submit" value="lookup" style="color: GrayText;" disabled>--></div>
 <div style="clear:both;">
 <br/>
 
