@@ -29,7 +29,7 @@
     <div class="panel-body">
     <p align="center"><i>(last commented {{ goal_hours }} hours ago)</i></p>
     {% for goal in goal_list %}
-    <b>{% if goal.0.personal %}<i class="fa fa-lock"></i>{% endif %} $ {{ goal.0.get_usd|floatformat:2 }}/{{ goal.0.get_remain_usd|floatformat:2 }} </b> {% if goal.1 %}<b>{% endif %}<a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{ goal.0.name }}</a>{% if goal.1 %}</b>{% endif %} (<a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{goal.0.comment_count}} comments</a>)<br/><p>{{goal.0.reason|markdown|truncatewords_html:34}}</p>
+    <b>{% if goal.0.personal %}<i class="fa {% if goal.0.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %} $ {{ goal.0.get_usd|floatformat:2 }}/{{ goal.0.get_remain_usd|floatformat:2 }} </b> {% if goal.1 %}<b>{% endif %}<a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{ goal.0.name }}</a>{% if goal.1 %}</b>{% endif %} (<a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{goal.0.comment_count}} comments</a>)<br/><p>{{goal.0.reason|markdown|truncatewords_html:34}}</p>
     {% endfor %}
     <a href="{% url "goal-list" %}">see more</a>
     </div>
@@ -40,7 +40,7 @@
     <div class="panel-body">
     <p align="center"><i>(last commented {{ idea_hours }} hours ago)</i></p>
     {% for idea in idea_list %}
-    <b>{% if idea.0.personal %}<i class="fa fa-lock"></i>{% endif %} $ {{ idea.0.get_usd|floatformat:2 }}/{{ idea.0.get_remain_usd|floatformat:2 }} </b> {% if idea.1 %}<b>{% endif %}<a href="{% url "idea-detail" idea.0.pk %}#{{idea.0.commented_at|date:"U"}}">{{ idea.0.name }}</a>{% if idea.1 %}</b>{% endif %} (<a href="{% url "idea-detail" idea.0.pk %}#{{idea.0.commented_at|date:"U"}}">{{idea.0.comment_count}} comments</a>)<br/><p>{{idea.0.description|markdown|truncatewords_html:34}}</p>
+    <b>{% if idea.0.personal %}<i class="fa {% if idea.0.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %} $ {{ idea.0.get_usd|floatformat:2 }}/{{ idea.0.get_remain_usd|floatformat:2 }} </b> {% if idea.1 %}<b>{% endif %}<a href="{% url "idea-detail" idea.0.pk %}#{{idea.0.commented_at|date:"U"}}">{{ idea.0.name }}</a>{% if idea.1 %}</b>{% endif %} (<a href="{% url "idea-detail" idea.0.pk %}#{{idea.0.commented_at|date:"U"}}">{{idea.0.comment_count}} comments</a>)<br/><p>{{idea.0.description|markdown|truncatewords_html:34}}</p>
     {% endfor %}
     <a href="{% url "idea-list" %}">see more</a>
     </div>
@@ -53,7 +53,7 @@
     <div class="panel-body">
     <p align="center"><i>(last commented {{ plan_hours }} hours ago)</i></p>
     {% for plan in plan_list %}
-    <b>{% if plan.0.personal %}<i class="fa fa-lock"></i>{% endif %} $ {{ plan.0.get_usd|floatformat:2 }}/{{ plan.0.get_remain_usd|floatformat:2 }} </b> {% if plan.1 %}<b>{% endif %}<a href="{% url "plan-detail" plan.0.pk %}#{{plan.0.commented_at|date:"U"}}">{{ plan.0.name }}</a>{% if plan.1 %}</b>{% endif %} (<a href="{% url "plan-detail" plan.0.pk %}#{{plan.0.commented_at|date:"U"}}">{{plan.0.comment_count}} comments</a>)<br/><p>{{plan.0.situation|markdown|truncatewords_html:34}}</p>
+    <b>{% if plan.0.personal %}<i class="fa {% if plan.0.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %} $ {{ plan.0.get_usd|floatformat:2 }}/{{ plan.0.get_remain_usd|floatformat:2 }} </b> {% if plan.1 %}<b>{% endif %}<a href="{% url "plan-detail" plan.0.pk %}#{{plan.0.commented_at|date:"U"}}">{{ plan.0.name }}</a>{% if plan.1 %}</b>{% endif %} (<a href="{% url "plan-detail" plan.0.pk %}#{{plan.0.commented_at|date:"U"}}">{{plan.0.comment_count}} comments</a>)<br/><p>{{plan.0.situation|markdown|truncatewords_html:34}}</p>
     {% endfor %}
     <a href="{% url "plan-list" %}">see more</a>
     </div>
@@ -66,7 +66,7 @@
     <div class="panel-body">
     <p align="center"><i>(last commented {{ step_hours }} hours ago)</i></p>
     {% for step in step_list %}
-    <b>{% if step.0.personal %}<i class="fa fa-lock"></i>{% endif %} $ {{ step.0.get_usd|floatformat:2 }}/{{ step.0.get_remain_usd|floatformat:2 }} </b> {% if step.1 %}<b>{% endif %}<a href="{% url "step-detail" step.0.pk %}#{{step.0.commented_at|date:"U"}}">{{ step.0.name }}</a>{% if step.1 %}</b>{% endif %} (<a href="{% url "step-detail" step.0.pk %}#{{step.0.commented_at|date:"U"}}">{{step.0.comment_count}} comments</a>)<br/><p>{{step.objective|markdown|truncatewords_html:34}}</p>
+    <b>{% if step.0.personal %}<i class="fa {% if step.0.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %} $ {{ step.0.get_usd|floatformat:2 }}/{{ step.0.get_remain_usd|floatformat:2 }} </b> {% if step.1 %}<b>{% endif %}<a href="{% url "step-detail" step.0.pk %}#{{step.0.commented_at|date:"U"}}">{{ step.0.name }}</a>{% if step.1 %}</b>{% endif %} (<a href="{% url "step-detail" step.0.pk %}#{{step.0.commented_at|date:"U"}}">{{step.0.comment_count}} comments</a>)<br/><p>{{step.objective|markdown|truncatewords_html:34}}</p>
     {% endfor %}
     <a href="{% url "step-list" %}">see more</a>
     </div>
@@ -80,7 +80,7 @@
     <div class="panel-body">
     <p align="center"><i>(last commented {{ task_hours }} hours ago)</i></p>
     {% for task in task_list %}
-    <b>{% if task.0.personal %}<i class="fa fa-lock"></i>{% endif %} $ {{ task.0.get_usd|floatformat:2 }}/{{ task.0.get_remain_usd|floatformat:2 }} </b> {% if task.1 %}<b>{% endif %}<a href="{% url "task-detail" task.0.pk %}#{{task.0.commented_at|date:"U"}}">{{ task.0.name }}</a>{% if task.1 %}</b>{% endif %} (<a href="{% url "task-detail" task.0.pk %}#{{task.0.commented_at|date:"U"}}">{{task.0.comment_count}} comments</a>)
+    <b>{% if task.0.personal %}<i class="fa {% if task.0.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %} $ {{ task.0.get_usd|floatformat:2 }}/{{ task.0.get_remain_usd|floatformat:2 }} </b> {% if task.1 %}<b>{% endif %}<a href="{% url "task-detail" task.0.pk %}#{{task.0.commented_at|date:"U"}}">{{ task.0.name }}</a>{% if task.1 %}</b>{% endif %} (<a href="{% url "task-detail" task.0.pk %}#{{task.0.commented_at|date:"U"}}">{{task.0.comment_count}} comments</a>)
     <br>
     {% endfor %}
     <a href="{% url "task-list" %}">see more</a>
