@@ -33,7 +33,7 @@ def deploy():
     virtualenv('pip install -r %s%s' % (
         env.directory, env.requirements))
     virtualenv('python infinity/manage.py migrate')
-    virtualenv('python infinity/manage.py collectstatic')
+    virtualenv('python infinity/manage.py collectstatic --noinput')
     # uncomment it when deploy project first time
     # loading fixtures takes additional time, will be really long
     # virtualenv('python infinity/manage.py loaddata fixtures/languages.json')
