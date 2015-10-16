@@ -67,4 +67,4 @@ Reload supervisor
 
     supervisorctl reload
 
-Make fab dev deploy from your local repository
+Make fab dev deploy from your local repository.
