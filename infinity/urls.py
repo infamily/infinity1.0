@@ -10,7 +10,7 @@ from core.views import IndexView
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = i18n_patterns(
+urlpatterns = patterns(
     '',
     url(r'^$', IndexView.as_view(), name='home'),
     url(r'^w$', IndexView.as_view(), name='wider'),
@@ -30,6 +30,7 @@ urlpatterns = i18n_patterns(
     url(r'^policy/$', TemplateView.as_view(template_name='policy.html'),
         name="policy"),
     url('^markdown/', include( 'django_markdown.urls')),
+    url('^i18n/', include('django.conf.urls.i18n')),
 )
 
 

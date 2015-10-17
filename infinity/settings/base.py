@@ -75,10 +75,10 @@ LANGUAGES = (
     ('ru', _('Russian')),
     ('ja', _('Japanese')),
     ('fr', _('French')),
-    ('zh', _('Chinese')),
+    ('zh-cn', _('Chinese')),
     ('de', _('German')),
     ('lt', _('Lithuanian')),
-    ('ua', _('Ukrainian'))
+    ('uk', _('Ukrainian'))
 )
 
 import os
