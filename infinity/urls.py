@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import RedirectView
@@ -9,7 +10,7 @@ from core.views import IndexView
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns(
+urlpatterns = i18n_patterns(
     '',
     url(r'^$', IndexView.as_view(), name='home'),
     url(r'^w$', IndexView.as_view(), name='wider'),

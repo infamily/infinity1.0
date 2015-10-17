@@ -743,7 +743,7 @@ msgstr ""
 #: infinity/templates/account/signup.html:21
 #: infinity/templates/account/signup_closed.html:9
 msgid "Sign Up"
-msgstr ""
+msgstr "Регистрация"
 
 #: infinity/templates/account/signup.html:13
 #, python-format
