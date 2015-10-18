@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 09:34-0700\n"
-"PO-Revision-Date: 2015-10-18 17:07+0100\n"
+"POT-Creation-Date: 2015-10-18 11:52-0700\n"
+"PO-Revision-Date: 2015-10-18 19:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -779,25 +779,28 @@ msgid ""
 "used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
 "a>."
 msgstr ""
+"Slaptažodžio pakeitimo nuoroda negaliojanti, tikriausiai todėl, kad jau buvo "
+"kartą panaudota. <a href=\"%(passwd_reset_url)s\">Sugeneruoti naują</a> "
+"slaptažodžio pakeitimo nuorodą."
 
 #: infinity/templates/account/password_reset_from_key.html:19
 msgid "change password"
-msgstr ""
+msgstr "pakeisti slaptažodį"
 
 #: infinity/templates/account/password_reset_from_key.html:22
 #: infinity/templates/account/password_reset_from_key_done.html:9
 msgid "Your password is now changed."
-msgstr ""
+msgstr "Jūsų slaptažodis pakeistas."
 
 #: infinity/templates/account/password_set.html:7
 #: infinity/templates/account/password_set.html:10
 #: infinity/templates/account/password_set.html:15
 msgid "Set Password"
-msgstr ""
+msgstr "Nustatyti slaptažodį"
 
 #: infinity/templates/account/signup.html:8
 msgid "Signup"
-msgstr ""
+msgstr "Registruotis"
 
 #: infinity/templates/account/signup.html:11
 #: infinity/templates/account/signup.html:21
@@ -818,6 +821,8 @@ msgstr ""
 #: infinity/templates/account/signup_closed.html:11
 msgid "Write an e-mail to <u>forever@infty.xyz</u>. We'll send you an invite."
 msgstr ""
+"Parašykite laišką adresu <u>forever@infty.xyz</u>, ir mes atsiųsime jums "
+"pakvietimą."
 
 #: infinity/templates/account/snippets/already_logged_in.html:5
 msgid "Note"
@@ -881,7 +886,7 @@ msgstr "Pagalba"
 
 #: infinity/templates/base.html:105
 msgid "About"
-msgstr ""
+msgstr "Apie.."
 
 #: infinity/templates/base.html:111
 msgid "Logout"
