@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: infinity/apps/core/forms.py:213 infinity/apps/core/forms.py:216
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-18 11:52-0700\n"
-"PO-Revision-Date: 2015-10-18 16:14+0100\n"
+"PO-Revision-Date: 2015-10-19 00:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -60,11 +59,11 @@ msgstr ""
 
 #: infinity/apps/core/forms.py:103 infinity/apps/core/forms.py:133
 msgid "Comment"
-msgstr ""
+msgstr "写评论"
 
 #: infinity/apps/core/forms.py:104 infinity/apps/core/forms.py:134
 msgid "Notify mentioned users by e-mail."
-msgstr ""
+msgstr "发给评论到提到的用户的邮箱"
 
 #: infinity/apps/core/forms.py:111 infinity/apps/core/forms.py:200
 #: infinity/apps/core/forms.py:256 infinity/apps/core/forms.py:296
@@ -74,19 +73,19 @@ msgstr ""
 #: infinity/apps/core/forms.py:636 infinity/apps/core/forms.py:674
 #: infinity/apps/core/forms.py:764 infinity/apps/core/forms.py:813
 msgid "Select the users to share with:"
-msgstr ""
+msgstr "选择用户跟谁分享"
 
 #: infinity/apps/core/forms.py:159
 msgid "Select the type of your need..."
-msgstr ""
+msgstr "选择需要的种类..."
 
 #: infinity/apps/core/forms.py:185
 msgid "Select the thing that you need..."
-msgstr ""
+msgstr "选择跟需要有关的对象..."
 
 #: infinity/apps/core/forms.py:203
 msgid "Share with:"
-msgstr ""
+msgstr "跟谁分享："
 
 #: infinity/apps/core/forms.py:206
 msgid ""
@@ -95,10 +94,14 @@ msgid ""
 "a> to\n"
 "                                      add if you can't find it.)"
 msgstr ""
+"<b>话题:</b> (选择跟问题有关的对象,\n"
+"                                      如果找不到，<a href=\"/need-create/\">"
+"点击这里</a>\n"
+"                                      附加新的对象)"
 
 #: infinity/apps/core/forms.py:209
 msgid "<b>Category:</b> (of the problem)"
-msgstr ""
+msgstr "<b>类别:</b> (问题的分类)"
 
 #: infinity/apps/core/forms.py:210
 msgid ""
@@ -107,6 +110,10 @@ msgid ""
 "\">check</a> if the problem is not\n"
 "                                      defined yet.)"
 msgstr ""
+"<b>标题:</b> (e.g., Potable Water\n"
+"                                      Shortage, <a href=\"/goal/list/"
+"\">check</a> if the problem is not\n"
+"                                      defined yet.)"
 
 #: infinity/apps/core/forms.py:214
 msgid ""
@@ -888,7 +895,7 @@ msgstr ""
 
 #: infinity/templates/home.html:18
 msgid "wider index"
-msgstr ""
+msgstr "更大的目录"
 
 #: infinity/templates/home.html:27
 msgid "define a problem"
