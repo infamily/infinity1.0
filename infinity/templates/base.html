@@ -87,28 +87,28 @@
 
           <ul class="nav navbar-nav navbar-right">
               <li>
-                <a href="{% url "goal-list" %}">Goals</a>
+              <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>
                 <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></a>
               </li>
               <li>
-                <a href="{% url "idea-list" %}">Ideas</a>
+              <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>
                 <a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></a></i></a>
               </li>
               <li>
-                <a href="{% url "plan-list" %}">Plans</a>
+              <a href="{% url "plan-list" %}">{% trans "Plans" %}</a>
                 <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></a></i></a>
               </li>
               <li>
               {% if request.user.is_authenticated %}
-              <a href="{% url "help" %}"><b>Help</b></a>
+              <a href="{% url "help" %}"><b>{% trans "Help" %}</b></a>
               {% else %}
-              <a href="{% url "about" %}"><b>About</b></a>
+              <a href="{% url "about" %}"><b>{% trans "About" %}</b></a>
               {% endif %}
               </li>
 
               {% if request.user.is_authenticated %}
               <li>
-              <a href="{% url "account_logout" %}"><b>Logout</b></a>
+              <a href="{% url "account_logout" %}"><b>{% trans "Logout" %}</b></a>
               </li>
               <li>
               <a href="{% url "user-detail" request.user.username %}"><b>[{{ request.user }}]</b></a>
