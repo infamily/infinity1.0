@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-19 05:06-0700\n"
-"PO-Revision-Date: 2015-10-19 13:36+0100\n"
+"POT-Creation-Date: 2015-10-19 07:54-0700\n"
+"PO-Revision-Date: 2015-10-19 16:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -316,7 +316,7 @@ msgid ""
 "<center><font color=\"grey\">Goal definition is implicit.</center>\n"
 msgstr ""
 "\n"
-"<center><u><i>Jūs galvojate:</i></u> Tingiu eiti į parduotuvę.</center>\n"
+"<center><u><i>Jūs manote:</i></u> Tingiu eiti į parduotuvę.</center>\n"
 "<center><u><i>Jūs rašote:</i></u> Vaikščioti į parduotuvę paprastai užima "
 "laiko, ir nėra patogu.</center>\n"
 "<center>↑</center>\n"
@@ -342,7 +342,7 @@ msgstr ""
 
 #: infinity/apps/core/views.py:284
 msgid "Goal succesfully created"
-msgstr ""
+msgstr "Apibrėžkite tikslą"
 
 #: infinity/apps/core/views.py:330
 msgid "Goal succesfully deleted"
@@ -496,11 +496,13 @@ msgstr ""
 
 #: infinity/apps/users/forms.py:71
 msgid "Login"
-msgstr ""
+msgstr "Prisijungti"
 
 #: infinity/apps/users/forms.py:94
+#, fuzzy
+#| msgid "Sign Up"
 msgid "SignUp"
-msgstr ""
+msgstr "Žmogus žmogui"
 
 #: infinity/apps/users/views.py:33
 msgid "Invitation to conversation has been sent"
@@ -557,6 +559,19 @@ msgstr ""
 
 #: infinity/templates/account/account_inactive.html:10
 msgid "This account is inactive."
+msgstr ""
+
+#: infinity/templates/account/detail.html:6
+msgid "User detail"
+msgstr ""
+
+#: infinity/templates/account/detail.html:7
+#: infinity/templates/translations.html:11
+msgid "E-mail"
+msgstr "El. paštas"
+
+#: infinity/templates/account/detail.html:10
+msgid "edit"
 msgstr ""
 
 #: infinity/templates/account/email.html:7
@@ -686,7 +701,7 @@ msgstr "Prisijungti"
 
 #: infinity/templates/account/login.html:30
 msgid "Forgot password?"
-msgstr "pakeisti slaptažodį"
+msgstr "Pamiršote slaptažodį?"
 
 #: infinity/templates/account/logout.html:6
 #: infinity/templates/account/logout.html:9
@@ -845,6 +860,10 @@ msgstr ""
 msgid "you are already logged in as %(user_display)s."
 msgstr ""
 
+#: infinity/templates/account/update.html:5
+msgid "User update"
+msgstr ""
+
 #: infinity/templates/account/verification_sent.html:5
 #: infinity/templates/account/verification_sent.html:8
 #: infinity/templates/account/verified_email_required.html:6
@@ -944,7 +963,7 @@ msgstr "valandų)"
 #: infinity/templates/home.html:78 infinity/templates/home.html.py:99
 #: infinity/templates/home.html:121
 msgid "see more"
-msgstr ""
+msgstr "skaityti daugiau..."
 
 #: infinity/templates/home.html:49
 msgid "suggest a solution"
@@ -972,7 +991,7 @@ msgstr "vykdykite"
 
 #: infinity/templates/home.html:132
 msgid "People-centric economy."
-msgstr ""
+msgstr "— ekonomika žmogui —"
 
 #: infinity/templates/invitations/email/email_invite_message.txt:3
 #, python-format
@@ -1030,6 +1049,18 @@ msgstr ""
 #: infinity/templates/search_form.html:18
 msgid "Reset Filter"
 msgstr ""
+
+#: infinity/templates/translations.html:12
+msgid "E-mail address"
+msgstr ""
+
+#: infinity/templates/translations.html:13
+msgid "The e-mail address and/or password you specified are not correct."
+msgstr ""
+
+#: infinity/templates/translations.html:14
+msgid "Remember Me"
+msgstr "Prisiminti"
 
 #~ msgid "Man is the engine of the progress. People-centric economy."
 #~ msgstr "Pažangos variklis yra žmogus. Ekonomika, kuri dirba žmonėms."

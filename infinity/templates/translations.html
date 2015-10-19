@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Extra Translations{% endblock %}
+
+{% block page_title %}Extra Translations{% endblock page_title %}
+
+{% block content %}
+to override some translations in the installed apps
+
+{% trans "E-mail" %}
+{% trans "E-mail address" %}
+{% trans "The e-mail address and/or password you specified are not correct." %}
+{% trans "Remember Me" %}
+{% endblock content %}

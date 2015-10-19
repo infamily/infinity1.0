@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-19 05:06-0700\n"
-"PO-Revision-Date: 2015-10-19 13:10+0100\n"
+"POT-Creation-Date: 2015-10-19 07:54-0700\n"
+"PO-Revision-Date: 2015-10-19 15:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -342,8 +342,10 @@ msgid "Comment succesfully created"
 msgstr ""
 
 #: infinity/apps/core/views.py:284
+#, fuzzy
+#| msgid "Goal create"
 msgid "Goal succesfully created"
-msgstr ""
+msgstr "创造目标"
 
 #: infinity/apps/core/views.py:330
 msgid "Goal succesfully deleted"
@@ -500,8 +502,10 @@ msgid "Login"
 msgstr "登陆"
 
 #: infinity/apps/users/forms.py:94
+#, fuzzy
+#| msgid "Sign Up"
 msgid "SignUp"
-msgstr ""
+msgstr "人与人之间"
 
 #: infinity/apps/users/views.py:33
 msgid "Invitation to conversation has been sent"
@@ -516,8 +520,10 @@ msgid "User with this name already exists"
 msgstr ""
 
 #: infinity/apps/users/views.py:221
+#, fuzzy
+#| msgid "User update"
 msgid "User succesfully updated"
-msgstr ""
+msgstr "用户更新"
 
 #: infinity/settings/base.py:74
 msgid "English"
@@ -559,6 +565,19 @@ msgstr ""
 #: infinity/templates/account/account_inactive.html:10
 msgid "This account is inactive."
 msgstr ""
+
+#: infinity/templates/account/detail.html:6
+msgid "User detail"
+msgstr ""
+
+#: infinity/templates/account/detail.html:7
+#: infinity/templates/translations.html:11
+msgid "E-mail"
+msgstr "邮箱"
+
+#: infinity/templates/account/detail.html:10
+msgid "edit"
+msgstr "编辑"
 
 #: infinity/templates/account/email.html:7
 msgid "Account"
@@ -842,6 +861,10 @@ msgstr ""
 msgid "you are already logged in as %(user_display)s."
 msgstr ""
 
+#: infinity/templates/account/update.html:5
+msgid "User update"
+msgstr "用户更新"
+
 #: infinity/templates/account/verification_sent.html:5
 #: infinity/templates/account/verification_sent.html:8
 #: infinity/templates/account/verified_email_required.html:6
@@ -1027,3 +1050,15 @@ msgstr "查找"
 #: infinity/templates/search_form.html:18
 msgid "Reset Filter"
 msgstr ""
+
+#: infinity/templates/translations.html:12
+msgid "E-mail address"
+msgstr "邮箱"
+
+#: infinity/templates/translations.html:13
+msgid "The e-mail address and/or password you specified are not correct."
+msgstr ""
+
+#: infinity/templates/translations.html:14
+msgid "Remember Me"
+msgstr "记住"
