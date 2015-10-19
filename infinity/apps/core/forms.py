@@ -443,7 +443,7 @@ class IdeaCreateForm(forms.ModelForm):
             widget=AutoHeavySelect2MultipleWidget(
                 select2_options={
                     'minimumInputLength': 0,
-                    'placeholder': 'Select a goal',
+                    'placeholder': unicode(_('Select a goal')),
                     'ajax': {
                         'dataType': 'json',
                         'quietMillis': 100,
@@ -453,6 +453,8 @@ class IdeaCreateForm(forms.ModelForm):
                 }
             )
         )
+        self.fields['goal'].label = _('Goals')
+
         self.fields['sharewith'] = MembersChoiceField(
             widget=AutoHeavySelect2MultipleWidget(
                 select2_options={
@@ -468,6 +470,8 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['description'].label = _('<b>Description:</b> (write full description here, used as body.)')
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['super_equity'].label = _('Super equity')
+        self.fields['sharewith'].label = _('Share with:')
         self.initial['language'] = 85 # English
 
     class Meta:
