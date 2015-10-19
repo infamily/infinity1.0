@@ -151,17 +151,6 @@ class CommentCreateForm(forms.ModelForm):
 
 class GoalCreateForm(forms.ModelForm):
 
-    type = TypeChoiceField(
-        queryset=Type.objects.all(),
-        widget=AutoHeavySelect2Widget(
-            select2_options={
-                'minimumInputLength': 0,
-                'placeholder': unicode(_('Select the type of your need...')),
-            }
-        ),
-        required=False
-    )
-
     reason = forms.CharField(widget=MarkdownWidget())
 
     hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
@@ -177,6 +166,18 @@ class GoalCreateForm(forms.ModelForm):
         if need_instance:
             self.initial['need'] = need_instance
             self.initial['type'] = need_instance.type
+
+
+        self.fields['type'] = TypeChoiceField(
+            queryset=Type.objects.all(),
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 0,
+                    'placeholder': unicode(_('Select the type of your need...')),
+                }
+            ),
+            required=False
+        )
 
         self.fields['need'] = NeedChoiceField(
             widget=AutoHeavySelect2Widget(
