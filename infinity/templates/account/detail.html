@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load django_markdown %}
 
 
-{% block title %}User detail{% endblock title %}
-
+{% block title %}{% trans "User detail" %}{% endblock title %}
+<!-- {% trans "E-mail" %} -->
 {% block content %}
 <h1>{{object.username}}</h1>
-{% if request.user.username == object.username %}[<a href="{% url "user-update" %}">edit</a>]{%endif%}
+{% if request.user.username == object.username %}[<a href="{% url "user-update" %}">{% trans "edit" %}</a>]{%endif%}
 <br/>
 <br/>
 <div>

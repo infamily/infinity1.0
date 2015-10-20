@@ -1,18 +1,19 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
-{% block title %}Idea create{% endblock title %}
+{% block title %}{% trans "Idea create" %}{% endblock title %}
 
 {% block content %}
 
-<h1>Idea create</h1>
+<h1>{% trans "Idea create" %}</h1>
 <br/>
 <br/>
 {% if goal_object %}
 <table class="table">
     <tr>
-        <td>Goal</td>
+        <td>{% trans "Goal" %}</td>
         <td>
 
             <a href="{% url "goal-detail" goal_object.pk %}">{{goal_object}}</a>

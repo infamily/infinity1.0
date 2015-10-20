@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% load crispy_forms_tags %}
 {% load django_markdown %}
@@ -18,7 +19,7 @@ function showMore(){
 }
 
 function showLess(){
-    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>";
+    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>{% trans "needs" %} ${{ object.get_remain_usd|floatformat:2 }} {% trans "for funding" %} {{ object.not_funded_hours|floatformat:2}} {% trans "hours" %}</u>]</b></span>";
 }
 </script>
 
@@ -36,17 +37,17 @@ $(document).ready( function() {
 <div class="panel-body">
     <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
     <div class="alignright" id="stats">
-        <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
+        <span onmouseover="showMore()"><b>[<u>{% trans "needs" %} ${{ object.get_remain_usd|floatformat:2 }} {% trans "for funding" %} {{ object.not_funded_hours|floatformat:2}} {% trans "hours" %}</u>]</b></span>
     </div>
     <div style="clear:both;"></div>
     <div align="right">
-    [<u>shareholders:</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %} <span class="tiptext"><u>equity</u>: {{ object.get_equity|floatformat:0 }}% ḥ]<br/>
-    <div class="description" align="left">A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much project <u>shareholders</u> own of all results under this project. The rest is owned by contributing users.</div>
+        [<u>{% trans "shareholders:" %}</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %} <span class="tiptext"><u>{% trans "equity" %}</u>: {{ object.get_equity|floatformat:0 }}% ḥ]<br/>
+            <div class="description" align="left">{% trans "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much project <u>shareholders</u> own of all results under this project. The rest is owned by contributing users." %}</div>
     </span>
     </div>
 
-approach to realizing idea <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a><br/>
-translations:
+    {% trans "approach to realizing idea" %} <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a><br/>
+    {% trans "translations:" %}
     <!-- translations -->
     <a href="{% url "plan-detail" object.id %}">
         [{{object.language.language_code}}]
@@ -60,29 +61,29 @@ translations:
     {% endfor %}
     <a href="{{ translate_url }}">[+]</a>
     <!-- /translations -->
-<h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>{% if object.user == request.user %}[<a href="{% if not translation %}{% url "plan-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% if not translation %}{% url "plan-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">delete</a>]{% endif %}
+    <h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>{% if object.user == request.user %}[<a href="{% if not translation %}{% url "plan-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a>, <a href="{% if not translation %}{% url "plan-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]{% endif %}
 <br/>
 <br/>
 
-<center>situation</center>
+<center>{% trans "situation" %}</center>
 <div class="breadcrumb">
 {% if not translation %}{{object.situation|markdown}}{% else %}{{translation.situation|markdown}}{% endif %}
 </div>
 
-<center>deliverable</center>
+<center>{% trans "deliverable" %}</center>
 <div class="breadcrumb">
     {% if not translation %}{{object.deliverable|markdown}}{% else %}{{translation.deliverable|markdown}}{% endif %}
 </div>
 
 <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 
-{% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>shared with:</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
+{% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>{% trans "shared with:" %}</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
 
 </div>
 
 
 
-<div class="panel-heading">Steps</div>
+<div class="panel-heading">{% trans "Steps" %}</div>
 <div class="panel-body">
 {% for object in step_list %}
     <ul class="list-group">
@@ -92,7 +93,7 @@ translations:
       </li>
     </ul>
 {% endfor %}
-<a href="{% url "step-create" object.pk %}">+New Step</a>
+<a href="{% url "step-create" object.pk %}">{% trans "+New Step" %}</a>
 </div>
 
 </div>

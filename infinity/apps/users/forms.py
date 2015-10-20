@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django import forms
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
-    Submit, HTML, Layout, Fieldset, ButtonHolder
+    Submit, HTML, Layout, Fieldset, ButtonHolder, Field
 )
 from allauth.account.forms import SignupForm as AllAuthSignupForm
 from allauth.account.forms import LoginForm as AllAuthLoginForm
@@ -22,15 +24,19 @@ class ConversationInviteForm(forms.ModelForm):
         self.helper = FormHelper(self)
         self.helper.layout = Layout(
             Fieldset(
-                'Invite to this conversation',
-                'name',
-                'email',
-                'invitation_text',
+                unicode(_('Invite to this conversation')),
+                Field('name'),
+                Field('email'),
+                Field('invitation_text'),
                 ButtonHolder(
                     Submit('invite', _('Send invite'))
                 )
             )
         )
+
+        self.fields['name'].label = _('New Username')
+        self.fields['email'].label = _('Email')
+        self.fields['invitation_text'].label = _('Invitation text')
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-sm-2'
         self.helper.field_class = 'col-sm-8'
