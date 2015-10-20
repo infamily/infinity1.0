@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-20 13:46-0700\n"
+"POT-Creation-Date: 2015-10-20 14:11-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -415,7 +415,14 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
+#: infinity/apps/core/templates/goal/detail.html:79
+#: infinity/apps/core/templates/idea/detail.html:80
+#: infinity/apps/core/templates/plan/detail.html:80
+msgid "shared with:"
+msgstr ""
+
 #: infinity/apps/core/templates/goal/detail.html:82
+#: infinity/apps/core/templates/idea/list2.html:6
 #: infinity/templates/base.html:94 infinity/templates/home.html:49
 msgid "Ideas"
 msgstr ""
@@ -441,11 +448,6 @@ msgstr ""
 
 #: infinity/apps/core/templates/idea/detail.html:50
 msgid "want:"
-msgstr ""
-
-#: infinity/apps/core/templates/idea/detail.html:80
-#: infinity/apps/core/templates/plan/detail.html:80
-msgid "shared with:"
 msgstr ""
 
 #: infinity/apps/core/templates/idea/detail.html:84

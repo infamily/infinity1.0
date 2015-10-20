@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: infinity/apps/core/forms.py:214 infinity/apps/core/forms.py:217
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-20 13:46-0700\n"
+"POT-Creation-Date: 2015-10-20 14:11-0700\n"
 "PO-Revision-Date: 2015-10-20 21:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -446,7 +447,14 @@ msgstr "编辑"
 msgid "delete"
 msgstr "删除"
 
+#: infinity/apps/core/templates/goal/detail.html:79
+#: infinity/apps/core/templates/idea/detail.html:80
+#: infinity/apps/core/templates/plan/detail.html:80
+msgid "shared with:"
+msgstr "谁可见:"
+
 #: infinity/apps/core/templates/goal/detail.html:82
+#: infinity/apps/core/templates/idea/list2.html:6
 #: infinity/templates/base.html:94 infinity/templates/home.html:49
 msgid "Ideas"
 msgstr "思路"
@@ -473,11 +481,6 @@ msgstr ""
 #: infinity/apps/core/templates/idea/detail.html:50
 msgid "want:"
 msgstr "需要:"
-
-#: infinity/apps/core/templates/idea/detail.html:80
-#: infinity/apps/core/templates/plan/detail.html:80
-msgid "shared with:"
-msgstr "谁可见:"
 
 #: infinity/apps/core/templates/idea/detail.html:84
 #: infinity/templates/base.html:98 infinity/templates/home.html:69
