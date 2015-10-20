@@ -39,7 +39,7 @@ class AuthTestMixin(object):
         # TODO: need to fix this test
         # for languages
         resp = self.app.get(reverse('account_login'))
-        form = resp.forms[0]
+        form = resp.forms[1]
         form['login'] = login
         form['password'] = password
         form.submit()
@@ -115,7 +115,7 @@ class CommentTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['text'] = comment_compare.text
         form.submit()
 
@@ -148,7 +148,7 @@ class CommentTest(WebTest, AuthTestMixin):
         url = reverse('comment-delete', args=(comment.pk,))
 
         resp = self.app.get(url)
-        resp.form.submit()
+        resp.forms[1].submit()
         self.assertEqual(Comment.objects.count(), 0)
 
     def test_create(self):
@@ -174,7 +174,7 @@ class CommentTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['text'] = comment.text
         form.submit()
 
@@ -228,7 +228,7 @@ class GoalTest(WebTest, AuthTestMixin):
         url = reverse('goal-delete', args=(goal.pk,))
 
         resp = self.app.get(url)
-        resp.form.submit()
+        resp.forms[1].submit()
         self.assertEqual(Goal.objects.count(), 0)
 
     def test_udpate(self):
@@ -253,7 +253,7 @@ class GoalTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = goal_compare.name
         form['personal'] = goal_compare.personal
         form['reason'] = goal_compare.reason
@@ -319,7 +319,7 @@ class GoalTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = goal.name
         form['personal'] = goal.personal
         form['reason'] = goal.reason
@@ -404,7 +404,7 @@ class WorkTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['task'] = work_compare.task.pk
         form['name'] = work_compare.name
         form['url'] = work_compare.url
@@ -466,7 +466,7 @@ class WorkTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = work.name
         form['url'] = work.url
         form['file'] = work.file
@@ -519,7 +519,7 @@ class WorkTest(WebTest, AuthTestMixin):
         url = reverse('work-delete', args=(work.pk,))
 
         resp = self.app.get(url)
-        resp.form.submit()
+        resp.forms[1].submit()
         self.assertEqual(Work.objects.count(), 0)
 
     def test_list(self):
@@ -640,7 +640,7 @@ class IdeaTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['description'] = idea_compare.description
         form['name'] = idea_compare.name
         form['summary'] = idea_compare.summary
@@ -683,7 +683,7 @@ class IdeaTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['description'] = idea.description
         form['name'] = idea.name
         form['summary'] = idea.summary
@@ -723,7 +723,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         url = reverse('idea-delete', args=(idea.pk,))
 
         resp = self.app.get(url)
-        resp.form.submit()
+        resp.forms[1].submit()
         self.assertEqual(Idea.objects.count(), 0)
 
     def test_detail(self):
@@ -780,7 +780,7 @@ class StepTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = step_compare.name
         form['deliverables'] = step_compare.deliverables
         form['priority'] = step_compare.priority
@@ -837,7 +837,7 @@ class StepTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = step.name
         form['deliverables'] = step.deliverables
         form['priority'] = step.priority
@@ -889,7 +889,7 @@ class StepTest(WebTest, AuthTestMixin):
         url = reverse('step-delete', args=(step.pk,))
 
         resp = self.app.get(url)
-        resp.form.submit()
+        resp.forms[1].submit()
         self.assertEqual(Step.objects.count(), 0)
 
     def test_list(self):
@@ -991,7 +991,7 @@ class TaskTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = task_compare.name
         form['priority'] = task_compare.priority
         form['step'] = task_compare.step.pk
@@ -1034,7 +1034,7 @@ class TaskTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = task.name
         form['priority'] = task.priority
         form['sharewith'] = [self.user.id,]
@@ -1072,7 +1072,7 @@ class TaskTest(WebTest, AuthTestMixin):
         url = reverse('task-delete', args=(task.pk,))
 
         resp = self.app.get(url)
-        resp.form.submit()
+        resp.forms[1].submit()
         self.assertEqual(Task.objects.count(), 0)
 
     def test_list(self):
@@ -1171,7 +1171,7 @@ class UserTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['about'] = user_compare.about
         form['email'] = user_compare.email
         form.submit()
@@ -1205,7 +1205,7 @@ class NeedTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = need.name
         form['sharewith'] = [self.user.id,]
         form.submit()
@@ -1317,7 +1317,7 @@ class PlanTest(WebTest, AuthTestMixin):
 
         resp = self.app.get(url)
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = plan_compare.name
         #form['idea'] = plan_compare.idea.pk
         form['deliverable'] = plan_compare.deliverable
@@ -1364,7 +1364,7 @@ class PlanTest(WebTest, AuthTestMixin):
 
         member = mommy.make('users.User')
 
-        form = resp.form
+        form = resp.forms[1]
         form['name'] = plan.name
         form['deliverable'] = plan.deliverable
         form['situation'] = plan.situation
@@ -1406,7 +1406,7 @@ class PlanTest(WebTest, AuthTestMixin):
         url = reverse('plan-delete', args=(plan.pk,))
 
         resp = self.app.get(url)
-        resp.form.submit()
+        resp.forms[1].submit()
         self.assertEqual(Plan.objects.count(), 0)
 
     def test_detail(self):

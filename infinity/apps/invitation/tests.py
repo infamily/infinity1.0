@@ -30,7 +30,7 @@ class InvitationTest(WebTest):
 
     def login(self, login, password):
         resp = self.app.get(reverse('account_login'))
-        form = resp.forms[0]
+        form = resp.forms[1]
         form['login'] = login
         form['password'] = password
         res = form.submit()
@@ -41,7 +41,7 @@ class InvitationTest(WebTest):
 
         self.login(self.email_second.email, 'test')
         response = self.app.get(invitation_form_view_url)
-        form = response.form
+        form = response.forms[1]
         form['member_email'] = 'test@test.com'
         form['language'] = self.language.id
         form['email_body'] = 'Hello, World {{ invitation_url }}'
@@ -55,7 +55,7 @@ class InvitationTest(WebTest):
 
         self.login(self.email_first.email, 'test')
         response = self.app.get(invitation_form_view_url)
-        form = response.form
+        form = response.forms[1]
         form['member_email'] = 'test@test.com'
         form['language'] = self.language.id
         form['email_body'] = 'Hello, World {{ invitation_url }}'
@@ -71,7 +71,7 @@ class InvitationTest(WebTest):
 
         self.login(self.email_first.email, 'test')
         response = self.app.get(invitation_form_view_url)
-        form = response.form
+        form = response.forms[1]
         form['member_email'] = self.email_first.email
         form['language'] = self.language.id
         form['email_body'] = 'Hello, World {{ invitation_url }}'
