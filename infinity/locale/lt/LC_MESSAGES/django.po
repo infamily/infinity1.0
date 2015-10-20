@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-20 08:46-0700\n"
+"POT-Creation-Date: 2015-10-20 13:46-0700\n"
 "PO-Revision-Date: 2015-10-19 16:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -32,7 +32,7 @@ msgstr "Sukurti"
 #: infinity/apps/core/forms.py:250 infinity/apps/core/forms.py:292
 #: infinity/apps/core/forms.py:397 infinity/apps/core/forms.py:505
 #: infinity/apps/core/forms.py:600 infinity/apps/core/forms.py:734
-#: infinity/apps/core/forms.py:774 infinity/apps/users/forms.py:54
+#: infinity/apps/core/forms.py:774 infinity/apps/users/forms.py:60
 msgid "Update"
 msgstr ""
 
@@ -185,6 +185,7 @@ msgstr ""
 
 #: infinity/apps/core/forms.py:456
 #: infinity/apps/core/templates/goal/list2.html:6
+#: infinity/apps/core/templates/goal/list2.html:9
 #: infinity/templates/base.html:90 infinity/templates/home.html:27
 msgid "Goals"
 msgstr "Tikslai"
@@ -349,6 +350,10 @@ msgstr ""
 msgid "Plain equity"
 msgstr ""
 
+#: infinity/apps/core/templates/comment/list.html:89
+msgid "Invite a friend to help!"
+msgstr ""
+
 #: infinity/apps/core/templates/goal/create1.html:10
 msgid "Goal create"
 msgstr "Apibrėžti tikslą"
@@ -373,16 +378,28 @@ msgstr ""
 
 #: infinity/apps/core/templates/goal/detail.html:23
 #: infinity/apps/core/templates/goal/detail.html:41
+#: infinity/apps/core/templates/idea/detail.html:22
+#: infinity/apps/core/templates/idea/detail.html:40
+#: infinity/apps/core/templates/plan/detail.html:22
+#: infinity/apps/core/templates/plan/detail.html:40
 msgid "needs"
 msgstr ""
 
 #: infinity/apps/core/templates/goal/detail.html:23
 #: infinity/apps/core/templates/goal/detail.html:41
+#: infinity/apps/core/templates/idea/detail.html:22
+#: infinity/apps/core/templates/idea/detail.html:40
+#: infinity/apps/core/templates/plan/detail.html:22
+#: infinity/apps/core/templates/plan/detail.html:40
 msgid "for funding"
 msgstr ""
 
 #: infinity/apps/core/templates/goal/detail.html:23
 #: infinity/apps/core/templates/goal/detail.html:41
+#: infinity/apps/core/templates/idea/detail.html:22
+#: infinity/apps/core/templates/idea/detail.html:40
+#: infinity/apps/core/templates/plan/detail.html:22
+#: infinity/apps/core/templates/plan/detail.html:40
 #, fuzzy
 #| msgid "hours ago)"
 msgid "hours"
@@ -410,15 +427,21 @@ msgid "related object:"
 msgstr ""
 
 #: infinity/apps/core/templates/goal/detail.html:51
+#: infinity/apps/core/templates/idea/detail.html:52
+#: infinity/apps/core/templates/plan/detail.html:50
 msgid "translations:"
 msgstr ""
 
 #: infinity/apps/core/templates/goal/detail.html:67
+#: infinity/apps/core/templates/idea/detail.html:69
+#: infinity/apps/core/templates/plan/detail.html:64
 #: infinity/templates/account/detail.html:10
 msgid "edit"
 msgstr ""
 
 #: infinity/apps/core/templates/goal/detail.html:67
+#: infinity/apps/core/templates/idea/detail.html:69
+#: infinity/apps/core/templates/plan/detail.html:64
 msgid "delete"
 msgstr ""
 
@@ -440,12 +463,88 @@ msgstr "Idėjos"
 msgid "Idea create"
 msgstr "Apibrėžti tikslą"
 
+#: infinity/apps/core/templates/idea/detail.html:44
+#, fuzzy
+#| msgid "Hyper equity"
+msgid "super-equity"
+msgstr "Hyper-marža"
+
+#: infinity/apps/core/templates/idea/detail.html:45
+msgid ""
+"A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
+"which indicates how much idea creator owns of all projects under this idea."
+msgstr ""
+
+#: infinity/apps/core/templates/idea/detail.html:50
+msgid "want:"
+msgstr ""
+
+#: infinity/apps/core/templates/idea/detail.html:80
+#: infinity/apps/core/templates/plan/detail.html:80
+#, fuzzy
+#| msgid "Share with:"
+msgid "shared with:"
+msgstr "Dalintis su:"
+
+#: infinity/apps/core/templates/idea/detail.html:84
+#: infinity/templates/base.html:98 infinity/templates/home.html:69
+msgid "Plans"
+msgstr "Planai"
+
+#: infinity/apps/core/templates/idea/detail.html:94
+#, fuzzy
+#| msgid "Ideas"
+msgid "+New Plan"
+msgstr "Idėjos"
+
 #: infinity/apps/core/templates/plan/create.html:6
 #: infinity/apps/core/templates/plan/create.html:10
 #, fuzzy
 #| msgid "Goal create"
 msgid "Plan create"
 msgstr "Apibrėžti tikslą"
+
+#: infinity/apps/core/templates/plan/detail.html:44
+msgid "shareholders:"
+msgstr ""
+
+#: infinity/apps/core/templates/plan/detail.html:44
+#, fuzzy
+#| msgid "Hyper equity"
+msgid "equity"
+msgstr "Hyper-marža"
+
+#: infinity/apps/core/templates/plan/detail.html:45
+msgid ""
+"A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
+"which indicates how much project <u>shareholders</u> own of all results "
+"under this project. The rest is owned by contributing users."
+msgstr ""
+
+#: infinity/apps/core/templates/plan/detail.html:49
+msgid "approach to realizing idea"
+msgstr ""
+
+#: infinity/apps/core/templates/plan/detail.html:68
+#, fuzzy
+#| msgid "invitations"
+msgid "situation"
+msgstr "pakvietimai"
+
+#: infinity/apps/core/templates/plan/detail.html:73
+msgid "deliverable"
+msgstr ""
+
+#: infinity/apps/core/templates/plan/detail.html:86
+#: infinity/templates/home.html:90
+msgid "Steps"
+msgstr "Uždaviniai"
+
+#: infinity/apps/core/templates/plan/detail.html:96
+#, fuzzy
+#| msgid "Ideas"
+msgid "+New Step"
+msgstr "Idėjos"
 
 #: infinity/apps/core/views.py:202
 msgid "Comment succesfully updated"
@@ -609,19 +708,35 @@ msgid ""
 "default"
 msgstr ""
 
-#: infinity/apps/users/forms.py:25
+#: infinity/apps/users/forms.py:27
 msgid "Invite to this conversation"
 msgstr ""
 
-#: infinity/apps/users/forms.py:30
+#: infinity/apps/users/forms.py:32
 msgid "Send invite"
 msgstr ""
 
-#: infinity/apps/users/forms.py:71
+#: infinity/apps/users/forms.py:37
+msgid "New Username"
+msgstr ""
+
+#: infinity/apps/users/forms.py:38
+#, fuzzy
+#| msgid "E-mail"
+msgid "Email"
+msgstr "El. paštas"
+
+#: infinity/apps/users/forms.py:39
+#, fuzzy
+#| msgid "invitations"
+msgid "Invitation text"
+msgstr "pakvietimai"
+
+#: infinity/apps/users/forms.py:77
 msgid "Login"
 msgstr "Prisijungti"
 
-#: infinity/apps/users/forms.py:94
+#: infinity/apps/users/forms.py:100
 #, fuzzy
 #| msgid "Sign Up"
 msgid "SignUp"
@@ -1018,10 +1133,6 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: infinity/templates/base.html:98 infinity/templates/home.html:69
-msgid "Plans"
-msgstr "Planai"
-
 #: infinity/templates/base.html:103
 msgid "Help"
 msgstr "Pagalba"
@@ -1087,10 +1198,6 @@ msgstr "pasiūlykite sprendimą"
 #: infinity/templates/home.html:69
 msgid "start a project"
 msgstr "pradėkite projektą"
-
-#: infinity/templates/home.html:90
-msgid "Steps"
-msgstr "Uždaviniai"
 
 #: infinity/templates/home.html:90
 msgid "break it down"

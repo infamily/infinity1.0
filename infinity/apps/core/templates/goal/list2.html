@@ -6,7 +6,7 @@
 {% block title %}{% trans "Goals" %}{% endblock title %}
 
 {% block content %}
-<h1>Goals <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></h1>
+<h1>{% trans "Goals" %} <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></h1>
 
 <div class="search-block" style="text-align: center;">
 {% crispy filter.form %}
