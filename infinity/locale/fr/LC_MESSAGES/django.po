@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-19 18:02-0700\n"
+"POT-Creation-Date: 2015-10-19 18:56-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -344,8 +344,34 @@ msgid ""
 "<center><font color=\"grey\">Goal definition is implicit.</center>\n"
 msgstr ""
 
-#: infinity/apps/core/templates/goal/detail.html:23
-msgid "needs"
+#: infinity/apps/core/templates/goal/detail.html:50
+msgid "category:"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:50
+msgid "related object:"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:51
+msgid "translations:"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:67
+#: infinity/templates/account/detail.html:10
+msgid "edit"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:67
+msgid "delete"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:82
+#: infinity/templates/base.html:94 infinity/templates/home.html:49
+msgid "Ideas"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:92
+msgid "+New Idea"
 msgstr ""
 
 #: infinity/apps/core/templates/idea/create.html:6
@@ -596,10 +622,6 @@ msgstr ""
 #: infinity/templates/account/detail.html:7
 #: infinity/templates/translations.html:11
 msgid "E-mail"
-msgstr ""
-
-#: infinity/templates/account/detail.html:10
-msgid "edit"
 msgstr ""
 
 #: infinity/templates/account/email.html:7
@@ -920,10 +942,6 @@ msgstr ""
 msgid ""
 "<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
 "mail address</a>."
-msgstr ""
-
-#: infinity/templates/base.html:94 infinity/templates/home.html:49
-msgid "Ideas"
 msgstr ""
 
 #: infinity/templates/base.html:98 infinity/templates/home.html:69
