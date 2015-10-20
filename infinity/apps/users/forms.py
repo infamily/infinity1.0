@@ -22,7 +22,7 @@ class ConversationInviteForm(forms.ModelForm):
         self.helper = FormHelper(self)
         self.helper.layout = Layout(
             Fieldset(
-                'Invite to this conversation',
+                unicode(_('Invite to this conversation')),
                 'name',
                 'email',
                 'invitation_text',

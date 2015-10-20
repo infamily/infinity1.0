@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-19 18:56-0700\n"
+"POT-Creation-Date: 2015-10-20 08:46-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -345,6 +345,32 @@ msgid ""
 "<center><font color=\"grey\">Goal definition is implicit.</center>\n"
 msgstr ""
 
+#: infinity/apps/core/templates/goal/detail.html:23
+#: infinity/apps/core/templates/goal/detail.html:41
+msgid "needs"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:23
+#: infinity/apps/core/templates/goal/detail.html:41
+msgid "for funding"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:23
+#: infinity/apps/core/templates/goal/detail.html:41
+msgid "hours"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:45
+msgid "hyper-equity"
+msgstr ""
+
+#: infinity/apps/core/templates/goal/detail.html:46
+msgid ""
+"A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
+"which indicates how much goal creator owns of all projects under this "
+"problem."
+msgstr ""
+
 #: infinity/apps/core/templates/goal/detail.html:50
 msgid "category:"
 msgstr ""
@@ -545,6 +571,10 @@ msgstr ""
 msgid ""
 "You have not added any credential. Please create a Credential or select "
 "default"
+msgstr ""
+
+#: infinity/apps/users/forms.py:25
+msgid "Invite to this conversation"
 msgstr ""
 
 #: infinity/apps/users/forms.py:30

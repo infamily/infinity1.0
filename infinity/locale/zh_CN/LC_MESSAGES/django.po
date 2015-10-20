@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: infinity/apps/core/forms.py:214 infinity/apps/core/forms.py:217
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-19 18:56-0700\n"
-"PO-Revision-Date: 2015-10-20 02:58+0100\n"
+"POT-Creation-Date: 2015-10-20 08:46-0700\n"
+"PO-Revision-Date: 2015-10-20 16:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -55,7 +56,7 @@ msgstr ""
 msgid ""
 "Notify mentioned users (e.g., <i>Hi [User], how are you?</i>) by e-mail."
 msgstr ""
-"Notify mentioned users (e.g., <i>Hi [User], how are you?</i>) by e-mail."
+"对提到的用户发给通知到邮箱 (比如，<i>您好 [用户名]，您最近怎么样？</i>)"
 
 #: infinity/apps/core/forms.py:103 infinity/apps/core/forms.py:133
 msgid "Comment"
@@ -376,6 +377,32 @@ msgstr ""
 "<center>这已经是个问题的，可以停写</center>\n"
 "<center><font color=\"grey\">目标的定义是问题的否定</center>\n"
 
+#: infinity/apps/core/templates/goal/detail.html:23
+#: infinity/apps/core/templates/goal/detail.html:41
+msgid "needs"
+msgstr "需要"
+
+#: infinity/apps/core/templates/goal/detail.html:23
+#: infinity/apps/core/templates/goal/detail.html:41
+msgid "for funding"
+msgstr "为了支住"
+
+#: infinity/apps/core/templates/goal/detail.html:23
+#: infinity/apps/core/templates/goal/detail.html:41
+msgid "hours"
+msgstr "小时"
+
+#: infinity/apps/core/templates/goal/detail.html:45
+msgid "hyper-equity"
+msgstr "极端产权比例"
+
+#: infinity/apps/core/templates/goal/detail.html:46
+msgid ""
+"A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
+"which indicates how much goal creator owns of all projects under this "
+"problem."
+msgstr ""
+
 #: infinity/apps/core/templates/goal/detail.html:50
 msgid "category:"
 msgstr "分别:"
@@ -580,6 +607,10 @@ msgid ""
 "default"
 msgstr ""
 
+#: infinity/apps/users/forms.py:25
+msgid "Invite to this conversation"
+msgstr "邀请到这个话题"
+
 #: infinity/apps/users/forms.py:30
 msgid "Send invite"
 msgstr ""
@@ -589,10 +620,8 @@ msgid "Login"
 msgstr "登陆"
 
 #: infinity/apps/users/forms.py:94
-#, fuzzy
-#| msgid "Sign Up"
 msgid "SignUp"
-msgstr "人与人之间"
+msgstr "注册"
 
 #: infinity/apps/users/views.py:33
 msgid "Invitation to conversation has been sent"
@@ -607,10 +636,8 @@ msgid "User with this name already exists"
 msgstr ""
 
 #: infinity/apps/users/views.py:221
-#, fuzzy
-#| msgid "User update"
 msgid "User succesfully updated"
-msgstr "用户更新"
+msgstr "用户更新成功"
 
 #: infinity/settings/base.py:74
 msgid "English"
@@ -1142,8 +1169,18 @@ msgstr ""
 msgid "Remember Me"
 msgstr "记住"
 
-#~ msgid "needs"
-#~ msgstr "需要"
+#~ msgid ""
+#~ "\n"
+#~ "          <span onmouseover=\"showMore()\"><b>[<u>needs $%(object."
+#~ "get_remain_usd|floatformat:2)s for funding %(object.not_funded_hours|"
+#~ "floatformat:2)s hours</u>]</b></span>\n"
+#~ "          "
+#~ msgstr ""
+#~ "\n"
+#~ "          <span onmouseover=\"showMore()\"><b>[<u>需要 $%(object."
+#~ "get_remain_usd|floatformat:2)s 为了支持 %(object.not_funded_hours|"
+#~ "floatformat:2)s 个小时</u>]</b></span>\n"
+#~ "          "
 
 #~ msgid ""
 #~ "<b>Means:</b> (e.g., \"computer-aided design software, good CAD skills, "
