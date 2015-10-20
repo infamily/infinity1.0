@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-19 09:53-0700\n"
-"PO-Revision-Date: 2015-10-19 18:00+0100\n"
+"POT-Creation-Date: 2015-10-19 18:02-0700\n"
+"PO-Revision-Date: 2015-10-20 02:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -20,16 +20,16 @@ msgstr ""
 #: infinity/apps/core/forms.py:54 infinity/apps/core/forms.py:86
 #: infinity/apps/core/forms.py:138 infinity/apps/core/forms.py:164
 #: infinity/apps/core/forms.py:333 infinity/apps/core/forms.py:437
-#: infinity/apps/core/forms.py:546 infinity/apps/core/forms.py:635
-#: infinity/apps/core/forms.py:822
+#: infinity/apps/core/forms.py:547 infinity/apps/core/forms.py:636
+#: infinity/apps/core/forms.py:823
 msgid "Create"
 msgstr "创造"
 
 #: infinity/apps/core/forms.py:66 infinity/apps/core/forms.py:116
 #: infinity/apps/core/forms.py:250 infinity/apps/core/forms.py:292
-#: infinity/apps/core/forms.py:397 infinity/apps/core/forms.py:504
-#: infinity/apps/core/forms.py:599 infinity/apps/core/forms.py:733
-#: infinity/apps/core/forms.py:773 infinity/apps/users/forms.py:54
+#: infinity/apps/core/forms.py:397 infinity/apps/core/forms.py:505
+#: infinity/apps/core/forms.py:600 infinity/apps/core/forms.py:734
+#: infinity/apps/core/forms.py:774 infinity/apps/users/forms.py:54
 msgid "Update"
 msgstr "更新"
 
@@ -68,12 +68,12 @@ msgstr "发给评论到提到的用户的邮箱"
 #: infinity/apps/core/forms.py:111 infinity/apps/core/forms.py:201
 #: infinity/apps/core/forms.py:257 infinity/apps/core/forms.py:297
 #: infinity/apps/core/forms.py:338 infinity/apps/core/forms.py:392
-#: infinity/apps/core/forms.py:462 infinity/apps/core/forms.py:509
-#: infinity/apps/core/forms.py:551 infinity/apps/core/forms.py:604
-#: infinity/apps/core/forms.py:640 infinity/apps/core/forms.py:678
-#: infinity/apps/core/forms.py:768 infinity/apps/core/forms.py:817
+#: infinity/apps/core/forms.py:462 infinity/apps/core/forms.py:510
+#: infinity/apps/core/forms.py:552 infinity/apps/core/forms.py:605
+#: infinity/apps/core/forms.py:641 infinity/apps/core/forms.py:679
+#: infinity/apps/core/forms.py:769 infinity/apps/core/forms.py:818
 msgid "Select the users to share with:"
-msgstr "选择用户跟谁分享"
+msgstr "选择用户谁能看到这内容"
 
 #: infinity/apps/core/forms.py:176
 msgid "Select the type of your need..."
@@ -83,9 +83,10 @@ msgstr "选择需要的种类..."
 msgid "Select the thing that you need..."
 msgstr "选择跟需要有关的对象..."
 
-#: infinity/apps/core/forms.py:204
+#: infinity/apps/core/forms.py:204 infinity/apps/core/forms.py:474
+#: infinity/apps/core/forms.py:871
 msgid "Share with:"
-msgstr "跟谁分享："
+msgstr "对谁可见："
 
 #: infinity/apps/core/forms.py:207
 msgid ""
@@ -122,8 +123,8 @@ msgid ""
 msgstr "<b>描写:</b> (比如，世界上有多人缺乏清洁饮用水)"
 
 #: infinity/apps/core/forms.py:218 infinity/apps/core/forms.py:353
-#: infinity/apps/core/forms.py:471 infinity/apps/core/forms.py:565
-#: infinity/apps/core/forms.py:874
+#: infinity/apps/core/forms.py:471 infinity/apps/core/forms.py:566
+#: infinity/apps/core/forms.py:879
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
 msgstr "<b>私人</b> (把发布分享只跟您选择的用户)"
@@ -131,9 +132,9 @@ msgstr "<b>私人</b> (把发布分享只跟您选择的用户)"
 #: infinity/apps/core/forms.py:219 infinity/apps/core/forms.py:262
 #: infinity/apps/core/forms.py:302 infinity/apps/core/forms.py:354
 #: infinity/apps/core/forms.py:399 infinity/apps/core/forms.py:472
-#: infinity/apps/core/forms.py:514 infinity/apps/core/forms.py:566
-#: infinity/apps/core/forms.py:609 infinity/apps/core/forms.py:648
-#: infinity/apps/core/forms.py:774 infinity/apps/core/forms.py:875
+#: infinity/apps/core/forms.py:515 infinity/apps/core/forms.py:567
+#: infinity/apps/core/forms.py:610 infinity/apps/core/forms.py:649
+#: infinity/apps/core/forms.py:775 infinity/apps/core/forms.py:880
 msgid "<b>Input Language</b> (the language you used to compose this post) "
 msgstr "<b>输入语言</b> (选择您撰写这篇文的主要的语言) "
 
@@ -207,21 +208,21 @@ msgstr "<b>描写:</b> (写细节关于思路)"
 msgid "Super equity"
 msgstr "特级产权比例"
 
-#: infinity/apps/core/forms.py:556
+#: infinity/apps/core/forms.py:557
 msgid "<b>Milestone:</b> (e.g., \"assemble solar panels\", used in title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:557
+#: infinity/apps/core/forms.py:558
 msgid "Type the name of the milestone."
 msgstr ""
 
-#: infinity/apps/core/forms.py:558
+#: infinity/apps/core/forms.py:559
 msgid ""
 "<b>Objective:</b> (describe conditions, when you will consider the milestone "
 "to be 'achieved')"
 msgstr ""
 
-#: infinity/apps/core/forms.py:559
+#: infinity/apps/core/forms.py:560
 msgid ""
 "Example:\n"
 "\n"
@@ -230,69 +231,90 @@ msgid ""
 "- Passes certain tests of reliability."
 msgstr ""
 
-#: infinity/apps/core/forms.py:560
+#: infinity/apps/core/forms.py:561
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the milestone has to be done earlier)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:561
+#: infinity/apps/core/forms.py:562
 msgid ""
 "<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "invest on this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:562
+#: infinity/apps/core/forms.py:563
 msgid "people 1\\3, days 10\\20, usd 50\\70"
 msgstr ""
 
-#: infinity/apps/core/forms.py:563
+#: infinity/apps/core/forms.py:564
 msgid ""
 "<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "have by completion of this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:564
+#: infinity/apps/core/forms.py:565
 msgid "complete solar assembly drawings 0\\1, solar cell assembly 1\\2"
 msgstr ""
 
-#: infinity/apps/core/forms.py:645
+#: infinity/apps/core/forms.py:646
 msgid "<b>Task:</b> (e.g., \"Purchase solar cells\", text in title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:646
+#: infinity/apps/core/forms.py:647
 msgid "Type the name of the task."
 msgstr ""
 
-#: infinity/apps/core/forms.py:647
+#: infinity/apps/core/forms.py:648
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the task has to be done earlier)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:703
+#: infinity/apps/core/forms.py:704
 msgid "Add & Go"
 msgstr ""
 
-#: infinity/apps/core/forms.py:868
-msgid ""
-"<b>Means:</b> (e.g., \"computer-aided design software, good CAD skills, "
-"electric soldering iron, glue, aluminium solder\", used in title.)"
-msgstr ""
+#: infinity/apps/core/forms.py:833
+msgid "Select goal"
+msgstr "选择一个问题"
 
-#: infinity/apps/core/forms.py:869
-msgid "Main tools and/or methods you will use, comma-separated."
-msgstr ""
+#: infinity/apps/core/forms.py:843
+#: infinity/apps/core/templates/idea/create.html:16
+msgid "Goal"
+msgstr "目标"
+
+#: infinity/apps/core/forms.py:850
+msgid "Select idea"
+msgstr "选择一个思路"
+
+#: infinity/apps/core/forms.py:860
+#: infinity/apps/core/templates/plan/create.html:16
+msgid "Idea"
+msgstr "思路"
+
+#: infinity/apps/core/forms.py:866
+msgid "Select the members for the equity..."
+msgstr "选择用户跟谁分享产权"
 
 #: infinity/apps/core/forms.py:870
+msgid "Members"
+msgstr "成员"
+
+#: infinity/apps/core/forms.py:873
+msgid "<b>Name:</b> (e.g., \"Solar Water Project\".)"
+msgstr "<b>项目名:</b> (比如，太阳水项目)"
+
+#: infinity/apps/core/forms.py:875
 msgid ""
 "<b>Situation:</b> (Describe your current situation by listing the things "
 "that you have, including access.)"
 msgstr ""
+"<b>情况:</b> (描写您的现实情况，包括你的地方，有关的财产，对资源的访问)"
 
-#: infinity/apps/core/forms.py:871
+#: infinity/apps/core/forms.py:876
 msgid ""
 "Example:\n"
 "\n"
@@ -304,18 +326,34 @@ msgid ""
 " - A car\n"
 " - 150 USD for this project"
 msgstr ""
+"比如:\n"
+"\n"
+"两个人在沙漠，有:\n"
+"- 电脑\n"
+"- 互联网\n"
+"- 邮政业务服务\n"
+"- 在200公里距离可以租3D印刷机\n"
+"- 车\n"
+"- 1500人民币"
 
-#: infinity/apps/core/forms.py:872
+#: infinity/apps/core/forms.py:877
 msgid "<b>Deliverable:</b> (Describe what do you expect to get.)"
-msgstr ""
+msgstr "<b>目的地:</b> (描写您期待的后果)"
 
-#: infinity/apps/core/forms.py:873
+#: infinity/apps/core/forms.py:878
 msgid ""
 "Example:\n"
 "\n"
 "A working prototype of solar water condenser, and high quality open designs "
 "published on GitHub, so others could easily replicate."
 msgstr ""
+"比如:\n"
+"\n"
+"可用的太阳能水冷凝器，高质量的开源的设计在GitHub上，为了别人也可以创造它"
+
+#: infinity/apps/core/forms.py:881
+msgid "Plain equity"
+msgstr "单纯产权比例"
 
 #: infinity/apps/core/templates/goal/create1.html:10
 msgid "Goal create"
@@ -338,14 +376,19 @@ msgstr ""
 "<center>这已经是个问题的，可以停写</center>\n"
 "<center><font color=\"grey\">目标的定义是问题的否定</center>\n"
 
+#: infinity/apps/core/templates/goal/detail.html:23
+msgid "needs"
+msgstr "需要"
+
 #: infinity/apps/core/templates/idea/create.html:6
 #: infinity/apps/core/templates/idea/create.html:10
 msgid "Idea create"
 msgstr "创造思路"
 
-#: infinity/apps/core/templates/idea/create.html:16
-msgid "Goal"
-msgstr "目标"
+#: infinity/apps/core/templates/plan/create.html:6
+#: infinity/apps/core/templates/plan/create.html:10
+msgid "Plan create"
+msgstr "创造项目"
 
 #: infinity/apps/core/views.py:202
 msgid "Comment succesfully updated"
@@ -1080,3 +1123,8 @@ msgstr ""
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr "记住"
+
+#~ msgid ""
+#~ "<b>Means:</b> (e.g., \"computer-aided design software, good CAD skills, "
+#~ "electric soldering iron, glue, aluminium solder\", used in title.)"
+#~ msgstr "<b>计划名:</b> (比如，太阳水项目)"

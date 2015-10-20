@@ -830,7 +830,7 @@ class PlanCreateForm(forms.ModelForm):
             widget=AutoHeavySelect2Widget(
                 select2_options={
                     'minimumInputLength': 0,
-                    'placeholder': 'Select goal',
+                    'placeholder': unicode(_('Select goal')),
                     'ajax': {
                         'dataType': 'json',
                         'quietMillis': 100,
@@ -840,13 +840,14 @@ class PlanCreateForm(forms.ModelForm):
                 }
             )
         )
+        self.fields['goal'].label = _('Goal')
 
 
         self.fields['idea'] = IdeaChoiceField(
             widget=AutoHeavySelect2Widget(
                 select2_options={
                     'minimumInputLength': 0,
-                    'placeholder': 'Select idea',
+                    'placeholder': unicode(_('Select idea')),
                     'ajax': {
                         'dataType': 'json',
                         'quietMillis': 100,
@@ -856,24 +857,28 @@ class PlanCreateForm(forms.ModelForm):
                 }
             )
         )
+        self.fields['idea'].label = _('Idea')
 
         self.fields['members'] = MembersChoiceField(
             widget=AutoHeavySelect2MultipleWidget(
                 select2_options={
                     'minimumInputLength': 1,
-                    'placeholder': 'Select the members for the equity...',
+                    'placeholder': unicode(_('Select the members for the equity...')),
                 }
             )
         )
+        self.fields['members'].label = _('Members')
+        self.fields['sharewith'].label = _('Share with:')
 
-        self.fields['name'].label = _('<b>Means:</b> (e.g., "computer-aided design software, good CAD skills, electric soldering iron, glue, aluminium solder", used in title.)')
-        self.fields['name'].widget.attrs.update({'placeholder': _("Main tools and/or methods you will use, comma-separated.")})
+        self.fields['name'].label = _('<b>Name:</b> (e.g., "Solar Water Project".)')
+        self.fields['name'].widget.attrs.update({'placeholder': ""})
         self.fields['situation'].label = _('<b>Situation:</b> (Describe your current situation by listing the things that you have, including access.)')
         self.fields['situation'].widget.attrs.update({'placeholder': _("Example:\n\nWe are two people in a desert. We have:\n- Computer\n- Internet connection\n- Access to postal services\n- Access to 3D printing services 200 kilos away\n - A car\n - 150 USD for this project")})
         self.fields['deliverable'].label = _('<b>Deliverable:</b> (Describe what do you expect to get.)')
         self.fields['deliverable'].widget.attrs.update({'placeholder': _("Example:\n\nA working prototype of solar water condenser, and high quality open designs published on GitHub, so others could easily replicate.")})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['plain_equity'].label = _('Plain equity')
         self.initial['language'] = 85 # English
 
     class Meta:
