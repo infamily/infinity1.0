@@ -145,6 +145,15 @@ table.table.centered
     display:inline-block;
 }
 
+.brand {
+    position: relative;
+    padding-left: 67px;
+    font-size: 24px;
+    transform:scale(2,1);
+    -webkit-transform:scale(2,1);
+    display:inline-block;
+}
+
 /* for menu item links */
 .nav>li>a {
     display: inline-block;
