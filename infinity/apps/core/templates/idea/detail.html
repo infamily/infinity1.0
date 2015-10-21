@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% load crispy_forms_tags %}
 {% load django_markdown %}
@@ -18,7 +19,7 @@ function showMore(){
 }
 
 function showLess(){
-    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>";
+    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>{% trans "needs" %} ${{ object.get_remain_usd|floatformat:2 }} {% trans "for funding" %} {{ object.not_funded_hours|floatformat:2}} {% trans "hours" %}</u>]</b></span>";
 }
 </script>
 
@@ -36,19 +37,19 @@ $(document).ready( function() {
 <div class="panel-body">
     <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
       <div class="alignright" id="stats">
-        <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
+          <span onmouseover="showMore()"><b>[<u>{% trans "needs" %} ${{ object.get_remain_usd|floatformat:2 }} {% trans "for funding" %} {{ object.not_funded_hours|floatformat:2}} {% trans "hours" %}</u>]</b></span>
       </div>
       <div style="clear:both;"></div>
       <div align="right">
-        <span class="tiptext">[<u>super-equity</u>: {{ object.get_equity|floatformat:2 }}% ḥ]
-        <div class="description" align="left">A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much idea creator owns of all projects under this idea.</div>
+          <span class="tiptext">[<u>{% trans "super-equity" %}</u>: {{ object.get_equity|floatformat:2 }}% ḥ]
+              <div class="description" align="left">{% trans "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much idea creator owns of all projects under this idea." %}</div>
         </span>
       </div>
 
 {% for goal in object.goal.all %}
-want: <a href="{% url "goal-detail" goal.pk %}">{{ goal }}</a></li>
+{% trans "want:" %} <a href="{% url "goal-detail" goal.pk %}">{{ goal }}</a></li>
 {% endfor %}<br/>
-translations: 
+{% trans "translations:" %} 
     <!-- translations -->
     <a href="{% url "idea-detail" object.id %}">
         [{{object.language.language_code}}]
@@ -65,7 +66,7 @@ translations:
 
 <h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>
 <h2 style="font-size:22px;">{% if not translation %}{{ object.summary }}{% else %}{{ translation.summary}}{% endif %}</h2>
-{% if object.user == request.user %}[<a href="{% if not translation %}{% url "idea-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% if not translation %}{% url "idea-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">delete</a>]{% endif %}
+{% if object.user == request.user %}[<a href="{% if not translation %}{% url "idea-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a>, <a href="{% if not translation %}{% url "idea-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]{% endif %}
 <br/>
 <br/>
 
@@ -76,11 +77,11 @@ translations:
 {% endif %}
 <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 
-{% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>shared with:</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
+{% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>{% trans "shared with:" %}</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
 </div>
 
 
-<div class="panel-heading">Plans</div>
+<div class="panel-heading">{% trans "Plans" %}</div>
 <div class="panel-body">
 {% for object in plan_list %}
     <ul class="list-group">
@@ -90,7 +91,7 @@ translations:
       </li>
     </ul>
 {% endfor %}
-<a href="{% url "plan-create" object.pk %}">+New Plan</a>
+<a href="{% url "plan-create" object.pk %}">{% trans "+New Plan" %}</a>
 </div>
 </div>
 

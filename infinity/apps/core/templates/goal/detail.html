@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% load crispy_forms_tags %}
 {% load django_markdown %}
@@ -19,7 +20,7 @@ function showMore(){
 }
 
 function showLess(){
-    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>";
+    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>{% trans "needs" %} ${{ object.get_remain_usd|floatformat:2 }} {% trans "for funding" %} {{ object.not_funded_hours|floatformat:2}} {% trans "hours" %}</u>]</b></span>";
 }
 </script>
 
@@ -37,17 +38,17 @@ $(document).ready( function() {
   <div class="panel-body">
       <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
       <div class="alignright" id="stats">
-          <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
+          <span onmouseover="showMore()"><b>[<u>{% trans "needs" %} ${{ object.get_remain_usd|floatformat:2 }} {% trans "for funding" %} {{ object.not_funded_hours|floatformat:2}} {% trans "hours" %}</u>]</b></span>
       </div>
       <div style="clear:both;"></div>
       <div align="right">
-        <span class="tiptext">[<u>hyper-equity</u>: {{ object.get_equity|floatformat:2 }}% ḥ]
-           <div class="description" align="left">A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much goal creator owns of all projects under this problem.</div>
+          <span class="tiptext">[<u>{% trans "hyper-equity" %}</u>: {{ object.get_equity|floatformat:2 }}% ḥ]
+              <div class="description" align="left">{% trans "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much goal creator owns of all projects under this problem." %}</div>
         </span>
       </div>
  
-    category: <a href="">{{ object.type }}</a>, related object: <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a><br/>
-    translations: 
+      {% trans "category:" %} <a href="">{{ object.type }}</a>, {% trans "related object:" %} <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a><br/>
+      {% trans "translations:" %}
       <!-- translations -->
       <a href="{% url "goal-detail" object.id %}">
           [{{object.language.language_code}}]
@@ -63,7 +64,7 @@ $(document).ready( function() {
       <!-- /translations-->
 
     <h1>{% if not translation %}{{object.name}}{% else %} {{ translation.name }} {% endif %}</h1>{% if object.user == request.user %}
-    [<a href="{% if not translation %}{% url "goal-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% if not translation %}{% url "goal-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">delete</a>]{% endif %}
+    [<a href="{% if not translation %}{% url "goal-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a>, <a href="{% if not translation %}{% url "goal-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]{% endif %}
 
   <br/>
   <br/>
@@ -75,10 +76,10 @@ $(document).ready( function() {
   {% endif %}
   <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 
-  {% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>shared with:</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
+  {% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>{% trans "shared with:" %}</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
   </div>
 
-  <div class="panel-heading">Ideas</div>
+  <div class="panel-heading">{% trans "Ideas" %}</div>
   <div class="panel-body">
   {% for object in idea_list %}
       <ul class="list-group">
@@ -88,7 +89,7 @@ $(document).ready( function() {
         </li>
       </ul>
   {% endfor %}
-  <a  href="{% url "idea-create" object.pk %}">+New Idea</a>
+  <a  href="{% url "idea-create" object.pk %}">{% trans "+New Idea" %}</a>
   </div>
 </div>
 

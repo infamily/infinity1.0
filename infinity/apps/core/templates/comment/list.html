@@ -1,4 +1,5 @@
 {% load crispy_forms_tags %}
+{% load i18n %}
 {% load django_markdown %}
 
 {% if request.user.is_authenticated %}
@@ -85,5 +86,5 @@ function getfocus() {
 
 
 {% if request.user.is_authenticated %}
-<div class="invite_fd"><b><a href="#id_name" onclick="getfocus()" style="color:white; text-decoration: none;">Invite a friend to help!</a></b></div>
+<div class="invite_fd"><b><a href="#id_name" onclick="getfocus()" style="color:white; text-decoration: none;">{% trans "Invite a friend to help!" %}</a></b></div>
 {% endif %}

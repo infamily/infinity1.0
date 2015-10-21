@@ -36,7 +36,7 @@ from .forms import *
 from .filters import *
 
 from hours.models import HourValue
-
+from core.models import Language
 
 class IndexView(TemplateView):
     template_name = 'home.html'
@@ -78,20 +78,33 @@ class IndexView(TemplateView):
         in_days = lambda x: float(x.seconds/86400.)
         in_hours = lambda x: float(x.seconds/3600.)
 
+        try: 
+            interface_language_id = Language.objects.get(language_code=self.request.LANGUAGE_CODE).id
+        except Language.DoesNotExist:
+            interface_language_id = 85 # English
+
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'home':
                 q_object = (
-                    Q(user=self.request.user) |
-                    Q(personal=True, sharewith=self.request.user)
+                    Q(language_id=interface_language_id) & (
+                        Q(user=self.request.user) |
+                        Q(personal=True, sharewith=self.request.user)
+                    )
                 )
             else:
                 q_object = (
-                    Q(personal=False) |
-                    Q(personal=True, user=self.request.user) |
-                    Q(personal=True, sharewith=self.request.user)
+                    Q(language_id=interface_language_id) & (
+                        Q(personal=False) |
+                        Q(personal=True, user=self.request.user) |
+                        Q(personal=True, sharewith=self.request.user)
+                    )
                 )
         else:
-            q_object = Q(personal=False)
+            q_object = (
+                Q(language_id=interface_language_id) & (
+                    Q(personal=False)
+                )
+            )
 
         goals = Goal.objects.filter(q_object).order_by('-commented_at')[:items['goals']]
         ideas = Idea.objects.filter(q_object).order_by('-commented_at')[:items['ideas']]
@@ -299,6 +312,7 @@ class GoalCreateView(CreateView):
     def get_form_kwargs(self):
         kwargs = super(GoalCreateView, self).get_form_kwargs()
         kwargs['need_instance'] = self.need_instance
+        kwargs['request'] = self.request
         return kwargs
 
 
@@ -481,6 +495,11 @@ class WorkCreateView(CreateView):
         })
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super(WorkCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
 
 class WorkDeleteView(OwnerMixin, DeleteView):
 
@@ -633,8 +652,8 @@ class IdeaCreateView(CreateView):
     def get_form_kwargs(self):
         kwargs = super(IdeaCreateView, self).get_form_kwargs()
         kwargs['goal_instance'] = self.goal_instance
+        kwargs['request'] = self.request
         return kwargs
-
 
 class IdeaDeleteView(OwnerMixin, DeleteView):
 
@@ -777,6 +796,11 @@ class StepCreateView(CreateView):
                     'plan_object': Plan.objects.get(pk=self.kwargs['plan']),
         })
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super(StepCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
 
 class StepDeleteView(OwnerMixin, DeleteView):
@@ -927,6 +951,11 @@ class TaskCreateView(CreateView):
                     'step_object': Step.objects.get(pk=self.kwargs['step']),
         })
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super(TaskCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
 
 class TaskDeleteView(OwnerMixin, DeleteView):
@@ -1205,6 +1234,7 @@ class PlanCreateView(CreateView):
     def get_form_kwargs(self):
         kwargs = super(PlanCreateView, self).get_form_kwargs()
         kwargs['idea_instance'] = self.idea_instance
+        kwargs['request'] = self.request
         return kwargs
 
     def get_context_data(self, **kwargs):
