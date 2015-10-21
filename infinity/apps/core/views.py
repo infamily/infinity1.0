@@ -36,7 +36,7 @@ from .forms import *
 from .filters import *
 
 from hours.models import HourValue
-
+from core.models import Language
 
 class IndexView(TemplateView):
     template_name = 'home.html'
@@ -78,20 +78,35 @@ class IndexView(TemplateView):
         in_days = lambda x: float(x.seconds/86400.)
         in_hours = lambda x: float(x.seconds/3600.)
 
+        try: 
+            interface_language_id = Language.objects.get(language_code=self.request.LANGUAGE_CODE).id
+        except Language.DoesNotExist:
+            interface_language_id = 85 # English
+
+        print ('language', interface_language_id)
+
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'home':
                 q_object = (
-                    Q(user=self.request.user) |
-                    Q(personal=True, sharewith=self.request.user)
+                    Q(language_id=interface_language_id) & (
+                        Q(user=self.request.user) |
+                        Q(personal=True, sharewith=self.request.user)
+                    )
                 )
             else:
                 q_object = (
-                    Q(personal=False) |
-                    Q(personal=True, user=self.request.user) |
-                    Q(personal=True, sharewith=self.request.user)
+                    Q(language_id=interface_language_id) & (
+                        Q(personal=False) |
+                        Q(personal=True, user=self.request.user) |
+                        Q(personal=True, sharewith=self.request.user)
+                    )
                 )
         else:
-            q_object = Q(personal=False)
+            q_object = (
+                Q(language_id=interface_language_id) & (
+                    Q(personal=False)
+                )
+            )
 
         goals = Goal.objects.filter(q_object).order_by('-commented_at')[:items['goals']]
         ideas = Idea.objects.filter(q_object).order_by('-commented_at')[:items['ideas']]

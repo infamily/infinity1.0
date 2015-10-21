@@ -37,9 +37,9 @@
     <a href="{% url "goal-list" %}">{% trans "see more" %}</a>
 
     {% else %}
-    <center><p>Oops! You have no goals!</p>
-        <p><a href="{% url "goal-create" %}">Add a problem</a></p>
-        <p>...or view <a href="{% url "wider" %}">wider index</a>.</p>
+    <center><p>{% trans "Oops! You have no goals!" %}</p>
+        <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
+        <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
     {% endif %}
     </div>
@@ -56,9 +56,9 @@
     {% endfor %}
     <a href="{% url "idea-list" %}">{% trans "see more" %}</a>
     {% else %}
-    <center><p>Oops! You have no ideas!</p>
-        <p><a href="{% url "idea-create" %}">Add a solution</a></p>
-        <p>...or view <a href="{% url "wider" %}">wider index</a>.</p>
+    <center><p>{% trans "Oops! You have no ideas!" %}</p>
+        <p><a href="{% url "idea-create" %}">{% trans "Add a solution" %}</a></p>
+        <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
     {% endif %}
     </div>
@@ -77,9 +77,9 @@
     {% endfor %}
     <a href="{% url "plan-list" %}">{% trans "see more" %}</a>
     {% else %}
-    <center><p>Oops! You have no plans!</p>
-        <p><a href="{% url "plan-create" %}">Add a project</a></p>
-        <p>...or view <a href="{% url "wider" %}">wider index</a>.</p>
+    <center><p>{% trans "Oops! You have no plans!" %}</p>
+        <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
+        <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
     {% endif %}
     </div>
@@ -98,9 +98,9 @@
     {% endfor %}
     <a href="{% url "step-list" %}">{% trans "see more" %}</a>
     {% else %}
-    <center><p>Oops! You have no steps!</p>
-        <p>Start a project to add milestones</p>
-        <p>...or view <a href="{% url "wider" %}">wider index</a>.</p>
+    <center><p>{% trans "Oops! You have no steps!" %}</p>
+        <p>{% trans "Start a project to add milestones" %}</p>
+        <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
     {% endif %}
     </div>
@@ -120,9 +120,9 @@
     {% endfor %}
     <a href="{% url "task-list" %}">{% trans "see more" %}</a>
     {% else %}
-    <center><p>Oops! You have no tasks!</p>
-        <p>Choose a milestone to add tasks</p>
-        <p>...or view <a href="{% url "wider" %}">wider index</a>.</p>
+    <center><p>{% trans "Oops! You have no tasks!" %}</p>
+        <p>{% trans "Choose a milestone to add tasks" %}</p>
+        <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
     {% endif %}
     </div>

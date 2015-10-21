@@ -1316,7 +1316,7 @@ class Language(models.Model):
     http_accept_language = models.CharField(max_length=255, blank=True,
                                             null=True)
     omegawiki_language_id = models.PositiveIntegerField(null=True, blank=True)
-    language_code = models.CharField(max_length=4)
+    language_code = models.CharField(max_length=5)
 
     def __unicode__(self):
         try:
