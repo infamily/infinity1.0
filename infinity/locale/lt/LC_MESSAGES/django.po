@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-20 14:10-0700\n"
-"PO-Revision-Date: 2015-10-20 22:13+0100\n"
+"POT-Creation-Date: 2015-10-21 05:25-0700\n"
+"PO-Revision-Date: 2015-10-21 13:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -457,6 +457,7 @@ msgstr "Dalinamasi su:"
 
 #: infinity/apps/core/templates/goal/detail.html:82
 #: infinity/apps/core/templates/idea/list2.html:6
+#: infinity/apps/core/templates/idea/list2.html:9
 #: infinity/templates/base.html:94 infinity/templates/home.html:49
 msgid "Ideas"
 msgstr "Idėjos"
@@ -485,6 +486,8 @@ msgid "want:"
 msgstr "norim:"
 
 #: infinity/apps/core/templates/idea/detail.html:84
+#: infinity/apps/core/templates/plan/list2.html:6
+#: infinity/apps/core/templates/plan/list2.html:9
 #: infinity/templates/base.html:98 infinity/templates/home.html:69
 msgid "Plans"
 msgstr "Planai"
@@ -534,111 +537,111 @@ msgstr "Uždaviniai"
 msgid "+New Step"
 msgstr "+Naujas uždavinys"
 
-#: infinity/apps/core/views.py:202
+#: infinity/apps/core/views.py:217
 msgid "Comment succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:216
+#: infinity/apps/core/views.py:231
 msgid "Comment succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:264
+#: infinity/apps/core/views.py:279
 msgid "Comment succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:284
+#: infinity/apps/core/views.py:299
 msgid "Goal succesfully created"
 msgstr "Apibrėžkite tikslą"
 
-#: infinity/apps/core/views.py:330
+#: infinity/apps/core/views.py:345
 msgid "Goal succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:349
+#: infinity/apps/core/views.py:364
 msgid "Goal succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:363 infinity/apps/core/views.py:526
-#: infinity/apps/core/views.py:678 infinity/apps/core/views.py:829
-#: infinity/apps/core/views.py:974 infinity/apps/core/views.py:1104
-#: infinity/apps/core/views.py:1257
+#: infinity/apps/core/views.py:378 infinity/apps/core/views.py:541
+#: infinity/apps/core/views.py:693 infinity/apps/core/views.py:844
+#: infinity/apps/core/views.py:989 infinity/apps/core/views.py:1119
+#: infinity/apps/core/views.py:1272
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:454
+#: infinity/apps/core/views.py:469
 msgid "Work succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:474
+#: infinity/apps/core/views.py:489
 msgid "Work succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:493
+#: infinity/apps/core/views.py:508
 msgid "Work succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:596
+#: infinity/apps/core/views.py:611
 msgid "Idea succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:625
+#: infinity/apps/core/views.py:640
 msgid "Idea succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:647
+#: infinity/apps/core/views.py:662
 msgid "Idea succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:751
+#: infinity/apps/core/views.py:766
 msgid "Step succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:771
+#: infinity/apps/core/views.py:786
 msgid "Step succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:790
+#: infinity/apps/core/views.py:805
 msgid "Step succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:901
+#: infinity/apps/core/views.py:916
 msgid "Task succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:921
+#: infinity/apps/core/views.py:936
 msgid "Task succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:940
+#: infinity/apps/core/views.py:955
 msgid "Task succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:1032
+#: infinity/apps/core/views.py:1047
 msgid "Need succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1076
+#: infinity/apps/core/views.py:1091
 msgid "Need succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:1175
+#: infinity/apps/core/views.py:1190
 msgid "Plan succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1195
+#: infinity/apps/core/views.py:1210
 msgid "Plan succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:1225
+#: infinity/apps/core/views.py:1240
 msgid "Plan succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:1359
+#: infinity/apps/core/views.py:1374
 msgid "Translation succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1409
+#: infinity/apps/core/views.py:1424
 msgid "Translation succesfully deleted"
 msgstr ""
 
@@ -1175,17 +1178,61 @@ msgstr "valandų)"
 msgid "see more"
 msgstr "skaityti daugiau..."
 
+#: infinity/templates/home.html:40
+msgid "Oops! You have no goals!"
+msgstr "Jūs dar neturite tikslų!"
+
+#: infinity/templates/home.html:41
+msgid "Add a problem"
+msgstr "Apibrėžkite problemą"
+
+#: infinity/templates/home.html:42 infinity/templates/home.html.py:61
+#: infinity/templates/home.html:82 infinity/templates/home.html.py:103
+#: infinity/templates/home.html:125
+msgid "...or view"
+msgstr "...arba žr."
+
+#: infinity/templates/home.html:42 infinity/templates/home.html.py:61
+#: infinity/templates/home.html:82 infinity/templates/home.html.py:103
+#: infinity/templates/home.html:125
+msgid "<u>wider index</u>"
+msgstr "mūsų turinį"
+
 #: infinity/templates/home.html:49
 msgid "suggest a solution"
 msgstr "pasiūlykite sprendimą"
+
+#: infinity/templates/home.html:59
+msgid "Oops! You have no ideas!"
+msgstr "Jūs dar neturite idėjų!"
+
+#: infinity/templates/home.html:60
+msgid "Add a solution"
+msgstr "Pridėkite sumanymą"
 
 #: infinity/templates/home.html:69
 msgid "start a project"
 msgstr "pradėkite projektą"
 
+#: infinity/templates/home.html:80
+msgid "Oops! You have no plans!"
+msgstr "Jūs dar neturite planų!"
+
+#: infinity/templates/home.html:81
+msgid "Add a project"
+msgstr "Pradėkite projektą"
+
 #: infinity/templates/home.html:90
 msgid "break it down"
 msgstr "išskaidykite į etapus"
+
+#: infinity/templates/home.html:101
+msgid "Oops! You have no steps!"
+msgstr "Jūs dar neturite uždavinių!"
+
+#: infinity/templates/home.html:102
+msgid "Start a project to add milestones"
+msgstr "Pradėkite projektą, ir prie jo pridėkite etapus"
 
 #: infinity/templates/home.html:111
 msgid "Tasks"
@@ -1194,6 +1241,14 @@ msgstr "Užduotys"
 #: infinity/templates/home.html:111
 msgid "execute it"
 msgstr "vykdykite"
+
+#: infinity/templates/home.html:123
+msgid "Oops! You have no tasks!"
+msgstr ""
+
+#: infinity/templates/home.html:124
+msgid "Choose a milestone to add tasks"
+msgstr ""
 
 #: infinity/templates/home.html:132
 msgid "People-centric economy."
