@@ -808,6 +808,7 @@ class PlanCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         idea_instance = kwargs.pop('idea_instance')
+        request = kwargs.pop('request')
         super(PlanCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
@@ -879,7 +880,12 @@ class PlanCreateForm(forms.ModelForm):
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['plain_equity'].label = _('Plain equity')
-        self.initial['language'] = 85 # English
+
+        try:
+            language = Language.objects.get(language_code=request.LANGUAGE_CODE)
+            self.initial['language'] = language
+        except Language.DoesNotExist:
+            pass
 
     class Meta:
         model = Plan
