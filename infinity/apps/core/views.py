@@ -495,6 +495,11 @@ class WorkCreateView(CreateView):
         })
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super(WorkCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
 
 class WorkDeleteView(OwnerMixin, DeleteView):
 
@@ -792,6 +797,11 @@ class StepCreateView(CreateView):
         })
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super(StepCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
 
 class StepDeleteView(OwnerMixin, DeleteView):
 
@@ -941,6 +951,11 @@ class TaskCreateView(CreateView):
                     'step_object': Step.objects.get(pk=self.kwargs['step']),
         })
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super(TaskCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
 
 class TaskDeleteView(OwnerMixin, DeleteView):

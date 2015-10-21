@@ -332,6 +332,7 @@ class WorkUpdateForm(forms.ModelForm):
 class WorkCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        request = kwargs.pop('request')
         super(WorkCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
@@ -358,7 +359,12 @@ class WorkCreateForm(forms.ModelForm):
         self.fields['parent_work_id'].widget.attrs.update({'placeholder': _('optional')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
-        self.initial['language'] = 85 # English
+
+        try:
+            language = Language.objects.get(language_code=request.LANGUAGE_CODE)
+            self.initial['language'] = language
+        except Language.DoesNotExist:
+            pass
 
     class Meta:
         model = Work
@@ -552,6 +558,7 @@ class StepUpdateForm(forms.ModelForm):
 class StepCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        request = kwargs.pop('request')
         super(StepCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
@@ -577,7 +584,12 @@ class StepCreateForm(forms.ModelForm):
         self.fields['deliverables'].widget.attrs.update({'placeholder': _('complete solar assembly drawings 0\\1, solar cell assembly 1\\2')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
-        self.initial['language'] = 85 # English
+
+        try:
+            language = Language.objects.get(language_code=request.LANGUAGE_CODE)
+            self.initial['language'] = language
+        except Language.DoesNotExist:
+            pass
 
     class Meta:
         model = Step
@@ -641,6 +653,7 @@ class TaskUpdateForm(forms.ModelForm):
 class TaskCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        request = kwargs.pop('request')
         super(TaskCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
@@ -659,7 +672,12 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the task.')})
         self.fields['priority'].label = _("<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number means the task has to be done earlier)")
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
-        self.initial['language'] = 85 # English
+
+        try:
+            language = Language.objects.get(language_code=request.LANGUAGE_CODE)
+            self.initial['language'] = language
+        except Language.DoesNotExist:
+            pass
 
     class Meta:
         model = Task
