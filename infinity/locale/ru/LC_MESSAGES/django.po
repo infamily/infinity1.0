@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: infinity/apps/core/forms.py:214 infinity/apps/core/forms.py:217
+#: infinity/apps/core/forms.py:215 infinity/apps/core/forms.py:218
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 05:25-0700\n"
+"POT-Creation-Date: 2015-10-21 11:14-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,18 +21,18 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: infinity/apps/core/forms.py:54 infinity/apps/core/forms.py:86
-#: infinity/apps/core/forms.py:138 infinity/apps/core/forms.py:164
-#: infinity/apps/core/forms.py:333 infinity/apps/core/forms.py:437
-#: infinity/apps/core/forms.py:547 infinity/apps/core/forms.py:636
-#: infinity/apps/core/forms.py:823
+#: infinity/apps/core/forms.py:138 infinity/apps/core/forms.py:165
+#: infinity/apps/core/forms.py:340 infinity/apps/core/forms.py:450
+#: infinity/apps/core/forms.py:566 infinity/apps/core/forms.py:661
+#: infinity/apps/core/forms.py:854
 msgid "Create"
 msgstr ""
 
 #: infinity/apps/core/forms.py:66 infinity/apps/core/forms.py:116
-#: infinity/apps/core/forms.py:250 infinity/apps/core/forms.py:292
-#: infinity/apps/core/forms.py:397 infinity/apps/core/forms.py:505
-#: infinity/apps/core/forms.py:600 infinity/apps/core/forms.py:734
-#: infinity/apps/core/forms.py:774 infinity/apps/users/forms.py:60
+#: infinity/apps/core/forms.py:256 infinity/apps/core/forms.py:298
+#: infinity/apps/core/forms.py:409 infinity/apps/core/forms.py:523
+#: infinity/apps/core/forms.py:624 infinity/apps/core/forms.py:764
+#: infinity/apps/core/forms.py:804 infinity/apps/users/forms.py:60
 msgid "Update"
 msgstr ""
 
@@ -61,30 +61,30 @@ msgstr ""
 msgid "Notify mentioned users by e-mail."
 msgstr ""
 
-#: infinity/apps/core/forms.py:111 infinity/apps/core/forms.py:201
-#: infinity/apps/core/forms.py:257 infinity/apps/core/forms.py:297
-#: infinity/apps/core/forms.py:338 infinity/apps/core/forms.py:392
-#: infinity/apps/core/forms.py:462 infinity/apps/core/forms.py:510
-#: infinity/apps/core/forms.py:552 infinity/apps/core/forms.py:605
-#: infinity/apps/core/forms.py:641 infinity/apps/core/forms.py:679
-#: infinity/apps/core/forms.py:769 infinity/apps/core/forms.py:818
+#: infinity/apps/core/forms.py:111 infinity/apps/core/forms.py:202
+#: infinity/apps/core/forms.py:263 infinity/apps/core/forms.py:303
+#: infinity/apps/core/forms.py:345 infinity/apps/core/forms.py:404
+#: infinity/apps/core/forms.py:475 infinity/apps/core/forms.py:528
+#: infinity/apps/core/forms.py:571 infinity/apps/core/forms.py:629
+#: infinity/apps/core/forms.py:666 infinity/apps/core/forms.py:709
+#: infinity/apps/core/forms.py:799 infinity/apps/core/forms.py:849
 msgid "Select the users to share with:"
 msgstr ""
 
-#: infinity/apps/core/forms.py:176
+#: infinity/apps/core/forms.py:177
 msgid "Select the type of your need..."
 msgstr ""
 
-#: infinity/apps/core/forms.py:186
+#: infinity/apps/core/forms.py:187
 msgid "Select the thing that you need..."
 msgstr ""
 
-#: infinity/apps/core/forms.py:204 infinity/apps/core/forms.py:474
-#: infinity/apps/core/forms.py:871
+#: infinity/apps/core/forms.py:205 infinity/apps/core/forms.py:487
+#: infinity/apps/core/forms.py:902
 msgid "Share with:"
 msgstr ""
 
-#: infinity/apps/core/forms.py:207
+#: infinity/apps/core/forms.py:208
 msgid ""
 "<b>Topic:</b> (relevant to problem,\n"
 "                                      <a href=\"/need-create/\">click here</"
@@ -92,11 +92,11 @@ msgid ""
 "                                      add if you can't find it.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:210
+#: infinity/apps/core/forms.py:211
 msgid "<b>Category:</b> (of the problem)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:211
+#: infinity/apps/core/forms.py:212
 msgid ""
 "<b>Title:</b> (e.g., Potable Water\n"
 "                                      Shortage, <a href=\"/goal/list/"
@@ -104,114 +104,114 @@ msgid ""
 "                                      defined yet.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:215
+#: infinity/apps/core/forms.py:216
 msgid ""
 "<b>Description:</b> (e.g., Many people in the world lack clean potable "
 "water.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:218 infinity/apps/core/forms.py:353
-#: infinity/apps/core/forms.py:471 infinity/apps/core/forms.py:566
-#: infinity/apps/core/forms.py:879
+#: infinity/apps/core/forms.py:219 infinity/apps/core/forms.py:360
+#: infinity/apps/core/forms.py:484 infinity/apps/core/forms.py:585
+#: infinity/apps/core/forms.py:910
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:219 infinity/apps/core/forms.py:262
-#: infinity/apps/core/forms.py:302 infinity/apps/core/forms.py:354
-#: infinity/apps/core/forms.py:399 infinity/apps/core/forms.py:472
-#: infinity/apps/core/forms.py:515 infinity/apps/core/forms.py:567
-#: infinity/apps/core/forms.py:610 infinity/apps/core/forms.py:649
-#: infinity/apps/core/forms.py:775 infinity/apps/core/forms.py:880
+#: infinity/apps/core/forms.py:220 infinity/apps/core/forms.py:268
+#: infinity/apps/core/forms.py:308 infinity/apps/core/forms.py:361
+#: infinity/apps/core/forms.py:411 infinity/apps/core/forms.py:485
+#: infinity/apps/core/forms.py:533 infinity/apps/core/forms.py:586
+#: infinity/apps/core/forms.py:634 infinity/apps/core/forms.py:674
+#: infinity/apps/core/forms.py:805 infinity/apps/core/forms.py:911
 msgid "<b>Input Language</b> (the language you used to compose this post) "
 msgstr ""
 
-#: infinity/apps/core/forms.py:220 infinity/apps/core/forms.py:263
+#: infinity/apps/core/forms.py:221 infinity/apps/core/forms.py:269
 msgid "Hyper equity"
 msgstr ""
 
-#: infinity/apps/core/forms.py:343
+#: infinity/apps/core/forms.py:350
 msgid ""
 "<b>Name:</b> (e.g., \"First attempt to assemble solar cells.\", used in "
 "title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:344
+#: infinity/apps/core/forms.py:351
 msgid "Give a title to your work."
 msgstr ""
 
-#: infinity/apps/core/forms.py:345
+#: infinity/apps/core/forms.py:352
 msgid "<b>Description:</b> (details about the work, used as body.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:346
+#: infinity/apps/core/forms.py:353
 msgid "Here is a little story of my work."
 msgstr ""
 
-#: infinity/apps/core/forms.py:347
+#: infinity/apps/core/forms.py:354
 msgid "<b>Link:</b> (you can give external link to your work description)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:348 infinity/apps/core/forms.py:350
+#: infinity/apps/core/forms.py:355 infinity/apps/core/forms.py:357
 msgid "http://"
 msgstr ""
 
-#: infinity/apps/core/forms.py:349
+#: infinity/apps/core/forms.py:356
 msgid "<b>File:</b> (you can upload a file describing your work)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:351
+#: infinity/apps/core/forms.py:358
 msgid "<b>Parent Work Id:</b> (integer referring to other work)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:352
+#: infinity/apps/core/forms.py:359
 msgid "optional"
 msgstr ""
 
-#: infinity/apps/core/forms.py:446
+#: infinity/apps/core/forms.py:459
 msgid "Select a goal"
 msgstr ""
 
-#: infinity/apps/core/forms.py:456
+#: infinity/apps/core/forms.py:469
 #: infinity/apps/core/templates/goal/list2.html:6
 #: infinity/apps/core/templates/goal/list2.html:9
-#: infinity/templates/base.html:90 infinity/templates/home.html:27
+#: infinity/templates/base.html:92 infinity/templates/home.html:27
 msgid "Goals"
 msgstr ""
 
-#: infinity/apps/core/forms.py:468
+#: infinity/apps/core/forms.py:481
 msgid "<b>Name:</b> (e.g., \"Solar Water Condenser\", used in title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:469
+#: infinity/apps/core/forms.py:482
 msgid ""
 "<b>Summary:</b> (e.g., \"Use solar panels and Peltier effect to extract "
 "water from air.\", appears as subtitle.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:470
+#: infinity/apps/core/forms.py:483
 msgid "<b>Description:</b> (write full description here, used as body.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:473
+#: infinity/apps/core/forms.py:486
 msgid "Super equity"
 msgstr ""
 
-#: infinity/apps/core/forms.py:557
+#: infinity/apps/core/forms.py:576
 msgid "<b>Milestone:</b> (e.g., \"assemble solar panels\", used in title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:558
+#: infinity/apps/core/forms.py:577
 msgid "Type the name of the milestone."
 msgstr ""
 
-#: infinity/apps/core/forms.py:559
+#: infinity/apps/core/forms.py:578
 msgid ""
 "<b>Objective:</b> (describe conditions, when you will consider the milestone "
 "to be 'achieved')"
 msgstr ""
 
-#: infinity/apps/core/forms.py:560
+#: infinity/apps/core/forms.py:579
 msgid ""
 "Example:\n"
 "\n"
@@ -220,89 +220,89 @@ msgid ""
 "- Passes certain tests of reliability."
 msgstr ""
 
-#: infinity/apps/core/forms.py:561
+#: infinity/apps/core/forms.py:580
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the milestone has to be done earlier)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:562
+#: infinity/apps/core/forms.py:581
 msgid ""
 "<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "invest on this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:563
+#: infinity/apps/core/forms.py:582
 msgid "people 1\\3, days 10\\20, usd 50\\70"
 msgstr ""
 
-#: infinity/apps/core/forms.py:564
+#: infinity/apps/core/forms.py:583
 msgid ""
 "<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "have by completion of this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:565
+#: infinity/apps/core/forms.py:584
 msgid "complete solar assembly drawings 0\\1, solar cell assembly 1\\2"
 msgstr ""
 
-#: infinity/apps/core/forms.py:646
+#: infinity/apps/core/forms.py:671
 msgid "<b>Task:</b> (e.g., \"Purchase solar cells\", text in title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:647
+#: infinity/apps/core/forms.py:672
 msgid "Type the name of the task."
 msgstr ""
 
-#: infinity/apps/core/forms.py:648
+#: infinity/apps/core/forms.py:673
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the task has to be done earlier)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:704
+#: infinity/apps/core/forms.py:734
 msgid "Add & Go"
 msgstr ""
 
-#: infinity/apps/core/forms.py:833
+#: infinity/apps/core/forms.py:864
 msgid "Select goal"
 msgstr ""
 
-#: infinity/apps/core/forms.py:843
+#: infinity/apps/core/forms.py:874
 #: infinity/apps/core/templates/idea/create.html:16
 msgid "Goal"
 msgstr ""
 
-#: infinity/apps/core/forms.py:850
+#: infinity/apps/core/forms.py:881
 msgid "Select idea"
 msgstr ""
 
-#: infinity/apps/core/forms.py:860
+#: infinity/apps/core/forms.py:891
 #: infinity/apps/core/templates/plan/create.html:16
 msgid "Idea"
 msgstr ""
 
-#: infinity/apps/core/forms.py:866
+#: infinity/apps/core/forms.py:897
 msgid "Select the members for the equity..."
 msgstr ""
 
-#: infinity/apps/core/forms.py:870
+#: infinity/apps/core/forms.py:901
 msgid "Members"
 msgstr ""
 
-#: infinity/apps/core/forms.py:873
+#: infinity/apps/core/forms.py:904
 msgid "<b>Name:</b> (e.g., \"Solar Water Project\".)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:875
+#: infinity/apps/core/forms.py:906
 msgid ""
 "<b>Situation:</b> (Describe your current situation by listing the things "
 "that you have, including access.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:876
+#: infinity/apps/core/forms.py:907
 msgid ""
 "Example:\n"
 "\n"
@@ -315,11 +315,11 @@ msgid ""
 " - 150 USD for this project"
 msgstr ""
 
-#: infinity/apps/core/forms.py:877
+#: infinity/apps/core/forms.py:908
 msgid "<b>Deliverable:</b> (Describe what do you expect to get.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:878
+#: infinity/apps/core/forms.py:909
 msgid ""
 "Example:\n"
 "\n"
@@ -327,7 +327,7 @@ msgid ""
 "published on GitHub, so others could easily replicate."
 msgstr ""
 
-#: infinity/apps/core/forms.py:881
+#: infinity/apps/core/forms.py:912
 msgid "Plain equity"
 msgstr ""
 
@@ -424,7 +424,7 @@ msgstr ""
 #: infinity/apps/core/templates/goal/detail.html:82
 #: infinity/apps/core/templates/idea/list2.html:6
 #: infinity/apps/core/templates/idea/list2.html:9
-#: infinity/templates/base.html:94 infinity/templates/home.html:49
+#: infinity/templates/base.html:96 infinity/templates/home.html:49
 msgid "Ideas"
 msgstr ""
 
@@ -454,7 +454,7 @@ msgstr ""
 #: infinity/apps/core/templates/idea/detail.html:84
 #: infinity/apps/core/templates/plan/list2.html:6
 #: infinity/apps/core/templates/plan/list2.html:9
-#: infinity/templates/base.html:98 infinity/templates/home.html:69
+#: infinity/templates/base.html:100 infinity/templates/home.html:69
 msgid "Plans"
 msgstr ""
 
@@ -503,111 +503,111 @@ msgstr ""
 msgid "+New Step"
 msgstr ""
 
-#: infinity/apps/core/views.py:217
+#: infinity/apps/core/views.py:215
 msgid "Comment succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:231
+#: infinity/apps/core/views.py:229
 msgid "Comment succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:279
+#: infinity/apps/core/views.py:277
 msgid "Comment succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:299
+#: infinity/apps/core/views.py:297
 msgid "Goal succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:345
+#: infinity/apps/core/views.py:344
 msgid "Goal succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:364
+#: infinity/apps/core/views.py:363
 msgid "Goal succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:378 infinity/apps/core/views.py:541
-#: infinity/apps/core/views.py:693 infinity/apps/core/views.py:844
-#: infinity/apps/core/views.py:989 infinity/apps/core/views.py:1119
-#: infinity/apps/core/views.py:1272
+#: infinity/apps/core/views.py:377 infinity/apps/core/views.py:545
+#: infinity/apps/core/views.py:697 infinity/apps/core/views.py:853
+#: infinity/apps/core/views.py:1003 infinity/apps/core/views.py:1133
+#: infinity/apps/core/views.py:1287
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:469
+#: infinity/apps/core/views.py:468
 msgid "Work succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:489
+#: infinity/apps/core/views.py:488
 msgid "Work succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:508
+#: infinity/apps/core/views.py:512
 msgid "Work succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:611
+#: infinity/apps/core/views.py:615
 msgid "Idea succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:640
+#: infinity/apps/core/views.py:644
 msgid "Idea succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:662
+#: infinity/apps/core/views.py:666
 msgid "Idea succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:766
+#: infinity/apps/core/views.py:770
 msgid "Step succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:786
+#: infinity/apps/core/views.py:790
 msgid "Step succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:805
+#: infinity/apps/core/views.py:814
 msgid "Step succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:916
+#: infinity/apps/core/views.py:925
 msgid "Task succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:936
+#: infinity/apps/core/views.py:945
 msgid "Task succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:955
+#: infinity/apps/core/views.py:969
 msgid "Task succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:1047
+#: infinity/apps/core/views.py:1061
 msgid "Need succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1091
+#: infinity/apps/core/views.py:1105
 msgid "Need succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:1190
+#: infinity/apps/core/views.py:1204
 msgid "Plan succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1210
+#: infinity/apps/core/views.py:1224
 msgid "Plan succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:1240
+#: infinity/apps/core/views.py:1255
 msgid "Plan succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:1374
+#: infinity/apps/core/views.py:1389
 msgid "Translation succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1424
+#: infinity/apps/core/views.py:1439
 msgid "Translation succesfully deleted"
 msgstr ""
 
@@ -882,7 +882,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:120
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:123
 #, fuzzy
 #| msgid "Sign Up"
 msgid "Sign in"
@@ -1083,19 +1083,23 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: infinity/templates/base.html:103
+#: infinity/templates/base.html:66
+msgid "Solve Your Problems."
+msgstr ""
+
+#: infinity/templates/base.html:106
 msgid "Help"
 msgstr ""
 
-#: infinity/templates/base.html:105
+#: infinity/templates/base.html:108
 msgid "About"
 msgstr ""
 
-#: infinity/templates/base.html:111
+#: infinity/templates/base.html:114
 msgid "Logout"
 msgstr ""
 
-#: infinity/templates/base.html:123
+#: infinity/templates/base.html:126
 #, fuzzy
 #| msgid "Sign Up"
 msgid "Sign up"
