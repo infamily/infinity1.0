@@ -83,8 +83,6 @@ class IndexView(TemplateView):
         except Language.DoesNotExist:
             interface_language_id = 85 # English
 
-        print ('language', interface_language_id)
-
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'home':
                 q_object = (
@@ -314,6 +312,7 @@ class GoalCreateView(CreateView):
     def get_form_kwargs(self):
         kwargs = super(GoalCreateView, self).get_form_kwargs()
         kwargs['need_instance'] = self.need_instance
+        kwargs['request'] = self.request
         return kwargs
 
 
@@ -648,8 +647,8 @@ class IdeaCreateView(CreateView):
     def get_form_kwargs(self):
         kwargs = super(IdeaCreateView, self).get_form_kwargs()
         kwargs['goal_instance'] = self.goal_instance
+        kwargs['request'] = self.request
         return kwargs
-
 
 class IdeaDeleteView(OwnerMixin, DeleteView):
 

@@ -157,6 +157,7 @@ class GoalCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         need_instance = kwargs.pop('need_instance')
+        request = kwargs.pop('request')
         super(GoalCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
@@ -218,7 +219,12 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['hyper_equity'].label = _('Hyper equity')
-        self.initial['language'] = 85 # English
+
+        try:
+            language = Language.objects.get(language_code=request.LANGUAGE_CODE)
+            self.initial['language'] = language
+        except Language.DoesNotExist:
+            pass
 
 
     class Meta:
@@ -429,6 +435,7 @@ class IdeaCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         goal_instance = kwargs.pop('goal_instance')
+        request = kwargs.pop('request')
 
         super(IdeaCreateForm, self).__init__(*args, **kwargs)
 
@@ -472,7 +479,12 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['super_equity'].label = _('Super equity')
         self.fields['sharewith'].label = _('Share with:')
-        self.initial['language'] = 85 # English
+
+        try:
+            language = Language.objects.get(language_code=request.LANGUAGE_CODE)
+            self.initial['language'] = language
+        except Language.DoesNotExist:
+            pass
 
     class Meta:
         model = Idea
