@@ -190,13 +190,45 @@ class UserDetailView(DetailView):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         user = kwargs.get('object')
         if not user.is_superuser:
-            context['idea_list'] = user.user_ideas.all()
-            context['plan_list'] = user.user_plans.all()
-            context['step_list'] = user.user_steps.all()
-            context['task_list'] = user.user_tasks.all()
-            context['work_list'] = user.user_works.all()
-            context['need_list'] = user.user_needs.all()
-            context['goal_list'] = user.user_goals.all()
+
+            previous_goal = u''
+            comment_list = []
+            LIMIT = 100
+
+            for comment in user.comment_set.order_by('-created_at')[:LIMIT][::-1]:
+
+                if comment.content_type.name == u'need':
+                    problem = {'goal': None,
+                               'comment': comment}
+                elif comment.content_type.name == u'goal':
+                    problem = {'goal': comment.content_object,
+                               'comment': comment}
+                elif comment.content_type.name == u'idea':
+                    problem = {'goal': comment.content_object.goal.all()[0],
+                               'comment': comment}
+                elif comment.content_type.name == u'plan':
+                    problem = {'goal': comment.content_object.idea.goal.all()[0],
+                               'comment': comment}
+                elif comment.content_type.name == u'step':
+                    problem = {'goal': comment.content_object.plan.idea.goal.all()[0],
+                               'comment': comment}
+                elif comment.content_type.name == u'task':
+                    problem = {'goal': comment.content_object.step.plan.idea.goal.all()[0],
+                               'comment': comment}
+                elif comment.content_type.name == u'work':
+                    problem = {'goal': comment.content_object.task.step.plan.idea.goal.all()[0],
+                               'comment': comment}
+
+                if not (problem['goal'] == previous_goal):
+                    previous_goal = problem['goal']
+                    comment_list.append({'items': [], 'goal': problem['goal']})
+
+                if problem['goal']:
+                    if problem['comment'].content_object:
+                        if not problem['comment'].content_object.personal:
+                            comment_list[-1]['items'].append(problem)
+                
+            context['comment_list'] = comment_list
 
         if self.request.user.is_authenticated():
             context['guest_follow_me'] = self.request.user.get_relationships(
