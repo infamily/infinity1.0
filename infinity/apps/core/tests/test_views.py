@@ -545,8 +545,6 @@ class WorkTest(WebTest, AuthTestMixin):
 
         url = reverse('work-list')
 
-        self.assertFalse(True)
-
         work = mommy.make('core.Work', user=self.user, task=task, _fill_optional=True)
         work_list.append(work)
 
