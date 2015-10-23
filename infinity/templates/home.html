@@ -41,6 +41,11 @@
         <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
         <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
+    {% blocktrans %}
+    <p><i><u>Example:</u></i></p>
+    <p><b>$ 0.00 Having Omelette</b></p>
+    <p>Omelette is a healthy and delicious food, which can be flavored in desired tastes. I like it, and I would like to eat omelete every morning, without any extra expenses.</p>
+    {% endblocktrans %}
     {% endif %}
     </div>
 </div>
@@ -60,6 +65,13 @@
         <p><a href="{% url "idea-create" %}">{% trans "Add a solution" %}</a></p>
         <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
+    {% blocktrans %}
+    <p><i><u>Example ideas:</u></i></p>
+    <p><b>$ 0.00 Go to buy eggs and spices, and cook one</b></p>
+    <p>It's easy enough just to cook.</p>
+    <p><b>$ 0.00 Hen Mini-Farm With Automated Egg Processor</b></p>
+    <p>Hens don't really require much human work to maintain. Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, spicers, cookers and dispensers - and have a self-sustaining supply of fresh omelete.</p>
+    {% endblocktrans %}
     {% endif %}
     </div>
 </div>
@@ -81,6 +93,12 @@
         <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
         <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
+    {% blocktrans %}
+    <p><i><u>Example:</u></i></p>
+    <p><b>$ 0.00 Omelette Microfarm Project</b></p>
+    <p><u>Situation:</u> I in Dublin, Ireland, with my friend X.</p>
+    <p><u>Destination:</u> we have a microfarm solution to home owners.</p>
+    {% endblocktrans %}
     {% endif %}
     </div>
 </div>
@@ -102,6 +120,16 @@
         <p>{% trans "Start a project to add milestones" %}</p>
         <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
+    {% blocktrans %}
+    <p><i><u>Example:</u></i></p>
+    <p><b>$ 0.00 Check existing solutions</b></p>
+    <p><u>Objective:</u> find out best technologies small farms use.</p>
+    <p><b>$ 0.00 Ideate on specific combination of them</b></p>
+    <p><u>Objective:</u> Come out with a viable candidate of full integration.</p>
+    <p><b>$ 0.00 Compute the expected costs of development and returns. </b></p>
+    <p><u>Objective:</u> Come out with a viable business plan.</p>
+    ...
+    {% endblocktrans %}
     {% endif %}
     </div>
 </div>
@@ -124,6 +152,11 @@
         <p>{% trans "Choose a milestone to add tasks" %}</p>
         <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
     </center>
+    {% blocktrans %}
+    <p><i><u>Example:</u></i></p>
+    <p><b>$ 0.00 Open the internet and do a research.</b></p>
+    ...
+    {% endblocktrans %}
     {% endif %}
     </div>
 </div>
