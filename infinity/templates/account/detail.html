@@ -12,7 +12,7 @@
     <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />
     <button type="submit" class="btn" id="submit">{% if guest_follow_me %}Unfollow{% else %}Follow{% endif %}</button>
     {% if guest_follow_me %}
-        <a class="btn" href="{% url "friend-following" object.username %}">Public posts of {{object.username}}'s friends</a>
+    <a class="btn" href="{% url "friend-following" object.username %}"><i class="fa fa-circle"></i></a>
     {% endif %}
 </form>
 {% endif %}
@@ -87,8 +87,6 @@
 {% if request.user.is_authenticated %}
     <div class="actions">
             My Comments
-        <a class="btn" href="{% url "comment-list1"   %}">
-        </a>
         <a class="btn btn-success" href="{% url "payments:cryptsy_credential_list"  %}"> 
             My Cryptsy Credentials
         </a>

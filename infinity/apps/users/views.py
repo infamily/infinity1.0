@@ -193,9 +193,8 @@ class UserDetailView(DetailView):
 
             previous_goal = u''
             comment_list = []
-            LIMIT = 100
 
-            for comment in user.comment_set.order_by('-created_at')[:LIMIT][::-1]:
+            for comment in user.comment_set.order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]:
 
                 if comment.content_type.name == u'need':
                     problem = {'goal': None,
