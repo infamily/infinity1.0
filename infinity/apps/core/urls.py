@@ -7,11 +7,6 @@ urlpatterns = patterns(
     '',
     url(r'^ajax/custom-chained-view-url/$', AjaxChainedView.as_view(), name='ajax_chained_view'),
     url(
-        r'^comment/list/1$',
-        CommentListView1.as_view(),
-        name="comment-list1"
-    ),
-    url(
         r'^comment/(?P<slug>.*)/update/$',
         CommentUpdateView.as_view(),
         name="comment-update"

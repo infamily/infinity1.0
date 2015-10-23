@@ -177,31 +177,6 @@ class AjaxChainedView(ChainedSelectChoicesView):
         return res
 
 
-class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name = "comment/list1.html"
-    model = Comment
-    paginate_by = 10
-    orderable_columns = [
-        "task",
-        "goal",
-        "text",
-        "created_at",
-        "work",
-        "updated_at",
-        "idea",
-        "step",
-        "user",
-        "plan",
-    ]
-    orderable_columns_default = "-id"
-    filter_set = CommentListViewFilter1
-
-    def get_base_queryset(self):
-        queryset = super(CommentListView1, self).get_base_queryset()
-        queryset = queryset.filter(user=self.request.user.pk)
-        return queryset
-
-
 class CommentUpdateView(OwnerMixin, UpdateView):
 
     """Comment update view"""
