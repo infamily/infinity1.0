@@ -19,11 +19,6 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^comment/(?P<goal>.*)/list/$',
-        CommentListView2.as_view(),
-        name="comment-list2"
-    ),
-    url(
         r'^goal/(?P<need>.*)/list/1$',
         GoalListView1.as_view(),
         name="goal-list1"
