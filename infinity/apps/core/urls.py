@@ -29,12 +29,6 @@ urlpatterns = patterns(
         name="comment-list2"
     ),
     url(
-        # TODO: Need to remove, including dependencies
-        r'^comment-create/$',
-        CommentCreateView.as_view(),
-        name="comment-create"
-    ),
-    url(
         r'^goal/(?P<need>.*)/list/1$',
         GoalListView1.as_view(),
         name="goal-list1"

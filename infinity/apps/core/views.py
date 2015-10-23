@@ -260,24 +260,6 @@ class CommentListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
         return queryset
 
 
-class CommentCreateView(CreateView):
-
-    """Comment create view"""
-    model = Comment
-    form_class = CommentCreateForm
-    template_name = "comment/create.html"
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(CommentCreateView, self).form_valid(form)
-
-    def get_success_url(self):
-        messages.success(self.request, _("Comment succesfully created"))
-        return "/"
-
-
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class GoalCreateView(CreateView):
 
