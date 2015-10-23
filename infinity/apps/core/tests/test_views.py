@@ -49,43 +49,6 @@ class AuthTestMixin(object):
 
 
 class CommentTest(WebTest, AuthTestMixin):
-
-    def test_list(self):
-        """Create list of Comment in database,
-        open list view and
-        check that selected fields are visible
-        for each object
-        """
-        self.init_users()
-        self.login(self.user.email, 'test')
-
-        comment_list = []
-        goal = mommy.make('core.Goal')
-        goal_type = ContentType.objects.get_for_model(Goal)
-        goal_model = goal_type.model_class()
-        comment = mommy.make(
-            'core.Comment',
-            content_type=goal_type,
-            object_id=goal_model.objects.first().pk,
-            user=self.user, _fill_optional=True
-        )
-        comment_list.append(comment)
-
-        url = reverse('comment-list1')
-
-        comment = mommy.make(
-            'core.Comment',
-            content_type=goal_type,
-            object_id=goal_model.objects.first().pk,
-            user=self.user, _fill_optional=True
-        )
-        comment_list.append(comment)
-
-        resp = self.app.get(url)
-
-        for comment in comment_list:
-            self.assertContains(resp, comment.text)
-
     def test_udpate(self):
         """Update object using view
         Check database for updated object
@@ -150,40 +113,6 @@ class CommentTest(WebTest, AuthTestMixin):
         resp = self.app.get(url)
         resp.forms[1].submit()
         self.assertEqual(Comment.objects.count(), 0)
-
-    def test_create(self):
-        """Create Comment object using view
-        Check database for created object
-        """
-        self.init_users()
-        self.login(self.user.email, 'test')
-
-        goal = mommy.make('core.Goal')
-        goal_type = ContentType.objects.get_for_model(Goal)
-        goal_model = goal_type.model_class()
-        comment = mommy.make(
-            'core.Comment',
-            content_type=goal_type,
-            object_id=goal_model.objects.first().pk,
-            user=self.user, _fill_optional=True
-        )
-
-
-        url = reverse('comment-create', kwargs={
-        })
-
-        resp = self.app.get(url)
-
-        form = resp.forms[1]
-        form['text'] = comment.text
-        form.submit()
-
-        comment_created = Comment.objects.latest('id')
-
-        self.assertEqual(
-            comment_created.text,
-            comment.text
-        )
 
 
 class GoalTest(WebTest, AuthTestMixin):

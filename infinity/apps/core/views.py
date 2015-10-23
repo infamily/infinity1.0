@@ -177,31 +177,6 @@ class AjaxChainedView(ChainedSelectChoicesView):
         return res
 
 
-class CommentListView1(PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name = "comment/list1.html"
-    model = Comment
-    paginate_by = 10
-    orderable_columns = [
-        "task",
-        "goal",
-        "text",
-        "created_at",
-        "work",
-        "updated_at",
-        "idea",
-        "step",
-        "user",
-        "plan",
-    ]
-    orderable_columns_default = "-id"
-    filter_set = CommentListViewFilter1
-
-    def get_base_queryset(self):
-        queryset = super(CommentListView1, self).get_base_queryset()
-        queryset = queryset.filter(user=self.request.user.pk)
-        return queryset
-
-
 class CommentUpdateView(OwnerMixin, UpdateView):
 
     """Comment update view"""
@@ -227,54 +202,6 @@ class CommentDeleteView(DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Comment succesfully deleted"))
-        return "/"
-
-
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class CommentListView2(PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    """Comment list view"""
-
-    template_name = "comment/list2.html"
-
-    model = Comment
-    paginate_by = 10
-    orderable_columns = [
-        "task",
-        "goal",
-        "text",
-        "created_at",
-        "work",
-        "updated_at",
-        "idea",
-        "step",
-        "user",
-        "plan",
-    ]
-    orderable_columns_default = "-id"
-    filter_set = CommentListViewFilter2
-
-    def get_base_queryset(self):
-        queryset = super(CommentListView2, self).get_base_queryset()
-        queryset = queryset.filter(goal__pk=self.kwargs['goal'])
-        return queryset
-
-
-class CommentCreateView(CreateView):
-
-    """Comment create view"""
-    model = Comment
-    form_class = CommentCreateForm
-    template_name = "comment/create.html"
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(CommentCreateView, self).form_valid(form)
-
-    def get_success_url(self):
-        messages.success(self.request, _("Comment succesfully created"))
         return "/"
 
 
