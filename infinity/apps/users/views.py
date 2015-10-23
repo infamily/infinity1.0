@@ -193,8 +193,9 @@ class UserDetailView(DetailView):
 
             previous_goal = u''
             comment_list = []
+            comments = user.comment_set.order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]
 
-            for comment in user.comment_set.order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]:
+            for comment in comments:
 
                 if comment.content_type.name == u'need':
                     problem = {'goal': None,
@@ -222,9 +223,14 @@ class UserDetailView(DetailView):
                     previous_goal = problem['goal']
                     comment_list.append({'items': [], 'goal': problem['goal']})
 
+
+                # self.request.user in problem['comment'].content_object.sharewith #
+                user_in_sharewith = self.request.user.id in \
+                    [item['id']for item in problem['comment'].content_object.sharewith.values()]
+
                 if problem['goal']:
                     if problem['comment'].content_object:
-                        if not problem['comment'].content_object.personal:
+                        if not problem['comment'].content_object.personal or user_in_sharewith:
                             comment_list[-1]['items'].append(problem)
                 
             context['comment_list'] = comment_list
