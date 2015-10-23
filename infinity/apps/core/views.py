@@ -106,11 +106,11 @@ class IndexView(TemplateView):
                 )
             )
 
-        goals = Goal.objects.filter(q_object).order_by('-commented_at')[:items['goals']]
-        ideas = Idea.objects.filter(q_object).order_by('-commented_at')[:items['ideas']]
-        plans = Plan.objects.filter(q_object).order_by('-commented_at')[:items['plans']]
-        steps = Step.objects.filter(q_object).order_by('-commented_at')[:items['steps']]
-        tasks = Task.objects.filter(q_object).order_by('-commented_at')[:items['tasks']]
+        goals = Goal.objects.filter(q_object).order_by('-commented_at').distinct()[:items['goals']]
+        ideas = Idea.objects.filter(q_object).order_by('-commented_at').distinct()[:items['ideas']]
+        plans = Plan.objects.filter(q_object).order_by('-commented_at').distinct()[:items['plans']]
+        steps = Step.objects.filter(q_object).order_by('-commented_at').distinct()[:items['steps']]
+        tasks = Task.objects.filter(q_object).order_by('-commented_at').distinct()[:items['tasks']]
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
