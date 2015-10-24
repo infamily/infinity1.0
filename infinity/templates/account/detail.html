@@ -6,70 +6,68 @@
 {% block title %}{% trans "User detail" %}{% endblock title %}
 {% block content %}
 <h1>{{object.username}}</h1>
+{% if user.is_anonymous %}
 {% if request.user.username == object.username %}[<a href="{% url "user-update" %}">{% trans "edit" %}</a>]{%endif%}
-{% if not request.user.id == object.id %}
-<form class="form-inline" action="{% url "follow" %}" method="post">{% csrf_token %}
-    <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />
-    <button type="submit" class="btn" id="submit">{% if guest_follow_me %}Unfollow{% else %}Follow{% endif %}</button>
-    {% if guest_follow_me %}
-    <a class="btn" href="{% url "friend-following" object.username %}"><i class="fa fa-circle"></i></a>
+    {% if not request.user.id == object.id %}
+    <form class="form-inline" action="{% url "follow" %}" method="post">{% csrf_token %}
+        <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />
+        <button type="submit" class="btn" id="submit">{% if guest_follow_me %}Unfollow{% else %}Follow{% endif %}</button>
+        {% if guest_follow_me %}
+        <a class="btn" href="{% url "friend-following" object.username %}"><i class="fa fa-circle"></i></a>
+        {% endif %}
+    </form>
     {% endif %}
-</form>
 {% endif %}
-
-{% if not guest_follow_me %}
-<br/>
 <br/>
 <div>
 {{ object.about|markdown}}
 </div>
-{% else %}
+
 <!-- display user's contributions -->
-<br/>
 
 <div class="panel panel-default">
 {% for comment_group in comment_list reversed %}
 {% if comment_group.items  %}
-<div class="panel-heading">{% if comment_group.goal.id %}<a href="{% url "goal-detail" comment_group.goal.id %}"> Type: {{ comment_group.goal.type }}, Problem: {{ comment_group.goal.name }}</a>{% else %} Unclassified {% endif %}</div>
+<div class="panel-heading">{% if comment_group.goals %}<u>Problems</u>: {% for goal in comment_group.goals %} <a href="">{{ goal.type.name }}: {{ goal.name }}</a>{%if not forloop.last%}, {%endif%}{% endfor %} {% endif %}</div>
     <div class="panel-body">
         <ul class="list-group">
-            {% for comment in comment_group.items reversed %}
+            {% for item in comment_group.items reversed %}
             <li class="list-group-item">
-            {% if not comment.comment.content_type.name == "goal" %}[<a href="{% if comment.comment.content_type.name == "need" %}
-                    {% url "need-detail" comment.comment.content_object.id %}
-                    {% elif comment.comment.content_type.name == "goal" %}
-                    {% url "goal-detail" comment.comment.content_object.id %}
-                    {% elif comment.comment.content_type.name == "idea" %}
-                    {% url "idea-detail" comment.comment.content_object.id %}
-                    {% elif comment.comment.content_type.name == "plan" %}
-                    {% url "plan-detail" comment.comment.content_object.id %}
-                    {% elif comment.comment.content_type.name == "step" %}
-                    {% url "step-detail" comment.comment.content_object.id %}
-                    {% elif comment.comment.content_type.name == "task" %}
-                    {% url "task-detail" comment.comment.content_object.id %}
-                    {% elif comment.comment.content_type.name == "work" %}
-                    {% url "work-detail" comment.comment.content_object.id %}
-                    {% endif %}">{{comment.comment.content_type.name}}: {{ comment.comment.content_object.name }}</a>]<br/><br/>{% endif %}
-            {{ comment.comment.text|markdown }}
+            {% if not item.comment.content_type.name == "goal" %}[<a href="{% if item.comment.content_type.name == "need" %}
+                    {% url "need-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "goal" %}
+                    {% url "goal-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "idea" %}
+                    {% url "idea-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "plan" %}
+                    {% url "plan-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "step" %}
+                    {% url "step-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "task" %}
+                    {% url "task-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "work" %}
+                    {% url "work-detail" item.comment.content_object.id %}
+                    {% endif %}">{{item.comment.content_type.name}}: {{ item.comment.content_object.name }}</a>]<br/><br/>{% endif %}
+            {{ item.comment.text|markdown }}
 
             <div align="right">
-                [<a href="{% url "payments:transaction_paypal" comment.comment.id %}"><i class="fa fa-paypal"></i> PayPal</a>]
-                <br/>--[{{ comment.comment.user.username }}],
-                <a href="{% if comment.comment.content_type.name == "need" %}
-                    {% url "need-detail" comment.comment.content_object.id %}#comment-{{ comment.comment.id }}
-                    {% elif comment.comment.content_type.name == "goal" %}
-                    {% url "goal-detail" comment.comment.content_object.id %}#comment-{{ comment.comment.id }}
-                    {% elif comment.comment.content_type.name == "idea" %}
-                    {% url "idea-detail" comment.comment.content_object.id %}#comment-{{ comment.comment.id }}
-                    {% elif comment.comment.content_type.name == "plan" %}
-                    {% url "plan-detail" comment.comment.content_object.id %}#comment-{{ comment.comment.id }}
-                    {% elif comment.comment.content_type.name == "step" %}
-                    {% url "step-detail" comment.comment.content_object.id %}#comment-{{ comment.comment.id }}
-                    {% elif comment.comment.content_type.name == "task" %}
-                    {% url "task-detail" comment.comment.content_object.id %}#comment-{{ comment.comment.id }}
-                    {% elif comment.comment.content_type.name == "work" %}
-                    {% url "work-detail" comment.comment.content_object.id %}#comment-{{ comment.comment.id }}
-                    {% endif %}" %}">{{ comment.comment.created_at }}</a></div>
+                [<a href="{% url "payments:transaction_paypal" item.comment.id %}"><i class="fa fa-paypal"></i> PayPal</a>]
+                <br/>--[{{ item.comment.user.username }}],
+                <a href="{% if item.comment.content_type.name == "need" %}
+                    {% url "need-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "goal" %}
+                    {% url "goal-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "idea" %}
+                    {% url "idea-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "plan" %}
+                    {% url "plan-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "step" %}
+                    {% url "step-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "task" %}
+                    {% url "task-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "work" %}
+                    {% url "work-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% endif %}" %}">{{ item.comment.created_at }}</a></div>
             </li>
             {% endfor %}
         </ul>
@@ -80,7 +78,6 @@
 
 
 
-{% endif %}
 
 <!--
 <br/>
