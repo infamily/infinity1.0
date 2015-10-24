@@ -6,17 +6,20 @@
 {% block title %}{% trans "User detail" %}{% endblock title %}
 {% block content %}
 <h1>{{object.username}}</h1>
-{% if not user.is_anonymous %}
-{% if request.user.username == object.username %}[<a href="{% url "user-update" %}">{% trans "edit" %}</a>]{%endif%}
+{% if request.user.is_authenticated %}
+
+    {% if request.user.username == object.username %}[<a href="{% url "user-update" %}">{% trans "edit" %}</a>]{%endif%}
+
     {% if not request.user.id == object.id %}
-    <form class="form-inline" action="{% url "follow" %}" method="post">{% csrf_token %}
-        <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />
-        <button type="submit" class="btn" id="submit">{% if guest_follow_me %}Unfollow{% else %}Follow{% endif %}</button>
-        {% if guest_follow_me %}
-        <a class="btn" href="{% url "friend-following" object.username %}"><i class="fa fa-circle"></i></a>
-        {% endif %}
-    </form>
+        <form class="form-inline" action="{% url "follow" %}" method="post">{% csrf_token %}
+            <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />
+            <button type="submit" class="btn" id="submit">{% if guest_follow_me %}Unfollow{% else %}Follow{% endif %}</button>
+            {% if guest_follow_me %}
+            <a class="btn" href="{% url "friend-following" object.username %}"><i class="fa fa-circle"></i></a>
+            {% endif %}
+        </form>
     {% endif %}
+
 {% endif %}
 <br/>
 <div>
@@ -90,11 +93,6 @@
         <a class="btn btn-success" href="{% url "payments:coin_address_list"  %}"> 
             My Coin Addresses
         </a>
-        {% if request.user.invitationoption.invitations_left %}
-        <a class="btn btn-success" href="{% url "invite:send"  %}"> 
-            Send Invite
-        </a>
-        {% endif %}
     </div>
 {% endif %}
 -->
