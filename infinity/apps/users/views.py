@@ -226,13 +226,11 @@ class UserDetailView(DetailView):
                     co['comment'].content_object.sharewith.all()
 
                 user_is_content_owner = self.request.user.id == co['comment'].content_object.user.id
-                print user_is_content_owner
 
                 if co['comment'].content_object:
                     if (not co['comment'].content_object.personal) or user_in_sharewith or user_is_content_owner:
                         comment_list[-1]['items'].append(co)
                 
-            print comment_list
             context['comment_list'] = comment_list
 
         if self.request.user.is_authenticated():
