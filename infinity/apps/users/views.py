@@ -200,17 +200,35 @@ class UserDetailView(DetailView):
                 if comment.content_type.name == u'need':
                     goals = None
                 elif comment.content_type.name == u'goal':
-                    goals = [comment.content_object]
+                    if comment.content_object:
+                        goals = [comment.content_object]
+                    else:
+                        goals = None
                 elif comment.content_type.name == u'idea':
-                    goals = comment.content_object.goal.all().order_by('-id')
+                    if comment.content_object:
+                        goals = comment.content_object.goal.all().order_by('-id')
+                    else:
+                        goals = None
                 elif comment.content_type.name == u'plan':
-                    goals = comment.content_object.idea.goal.all().order_by('-id')
+                    if comment.content_object:
+                        goals = comment.content_object.idea.goal.all().order_by('-id')
+                    else:
+                        goals = None
                 elif comment.content_type.name == u'step':
-                    goals = comment.content_object.plan.idea.goal.all().order_by('-id')
+                    if comment.content_object:
+                        goals = comment.content_object.plan.idea.goal.all().order_by('-id')
+                    else:
+                        goals = None
                 elif comment.content_type.name == u'task':
-                    goals = comment.content_object.step.plan.idea.goal.all().order_by('-id')
+                    if comment.content_object:
+                        goals = comment.content_object.step.plan.idea.goal.all().order_by('-id')
+                    else:
+                        goals = None
                 elif comment.content_type.name == u'work':
-                    goals = comment.content_object.task.step.plan.idea.goal.all().order_by('-id')
+                    if comment.content_object:
+                        goals = comment.content_object.task.step.plan.idea.goal.all().order_by('-id')
+                    else:
+                        goals = None
 
                 co = {'comment': comment,
                       'goals_hash': md5(str(goals)).hexdigest() }
