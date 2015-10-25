@@ -39,6 +39,7 @@ CONSTANCE_CONFIG = {
     'WORK_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
     'CONVERSATION_SUBJECT': ('Invitation to conversation', ''),
     'CONVERSATION_FROM_EMAIL': ('noreply@infty.xyz', ''),
+    'MAX_COMMENTS_IN_USER_PROFILE': (100, 'number of comments to display on user profiles')
 }
 
 AUTH_USER_MODELS = [

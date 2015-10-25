@@ -4,161 +4,98 @@
 
 
 {% block title %}{% trans "User detail" %}{% endblock title %}
-<!-- {% trans "E-mail" %} -->
 {% block content %}
 <h1>{{object.username}}</h1>
-{% if request.user.username == object.username %}[<a href="{% url "user-update" %}">{% trans "edit" %}</a>]{%endif%}
-<br/>
+{% if request.user.is_authenticated %}
+
+    {% if request.user.username == object.username %}[<a href="{% url "user-update" %}">{% trans "edit" %}</a>]{%endif%}
+
+    {% if not request.user.id == object.id %}
+        <form class="form-inline" action="{% url "follow" %}" method="post">{% csrf_token %}
+            <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />
+            <button type="submit" class="btn" id="submit">{% if guest_follow_me %}Unfollow{% else %}Follow{% endif %}</button>
+            {% if guest_follow_me %}
+            <a class="btn" href="{% url "friend-following" object.username %}"><i class="fa fa-circle"></i></a>
+            {% endif %}
+        </form>
+    {% endif %}
+
+{% endif %}
 <br/>
 <div>
 {{ object.about|markdown}}
 </div>
-<!--
-<nav class="navbar navbar-default" role="navigation">
-<ul class="nav navbar-nav">
-    <li><a class="navbar-brand" href="#needs">My Needs</a></li>
-    <li><a class="navbar-brand" href="#goals">My Goals</a></li>
-    <li><a class="navbar-brand" href="#ideas">My Ideas</a></li>
-    <li><a class="navbar-brand" href="#plans">My Plans</a></li>
-    <li><a class="navbar-brand" href="#steps">My Steps</a></li>
-    <li><a class="navbar-brand" href="#tasks">My Tasks</a></li>
-    <li><a class="navbar-brand" href="#works">My Works</a></li>
-    <li><a class="navbar-brand" href="{% url "friend-following" object.username %}">My Friends</a></li>
-</ul>
-</nav>
--->
-<hr>
-[contributions]
+
+<!-- display user's contributions -->
+
+<div class="panel panel-default">
+{% for comment_group in comment_list reversed %}
+{% if comment_group.items  %}
+<div class="panel-heading">{% if comment_group.goals %}<u>Problems</u>: {% for goal in comment_group.goals %} <a href="">{{ goal.type.name }}: {{ goal.name }}</a>{%if not forloop.last%}, {%endif%}{% endfor %} {% endif %}</div>
+    <div class="panel-body">
+        <ul class="list-group">
+            {% for item in comment_group.items reversed %}
+            <li class="list-group-item">
+            {% if not item.comment.content_type.name == "goal" %}[<a href="{% if item.comment.content_type.name == "need" %}
+                    {% url "need-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "goal" %}
+                    {% url "goal-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "idea" %}
+                    {% url "idea-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "plan" %}
+                    {% url "plan-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "step" %}
+                    {% url "step-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "task" %}
+                    {% url "task-detail" item.comment.content_object.id %}
+                    {% elif item.comment.content_type.name == "work" %}
+                    {% url "work-detail" item.comment.content_object.id %}
+                    {% endif %}">{{item.comment.content_type.name}}: {{ item.comment.content_object.name }}</a>]<br/><br/>{% endif %}
+            {{ item.comment.text|markdown }}
+
+            <div align="right">
+                [<a href="{% url "payments:transaction_paypal" item.comment.id %}"><i class="fa fa-paypal"></i> PayPal</a>]
+                <br/>--[{{ item.comment.user.username }}],
+                <a href="{% if item.comment.content_type.name == "need" %}
+                    {% url "need-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "goal" %}
+                    {% url "goal-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "idea" %}
+                    {% url "idea-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "plan" %}
+                    {% url "plan-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "step" %}
+                    {% url "step-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "task" %}
+                    {% url "task-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% elif item.comment.content_type.name == "work" %}
+                    {% url "work-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                    {% endif %}" %}">{{ item.comment.created_at }}</a></div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+{% endfor %}
+</div>
+
+
+
 
 <!--
 <br/>
 {% if request.user.is_authenticated %}
     <div class="actions">
-        <a class="btn btn-warning" href="{% url "user-update"   %}">
-            User Edit
-        </a>
-        <a class="btn btn-success" href="{% url "comment-list1"   %}">
             My Comments
-        </a>
         <a class="btn btn-success" href="{% url "payments:cryptsy_credential_list"  %}"> 
             My Cryptsy Credentials
         </a>
         <a class="btn btn-success" href="{% url "payments:coin_address_list"  %}"> 
             My Coin Addresses
         </a>
-        {% if request.user.invitationoption.invitations_left %}
-        <a class="btn btn-success" href="{% url "invite:send"  %}"> 
-            Send Invite
-        </a>
-        {% endif %}
-        {% if not request.user.id == object.id %}
-        <form action="{% url "follow" %}" method="post">{% csrf_token %}
-            <input type="hidden" name="destination_user_id" value="{{ object.pk }}" />
-            <button type="submit" class="btn btn-success" id="submit">{% if guest_follow_me %}Unfollow{% else %}Follow{% endif %}</button>
-        </form>
-        {% endif %}
     </div>
 {% endif %}
 -->
 
 
-
-<br/>
-<div>
-
-</div>
-<br/>
-
-<!--
-<div class="panel panel-default">
-    <div class="panel-heading">My Needs<a name="needs"></a></div>
-    <div class="panel-body">
-        {% for need in need_list %}
-        <ul class="list-group">
-            <li class="list-group-item">
-            <a href="{% url "need-detail" need.id %}">{{ need.name }}</a>
-            </li>
-        </ul>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">My Goals<a name="goals"></a></div>
-    <div class="panel-body">
-        {% for goal in goal_list %}
-        <ul class="list-group">
-            <li class="list-group-item">
-            <a href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>
-            </li>
-        </ul>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">My Ideas<a name="ideas"></a></div>
-    <div class="panel-body">
-        {% for idea in idea_list %}
-        <ul class="list-group">
-            <li class="list-group-item">
-            <a href="{% url "idea-detail" idea.id %}">{{ idea.name }}</a>
-            </li>
-        </ul>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">My Plans<a name="plans"></a></div>
-    <div class="panel-body">
-        {% for plan in plan_list %}
-        <ul class="list-group">
-            <li class="list-group-item">
-            <a href="{% url "plan-detail" plan.id %}">{{ plan.name }}</a>
-            </li>
-        </ul>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">My Steps<a name="steps"></a></div>
-    <div class="panel-body">
-        {% for step in step_list %}
-        <ul class="list-group">
-            <li class="list-group-item">
-            <a href="{% url "step-detail" step.id %}">{{ step.name }}</a>
-            </li>
-        </ul>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">My Tasks<a name="tasks"></a></div>
-    <div class="panel-body">
-        {% for task in task_list %}
-        <ul class="list-group">
-            <li class="list-group-item">
-            <a href="{% url "task-detail" task.id %}">{{ task.name }}</a>
-            </li>
-        </ul>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">My Works<a name="works"></a></div>
-    <div class="panel-body">
-        {% for work in work_list %}
-        <ul class="list-group">
-            <li class="list-group-item">
-            <a href="{% url "work-detail" work.id %}">{{ work.name }}</a>
-            </li>
-        </ul>
-        {% endfor %}
-    </div>
-</div>
--->
 {% endblock content %}
