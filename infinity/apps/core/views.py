@@ -85,23 +85,29 @@ class IndexView(TemplateView):
 
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'home':
-                q_object = (
-                    Q(language_id=interface_language_id) & (
+                q_object = ((
+                        Q(language_id=interface_language_id) |
+                        Q(languages=interface_language_id)
+                    ) & (
                         Q(user=self.request.user) |
                         Q(personal=True, sharewith=self.request.user)
                     )
                 )
             else:
-                q_object = (
-                    Q(language_id=interface_language_id) & (
+                q_object = ((
+                        Q(language_id=interface_language_id)  |
+                        Q(languages=interface_language_id)
+                    ) & (
                         Q(personal=False) |
                         Q(personal=True, user=self.request.user) |
                         Q(personal=True, sharewith=self.request.user)
                     )
                 )
         else:
-            q_object = (
-                Q(language_id=interface_language_id) & (
+            q_object = ((
+                Q(language_id=interface_language_id) |
+                Q(languages=interface_language_id)
+                ) & (
                     Q(personal=False)
                 )
             )

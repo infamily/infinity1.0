@@ -155,6 +155,12 @@ class Goal(models.Model):
         blank=True,
         null=True,
     )
+    languages = models.ManyToManyField(
+        'Language',
+        related_name='goal_languages',
+        blank=True,
+        null=True,
+    )
     personal = models.BooleanField(default=False)
     created_at = models.DateTimeField(
         auto_now=False,
@@ -306,6 +312,12 @@ class Work(models.Model):
     personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
+        blank=True,
+        null=True,
+    )
+    languages = models.ManyToManyField(
+        'Language',
+        related_name='work_languages',
         blank=True,
         null=True,
     )
@@ -470,6 +482,12 @@ class Idea(models.Model):
     description = MarkdownField(blank=False)
     language = models.ForeignKey(
         'Language',
+        blank=True,
+        null=True,
+    )
+    languages = models.ManyToManyField(
+        'Language',
+        related_name='idea_languages',
         blank=True,
         null=True,
     )
@@ -640,6 +658,12 @@ class Step(models.Model):
         blank=True,
         null=True,
     )
+    languages = models.ManyToManyField(
+        'Language',
+        related_name='step_languages',
+        blank=True,
+        null=True,
+    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_steps',
@@ -805,6 +829,12 @@ class Task(models.Model):
     personal = models.BooleanField(default=False)
     language = models.ForeignKey(
         'Language',
+        blank=True,
+        null=True,
+    )
+    languages = models.ManyToManyField(
+        'Language',
+        related_name='task_languages',
         blank=True,
         null=True,
     )
@@ -1124,6 +1154,12 @@ class Plan(models.Model):
         blank=True,
         null=True,
     )
+    languages = models.ManyToManyField(
+        'Language',
+        related_name='plan_languages',
+        blank=True,
+        null=True,
+    )
     name = models.CharField(
         unique=False,
         max_length=150,
@@ -1309,6 +1345,18 @@ class Translation(models.Model):
             self.content_type,
             self.object_id
         )
+
+    def save(self, *args, **kwargs):
+        "Update object translations"
+        super(Translation, self).save(*args, **kwargs)
+        if self.language not in self.content_object.languages.all():
+            self.content_object.languages.add(self.language)
+
+    def delete(self, *args, **kwargs):
+        "Update object translations"
+        super(Translation, self).delete(*args, **kwargs)
+        if self.language in self.content_object.languages.all():
+            self.content_object.languages.remove(self.language)
 
 
 class Language(models.Model):
