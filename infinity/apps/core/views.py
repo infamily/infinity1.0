@@ -85,23 +85,29 @@ class IndexView(TemplateView):
 
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'home':
-                q_object = (
-                    Q(language_id=interface_language_id) & (
+                q_object = ((
+                        Q(language_id=interface_language_id) |
+                        Q(languages=interface_language_id)
+                    ) & (
                         Q(user=self.request.user) |
                         Q(personal=True, sharewith=self.request.user)
                     )
                 )
             else:
-                q_object = (
-                    Q(language_id=interface_language_id) & (
+                q_object = ((
+                        Q(language_id=interface_language_id)  |
+                        Q(languages=interface_language_id)
+                    ) & (
                         Q(personal=False) |
                         Q(personal=True, user=self.request.user) |
                         Q(personal=True, sharewith=self.request.user)
                     )
                 )
         else:
-            q_object = (
-                Q(language_id=interface_language_id) & (
+            q_object = ((
+                Q(language_id=interface_language_id) |
+                Q(languages=interface_language_id)
+                ) & (
                     Q(personal=False)
                 )
             )
@@ -129,12 +135,21 @@ class IndexView(TemplateView):
         except HourValue.DoesNotExist:
             hour_value = 0
 
+        def tr(item_id, model, lang_id):
+            """ get translation """
+            try:
+                return Translation.objects.get(language__id=lang_id,
+                       content_type=ContentType.objects.get(model=model).id,
+                       object_id=item_id)
+            except:
+                return None
+
         context = {
-            'goal_list': [(goal, goal.created_at > start) for goal in goals],
-            'idea_list': [(idea, idea.created_at > start) for idea in ideas],
-            'plan_list': [(plan, plan.created_at > start) for plan in plans],
-            'step_list': [(step, step.created_at > start) for step in steps],
-            'task_list': [(task, task.created_at > start) for task in tasks],
+            'goal_list': [(goal, goal.created_at > start, tr(goal.id,'goal',interface_language_id)) for goal in goals],
+            'idea_list': [(idea, idea.created_at > start, tr(idea.id,'idea',interface_language_id)) for idea in ideas],
+            'plan_list': [(plan, plan.created_at > start, tr(plan.id,'plan',interface_language_id)) for plan in plans],
+            'step_list': [(step, step.created_at > start, tr(step.id,'step',interface_language_id)) for step in steps],
+            'task_list': [(task, task.created_at > start, tr(task.id,'task',interface_language_id)) for task in tasks],
             'goal_hours': goals and 
                          '%0.2f' % in_hours(now-max(commented_at(list(goals))))
                          or 0.,
