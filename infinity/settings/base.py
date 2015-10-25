@@ -72,7 +72,7 @@ USE_I18N = True
 from django.utils.translation import ugettext_lazy as _
 LANGUAGES = (
     ('en', _('English')),
-#   ('ru', _('Russian')),
+    ('ru', _('Russian')),
 #   ('ja', _('Japanese')),
 #   ('fr', _('French')),
     ('zh-cn', _('Chinese')),

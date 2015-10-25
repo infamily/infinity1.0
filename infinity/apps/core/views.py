@@ -57,22 +57,22 @@ class IndexView(TemplateView):
         return redirect(reverse('home'))
 
     def get_context_data(self, **kwargs):
-        items = {'goals': 64,
-                 'ideas': 128,
-                 'plans': 256,
-                 'steps': 512,
-                 'tasks': 1024}
+        items = {'goal': 64,
+                 'idea': 128,
+                 'plan': 256,
+                 'step': 512,
+                 'task': 1024}
 
         if self.request.session.get('goals_number'):
-            items['goals'] = self.request.session['goals_number']
+            items['goal'] = self.request.session['goals_number']
         if self.request.session.get('ideas_number'):
-            items['ideas'] = self.request.session['ideas_number']
+            items['idea'] = self.request.session['ideas_number']
         if self.request.session.get('plans_number'):
-            items['plans'] = self.request.session['plans_number']
+            items['plan'] = self.request.session['plans_number']
         if self.request.session.get('steps_number'):
-            items['steps'] = self.request.session['steps_number']
+            items['step'] = self.request.session['steps_number']
         if self.request.session.get('tasks_number'):
-            items['tasks'] = self.request.session['tasks_number']
+            items['task'] = self.request.session['tasks_number']
 
         now = timezone.now()
         in_days = lambda x: float(x.seconds/86400.)
@@ -86,29 +86,24 @@ class IndexView(TemplateView):
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'home':
                 q_object = (
-                    Q(language_id=interface_language_id) & (
-                        Q(user=self.request.user) |
-                        Q(personal=True, sharewith=self.request.user)
-                    )
+                    Q(user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
                 )
             else:
                 q_object = (
-                    Q(language_id=interface_language_id) & (
-                        Q(personal=False) |
-                        Q(personal=True, user=self.request.user) |
-                        Q(personal=True, sharewith=self.request.user)
-                    )
+                    Q(personal=False) |
+                    Q(personal=True, user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
                 )
         else:
             q_object = (
-                Q(language_id=interface_language_id) &
                 Q(personal=False)
             )
 
         ct_models = ContentType.objects.get_for_models(Goal, Idea, Plan, Step, Task)
 
-
         translations = {}
+
         for ct_class, ct_model in ct_models.items():
             translations[ct_class] = Translation.objects.filter(content_type=ct_model, language=interface_language_id)
         
@@ -118,8 +113,7 @@ class IndexView(TemplateView):
             ct_objects[translation_class_lower_name] = translation_class.objects.filter(
                 q_object,
                 pk__in=[trans.object_id for trans in translation],
-            ).order_by('-commented_at').distinct()[:items[translation_class_lower_name + 's']]
-
+            ).order_by('-commented_at').distinct()[:items[translation_class_lower_name]]
 
         goals = ct_objects['goal']
         ideas = ct_objects['idea']
