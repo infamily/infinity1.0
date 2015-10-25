@@ -194,6 +194,7 @@ class UserDetailView(DetailView):
         comment_list = []
         goals_hash = md5(u'').hexdigest()
         comments = user.comment_set.order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]
+        interest_counts = {}
 
         for comment in comments:
 
@@ -232,8 +233,18 @@ class UserDetailView(DetailView):
                 if co['comment'].content_object:
                     if (not co['comment'].content_object.personal) or user_in_sharewith or user_is_content_owner:
                         comment_list[-1]['items'].append(co)
+
+                        """ interest counts """
+                        if goals:
+                            for goal in goals:
+                                if goal.type.name not in interest_counts.keys():
+                                    interest_counts[goal.type.name] = 1
+                                else:
+                                    interest_counts[goal.type.name] += 1
+
             
         context['comment_list'] = comment_list
+        context['interest_counts'] = interest_counts
 
         if self.request.user.is_authenticated():
             context['guest_follow_me'] = self.request.user.get_relationships(
