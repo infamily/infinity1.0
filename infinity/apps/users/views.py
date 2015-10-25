@@ -190,51 +190,50 @@ class UserDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         user = kwargs.get('object')
-        if not user.is_superuser:
 
-            comment_list = []
-            goals_hash = md5(u'').hexdigest()
-            comments = user.comment_set.order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]
+        comment_list = []
+        goals_hash = md5(u'').hexdigest()
+        comments = user.comment_set.order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]
 
-            for comment in comments:
+        for comment in comments:
 
-                if comment.content_object:
+            if comment.content_object:
 
-                    if comment.content_type.name == u'need':
-                        goals = None
-                    elif comment.content_type.name == u'goal':
-                        goals = [comment.content_object]
-                    elif comment.content_type.name == u'idea':
-                        goals = comment.content_object.goal.all().order_by('-id')
-                    elif comment.content_type.name == u'plan':
-                        goals = comment.content_object.idea.goal.all().order_by('-id')
-                    elif comment.content_type.name == u'step':
-                        goals = comment.content_object.plan.idea.goal.all().order_by('-id')
-                    elif comment.content_type.name == u'task':
-                        goals = comment.content_object.step.plan.idea.goal.all().order_by('-id')
-                    elif comment.content_type.name == u'work':
-                        goals = comment.content_object.task.step.plan.idea.goal.all().order_by('-id')
+                if comment.content_type.name == u'need':
+                    goals = None
+                elif comment.content_type.name == u'goal':
+                    goals = [comment.content_object]
+                elif comment.content_type.name == u'idea':
+                    goals = comment.content_object.goal.all().order_by('-id')
+                elif comment.content_type.name == u'plan':
+                    goals = comment.content_object.idea.goal.all().order_by('-id')
+                elif comment.content_type.name == u'step':
+                    goals = comment.content_object.plan.idea.goal.all().order_by('-id')
+                elif comment.content_type.name == u'task':
+                    goals = comment.content_object.step.plan.idea.goal.all().order_by('-id')
+                elif comment.content_type.name == u'work':
+                    goals = comment.content_object.task.step.plan.idea.goal.all().order_by('-id')
 
-                    co = {'comment': comment,
-                          'goals_hash': md5(str(goals)).hexdigest() }
+                co = {'comment': comment,
+                      'goals_hash': md5(str(goals)).hexdigest() }
 
-                    if co['goals_hash'] != goals_hash:
-                        goals_hash = co['goals_hash']
-                        new_group = {'items': [],
-                                     'goals': goals,
-                                     'goals_hash': co['goals_hash']}
-                        comment_list.append(new_group)
+                if co['goals_hash'] != goals_hash:
+                    goals_hash = co['goals_hash']
+                    new_group = {'items': [],
+                                 'goals': goals,
+                                 'goals_hash': co['goals_hash']}
+                    comment_list.append(new_group)
 
-                    user_in_sharewith = self.request.user in \
-                        co['comment'].content_object.sharewith.all()
+                user_in_sharewith = self.request.user in \
+                    co['comment'].content_object.sharewith.all()
 
-                    user_is_content_owner = self.request.user.id == co['comment'].content_object.user.id
+                user_is_content_owner = self.request.user.id == co['comment'].content_object.user.id
 
-                    if co['comment'].content_object:
-                        if (not co['comment'].content_object.personal) or user_in_sharewith or user_is_content_owner:
-                            comment_list[-1]['items'].append(co)
-                
-            context['comment_list'] = comment_list
+                if co['comment'].content_object:
+                    if (not co['comment'].content_object.personal) or user_in_sharewith or user_is_content_owner:
+                        comment_list[-1]['items'].append(co)
+            
+        context['comment_list'] = comment_list
 
         if self.request.user.is_authenticated():
             context['guest_follow_me'] = self.request.user.get_relationships(
