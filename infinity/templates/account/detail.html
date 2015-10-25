@@ -3,7 +3,8 @@
 {% load django_markdown %}
 
 
-{% block title %}{% trans "User detail" %}{% endblock title %}
+{% block title %}u: {{object.username}}{% endblock title %}
+
 {% block content %}
 <h1>{{object.username}}</h1>
 {% if request.user.is_authenticated %}
@@ -27,7 +28,9 @@
 </div>
 
 <!-- display user's contributions -->
-
+<button class="btn">{{ object.username }} is interested in</button> : {% for key,value in interest_counts.items %} <button class="btn btn-default">{{ key }}: {{ value }}</button> {% endfor %}
+<br/>
+<br/>
 <div class="panel panel-default">
 {% for comment_group in comment_list reversed %}
 {% if comment_group.items  %}
