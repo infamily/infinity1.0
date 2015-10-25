@@ -101,16 +101,31 @@ class IndexView(TemplateView):
                 )
         else:
             q_object = (
-                Q(language_id=interface_language_id) & (
-                    Q(personal=False)
-                )
+                Q(language_id=interface_language_id) &
+                Q(personal=False)
             )
 
-        goals = Goal.objects.filter(q_object).order_by('-commented_at').distinct()[:items['goals']]
-        ideas = Idea.objects.filter(q_object).order_by('-commented_at').distinct()[:items['ideas']]
-        plans = Plan.objects.filter(q_object).order_by('-commented_at').distinct()[:items['plans']]
-        steps = Step.objects.filter(q_object).order_by('-commented_at').distinct()[:items['steps']]
-        tasks = Task.objects.filter(q_object).order_by('-commented_at').distinct()[:items['tasks']]
+        ct_models = ContentType.objects.get_for_models(Goal, Idea, Plan, Step, Task)
+
+
+        translations = {}
+        for ct_class, ct_model in ct_models.items():
+            translations[ct_class] = Translation.objects.filter(content_type=ct_model, language=interface_language_id)
+        
+        ct_objects = {}
+        for translation_class, translation in translations.items():
+            translation_class_lower_name = translation_class.__name__.lower()
+            ct_objects[translation_class_lower_name] = translation_class.objects.filter(
+                q_object,
+                pk__in=[trans.object_id for trans in translation],
+            ).order_by('-commented_at').distinct()[:items[translation_class_lower_name + 's']]
+
+
+        goals = ct_objects['goal']
+        ideas = ct_objects['idea']
+        plans = ct_objects['plan']
+        steps = ct_objects['step']
+        tasks = ct_objects['task']
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
