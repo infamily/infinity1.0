@@ -57,22 +57,22 @@ class IndexView(TemplateView):
         return redirect(reverse('home'))
 
     def get_context_data(self, **kwargs):
-        items = {'goal': 64,
-                 'idea': 128,
-                 'plan': 256,
-                 'step': 512,
-                 'task': 1024}
+        items = {'goals': 64,
+                 'ideas': 128,
+                 'plans': 256,
+                 'steps': 512,
+                 'tasks': 1024}
 
         if self.request.session.get('goals_number'):
-            items['goal'] = self.request.session['goals_number']
+            items['goals'] = self.request.session['goals_number']
         if self.request.session.get('ideas_number'):
-            items['idea'] = self.request.session['ideas_number']
+            items['ideas'] = self.request.session['ideas_number']
         if self.request.session.get('plans_number'):
-            items['plan'] = self.request.session['plans_number']
+            items['plans'] = self.request.session['plans_number']
         if self.request.session.get('steps_number'):
-            items['step'] = self.request.session['steps_number']
+            items['steps'] = self.request.session['steps_number']
         if self.request.session.get('tasks_number'):
-            items['task'] = self.request.session['tasks_number']
+            items['tasks'] = self.request.session['tasks_number']
 
         now = timezone.now()
         in_days = lambda x: float(x.seconds/86400.)
@@ -109,17 +109,17 @@ class IndexView(TemplateView):
 
         ct_objects = {}
         for translation_class, translation in translations.items():
-            translation_class_lower_name = translation_class.__name__.lower()
+            translation_class_lower_name = translation_class.__name__.lower() + 's'
             ct_objects[translation_class_lower_name] = translation_class.objects.filter(
                 q_object,
                 pk__in=[trans.object_id for trans in translation],
             ).order_by('-commented_at').distinct()[:items[translation_class_lower_name]]
 
-        goals = ct_objects['goal']
-        ideas = ct_objects['idea']
-        plans = ct_objects['plan']
-        steps = ct_objects['step']
-        tasks = ct_objects['task']
+        goals = ct_objects['goals']
+        ideas = ct_objects['ideas']
+        plans = ct_objects['plans']
+        steps = ct_objects['steps']
+        tasks = ct_objects['tasks']
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
