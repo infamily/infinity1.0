@@ -106,7 +106,7 @@ class IndexView(TemplateView):
 
         for ct_class, ct_model in ct_models.items():
             translations[ct_class] = Translation.objects.filter(content_type=ct_model, language=interface_language_id)
-        
+
         ct_objects = {}
         for translation_class, translation in translations.items():
             translation_class_lower_name = translation_class.__name__.lower()
