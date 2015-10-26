@@ -1,19 +1,19 @@
+from re import finditer
+from decimal import Decimal
+
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
-#from django.db.models.signals import post_save
-
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
-
-#from .signals import _comment_post_save
-
 from django_markdown.models import MarkdownField
+from django.db.models.signals import post_save
+
 from djmoney_rates.utils import convert_money
 
-from re import finditer
-from decimal import Decimal
+
+from .signals import _content_type_post_save
 from hours.models import HourValue
 
 
@@ -1324,5 +1324,8 @@ class Language(models.Model):
         except TypeError:
             return unicode(self.pk)
 
-# Signals register place
-#post_save.connect(_comment_post_save, sender=Comment)
+post_save.connect(_content_type_post_save, sender=Goal)
+post_save.connect(_content_type_post_save, sender=Idea)
+post_save.connect(_content_type_post_save, sender=Plan)
+post_save.connect(_content_type_post_save, sender=Step)
+post_save.connect(_content_type_post_save, sender=Task)
