@@ -78,11 +78,12 @@ class IndexView(TemplateView):
         in_days = lambda x: float(x.seconds/86400.)
         in_hours = lambda x: float(x.seconds/3600.)
 
-        try: 
+        try:
             interface_language_id = Language.objects.get(language_code=self.request.LANGUAGE_CODE).id
         except Language.DoesNotExist:
             interface_language_id = 85 # English
 
+        # Prepare base content access filters
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'home':
                 q_object = (
@@ -100,26 +101,36 @@ class IndexView(TemplateView):
                 Q(personal=False)
             )
 
-        ct_models = ContentType.objects.get_for_models(Goal, Idea, Plan, Step, Task)
+        # Get Content Types for Goal, Idea, Plan, Step, Task
+        content_types = ContentType.objects.get_for_models(Goal, Idea, Plan, Step, Task)
 
-        translations = {}
+        # Collect translations list for each model: Goal, Idea, Plan, Step, Task
+        # by language ID from request
 
-        for ct_class, ct_model in ct_models.items():
-            translations[ct_class] = Translation.objects.filter(content_type=ct_model, language=interface_language_id)
+        model_translations = {}
 
-        ct_objects = {}
-        for translation_class, translation in translations.items():
-            translation_class_lower_name = translation_class.__name__.lower() + 's'
-            ct_objects[translation_class_lower_name] = translation_class.objects.filter(
+        for model, content_type in content_types.items():
+            model_translations[model] = Translation.objects.filter(
+                content_type=content_type,
+                language=interface_language_id
+            )
+
+        # Get translated instances
+
+        instances = {}
+
+        for model_class, translations in model_translations.items():
+            model_class_lower_name = model_class.__name__.lower() + 's'
+            instances[model_class_lower_name] = model_class.objects.filter(
                 q_object,
-                pk__in=[trans.object_id for trans in translation],
-            ).order_by('-commented_at').distinct()[:items[translation_class_lower_name]]
+                pk__in=[trans.object_id for trans in translations],
+            ).order_by('-commented_at').distinct()[:items[model_class_lower_name]]
 
-        goals = ct_objects['goals']
-        ideas = ct_objects['ideas']
-        plans = ct_objects['plans']
-        steps = ct_objects['steps']
-        tasks = ct_objects['tasks']
+        goals = instances['goals']
+        ideas = instances['ideas']
+        plans = instances['plans']
+        steps = instances['steps']
+        tasks = instances['tasks']
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
