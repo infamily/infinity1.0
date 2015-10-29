@@ -291,13 +291,10 @@ class BaseContentModel(models.Model):
         Returns False if there is no translation
         """
         content_type = ContentType.objects.get_for_model(self)
-        try:
-            translations = Translation.objects.filter(
-                content_type=content_type,
-                object_id=self.pk
-            ).exclude(default=True)
-        except Translation.DoesNotExist:
-            return False
+        translations = Translation.objects.filter(
+            content_type=content_type,
+            object_id=self.pk
+        ).exclude(default=True)
 
         return translations
 
