@@ -286,6 +286,21 @@ class BaseContentModel(models.Model):
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
+    def translations(self):
+        """
+        Returns False if there is no translation
+        """
+        content_type = ContentType.objects.get_for_model(self)
+        try:
+            translations = Translation.objects.filter(
+                content_type=content_type,
+                object_id=self.pk
+            )
+        except Translation.ObjectDoesNotExist:
+            return False
+
+        return translations
+
     class Meta:
         abstract = True
 
