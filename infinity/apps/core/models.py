@@ -296,7 +296,7 @@ class BaseContentModel(models.Model):
                 content_type=content_type,
                 object_id=self.pk
             )
-        except Translation.ObjectDoesNotExist:
+        except Translation.DoesNotExist:
             return False
 
         return translations
