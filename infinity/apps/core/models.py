@@ -576,7 +576,21 @@ class Task(BaseContentModel):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
 
-class Need(BaseContentModel):
+class Need(models.Model):
+    created_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    commented_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
     defined_meaning_id = models.PositiveIntegerField(null=True, blank=True)
     definition = models.TextField()
     type = models.ForeignKey(
@@ -589,11 +603,37 @@ class Need(BaseContentModel):
         blank=True,
         null=True,
     )
+    personal = models.BooleanField(default=False)
+    name = models.TextField()
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_needs',
         blank=False,
         null=False,
+    )
+    hours_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
     )
     total_donated = models.DecimalField(
         default=0.,
@@ -619,12 +659,66 @@ class Need(BaseContentModel):
         max_digits=20,
         blank=False,
     )
+    sharewith = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
+    )
+
+    def __unicode__(self):
+        return unicode(self.name[:50])
+
+    def get_absolute_url(self):
+        return "/"
 
     class Meta:
         unique_together = ('language', 'name', 'definition')
 
+    def sum_hours(self):
+        self.hours_donated = Decimal(0.)
+        self.hours_claimed = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
+        self.hours_matched = Decimal(0.)
+        comment_content_type = ContentType.objects.get_for_model(self)
+        comments = Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        )
+        for comment in comments:
+            self.hours_donated += comment.hours_donated
+            self.hours_claimed += comment.hours_claimed
+            self.hours_assumed += comment.hours_assumed
+            self.hours_matched += Decimal(2.)*comment.hours_matched
+        self.save()
+
+    def sum_totals(self):
+        self.total_donated = self.hours_donated
+        self.total_claimed = self.hours_claimed
+        self.total_assumed = self.hours_assumed
+        self.total_matched = self.hours_matched
+        for goal in self.need_goals.all():
+            self.total_donated += goal.hours_donated
+            self.total_claimed += goal.hours_claimed
+            self.total_assumed += goal.hours_assumed
+            self.total_matched += goal.hours_matched
+        self.save()
+
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
+
+    def get_remain_usd(self):
+        return ((self.total_assumed+self.total_claimed)-self.total_donated)*\
+            HourValue.objects.latest('created_at').value
+
+    def not_funded_hours(self):
+        return self.total_assumed+self.total_claimed-self.total_donated
+
+    def comment_count(self):
+        comment_content_type = ContentType.objects.get_for_model(self)
+        return Comment.objects.filter(
+            content_type__pk=comment_content_type.pk,
+            object_id=self.id
+        ).count()
 
 
 class Type(models.Model):
