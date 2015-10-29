@@ -59,6 +59,7 @@
                 {% if goal_list %}
                 <p align="center"><i>{% trans "(last commented" %} {{ goal_hours }} {% trans "hours ago)" %}</i></p>
                 {% for goal in goal_list %}
+                {{ goal.0.translations }}
                 <b>
                     {% if goal.0.personal %}
                     <i class="fa {% if goal.0.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>

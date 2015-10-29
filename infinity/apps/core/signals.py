@@ -10,5 +10,6 @@ def _content_type_post_save(sender, instance, created, *args, **kwargs):
         Translation.objects.create(
             content_type=content_type,
             object_id=instance.id,
-            language=instance.language
+            language=instance.language,
+            default=True
         )

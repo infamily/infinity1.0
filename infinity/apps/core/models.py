@@ -295,7 +295,7 @@ class BaseContentModel(models.Model):
             translations = Translation.objects.filter(
                 content_type=content_type,
                 object_id=self.pk
-            )
+            ).exclude(default=True)
         except Translation.DoesNotExist:
             return False
 
@@ -625,6 +625,8 @@ class Translation(models.Model):
     investables = models.TextField(blank=True, null=True)
     deliverables = models.TextField(blank=True, null=True)
     language = models.ForeignKey('Language')
+
+    default = models.BooleanField(default=False)
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
