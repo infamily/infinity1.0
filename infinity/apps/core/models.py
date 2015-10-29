@@ -184,7 +184,7 @@ class BaseContentModel(models.Model):
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name='user_%(class)s',
+        related_name='user_%(class)ss',
         blank=False,
         null=False,
     )
