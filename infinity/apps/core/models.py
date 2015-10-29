@@ -67,6 +67,7 @@ class Comment(models.Model):
         max_digits=20,
         blank=False,
     )
+
     def __unicode__(self):
         return u"Comment #%s" % self.id
 
