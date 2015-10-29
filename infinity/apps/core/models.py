@@ -592,7 +592,6 @@ class Plan(BaseContentModel):
         null=False,
     )
 
-
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
