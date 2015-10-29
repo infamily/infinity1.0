@@ -213,6 +213,13 @@ class BaseContentModel(models.Model):
         max_digits=20,
         blank=False,
     )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        auto_now_add=False,
+        unique=False,
+        null=False,
+        blank=False,
+    )
 
     def sum_hours(self):
         self.hours_donated = Decimal(0.)
@@ -292,13 +299,6 @@ class Goal(BaseContentModel):
         blank=True,
         null=True,
     )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        auto_now_add=False,
-        unique=False,
-        null=False,
-        blank=False,
-    )
     reason = MarkdownField(blank=False)
     hyper_equity = models.DecimalField(
         default=0.0001,
@@ -329,13 +329,6 @@ class Work(BaseContentModel):
         null=True,
         blank=True,
     )
-    updated_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
-    )
     file = models.FileField(
         null=True,
         upload_to='files',
@@ -364,13 +357,6 @@ class Idea(BaseContentModel):
         'Language',
         blank=True,
         null=True,
-    )
-    updated_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
     )
     summary = models.CharField(
         unique=False,
@@ -412,13 +398,6 @@ class Step(BaseContentModel):
         blank=False,
         null=False,
     )
-    updated_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
-    )
     deliverables = models.CharField(
         unique=False,
         max_length=150,
@@ -451,13 +430,6 @@ class Task(BaseContentModel):
         'Language',
         blank=True,
         null=True,
-    )
-    updated_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
     )
     priority = models.IntegerField(
             unique=False,
@@ -645,13 +617,6 @@ class Plan(BaseContentModel):
         'Language',
         blank=True,
         null=True,
-    )
-    updated_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
     )
     idea = models.ForeignKey(
         'Idea',
