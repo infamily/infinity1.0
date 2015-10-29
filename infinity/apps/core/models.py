@@ -189,6 +189,31 @@ class BaseContentModel(models.Model):
         null=True,
     )
 
+    total_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    total_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+
     def sum_hours(self):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
@@ -275,30 +300,6 @@ class Goal(BaseContentModel):
         blank=False,
     )
     reason = MarkdownField(blank=False)
-    total_donated = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_claimed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_assumed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_matched = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
     hyper_equity = models.DecimalField(
         default=0.0001,
         decimal_places=8,
@@ -346,30 +347,6 @@ class Work(BaseContentModel):
         blank=True,
     )
     description = MarkdownField(blank=False)
-    total_donated = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_claimed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_assumed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_matched = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_works',
@@ -411,30 +388,6 @@ class Idea(BaseContentModel):
         related_name='goal_ideas',
         blank=False,
         null=False,
-    )
-    total_donated = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_claimed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_assumed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_matched = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
     )
     super_equity = models.DecimalField(
         default=0.01,
@@ -488,30 +441,6 @@ class Step(BaseContentModel):
         max_length=150,
         blank=False,
     )
-    total_donated = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_claimed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_assumed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_matched = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
@@ -546,30 +475,6 @@ class Task(BaseContentModel):
         related_name='user_tasks',
         blank=False,
         null=False,
-    )
-    total_donated = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_claimed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_assumed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_matched = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
     )
 
     def get_usd(self):
@@ -762,30 +667,6 @@ class Plan(BaseContentModel):
         null=False,
     )
     situation = MarkdownField(blank=False)
-    total_donated = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_claimed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_assumed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    total_matched = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
     plain_equity = models.DecimalField(
         default=0.1,
         decimal_places=8,
