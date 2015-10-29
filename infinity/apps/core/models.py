@@ -193,8 +193,7 @@ class BaseContentModel(models.Model):
 
     sharewith = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        blank=True,
-        null=True,
+        blank=True
     )
 
     language = models.ForeignKey(
