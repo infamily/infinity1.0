@@ -181,6 +181,13 @@ class BaseContentModel(models.Model):
         blank=False,
     )
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='user_%(class)s',
+        blank=False,
+        null=False,
+    )
+
     personal = models.BooleanField(default=False)
 
     sharewith = models.ManyToManyField(
@@ -289,12 +296,6 @@ class Goal(BaseContentModel):
         blank=False,
         null=False,
     )
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        blank=False,
-        null=False,
-        related_name='user_goals'
-    )
     need = models.ForeignKey(
         'Need',
         blank=False,
@@ -336,12 +337,6 @@ class Work(BaseContentModel):
         blank=True,
     )
     description = MarkdownField(blank=False)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='user_works',
-        blank=False,
-        null=False,
-    )
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
@@ -353,12 +348,6 @@ class Idea(BaseContentModel):
         unique=False,
         max_length=150,
         blank=False,
-    )
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='user_ideas',
-        blank=False,
-        null=False,
     )
     goal = models.ManyToManyField(
         'Goal',
@@ -378,12 +367,6 @@ class Idea(BaseContentModel):
 
 
 class Step(BaseContentModel):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='user_steps',
-        blank=False,
-        null=False,
-    )
     deliverables = models.CharField(
         unique=False,
         max_length=150,
@@ -420,12 +403,6 @@ class Task(BaseContentModel):
     step = models.ForeignKey(
         'Step',
         related_name='step_tasks',
-        blank=False,
-        null=False,
-    )
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='user_tasks',
         blank=False,
         null=False,
     )
@@ -601,12 +578,6 @@ class Plan(BaseContentModel):
         null=False,
     )
     deliverable = MarkdownField(blank=False)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='user_plans',
-        blank=False,
-        null=False,
-    )
     situation = MarkdownField(blank=False)
     plain_equity = models.DecimalField(
         default=0.1,
