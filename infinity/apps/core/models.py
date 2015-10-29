@@ -189,6 +189,12 @@ class BaseContentModel(models.Model):
         null=True,
     )
 
+    language = models.ForeignKey(
+        'Language',
+        blank=True,
+        null=True,
+    )
+
     total_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
@@ -294,11 +300,6 @@ class Goal(BaseContentModel):
         blank=False,
         null=False,
     )
-    language = models.ForeignKey(
-        'Language',
-        blank=True,
-        null=True,
-    )
     reason = MarkdownField(blank=False)
     hyper_equity = models.DecimalField(
         default=0.0001,
@@ -312,11 +313,6 @@ class Goal(BaseContentModel):
 
 
 class Work(BaseContentModel):
-    language = models.ForeignKey(
-        'Language',
-        blank=True,
-        null=True,
-    )
     task = models.ForeignKey(
         'Task',
         related_name='task_works',
@@ -353,11 +349,6 @@ class Work(BaseContentModel):
 
 class Idea(BaseContentModel):
     description = MarkdownField(blank=False)
-    language = models.ForeignKey(
-        'Language',
-        blank=True,
-        null=True,
-    )
     summary = models.CharField(
         unique=False,
         max_length=150,
@@ -387,11 +378,6 @@ class Idea(BaseContentModel):
 
 
 class Step(BaseContentModel):
-    language = models.ForeignKey(
-        'Language',
-        blank=True,
-        null=True,
-    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_steps',
@@ -426,11 +412,6 @@ class Step(BaseContentModel):
 
 
 class Task(BaseContentModel):
-    language = models.ForeignKey(
-        'Language',
-        blank=True,
-        null=True,
-    )
     priority = models.IntegerField(
             unique=False,
         null=False,
@@ -613,11 +594,6 @@ class Type(models.Model):
 
 
 class Plan(BaseContentModel):
-    language = models.ForeignKey(
-        'Language',
-        blank=True,
-        null=True,
-    )
     idea = models.ForeignKey(
         'Idea',
         related_name='idea_plans',
