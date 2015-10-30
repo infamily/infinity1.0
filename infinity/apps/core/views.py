@@ -150,7 +150,7 @@ class IndexView(TemplateView):
             except Translation.DoesNotExist:
                 # If translations does't exist return original instance
                 # without any translations
-                if instance.language_id == interface_language_id:
+                if instance.language_id == Language.objects.get(language_code=self.request.LANGUAGE_CODE).id:
                     return instance
                 return False
             return translation

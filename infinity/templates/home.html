@@ -62,8 +62,8 @@
                 <b>
                     {% if goal.0.personal %}
                     <i class="fa {% if goal.0.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
-                    {% endif %}
                     $ {{ goal.0.get_usd|floatformat:2 }}/{{ goal.0.get_remain_usd|floatformat:2 }}
+                    {% endif %}
                 </b>
                 
                 {% if goal.1 %} {# if goal is new #}
@@ -79,7 +79,9 @@
 
                 {% endif %}
 
+                {% if goal.2 %}
                 ({{goal.0.comment_count}} comments)
+                {% endif %}
 
                 <br/>
 
