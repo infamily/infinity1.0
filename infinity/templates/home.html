@@ -66,18 +66,35 @@
                     $ {{ goal.0.get_usd|floatformat:2 }}/{{ goal.0.get_remain_usd|floatformat:2 }}
                 </b>
 
-                {# if new #}
-                {% if goal.1 %}
-                <b><a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{ goal.2.name }}</a></b>
-                {% else %}
-                <a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{ goal.2.name }}</a>
+                
+                {% if goal.1 %} {# if goal is new #}
+
+                    {% if goal.2 %} {# if has a translation #}
+                    <b><a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{ goal.2.name }}</b>
+                    {% else %}
+                    <b><a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{ goal.0.name }}
+                    </a></b>
+                    {% endif %}}
+
+                {% else %} {# if goal is old #}
+
+                    {% if goal.2 %} {# if has a translation #}
+                    <a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{ goal.2.name }}</a>
+                    {% else %}
+                    <a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{ goal.0.name }}</a>
+                    {% endif %}
+
                 {% endif %}
 
-                (<a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{goal.0.comment_count}} comments</a>)
+                ({{goal.0.comment_count}} comments)
 
                 <br/>
 
+                {% if goal.2 %} {# if goal has translation #}
                 <p>{{goal.2.reason|markdown|truncatewords_html:34}}</p>
+                {% else %}
+                <p>{{goal.0.reason|markdown|truncatewords_html:34}}</p>
+                {% endif %}
 
                 {% endfor %}
 
@@ -131,13 +148,27 @@
 
                 </b>
 
-                {% if idea.1 %}
-                <b><a href="{% url "idea-detail" idea.0.pk %}?lang={{idea.2.language.language_code}}#{{idea.0.commented_at|date:"U"}}">{{ idea.2.name }}</a></b>
-                {% else %}
-                <a href="{% url "idea-detail" idea.0.pk %}?lang={{idea.2.language.language_code}}#{{idea.0.commented_at|date:"U"}}">{{ idea.2.name }}</a>
+                {% if idea.1 %} {# if idea is new #}
+
+                    {% if idea.2 %} {# if has a translation #}
+                    <b><a href="{% url "idea-detail" idea.0.pk %}?lang={{idea.2.language.language_code}}#{{idea.0.commented_at|date:"U"}}">{{ idea.2.name }}</a></b>
+                    {% else %}
+                    <b><a href="{% url "idea-detail" idea.0.pk %}?lang={{idea.0.language.language_code}}#{{idea.0.commented_at|date:"U"}}">{{ idea.2.name }}</a></b>
+                    {% endif %}
+
+                {% else %} {# if idea is old #}
+
+                    {% if idea.2 %} {# if has a translation #}
+                    <a href="{% url "idea-detail" idea.0.pk %}?lang={{idea.2.language.language_code}}#{{idea.0.commented_at|date:"U"}}">{{ idea.2.name }}</a></b>
+                    {% else %}
+                    <a href="{% url "idea-detail" idea.0.pk %}?lang={{idea.2.language.language_code}}#{{idea.0.commented_at|date:"U"}}">{{ idea.0.name }}</a>
+                    {% endif %}
+
                 {% endif %}
 
-                (<a href="{% url "idea-detail" idea.0.pk %}?lang={{idea.2.language.language_code}}#{{idea.0.commented_at|date:"U"}}">{{idea.0.comment_count}} comments</a>)
+
+
+                ({{idea.0.comment_count}} comments</a>)
                 <br/>
 
                 <p>{{idea.0.description|markdown|truncatewords_html:34}}</p>
@@ -197,16 +228,32 @@
                     $ {{ plan.0.get_usd|floatformat:2 }}/{{ plan.0.get_remain_usd|floatformat:2 }}
                 </b>
 
-                {% if plan.1 %}
-                <b><a href="{% url "plan-detail" plan.0.pk %}?lang={{plan.2.language.language_code}}#{{plan.0.commented_at|date:"U"}}">{{ plan.2.name }}</a></b>
-                {% else %}
-                <a href="{% url "plan-detail" plan.0.pk %}?lang={{plan.2.language.language_code}}#{{plan.0.commented_at|date:"U"}}">{{ plan.2.name }}</a>
+                {% if plan.1 %} {# if plan is new #}
+
+                    {% if plan.2 %} {# if has a translation #}
+                    <b><a href="{% url "plan-detail" plan.0.pk %}?lang={{plan.2.language.language_code}}#{{plan.0.commented_at|date:"U"}}">{{ plan.2.name }}</a></b>
+                    {% else %}
+                    <b><a href="{% url "plan-detail" plan.0.pk %}?lang={{plan.2.language.language_code}}#{{plan.0.commented_at|date:"U"}}">{{ plan.0.name }}</a></b>
+                    {% endif %}
+
+                {% else %} {# if plan is old #}
+                    
+                    {% if plan.2 %} {# if has a translation #}
+                    <a href="{% url "plan-detail" plan.0.pk %}?lang={{plan.2.language.language_code}}#{{plan.0.commented_at|date:"U"}}">{{ plan.2.name }}</a>
+                    {% else %}
+                    <a href="{% url "plan-detail" plan.0.pk %}?lang={{plan.2.language.language_code}}#{{plan.0.commented_at|date:"U"}}">{{ plan.0.name }}</a>
+                    {% endif %}
+
                 {% endif %}
 
-                (<a href="{% url "plan-detail" plan.0.pk %}?lang={{plan.2.language.language_code}}#{{plan.0.commented_at|date:"U"}}">{{plan.0.comment_count}} comments</a>)
+                ({{plan.0.comment_count}} comments)
 
                 <br/>
+                {% if plan.2 %} {# if plan has translation #}
+                <p>{{plan.2.situation|markdown|truncatewords_html:34}}</p>
+                {% else %}
                 <p>{{plan.0.situation|markdown|truncatewords_html:34}}</p>
+                {% endif %}
 
                 {% endfor %}
 
@@ -262,13 +309,25 @@
                     $ {{ step.0.get_usd|floatformat:2 }}/{{ step.0.get_remain_usd|floatformat:2 }}
                 </b>
 
-                {% if step.1 %}
-                <b><a href="{% url "step-detail" step.0.pk %}?lang={{step.2.language.language_code}}#{{step.0.commented_at|date:"U"}}">{{ step.2.name }}</a></b>
-                {% else %}
-                <a href="{% url "step-detail" step.0.pk %}?lang={{step.2.language.language_code}}#{{step.0.commented_at|date:"U"}}">{{ step.2.name }}</a>
+                {% if step.1 %} {# if step is new #}
+
+                    {% if step.2 %}  {# if has a translation #}
+                    <b><a href="{% url "step-detail" step.0.pk %}?lang={{step.2.language.language_code}}#{{step.0.commented_at|date:"U"}}">{{ step.2.name }}</a></b>
+                    {% else %}
+                    <b><a href="{% url "step-detail" step.0.pk %}?lang={{step.2.language.language_code}}#{{step.0.commented_at|date:"U"}}">{{ step.0.name }}</a></b>
+                    {% endif %}
+
+                {% else %} {# if step is old #}
+
+                    {% if step.2 %}  {# if has a translation #}
+                    <a href="{% url "step-detail" step.0.pk %}?lang={{step.2.language.language_code}}#{{step.0.commented_at|date:"U"}}">{{ step.2.name }}</a>
+                    {% else %}
+                    <a href="{% url "step-detail" step.0.pk %}?lang={{step.2.language.language_code}}#{{step.0.commented_at|date:"U"}}">{{ step.0.name }}</a>
+                    {% endif %}
+
                 {% endif %}
 
-                (<a href="{% url "step-detail" step.0.pk %}?lang={{step.2.language.language_code}}#{{step.0.commented_at|date:"U"}}">{{step.0.comment_count}} comments</a>)
+                ({{step.0.comment_count}} comments)
                 <br/>
 
                 <p>{{step.objective|markdown|truncatewords_html:34}}</p>
@@ -326,10 +385,21 @@
                     $ {{ task.0.get_usd|floatformat:2 }}/{{ task.0.get_remain_usd|floatformat:2 }}
                 </b>
 
-                {% if task.1 %}
-                <b><a href="{% url "task-detail" task.0.pk %}?lang={{task.2.language.language_code}}#{{task.0.commented_at|date:"U"}}">{{ task.2.name }}</a></b>
-                {% else %}
-                <a href="{% url "task-detail" task.0.pk %}?lang={{task.2.language.language_code}}#{{task.0.commented_at|date:"U"}}">{{ task.2.name }}</a>
+                {% if task.1 %} {# if task is new #}
+
+                    {% if task.2 %} {# if has a translation #}
+                    <b><a href="{% url "task-detail" task.0.pk %}?lang={{task.2.language.language_code}}#{{task.0.commented_at|date:"U"}}">{{ task.2.name }}</a></b>
+                    {% else %}
+                    <b><a href="{% url "task-detail" task.0.pk %}?lang={{task.2.language.language_code}}#{{task.0.commented_at|date:"U"}}">{{ task.0.name }}</a></b>
+                    {% endif %}
+
+                {% else %} {# if task is old #}
+
+                    {% if task.2 %} {# if has a translation #}
+                    <a href="{% url "task-detail" task.0.pk %}?lang={{task.2.language.language_code}}#{{task.0.commented_at|date:"U"}}">{{ task.2.name }}</a>
+                    {% else %}
+                    <a href="{% url "task-detail" task.0.pk %}?lang={{task.2.language.language_code}}#{{task.0.commented_at|date:"U"}}">{{ task.0.name }}</a>
+                    {% endif %}
                 {% endif %}
 
                 (<a href="{% url "task-detail" task.0.pk %}?lang={{task.2.language.language_code}}#{{task.0.commented_at|date:"U"}}">{{task.0.comment_count}} comments</a>)
