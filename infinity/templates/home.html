@@ -65,7 +65,6 @@
                     {% endif %}
                     $ {{ goal.0.get_usd|floatformat:2 }}/{{ goal.0.get_remain_usd|floatformat:2 }}
                 </b>
-
                 
                 {% if goal.1 %} {# if goal is new #}
 
@@ -74,7 +73,7 @@
                     {% else %}
                     <b><a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{ goal.0.name }}
                     </a></b>
-                    {% endif %}}
+                    {% endif %}
 
                 {% else %} {# if goal is old #}
 
