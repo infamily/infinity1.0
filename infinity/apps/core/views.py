@@ -160,7 +160,7 @@ class IndexView(TemplateView):
             instances_list[model_name + '_list'] = [(
                 instance,
                 instance.created_at > start,
-                get_translation_by_instance(instance, interface_language_id)
+                get_translation_by_instance(instance, Language.objects.get(language_code=self.request.LANGUAGE_CODE).id)
             ) for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
 
         context = {

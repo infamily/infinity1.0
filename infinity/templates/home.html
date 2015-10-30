@@ -59,11 +59,6 @@
                 {% if goal_list %}
                 <p align="center"><i>{% trans "(last commented" %} {{ goal_hours }} {% trans "hours ago)" %}</i></p>
                 {% for goal in goal_list %}
-                ---
-                {% if goal.2 %}
-                {{ goal.2.name }}
-                {% endif %}
-                ---
                 <b>
                     {% if goal.0.personal %}
                     <i class="fa {% if goal.0.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
@@ -72,20 +67,14 @@
                 </b>
                 
                 {% if goal.1 %} {# if goal is new #}
-
                     {% if goal.2 %} {# if has a translation #}
-                    <b><a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{ goal.2.name }}</b>
-                    {% else %}
-                    <b><a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{ goal.0.name }}
-                    </a></b>
+                    <b><a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{ goal.2.name }}</a></b>
                     {% endif %}
 
                 {% else %} {# if goal is old #}
 
                     {% if goal.2 %} {# if has a translation #}
                     <a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{ goal.2.name }}</a>
-                    {% else %}
-                    <a href="{% url "goal-detail" goal.0.pk %}#{{goal.0.commented_at|date:"U"}}">{{ goal.0.name }}</a>
                     {% endif %}
 
                 {% endif %}
@@ -96,8 +85,6 @@
 
                 {% if goal.2 %} {# if goal has translation #}
                 <p>{{goal.2.reason|markdown|truncatewords_html:34}}</p>
-                {% else %}
-                <p>{{goal.0.reason|markdown|truncatewords_html:34}}</p>
                 {% endif %}
 
                 {% endfor %}
