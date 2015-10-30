@@ -402,7 +402,7 @@
                     {% endif %}
                 {% endif %}
 
-                (<a href="{% url "task-detail" task.0.pk %}?lang={{task.2.language.language_code}}#{{task.0.commented_at|date:"U"}}">{{task.0.comment_count}} comments</a>)
+                ({{task.0.comment_count}} comments)
 
                 <br>
 
