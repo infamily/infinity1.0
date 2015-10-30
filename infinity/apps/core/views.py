@@ -104,27 +104,16 @@ class IndexView(TemplateView):
         # Get Content Types for Goal, Idea, Plan, Step, Task
         content_types = ContentType.objects.get_for_models(Goal, Idea, Plan, Step, Task)
 
-        # Collect translations list for each model: Goal, Idea, Plan, Step, Task
-        # by language ID from request
-
-        model_translations = {}
-
-        for model, content_type in content_types.items():
-            model_translations[model] = Translation.objects.filter(
-                content_type=content_type,
-                language=interface_language_id
-            )
-
         # Get translated instances
 
         instances = {}
 
-        for model_class, translations in model_translations.items():
+        for model_class, translations in content_types.items():
             model_class_lower_name = model_class.__name__.lower() + 's'
             instances[model_class_lower_name] = model_class.objects.filter(
-                q_object,
-                pk__in=[trans.object_id for trans in translations],
+                q_object
             ).order_by('-commented_at').distinct()[:items[model_class_lower_name]]
+
 
         goals = instances['goals']
         ideas = instances['ideas']
@@ -159,18 +148,23 @@ class IndexView(TemplateView):
                     language=interface_language_id
                 )
             except Translation.DoesNotExist:
+                # If translations does't exist return original instance
+                # without any translations
+                if instance.language_id == interface_language_id:
+                    return instance
                 return False
             return translation
 
         for model, content_type in content_types.items():
-            instances_list[model.__name__.lower() + '_list'] = [(
+            model_name = model.__name__.lower()
+            instances_list[model_name + '_list'] = [(
                 instance,
                 instance.created_at > start,
                 get_translation_by_instance(instance, interface_language_id)
-            ) for instance in instances[model.__name__.lower() + 's']]
+            ) for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
 
         context = {
-            'goal_hours': goals and 
+            'goal_hours': goals and
                          '%0.2f' % in_hours(now-max(commented_at(list(goals))))
                          or 0.,
             'idea_hours': ideas and
