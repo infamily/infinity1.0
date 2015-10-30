@@ -149,12 +149,20 @@ class IndexView(TemplateView):
         except HourValue.DoesNotExist:
             hour_value = 0
 
+        instances_list = {}
+
+        for model, content_type in content_types.items():
+            instances_list[model.__name__.lower() + '_list'] = [(
+                instance,
+                instance.created_at > start,
+                Translation.objects.filter(
+                    content_type=content_type,
+                    object_id=instance.id,
+                    language=interface_language_id
+                ).exclude(default=True)
+            ) for instance in instances[model.__name__.lower() + 's']]
+
         context = {
-            'goal_list': [(goal, goal.created_at > start) for goal in goals],
-            'idea_list': [(idea, idea.created_at > start) for idea in ideas],
-            'plan_list': [(plan, plan.created_at > start) for plan in plans],
-            'step_list': [(step, step.created_at > start) for step in steps],
-            'task_list': [(task, task.created_at > start) for task in tasks],
             'goal_hours': goals and 
                          '%0.2f' % in_hours(now-max(commented_at(list(goals))))
                          or 0.,
@@ -177,6 +185,7 @@ class IndexView(TemplateView):
             'items': items,
         }
 
+        context.update(instances_list)
         context.update(kwargs)
 
         return context
