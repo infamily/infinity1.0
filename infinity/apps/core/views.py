@@ -151,15 +151,22 @@ class IndexView(TemplateView):
 
         instances_list = {}
 
+        def get_translation_by_instance(instance, interface_language_id):
+            try:
+                translation = Translation.objects.get(
+                    content_type=content_type,
+                    object_id=instance.id,
+                    language=interface_language_id
+                )
+            except Translation.DoesNotExist:
+                return False
+            return translation
+
         for model, content_type in content_types.items():
             instances_list[model.__name__.lower() + '_list'] = [(
                 instance,
                 instance.created_at > start,
-                Translation.objects.filter(
-                    content_type=content_type,
-                    object_id=instance.id,
-                    language=interface_language_id
-                ).exclude(default=True)
+                get_translation_by_instance(instance, interface_language_id)
             ) for instance in instances[model.__name__.lower() + 's']]
 
         context = {
