@@ -139,19 +139,16 @@
                         {% else %} {# if idea is old #}
                             <a href="{% url "idea-detail" idea.object.pk %}?lang={{idea.object.language.language_code}}#{{idea.object.commented_at|date:"U"}}">{{ idea.translation.name }}</a>
 
+                        {% endif %}
+
+                        ({{idea.object.comment_count}} comments</a>)
+
+                        <br/>
+
+                        <p>{{idea.object.description|markdown|truncatewords_html:34}}</p>
+
                     {% endif %}
-
-                    ({{idea.object.comment_count}} comments</a>)
-
-                {% endif %}
-
-
-                <br/>
-
-                <p>{{idea.object.description|markdown|truncatewords_html:34}}</p>
-
                 {% endfor %}
-
                 <a href="{% url "idea-list" %}">{% trans "see more" %}</a>
 
                 {% else %}
@@ -197,43 +194,32 @@
 
                 <p align="center"><i>{% trans "(last commented" %} {{ plan_hours }} {% trans "hours ago)" %}</i></p>
                 {% for plan in plan_list %}
-                <b>
-                    {% if plan.object.personal %}
-                    <i class="fa {% if plan.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
+                    {% if plan.translation %}  {# if plan translated #}
+                    <b>
+                        {% if plan.object.personal %}
+                        <i class="fa {% if plan.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
+                        {% endif %}
+
+                        $ {{ plan.object.get_usd|floatformat:2 }}/{{ plan.object.get_remain_usd|floatformat:2 }}
+                    </b>
+
+                    {% if plan.is_new %} {# if plan is new #}
+
+                        <b><a href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.translation.name }}</a></b>
+
+                    {% else %} {# if plan is old #}
+
+                        <a href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.translation.name }}</a>
                     {% endif %}
-
-                    $ {{ plan.object.get_usd|floatformat:2 }}/{{ plan.object.get_remain_usd|floatformat:2 }}
-                </b>
-
-                {% if plan.is_new %} {# if plan is new #}
-
-                    {% if plan.translation %} {# if has a translation #}
-                    <b><a href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.translation.name }}</a></b>
-                    {% else %}
-                    <b><a href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.object.name }}</a></b>
-                    {% endif %}
-
-                {% else %} {# if plan is old #}
-                    
-                    {% if plan.translation %} {# if has a translation #}
-                    <a href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.translation.name }}</a>
-                    {% else %}
-                    <a href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.object.name }}</a>
-                    {% endif %}
-
-                {% endif %}
 
                 ({{plan.object.comment_count}} comments)
 
                 <br/>
-                {% if plan.translation %} {# if plan has translation #}
+
                 <p>{{plan.translation.situation|markdown|truncatewords_html:34}}</p>
-                {% else %}
-                <p>{{plan.object.situation|markdown|truncatewords_html:34}}</p>
-                {% endif %}
 
+                    {% endif %}
                 {% endfor %}
-
                 <a href="{% url "plan-list" %}">{% trans "see more" %}</a>
 
                 {% else %}
@@ -278,38 +264,33 @@
                 <p align="center"><i>{% trans "(last commented" %} {{ step_hours }} {% trans "hours ago)" %}</i></p>
 
                 {% for step in step_list %}
-                <b>
-                    {% if step.object.personal %}
-                    <i class="fa {% if step.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
+                    {% if step.translation %} {# if step translated #}
+                        <b>
+                            {% if step.object.personal %}
+                            <i class="fa {% if step.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
+                            {% endif %}
+                            $ {{ step.object.get_usd|floatformat:2 }}/{{ step.object.get_remain_usd|floatformat:2 }}
+                        </b>
+
+                        {% if step.is_new %} {# if step is new #}
+
+                            <b><a href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.translation.commented_at|date:"U"}}">{{ step.translation.name }}</a></b>
+
+                        {% else %} {# if step is old #}
+
+                            <a href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.translation.commented_at|date:"U"}}">{{ step.translation.name }}</a>
+
+                        {% endif %}
+
+                        ({{step.object.comment_count}} comments)
+
+                        <br/>
+
+                        <p>{{step.objective|markdown|truncatewords_html:34}}</p>
+
                     {% endif %}
-
-                    $ {{ step.object.get_usd|floatformat:2 }}/{{ step.object.get_remain_usd|floatformat:2 }}
-                </b>
-
-                {% if step.is_new %} {# if step is new #}
-
-                    {% if step.translation %}  {# if has a translation #}
-                    <b><a href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.object.commented_at|date:"U"}}">{{ step.translation.name }}</a></b>
-                    {% else %}
-                    <b><a href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.object.commented_at|date:"U"}}">{{ step.object.name }}</a></b>
-                    {% endif %}
-
-                {% else %} {# if step is old #}
-
-                    {% if step.translation %}  {# if has a translation #}
-                    <a href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.object.commented_at|date:"U"}}">{{ step.translation.name }}</a>
-                    {% else %}
-                    <a href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.object.commented_at|date:"U"}}">{{ step.object.name }}</a>
-                    {% endif %}
-
-                {% endif %}
-
-                ({{step.object.comment_count}} comments)
-                <br/>
-
-                <p>{{step.objective|markdown|truncatewords_html:34}}</p>
-
                 {% endfor %}
+
                 <a href="{% url "step-list" %}">{% trans "see more" %}</a>
                 {% else %}
                 <center>
@@ -355,33 +336,31 @@
                 <p align="center"><i>{% trans "(last commented" %} {{ task_hours }} {% trans "hours ago)" %}</i></p>
 
                 {% for task in task_list %}
-                <b>
-                    {% if task.object.personal %}
-                    <i class="fa {% if task.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %}
+                    {% if task.translation %} {# if task translated #}
+                        <b>
+                            {% if task.object.personal %}
+                            <i class="fa {% if task.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %}
 
-                    $ {{ task.object.get_usd|floatformat:2 }}/{{ task.object.get_remain_usd|floatformat:2 }}
-                </b>
+                            $ {{ task.object.get_usd|floatformat:2 }}/{{ task.object.get_remain_usd|floatformat:2 }}
+                        </b>
 
-                {% if task.is_new %} {# if task is new #}
+                        {% if task.is_new %} {# if task is new #}
 
-                    {% if task.translation %} {# if has a translation #}
-                    <b><a href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.translation.name }}</a></b>
-                    {% else %}
-                    <b><a href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.object.name }}</a></b>
+                            <b><a href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.translation.name }}</a></b>
+
+                        {% else %}
+
+                            <a href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.translation.name }}</a>
+
+                        {% endif %}
+
+                        ({{task.object.comment_count}} comments)
+
+                        <!-- task has no body -->
+
+                        <br>
+
                     {% endif %}
-
-                {% else %} {# if task is old #}
-
-                    {% if task.translation %} {# if has a translation #}
-                    <a href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.translation.name }}</a>
-                    {% else %}
-                    <a href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.object.name }}</a>
-                    {% endif %}
-                {% endif %}
-
-                ({{task.object.comment_count}} comments)
-
-                <br>
 
                 {% endfor %}
 
