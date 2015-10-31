@@ -78,7 +78,7 @@
 
                             <br/>
 
-                            <p>{{goal.object.reason|markdown|truncatewords_html:34}}</p>
+                            <p>{{goal.translation.reason|markdown|truncatewords_html:34}}</p>
                         {% endif %}
                     {% endfor %}
                     <a href="{% url "goal-list" %}">{% trans "see more" %}</a>
@@ -145,7 +145,7 @@
 
                         <br/>
 
-                        <p>{{idea.object.description|markdown|truncatewords_html:34}}</p>
+                        <p>{{idea.translation.description|markdown|truncatewords_html:34}}</p>
 
                     {% endif %}
                 {% endfor %}
@@ -286,7 +286,7 @@
 
                         <br/>
 
-                        <p>{{step.objective|markdown|truncatewords_html:34}}</p>
+                        <p>{{step.translation.objective|markdown|truncatewords_html:34}}</p>
 
                     {% endif %}
                 {% endfor %}
