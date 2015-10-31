@@ -650,8 +650,8 @@ class Language(models.Model):
         except TypeError:
             return unicode(self.pk)
 
-# post_save.connect(_content_type_post_save, sender=Goal)
-# post_save.connect(_content_type_post_save, sender=Idea)
-# post_save.connect(_content_type_post_save, sender=Plan)
-# post_save.connect(_content_type_post_save, sender=Step)
-# post_save.connect(_content_type_post_save, sender=Task)
+post_save.connect(_content_type_post_save, sender=Goal)
+post_save.connect(_content_type_post_save, sender=Idea)
+post_save.connect(_content_type_post_save, sender=Plan)
+post_save.connect(_content_type_post_save, sender=Step)
+post_save.connect(_content_type_post_save, sender=Task)
