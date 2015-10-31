@@ -57,54 +57,43 @@
 
             <div class="panel-body">
                 {% if goal_list %}
-                <p align="center"><i>{% trans "(last commented" %} {{ goal_hours }} {% trans "hours ago)" %}</i></p>
-                {% for goal in goal_list %}
-                <b>
-                    {% if goal.0.personal %}
-                    <i class="fa {% if goal.0.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
-                    $ {{ goal.0.get_usd|floatformat:2 }}/{{ goal.0.get_remain_usd|floatformat:2 }}
-                    {% endif %}
-                </b>
-                
-                {% if goal.1 %} {# if goal is new #}
-                    {% if goal.2 %} {# if has a translation #}
-                    <b><a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{ goal.2.name }}</a></b>
-                    {% endif %}
+                    <p align="center"><i>{% trans "(last commented" %} {{ goal_hours }} {% trans "hours ago)" %}</i></p>
+                    {% for goal in goal_list %}
+                        {% if goal.translation %} {# if goal translated #}
+                            <b>
+                                {% if goal.object.personal %}
+                                <i class="fa {% if goal.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
+                                $ {{ goal.object.get_usd|floatformat:2 }}/{{ goal.object.get_remain_usd|floatformat:2 }}
+                                {% endif %}
+                            </b>
+                            
+                            {% if goal.is_new %} {# if goal is new #}
+                                <b><a href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a></b>
 
-                {% else %} {# if goal is old #}
+                            {% else %} {# if goal is old #}
+                                <a href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
+                            {% endif %}
 
-                    {% if goal.2 %} {# if has a translation #}
-                    <a href="{% url "goal-detail" goal.0.pk %}?lang={{goal.2.language.language_code}}#{{goal.0.commented_at|date:"U"}}">{{ goal.2.name }}</a>
-                    {% endif %}
+                            ({{goal.object.comment_count}} comments)
 
-                {% endif %}
+                            <br/>
 
-                {% if goal.2 %}
-                ({{goal.0.comment_count}} comments)
-                {% endif %}
-
-                <br/>
-
-                {% if goal.2 %} {# if goal has translation #}
-                <p>{{goal.2.reason|markdown|truncatewords_html:34}}</p>
-                {% endif %}
-
-                {% endfor %}
-
-                <a href="{% url "goal-list" %}">{% trans "see more" %}</a>
-
+                            <p>{{goal.object.reason|markdown|truncatewords_html:34}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <a href="{% url "goal-list" %}">{% trans "see more" %}</a>
                 {% else %}
-                <center>
-                    <p>{% trans "Oops! You have no goals!" %}</p>
-                    <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
-                </center>
+                    <center>
+                        <p>{% trans "Oops! You have no goals!" %}</p>
+                        <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
+                        <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                    </center>
 
-                {% blocktrans %}
-                <p><i><u>Example:</u></i></p>
-                <p><b>$ 0.00 Having Omelette</b></p>
-                <p>Omelette is a healthy and delicious food, which can be flavored in desired tastes. I like it, and I would like to eat omelete every morning, without any extra expenses.</p>
-                {% endblocktrans %}
+                    {% blocktrans %}
+                    <p><i><u>Example:</u></i></p>
+                    <p><b>$ 0.00 Having Omelette</b></p>
+                    <p>Omelette is a healthy and delicious food, which can be flavored in desired tastes. I like it, and I would like to eat omelete every morning, without any extra expenses.</p>
+                    {% endblocktrans %}
                 {% endif %}
             </div>
         </div>
