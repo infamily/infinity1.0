@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 translation.content_type = content_type
                 translation.object_id = instance.id
 
-                instance.language = Language.objects.get(name='English')
+                instance.language = Language.objects.get(id=85)
                 instance.save()
 
                 translation.language = instance.language

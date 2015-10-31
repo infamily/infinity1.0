@@ -623,8 +623,6 @@ class Translation(models.Model):
     deliverables = models.TextField(blank=True, null=True)
     language = models.ForeignKey('Language')
 
-    default = models.BooleanField(default=False)
-
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
