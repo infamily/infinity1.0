@@ -33,6 +33,7 @@ build
 .project
 .pydevproject
 .settings
+.idea
 
 # Linux Editors
 *~
