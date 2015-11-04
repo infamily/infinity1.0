@@ -119,6 +119,8 @@ class CommentTest(WebTest, AuthTestMixin):
         form['text'] = comment_compare.text
         form.submit()
 
+        self.assertTrue(False)
+
         comment_updated = Comment.objects.get(pk=comment.pk)
 
         self.assertEqual(
