@@ -56,6 +56,16 @@ class IndexView(TemplateView):
 
         return redirect(reverse('home'))
 
+    def get_translation_by_instance(self, instance, content_type):
+        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
+        translation = Translation.objects.filter(
+            content_type=content_type,
+            object_id=instance.id,
+            language=language.id
+        )
+
+        return translation.first()
+
     def get_context_data(self, **kwargs):
         items = {'goals': 64,
                  'ideas': 128,
@@ -74,43 +84,46 @@ class IndexView(TemplateView):
         if self.request.session.get('tasks_number'):
             items['tasks'] = self.request.session['tasks_number']
 
+
+        # Prepare base content access filters
+        if self.request.user.is_authenticated():
+            if self.request.resolver_match.url_name == 'home':
+                q_object = (
+                    Q(user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
+                )
+            else:
+                q_object = (
+                    Q(personal=False) |
+                    Q(personal=True, user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
+                )
+        else:
+            q_object = (
+                Q(personal=False)
+            )
+
+        # Get Content Types for Goal, Idea, Plan, Step, Task
+        content_types = ContentType.objects.get_for_models(Goal, Idea, Plan, Step, Task)
+
         now = timezone.now()
         in_days = lambda x: float(x.seconds/86400.)
         in_hours = lambda x: float(x.seconds/3600.)
 
-        try: 
-            interface_language_id = Language.objects.get(language_code=self.request.LANGUAGE_CODE).id
-        except Language.DoesNotExist:
-            interface_language_id = 85 # English
+        instances = {}
 
-        if self.request.user.is_authenticated():
-            if self.request.resolver_match.url_name == 'home':
-                q_object = (
-                    Q(language_id=interface_language_id) & (
-                        Q(user=self.request.user) |
-                        Q(personal=True, sharewith=self.request.user)
-                    )
-                )
-            else:
-                q_object = (
-                    Q(language_id=interface_language_id) & (
-                        Q(personal=False) |
-                        Q(personal=True, user=self.request.user) |
-                        Q(personal=True, sharewith=self.request.user)
-                    )
-                )
-        else:
-            q_object = (
-                Q(language_id=interface_language_id) & (
-                    Q(personal=False)
-                )
-            )
+        for model_class, translations in content_types.items():
+            model_class_lower_name = model_class.__name__.lower() + 's'
+            instances[model_class_lower_name] = model_class.objects.filter(
+                q_object
+            ).order_by('-commented_at').distinct()[:items[model_class_lower_name]]
 
-        goals = Goal.objects.filter(q_object).order_by('-commented_at').distinct()[:items['goals']]
-        ideas = Idea.objects.filter(q_object).order_by('-commented_at').distinct()[:items['ideas']]
-        plans = Plan.objects.filter(q_object).order_by('-commented_at').distinct()[:items['plans']]
-        steps = Step.objects.filter(q_object).order_by('-commented_at').distinct()[:items['steps']]
-        tasks = Task.objects.filter(q_object).order_by('-commented_at').distinct()[:items['tasks']]
+
+        goals = instances['goals']
+        ideas = instances['ideas']
+        plans = instances['plans']
+        steps = instances['steps']
+        tasks = instances['tasks']
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
@@ -129,13 +142,18 @@ class IndexView(TemplateView):
         except HourValue.DoesNotExist:
             hour_value = 0
 
+        instances_list = {}
+
+        for model, content_type in content_types.items():
+            model_name = model.__name__.lower()
+            instances_list[model_name + '_list'] = [{
+                'object': instance,
+                'is_new': instance.created_at > start,
+                'translation': self.get_translation_by_instance(instance, content_type)
+            } for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
+
         context = {
-            'goal_list': [(goal, goal.created_at > start) for goal in goals],
-            'idea_list': [(idea, idea.created_at > start) for idea in ideas],
-            'plan_list': [(plan, plan.created_at > start) for plan in plans],
-            'step_list': [(step, step.created_at > start) for step in steps],
-            'task_list': [(task, task.created_at > start) for task in tasks],
-            'goal_hours': goals and 
+            'goal_hours': goals and
                          '%0.2f' % in_hours(now-max(commented_at(list(goals))))
                          or 0.,
             'idea_hours': ideas and
@@ -157,6 +175,7 @@ class IndexView(TemplateView):
             'items': items,
         }
 
+        context.update(instances_list)
         context.update(kwargs)
 
         return context

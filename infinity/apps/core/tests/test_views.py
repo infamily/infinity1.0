@@ -56,7 +56,7 @@ class CommentTest(WebTest, AuthTestMixin):
         self.init_users()
         self.login(self.user.email, 'test')
 
-        goal = mommy.make('core.Goal')
+        goal = mommy.make('core.Goal', _fill_optional=True)
         goal_type = ContentType.objects.get_for_model(Goal)
         goal_model = goal_type.model_class()
         comment = mommy.make(
@@ -97,7 +97,7 @@ class CommentTest(WebTest, AuthTestMixin):
         self.init_users()
         self.login(self.user.email, 'test')
 
-        goal = mommy.make('core.Goal')
+        goal = mommy.make('core.Goal', _fill_optional=True)
         goal_type = ContentType.objects.get_for_model(Goal)
         goal_model = goal_type.model_class()
         comment = mommy.make(
@@ -255,6 +255,7 @@ class GoalTest(WebTest, AuthTestMixin):
         form['type'] = type.pk
         form['need'] = goal.need.pk
         form['sharewith'] = [self.user.id,]
+        form['language'] = str(1)
         form.submit()
 
         goal_created = Goal.objects.latest('id')
@@ -405,6 +406,8 @@ class WorkTest(WebTest, AuthTestMixin):
         form['description'] = work.description
         form['personal'] = work.personal
         form['sharewith'] = str(1)
+        form['language'] = str(1)
+
         form.submit()
 
         work_created = Work.objects.latest('id')
@@ -619,6 +622,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         form['goal'] = [goal.id, ]
         form['super_equity'] = form['super_equity'].options[0][0]
         form['sharewith'] = [self.user.id,]
+        form['language'] = str(1)
         form.submit()
 
         idea_created = Idea.objects.latest('id')
@@ -773,6 +777,7 @@ class StepTest(WebTest, AuthTestMixin):
         form['objective'] = step.objective
         form['investables'] = step.investables
         form['sharewith'] = [self.user.id,]
+        form['language'] = str(1)
         form.submit()
 
         step_created = Step.objects.latest('id')
@@ -967,6 +972,7 @@ class TaskTest(WebTest, AuthTestMixin):
         form['name'] = task.name
         form['priority'] = task.priority
         form['sharewith'] = [self.user.id,]
+        form['language'] = str(1)
         form.submit()
 
         task_created = Task.objects.latest('id')
