@@ -28,9 +28,6 @@ function showLess(){
       step of plan <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a><br/>
     translations:
     <!-- translations -->
-    <a href="{% url "step-detail" object.id %}">
-        [{{object.language.language_code}}]
-    </a>
     {% for translation in translations %}
     {% if translation.language.language_code %}
     <a href="{% url "step-detail" object.id %}?lang={{translation.language.language_code }}">

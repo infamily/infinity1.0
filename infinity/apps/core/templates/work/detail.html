@@ -28,9 +28,6 @@ function showLess(){
       attempt on task <a href="{% url "task-detail" object.task.pk %}">{{object.task}}</a></br>
       translations: 
       <!-- translations -->
-    <a href="{% url "work-detail" object.id %}">
-        [{{object.language.language_code}}]
-    </a>
     {% for translation in translations %}
     {% if translation.language.language_code %}
     <a href="{% url "work-detail" object.id %}?lang={{translation.language.language_code }}">
