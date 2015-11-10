@@ -79,6 +79,7 @@ LANGUAGES = (
 #   ('de', _('German')),
     ('lt', _('Lithuanian')),
 #   ('uk', _('Ukrainian'))
+    ('hr', _('Croatian')),
 )
 
 import os

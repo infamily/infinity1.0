@@ -51,9 +51,6 @@ $(document).ready( function() {
 {% endfor %}<br/>
 {% trans "translations:" %} 
     <!-- translations -->
-    <a href="{% url "idea-detail" object.id %}">
-        [{{object.language.language_code}}]
-    </a>
     {% for translation in translations %}
     {% if translation.language.language_code %}
     <a href="{% url "idea-detail" object.id %}?lang={{translation.language.language_code }}">

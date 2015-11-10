@@ -27,9 +27,6 @@ function showLess(){
    todo for milestone <a href="{% url "step-detail" object.step.pk %}">{{object.step}}</a><br/>
    translations:
     <!-- translations -->
-    <a href="{% url "task-detail" object.id %}">
-        [{{object.language.language_code}}]
-    </a>
     {% for translation in translations %}
     {% if translation.language.language_code %}
     <a href="{% url "task-detail" object.id %}?lang={{translation.language.language_code }}">
