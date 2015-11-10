@@ -49,9 +49,6 @@ $(document).ready( function() {
     {% trans "approach to realizing idea" %} <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a><br/>
     {% trans "translations:" %}
     <!-- translations -->
-    <a href="{% url "plan-detail" object.id %}">
-        [{{object.language.language_code}}]
-    </a>
     {% for translation in translations %}
     {% if translation.language.language_code %}
     <a href="{% url "plan-detail" object.id %}?lang={{translation.language.language_code }}">

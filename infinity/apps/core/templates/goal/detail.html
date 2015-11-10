@@ -50,9 +50,6 @@ $(document).ready( function() {
       {% trans "category:" %} <a href="">{{ object.type }}</a>, {% trans "related object:" %} <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a><br/>
       {% trans "translations:" %}
       <!-- translations -->
-      <a href="{% url "goal-detail" object.id %}">
-          [{{object.language.language_code}}]
-      </a>
       {% for translation in translations %}
       {% if translation.language.language_code %}
       <a title="{{ translation.language.name }}" href="{% url "goal-detail" object.id %}?lang={{translation.language.language_code }}">
