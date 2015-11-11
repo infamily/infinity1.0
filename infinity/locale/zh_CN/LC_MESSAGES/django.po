@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-21 11:14-0700\n"
-"PO-Revision-Date: 2015-10-21 19:14+0100\n"
+"PO-Revision-Date: 2015-11-12 01:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -1147,11 +1147,11 @@ msgstr "时间价值"
 
 #: infinity/templates/home.html:18
 msgid "my index"
-msgstr "我的目录"
+msgstr "私人的目录"
 
 #: infinity/templates/home.html:18
 msgid "wider index"
-msgstr "大家的目录"
+msgstr "公开的目录"
 
 #: infinity/templates/home.html:27
 msgid "define a problem"

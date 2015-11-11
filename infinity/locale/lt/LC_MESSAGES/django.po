@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-21 11:14-0700\n"
-"PO-Revision-Date: 2015-11-10 20:26+0200\n"
+"PO-Revision-Date: 2015-11-12 01:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -1154,11 +1154,11 @@ msgstr "laiko vertė"
 
 #: infinity/templates/home.html:18
 msgid "my index"
-msgstr "mano turinys"
+msgstr "privatus turinys"
 
 #: infinity/templates/home.html:18
 msgid "wider index"
-msgstr "mūsų turinys"
+msgstr "viešas turinys"
 
 #: infinity/templates/home.html:27
 msgid "define a problem"
