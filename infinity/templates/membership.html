@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}About{% endblock %}
+
+{% block page_title %}About{% endblock page_title %}
+
+{% block content %}
+{% trans "<h1>Membership</h1>" %}
+
+
+<p>{% trans "By subscribing to any of the support options, you support our causes of:" %}
+<center>
+	<input type="checkbox">&nbsp;<b>{% trans "Ensuring that all technologies are understood by humans." %}</b><br/>
+	<input type="checkbox">&nbsp;<b>{% trans "Making people get paid for their constructive communications on-line." %}</b><br/>
+	<input type="checkbox">&nbsp;<b>{% trans "Ensuring that mankind itself defines its goals, and does not get them defined by an A.I." %}</b><br/>
+</center>
+</p>
+
+
+<br/>
+<div class="col-sm-8 col-sm-offset-2">
+    <div class="row">
+
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+				<div class="name">{% trans "Microfunder" %}</div>
+				<div class="amount">
+					<sup>$</sup>
+						1
+					<small>
+						{% trans "per month <p>every month</p>" %}
+					</small>
+				</div>
+				<ul>
+					<li><i class=""></i>{% trans "Access to our G+ group" %}</li>
+				</ul>
+				<div class="membership-footer">
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="ZZ8XBSVL3YTHU">
+					<input type="submit" class="btn btn-lg btn-block btn-success" border="0" name="submit" value="subscribe">
+					</form>
+				</div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+				<div class="name">Supporter</div>
+				<div class="amount">
+					<sup>$</sup>
+						5
+					<small>
+						{% trans "per month <p>every month</p>" %}
+					</small>
+				</div>
+				<ul>
+					<li><i class=""></i>{% trans "Access to our G+ group" %}</li>
+					<li><i class=""></i>{% trans "User account" %}</li>
+					<li><i class=""></i>{% trans "Can post private content and share with friends" %}</li>
+					<li><i class=""></i>{% trans "Cannot post public content" %}</li>
+				</ul>
+				<div class="membership-footer">
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="D39EBVUBCAPPW">
+					<input type="submit" class="btn btn-lg btn-block btn-success" border="0" name="submit" value="subscribe">
+					</form>
+				</div>
+            </div>
+        
+        
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+				<div class="name">Member</div>
+				<div class="amount">
+					<sup>$</sup>
+						50
+					<small>
+						{% trans "per month <p>every month</p>" %}
+					</small>
+				</div>
+				<ul>
+					<li><i class=""></i>{% trans "Access to our G+ group" %}</li>
+					<li><i class=""></i>{% trans "User account" %}</li>
+					<li><i class=""></i>{% trans "Can post private content and share with friends" %}</li>
+					<li><i class=""></i>{% trans "Can post public content" %}</li>
+					<li><i class=""></i>{% trans "100 invitations" %}</li>
+					<li><i class=""></i>{% trans "Can apply for staff status" %}</li>
+					<li><i class=""></i>{% trans "Non-profit membership certificate, if becomes a staff." %}</li>
+				</ul>
+				<div class="membership-footer">
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="6RU6PT2HLHZ3E">
+					<input type="submit" class="btn btn-lg btn-block btn-success" border="0" name="submit" value="subscribe">
+					</form>
+				</div>
+            </div>
+        
+        
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
