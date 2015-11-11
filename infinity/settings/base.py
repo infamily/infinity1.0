@@ -80,6 +80,7 @@ LANGUAGES = (
     ('lt', _('Lithuanian')),
 #   ('uk', _('Ukrainian'))
     ('hr', _('Croatian')),
+    ('ja', _('Japanese')),
 )
 
 import os

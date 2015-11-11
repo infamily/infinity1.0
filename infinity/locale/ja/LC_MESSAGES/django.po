@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-21 11:14-0700\n"
-"PO-Revision-Date: 2015-10-21 19:25+0100\n"
+"PO-Revision-Date: 2015-11-12 01:02+0200\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: infinity/apps/core/forms.py:566 infinity/apps/core/forms.py:661
 #: infinity/apps/core/forms.py:854
 msgid "Create"
-msgstr ""
+msgstr "作成"
 
 #: infinity/apps/core/forms.py:66 infinity/apps/core/forms.py:116
 #: infinity/apps/core/forms.py:256 infinity/apps/core/forms.py:298
@@ -32,7 +32,7 @@ msgstr ""
 #: infinity/apps/core/forms.py:624 infinity/apps/core/forms.py:764
 #: infinity/apps/core/forms.py:804 infinity/apps/users/forms.py:60
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #: infinity/apps/core/forms.py:78
 msgid ""
@@ -45,19 +45,29 @@ msgid ""
 "indicate\n"
 "                                      estimates."
 msgstr ""
+"<b>コメント</b> (時を断言するために\n"
+"                                      時間数を波括弧に囲まれてください、例え"
+"ば\n"
+"                                      {1.5} 時。一つのコメントの中で何回も時"
+"間を断言するこが可能です。\n"
+"                                      もし時間の見積だけを書きたいならはてな"
+"を使ってください、例えば\n"
+"                                       {?1.5}。"
 
 #: infinity/apps/core/forms.py:83
 msgid ""
 "Notify mentioned users (e.g., <i>Hi [User], how are you?</i>) by e-mail."
 msgstr ""
+"指摘した名前の利用者（例えば、<i>こんにちは、[利用者]、お元気ですか？</i>）を"
+"メールで通知する。"
 
 #: infinity/apps/core/forms.py:103 infinity/apps/core/forms.py:133
 msgid "Comment"
-msgstr ""
+msgstr "コメント"
 
 #: infinity/apps/core/forms.py:104 infinity/apps/core/forms.py:134
 msgid "Notify mentioned users by e-mail."
-msgstr ""
+msgstr "指摘した名前の利用者をメールで通知する。"
 
 #: infinity/apps/core/forms.py:111 infinity/apps/core/forms.py:202
 #: infinity/apps/core/forms.py:263 infinity/apps/core/forms.py:303
@@ -67,20 +77,20 @@ msgstr ""
 #: infinity/apps/core/forms.py:666 infinity/apps/core/forms.py:709
 #: infinity/apps/core/forms.py:799 infinity/apps/core/forms.py:849
 msgid "Select the users to share with:"
-msgstr ""
+msgstr "共有したい利用者の選択："
 
 #: infinity/apps/core/forms.py:177
 msgid "Select the type of your need..."
-msgstr ""
+msgstr "需要の種類の選択..."
 
 #: infinity/apps/core/forms.py:187
 msgid "Select the thing that you need..."
-msgstr ""
+msgstr "需要と関連する対象の選択..."
 
 #: infinity/apps/core/forms.py:205 infinity/apps/core/forms.py:487
 #: infinity/apps/core/forms.py:902
 msgid "Share with:"
-msgstr ""
+msgstr "誰と共有する："
 
 #: infinity/apps/core/forms.py:208
 msgid ""
@@ -89,10 +99,13 @@ msgid ""
 "a> to\n"
 "                                      add if you can't find it.)"
 msgstr ""
+"<b>話題：</b> （問題と関連する概念、見つけないなら\n"
+"                                      <a href=\"/need-create/\">ここで</a> \n"
+"                                      新しい概念を定義してください。)"
 
 #: infinity/apps/core/forms.py:211
 msgid "<b>Category:</b> (of the problem)"
-msgstr ""
+msgstr "<b>種類：</b> （問題の）"
 
 #: infinity/apps/core/forms.py:212
 msgid ""
@@ -101,19 +114,23 @@ msgid ""
 "\">check</a> if the problem is not\n"
 "                                      defined yet.)"
 msgstr ""
+"<b>タイトル：</b> （例えば、健康な飲料水の\n"
+"                                      不足の問題。同じの公式問題は既に存在す"
+"るかどうか <a href=\"/goal/list/\">ここで</a> 確かめて\n"
+"                                      ください。）"
 
 #: infinity/apps/core/forms.py:216
 msgid ""
 "<b>Description:</b> (e.g., Many people in the world lack clean potable "
 "water.)"
-msgstr ""
+msgstr "<b>説明:</b> （例えば、世界中飲料水が足りない人は多いです。）"
 
 #: infinity/apps/core/forms.py:219 infinity/apps/core/forms.py:360
 #: infinity/apps/core/forms.py:484 infinity/apps/core/forms.py:585
 #: infinity/apps/core/forms.py:910
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
-msgstr ""
+msgstr "<b>個人的</b> （チェックすると選択選択した利用者だけが見れる）"
 
 #: infinity/apps/core/forms.py:220 infinity/apps/core/forms.py:268
 #: infinity/apps/core/forms.py:308 infinity/apps/core/forms.py:361
@@ -122,11 +139,11 @@ msgstr ""
 #: infinity/apps/core/forms.py:634 infinity/apps/core/forms.py:674
 #: infinity/apps/core/forms.py:805 infinity/apps/core/forms.py:911
 msgid "<b>Input Language</b> (the language you used to compose this post) "
-msgstr ""
+msgstr "<b>入力言語</b> （この投稿を作成する多面に使われている言葉）"
 
 #: infinity/apps/core/forms.py:221 infinity/apps/core/forms.py:269
 msgid "Hyper equity"
-msgstr ""
+msgstr "ハイパー持ち分"
 
 #: infinity/apps/core/forms.py:350
 msgid ""
@@ -175,7 +192,7 @@ msgstr ""
 #: infinity/apps/core/templates/goal/list2.html:9
 #: infinity/templates/base.html:92 infinity/templates/home.html:27
 msgid "Goals"
-msgstr ""
+msgstr "目的"
 
 #: infinity/apps/core/forms.py:481
 msgid "<b>Name:</b> (e.g., \"Solar Water Condenser\", used in title.)"
@@ -335,7 +352,7 @@ msgstr ""
 
 #: infinity/apps/core/templates/goal/create1.html:10
 msgid "Goal create"
-msgstr ""
+msgstr "目的の作成"
 
 #: infinity/apps/core/templates/goal/create1.html:12
 msgid ""
@@ -347,6 +364,13 @@ msgid ""
 "<center>That's a problem, period.</center>\n"
 "<center><font color=\"grey\">Goal definition is implicit.</center>\n"
 msgstr ""
+"\n"
+"<center><u><i>あなたが思う：</i></u>ショッピングはつまらない</center>\n"
+"<center><u><i>あなたが書く：</i></u>一般的に、ショッピングは退屈で時間がかか"
+"る</center>\n"
+"<center>↑</center>\n"
+"<center>それは既に問題だ、結構です。</center>\n"
+"<center><font color=\"grey\">目的は問題の不定です。</center>\n"
 
 #: infinity/apps/core/templates/goal/detail.html:23
 #: infinity/apps/core/templates/goal/detail.html:41
@@ -424,7 +448,7 @@ msgstr ""
 #: infinity/apps/core/templates/idea/list2.html:9
 #: infinity/templates/base.html:96 infinity/templates/home.html:49
 msgid "Ideas"
-msgstr ""
+msgstr "発想"
 
 #: infinity/apps/core/templates/goal/detail.html:92
 msgid "+New Idea"
@@ -454,7 +478,7 @@ msgstr ""
 #: infinity/apps/core/templates/plan/list2.html:9
 #: infinity/templates/base.html:100 infinity/templates/home.html:69
 msgid "Plans"
-msgstr ""
+msgstr "企画"
 
 #: infinity/apps/core/templates/idea/detail.html:94
 msgid "+New Plan"
@@ -495,7 +519,7 @@ msgstr ""
 #: infinity/apps/core/templates/plan/detail.html:86
 #: infinity/templates/home.html:90
 msgid "Steps"
-msgstr ""
+msgstr "段階"
 
 #: infinity/apps/core/templates/plan/detail.html:96
 msgid "+New Step"
@@ -685,7 +709,7 @@ msgstr ""
 
 #: infinity/apps/users/forms.py:77
 msgid "Login"
-msgstr ""
+msgstr "ログイン"
 
 #: infinity/apps/users/forms.py:100
 msgid "SignUp"
@@ -880,11 +904,11 @@ msgstr ""
 
 #: infinity/templates/account/login.html:10 infinity/templates/base.html:123
 msgid "Sign in"
-msgstr ""
+msgstr "ログイン"
 
 #: infinity/templates/account/login.html:30
 msgid "Forgot password?"
-msgstr ""
+msgstr "パスワードを忘れましたか？"
 
 #: infinity/templates/account/logout.html:6
 #: infinity/templates/account/logout.html:9
@@ -1079,65 +1103,65 @@ msgstr ""
 
 #: infinity/templates/base.html:66
 msgid "Solve Your Problems."
-msgstr "御問題を解決しよう"
+msgstr "問題を解決しよう。"
 
 #: infinity/templates/base.html:106
 msgid "Help"
-msgstr ""
+msgstr "ヘルプ"
 
 #: infinity/templates/base.html:108
 msgid "About"
-msgstr ""
+msgstr "プロジェクトについて"
 
 #: infinity/templates/base.html:114
 msgid "Logout"
-msgstr ""
+msgstr "ログアウト"
 
 #: infinity/templates/base.html:126
 msgid "Sign up"
-msgstr ""
+msgstr "登録"
 
 #: infinity/templates/home.html:16
 msgid "invitations"
-msgstr ""
+msgstr "招待"
 
 #: infinity/templates/home.html:16
 msgid "write bugs"
-msgstr ""
+msgstr "バッグを書く"
 
 #: infinity/templates/home.html:16
 msgid "time value"
-msgstr ""
+msgstr "時間の価値"
 
 #: infinity/templates/home.html:18
 msgid "my index"
-msgstr ""
+msgstr "私の目次"
 
 #: infinity/templates/home.html:18
 msgid "wider index"
-msgstr ""
+msgstr "公的目次"
 
 #: infinity/templates/home.html:27
 msgid "define a problem"
-msgstr ""
+msgstr "問題を定義する"
 
 #: infinity/templates/home.html:33 infinity/templates/home.html.py:53
 #: infinity/templates/home.html:74 infinity/templates/home.html.py:95
 #: infinity/templates/home.html:116
 msgid "(last commented"
-msgstr ""
+msgstr "（最終コメント"
 
 #: infinity/templates/home.html:33 infinity/templates/home.html.py:53
 #: infinity/templates/home.html:74 infinity/templates/home.html.py:95
 #: infinity/templates/home.html:116
 msgid "hours ago)"
-msgstr ""
+msgstr "時間前）"
 
 #: infinity/templates/home.html:37 infinity/templates/home.html.py:57
 #: infinity/templates/home.html:78 infinity/templates/home.html.py:99
 #: infinity/templates/home.html:121
 msgid "see more"
-msgstr ""
+msgstr "つづく"
 
 #: infinity/templates/home.html:40
 msgid "Oops! You have no goals!"
@@ -1161,7 +1185,7 @@ msgstr ""
 
 #: infinity/templates/home.html:49
 msgid "suggest a solution"
-msgstr ""
+msgstr "解決を提案する"
 
 #: infinity/templates/home.html:59
 msgid "Oops! You have no ideas!"
@@ -1173,7 +1197,7 @@ msgstr ""
 
 #: infinity/templates/home.html:69
 msgid "start a project"
-msgstr ""
+msgstr "プロジェクトをはじめる"
 
 #: infinity/templates/home.html:80
 msgid "Oops! You have no plans!"
@@ -1185,7 +1209,7 @@ msgstr ""
 
 #: infinity/templates/home.html:90
 msgid "break it down"
-msgstr ""
+msgstr "節目を定義する"
 
 #: infinity/templates/home.html:101
 msgid "Oops! You have no steps!"
@@ -1197,11 +1221,11 @@ msgstr ""
 
 #: infinity/templates/home.html:111
 msgid "Tasks"
-msgstr ""
+msgstr "タスク"
 
 #: infinity/templates/home.html:111
 msgid "execute it"
-msgstr ""
+msgstr "やることを定義する"
 
 #: infinity/templates/home.html:123
 msgid "Oops! You have no tasks!"
@@ -1213,7 +1237,7 @@ msgstr ""
 
 #: infinity/templates/home.html:132
 msgid "People-centric economy."
-msgstr ""
+msgstr "─人への経済─"
 
 #: infinity/templates/invitations/email/email_invite_message.txt:3
 #, python-format
