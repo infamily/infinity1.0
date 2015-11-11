@@ -29,6 +29,8 @@ urlpatterns = patterns(
         name="story"),
     url(r'^policy/$', TemplateView.as_view(template_name='policy.html'),
         name="policy"),
+    url(r'^membership/$', TemplateView.as_view(template_name='membership.html'),
+        name="membership"),
     url('^markdown/', include( 'django_markdown.urls')),
     url('^i18n/', include('django.conf.urls.i18n')),
 )
