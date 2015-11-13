@@ -258,6 +258,8 @@ class BaseContentModel(models.Model):
         self.total_matched = self.hours_matched
         if hasattr(self,'definition_goals'):
             child_objects = self.definition_goals.all()
+        elif hasattr(self,'need_goals'):
+            child_objects = self.definition_goals.all()
         elif hasattr(self,'goal_ideas'):
             child_objects = self.goal_ideas.all()
         elif hasattr(self,'idea_plans'):
@@ -268,11 +270,12 @@ class BaseContentModel(models.Model):
             child_objects = self.step_tasks.all()
         elif hasattr(self, 'task_works'):
             child_objects = self.task_works.all()
-        for content in child_objects:
-            self.total_donated += content.total_donated
-            self.total_claimed += content.total_claimed
-            self.total_assumed += content.total_assumed
-            self.total_matched += content.total_matched
+        if 'child_objects' in locals():
+            for content in child_objects:
+                self.total_donated += content.total_donated
+                self.total_claimed += content.total_claimed
+                self.total_assumed += content.total_assumed
+                self.total_matched += content.total_matched
         self.save()
 
     def get_remain_usd(self):
@@ -634,6 +637,7 @@ class Definition(models.Model):
 
 class Translation(models.Model):
     name = models.TextField(blank=True, null=True)
+    content = models.TextField(blank=True, null=True)
     summary = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     reason = models.TextField(blank=True, null=True)
@@ -669,6 +673,7 @@ class Language(models.Model):
         except TypeError:
             return unicode(self.pk)
 
+post_save.connect(_content_type_post_save, sender=Need)
 post_save.connect(_content_type_post_save, sender=Goal)
 post_save.connect(_content_type_post_save, sender=Idea)
 post_save.connect(_content_type_post_save, sender=Plan)
