@@ -234,7 +234,7 @@ class GoalCreateForm(forms.ModelForm):
         ]
         fields = [
             'type',
-            'definition',
+#           'definition',
             'name',
             'reason',
             'language',

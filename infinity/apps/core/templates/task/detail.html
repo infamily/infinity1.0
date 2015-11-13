@@ -13,7 +13,7 @@ function showMore(){
 }
 
 function showLess(){
-    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>definitions ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>";
+    document.getElementById("stats").innerHTML = "<span onmouseover='showMore()'><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>";
 }
 </script>
 
@@ -21,7 +21,7 @@ function showLess(){
 <div class="panel-body">
     <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
     <div class="alignright" id="stats">
-        <span onmouseover="showMore()"><b>[<u>definitions ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
+        <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
       </div>
    <div style="clear:both;"></div>
    todo for milestone <a href="{% url "step-detail" object.step.pk %}">{{object.step}}</a><br/>
