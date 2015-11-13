@@ -1156,7 +1156,7 @@ class DefinitionCreateView(CreateView):
                         http_accept_language=find_language)
                 except Language.DoesNotExist:
                     language = Language.objects.get(
-                        pk=85)
+                        language_code=request.LANGUAGE_CODE)
                 return HttpResponse(language.pk)
 
             hints = []
@@ -1173,6 +1173,11 @@ class DefinitionCreateView(CreateView):
         form = DefinitionCreateForm()
         return render(request, 'definition/create.html',
                       {'form': form})
+
+    def get_form_kwargs(self, request, **kwargs):
+        kwargs = super(DefinitionCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
     def post(self, request, **kwargs):
         form = DefinitionCreateForm(request.POST)
