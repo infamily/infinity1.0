@@ -607,11 +607,11 @@ class Definition(models.Model):
         self.total_claimed = self.hours_claimed
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
-        for goal in self.definition_goals.all():
-            self.total_donated += goal.hours_donated
-            self.total_claimed += goal.hours_claimed
-            self.total_assumed += goal.hours_assumed
-            self.total_matched += goal.hours_matched
+       #for goal in self.definition_goals.all():
+       #    self.total_donated += goal.hours_donated
+       #    self.total_claimed += goal.hours_claimed
+       #    self.total_assumed += goal.hours_assumed
+       #    self.total_matched += goal.hours_matched
         self.save()
 
     def get_usd(self):

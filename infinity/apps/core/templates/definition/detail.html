@@ -18,7 +18,7 @@ function showLess(){
 }
 </script>
 
-<div class="panel panel-default">
+<div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
 
     <div align="right" id="stats">
@@ -44,27 +44,25 @@ Defined Meaning ID: {{object.defined_meaning_id}}
 <div>
     
 </div>
-<br/>
 
+  <div class="panel-heading">Related definitions</div>
+  <div class="panel-body">
+  {% for object in goal_list %}
+      <ul class="list-group">
+        <li class="list-group-item">
+           <a href="{% url "goal-detail" object.pk %}">{{object.name}}</a>
+           <p>{{object.reason}}</p>
+        </li>
+      </ul>
+  {% endfor %}
+  <!--
+  <a class="btn btn-info" href="{% url "goal-create" object.pk %}">
+      +Add Need
+  </a>
+  -->
+  </div>
+</div>
 
-<div class="panel panel-default">
-<div class="panel-heading">Related definitions</div>
-<div class="panel-body">
-{% for object in goal_list %}
-    <ul class="list-group">
-      <li class="list-group-item">
-         <a href="{% url "goal-detail" object.pk %}">{{object.name}}</a>
-         <p>{{object.reason}}</p>
-      </li>
-    </ul>
-{% endfor %}
-<a class="btn btn-info" href="{% url "goal-create" object.pk %}">
-    Add new
-</a>
-</div>
-</div>
-
-</div>
 
 {% include "comment/list.html" %}
 
