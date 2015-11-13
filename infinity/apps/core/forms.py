@@ -720,6 +720,9 @@ class DefinitionCreateForm(forms.ModelForm):
             Div(
                 Div(
                     Div(
+                        css_class='col-sm-12 hints-block',
+                    ),
+                    Div(
                         Field(
                             'definition', placeholder=kwargs.pop('query_placeholder', "definition, e.g., 'spaceflight to other star systems', 'water suitability for life on Earth'"),
                             # type="hidden",
@@ -731,7 +734,6 @@ class DefinitionCreateForm(forms.ModelForm):
                         # css_class='col-sm-2 hidden create-button',
                         css_class='col-sm-2 create-button',
                     ),
-                    css_class='col-sm-12 hints-block',
                 ),
                 css_class='row'
             ),

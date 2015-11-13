@@ -68,7 +68,7 @@ function showProposals(data) {
             '</p></div><div class="col-sm-2"><a class="btn btn-primary choose-definition" href="' + entry[1] + '">Choose</a></div></div>'
         );
     });
-    definitionsBlock.insertAdjacentHTML('afterend', '<div align="center" class="row hint form-group"><b>Did you mean?</b></div>');
+    // definitionsBlock.insertAdjacentHTML('afterend', '<div align="center" class="row hint form-group"><b>Did you mean?</b></div>');
 }
 
 
