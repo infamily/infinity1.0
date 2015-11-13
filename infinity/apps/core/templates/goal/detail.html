@@ -42,9 +42,11 @@ $(document).ready( function() {
       </div>
       <div style="clear:both;"></div>
       <div align="right">
+        <!--
           <span class="tiptext">[<u>{% trans "hyper-equity" %}</u>: {{ object.get_equity|floatformat:2 }}% ḥ]
               <div class="description" align="left">{% trans "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much goal creator owns of all projects under this problem." %}</div>
         </span>
+        -->
       </div>
  
       {% trans "category:" %} <a href="">{{ object.type }}</a>, {% trans "related object:" %} <a href="{% url "need-detail" object.need.pk %}">{{object.need }}</a><br/>

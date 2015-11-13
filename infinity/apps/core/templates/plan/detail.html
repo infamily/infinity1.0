@@ -41,7 +41,7 @@ $(document).ready( function() {
     </div>
     <div style="clear:both;"></div>
     <div align="right">
-        [<u>{% trans "shareholders:" %}</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %} <span class="tiptext"><u>{% trans "equity" %}</u>: {{ object.get_equity|floatformat:0 }}% ḥ]<br/>
+        [<u>{% trans "members:" %}</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %} <!--<span class="tiptext"><u>{% trans "equity" %}</u>: {{ object.get_equity|floatformat:0 }}% ḥ-->]<br/>
             <div class="description" align="left">{% trans "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much project <u>shareholders</u> own of all results under this project. The rest is owned by contributing users." %}</div>
     </span>
     </div>
