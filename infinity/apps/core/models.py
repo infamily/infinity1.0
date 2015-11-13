@@ -320,11 +320,6 @@ class Goal(BaseContentModel):
         blank=False,
         null=False,
     )
-    need = models.ForeignKey(
-        'Need',
-        blank=False,
-        null=False,
-    )
     reason = MarkdownField(blank=False)
     hyper_equity = models.DecimalField(
         default=0.0001,
