@@ -39,8 +39,8 @@
         <ul class="list-group">
             {% for item in comment_group.items reversed %}
             <li class="list-group-item">
-            {% if not item.comment.content_type.name == "goal" %}[<a href="{% if item.comment.content_type.name == "need" %}
-                    {% url "need-detail" item.comment.content_object.id %}
+            {% if not item.comment.content_type.name == "goal" %}[<a href="{% if item.comment.content_type.name == "definition" %}
+                    {% url "definition-detail" item.comment.content_object.id %}
                     {% elif item.comment.content_type.name == "goal" %}
                     {% url "goal-detail" item.comment.content_object.id %}
                     {% elif item.comment.content_type.name == "idea" %}
@@ -59,8 +59,8 @@
             <div align="right">
                 [<a href="{% url "payments:transaction_paypal" item.comment.id %}"><i class="fa fa-paypal"></i> PayPal</a>]
                 <br/>--[{{ item.comment.user.username }}],
-                <a href="{% if item.comment.content_type.name == "need" %}
-                    {% url "need-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
+                <a href="{% if item.comment.content_type.name == "definition" %}
+                    {% url "definition-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
                     {% elif item.comment.content_type.name == "goal" %}
                     {% url "goal-detail" item.comment.content_object.id %}#comment-{{ item.comment.id }}
                     {% elif item.comment.content_type.name == "idea" %}

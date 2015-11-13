@@ -6,7 +6,7 @@ from .models import Work
 from .models import Idea
 from .models import Step
 from .models import Task
-from .models import Need
+from .models import Definition
 from .models import Type
 from .models import Plan
 from .models import Language
@@ -23,7 +23,7 @@ admin.site.register(Work)
 admin.site.register(Idea)
 admin.site.register(Step)
 admin.site.register(Task)
-admin.site.register(Need)
+admin.site.register(Definition)
 admin.site.register(Type)
 admin.site.register(Plan)
 admin.site.register(Language, LanguageAdmin)

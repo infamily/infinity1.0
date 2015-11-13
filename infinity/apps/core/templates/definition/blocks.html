@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}Need list{% endblock title %}
+{% block title %}Definition list{% endblock title %}
 
 {% block content %}
 <nav class="navbar navbar-default">
@@ -46,7 +46,7 @@
 
 
 
-    <a class="btn btn-primary" href="{% url "need-detail" object.pk %}">Need detail</a>
+    <a class="btn btn-primary" href="{% url "definition-detail" object.pk %}">Definition detail</a>
 
 
 
