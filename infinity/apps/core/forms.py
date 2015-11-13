@@ -153,7 +153,7 @@ class GoalCreateForm(forms.ModelForm):
 
     reason = forms.CharField(widget=MarkdownWidget())
 
-    hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
+#   hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
 
     def __init__(self, *args, **kwargs):
         need_instance = kwargs.pop('need_instance')
@@ -218,7 +218,7 @@ class GoalCreateForm(forms.ModelForm):
         _('')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
-        self.fields['hyper_equity'].label = _('Hyper equity')
+#       self.fields['hyper_equity'].label = _('Hyper equity')
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -237,7 +237,6 @@ class GoalCreateForm(forms.ModelForm):
             'need',
             'name',
             'reason',
-            'hyper_equity',
             'language',
             'personal',
             'sharewith',
@@ -246,7 +245,7 @@ class GoalCreateForm(forms.ModelForm):
 
 class GoalUpdateForm(forms.ModelForm):
 
-    hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
+#   hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
 
     def __init__(self, *args, **kwargs):
         super(GoalUpdateForm, self).__init__(*args, **kwargs)
@@ -266,7 +265,7 @@ class GoalUpdateForm(forms.ModelForm):
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
-        self.fields['hyper_equity'].label = _('Hyper equity')
+#       self.fields['hyper_equity'].label = _('Hyper equity')
 
     class Meta:
         model = Goal
@@ -277,7 +276,6 @@ class GoalUpdateForm(forms.ModelForm):
         fields = [
             'type',
             'name',
-            'hyper_equity',
             'reason',
             'language',
             'personal',
@@ -389,9 +387,9 @@ class WorkCreateForm(forms.ModelForm):
 
 class IdeaUpdateForm(forms.ModelForm):
 
-    super_equity = forms.ChoiceField(
-        choices=[(Decimal(x*0.01), '%.0f' % (x*1.)+ '%') for x in range(1,11)]
-    )
+#   super_equity = forms.ChoiceField(
+#       choices=[(Decimal(x*0.01), '%.0f' % (x*1.)+ '%') for x in range(1,11)]
+#   )
 
     def __init__(self, *args, **kwargs):
         super(IdeaUpdateForm, self).__init__(*args, **kwargs)
@@ -421,7 +419,6 @@ class IdeaUpdateForm(forms.ModelForm):
             'summary',
             'description',
             'goal',
-            'super_equity',
             'language',
             'personal',
             'sharewith',
@@ -435,9 +432,9 @@ class IdeaCreateForm(forms.ModelForm):
 
     goal = GoalChoiceFieldMultiple()
 
-    super_equity = forms.ChoiceField(
-        choices=[(Decimal(x*0.01), '%.0f' % (x*1.)+ '%') for x in range(1,11)]
-    )
+#   super_equity = forms.ChoiceField(
+#       choices=[(Decimal(x*0.01), '%.0f' % (x*1.)+ '%') for x in range(1,11)]
+#   )
 
     def __init__(self, *args, **kwargs):
         goal_instance = kwargs.pop('goal_instance')
@@ -483,7 +480,7 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['description'].label = _('<b>Description:</b> (write full description here, used as body.)')
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
-        self.fields['super_equity'].label = _('Super equity')
+#       self.fields['super_equity'].label = _('Super equity')
         self.fields['sharewith'].label = _('Share with:')
 
         try:
@@ -503,7 +500,6 @@ class IdeaCreateForm(forms.ModelForm):
             'name',
             'summary',
             'description',
-            'super_equity',
             'language',
             'personal',
             'sharewith',
@@ -775,9 +771,9 @@ class NeedUpdateForm(forms.ModelForm):
 
 class PlanUpdateForm(forms.ModelForm):
 
-    plain_equity = forms.ChoiceField(
-        choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
-    )
+#   plain_equity = forms.ChoiceField(
+#       choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
+#   )
 
     def __init__(self, *args, **kwargs):
         super(PlanUpdateForm, self).__init__(*args, **kwargs)
@@ -816,7 +812,6 @@ class PlanUpdateForm(forms.ModelForm):
             'name',
             'situation',
             'deliverable',
-            'plain_equity',
             'members',
             'language',
             'personal',
@@ -832,9 +827,9 @@ class PlanCreateForm(forms.ModelForm):
 
     goal = GoalChoiceField()
 
-    plain_equity = forms.ChoiceField(
-        choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
-    )
+#   plain_equity = forms.ChoiceField(
+#       choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
+#   )
 
     def __init__(self, *args, **kwargs):
         idea_instance = kwargs.pop('idea_instance')
@@ -909,7 +904,7 @@ class PlanCreateForm(forms.ModelForm):
         self.fields['deliverable'].widget.attrs.update({'placeholder': _("Example:\n\nA working prototype of solar water condenser, and high quality open designs published on GitHub, so others could easily replicate.")})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
-        self.fields['plain_equity'].label = _('Plain equity')
+       #self.fields['plain_equity'].label = _('Plain equity')
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -929,7 +924,6 @@ class PlanCreateForm(forms.ModelForm):
             'situation',
             'deliverable',
             'name',
-            'plain_equity',
             'members',
             'language',
             'personal',

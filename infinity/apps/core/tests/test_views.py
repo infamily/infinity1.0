@@ -620,7 +620,7 @@ class IdeaTest(WebTest, AuthTestMixin):
         form['name'] = idea.name
         form['summary'] = idea.summary
         form['goal'] = [goal.id, ]
-        form['super_equity'] = form['super_equity'].options[0][0]
+#       form['super_equity'] = form['super_equity'].options[0][0]
         form['sharewith'] = [self.user.id,]
         form['language'] = str(1)
         form.submit()
