@@ -95,7 +95,7 @@ table.table.centered
 
 /* end of item list */
 
-.choose-need, .create-button > .btn{
+.choose-definition, .create-button > .btn{
     float: right;
     width: 100%;
 }

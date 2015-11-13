@@ -235,7 +235,7 @@ class GoalCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.need = form.cleaned_data.get('need')
+        self.object.definition = form.cleaned_data.get('definition')
         self.object.save()
         return super(GoalCreateView, self).form_valid(form)
 
@@ -245,19 +245,19 @@ class GoalCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(GoalCreateView, self).get_context_data(**kwargs)
-        context.update({'need_object': self.need_instance})
+        context.update({'definition_object': self.definition_instance})
         return context
 
     def dispatch(self, *args, **kwargs):
-        if kwargs.get('need_id'):
-            self.need_instance = get_object_or_404(Need, pk=int(kwargs['need_id']))
+        if kwargs.get('definition_id'):
+            self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
         else:
-            self.need_instance = False
+            self.definition_instance = False
         return super(GoalCreateView, self).dispatch(*args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super(GoalCreateView, self).get_form_kwargs()
-        kwargs['need_instance'] = self.need_instance
+        kwargs['definition_instance'] = self.definition_instance
         kwargs['request'] = self.request
         return kwargs
 
@@ -273,7 +273,7 @@ class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         "updated_at",
         "reason",
         "user",
-        "need",
+        "definition",
     ]
     orderable_columns_default = "-id"
     filter_set = GoalListViewFilter1
@@ -288,7 +288,7 @@ class GoalDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Goal succesfully deleted"))
-        return reverse("need-detail", args=[self.object.need.pk, ])
+        return reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
 class GoalUpdateView(OwnerMixin, UpdateView):
@@ -367,7 +367,7 @@ class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
 
     # def get_base_queryset(self):
     #     queryset = super(GoalListView2, self).get_base_queryset()
-    #     queryset = queryset.filter(need=self.kwargs.get('need'))
+    #     queryset = queryset.filter(definition=self.kwargs.get('definition'))
     #     return queryset
 
 
@@ -981,39 +981,39 @@ class TaskDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class NeedUpdateView(OwnerMixin, UpdateView):
+class DefinitionUpdateView(OwnerMixin, UpdateView):
 
-    """Need update view"""
-    model = Need
-    form_class = NeedUpdateForm
+    """Definition update view"""
+    model = Definition
+    form_class = DefinitionUpdateForm
     slug_field = "pk"
-    template_name = "need/update.html"
+    template_name = "definition/update.html"
 
     def dispatch(self, *args, **kwargs):
-        owner = Need.objects.get(pk=self.kwargs['slug']).user
+        owner = Definition.objects.get(pk=self.kwargs['slug']).user
         if self.request.user != owner:
-            return redirect(reverse('need-detail',
+            return redirect(reverse('definition-detail',
                                     kwargs={'slug': self.kwargs['slug']}))
-        return super(NeedUpdateView, self).dispatch(*args, **kwargs)
+        return super(DefinitionUpdateView, self).dispatch(*args, **kwargs)
 
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        return super(NeedUpdateView, self).form_valid(form)
+        return super(DefinitionUpdateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Need succesfully updated"))
-        return reverse("need-detail", args=[self.object.pk, ])
+        messages.success(self.request, _("Definition succesfully updated"))
+        return reverse("definition-detail", args=[self.object.pk, ])
 
 
-class NeedCreateView(CreateView):
+class DefinitionCreateView(CreateView):
 
-    """Need create view"""
-    model = Need
-    form_class = NeedCreateForm
-    template_name = "need/create.html"
+    """Definition create view"""
+    model = Definition
+    form_class = DefinitionCreateForm
+    template_name = "definition/create.html"
 
     def get(self, request, **kwargs):
         if request.is_ajax():
@@ -1028,50 +1028,50 @@ class NeedCreateView(CreateView):
                 return HttpResponse(language.pk)
 
             hints = []
-            similar_needs = Need.objects.filter(
+            similar_definitions = Definition.objects.filter(
                 language__pk=request.GET['language'],
                 name=request.GET['name']
             )
-            for need in similar_needs:
-                if need.definition:
-                    hints.append([need.definition,
-                                  reverse('need-detail', args=[need.pk])])
+            for definition in similar_definitions:
+                if definition.definition:
+                    hints.append([definition.definition,
+                                  reverse('definition-detail', args=[definition.pk])])
             resp = json.dumps(hints)
             return HttpResponse(resp, content_type='application/json')
-        form = NeedCreateForm()
-        return render(request, 'need/create.html',
+        form = DefinitionCreateForm()
+        return render(request, 'definition/create.html',
                       {'form': form})
 
     def post(self, request, **kwargs):
-        form = NeedCreateForm(request.POST)
+        form = DefinitionCreateForm(request.POST)
         if form.is_valid():
             self.object = form.save(commit=False)
             self.object.user = self.request.user
             self.object.save()
-            messages.success(self.request, _("Need succesfully created"))
-            return redirect(reverse('goal-create', kwargs={'need_id': self.object.pk}))
+            messages.success(self.request, _("Definition succesfully created"))
+            return redirect(reverse('goal-create', kwargs={'definition_id': self.object.pk}))
 
-        return render(request, 'need/create.html',
+        return render(request, 'definition/create.html',
                       {'form': form})
 
 
-class NeedListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
+class DefinitionListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    template_name = "need/list.html"
-    model = Need
+    template_name = "definition/list.html"
+    model = Definition
     paginate_by = 10
     orderable_columns = ["created_at", "type", "name", ]
     orderable_columns_default = "-id"
     ordering = ["-id"]
-    filter_set = NeedListViewFilter
+    filter_set = DefinitionListViewFilter
 
 
-class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
+class DefinitionDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
-    """Need detail view"""
-    model = Need
+    """Definition detail view"""
+    model = Definition
     slug_field = "pk"
-    template_name = "need/detail.html"
+    template_name = "definition/detail.html"
 
     def get_success_url(self):
         messages.success(
@@ -1081,7 +1081,7 @@ class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         return self.request.path
 
     def get_context_data(self, **kwargs):
-        context = super(NeedDetailView, self).get_context_data(**kwargs)
+        context = super(DefinitionDetailView, self).get_context_data(**kwargs)
         obj = self.get_object()
         form = None
         if self.request.user.__class__.__name__ not in [u'AnonymousUser']:
@@ -1093,7 +1093,7 @@ class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
             'object_list': self.object_list,
         })
         context.update({
-            'goal_list': Goal.objects.filter(need=kwargs.get('object')).order_by('-id')
+            'goal_list': Goal.objects.filter(definition=kwargs.get('object')).order_by('-id')
         })
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path

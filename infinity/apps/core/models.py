@@ -256,8 +256,8 @@ class BaseContentModel(models.Model):
         self.total_claimed = self.hours_claimed
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
-        if hasattr(self,'need_goals'):
-            child_objects = self.need_goals.all()
+        if hasattr(self,'definition_goals'):
+            child_objects = self.definition_goals.all()
         elif hasattr(self,'goal_ideas'):
             child_objects = self.goal_ideas.all()
         elif hasattr(self,'idea_plans'):
@@ -430,7 +430,7 @@ class Task(BaseContentModel):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
 
-class Need(models.Model):
+class Definition(models.Model):
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
@@ -461,7 +461,7 @@ class Need(models.Model):
     name = models.TextField()
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name='user_needs',
+        related_name='user_definitions',
         blank=False,
         null=False,
     )
@@ -550,7 +550,7 @@ class Need(models.Model):
         self.total_claimed = self.hours_claimed
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
-        for goal in self.need_goals.all():
+        for goal in self.definition_goals.all():
             self.total_donated += goal.hours_donated
             self.total_claimed += goal.hours_claimed
             self.total_assumed += goal.hours_assumed

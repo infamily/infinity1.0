@@ -19,7 +19,7 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^goal/(?P<need>.*)/list/1$',
+        r'^goal/(?P<definition>.*)/list/1$',
         GoalListView1.as_view(),
         name="goal-list1"
     ),
@@ -41,7 +41,7 @@ urlpatterns = patterns(
         name="goal-detail"
     ),
     url(
-        r'^goal/(?P<need>.*)/list/2$',
+        r'^goal/(?P<definition>.*)/list/2$',
         GoalListView2.as_view(),
         name="goal-list2"
     ),
@@ -56,7 +56,7 @@ urlpatterns = patterns(
         name="goal-create"
     ),
     url(
-        r'^goal-create/(?P<need_id>\d+)/$',
+        r'^goal-create/(?P<definition_id>\d+)/$',
         GoalCreateView.as_view(),
         name="goal-create"
     ),
@@ -193,24 +193,24 @@ urlpatterns = patterns(
         name="task-detail"
     ),
     url(
-        r'^need-create/$',
-        NeedCreateView.as_view(),
-        name="need-create"
+        r'^definition-create/$',
+        DefinitionCreateView.as_view(),
+        name="definition-create"
     ),
     url(
-        r'^need/(?P<slug>.*)/update$',
-        NeedUpdateView.as_view(),
-        name="need-update"
+        r'^definition/(?P<slug>.*)/update$',
+        DefinitionUpdateView.as_view(),
+        name="definition-update"
     ),
     url(
-        r'^need/list/$',
-        NeedListView.as_view(),
-        name="need-list"
+        r'^definition/list/$',
+        DefinitionListView.as_view(),
+        name="definition-list"
     ),
     url(
-        r'^need/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',
-        NeedDetailView.as_view(),
-        name="need-detail"
+        r'^definition/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',
+        DefinitionDetailView.as_view(),
+        name="definition-detail"
     ),
     url(
         r'^plan/(?P<idea>.*)/list/1$',

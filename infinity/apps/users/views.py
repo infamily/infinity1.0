@@ -200,7 +200,7 @@ class UserDetailView(DetailView):
 
             if comment.content_object:
 
-                if comment.content_type.name == u'need':
+                if comment.content_type.name == u'definition':
                     goals = None
                 elif comment.content_type.name == u'goal':
                     goals = [comment.content_object]

@@ -17,7 +17,7 @@ from .models import Work
 from .models import Idea
 from .models import Step
 from .models import Task
-from .models import Need
+from .models import Definition
 from .models import Type
 from .models import Plan
 
@@ -67,8 +67,8 @@ class UserChoiceField(django_select2.AutoModelSelect2Field):
     search_fields = ['introduction__icontains', ]
 
 
-class NeedChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Need.objects.all()
+class DefinitionChoiceField(django_select2.AutoModelSelect2Field):
+    queryset = Definition.objects.all()
     search_fields = ['name__icontains']
 
 
@@ -113,8 +113,8 @@ class UserChoiceFilter(django_filters.Filter):
     field_class = UserChoiceField
 
 
-class NeedChoiceFilter(django_filters.Filter):
-    field_class = NeedChoiceField
+class DefinitionChoiceFilter(django_filters.Filter):
+    field_class = DefinitionChoiceField
 
 
 class TypeChoiceFilter(django_filters.Filter):
@@ -451,7 +451,7 @@ class TaskListViewFilter2(django_filters.FilterSet):
         exclude = []
 
 
-class NeedLimitChoiceFilter(django_filters.Filter):
+class DefinitionLimitChoiceFilter(django_filters.Filter):
     field_class = forms.ChoiceField
 
     def filter(self, qs, value):
@@ -464,7 +464,7 @@ class NeedLimitChoiceFilter(django_filters.Filter):
         return qs
 
 
-class NeedListViewFilter(django_filters.FilterSet):
+class DefinitionListViewFilter(django_filters.FilterSet):
     OBJECTS_LIMITS = (
         (-1, 'ALL'),
         (100, '100'),
@@ -472,24 +472,24 @@ class NeedListViewFilter(django_filters.FilterSet):
         (10000, '10000'),
     )
     name = django_filters.CharFilter(lookup_type="icontains")
-    number_of_needs = NeedLimitChoiceFilter(choices=OBJECTS_LIMITS)
+    number_of_definitions = DefinitionLimitChoiceFilter(choices=OBJECTS_LIMITS)
 
     @property
     def form(self):
-        form = super(NeedListViewFilter, self).form
+        form = super(DefinitionListViewFilter, self).form
         form.helper = FormHelper()
         form.helper.form_method = 'get'
         form.helper.form_class = 'form-inline'
         form.helper.field_template = 'bootstrap3/layout/inline_field.html'
         form.helper.layout = Layout(
             FieldWithButtons(Field('name'), Submit('submit', 'Search', css_class='button white')),
-            Field('number_of_needs'),
+            Field('number_of_definitions'),
         )
 
         return form
 
     class Meta:
-        model = Need
+        model = Definition
 
         fields = ['name']
 
@@ -554,6 +554,6 @@ IdeaChoiceField()
 StepChoiceField()
 TaskChoiceField()
 UserChoiceField()
-NeedChoiceField()
+DefinitionChoiceField()
 TypeChoiceField()
 PlanChoiceField()
