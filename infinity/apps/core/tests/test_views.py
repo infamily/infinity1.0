@@ -253,7 +253,7 @@ class GoalTest(WebTest, AuthTestMixin):
         form['personal'] = goal.personal
         form['reason'] = goal.reason
         form['type'] = type.pk
-        form['definition'] = goal.definition.pk
+        #form['definition'] = goal.definition.pk
         form['sharewith'] = [self.user.id,]
         form['language'] = str(1)
         form.submit()
