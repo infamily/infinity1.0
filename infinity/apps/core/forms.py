@@ -748,6 +748,10 @@ class DefinitionCreateForm(forms.ModelForm):
             'definition',
             'sharewith',
         ]
+        widgets = {
+            'name': forms.TextInput,
+            'definition': forms.TextInput,
+        }
 
 
 class DefinitionUpdateForm(forms.ModelForm):
