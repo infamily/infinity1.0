@@ -828,7 +828,7 @@ class DefinitionCreateForm(forms.ModelForm):
                 Div('language', css_class='col-sm-2',),
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder',
-                                                         "expression, e.g., 'interstellar spaceflight', 'water quality on Earth'")),
+                                                         _("expression, e.g., 'intergalactic spaceflight'"))),
                     css_class='col-sm-10',
                 ),
                 css_class='row'
@@ -840,7 +840,7 @@ class DefinitionCreateForm(forms.ModelForm):
                     ),
                     Div(
                         Field(
-                            'definition', placeholder=kwargs.pop('query_placeholder', "definition, e.g., 'spaceflight to other star systems', 'water suitability for life on Earth'"),
+                            'definition', placeholder=kwargs.pop('query_placeholder', _("definition, e.g., 'spaceflight beyond the bounderies of galaxies'")),
                             # type="hidden",
                         ),
                         css_class='col-sm-10',
@@ -857,6 +857,7 @@ class DefinitionCreateForm(forms.ModelForm):
         self.fields['name'].label = ''
         self.fields['language'].label = ''
         self.fields['definition'].label = ''
+
 
     class Meta:
         model = Definition
