@@ -256,11 +256,23 @@ class BaseContentModel(models.Model):
         self.total_claimed = self.hours_claimed
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
-        for idea in self.goal_ideas.all():
-            self.total_donated += idea.total_donated
-            self.total_claimed += idea.total_claimed
-            self.total_assumed += idea.total_assumed
-            self.total_matched += idea.total_matched
+        if hasattr(self,'need_goals'):
+            child_objects = self.need_goals.all()
+        elif hasattr(self,'goal_ideas'):
+            child_objects = self.goal_ideas.all()
+        elif hasattr(self,'idea_plans'):
+            child_objects = self.idea_plans.all()
+        elif hasattr(self, 'plan_steps'):
+            child_objects = self.plan_steps.all()
+        elif hasattr(self, 'step_tasks'):
+            child_objects = self.step_tasks.all()
+        elif hasattr(self, 'task_works'):
+            child_objects = self.task_works.all()
+        for content in child_objects:
+            self.total_donated += content.total_donated
+            self.total_claimed += content.total_claimed
+            self.total_assumed += content.total_assumed
+            self.total_matched += content.total_matched
         self.save()
 
     def get_remain_usd(self):
