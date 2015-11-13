@@ -17,13 +17,13 @@
 <center><font color="grey">Goal definition is implicit.</center>
 {% endblocktrans %}
 <br/>
-{% if need_object %}
+{% if definition_object %}
 <table class="table">
     <tr>
-        <td>Need</td>
+        <td>Definition</td>
         <td>
 
-            <a href="{% url "need-detail" need_object.pk %}">{{need_object}}</a>
+            <a href="{% url "definition-detail" definition_object.pk %}">{{definition_object}}</a>
 
         </td>
     </tr>

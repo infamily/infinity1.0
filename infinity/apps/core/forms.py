@@ -15,10 +15,10 @@ from core.models import Work
 from core.models import Idea
 from core.models import Step
 from core.models import Task
-from core.models import Need
+from core.models import Definition
 from core.models import Plan
 from core.models import Language
-from .fields import NeedChoiceField
+from .fields import DefinitionChoiceField
 from .fields import TypeChoiceField
 from .fields import GoalChoiceField
 from .fields import GoalChoiceFieldMultiple
@@ -156,7 +156,7 @@ class GoalCreateForm(forms.ModelForm):
 #   hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
 
     def __init__(self, *args, **kwargs):
-        need_instance = kwargs.pop('need_instance')
+#       definition_instance = kwargs.pop('definition_instance')
         request = kwargs.pop('request')
         super(GoalCreateForm, self).__init__(*args, **kwargs)
 
@@ -164,9 +164,9 @@ class GoalCreateForm(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Create')))
 
-        if need_instance:
-            self.initial['need'] = need_instance
-            self.initial['type'] = need_instance.type
+#       if definition_instance:
+#           self.initial['definition'] = definition_instance
+#           self.initial['type'] = definition_instance.type
 
 
         self.fields['type'] = TypeChoiceField(
@@ -180,20 +180,20 @@ class GoalCreateForm(forms.ModelForm):
             required=False
         )
 
-        self.fields['need'] = NeedChoiceField(
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the thing that you need...')),
-                    'ajax': {
-                        'dataType': 'json',
-                        'quietMillis': 100,
-                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
-                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-                    },
-                }
-            )
-        )
+#       self.fields['definition'] = DefinitionChoiceField(
+#           widget=AutoHeavySelect2Widget(
+#               select2_options={
+#                   'minimumInputLength': 1,
+#                   'placeholder': unicode(_('Select the thing that you need...')),
+#                   'ajax': {
+#                       'dataType': 'json',
+#                       'quietMillis': 100,
+#                       'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
+#                       'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+#                   },
+#               }
+#           )
+#       )
 
         self.fields['sharewith'] = MembersChoiceField(
             widget=AutoHeavySelect2MultipleWidget(
@@ -205,9 +205,9 @@ class GoalCreateForm(forms.ModelForm):
             label=_('Share with:')
         )
 
-        self.fields['need'].label = _("""<b>Topic:</b> (relevant to problem,
-                                      <a href="/need-create/">click here</a> to
-                                      add if you can't find it.)""")
+#       self.fields['definition'].label = _("""<b>Topic:</b> (relevant to problem,
+#                                     <a href="/definition-create/">click here</a> to
+#                                     add if you can't find it.)""")
         self.fields['type'].label = _("<b>Category:</b> (of the problem)")
         self.fields['name'].label = _("""<b>Title:</b> (e.g., Potable Water
                                       Shortage, <a href="/goal/list/">check</a> if the problem is not
@@ -234,7 +234,7 @@ class GoalCreateForm(forms.ModelForm):
         ]
         fields = [
             'type',
-            'need',
+#           'definition',
             'name',
             'reason',
             'language',
@@ -692,10 +692,10 @@ class TaskCreateForm(forms.ModelForm):
         ]
 
 
-class NeedCreateForm(forms.ModelForm):
+class DefinitionCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        super(NeedCreateForm, self).__init__(*args, **kwargs)
+        super(DefinitionCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
         self.fields['sharewith'] = MembersChoiceField(
@@ -741,7 +741,7 @@ class NeedCreateForm(forms.ModelForm):
         self.fields['definition'].label = ''
 
     class Meta:
-        model = Need
+        model = Definition
         fields = [
             'name',
             'language',
@@ -750,17 +750,17 @@ class NeedCreateForm(forms.ModelForm):
         ]
 
 
-class NeedUpdateForm(forms.ModelForm):
+class DefinitionUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        super(NeedUpdateForm, self).__init__(*args, **kwargs)
+        super(DefinitionUpdateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
 
     class Meta:
-        model = Need
+        model = Definition
         fields = [
             'name',
             'language',

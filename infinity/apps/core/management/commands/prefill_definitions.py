@@ -2,11 +2,11 @@
 import MySQLdb
 
 from django.core.management.base import BaseCommand
-from core.models import Language, Need
+from core.models import Language, Definition
 from users.models import User
 
 class Command(BaseCommand):
-    help = 'prefill needs objects'
+    help = 'prefill definitions objects'
 
     def handle(self, *args, **options):
         self.prefill()
@@ -16,8 +16,8 @@ class Command(BaseCommand):
                              db="omegawiki", charset='utf8')
         cur = db.cursor()
 
-        #for need in Need.objects.all():
-        #    need.delete()
+        #for definition in Definition.objects.all():
+        #    definition.delete()
 
         query = lambda lang_id: '''select uw_expression.spelling, uw_text.text_text,uw_syntrans.defined_meaning_id 
              from uw_text, uw_translated_content, uw_defined_meaning, uw_syntrans, uw_expression 
@@ -36,7 +36,7 @@ class Command(BaseCommand):
             for row in cur.fetchall():
                 if row[1]:
                     try:
-                        Need.objects.create(name=row[0],
+                        Definition.objects.create(name=row[0],
                                             definition=row[1],
                                             defined_meaning_id=row[2],
                                             language=language,
