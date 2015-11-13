@@ -235,7 +235,7 @@ class GoalCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.definition = form.cleaned_data.get('definition')
+       #self.object.definition = form.cleaned_data.get('definition')
         self.object.save()
         return super(GoalCreateView, self).form_valid(form)
 
@@ -245,19 +245,19 @@ class GoalCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(GoalCreateView, self).get_context_data(**kwargs)
-        context.update({'definition_object': self.definition_instance})
+       #context.update({'definition_object': self.definition_instance})
         return context
 
     def dispatch(self, *args, **kwargs):
-        if kwargs.get('definition_id'):
-            self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
-        else:
-            self.definition_instance = False
+       #if kwargs.get('definition_id'):
+       #    self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
+       #else:
+       #    self.definition_instance = False
         return super(GoalCreateView, self).dispatch(*args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super(GoalCreateView, self).get_form_kwargs()
-        kwargs['definition_instance'] = self.definition_instance
+       #kwargs['definition_instance'] = self.definition_instance
         kwargs['request'] = self.request
         return kwargs
 
