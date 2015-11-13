@@ -2,7 +2,7 @@ from django.core.management import BaseCommand
 from django.contrib.contenttypes.models import ContentType
 
 from core.models import Translation
-from core.models import Goal, Idea, Plan, Step, Task
+from core.models import Need, Goal, Idea, Plan, Step, Task, Work
 from core.models import Language
 
 
@@ -10,7 +10,7 @@ class Command(BaseCommand):
     help = 'generate default translation for each of content types'
 
     def handle(self, *args, **options):
-        content_types = ContentType.objects.get_for_models(Goal, Idea, Plan, Step, Task)
+        content_types = ContentType.objects.get_for_models(Need, Goal, Idea, Plan, Step, Task, Work)
 
         for model, content_type in content_types.items():
             for instance in model.objects.all():

@@ -225,6 +225,138 @@ class CommentDeleteView(DeleteView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class NeedCreateView(CreateView):
+
+    """Need create view"""
+    model = Need
+    form_class = NeedCreateForm
+    template_name = "need/create1.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.definition = form.cleaned_data.get('definition')
+        self.object.save()
+        return super(NeedCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully created"))
+        return reverse("need-detail", args=[self.object.pk, ])
+
+    def get_context_data(self, **kwargs):
+        context = super(NeedCreateView, self).get_context_data(**kwargs)
+        context.update({'definition_object': self.definition_instance})
+        return context
+
+    def dispatch(self, *args, **kwargs):
+        if kwargs.get('definition_id'):
+            self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
+        else:
+            self.definition_instance = False
+        return super(NeedCreateView, self).dispatch(*args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(NeedCreateView, self).get_form_kwargs()
+        kwargs['definition_instance'] = self.definition_instance
+        kwargs['request'] = self.request
+        return kwargs
+
+class NeedDeleteView(OwnerMixin, DeleteView):
+
+    """Need delete view"""
+    model = Need
+    slug_field = "pk"
+    template_name = "need/delete.html"
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully deleted"))
+        return reverse("definition-detail", args=[self.object.definition.pk, ])
+
+
+class NeedUpdateView(OwnerMixin, UpdateView):
+
+    """Need update view"""
+    model = Need
+    form_class = NeedUpdateForm
+    slug_field = "pk"
+    template_name = "need/update.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(NeedUpdateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully updated"))
+        return reverse("need-detail", args=[self.object.pk, ])
+
+
+class NeedUpdateView(OwnerMixin, UpdateView):
+
+    """Need update view"""
+    model = Need
+    form_class = NeedUpdateForm
+    slug_field = "pk"
+    template_name = "need/update.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(NeedUpdateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully updated"))
+        return reverse("need-detail", args=[self.object.pk, ])
+
+
+class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
+
+    """Need detail view"""
+    model = Need
+    slug_field = "pk"
+    template_name = "need/detail.html"
+
+    def get_success_url(self):
+        messages.success(
+            self.request, _(
+                "%s succesfully created" %
+                self.form_class._meta.model.__name__))
+        return self.request.path
+
+    def get_context_data(self, **kwargs):
+        context = super(NeedDetailView, self).get_context_data(**kwargs)
+        obj = self.get_object()
+        form = None
+
+        if self.request.user.__class__.__name__ not in [u'AnonymousUser']:
+            form = self.get_form_class()
+        context.update({
+            'form': form,
+        })
+        context.update({
+            'object_list': self.object_list,
+        })
+       #context.update({
+       #    'idea_list': Idea.objects.filter(goal=kwargs.get('object')).order_by('-id')
+       #})
+
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
+        context.update({
+            'conversation_form': conversation_form
+        })
+
+        return context
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class GoalCreateView(CreateView):
 
     """Goal create view"""
@@ -1035,7 +1167,7 @@ class DefinitionCreateView(CreateView):
             for definition in similar_definitions:
                 if definition.definition:
                     hints.append([definition.definition,
-                                  reverse('definition-detail', args=[definition.pk])])
+                                  reverse('need-create', args=[definition.pk])])
             resp = json.dumps(hints)
             return HttpResponse(resp, content_type='application/json')
         form = DefinitionCreateForm()
@@ -1049,7 +1181,7 @@ class DefinitionCreateView(CreateView):
             self.object.user = self.request.user
             self.object.save()
             messages.success(self.request, _("Definition succesfully created"))
-            return redirect(reverse('goal-create', kwargs={'definition_id': self.object.pk}))
+            return redirect(reverse('need-create', kwargs={'definition_id': self.object.pk}))
 
         return render(request, 'definition/create.html',
                       {'form': form})

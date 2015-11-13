@@ -19,6 +19,32 @@ urlpatterns = patterns(
     ),
 
     url(
+        r'^need/(?P<slug>[a-zA-Z-_0-9]+)/delete/$',
+        NeedDeleteView.as_view(),
+        name="need-delete"
+    ),
+    url(
+        r'^need/(?P<slug>.*)/update/$',
+        NeedUpdateView.as_view(),
+        name="need-update"
+    ),
+    url(
+        r'^need/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',
+        NeedDetailView.as_view(),
+        name="need-detail"
+    ),
+    url(
+        r'^need-create/$',
+        NeedCreateView.as_view(),
+        name="need-create"
+    ),
+    url(
+        r'^need-create/(?P<definition_id>\d+)/$',
+        NeedCreateView.as_view(),
+        name="need-create"
+    ),
+
+    url(
         r'^goal/(?P<definition>.*)/list/1$',
         GoalListView1.as_view(),
         name="goal-list1"
@@ -28,13 +54,11 @@ urlpatterns = patterns(
         GoalDeleteView.as_view(),
         name="goal-delete"
     ),
-
     url(
         r'^goal/(?P<slug>.*)/update/$',
         GoalUpdateView.as_view(),
         name="goal-update"
     ),
-
     url(
         r'^goal/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',
         GoalDetailView.as_view(),
@@ -60,6 +84,7 @@ urlpatterns = patterns(
         GoalCreateView.as_view(),
         name="goal-create"
     ),
+
     url(
         r'^work/(?P<task>.*)/list/1$',
         WorkListView1.as_view(),

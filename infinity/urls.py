@@ -5,14 +5,15 @@ from django.conf import settings
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
-from core.views import IndexView
+from core.views import IndexView, DefinitionCreateView
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', IndexView.as_view(), name='home'),
+    url(r'^$', DefinitionCreateView.as_view(), name='home'),
+    url(r'^i$', IndexView.as_view(), name='index'),
     url(r'^w$', IndexView.as_view(), name='wider'),
     url(r'', include('apps.core.urls')),
     url(r'^user/', include('allauth.urls')),
