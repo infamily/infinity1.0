@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-13 14:54-0800\n"
-"PO-Revision-Date: 2015-11-14 01:25+0200\n"
+"PO-Revision-Date: 2015-11-14 01:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -110,7 +110,7 @@ msgstr ""
 
 #: infinity/apps/core/forms.py:198
 msgid "<b>Subject:</b>"
-msgstr ""
+msgstr "<b>Pasidalink su draugais:</b>"
 
 #: infinity/apps/core/forms.py:201 infinity/apps/core/forms.py:335
 #: infinity/apps/core/forms.py:474 infinity/apps/core/forms.py:597
@@ -289,7 +289,7 @@ msgstr ""
 
 #: infinity/apps/core/forms.py:831
 msgid "expression, e.g., 'intergalactic spaceflight'"
-msgstr "kas pavadinsi? pvz.: tarpgalaktinis skrydis"
+msgstr "kaip pavadinsi? pvz.: tarpgalaktinis skrydis"
 
 #: infinity/apps/core/forms.py:843
 msgid "definition, e.g., 'spaceflight beyond the bounderies of galaxies'"

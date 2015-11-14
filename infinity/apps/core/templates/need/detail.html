@@ -49,7 +49,7 @@ $(document).ready( function() {
         -->
       </div>
  
-      {% if object.definition %}{% trans "related object:" %} <a href="{% url "definition-detail" object.definition.pk %}">{{object.definition }}</a>{% endif %}<br/>
+      {% if object.definition %}{% trans "want:" %} <a href="{% url "definition-detail" object.definition.pk %}">{{object.definition }}</a>{% endif %}<br/>
       {% trans "translations:" %}
       <!-- translations -->
       {% for translation in translations %}
