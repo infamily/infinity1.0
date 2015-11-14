@@ -8,16 +8,17 @@ from django_select2.widgets import AutoHeavySelect2MultipleWidget
 from django_select2.fields import AutoModelSelect2Field
 
 
-from core.models import Comment
+from core.models import Language
+from core.models import Definition
 from core.models import Type
+from core.models import Need
 from core.models import Goal
-from core.models import Work
 from core.models import Idea
+from core.models import Plan
 from core.models import Step
 from core.models import Task
-from core.models import Definition
-from core.models import Plan
-from core.models import Language
+from core.models import Work
+from core.models import Comment
 from .fields import DefinitionChoiceField
 from .fields import TypeChoiceField
 from .fields import GoalChoiceField
@@ -147,6 +148,121 @@ class CommentCreateForm(forms.ModelForm):
         widgets = {
             'text': MarkdownWidget,
         }
+
+
+class NeedCreateForm(forms.ModelForm):
+
+    content = forms.CharField(widget=MarkdownWidget())
+
+    def __init__(self, *args, **kwargs):
+        definition_instance = kwargs.pop('definition_instance')
+        request = kwargs.pop('request')
+        super(NeedCreateForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+
+        self.helper.layout.append(Submit('save', _('Create')))
+
+        if definition_instance:
+            self.initial['definition'] = definition_instance
+
+
+        self.fields['definition'] = DefinitionChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the thing that you need...')),
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            )
+        )
+
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the users to share with:')),
+                }
+            ), required=False,
+            label=_('Share with:')
+        )
+
+        self.fields['definition'].label = _("""<b>Topic:</b> (relevant to problem,
+                                      <a href="/definition-create/">click here</a> to
+                                      add if you can't find it.)""")
+        self.fields['name'].label = _("""<b>Subject:</b>""")
+        self.fields['name'].widget.attrs.update({'placeholder': _('')})
+        self.fields['content'].label = _('')
+        self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['definition'].widget = forms.HiddenInput()
+
+        try:
+            language = Language.objects.get(language_code=request.LANGUAGE_CODE)
+            self.initial['language'] = language
+        except Language.DoesNotExist:
+            pass
+
+
+    class Meta:
+        model = Need
+        exclude = [
+            'user',
+        ]
+        fields = [
+            'name',
+            'definition',
+            'content',
+            'language',
+            'personal',
+            'sharewith',
+        ]
+
+
+class NeedUpdateForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(NeedUpdateForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+
+        self.helper.layout.append(Submit('save', _('Update')))
+
+        self.fields['name'].label = 'Description'
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the users to share with:')),
+                }
+            ), required=False
+        )
+
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+
+    class Meta:
+        model = Need
+        exclude = [
+            'created_at',
+            'user',
+        ]
+        fields = [
+            'name',
+            'content',
+            'language',
+            'personal',
+            'sharewith',
+        ]
+        widgets = {
+            'content': MarkdownWidget,
+        }
+
+
 
 
 class GoalCreateForm(forms.ModelForm):
@@ -712,7 +828,7 @@ class DefinitionCreateForm(forms.ModelForm):
                 Div('language', css_class='col-sm-2',),
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder',
-                                                         "expression, e.g., 'interstellar spaceflight', 'water quality on Earth'")),
+                                                         _("expression, e.g., 'intergalactic spaceflight'"))),
                     css_class='col-sm-10',
                 ),
                 css_class='row'
@@ -720,8 +836,11 @@ class DefinitionCreateForm(forms.ModelForm):
             Div(
                 Div(
                     Div(
+                        css_class='col-sm-12 hints-block',
+                    ),
+                    Div(
                         Field(
-                            'definition', placeholder=kwargs.pop('query_placeholder', "definition, e.g., 'spaceflight to other star systems', 'water suitability for life on Earth'"),
+                            'definition', placeholder=kwargs.pop('query_placeholder', _("definition, e.g., 'spaceflight beyond the bounderies of galaxies'")),
                             # type="hidden",
                         ),
                         css_class='col-sm-10',
@@ -731,7 +850,6 @@ class DefinitionCreateForm(forms.ModelForm):
                         # css_class='col-sm-2 hidden create-button',
                         css_class='col-sm-2 create-button',
                     ),
-                    css_class='col-sm-12 hints-block',
                 ),
                 css_class='row'
             ),
@@ -739,6 +857,7 @@ class DefinitionCreateForm(forms.ModelForm):
         self.fields['name'].label = ''
         self.fields['language'].label = ''
         self.fields['definition'].label = ''
+
 
     class Meta:
         model = Definition
@@ -748,6 +867,10 @@ class DefinitionCreateForm(forms.ModelForm):
             'definition',
             'sharewith',
         ]
+        widgets = {
+            'name': forms.TextInput,
+            'definition': forms.TextInput,
+        }
 
 
 class DefinitionUpdateForm(forms.ModelForm):

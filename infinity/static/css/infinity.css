@@ -128,21 +128,21 @@ table.table.centered
 
 /* for the logo */
 .infin {
-    position: relative;
-    top: 2px;
-    padding-left: 7px;
-    font-size: 26px;
-    color: black;
-    transform:scale(3,1);
-    -webkit-transform:scale(3,1);
-    display:inline-block;
+    font-size: 100px;
+    color: blue;
+    font-family: Cantarell;
 }
+
 .ity {
-    padding-left: 26px;
-    font-size: 24px;
-    transform:scale(2,1);
-    -webkit-transform:scale(2,1);
-    display:inline-block;
+    font-size: 100px;
+    color: red;
+    font-family: Cantarell;
+}
+
+.definition {
+    font-size: 80px;
+    color: blue;
+    font-family: Cantarell;
 }
 
 .brand {

@@ -38,6 +38,112 @@ from .filters import *
 from hours.models import HourValue
 from core.models import Language
 
+class InboxView(TemplateView):
+    template_name = 'inbox.html'
+    dropdown_list = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+
+    def post(self, request, *args, **kwargs):
+        if self.request.POST.get('needs'):
+            self.request.session['needs_number'] = int(self.request.POST['needs'])
+
+        return redirect(reverse('inbox'))
+
+    def get_translation_by_instance(self, instance, content_type):
+        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
+        translation = Translation.objects.filter(
+            content_type=content_type,
+            object_id=instance.id,
+            language=language.id
+        )
+
+        return translation.first()
+
+    def get_context_data(self, **kwargs):
+        items = {'needs': 64}
+
+        if self.request.session.get('neeeds_number'):
+            items['needs'] = self.request.session['needs_number']
+
+        # Prepare base content access filters
+        if self.request.user.is_authenticated():
+            if self.request.resolver_match.url_name == 'inbox':
+                q_object = (
+                    Q(user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
+                )
+            else:
+                q_object = (
+                    Q(personal=False) |
+                    Q(personal=True, user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
+                )
+        else:
+            q_object = (
+                Q(personal=False)
+            )
+
+        # Get Content Types for Need
+        content_types = ContentType.objects.get_for_models(Need)
+
+        now = timezone.now()
+        in_days = lambda x: float(x.seconds/86400.)
+        in_hours = lambda x: float(x.seconds/3600.)
+
+        instances = {}
+
+        for model_class, translations in content_types.items():
+            model_class_lower_name = model_class.__name__.lower() + 's'
+            instances[model_class_lower_name] = model_class.objects.filter(
+                q_object
+            ).order_by('-commented_at').distinct()[:items[model_class_lower_name]]
+
+
+        needs = instances['needs']
+
+        commented_at = lambda items: [obj.commented_at for obj in items]
+
+        objects_list = list(chain(needs))
+        dates = commented_at(objects_list)
+
+        if dates:
+            start = min(dates)
+            days = in_days(now-start)
+        else:
+            start = timezone.now()
+            days = 0.
+
+        try:
+            hour_value = HourValue.objects.latest('created_at')
+        except HourValue.DoesNotExist:
+            hour_value = 0
+
+        instances_list = {}
+
+        for model, content_type in content_types.items():
+            model_name = model.__name__.lower()
+            instances_list[model_name + '_list'] = [{
+                'object': instance,
+                'is_new': instance.created_at > start,
+                'translation': self.get_translation_by_instance(instance, content_type)
+            } for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
+
+        context = {
+            'need_hours': needs and
+                         '%0.2f' % in_hours(now-max(commented_at(list(needs))))
+                         or 0.,
+            'last_days': '%0.2f' % days,
+            'number_of_items': len(objects_list),
+            'hour_value': hour_value,
+            'dropdown_list': self.dropdown_list,
+            'items': items,
+        }
+
+        context.update(instances_list)
+        context.update(kwargs)
+
+        return context
+
+
 class IndexView(TemplateView):
     template_name = 'home.html'
     dropdown_list = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
@@ -222,6 +328,139 @@ class CommentDeleteView(DeleteView):
     def get_success_url(self):
         messages.success(self.request, _("Comment succesfully deleted"))
         return "/"
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class NeedCreateView(CreateView):
+
+    """Need create view"""
+    model = Need
+    form_class = NeedCreateForm
+    template_name = "need/create1.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.definition = form.cleaned_data.get('definition')
+        self.object.save()
+        return super(NeedCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully created"))
+        return reverse("need-detail", args=[self.object.pk, ])
+
+    def get_context_data(self, **kwargs):
+        context = super(NeedCreateView, self).get_context_data(**kwargs)
+        context.update({'definition_object': self.definition_instance})
+        return context
+
+    def dispatch(self, *args, **kwargs):
+        if kwargs.get('definition_id'):
+            self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
+        else:
+            self.definition_instance = False
+        return super(NeedCreateView, self).dispatch(*args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(NeedCreateView, self).get_form_kwargs()
+        kwargs['definition_instance'] = self.definition_instance
+        kwargs['request'] = self.request
+        return kwargs
+
+
+class NeedDeleteView(OwnerMixin, DeleteView):
+
+    """Need delete view"""
+    model = Need
+    slug_field = "pk"
+    template_name = "need/delete.html"
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully deleted"))
+        return reverse("definition-detail", args=[self.object.definition.pk, ])
+
+
+class NeedUpdateView(OwnerMixin, UpdateView):
+
+    """Need update view"""
+    model = Need
+    form_class = NeedUpdateForm
+    slug_field = "pk"
+    template_name = "need/update.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(NeedUpdateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully updated"))
+        return reverse("need-detail", args=[self.object.pk, ])
+
+
+class NeedUpdateView(OwnerMixin, UpdateView):
+
+    """Need update view"""
+    model = Need
+    form_class = NeedUpdateForm
+    slug_field = "pk"
+    template_name = "need/update.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(NeedUpdateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully updated"))
+        return reverse("need-detail", args=[self.object.pk, ])
+
+
+class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
+
+    """Need detail view"""
+    model = Need
+    slug_field = "pk"
+    template_name = "need/detail.html"
+
+    def get_success_url(self):
+        messages.success(
+            self.request, _(
+                "%s succesfully created" %
+                self.form_class._meta.model.__name__))
+        return self.request.path
+
+    def get_context_data(self, **kwargs):
+        context = super(NeedDetailView, self).get_context_data(**kwargs)
+        obj = self.get_object()
+        form = None
+
+        if self.request.user.__class__.__name__ not in [u'AnonymousUser']:
+            form = self.get_form_class()
+        context.update({
+            'form': form,
+        })
+        context.update({
+            'object_list': self.object_list,
+        })
+       #context.update({
+       #    'idea_list': Idea.objects.filter(goal=kwargs.get('object')).order_by('-id')
+       #})
+
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
+        context.update({
+            'conversation_form': conversation_form
+        })
+
+        return context
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -1024,7 +1263,7 @@ class DefinitionCreateView(CreateView):
                         http_accept_language=find_language)
                 except Language.DoesNotExist:
                     language = Language.objects.get(
-                        pk=85)
+                        language_code=request.LANGUAGE_CODE)
                 return HttpResponse(language.pk)
 
             hints = []
@@ -1035,12 +1274,17 @@ class DefinitionCreateView(CreateView):
             for definition in similar_definitions:
                 if definition.definition:
                     hints.append([definition.definition,
-                                  reverse('definition-detail', args=[definition.pk])])
+                                  reverse('need-create', args=[definition.pk])])
             resp = json.dumps(hints)
             return HttpResponse(resp, content_type='application/json')
         form = DefinitionCreateForm()
         return render(request, 'definition/create.html',
                       {'form': form})
+
+    def get_form_kwargs(self, request, **kwargs):
+        kwargs = super(DefinitionCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
     def post(self, request, **kwargs):
         form = DefinitionCreateForm(request.POST)
@@ -1049,7 +1293,7 @@ class DefinitionCreateView(CreateView):
             self.object.user = self.request.user
             self.object.save()
             messages.success(self.request, _("Definition succesfully created"))
-            return redirect(reverse('goal-create', kwargs={'definition_id': self.object.pk}))
+            return redirect(reverse('need-create', kwargs={'definition_id': self.object.pk}))
 
         return render(request, 'definition/create.html',
                       {'form': form})

@@ -258,6 +258,8 @@ class BaseContentModel(models.Model):
         self.total_matched = self.hours_matched
         if hasattr(self,'definition_goals'):
             child_objects = self.definition_goals.all()
+        elif hasattr(self,'need_goals'):
+            child_objects = self.definition_goals.all()
         elif hasattr(self,'goal_ideas'):
             child_objects = self.goal_ideas.all()
         elif hasattr(self,'idea_plans'):
@@ -268,11 +270,12 @@ class BaseContentModel(models.Model):
             child_objects = self.step_tasks.all()
         elif hasattr(self, 'task_works'):
             child_objects = self.task_works.all()
-        for content in child_objects:
-            self.total_donated += content.total_donated
-            self.total_claimed += content.total_claimed
-            self.total_assumed += content.total_assumed
-            self.total_matched += content.total_matched
+        if 'child_objects' in locals():
+            for content in child_objects:
+                self.total_donated += content.total_donated
+                self.total_claimed += content.total_claimed
+                self.total_assumed += content.total_assumed
+                self.total_matched += content.total_matched
         self.save()
 
     def get_remain_usd(self):
@@ -314,6 +317,29 @@ class BaseContentModel(models.Model):
         abstract = True
 
 
+class Type(models.Model):
+    name = models.CharField(
+        unique=False,
+        max_length=150,
+        blank=False,
+    )
+
+    def __unicode__(self):
+        return unicode(self.name[:50])
+
+    def get_absolute_url(self):
+        return "/"
+
+
+class Need(BaseContentModel):
+    definition = models.ForeignKey(
+	'Definition',
+	blank=False,
+	null=False,
+    )
+    content = MarkdownField(blank=False)
+
+
 class Goal(BaseContentModel):
     type = models.ForeignKey(
         'Type',
@@ -335,35 +361,6 @@ class Goal(BaseContentModel):
 
     def get_equity(self):
         return self.hyper_equity*100
-
-
-class Work(BaseContentModel):
-    task = models.ForeignKey(
-        'Task',
-        related_name='task_works',
-        blank=False,
-        null=False,
-    )
-    url = models.URLField(
-        max_length=150,
-        unique=False,
-        null=True,
-        blank=True,
-    )
-    file = models.FileField(
-        null=True,
-        upload_to='files',
-        blank=True,
-    )
-    parent_work_id = models.PositiveIntegerField(
-        unique=False,
-        null=True,
-        blank=True,
-    )
-    description = MarkdownField(blank=False)
-
-    def get_usd(self):
-        return self.total_donated*HourValue.objects.latest('created_at').value
 
 
 class Idea(BaseContentModel):
@@ -388,6 +385,35 @@ class Idea(BaseContentModel):
 
     def get_equity(self):
         return self.super_equity*100
+
+
+class Plan(BaseContentModel):
+    idea = models.ForeignKey(
+        'Idea',
+        related_name='idea_plans',
+        blank=False,
+        null=False,
+    )
+    deliverable = MarkdownField(blank=False)
+    situation = MarkdownField(blank=False)
+    plain_equity = models.DecimalField(
+        default=0.1,
+        decimal_places=8,
+        max_digits=20,
+        blank=False
+    )
+    members = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='user_members',
+        blank=False,
+        null=False,
+    )
+
+    def get_usd(self):
+        return self.total_donated*HourValue.objects.latest('created_at').value
+
+    def get_equity(self):
+        return self.plain_equity*100
 
 
 class Step(BaseContentModel):
@@ -430,6 +456,35 @@ class Task(BaseContentModel):
         blank=False,
         null=False,
     )
+
+    def get_usd(self):
+        return self.total_donated*HourValue.objects.latest('created_at').value
+
+
+class Work(BaseContentModel):
+    task = models.ForeignKey(
+        'Task',
+        related_name='task_works',
+        blank=False,
+        null=False,
+    )
+    url = models.URLField(
+        max_length=150,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    file = models.FileField(
+        null=True,
+        upload_to='files',
+        blank=True,
+    )
+    parent_work_id = models.PositiveIntegerField(
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    description = MarkdownField(blank=False)
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
@@ -555,11 +610,11 @@ class Definition(models.Model):
         self.total_claimed = self.hours_claimed
         self.total_assumed = self.hours_assumed
         self.total_matched = self.hours_matched
-        for goal in self.definition_goals.all():
-            self.total_donated += goal.hours_donated
-            self.total_claimed += goal.hours_claimed
-            self.total_assumed += goal.hours_assumed
-            self.total_matched += goal.hours_matched
+       #for goal in self.definition_goals.all():
+       #    self.total_donated += goal.hours_donated
+       #    self.total_claimed += goal.hours_claimed
+       #    self.total_assumed += goal.hours_assumed
+       #    self.total_matched += goal.hours_matched
         self.save()
 
     def get_usd(self):
@@ -580,51 +635,9 @@ class Definition(models.Model):
         ).count()
 
 
-class Type(models.Model):
-    name = models.CharField(
-        unique=False,
-        max_length=150,
-        blank=False,
-    )
-
-    def __unicode__(self):
-        return unicode(self.name[:50])
-
-    def get_absolute_url(self):
-        return "/"
-
-
-class Plan(BaseContentModel):
-    idea = models.ForeignKey(
-        'Idea',
-        related_name='idea_plans',
-        blank=False,
-        null=False,
-    )
-    deliverable = MarkdownField(blank=False)
-    situation = MarkdownField(blank=False)
-    plain_equity = models.DecimalField(
-        default=0.1,
-        decimal_places=8,
-        max_digits=20,
-        blank=False
-    )
-    members = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
-        related_name='user_members',
-        blank=False,
-        null=False,
-    )
-
-    def get_usd(self):
-        return self.total_donated*HourValue.objects.latest('created_at').value
-
-    def get_equity(self):
-        return self.plain_equity*100
-
-
 class Translation(models.Model):
     name = models.TextField(blank=True, null=True)
+    content = models.TextField(blank=True, null=True)
     summary = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     reason = models.TextField(blank=True, null=True)
@@ -660,6 +673,7 @@ class Language(models.Model):
         except TypeError:
             return unicode(self.pk)
 
+post_save.connect(_content_type_post_save, sender=Need)
 post_save.connect(_content_type_post_save, sender=Goal)
 post_save.connect(_content_type_post_save, sender=Idea)
 post_save.connect(_content_type_post_save, sender=Plan)
