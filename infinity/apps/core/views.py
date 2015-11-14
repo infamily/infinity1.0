@@ -1277,17 +1277,12 @@ class DefinitionCreateView(CreateView):
                                   reverse('need-create', args=[definition.pk])])
             resp = json.dumps(hints)
             return HttpResponse(resp, content_type='application/json')
-        form = DefinitionCreateForm()
+        form = DefinitionCreateForm(request=request)
         return render(request, 'definition/create.html',
                       {'form': form})
 
-    def get_form_kwargs(self, request, **kwargs):
-        kwargs = super(DefinitionCreateView, self).get_form_kwargs()
-        kwargs['request'] = self.request
-        return kwargs
-
     def post(self, request, **kwargs):
-        form = DefinitionCreateForm(request.POST)
+        form = DefinitionCreateForm(request.POST, request=request)
         if form.is_valid():
             self.object = form.save(commit=False)
             self.object.user = self.request.user
