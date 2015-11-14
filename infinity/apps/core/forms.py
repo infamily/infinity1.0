@@ -2,10 +2,11 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Div
+from crispy_forms.layout import Submit, Layout, Field, Div, Button
 from django_select2.widgets import AutoHeavySelect2Widget
 from django_select2.widgets import AutoHeavySelect2MultipleWidget
 from django_select2.fields import AutoModelSelect2Field
+from django.core.urlresolvers import reverse
 
 
 from core.models import Language
@@ -824,6 +825,18 @@ class DefinitionCreateForm(forms.ModelForm):
             ), required=False
         )
 
+        if self.request.user.is_anonymous():
+            submit_button = Div(
+                Field(Button('register', _('Add & Go'),
+                             onclick="window.location.assign('%s')" % reverse("account_signup"))),
+                css_class='col-sm-2 create-button disabled',
+            )
+        else:
+            submit_button = Div(
+                Field(Submit('submit', _('Add & Go'))),
+                css_class='col-sm-2 create-button',
+            )
+
         self.helper.layout = Layout(
             Div(
                 Div('language', css_class='col-sm-2',),
@@ -846,11 +859,7 @@ class DefinitionCreateForm(forms.ModelForm):
                         ),
                         css_class='col-sm-10',
                     ),
-                    Div(
-                        Field(Submit('submit', _('Add & Go'))),
-                        # css_class='col-sm-2 hidden create-button',
-                        css_class='col-sm-2 create-button',
-                    ),
+                    submit_button,
                 ),
                 css_class='row'
             ),
