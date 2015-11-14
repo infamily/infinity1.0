@@ -244,3 +244,8 @@ a:visited{
 #div_id_sharewith {
     display: none;
 }
+
+.octocat-login {
+    color: #000000;
+    font-size: 144px;
+}

@@ -287,7 +287,7 @@ DJANGO_APPS += (
 
 # Allauth providers
 DJANGO_APPS += (
-    # 'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.github',
 )
 
 AUTHENTICATION_BACKENDS = (
