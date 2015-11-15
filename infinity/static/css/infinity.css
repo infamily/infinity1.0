@@ -245,6 +245,10 @@ a:visited{
     display: none;
 }
 
+#div_id_define {
+    display: none;
+}
+
 .octocat-login {
     color: #000000;
     font-size: 144px;

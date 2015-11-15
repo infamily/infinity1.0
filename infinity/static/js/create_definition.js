@@ -90,3 +90,17 @@ $(document).ready(function() {
     });
     searchResult()
 });
+
+
+$(function() {
+    $("#id_name").keyup(function() {
+
+    if ($("#id_name").val()) {
+      $("#div_id_define").show();
+    }
+    else {
+      $("#div_id_define").hide();
+    }
+
+    });
+});

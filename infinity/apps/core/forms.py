@@ -842,7 +842,9 @@ class DefinitionCreateForm(forms.ModelForm):
                 Div('language', css_class='col-sm-2',),
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder',
-                                                         _("expression, e.g., 'intergalactic spaceflight'"))),
+                                                         _("expression, e.g., 'intergalactic spaceflight'")),
+			   autocomplete='off',
+		    ),
                     css_class='col-sm-10',
                 ),
                 css_class='row'
@@ -855,13 +857,14 @@ class DefinitionCreateForm(forms.ModelForm):
                     Div(
                         Field(
                             'definition', placeholder=kwargs.pop('query_placeholder', _("definition, e.g., 'spaceflight beyond the bounderies of galaxies'")),
-                            # type="hidden",
+                            #type="hidden",
                         ),
                         css_class='col-sm-10',
                     ),
                     submit_button,
                 ),
-                css_class='row'
+                css_class='row',
+		css_id='div_id_define',
             ),
         )
         self.fields['name'].label = ''
