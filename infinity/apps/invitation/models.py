@@ -62,13 +62,12 @@ class InvitationsAdapter(DefaultAccountAdapter):
 
     def is_open_for_signup(self, request):
 
-        if request.GET.get('code'):
-            """
-            I'm not sure but his line should be refactored.
-            We're checking if there is code then user came
-            from github provider and we allow registration
-            """
-            return True
+        social_account = request.session.get('socialaccount_sociallogin')
+        if social_account:
+            social_account = social_account.get('account')
+            if social_account:
+                if social_account.get('provider') == 'github':
+                    return True
 
         if hasattr(request, 'session') and request.session.get('invitation'):
             return True
