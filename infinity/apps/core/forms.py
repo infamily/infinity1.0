@@ -74,6 +74,19 @@ class TranslationUpdateForm(forms.ModelForm):
 
 class CommentCreateFormDetail(forms.ModelForm):
 
+    amount = forms.DecimalField(required=False)
+
+    USD = 0
+    EUR = 1
+
+    CURRENCIES = (
+        (USD, _("USD")),
+        (EUR, _("EUR"))
+    )
+
+    currency = forms.ChoiceField(choices=CURRENCIES, required=False)
+
+
     def __init__(self, *args, **kwargs):
         super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
 
