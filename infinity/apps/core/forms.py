@@ -336,6 +336,9 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['hyper_equity'].label = _('Hyper equity')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -350,6 +353,8 @@ class GoalCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'type',
 #           'definition',
             'name',
@@ -383,6 +388,9 @@ class GoalUpdateForm(forms.ModelForm):
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['hyper_equity'].label = _('Hyper equity')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Goal
@@ -391,6 +399,8 @@ class GoalUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'type',
             'name',
             'reason',
@@ -421,6 +431,9 @@ class WorkUpdateForm(forms.ModelForm):
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Work
@@ -429,10 +442,11 @@ class WorkUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'file',
             'description',
-            'url',
             'parent_work_id',
             'task',
             'language',
@@ -466,14 +480,15 @@ class WorkCreateForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({'placeholder': _('Give a title to your work.')})
         self.fields['description'].label = _('<b>Description:</b> (details about the work, used as body.)')
         self.fields['description'].widget.attrs.update({'placeholder': _('Here is a little story of my work.')})
-        self.fields['url'].label = _('<b>Link:</b> (you can give external link to your work description)')
-        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['file'].label = _('<b>File:</b> (you can upload a file describing your work)')
         self.fields['file'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['parent_work_id'].label = _('<b>Parent Work Id:</b> (integer referring to other work)')
         self.fields['parent_work_id'].widget.attrs.update({'placeholder': _('optional')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -488,9 +503,10 @@ class WorkCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'description',
-            'url',
             'file',
             'parent_work_id',
             'language',
@@ -524,6 +540,9 @@ class IdeaUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Idea
@@ -532,6 +551,8 @@ class IdeaUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'summary',
             'description',
@@ -599,6 +620,9 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['super_equity'].label = _('Super equity')
         self.fields['sharewith'].label = _('Share with:')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -613,6 +637,8 @@ class IdeaCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'goal',
             'name',
             'summary',
@@ -644,6 +670,9 @@ class StepUpdateForm(forms.ModelForm):
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Step
@@ -653,6 +682,8 @@ class StepUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'objective',
             'priority',
@@ -697,6 +728,9 @@ class StepCreateForm(forms.ModelForm):
         self.fields['deliverables'].widget.attrs.update({'placeholder': _('complete solar assembly drawings 0\\1, solar cell assembly 1\\2')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -713,6 +747,8 @@ class StepCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'objective',
             'priority',
@@ -745,6 +781,9 @@ class TaskUpdateForm(forms.ModelForm):
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Task
@@ -754,7 +793,10 @@ class TaskUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
+            'description',
             'priority',
             'step',
             'language',
@@ -785,6 +827,9 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the task.')})
         self.fields['priority'].label = _("<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number means the task has to be done earlier)")
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -801,7 +846,10 @@ class TaskCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
+            'description',
             'priority',
             'language',
             'personal',
@@ -935,6 +983,9 @@ class PlanUpdateForm(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Update')))
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
 
     class Meta:
@@ -945,6 +996,8 @@ class PlanUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'situation',
             'deliverable',
@@ -1040,6 +1093,9 @@ class PlanCreateForm(forms.ModelForm):
         self.fields['deliverable'].widget.attrs.update({'placeholder': _("Example:\n\nA working prototype of solar water condenser, and high quality open designs published on GitHub, so others could easily replicate.")})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
        #self.fields['plain_equity'].label = _('Plain equity')
 
         try:
@@ -1054,6 +1110,8 @@ class PlanCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'goal',
             'idea',
             'name',

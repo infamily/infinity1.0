@@ -60,6 +60,11 @@
                     <p align="center"><i>{% trans "(last commented" %} {{ goal_hours }} {% trans "hours ago)" %}</i></p>
                     {% for goal in goal_list %}
                         {% if goal.translation %} {# if goal translated #}
+
+                            {% if goal.object.is_link %}
+                            <span class="badge">{% trans "link" %}</span>
+                            {% endif %}
+
                             <b>
                                 {% if goal.object.personal %}
                                 <i class="fa {% if goal.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
@@ -74,7 +79,7 @@
                                 <a href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
                             {% endif %}
 
-                            ({{goal.object.comment_count}} comments)
+                            ({{goal.object.comment_count}} comments) 
 
                             <br/>
 
@@ -124,6 +129,11 @@
                 {% for idea in idea_list %}
                     
                     {% if idea.translation %} {# if idea translated #}
+
+                            {% if idea.object.is_link %}
+                            <span class="badge">{% trans "link" %}</span>
+                            {% endif %}
+
                         <b>
                             {% if idea.object.personal %}
                             <i class="fa {% if idea.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
@@ -195,6 +205,11 @@
                 <p align="center"><i>{% trans "(last commented" %} {{ plan_hours }} {% trans "hours ago)" %}</i></p>
                 {% for plan in plan_list %}
                     {% if plan.translation %}  {# if plan translated #}
+
+                            {% if plan.object.is_link %}
+                            <span class="badge">{% trans "link" %}</span>
+                            {% endif %}
+
                     <b>
                         {% if plan.object.personal %}
                         <i class="fa {% if plan.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
@@ -265,6 +280,11 @@
 
                 {% for step in step_list %}
                     {% if step.translation %} {# if step translated #}
+
+                            {% if step.object.is_link %}
+                            <span class="badge">{% trans "link" %}</span>
+                            {% endif %}
+
                         <b>
                             {% if step.object.personal %}
                             <i class="fa {% if step.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
@@ -337,6 +357,11 @@
 
                 {% for task in task_list %}
                     {% if task.translation %} {# if task translated #}
+
+                            {% if task.object.is_link %}
+                            <span class="badge">{% trans "link" %}</span>
+                            {% endif %}
+
                         <b>
                             {% if task.object.personal %}
                             <i class="fa {% if task.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %}
