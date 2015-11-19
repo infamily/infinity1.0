@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 
 
 {% block title %}t: {{ object.name }}{% endblock title %}
@@ -37,7 +38,13 @@ function showLess(){
     <a href="{{ translate_url }}">[+]</a>
     <!-- /translations -->
     <h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>{% if object.user == request.user %}[<a href="{% if not translation %}{% url "task-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% if not translation %}{% url "task-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">delete</a>]{% endif %}
-
+<br/>
+<br/>
+{% if not translation %}
+{{object.description|markdown}}
+{% else %}
+{{translation.description|markdown}}
+{% endif %}
 <div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 
 {% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>shared with:</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
