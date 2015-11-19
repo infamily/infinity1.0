@@ -463,6 +463,7 @@ class Task(BaseContentModel):
         blank=False,
         null=False,
     )
+    description = MarkdownField(blank=False)
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
