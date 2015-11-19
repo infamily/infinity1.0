@@ -63,6 +63,9 @@ function showLess(){
 {% for object in work_list %}
     <ul class="list-group">
       <li class="list-group-item">
+			{% if object.is_link %}
+			<span class="badge">{% trans "link" %}</span>
+			{% endif %}
          <a href="{% url "work-detail" object.pk %}">{{object.name}}</a> 
          <p>{{object.description}}</p>
       </li>

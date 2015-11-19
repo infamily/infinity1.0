@@ -89,6 +89,9 @@ $(document).ready( function() {
 {% for object in plan_list %}
     <ul class="list-group">
       <li class="list-group-item">
+			{% if object.is_link %}
+			<span class="badge">{% trans "link" %}</span>
+			{% endif %}
          <a href="{% url "plan-detail" object.pk %}">{{object.name}}</a> 
          <p>{{object.situation}}</p>
       </li>

@@ -75,7 +75,11 @@ function showLess(){
 {% for object in task_list reversed %}
     <ul class="list-group">
       <li class="list-group-item">
+			{% if object.is_link %}
+			<span class="badge">{% trans "link" %}</span>
+			{% endif %}
       <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}">{{object.name}}</a>
+           <p>{{object.description|truncatechars:120}}</p>
       </li>
     </ul>
 {% endfor %}

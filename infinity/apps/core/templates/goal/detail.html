@@ -88,6 +88,9 @@ $(document).ready( function() {
   {% for object in idea_list %}
       <ul class="list-group">
         <li class="list-group-item"> 
+			{% if object.is_link %}
+			<span class="badge">{% trans "link" %}</span>
+			{% endif %}
            <a href="{% url "idea-detail" object.pk %}">{{object.name}}</a>
            <p>{{object.description|truncatechars:120}}</p>
         </li>

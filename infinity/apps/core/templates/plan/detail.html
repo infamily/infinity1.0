@@ -90,6 +90,9 @@ $(document).ready( function() {
 {% for object in step_list %}
     <ul class="list-group">
       <li class="list-group-item">
+			{% if object.is_link %}
+			<span class="badge">{% trans "link" %}</span>
+			{% endif %}
          <b>[{{object.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" object.pk %}">{{object.name}}</a> 
          <p>{{object.objective}}</p>
       </li>
