@@ -137,6 +137,13 @@ class Comment(models.Model):
 
 
 class BaseContentModel(models.Model):
+    is_link = models.BooleanField(default=False)
+    url = models.URLField(
+        max_length=150,
+        unique=False,
+        null=True,
+        blank=True,
+    )
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
@@ -467,12 +474,6 @@ class Work(BaseContentModel):
         related_name='task_works',
         blank=False,
         null=False,
-    )
-    url = models.URLField(
-        max_length=150,
-        unique=False,
-        null=True,
-        blank=True,
     )
     file = models.FileField(
         null=True,
