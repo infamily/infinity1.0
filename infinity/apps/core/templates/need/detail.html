@@ -94,7 +94,7 @@ $(document).ready( function() {
         </li>
       </ul>
   {% endfor %}
-  <a  href="{% url "wider" %}">{% trans "+Add Goal" %}</a>
+  <a  href="{% url "goal-create" object.pk %}">{% trans "+Add Goal" %}</a>
   </div>
 </div>
 
