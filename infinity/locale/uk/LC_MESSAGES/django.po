@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 19:18-0800\n"
+"POT-Creation-Date: 2015-11-20 03:52-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -370,6 +370,20 @@ msgstr ""
 msgid "Define what you need"
 msgstr ""
 
+#: infinity/apps/core/templates/definition/detail.html:55
+#: infinity/apps/core/templates/goal/detail.html:92
+#: infinity/apps/core/templates/idea/detail.html:93
+#: infinity/apps/core/templates/need/detail.html:90
+#: infinity/apps/core/templates/plan/detail.html:94
+#: infinity/apps/core/templates/step/detail.html:79
+#: infinity/apps/core/templates/task/detail.html:67
+#: infinity/apps/core/templates/work/detail.html:87
+#: infinity/templates/home.html:65 infinity/templates/home.html.py:134
+#: infinity/templates/home.html:210 infinity/templates/home.html.py:285
+#: infinity/templates/home.html:362 infinity/templates/inbox.html:60
+msgid "link"
+msgstr ""
+
 #: infinity/apps/core/templates/goal/create1.html:10
 msgid "Goal create"
 msgstr ""
@@ -479,19 +493,6 @@ msgstr ""
 #: infinity/apps/core/templates/idea/list2.html:9
 #: infinity/templates/base.html:96 infinity/templates/home.html:108
 msgid "Ideas"
-msgstr ""
-
-#: infinity/apps/core/templates/goal/detail.html:92
-#: infinity/apps/core/templates/idea/detail.html:93
-#: infinity/apps/core/templates/need/detail.html:90
-#: infinity/apps/core/templates/plan/detail.html:94
-#: infinity/apps/core/templates/step/detail.html:79
-#: infinity/apps/core/templates/task/detail.html:67
-#: infinity/apps/core/templates/work/detail.html:87
-#: infinity/templates/home.html:65 infinity/templates/home.html.py:134
-#: infinity/templates/home.html:210 infinity/templates/home.html.py:285
-#: infinity/templates/home.html:362 infinity/templates/inbox.html:60
-msgid "link"
 msgstr ""
 
 #: infinity/apps/core/templates/goal/detail.html:99
