@@ -445,9 +445,9 @@ class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'object_list': self.object_list,
         })
-       #context.update({
-       #    'idea_list': Idea.objects.filter(goal=kwargs.get('object')).order_by('-id')
-       #})
+        context.update({
+            'goal_list': Goal.objects.filter(need=kwargs.get('object')).order_by('-id')
+        })
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
