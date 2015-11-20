@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 19:18-0800\n"
-"PO-Revision-Date: 2015-11-20 12:52+0200\n"
+"POT-Creation-Date: 2015-11-20 03:52-0800\n"
+"PO-Revision-Date: 2015-11-20 13:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -402,6 +402,20 @@ msgstr "邀请好友帮忙！"
 msgid "Define what you need"
 msgstr "下定义一下你需要什么"
 
+#: infinity/apps/core/templates/definition/detail.html:55
+#: infinity/apps/core/templates/goal/detail.html:92
+#: infinity/apps/core/templates/idea/detail.html:93
+#: infinity/apps/core/templates/need/detail.html:90
+#: infinity/apps/core/templates/plan/detail.html:94
+#: infinity/apps/core/templates/step/detail.html:79
+#: infinity/apps/core/templates/task/detail.html:67
+#: infinity/apps/core/templates/work/detail.html:87
+#: infinity/templates/home.html:65 infinity/templates/home.html.py:134
+#: infinity/templates/home.html:210 infinity/templates/home.html.py:285
+#: infinity/templates/home.html:362 infinity/templates/inbox.html:60
+msgid "link"
+msgstr "链接"
+
 #: infinity/apps/core/templates/goal/create1.html:10
 msgid "Goal create"
 msgstr "创造目标"
@@ -412,6 +426,9 @@ msgid ""
 "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
 "problem.</font></i></center>\n"
 msgstr ""
+"\n"
+"<center><i><font color=\"grey\">目标是个问题的否定。下定义一下问题。</font></"
+"i></center>\n"
 
 #: infinity/apps/core/templates/goal/detail.html:23
 #: infinity/apps/core/templates/goal/detail.html:41
@@ -512,19 +529,6 @@ msgstr "谁可见:"
 #: infinity/templates/base.html:96 infinity/templates/home.html:108
 msgid "Ideas"
 msgstr "思路"
-
-#: infinity/apps/core/templates/goal/detail.html:92
-#: infinity/apps/core/templates/idea/detail.html:93
-#: infinity/apps/core/templates/need/detail.html:90
-#: infinity/apps/core/templates/plan/detail.html:94
-#: infinity/apps/core/templates/step/detail.html:79
-#: infinity/apps/core/templates/task/detail.html:67
-#: infinity/apps/core/templates/work/detail.html:87
-#: infinity/templates/home.html:65 infinity/templates/home.html.py:134
-#: infinity/templates/home.html:210 infinity/templates/home.html.py:285
-#: infinity/templates/home.html:362 infinity/templates/inbox.html:60
-msgid "link"
-msgstr "链接"
 
 #: infinity/apps/core/templates/goal/detail.html:99
 msgid "+New Idea"
