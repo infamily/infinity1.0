@@ -488,15 +488,15 @@ class GoalCreateView(CreateView):
         return context
 
     def dispatch(self, *args, **kwargs):
-       #if kwargs.get('definition_id'):
-       #    self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
-       #else:
-       #    self.definition_instance = False
+        if kwargs.get('need_id'):
+            self.need_instance = get_object_or_404(Need, pk=int(kwargs['need_id']))
+        else:
+            self.need_instance = False
         return super(GoalCreateView, self).dispatch(*args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super(GoalCreateView, self).get_form_kwargs()
-       #kwargs['definition_instance'] = self.definition_instance
+        kwargs['need_instance'] = self.need_instance
         kwargs['request'] = self.request
         return kwargs
 
@@ -1332,7 +1332,7 @@ class DefinitionDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
             'object_list': self.object_list,
         })
         context.update({
-            'goal_list': Goal.objects.filter(definition=kwargs.get('object')).order_by('-id')
+            'need_list': Need.objects.filter(definition=kwargs.get('object')).order_by('-id')
         })
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
