@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% load crispy_forms_tags %}
 
@@ -45,13 +46,16 @@ Defined Meaning ID: {{object.defined_meaning_id}}
     
 </div>
 
-  <div class="panel-heading">Related definitions</div>
+  <div class="panel-heading">Needs</div>
   <div class="panel-body">
-  {% for object in goal_list %}
+  {% for object in need_list %}
       <ul class="list-group">
         <li class="list-group-item">
-           <a href="{% url "goal-detail" object.pk %}">{{object.name}}</a>
-           <p>{{object.reason}}</p>
+            {% if object.is_link %}
+            <span class="badge">{% trans "link" %}</span>
+            {% endif %}
+           <a href="{% url "need-detail" object.pk %}">{{object.name}}</a>
+           <p>{{object.content}}</p>
         </li>
       </ul>
   {% endfor %}

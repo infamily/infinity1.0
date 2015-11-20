@@ -80,7 +80,7 @@ urlpatterns = patterns(
         name="goal-create"
     ),
     url(
-        r'^goal-create/(?P<definition_id>\d+)/$',
+        r'^goal-create/(?P<need_id>\d+)/$',
         GoalCreateView.as_view(),
         name="goal-create"
     ),

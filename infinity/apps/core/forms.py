@@ -21,6 +21,7 @@ from core.models import Task
 from core.models import Work
 from core.models import Comment
 from .fields import DefinitionChoiceField
+from .fields import NeedChoiceField
 from .fields import TypeChoiceField
 from .fields import GoalChoiceField
 from .fields import GoalChoiceFieldMultiple
@@ -273,7 +274,7 @@ class GoalCreateForm(forms.ModelForm):
 #   hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
 
     def __init__(self, *args, **kwargs):
-#       definition_instance = kwargs.pop('definition_instance')
+        need_instance = kwargs.pop('need_instance')
         request = kwargs.pop('request')
         super(GoalCreateForm, self).__init__(*args, **kwargs)
 
@@ -281,36 +282,34 @@ class GoalCreateForm(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Create')))
 
-#       if definition_instance:
-#           self.initial['definition'] = definition_instance
-#           self.initial['type'] = definition_instance.type
-
+        if need_instance:
+            self.initial['need'] = need_instance
 
         self.fields['type'] = TypeChoiceField(
             queryset=Type.objects.all(),
             widget=AutoHeavySelect2Widget(
                 select2_options={
                     'minimumInputLength': 0,
-                    'placeholder': unicode(_('Select the type of your need...')),
+                    'placeholder': unicode(_('Select the type of the problem...')),
                 }
             ),
-            required=False
+            required=True
         )
 
-#       self.fields['definition'] = DefinitionChoiceField(
-#           widget=AutoHeavySelect2Widget(
-#               select2_options={
-#                   'minimumInputLength': 1,
-#                   'placeholder': unicode(_('Select the thing that you need...')),
-#                   'ajax': {
-#                       'dataType': 'json',
-#                       'quietMillis': 100,
-#                       'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
-#                       'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-#                   },
-#               }
-#           )
-#       )
+        self.fields['need'] = NeedChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the thing that you need...')),
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            ), required=False,
+        )
 
         self.fields['sharewith'] = MembersChoiceField(
             widget=AutoHeavySelect2MultipleWidget(
@@ -322,10 +321,8 @@ class GoalCreateForm(forms.ModelForm):
             label=_('Share with:')
         )
 
-#       self.fields['definition'].label = _("""<b>Topic:</b> (relevant to problem,
-#                                     <a href="/definition-create/">click here</a> to
-#                                     add if you can't find it.)""")
-        self.fields['type'].label = _("<b>Category:</b> (of the problem)")
+        self.fields['type'].label = _("<b>Problem category:</b>")
+        self.fields['need'].label = _("""<b>Related Need:</b> (Optional)""")
         self.fields['name'].label = _("""<b>Title:</b> (e.g., Potable Water
                                       Shortage, <a href="/goal/list/">check</a> if the problem is not
                                       defined yet.)""")
@@ -356,8 +353,8 @@ class GoalCreateForm(forms.ModelForm):
             'is_link',
             'url',
             'type',
-#           'definition',
             'name',
+            'need',
             'reason',
             'language',
             'personal',
@@ -386,6 +383,22 @@ class GoalUpdateForm(forms.ModelForm):
             ), required=False
         )
 
+        self.fields['need'] = NeedChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the thing that you need...')),
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            ), required=False,
+        )
+
+
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['hyper_equity'].label = _('Hyper equity')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
@@ -403,6 +416,7 @@ class GoalUpdateForm(forms.ModelForm):
             'url',
             'type',
             'name',
+            'need',
             'reason',
             'language',
             'personal',
