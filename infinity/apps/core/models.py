@@ -353,8 +353,8 @@ class Goal(BaseContentModel):
         blank=False,
         null=False,
     )
-    definition = models.ForeignKey(
-        'Definition',
+    need = models.ForeignKey(
+        'Need',
         blank=True,
         null=True,
     )
