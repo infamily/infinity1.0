@@ -232,7 +232,7 @@ class GoalTest(WebTest, AuthTestMixin):
 
         url = reverse('goal-detail', args=(goal.pk,))
 
-        resp = self.app.get(url)
+        resp = self.app.get(url, user=self.user)
         self.assertContains(resp, goal.name)
 
         #self.assertContains(resp, goal.personal)
@@ -1216,7 +1216,7 @@ class DefinitionTest(WebTest, AuthTestMixin):
         definition = mommy.make('core.Definition', language=language, user=self.user, _fill_optional=True)
         url = reverse('definition-detail', args=(definition.pk,))
 
-        resp = self.app.get(url)
+        resp = self.app.get(url, user=self.user)
 
         #self.assertContains(resp, definition.type or "")
 
