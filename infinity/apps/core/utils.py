@@ -220,3 +220,19 @@ class UpdateViewWrapper(OwnerMixin, UpdateView):
         self.object.user = self.request.user
         self.object.save()
         return super(UpdateViewWrapper, self).form_valid(form)
+
+
+class CreateViewWrapper(CreateView):
+
+    def form_valid(self, form):
+        """
+        If the form is valid, send notifications.
+        """
+
+        all_sharewith_users = form.cleaned_data.get('sharewith', False)
+        if all_sharewith_users:
+            new_sharewith_users = all_sharewith_users.exclude(id__in=self.object.sharewith.all())
+            # Send email logick here
+            notify_new_sharewith_users(new_sharewith_users, self.object)
+        return super(CreateViewWrapper, self).form_valid(form)
+

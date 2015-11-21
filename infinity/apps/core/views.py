@@ -32,6 +32,7 @@ from .utils import CommentsContentTypeWrapper
 from .utils import ViewTypeWrapper
 from .utils import DetailViewWrapper
 from .utils import UpdateViewWrapper
+from .utils import CreateViewWrapper
 from .models import *
 from .forms import *
 from .filters import *
@@ -332,7 +333,7 @@ class CommentDeleteView(DeleteView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class NeedCreateView(CreateView):
+class NeedCreateView(CreateViewWrapper):
 
     """Need create view"""
     model = Need
@@ -443,7 +444,7 @@ class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class GoalCreateView(CreateView):
+class GoalCreateView(CreateViewWrapper):
 
     """Goal create view"""
     model = Goal
@@ -628,7 +629,7 @@ class WorkUpdateView(UpdateViewWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class WorkCreateView(CreateView):
+class WorkCreateView(CreateViewWrapper):
 
     """Work create view"""
     model = Work
@@ -772,7 +773,7 @@ class IdeaUpdateView(UpdateViewWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class IdeaCreateView(CreateView):
+class IdeaCreateView(CreateViewWrapper):
 
     """Idea create view"""
     model = Idea
@@ -924,7 +925,7 @@ class StepUpdateView(UpdateViewWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class StepCreateView(CreateView):
+class StepCreateView(CreateViewWrapper):
 
     """Step create view"""
     model = Step
@@ -1076,7 +1077,7 @@ class TaskUpdateView(UpdateViewWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class TaskCreateView(CreateView):
+class TaskCreateView(CreateViewWrapper):
 
     """Task create view"""
     model = Task
@@ -1352,7 +1353,7 @@ class PlanUpdateView(UpdateViewWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class PlanCreateView(CreateView):
+class PlanCreateView(CreateViewWrapper):
 
     """Plan create view"""
     model = Plan
