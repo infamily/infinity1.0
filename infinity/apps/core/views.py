@@ -31,6 +31,8 @@ from core.forms import TranslationUpdateForm
 from .utils import CommentsContentTypeWrapper
 from .utils import ViewTypeWrapper
 from .utils import DetailViewWrapper
+from .utils import UpdateViewWrapper
+from .utils import CreateViewWrapper
 from .models import *
 from .forms import *
 from .filters import *
@@ -331,7 +333,7 @@ class CommentDeleteView(DeleteView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class NeedCreateView(CreateView):
+class NeedCreateView(CreateViewWrapper):
 
     """Need create view"""
     model = Need
@@ -380,7 +382,7 @@ class NeedDeleteView(OwnerMixin, DeleteView):
         return reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
-class NeedUpdateView(OwnerMixin, UpdateView):
+class NeedUpdateView(UpdateViewWrapper):
 
     """Need update view"""
     model = Need
@@ -389,28 +391,6 @@ class NeedUpdateView(OwnerMixin, UpdateView):
     template_name = "need/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(NeedUpdateView, self).form_valid(form)
-
-    def get_success_url(self):
-        messages.success(self.request, _("Need succesfully updated"))
-        return reverse("need-detail", args=[self.object.pk, ])
-
-
-class NeedUpdateView(OwnerMixin, UpdateView):
-
-    """Need update view"""
-    model = Need
-    form_class = NeedUpdateForm
-    slug_field = "pk"
-    template_name = "need/update.html"
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(NeedUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -464,7 +444,7 @@ class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class GoalCreateView(CreateView):
+class GoalCreateView(CreateViewWrapper):
 
     """Goal create view"""
     model = Goal
@@ -474,7 +454,7 @@ class GoalCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-       #self.object.definition = form.cleaned_data.get('definition')
+        #self.object.definition = form.cleaned_data.get('definition')
         self.object.save()
         return super(GoalCreateView, self).form_valid(form)
 
@@ -530,7 +510,7 @@ class GoalDeleteView(OwnerMixin, DeleteView):
         return reverse("home") #reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
-class GoalUpdateView(OwnerMixin, UpdateView):
+class GoalUpdateView(UpdateViewWrapper):
 
     """Goal update view"""
     model = Goal
@@ -539,9 +519,6 @@ class GoalUpdateView(OwnerMixin, UpdateView):
     template_name = "goal/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(GoalUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -635,7 +612,7 @@ class WorkListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class WorkUpdateView(OwnerMixin, UpdateView):
+class WorkUpdateView(UpdateViewWrapper):
 
     """Work update view"""
     model = Work
@@ -644,9 +621,6 @@ class WorkUpdateView(OwnerMixin, UpdateView):
     template_name = "work/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(WorkUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -655,7 +629,7 @@ class WorkUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class WorkCreateView(CreateView):
+class WorkCreateView(CreateViewWrapper):
 
     """Work create view"""
     model = Work
@@ -782,7 +756,7 @@ class IdeaListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class IdeaUpdateView(OwnerMixin, UpdateView):
+class IdeaUpdateView(UpdateViewWrapper):
 
     """Idea update view"""
     model = Idea
@@ -791,9 +765,6 @@ class IdeaUpdateView(OwnerMixin, UpdateView):
     template_name = "idea/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(IdeaUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -802,7 +773,7 @@ class IdeaUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class IdeaCreateView(CreateView):
+class IdeaCreateView(CreateViewWrapper):
 
     """Idea create view"""
     model = Idea
@@ -937,7 +908,7 @@ class StepListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class StepUpdateView(OwnerMixin, UpdateView):
+class StepUpdateView(UpdateViewWrapper):
 
     """Step update view"""
     model = Step
@@ -946,9 +917,6 @@ class StepUpdateView(OwnerMixin, UpdateView):
     template_name = "step/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(StepUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -957,7 +925,7 @@ class StepUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class StepCreateView(CreateView):
+class StepCreateView(CreateViewWrapper):
 
     """Step create view"""
     model = Step
@@ -1092,7 +1060,7 @@ class TaskListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class TaskUpdateView(OwnerMixin, UpdateView):
+class TaskUpdateView(UpdateViewWrapper):
 
     """Task update view"""
     model = Task
@@ -1101,9 +1069,6 @@ class TaskUpdateView(OwnerMixin, UpdateView):
     template_name = "task/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(TaskUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -1112,7 +1077,7 @@ class TaskUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class TaskCreateView(CreateView):
+class TaskCreateView(CreateViewWrapper):
 
     """Task create view"""
     model = Task
@@ -1371,7 +1336,7 @@ class PlanListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class PlanUpdateView(OwnerMixin, UpdateView):
+class PlanUpdateView(UpdateViewWrapper):
 
     """Plan update view"""
     model = Plan
@@ -1380,9 +1345,6 @@ class PlanUpdateView(OwnerMixin, UpdateView):
     template_name = "plan/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(PlanUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -1391,7 +1353,7 @@ class PlanUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class PlanCreateView(CreateView):
+class PlanCreateView(CreateViewWrapper):
 
     """Plan create view"""
     model = Plan
