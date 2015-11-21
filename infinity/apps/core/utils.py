@@ -6,6 +6,7 @@ from django.core.exceptions import FieldError
 
 from django.template.loader import render_to_string
 from django.views.generic import DetailView
+from django.views.generic import UpdateView
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404
@@ -22,6 +23,9 @@ from core.models import Language
 from .forms import CommentCreateFormDetail
 from .models import Comment
 from .models import Translation
+
+from users.mixins import OwnerMixin
+
 
 
 def notify_mentioned_users(comment_instance):
@@ -181,3 +185,38 @@ class CommentsContentTypeWrapper(CreateView):
         self.object.save()
         notify_mentioned_users(self.object)
         return super(CommentsContentTypeWrapper, self).form_valid(form)
+
+
+def notify_new_sharewith_users(list_of_users):
+
+#   subject_template_path = 'mail/content/sharewith_notification_subject.txt'
+#   email_template_path = 'mail/content/sharewith_notification.html'
+
+#   from django.contrib.sites.models import Site
+
+#   #url = 
+#   #link = path.join(path.join('http://', Site.objects.get_current().domain), url)
+
+#   for user in list_of_users:
+#   	send_mail_template(subject_template_path,
+#   					   email_template_path,
+#   					   recipient_list=[user.email],
+#   					   context={'user': user.username,
+#   								'content_object': '',
+#   								'link': 'https://'})
+    pass
+
+
+class UpdateViewWrapper(OwnerMixin, UpdateView):
+
+    def form_valid(self, form):
+        """
+        If the form is valid, send notifications.
+        """
+        all_sharewith_users = form.cleaned_data.get('sharewith', False)
+
+        if all_sharewith_users:
+            new_sharewith_users = all_sharewith_users.exclude(id__in=self.object.sharewith.all())
+            print new_sharewith_users
+            # Send email logick here
+        return super(UpdateViewWrapper, self).form_valid(form)

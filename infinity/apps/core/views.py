@@ -31,6 +31,7 @@ from core.forms import TranslationUpdateForm
 from .utils import CommentsContentTypeWrapper
 from .utils import ViewTypeWrapper
 from .utils import DetailViewWrapper
+from .utils import UpdateViewWrapper
 from .models import *
 from .forms import *
 from .filters import *
@@ -782,7 +783,7 @@ class IdeaListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class IdeaUpdateView(OwnerMixin, UpdateView):
+class IdeaUpdateView(UpdateViewWrapper):
 
     """Idea update view"""
     model = Idea
@@ -792,13 +793,6 @@ class IdeaUpdateView(OwnerMixin, UpdateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-
-        all_sharewith_users = form.cleaned_data.get('sharewith', False)
-
-        if all_sharewith_users:
-            new_sharewith_users = sharewith_users.exclude(id__in=self.object.sharewith.all())
-            # Send email logick here
-
         self.object.user = self.request.user
         self.object.save()
         return super(IdeaUpdateView, self).form_valid(form)
