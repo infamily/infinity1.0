@@ -137,6 +137,13 @@ class Comment(models.Model):
 
 
 class BaseContentModel(models.Model):
+    is_link = models.BooleanField(default=False)
+    url = models.URLField(
+        max_length=150,
+        unique=False,
+        null=True,
+        blank=True,
+    )
     created_at = models.DateTimeField(
         auto_now=False,
         auto_now_add=True,
@@ -346,8 +353,8 @@ class Goal(BaseContentModel):
         blank=False,
         null=False,
     )
-    definition = models.ForeignKey(
-        'Definition',
+    need = models.ForeignKey(
+        'Need',
         blank=True,
         null=True,
     )
@@ -456,6 +463,7 @@ class Task(BaseContentModel):
         blank=False,
         null=False,
     )
+    description = MarkdownField(blank=False)
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
@@ -467,12 +475,6 @@ class Work(BaseContentModel):
         related_name='task_works',
         blank=False,
         null=False,
-    )
-    url = models.URLField(
-        max_length=150,
-        unique=False,
-        null=True,
-        blank=True,
     )
     file = models.FileField(
         null=True,

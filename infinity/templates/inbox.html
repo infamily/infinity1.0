@@ -55,6 +55,11 @@
                     <p align="center"><i>{% trans "(last commented" %} {{ need_hours }} {% trans "hours ago)" %}</i></p>
                     {% for need in need_list %}
                         {% if need.translation %} {# if need translated #}
+
+                            {% if need.object.is_link %}
+                            <span class="badge">{% trans "link" %}</span>
+                            {% endif %}
+
                             <b>
                                 {% if need.object.personal %}
                                 <i class="fa {% if need.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>

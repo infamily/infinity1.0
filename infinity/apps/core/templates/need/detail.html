@@ -62,10 +62,13 @@ $(document).ready( function() {
       <a title="Create new Translation" href="{{ translate_url }}">[+]</a>
       <!-- /translations-->
 
-    <h1>{% if not translation %}{{object.name}}{% else %} {{ translation.name }} {% endif %}</h1>{% if object.user == request.user %}
-    [<a href="{% if not translation %}{% url "need-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a>, <a href="{% if not translation %}{% url "need-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]{% endif %}
-
-  <br/>
+      <h1>{% if not translation %}{{object.name}}{% else %} {{ translation.name }} {% endif %}</h1>
+        {% if object.is_link %}
+        <div>
+            <i><span style="color:grey;">{% trans "Source:" %} <a href="{{ object.url }}" style="color:grey;">{{ object.url }}</a>.</span></i>
+        </div>
+        {% endif %}
+    {% if object.user == request.user %}[<a href="{% if not translation %}{% url "need-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a>, <a href="{% if not translation %}{% url "need-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]<br/>{% endif %}
   <br/>
 
   {% if not translation %}
@@ -83,12 +86,15 @@ $(document).ready( function() {
   {% for object in goal_list %}
       <ul class="list-group">
         <li class="list-group-item"> 
+            {% if object.is_link %}
+            <span class="badge">{% trans "link" %}</span>
+            {% endif %}
            <a href="{% url "goal-detail" object.pk %}">{{object.name}}</a>
            <p>{{object.description|truncatechars:120}}</p>
         </li>
       </ul>
   {% endfor %}
-  <a  href="{% url "wider" %}">{% trans "+Add Goal" %}</a>
+  <a  href="{% url "goal-create" object.pk %}">{% trans "+Add Goal" %}</a>
   </div>
 </div>
 

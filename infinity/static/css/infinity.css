@@ -129,13 +129,14 @@ table.table.centered
 /* for the logo */
 .infin {
     font-size: 100px;
-    color: blue;
+    color: black;
     font-family: Cantarell;
 }
 
 .ity {
     font-size: 100px;
-    color: red;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     font-family: Cantarell;
 }
 
@@ -246,6 +247,10 @@ a:visited{
 }
 
 #div_id_define {
+    display: none;
+}
+
+#div_id_url {
     display: none;
 }
 

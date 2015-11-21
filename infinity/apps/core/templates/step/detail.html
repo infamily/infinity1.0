@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% load crispy_forms_tags %}
 {% load django_markdown %}
@@ -37,8 +38,13 @@ function showLess(){
     {% endfor %}
     <a href="{{ translate_url }}">[+]</a>
     <!-- /translations -->
-    <h1>{% if not translation %}{{object.name}}{% else %}{{ translation.name}}{% endif %}</h1>{% if object.user == request.user %}[<a href="{% if not translation %}{% url "step-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% if not translation %}{% url "step-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">delete</a>]{% endif %}
-	<br/>
+    <h1>{% if not translation %}{{object.name}}{% else %}{{ translation.name}}{% endif %}</h1>
+        {% if object.is_link %}
+        <div>
+            <i><span style="color:grey;">{% trans "Source:" %} <a href="{{ object.url }}" style="color:grey;">{{ object.url }}</a>.</span></i>
+        </div>
+        {% endif %}
+    {% if object.user == request.user %}[<a href="{% if not translation %}{% url "step-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% if not translation %}{% url "step-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">delete</a>]<br/>{% endif %}
 	<br/>
 
     {% if not translation %}
@@ -69,7 +75,11 @@ function showLess(){
 {% for object in task_list reversed %}
     <ul class="list-group">
       <li class="list-group-item">
+			{% if object.is_link %}
+			<span class="badge">{% trans "link" %}</span>
+			{% endif %}
       <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}">{{object.name}}</a>
+           <p>{{object.description|truncatechars:120}}</p>
       </li>
     </ul>
 {% endfor %}

@@ -31,6 +31,7 @@ CONSTANCE_CONFIG = {
     'MAX_MENTIONS_PER_COMMENT': (10, '_comment_post_save email notifications per comment'),
     'CONVERSATION_EMAIL_TEMPLATE': ('Hello, your conversation url: {{conversation_url}}, Your password: {{user_password}}', ''),
     'DEFINITION_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
+    'NEED_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
     'GOAL_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
     'IDEA_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),
     'PLAN_CONVERSATION_EMAIL_TEMPLATE': (CONVERSATION_EMAIL_TEMPLATE, 'available tags: {{ conversation_url }}, {{ user_password }}, {{ invited_user }}, {{ existing_user }}, {{ object }}'),

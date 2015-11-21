@@ -14,15 +14,10 @@
         <td>Plan</td>
         <td>
 
-            <b>The</b> <a href="{% url "plan-detail" plan_object.pk %}">{{plan_object}}</a> <b>approach for</b> <a href="{% url "idea-detail" plan_object.idea.pk %}">{{ plan_object.idea.name }}</a> <b>idea.</b>
-
+            <a href="{% url "plan-detail" plan_object.pk %}">{{plan_object}}
         </td>
     </tr>
 </table>
-<div>
-    
-</div>
-<br/>
 
 {% crispy form %}
 {% markdown_media %}

@@ -65,7 +65,7 @@ function showProposals(data) {
     data.forEach(function(entry) {
         definitionsBlock.insertAdjacentHTML(
             'afterend', '<div class="row hint form-group"><div class="col-sm-10"><p class="hint-text">' + entry[0] +
-            '</p></div><div class="col-sm-2"><a class="btn btn-primary choose-definition" style="color:red;" href="' + entry[1] + '"><b>y</b></a></div></div>'
+            '</p></div><div class="col-sm-2"><a class="btn btn-primary choose-definition" style="color:white;" href="' + entry[1] + '">y</a></div></div>'
         );
     });
     // definitionsBlock.insertAdjacentHTML('afterend', '<div align="center" class="row hint form-group"><b>Did you mean?</b></div>');

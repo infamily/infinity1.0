@@ -1,7 +1,8 @@
 from django_select2.fields import AutoModelSelect2Field
 from django_select2.fields import AutoModelSelect2MultipleField
 
-from .models import Definition
+from .models import Definition 
+from .models import Need
 from .models import Type
 from .models import Goal
 from .models import Idea
@@ -22,6 +23,9 @@ class DefinitionChoiceField(AutoModelSelect2Field):
     queryset = Definition.objects.all()
     search_fields = ['name__icontains']
 
+class NeedChoiceField(AutoModelSelect2Field):
+    queryset = Need.objects.all()
+    search_fields = ['name__icontains']
 
 class GoalChoiceField(AutoModelSelect2Field):
     queryset = Goal.objects

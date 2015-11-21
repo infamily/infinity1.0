@@ -17,3 +17,12 @@ $(function() {
     $("#div_id_sharewith").show();
   }
 });
+
+$(function() {
+  $("#id_is_link").change(function() {$("#div_id_url").toggle()});
+
+  if ($("#id_is_link").is(":checked")) {
+    // Show url box if is_link checkbox is checked
+    $("#div_id_url").show();
+  }
+});
