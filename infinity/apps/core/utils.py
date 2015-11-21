@@ -231,8 +231,7 @@ class CreateViewWrapper(CreateView):
 
         all_sharewith_users = form.cleaned_data.get('sharewith', False)
         if all_sharewith_users:
-            new_sharewith_users = all_sharewith_users.exclude(id__in=self.object.sharewith.all())
             # Send email logick here
-            notify_new_sharewith_users(new_sharewith_users, self.object)
+            notify_new_sharewith_users(all_sharewith_users, self.object)
         return super(CreateViewWrapper, self).form_valid(form)
 
