@@ -397,25 +397,6 @@ class NeedUpdateView(UpdateViewWrapper):
         return reverse("need-detail", args=[self.object.pk, ])
 
 
-class NeedUpdateView(OwnerMixin, UpdateView):
-
-    """Need update view"""
-    model = Need
-    form_class = NeedUpdateForm
-    slug_field = "pk"
-    template_name = "need/update.html"
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(NeedUpdateView, self).form_valid(form)
-
-    def get_success_url(self):
-        messages.success(self.request, _("Need succesfully updated"))
-        return reverse("need-detail", args=[self.object.pk, ])
-
-
 class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     """Need detail view"""
