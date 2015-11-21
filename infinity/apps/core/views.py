@@ -381,7 +381,7 @@ class NeedDeleteView(OwnerMixin, DeleteView):
         return reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
-class NeedUpdateView(OwnerMixin, UpdateView):
+class NeedUpdateView(UpdateViewWrapper):
 
     """Need update view"""
     model = Need
@@ -390,9 +390,6 @@ class NeedUpdateView(OwnerMixin, UpdateView):
     template_name = "need/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(NeedUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -531,7 +528,7 @@ class GoalDeleteView(OwnerMixin, DeleteView):
         return reverse("home") #reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
-class GoalUpdateView(OwnerMixin, UpdateView):
+class GoalUpdateView(UpdateViewWrapper):
 
     """Goal update view"""
     model = Goal
@@ -540,9 +537,6 @@ class GoalUpdateView(OwnerMixin, UpdateView):
     template_name = "goal/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(GoalUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -636,7 +630,7 @@ class WorkListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class WorkUpdateView(OwnerMixin, UpdateView):
+class WorkUpdateView(UpdateViewWrapper):
 
     """Work update view"""
     model = Work
@@ -645,9 +639,6 @@ class WorkUpdateView(OwnerMixin, UpdateView):
     template_name = "work/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(WorkUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -792,9 +783,6 @@ class IdeaUpdateView(UpdateViewWrapper):
     template_name = "idea/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(IdeaUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -938,7 +926,7 @@ class StepListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class StepUpdateView(OwnerMixin, UpdateView):
+class StepUpdateView(UpdateViewWrapper):
 
     """Step update view"""
     model = Step
@@ -947,9 +935,6 @@ class StepUpdateView(OwnerMixin, UpdateView):
     template_name = "step/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(StepUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -1093,7 +1078,7 @@ class TaskListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class TaskUpdateView(OwnerMixin, UpdateView):
+class TaskUpdateView(UpdateViewWrapper):
 
     """Task update view"""
     model = Task
@@ -1102,9 +1087,6 @@ class TaskUpdateView(OwnerMixin, UpdateView):
     template_name = "task/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(TaskUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -1372,7 +1354,7 @@ class PlanListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class PlanUpdateView(OwnerMixin, UpdateView):
+class PlanUpdateView(UpdateViewWrapper):
 
     """Plan update view"""
     model = Plan
@@ -1381,9 +1363,6 @@ class PlanUpdateView(OwnerMixin, UpdateView):
     template_name = "plan/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(PlanUpdateView, self).form_valid(form)
 
     def get_success_url(self):

@@ -27,7 +27,6 @@ from .models import Translation
 from users.mixins import OwnerMixin
 
 
-
 def notify_mentioned_users(comment_instance):
     """
     """
@@ -187,25 +186,22 @@ class CommentsContentTypeWrapper(CreateView):
         return super(CommentsContentTypeWrapper, self).form_valid(form)
 
 
-def notify_new_sharewith_users(list_of_users):
+def notify_new_sharewith_users(list_of_users, object_instance):
 
-#   subject_template_path = 'mail/content/sharewith_notification_subject.txt'
-#   email_template_path = 'mail/content/sharewith_notification.html'
+    from django.contrib.sites.models import Site
+    subject_template_path = 'mail/content/sharewith_notification_subject.txt'
+    email_template_path = 'mail/content/sharewith_notification.html'
+    url = '%s/%s/detail' % (object_instance.__class__.__name__.lower(),
+							object_instance.id)
+    link = path.join(path.join('http://', Site.objects.get_current().domain), url)
 
-#   from django.contrib.sites.models import Site
-
-#   #url = 
-#   #link = path.join(path.join('http://', Site.objects.get_current().domain), url)
-
-#   for user in list_of_users:
-#   	send_mail_template(subject_template_path,
-#   					   email_template_path,
-#   					   recipient_list=[user.email],
-#   					   context={'user': user.username,
-#   								'content_object': '',
-#   								'link': 'https://'})
-    pass
-
+    for user in list_of_users:
+        send_mail_template(subject_template_path,
+            email_template_path,
+            recipient_list=[user.email],
+            context={'user': user.username,
+                    'content_object': object_instance,
+                    'link': link})
 
 class UpdateViewWrapper(OwnerMixin, UpdateView):
 
@@ -213,10 +209,14 @@ class UpdateViewWrapper(OwnerMixin, UpdateView):
         """
         If the form is valid, send notifications.
         """
-        all_sharewith_users = form.cleaned_data.get('sharewith', False)
 
+        all_sharewith_users = form.cleaned_data.get('sharewith', False)
         if all_sharewith_users:
             new_sharewith_users = all_sharewith_users.exclude(id__in=self.object.sharewith.all())
-            print new_sharewith_users
             # Send email logick here
+            notify_new_sharewith_users(new_sharewith_users, self.object)
+		# The rest:
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
         return super(UpdateViewWrapper, self).form_valid(form)
