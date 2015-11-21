@@ -474,7 +474,7 @@ class GoalCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-       #self.object.definition = form.cleaned_data.get('definition')
+        #self.object.definition = form.cleaned_data.get('definition')
         self.object.save()
         return super(GoalCreateView, self).form_valid(form)
 
@@ -792,6 +792,13 @@ class IdeaUpdateView(OwnerMixin, UpdateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
+
+        all_sharewith_users = form.cleaned_data.get('sharewith', False)
+
+        if all_sharewith_users:
+            new_sharewith_users = sharewith_users.exclude(id__in=self.object.sharewith.all())
+            # Send email logick here
+
         self.object.user = self.request.user
         self.object.save()
         return super(IdeaUpdateView, self).form_valid(form)
