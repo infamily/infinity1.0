@@ -14,6 +14,7 @@ from django.views.generic import DetailView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic import FormView
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.utils import timezone
@@ -39,6 +40,38 @@ from .filters import *
 
 from hours.models import HourValue
 from core.models import Language
+
+
+class ContentTypeSubscribeFormView(FormView):
+    form_class = ContentTypeSubscribeForm
+    template_name = "content_type_subscribe_form.html"
+
+    def get_success_url(self):
+        form = self.get_form()
+        content_type_id = form.data.get('content_type')
+        object_id = form.data.get('object_id')
+
+        content_type = ContentType.objects.get(pk=content_type_id)
+
+        return reverse("%s-detail" % content_type.model, kwargs={
+            'slug': object_id
+        })
+
+    def form_valid(self, form):
+        content_type = form.cleaned_data.get('content_type')
+        object_id = form.cleaned_data.get('object_id')
+        model = content_type.model_class()
+        try:
+            object_instance = model.objects.get(id=object_id)
+        except model.DoesNotExist:
+            messages.error(self.request, "Object with this id not found")
+            return super(ContentTypeSubscribeFormView, self).form_invalid(form)
+
+        object_instance.subscribers.add(self.request.user)
+        object_instance.save()
+        messages.info(self.request, "You have subscribed to this post")
+        return super(ContentTypeSubscribeFormView, self).form_valid(form)
+
 
 class InboxView(TemplateView):
     template_name = 'inbox.html'

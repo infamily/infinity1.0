@@ -140,6 +140,12 @@ class DetailViewWrapper(DetailView):
             })
         })
 
+        content_type = ContentType.objects.get_for_model(self.get_object().__class__)
+        context.update({
+            'content_type': content_type.id,
+            'object_id': self.get_object().id
+        })
+
         if self.request.GET.get('lang'):
             context.update({
                 'translation': self.translation
