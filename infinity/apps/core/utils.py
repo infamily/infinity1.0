@@ -253,5 +253,6 @@ class CreateViewWrapper(CreateView):
         if all_sharewith_users:
             # Send email logick here
             notify_new_sharewith_users(all_sharewith_users, self.object)
+        self.object.subscribers.add(self.request.user)
         return super(CreateViewWrapper, self).form_valid(form)
 
