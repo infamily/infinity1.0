@@ -29,32 +29,46 @@ from users.mixins import OwnerMixin
 
 def notify_mentioned_users(comment_instance):
     """
+	notify mentioned users and unmentioned subscribers other than owner of comment
     """
+    from .utils import send_mail_template
+    from django.contrib.sites.models import Site
+
     comment = comment_instance.text
     usernames = [m.group(1) for m in finditer('\[([^]]+)\]', comment)]
     usernames = usernames[:config.MAX_MENTIONS_PER_COMMENT]
+
     subject_template_path = 'mail/comments/mention_notification_subject.txt'
     email_template_path = 'mail/comments/mention_notification.html'
+    url = "%s/%s/detail/#comment-%s" % (comment_instance.content_type,
+							  comment_instance.content_object.id,
+							  comment_instance.id)
+    link = path.join(path.join('http://', Site.objects.get_current().domain), url)
 
-    users = User.objects.filter(username__in=usernames)
+    mentioned_users = User.objects.filter(username__in=usernames)
 
-    if users.exists():
-
-        from .utils import send_mail_template
-        from django.contrib.sites.models import Site
-
-        url = "%s/%s/detail/#comment-%s" % (comment_instance.content_type,
-                                  comment_instance.content_object.id,
-                                  comment_instance.id)
-        link = path.join(path.join('http://', Site.objects.get_current().domain), url)
-
-        for user in users.iterator():
+    if mentioned_users.exists():
+        for user in mentioned_users.iterator():
             send_mail_template(subject_template_path,
                                email_template_path,
                                recipient_list=[user.email],
                                context={'user': comment_instance.user.username,
                                         'comment': comment_instance.text,
                                         'link': link})
+
+    unmentioned_subscribers = comment_instance.content_object.subscribers.exclude(id__in=mentioned_users)
+
+    subject_template_path = 'mail/comments/subscriber_notification_subject.txt'
+    email_template_path = 'mail/comments/subscriber_notification.html'
+
+    for user in unmentioned_subscribers:
+        if user.id != comment_instance.user.id:
+            send_mail_template(subject_template_path,
+                 email_template_path,
+                 recipient_list=[user.email],
+                 context={'user': comment_instance.user.username,
+                         'comment': comment_instance.text,
+                         'link': link})
 
 
 def send_mail_template(
