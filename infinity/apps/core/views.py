@@ -468,6 +468,9 @@ class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'goal_list': Goal.objects.filter(need=kwargs.get('object')).order_by('-id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
@@ -595,6 +598,9 @@ class GoalDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'idea_list': Idea.objects.filter(goal=kwargs.get('object')).order_by('-id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()
@@ -760,6 +766,10 @@ class WorkDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'work_list': Work.objects.filter(parent_work_id=kwargs.get('object').id).order_by('-id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
+
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
         obj = kwargs.get('object')
@@ -1065,6 +1075,9 @@ class StepDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'task_list': Task.objects.filter(step=kwargs.get('object')).order_by('id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
@@ -1211,6 +1224,9 @@ class TaskDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'work_list': Work.objects.filter(task=kwargs.get('object')).order_by('id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()
@@ -1492,6 +1508,9 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()
