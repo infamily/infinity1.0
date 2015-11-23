@@ -42,6 +42,7 @@ from hours.models import HourValue
 from core.models import Language
 
 
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class ContentTypeSubscribeFormView(FormView):
     """ 
     Subscribe/unsubscribe view
