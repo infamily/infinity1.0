@@ -203,6 +203,9 @@ class CommentsContentTypeWrapper(CreateView):
         self.object.object_id = self.get_object().id
         self.object.save()
         notify_mentioned_users(self.object)
+		# temporary: add commenter to subscribers [ necessary evil? ]
+        self.object.content_object.subscribers.add(self.request.user)
+        self.object.content_object.save()
         return super(CommentsContentTypeWrapper, self).form_valid(form)
 
 
@@ -253,5 +256,6 @@ class CreateViewWrapper(CreateView):
         if all_sharewith_users:
             # Send email logick here
             notify_new_sharewith_users(all_sharewith_users, self.object)
+        self.object.subscribers.add(self.request.user)
         return super(CreateViewWrapper, self).form_valid(form)
 
