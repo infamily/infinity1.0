@@ -3,27 +3,17 @@
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
-{% block title %}Goal create{% endblock title %}
+{% block title %}Need create{% endblock title %}
 
 {% block content %}
 
-<h1>{% trans "Goal create" %}</h1>
-<br/>
-{% blocktrans %}
-<center><i><font color="grey">Goal is a negation of problem. Define a problem.</font></i></center>
-{% endblocktrans %}
-<br/>
-{% if need_object %}
-<table class="table">
-    <tr>
-        <td>Need</td>
-        <td>
-
-            <a href="{% url "need-detail" need_object.pk %}">{{need_object}}</a>
-
-        </td>
-    </tr>
-</table>
+{% if definition_object %}
+<center>
+    <div>
+        <a class="definition" href="{% url "definition-detail" definition_object.pk %}">{{definition_object}}</a>
+    </div>
+        {{definition_object.definition}}
+</center>
 {% endif %}
 <div>
     

@@ -61,6 +61,14 @@ class Invitation(models.Model):
 class InvitationsAdapter(DefaultAccountAdapter):
 
     def is_open_for_signup(self, request):
+
+        social_account = request.session.get('socialaccount_sociallogin')
+        if social_account:
+            social_account = social_account.get('account')
+            if social_account:
+                if social_account.get('provider') == 'github':
+                    return True
+
         if hasattr(request, 'session') and request.session.get('invitation'):
             return True
         elif app_settings.INVITATION_ONLY is True:

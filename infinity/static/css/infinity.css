@@ -128,21 +128,22 @@ table.table.centered
 
 /* for the logo */
 .infin {
-    position: relative;
-    top: 2px;
-    padding-left: 7px;
-    font-size: 26px;
+    font-size: 100px;
     color: black;
-    transform:scale(3,1);
-    -webkit-transform:scale(3,1);
-    display:inline-block;
+    font-family: Cantarell;
 }
+
 .ity {
-    padding-left: 26px;
-    font-size: 24px;
-    transform:scale(2,1);
-    -webkit-transform:scale(2,1);
-    display:inline-block;
+    font-size: 100px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-family: Cantarell;
+}
+
+.definition {
+    font-size: 80px;
+    color: blue;
+    font-family: Cantarell;
 }
 
 .brand {
@@ -243,4 +244,17 @@ a:visited{
 
 #div_id_sharewith {
     display: none;
+}
+
+#div_id_define {
+    display: none;
+}
+
+#div_id_url {
+    display: none;
+}
+
+.octocat-login {
+    color: #000000;
+    font-size: 144px;
 }

@@ -87,6 +87,11 @@ class ConversationInviteView(FormView):
         ).model_class()
         model_instance = model_class.objects.get(pk=self.kwargs.get('object_id'))
 
+        if model_instance.personal:
+            if not model_instance.sharewith.filter(user=self.object.user).exists():
+                model_instance.sharewith.add(self.object.user)
+                model_instance.save()
+
         ctx = {
             'user_password': password,
             'invited_user': user,

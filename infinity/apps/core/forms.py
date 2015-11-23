@@ -2,23 +2,26 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Div
+from crispy_forms.layout import Submit, Layout, Field, Div, Button
 from django_select2.widgets import AutoHeavySelect2Widget
 from django_select2.widgets import AutoHeavySelect2MultipleWidget
 from django_select2.fields import AutoModelSelect2Field
+from django.core.urlresolvers import reverse
 
 
-from core.models import Comment
+from core.models import Language
+from core.models import Definition
 from core.models import Type
+from core.models import Need
 from core.models import Goal
-from core.models import Work
 from core.models import Idea
+from core.models import Plan
 from core.models import Step
 from core.models import Task
-from core.models import Definition
-from core.models import Plan
-from core.models import Language
+from core.models import Work
+from core.models import Comment
 from .fields import DefinitionChoiceField
+from .fields import NeedChoiceField
 from .fields import TypeChoiceField
 from .fields import GoalChoiceField
 from .fields import GoalChoiceFieldMultiple
@@ -32,6 +35,17 @@ from django_markdown.widgets import MarkdownWidget
 
 from decimal import Decimal
 from core.models import Translation
+
+
+class ContentTypeSubscribeForm(forms.Form):
+    object_id = forms.IntegerField()
+    content_type = forms.ModelChoiceField(
+        queryset=ContentType.objects.filter(
+            model__in=[
+                'need', 'goal', 'idea', 'plan', 'step', 'task','work'
+            ]
+        )
+    )
 
 
 class TranslationCreateForm(forms.ModelForm):
@@ -149,51 +163,37 @@ class CommentCreateForm(forms.ModelForm):
         }
 
 
-class GoalCreateForm(forms.ModelForm):
+class NeedCreateForm(forms.ModelForm):
 
-    reason = forms.CharField(widget=MarkdownWidget())
-
-#   hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
+    content = forms.CharField(widget=MarkdownWidget())
 
     def __init__(self, *args, **kwargs):
-#       definition_instance = kwargs.pop('definition_instance')
+        definition_instance = kwargs.pop('definition_instance')
         request = kwargs.pop('request')
-        super(GoalCreateForm, self).__init__(*args, **kwargs)
+        super(NeedCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
 
-#       if definition_instance:
-#           self.initial['definition'] = definition_instance
-#           self.initial['type'] = definition_instance.type
+        if definition_instance:
+            self.initial['definition'] = definition_instance
 
 
-        self.fields['type'] = TypeChoiceField(
-            queryset=Type.objects.all(),
+        self.fields['definition'] = DefinitionChoiceField(
             widget=AutoHeavySelect2Widget(
                 select2_options={
-                    'minimumInputLength': 0,
-                    'placeholder': unicode(_('Select the type of your need...')),
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the thing that you need...')),
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
                 }
-            ),
-            required=False
+            )
         )
-
-#       self.fields['definition'] = DefinitionChoiceField(
-#           widget=AutoHeavySelect2Widget(
-#               select2_options={
-#                   'minimumInputLength': 1,
-#                   'placeholder': unicode(_('Select the thing that you need...')),
-#                   'ajax': {
-#                       'dataType': 'json',
-#                       'quietMillis': 100,
-#                       'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
-#                       'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-#                   },
-#               }
-#           )
-#       )
 
         self.fields['sharewith'] = MembersChoiceField(
             widget=AutoHeavySelect2MultipleWidget(
@@ -205,10 +205,135 @@ class GoalCreateForm(forms.ModelForm):
             label=_('Share with:')
         )
 
-#       self.fields['definition'].label = _("""<b>Topic:</b> (relevant to problem,
-#                                     <a href="/definition-create/">click here</a> to
-#                                     add if you can't find it.)""")
-        self.fields['type'].label = _("<b>Category:</b> (of the problem)")
+        self.fields['definition'].label = _("""<b>Topic:</b> (relevant to problem,
+                                      <a href="/definition-create/">click here</a> to
+                                      add if you can't find it.)""")
+        self.fields['name'].label = _("""<b>Subject:</b>""")
+        self.fields['name'].widget.attrs.update({'placeholder': _('')})
+        self.fields['content'].label = _('')
+        self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['definition'].widget = forms.HiddenInput()
+
+        try:
+            language = Language.objects.get(language_code=request.LANGUAGE_CODE)
+            self.initial['language'] = language
+        except Language.DoesNotExist:
+            pass
+
+
+    class Meta:
+        model = Need
+        exclude = [
+            'user',
+        ]
+        fields = [
+            'name',
+            'definition',
+            'content',
+            'language',
+            'personal',
+            'sharewith',
+        ]
+
+
+class NeedUpdateForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(NeedUpdateForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+
+        self.helper.layout.append(Submit('save', _('Update')))
+
+        self.fields['name'].label = 'Description'
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the users to share with:')),
+                }
+            ), required=False
+        )
+
+        self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+
+    class Meta:
+        model = Need
+        exclude = [
+            'created_at',
+            'user',
+        ]
+        fields = [
+            'name',
+            'content',
+            'language',
+            'personal',
+            'sharewith',
+        ]
+        widgets = {
+            'content': MarkdownWidget,
+        }
+
+
+
+
+class GoalCreateForm(forms.ModelForm):
+
+    reason = forms.CharField(widget=MarkdownWidget())
+
+#   hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
+
+    def __init__(self, *args, **kwargs):
+        need_instance = kwargs.pop('need_instance')
+        request = kwargs.pop('request')
+        super(GoalCreateForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+
+        self.helper.layout.append(Submit('save', _('Create')))
+
+        if need_instance:
+            self.initial['need'] = need_instance
+
+        self.fields['type'] = TypeChoiceField(
+            queryset=Type.objects.all(),
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 0,
+                    'placeholder': unicode(_('Select the type of the problem...')),
+                }
+            ),
+            required=True
+        )
+
+        self.fields['need'] = NeedChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the thing that you need...')),
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            ), required=False,
+        )
+
+        self.fields['sharewith'] = MembersChoiceField(
+            widget=AutoHeavySelect2MultipleWidget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the users to share with:')),
+                }
+            ), required=False,
+            label=_('Share with:')
+        )
+
+        self.fields['type'].label = _("<b>Problem category:</b>")
+        self.fields['need'].label = _("""<b>Related Need:</b> (Optional)""")
         self.fields['name'].label = _("""<b>Title:</b> (e.g., Potable Water
                                       Shortage, <a href="/goal/list/">check</a> if the problem is not
                                       defined yet.)""")
@@ -219,6 +344,9 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['hyper_equity'].label = _('Hyper equity')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -233,9 +361,11 @@ class GoalCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'type',
-#           'definition',
             'name',
+            'need',
             'reason',
             'language',
             'personal',
@@ -264,8 +394,27 @@ class GoalUpdateForm(forms.ModelForm):
             ), required=False
         )
 
+        self.fields['need'] = NeedChoiceField(
+            widget=AutoHeavySelect2Widget(
+                select2_options={
+                    'minimumInputLength': 1,
+                    'placeholder': unicode(_('Select the thing that you need...')),
+                    'ajax': {
+                        'dataType': 'json',
+                        'quietMillis': 100,
+                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
+                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
+                    },
+                }
+            ), required=False,
+        )
+
+
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['hyper_equity'].label = _('Hyper equity')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Goal
@@ -274,8 +423,11 @@ class GoalUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'type',
             'name',
+            'need',
             'reason',
             'language',
             'personal',
@@ -304,6 +456,9 @@ class WorkUpdateForm(forms.ModelForm):
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Work
@@ -312,10 +467,11 @@ class WorkUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'file',
             'description',
-            'url',
             'parent_work_id',
             'task',
             'language',
@@ -349,14 +505,15 @@ class WorkCreateForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({'placeholder': _('Give a title to your work.')})
         self.fields['description'].label = _('<b>Description:</b> (details about the work, used as body.)')
         self.fields['description'].widget.attrs.update({'placeholder': _('Here is a little story of my work.')})
-        self.fields['url'].label = _('<b>Link:</b> (you can give external link to your work description)')
-        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['file'].label = _('<b>File:</b> (you can upload a file describing your work)')
         self.fields['file'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['parent_work_id'].label = _('<b>Parent Work Id:</b> (integer referring to other work)')
         self.fields['parent_work_id'].widget.attrs.update({'placeholder': _('optional')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -371,9 +528,10 @@ class WorkCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'description',
-            'url',
             'file',
             'parent_work_id',
             'language',
@@ -407,6 +565,9 @@ class IdeaUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Idea
@@ -415,6 +576,8 @@ class IdeaUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'summary',
             'description',
@@ -482,6 +645,9 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['super_equity'].label = _('Super equity')
         self.fields['sharewith'].label = _('Share with:')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -496,6 +662,8 @@ class IdeaCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'goal',
             'name',
             'summary',
@@ -527,6 +695,9 @@ class StepUpdateForm(forms.ModelForm):
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Step
@@ -536,6 +707,8 @@ class StepUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'objective',
             'priority',
@@ -580,6 +753,9 @@ class StepCreateForm(forms.ModelForm):
         self.fields['deliverables'].widget.attrs.update({'placeholder': _('complete solar assembly drawings 0\\1, solar cell assembly 1\\2')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -596,6 +772,8 @@ class StepCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'objective',
             'priority',
@@ -628,6 +806,9 @@ class TaskUpdateForm(forms.ModelForm):
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
     class Meta:
         model = Task
@@ -637,7 +818,10 @@ class TaskUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
+            'description',
             'priority',
             'step',
             'language',
@@ -668,6 +852,9 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the task.')})
         self.fields['priority'].label = _("<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number means the task has to be done earlier)")
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -684,7 +871,10 @@ class TaskCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
+            'description',
             'priority',
             'language',
             'personal',
@@ -695,6 +885,7 @@ class TaskCreateForm(forms.ModelForm):
 class DefinitionCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request')
         super(DefinitionCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
@@ -707,12 +898,26 @@ class DefinitionCreateForm(forms.ModelForm):
             ), required=False
         )
 
+        if self.request.user.is_anonymous():
+            submit_button = Div(
+                Field(Button('register', _('Add & Go'),
+                             onclick="window.location.assign('%s')" % reverse("account_signup"))),
+                css_class='col-sm-2 create-button disabled',
+            )
+        else:
+            submit_button = Div(
+                Field(Submit('submit', _('Add & Go'))),
+                css_class='col-sm-2 create-button',
+            )
+
         self.helper.layout = Layout(
             Div(
                 Div('language', css_class='col-sm-2',),
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder',
-                                                         "expression, e.g., 'interstellar spaceflight', 'water quality on Earth'")),
+                                                         _("expression, e.g., 'intergalactic spaceflight'")),
+			   autocomplete='off',
+		    ),
                     css_class='col-sm-10',
                 ),
                 css_class='row'
@@ -720,25 +925,25 @@ class DefinitionCreateForm(forms.ModelForm):
             Div(
                 Div(
                     Div(
+                        css_class='col-sm-12 hints-block',
+                    ),
+                    Div(
                         Field(
-                            'definition', placeholder=kwargs.pop('query_placeholder', "definition, e.g., 'spaceflight to other star systems', 'water suitability for life on Earth'"),
-                            # type="hidden",
+                            'definition', placeholder=kwargs.pop('query_placeholder', _("definition, e.g., 'spaceflight beyond the bounderies of galaxies'")),
+                            autocomplete='off',
                         ),
                         css_class='col-sm-10',
                     ),
-                    Div(
-                        Field(Submit('submit', _('Add & Go'))),
-                        # css_class='col-sm-2 hidden create-button',
-                        css_class='col-sm-2 create-button',
-                    ),
-                    css_class='col-sm-12 hints-block',
+                    submit_button,
                 ),
-                css_class='row'
+                css_class='row',
+		css_id='div_id_define',
             ),
         )
         self.fields['name'].label = ''
         self.fields['language'].label = ''
         self.fields['definition'].label = ''
+
 
     class Meta:
         model = Definition
@@ -748,6 +953,10 @@ class DefinitionCreateForm(forms.ModelForm):
             'definition',
             'sharewith',
         ]
+        widgets = {
+            'name': forms.TextInput,
+            'definition': forms.TextInput,
+        }
 
 
 class DefinitionUpdateForm(forms.ModelForm):
@@ -799,6 +1008,9 @@ class PlanUpdateForm(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Update')))
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
 
 
     class Meta:
@@ -809,6 +1021,8 @@ class PlanUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'name',
             'situation',
             'deliverable',
@@ -904,6 +1118,9 @@ class PlanCreateForm(forms.ModelForm):
         self.fields['deliverable'].widget.attrs.update({'placeholder': _("Example:\n\nA working prototype of solar water condenser, and high quality open designs published on GitHub, so others could easily replicate.")})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
+        self.fields['url'].label = _('<b>Origin:</b> (of the source)')
+        self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
        #self.fields['plain_equity'].label = _('Plain equity')
 
         try:
@@ -918,6 +1135,8 @@ class PlanCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'is_link',
+            'url',
             'goal',
             'idea',
             'name',

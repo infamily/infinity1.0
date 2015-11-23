@@ -65,10 +65,10 @@ function showProposals(data) {
     data.forEach(function(entry) {
         definitionsBlock.insertAdjacentHTML(
             'afterend', '<div class="row hint form-group"><div class="col-sm-10"><p class="hint-text">' + entry[0] +
-            '</p></div><div class="col-sm-2"><a class="btn btn-primary choose-definition" href="' + entry[1] + '">Choose</a></div></div>'
+            '</p></div><div class="col-sm-2"><a class="btn btn-primary choose-definition" style="color:white;" href="' + entry[1] + '">y</a></div></div>'
         );
     });
-    definitionsBlock.insertAdjacentHTML('afterend', '<div align="center" class="row hint form-group"><b>Did you mean?</b></div>');
+    // definitionsBlock.insertAdjacentHTML('afterend', '<div align="center" class="row hint form-group"><b>Did you mean?</b></div>');
 }
 
 
@@ -89,4 +89,22 @@ $(document).ready(function() {
         searchOpen();
     });
     searchResult()
+});
+
+
+$(function() {
+    $("#id_name").keyup(function() {
+
+    if ($("#id_name").val()) {
+      $("#div_id_define").show();
+    }
+    else {
+      $("#div_id_define").hide();
+    }
+
+    });
+});
+
+$( document ).ready(function() {
+	$("#id_name").focus();
 });

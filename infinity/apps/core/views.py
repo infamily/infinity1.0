@@ -14,6 +14,7 @@ from django.views.generic import DetailView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic import FormView
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.utils import timezone
@@ -31,12 +32,160 @@ from core.forms import TranslationUpdateForm
 from .utils import CommentsContentTypeWrapper
 from .utils import ViewTypeWrapper
 from .utils import DetailViewWrapper
+from .utils import UpdateViewWrapper
+from .utils import CreateViewWrapper
 from .models import *
 from .forms import *
 from .filters import *
 
 from hours.models import HourValue
 from core.models import Language
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class ContentTypeSubscribeFormView(FormView):
+    """ 
+    Subscribe/unsubscribe view
+    """
+    form_class = ContentTypeSubscribeForm
+    template_name = "content_type_subscribe_form.html"
+
+    def get_success_url(self):
+        form = self.get_form()
+        content_type_id = form.data.get('content_type')
+        object_id = form.data.get('object_id')
+
+        content_type = ContentType.objects.get(pk=content_type_id)
+
+        return reverse("%s-detail" % content_type.model, kwargs={
+            'slug': object_id
+        })
+
+    def form_valid(self, form):
+        content_type = form.cleaned_data.get('content_type')
+        object_id = form.cleaned_data.get('object_id')
+        model = content_type.model_class()
+        try:
+            object_instance = model.objects.get(id=object_id)
+        except model.DoesNotExist:
+            messages.error(self.request, "Object with this id not found")
+            return super(ContentTypeSubscribeFormView, self).form_invalid(form)
+
+        if object_instance.subscribers.filter(pk=self.request.user.id):
+            object_instance.subscribers.remove(self.request.user)
+        else:
+            object_instance.subscribers.add(self.request.user)
+
+        object_instance.save()
+
+        return super(ContentTypeSubscribeFormView, self).form_valid(form)
+
+
+class InboxView(TemplateView):
+    template_name = 'inbox.html'
+    dropdown_list = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+
+    def post(self, request, *args, **kwargs):
+        if self.request.POST.get('needs'):
+            self.request.session['needs_number'] = int(self.request.POST['needs'])
+
+        return redirect(reverse('inbox'))
+
+    def get_translation_by_instance(self, instance, content_type):
+        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
+        translation = Translation.objects.filter(
+            content_type=content_type,
+            object_id=instance.id,
+            language=language.id
+        )
+
+        return translation.first()
+
+    def get_context_data(self, **kwargs):
+        items = {'needs': 64}
+
+        if self.request.session.get('neeeds_number'):
+            items['needs'] = self.request.session['needs_number']
+
+        # Prepare base content access filters
+        if self.request.user.is_authenticated():
+            if self.request.resolver_match.url_name == 'inbox':
+                q_object = (
+                    Q(user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
+                )
+            else:
+                q_object = (
+                    Q(personal=False) |
+                    Q(personal=True, user=self.request.user) |
+                    Q(personal=True, sharewith=self.request.user)
+                )
+        else:
+            q_object = (
+                Q(personal=False)
+            )
+
+        # Get Content Types for Need
+        content_types = ContentType.objects.get_for_models(Need)
+
+        now = timezone.now()
+        in_days = lambda x: float(x.seconds/86400.)
+        in_hours = lambda x: float(x.seconds/3600.)
+
+        instances = {}
+
+        for model_class, translations in content_types.items():
+            model_class_lower_name = model_class.__name__.lower() + 's'
+            instances[model_class_lower_name] = model_class.objects.filter(
+                q_object
+            ).order_by('-commented_at').distinct()[:items[model_class_lower_name]]
+
+
+        needs = instances['needs']
+
+        commented_at = lambda items: [obj.commented_at for obj in items]
+
+        objects_list = list(chain(needs))
+        dates = commented_at(objects_list)
+
+        if dates:
+            start = min(dates)
+            days = in_days(now-start)
+        else:
+            start = timezone.now()
+            days = 0.
+
+        try:
+            hour_value = HourValue.objects.latest('created_at')
+        except HourValue.DoesNotExist:
+            hour_value = 0
+
+        instances_list = {}
+
+        for model, content_type in content_types.items():
+            model_name = model.__name__.lower()
+            instances_list[model_name + '_list'] = [{
+                'object': instance,
+                'is_new': instance.created_at > start,
+                'translation': self.get_translation_by_instance(instance, content_type)
+            } for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
+
+        context = {
+            'need_hours': needs and
+                         '%0.2f' % in_hours(now-max(commented_at(list(needs))))
+                         or 0.,
+            'last_days': '%0.2f' % days,
+            'number_of_items': len(objects_list),
+            'hour_value': hour_value,
+            'dropdown_list': self.dropdown_list,
+            'items': items,
+        }
+
+        context.update(instances_list)
+        context.update(kwargs)
+
+        return context
+
 
 class IndexView(TemplateView):
     template_name = 'home.html'
@@ -225,7 +374,121 @@ class CommentDeleteView(DeleteView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class GoalCreateView(CreateView):
+class NeedCreateView(CreateViewWrapper):
+
+    """Need create view"""
+    model = Need
+    form_class = NeedCreateForm
+    template_name = "need/create1.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.definition = form.cleaned_data.get('definition')
+        self.object.save()
+        return super(NeedCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully created"))
+        return reverse("need-detail", args=[self.object.pk, ])
+
+    def get_context_data(self, **kwargs):
+        context = super(NeedCreateView, self).get_context_data(**kwargs)
+        context.update({'definition_object': self.definition_instance})
+        return context
+
+    def dispatch(self, *args, **kwargs):
+        if kwargs.get('definition_id'):
+            self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
+        else:
+            self.definition_instance = False
+        return super(NeedCreateView, self).dispatch(*args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(NeedCreateView, self).get_form_kwargs()
+        kwargs['definition_instance'] = self.definition_instance
+        kwargs['request'] = self.request
+        return kwargs
+
+
+class NeedDeleteView(OwnerMixin, DeleteView):
+
+    """Need delete view"""
+    model = Need
+    slug_field = "pk"
+    template_name = "need/delete.html"
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully deleted"))
+        return reverse("definition-detail", args=[self.object.definition.pk, ])
+
+
+class NeedUpdateView(UpdateViewWrapper):
+
+    """Need update view"""
+    model = Need
+    form_class = NeedUpdateForm
+    slug_field = "pk"
+    template_name = "need/update.html"
+
+    def form_valid(self, form):
+        return super(NeedUpdateView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, _("Need succesfully updated"))
+        return reverse("need-detail", args=[self.object.pk, ])
+
+
+class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
+
+    """Need detail view"""
+    model = Need
+    slug_field = "pk"
+    template_name = "need/detail.html"
+
+    def get_success_url(self):
+        messages.success(
+            self.request, _(
+                "%s succesfully created" %
+                self.form_class._meta.model.__name__))
+        return self.request.path
+
+    def get_context_data(self, **kwargs):
+        context = super(NeedDetailView, self).get_context_data(**kwargs)
+        obj = self.get_object()
+        form = None
+
+        if self.request.user.__class__.__name__ not in [u'AnonymousUser']:
+            form = self.get_form_class()
+        context.update({
+            'form': form,
+        })
+        context.update({
+            'object_list': self.object_list,
+        })
+        context.update({
+            'goal_list': Goal.objects.filter(need=kwargs.get('object')).order_by('-id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
+
+        conversation_form = ConversationInviteForm()
+        next_url = "?next=%s" % self.request.path
+        obj = kwargs.get('object')
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
+        context.update({
+            'conversation_form': conversation_form
+        })
+
+        return context
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class GoalCreateView(CreateViewWrapper):
 
     """Goal create view"""
     model = Goal
@@ -235,7 +498,7 @@ class GoalCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-       #self.object.definition = form.cleaned_data.get('definition')
+        #self.object.definition = form.cleaned_data.get('definition')
         self.object.save()
         return super(GoalCreateView, self).form_valid(form)
 
@@ -249,15 +512,15 @@ class GoalCreateView(CreateView):
         return context
 
     def dispatch(self, *args, **kwargs):
-       #if kwargs.get('definition_id'):
-       #    self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
-       #else:
-       #    self.definition_instance = False
+        if kwargs.get('need_id'):
+            self.need_instance = get_object_or_404(Need, pk=int(kwargs['need_id']))
+        else:
+            self.need_instance = False
         return super(GoalCreateView, self).dispatch(*args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super(GoalCreateView, self).get_form_kwargs()
-       #kwargs['definition_instance'] = self.definition_instance
+        kwargs['need_instance'] = self.need_instance
         kwargs['request'] = self.request
         return kwargs
 
@@ -291,7 +554,7 @@ class GoalDeleteView(OwnerMixin, DeleteView):
         return reverse("home") #reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
-class GoalUpdateView(OwnerMixin, UpdateView):
+class GoalUpdateView(UpdateViewWrapper):
 
     """Goal update view"""
     model = Goal
@@ -300,9 +563,6 @@ class GoalUpdateView(OwnerMixin, UpdateView):
     template_name = "goal/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(GoalUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -339,6 +599,9 @@ class GoalDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'idea_list': Idea.objects.filter(goal=kwargs.get('object')).order_by('-id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()
@@ -396,7 +659,7 @@ class WorkListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class WorkUpdateView(OwnerMixin, UpdateView):
+class WorkUpdateView(UpdateViewWrapper):
 
     """Work update view"""
     model = Work
@@ -405,9 +668,6 @@ class WorkUpdateView(OwnerMixin, UpdateView):
     template_name = "work/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(WorkUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -416,7 +676,7 @@ class WorkUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class WorkCreateView(CreateView):
+class WorkCreateView(CreateViewWrapper):
 
     """Work create view"""
     model = Work
@@ -507,6 +767,10 @@ class WorkDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'work_list': Work.objects.filter(parent_work_id=kwargs.get('object').id).order_by('-id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
+
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
         obj = kwargs.get('object')
@@ -543,7 +807,7 @@ class IdeaListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class IdeaUpdateView(OwnerMixin, UpdateView):
+class IdeaUpdateView(UpdateViewWrapper):
 
     """Idea update view"""
     model = Idea
@@ -552,9 +816,6 @@ class IdeaUpdateView(OwnerMixin, UpdateView):
     template_name = "idea/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(IdeaUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -563,7 +824,7 @@ class IdeaUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class IdeaCreateView(CreateView):
+class IdeaCreateView(CreateViewWrapper):
 
     """Idea create view"""
     model = Idea
@@ -659,6 +920,9 @@ class IdeaDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'plan_list': Plan.objects.filter(idea=kwargs.get('object')).order_by('-id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
@@ -698,7 +962,7 @@ class StepListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class StepUpdateView(OwnerMixin, UpdateView):
+class StepUpdateView(UpdateViewWrapper):
 
     """Step update view"""
     model = Step
@@ -707,9 +971,6 @@ class StepUpdateView(OwnerMixin, UpdateView):
     template_name = "step/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(StepUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -718,7 +979,7 @@ class StepUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class StepCreateView(CreateView):
+class StepCreateView(CreateViewWrapper):
 
     """Step create view"""
     model = Step
@@ -815,6 +1076,9 @@ class StepDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'task_list': Task.objects.filter(step=kwargs.get('object')).order_by('id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
@@ -853,7 +1117,7 @@ class TaskListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class TaskUpdateView(OwnerMixin, UpdateView):
+class TaskUpdateView(UpdateViewWrapper):
 
     """Task update view"""
     model = Task
@@ -862,9 +1126,6 @@ class TaskUpdateView(OwnerMixin, UpdateView):
     template_name = "task/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(TaskUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -873,7 +1134,7 @@ class TaskUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class TaskCreateView(CreateView):
+class TaskCreateView(CreateViewWrapper):
 
     """Task create view"""
     model = Task
@@ -965,6 +1226,9 @@ class TaskDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'work_list': Work.objects.filter(task=kwargs.get('object')).order_by('id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
@@ -1024,7 +1288,7 @@ class DefinitionCreateView(CreateView):
                         http_accept_language=find_language)
                 except Language.DoesNotExist:
                     language = Language.objects.get(
-                        pk=85)
+                        language_code=request.LANGUAGE_CODE)
                 return HttpResponse(language.pk)
 
             hints = []
@@ -1035,21 +1299,21 @@ class DefinitionCreateView(CreateView):
             for definition in similar_definitions:
                 if definition.definition:
                     hints.append([definition.definition,
-                                  reverse('definition-detail', args=[definition.pk])])
+                                  reverse('need-create', args=[definition.pk])])
             resp = json.dumps(hints)
             return HttpResponse(resp, content_type='application/json')
-        form = DefinitionCreateForm()
+        form = DefinitionCreateForm(request=request)
         return render(request, 'definition/create.html',
                       {'form': form})
 
     def post(self, request, **kwargs):
-        form = DefinitionCreateForm(request.POST)
+        form = DefinitionCreateForm(request.POST, request=request)
         if form.is_valid():
             self.object = form.save(commit=False)
             self.object.user = self.request.user
             self.object.save()
             messages.success(self.request, _("Definition succesfully created"))
-            return redirect(reverse('goal-create', kwargs={'definition_id': self.object.pk}))
+            return redirect(reverse('need-create', kwargs={'definition_id': self.object.pk}))
 
         return render(request, 'definition/create.html',
                       {'form': form})
@@ -1093,7 +1357,7 @@ class DefinitionDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
             'object_list': self.object_list,
         })
         context.update({
-            'goal_list': Goal.objects.filter(definition=kwargs.get('object')).order_by('-id')
+            'need_list': Need.objects.filter(definition=kwargs.get('object')).order_by('-id')
         })
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
@@ -1132,7 +1396,7 @@ class PlanListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-class PlanUpdateView(OwnerMixin, UpdateView):
+class PlanUpdateView(UpdateViewWrapper):
 
     """Plan update view"""
     model = Plan
@@ -1141,9 +1405,6 @@ class PlanUpdateView(OwnerMixin, UpdateView):
     template_name = "plan/update.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
         return super(PlanUpdateView, self).form_valid(form)
 
     def get_success_url(self):
@@ -1152,7 +1413,7 @@ class PlanUpdateView(OwnerMixin, UpdateView):
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class PlanCreateView(CreateView):
+class PlanCreateView(CreateViewWrapper):
 
     """Plan create view"""
     model = Plan
@@ -1248,6 +1509,9 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()
