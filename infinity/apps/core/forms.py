@@ -930,7 +930,7 @@ class DefinitionCreateForm(forms.ModelForm):
                     Div(
                         Field(
                             'definition', placeholder=kwargs.pop('query_placeholder', _("definition, e.g., 'spaceflight beyond the bounderies of galaxies'")),
-                            #type="hidden",
+                            autocomplete='off',
                         ),
                         css_class='col-sm-10',
                     ),
