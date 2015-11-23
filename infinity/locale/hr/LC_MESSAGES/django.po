@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 04:40-0800\n"
+"POT-Creation-Date: 2015-11-23 14:52-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -438,6 +438,18 @@ msgstr "Pozovite prijatelja u pomoć!"
 #| msgid "Select the thing that you need..."
 msgid "Define what you need"
 msgstr "Izaberite potrebnu stvar..."
+
+#: infinity/apps/core/templates/definition/create.html:32
+msgid "e.g.:"
+msgstr ""
+
+#: infinity/apps/core/templates/definition/create.html:32
+msgid "spaceship"
+msgstr ""
+
+#: infinity/apps/core/templates/definition/create.html:32
+msgid "vessel or machine designed to fly in outer space"
+msgstr ""
 
 #: infinity/apps/core/templates/definition/detail.html:55
 #: infinity/apps/core/templates/goal/detail.html:101
@@ -1074,7 +1086,12 @@ msgstr ""
 msgid "Sign in"
 msgstr "Registracija"
 
-#: infinity/templates/account/login.html:30
+#: infinity/templates/account/login.html:16
+#: infinity/templates/account/signup_closed.html:18
+msgid "octocats get a free pass"
+msgstr ""
+
+#: infinity/templates/account/login.html:29
 msgid "Forgot password?"
 msgstr "Zaboravili ste lozinku?"
 
@@ -1230,10 +1247,6 @@ msgstr "Registracija zatvorena"
 #: infinity/templates/account/signup_closed.html:12
 msgid "Write an e-mail to <u>forever@infty.xyz</u>. We'll send you an invite."
 msgstr "Napišite e-mail <u>forever@infty.xyz</u>. Poslat ćemo vam pozivnicu."
-
-#: infinity/templates/account/signup_closed.html:18
-msgid "octocats get a free pass"
-msgstr ""
 
 #: infinity/templates/account/snippets/already_logged_in.html:5
 msgid "Note"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 04:40-0800\n"
-"PO-Revision-Date: 2015-11-23 14:48+0200\n"
+"POT-Creation-Date: 2015-11-23 14:52-0800\n"
+"PO-Revision-Date: 2015-11-24 01:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -401,6 +401,18 @@ msgstr "邀请好友帮忙！"
 #: infinity/apps/core/templates/definition/create.html:27
 msgid "Define what you need"
 msgstr "下定义一下你需要什么"
+
+#: infinity/apps/core/templates/definition/create.html:32
+msgid "e.g.:"
+msgstr "例如："
+
+#: infinity/apps/core/templates/definition/create.html:32
+msgid "spaceship"
+msgstr "宇宙飞船"
+
+#: infinity/apps/core/templates/definition/create.html:32
+msgid "vessel or machine designed to fly in outer space"
+msgstr "按照天体力学的规律在大气层以外的宇宙空间中运动的飞行器"
 
 #: infinity/apps/core/templates/definition/detail.html:55
 #: infinity/apps/core/templates/goal/detail.html:101
@@ -1002,7 +1014,12 @@ msgstr ""
 msgid "Sign in"
 msgstr "登陆"
 
-#: infinity/templates/account/login.html:30
+#: infinity/templates/account/login.html:16
+#: infinity/templates/account/signup_closed.html:18
+msgid "octocats get a free pass"
+msgstr ""
+
+#: infinity/templates/account/login.html:29
 msgid "Forgot password?"
 msgstr "忘了密码？"
 
@@ -1149,10 +1166,6 @@ msgstr "人与人之间"
 msgid "Write an e-mail to <u>forever@infty.xyz</u>. We'll send you an invite."
 msgstr ""
 "请写我们您的注册请求到 <u>forever@infty.xyz</u>， 我们会发给您个邀请邮件。"
-
-#: infinity/templates/account/signup_closed.html:18
-msgid "octocats get a free pass"
-msgstr ""
 
 #: infinity/templates/account/snippets/already_logged_in.html:5
 msgid "Note"
