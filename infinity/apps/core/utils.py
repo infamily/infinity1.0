@@ -203,6 +203,9 @@ class CommentsContentTypeWrapper(CreateView):
         self.object.object_id = self.get_object().id
         self.object.save()
         notify_mentioned_users(self.object)
+		# temporary: add commenter to subscribers [ necessary evil? ]
+        self.object.content_object.subscribers.add(self.request.user)
+        self.object.content_object.save()
         return super(CommentsContentTypeWrapper, self).form_valid(form)
 
 
