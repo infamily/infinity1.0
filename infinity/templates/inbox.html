@@ -37,7 +37,7 @@
         <div class="panel panel-default col block-content">
             <div class="panel-heading">
                 {% trans "Needs" %}
-                &nbsp; <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "define a need" %}</b>
+                &nbsp; <a href="{% url "definition-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "define a need" %}</b>
 
                 <div style="display:inline-block; float: right;">
                     <form method="post" style="display:inline;">{% csrf_token %}
