@@ -43,6 +43,9 @@ from core.models import Language
 
 
 class ContentTypeSubscribeFormView(FormView):
+    """ 
+    Subscribe/unsubscribe view
+    """
     form_class = ContentTypeSubscribeForm
     template_name = "content_type_subscribe_form.html"
 
@@ -67,9 +70,13 @@ class ContentTypeSubscribeFormView(FormView):
             messages.error(self.request, "Object with this id not found")
             return super(ContentTypeSubscribeFormView, self).form_invalid(form)
 
-        object_instance.subscribers.add(self.request.user)
+        if object_instance.subscribers.filter(pk=self.request.user.id):
+            object_instance.subscribers.remove(self.request.user)
+        else:
+            object_instance.subscribers.add(self.request.user)
+
         object_instance.save()
-        messages.info(self.request, "You have subscribed to this post")
+
         return super(ContentTypeSubscribeFormView, self).form_valid(form)
 
 
@@ -901,6 +908,9 @@ class IdeaDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'plan_list': Plan.objects.filter(idea=kwargs.get('object')).order_by('-id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()
