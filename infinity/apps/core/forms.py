@@ -37,6 +37,17 @@ from decimal import Decimal
 from core.models import Translation
 
 
+class ContentTypeSubscribeForm(forms.Form):
+    object_id = forms.IntegerField()
+    content_type = forms.ModelChoiceField(
+        queryset=ContentType.objects.filter(
+            model__in=[
+                'need', 'goal', 'idea', 'plan', 'step', 'task','work'
+            ]
+        )
+    )
+
+
 class TranslationCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         content_type_instance = kwargs.pop('content_type_instance')

@@ -14,6 +14,7 @@ from django.views.generic import DetailView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic import FormView
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.utils import timezone
@@ -39,6 +40,46 @@ from .filters import *
 
 from hours.models import HourValue
 from core.models import Language
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class ContentTypeSubscribeFormView(FormView):
+    """ 
+    Subscribe/unsubscribe view
+    """
+    form_class = ContentTypeSubscribeForm
+    template_name = "content_type_subscribe_form.html"
+
+    def get_success_url(self):
+        form = self.get_form()
+        content_type_id = form.data.get('content_type')
+        object_id = form.data.get('object_id')
+
+        content_type = ContentType.objects.get(pk=content_type_id)
+
+        return reverse("%s-detail" % content_type.model, kwargs={
+            'slug': object_id
+        })
+
+    def form_valid(self, form):
+        content_type = form.cleaned_data.get('content_type')
+        object_id = form.cleaned_data.get('object_id')
+        model = content_type.model_class()
+        try:
+            object_instance = model.objects.get(id=object_id)
+        except model.DoesNotExist:
+            messages.error(self.request, "Object with this id not found")
+            return super(ContentTypeSubscribeFormView, self).form_invalid(form)
+
+        if object_instance.subscribers.filter(pk=self.request.user.id):
+            object_instance.subscribers.remove(self.request.user)
+        else:
+            object_instance.subscribers.add(self.request.user)
+
+        object_instance.save()
+
+        return super(ContentTypeSubscribeFormView, self).form_valid(form)
+
 
 class InboxView(TemplateView):
     template_name = 'inbox.html'
@@ -428,6 +469,9 @@ class NeedDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'goal_list': Goal.objects.filter(need=kwargs.get('object')).order_by('-id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
@@ -555,6 +599,9 @@ class GoalDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'idea_list': Idea.objects.filter(goal=kwargs.get('object')).order_by('-id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()
@@ -720,6 +767,10 @@ class WorkDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'work_list': Work.objects.filter(parent_work_id=kwargs.get('object').id).order_by('-id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
+
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
         obj = kwargs.get('object')
@@ -868,6 +919,9 @@ class IdeaDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'plan_list': Plan.objects.filter(idea=kwargs.get('object')).order_by('-id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()
@@ -1022,6 +1076,9 @@ class StepDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context.update({
             'task_list': Task.objects.filter(step=kwargs.get('object')).order_by('id')
         })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
+        })
 
         conversation_form = ConversationInviteForm()
         next_url = "?next=%s" % self.request.path
@@ -1168,6 +1225,9 @@ class TaskDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'work_list': Work.objects.filter(task=kwargs.get('object')).order_by('id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()
@@ -1449,6 +1509,9 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         })
         context.update({
             'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('id')
+        })
+        context.update({
+            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
         })
 
         conversation_form = ConversationInviteForm()

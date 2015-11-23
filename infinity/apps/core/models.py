@@ -241,6 +241,12 @@ class BaseContentModel(models.Model):
         blank=False,
     )
 
+    subscribers = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name="%(class)s_subscribers"
+    )
+
     def sum_hours(self):
         self.hours_donated = Decimal(0.)
         self.hours_claimed = Decimal(0.)
