@@ -108,9 +108,12 @@ class CommentCreateFormDetail(forms.ModelForm):
                                       one comment, and use {?1.5} to indicate
                                       estimates.""")
         self.fields['notify'].label = _('Notify mentioned users (e.g., <i>Hi [User], how are you?</i>) by e-mail.')
+        self.fields['amount'].label = _('Amount')
+        self.fields['currency'].label = _('Currency')
+        self.fields['amount'].initial = Decimal(0)
         self.helper = FormHelper(self)
 
-        self.helper.layout.append(Submit('save', _('Create')))
+        self.helper.layout.append(Submit('save', _('Send Comment')))
 
     class Meta:
         model = Comment

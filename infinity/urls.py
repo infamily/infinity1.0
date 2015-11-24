@@ -5,13 +5,14 @@ from django.conf import settings
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
-from core.views import IndexView, InboxView, DefinitionCreateView
+from core.views import IndexView, InboxView, DefinitionCreateView, SetLanguageView
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
+    url(r'^set-lang/(?P<lang>\w+)/$', SetLanguageView.as_view(pattern_name='home'), name='lang_redirect'),
     url(r'^$', DefinitionCreateView.as_view(), name='home'),
     url(r'^i$', IndexView.as_view(), name='index'),
     url(r'^w$', IndexView.as_view(), name='wider'),

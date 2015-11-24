@@ -16,6 +16,7 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from django.views.generic import FormView
 from django.views.generic import TemplateView
+from django.views.generic import RedirectView
 from django.shortcuts import render
 from django.utils import timezone
 
@@ -40,6 +41,26 @@ from .filters import *
 
 from hours.models import HourValue
 from core.models import Language
+
+from django.conf import settings
+from django.utils import translation as trans_settings
+
+class SetLanguageView(RedirectView):
+
+    url = '/'
+
+    def get(self, request, *args, **kwargs):
+        response = super(SetLanguageView, self).get(request, *args, **kwargs)
+        lang = kwargs.get('lang')
+        if lang:
+            # To set the language for this session
+            request.session[trans_settings.LANGUAGE_SESSION_KEY] = lang
+            # To set it as a cookie
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang,
+                                max_age=settings.LANGUAGE_COOKIE_AGE,
+                                path=settings.LANGUAGE_COOKIE_PATH,
+                                domain=settings.LANGUAGE_COOKIE_DOMAIN)
+        return response
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
