@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 15:42-0800\n"
-"PO-Revision-Date: 2015-11-24 01:48+0200\n"
+"POT-Creation-Date: 2015-11-23 18:52-0800\n"
+"PO-Revision-Date: 2015-11-24 04:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -1250,8 +1250,8 @@ msgid ""
 msgstr ""
 
 #: infinity/templates/base.html:66
-msgid "Solve Your Problems."
-msgstr "Spręskime problemas."
+msgid "Solving Problems"
+msgstr "Spręskim problemas"
 
 #: infinity/templates/base.html:106
 msgid "Help"
