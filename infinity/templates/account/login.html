@@ -8,14 +8,13 @@
 {% block content %}
 
 <h1>{% trans "Sign in" %}</h1>
-<br/>
-<br/>
-<div>
-    
-</div>
-<br/>
 
-
+<center>
+    <div>
+        <a class="octocat-login" href="{% provider_login_url "github" %}"><i class="fa fa-github"></i></a>
+    </div>
+    <span style="font-variant: small-caps;">{% trans "octocats get a free pass" %}</span>
+</center>
 
 {% comment %}
 <a href="{% provider_login_url "github"  %}" class="btn btn-primary">github</a>

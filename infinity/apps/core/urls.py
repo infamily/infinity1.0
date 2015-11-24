@@ -290,4 +290,9 @@ urlpatterns = patterns(
         TranslationDeleteView.as_view(),
         name="delete-translation"
     ),
+    url(
+        r'^subscribe/$',
+        ContentTypeSubscribeFormView.as_view(),
+        name="subscribe"
+    )
 )

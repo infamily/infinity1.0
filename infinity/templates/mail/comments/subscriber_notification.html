@@ -1,0 +1,10 @@
+{% extends "mail/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<p>{% trans "User" %} [{{user}}] {% trans "has written a comment:" %}</p>
+
+{{comment}}
+
+<p>{% trans "Reply:" %} <a href="{{link}}">{{link}}</a></p>
+{% endblock content %}

@@ -92,6 +92,23 @@ $(document).ready(function() {
 });
 
 
+function redirectIndex(seconds) {
+    var refresh,       
+        intvrefresh = function() {
+            clearInterval(refresh);
+            refresh = setTimeout(function() {
+              if (!$("#id_name").val()) {
+                 location.href = '/w';
+              }
+            }, seconds * 1000);
+        };
+
+    $(document).on('keypress click', function() { intvrefresh() });
+    intvrefresh();
+
+}
+
+
 $(function() {
     $("#id_name").keyup(function() {
 
@@ -100,7 +117,15 @@ $(function() {
     }
     else {
       $("#div_id_define").hide();
+      redirectIndex(15);
     }
 
     });
 });
+
+$( document ).ready(function() {
+	$("#id_name").focus();
+	redirectIndex(60);
+});
+
+

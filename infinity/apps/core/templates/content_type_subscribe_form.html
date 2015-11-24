@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="." method="post" accept-charset="utf-8">{% csrf_token %}
+    
+{{ form }}
+
+    <p><input type="submit" value="Subscribe"></p>
+</form>
+{% endblock content %}

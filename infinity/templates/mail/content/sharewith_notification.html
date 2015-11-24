@@ -1,0 +1,10 @@
+{% extends "mail/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<p>{% trans "User" %} [{{content_object.user}}] {% trans "has shared new content:" %}</p>
+
+{{content_object}}
+
+<p>{% trans "View:" %} <a href="{{link}}">{{link}}</a></p>
+{% endblock content %}

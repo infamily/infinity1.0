@@ -37,6 +37,17 @@ from decimal import Decimal
 from core.models import Translation
 
 
+class ContentTypeSubscribeForm(forms.Form):
+    object_id = forms.IntegerField()
+    content_type = forms.ModelChoiceField(
+        queryset=ContentType.objects.filter(
+            model__in=[
+                'need', 'goal', 'idea', 'plan', 'step', 'task','work'
+            ]
+        )
+    )
+
+
 class TranslationCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         content_type_instance = kwargs.pop('content_type_instance')
@@ -188,8 +199,9 @@ class NeedCreateForm(forms.ModelForm):
                                       <a href="/definition-create/">click here</a> to
                                       add if you can't find it.)""")
         self.fields['name'].label = _("""<b>Subject:</b>""")
-        self.fields['name'].widget.attrs.update({'placeholder': _('')})
+        self.fields['name'].widget.attrs.update({'placeholder': _('e.g., "Hi friends, who would also want a spaceship?"')})
         self.fields['content'].label = _('')
+        self.fields['content'].widget.attrs.update({'placeholder': _('e.g., "I have been dreaming about travelling to explore other planets since childhood. I would enjoy going on a long journey to the unknown together with a group of close friends living in the spaceship like one family. It is not impossible. Who would like to join me in an attempt to consider all possible ways how we could do it, from laws of physics to specific designs and logistics."')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['definition'].widget = forms.HiddenInput()
@@ -895,8 +907,8 @@ class DefinitionCreateForm(forms.ModelForm):
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder',
                                                          _("expression, e.g., 'intergalactic spaceflight'")),
-			   autocomplete='off',
-		    ),
+                          autocomplete='off',
+                    ),
                     css_class='col-sm-10',
                 ),
                 css_class='row'
@@ -909,7 +921,7 @@ class DefinitionCreateForm(forms.ModelForm):
                     Div(
                         Field(
                             'definition', placeholder=kwargs.pop('query_placeholder', _("definition, e.g., 'spaceflight beyond the bounderies of galaxies'")),
-                            #type="hidden",
+                            autocomplete='off',
                         ),
                         css_class='col-sm-10',
                     ),

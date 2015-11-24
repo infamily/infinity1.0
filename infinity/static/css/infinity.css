@@ -258,3 +258,24 @@ a:visited{
     color: #000000;
     font-size: 144px;
 }
+
+.start-example {
+    color: grey;
+    font-size: 24px;
+    font-style: italic;
+}
+
+.expression-example {
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.definition-example {
+    color: grey;
+    font-size: 24px;
+}
+#id_language {
+    background-color: black;
+    color: white;
+}

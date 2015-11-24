@@ -6,6 +6,7 @@ from django.core.exceptions import FieldError
 
 from django.template.loader import render_to_string
 from django.views.generic import DetailView
+from django.views.generic import UpdateView
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404
@@ -23,35 +24,51 @@ from .forms import CommentCreateFormDetail
 from .models import Comment
 from .models import Translation
 
+from users.mixins import OwnerMixin
+
 
 def notify_mentioned_users(comment_instance):
     """
+	notify mentioned users and unmentioned subscribers other than owner of comment
     """
+    from .utils import send_mail_template
+    from django.contrib.sites.models import Site
+
     comment = comment_instance.text
     usernames = [m.group(1) for m in finditer('\[([^]]+)\]', comment)]
     usernames = usernames[:config.MAX_MENTIONS_PER_COMMENT]
+
     subject_template_path = 'mail/comments/mention_notification_subject.txt'
     email_template_path = 'mail/comments/mention_notification.html'
+    url = "%s/%s/detail/#comment-%s" % (comment_instance.content_type,
+							  comment_instance.content_object.id,
+							  comment_instance.id)
+    link = path.join(path.join('http://', Site.objects.get_current().domain), url)
 
-    users = User.objects.filter(username__in=usernames)
+    mentioned_users = User.objects.filter(username__in=usernames)
 
-    if users.exists():
-
-        from .utils import send_mail_template
-        from django.contrib.sites.models import Site
-
-        url = "%s/%s/detail/#comment-%s" % (comment_instance.content_type,
-                                  comment_instance.content_object.id,
-                                  comment_instance.id)
-        link = path.join(path.join('http://', Site.objects.get_current().domain), url)
-
-        for user in users.iterator():
+    if mentioned_users.exists():
+        for user in mentioned_users.iterator():
             send_mail_template(subject_template_path,
                                email_template_path,
                                recipient_list=[user.email],
                                context={'user': comment_instance.user.username,
                                         'comment': comment_instance.text,
                                         'link': link})
+
+    unmentioned_subscribers = comment_instance.content_object.subscribers.exclude(id__in=mentioned_users)
+
+    subject_template_path = 'mail/comments/subscriber_notification_subject.txt'
+    email_template_path = 'mail/comments/subscriber_notification.html'
+
+    for user in unmentioned_subscribers:
+        if user.id != comment_instance.user.id:
+            send_mail_template(subject_template_path,
+                 email_template_path,
+                 recipient_list=[user.email],
+                 context={'user': comment_instance.user.username,
+                         'comment': comment_instance.text,
+                         'link': link})
 
 
 def send_mail_template(
@@ -137,6 +154,12 @@ class DetailViewWrapper(DetailView):
             })
         })
 
+        content_type = ContentType.objects.get_for_model(self.get_object().__class__)
+        context.update({
+            'content_type': content_type.id,
+            'object_id': self.get_object().id
+        })
+
         if self.request.GET.get('lang'):
             context.update({
                 'translation': self.translation
@@ -182,6 +205,11 @@ class CommentsContentTypeWrapper(CreateView):
 
         notify_mentioned_users(self.object)
 
+		# temporary: subscribe commenter
+        self.object.content_object.subscribers.add(self.request.user)
+        self.object.content_object.save()
+
+        # payments fields
         amount = form.cleaned_data.get('amount', False)
         currency = form.cleaned_data.get('currency', False)
 
@@ -191,3 +219,55 @@ class CommentsContentTypeWrapper(CreateView):
             return redirect(reverse("payments:transaction_paypal", kwargs={'comment_id': self.object.id}))
 
         return super(CommentsContentTypeWrapper, self).form_valid(form)
+
+
+def notify_new_sharewith_users(list_of_users, object_instance):
+
+    from django.contrib.sites.models import Site
+    subject_template_path = 'mail/content/sharewith_notification_subject.txt'
+    email_template_path = 'mail/content/sharewith_notification.html'
+    url = '%s/%s/detail' % (object_instance.__class__.__name__.lower(),
+							object_instance.id)
+    link = path.join(path.join('http://', Site.objects.get_current().domain), url)
+
+    for user in list_of_users:
+        send_mail_template(subject_template_path,
+            email_template_path,
+            recipient_list=[user.email],
+            context={'user': user.username,
+                    'content_object': object_instance,
+                    'link': link})
+
+class UpdateViewWrapper(OwnerMixin, UpdateView):
+
+    def form_valid(self, form):
+        """
+        If the form is valid, send notifications.
+        """
+
+        all_sharewith_users = form.cleaned_data.get('sharewith', False)
+        if all_sharewith_users:
+            new_sharewith_users = all_sharewith_users.exclude(id__in=self.object.sharewith.all())
+            # Send email logick here
+            notify_new_sharewith_users(new_sharewith_users, self.object)
+		# The rest:
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(UpdateViewWrapper, self).form_valid(form)
+
+
+class CreateViewWrapper(CreateView):
+
+    def form_valid(self, form):
+        """
+        If the form is valid, send notifications.
+        """
+
+        all_sharewith_users = form.cleaned_data.get('sharewith', False)
+        if all_sharewith_users:
+            # Send email logick here
+            notify_new_sharewith_users(all_sharewith_users, self.object)
+        self.object.subscribers.add(self.request.user)
+        return super(CreateViewWrapper, self).form_valid(form)
+
