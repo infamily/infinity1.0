@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-24 04:35-0800\n"
-"PO-Revision-Date: 2015-11-24 14:49+0200\n"
+"PO-Revision-Date: 2015-11-24 14:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -841,7 +841,7 @@ msgstr ""
 
 #: infinity/apps/users/forms.py:27
 msgid "Invite to this conversation"
-msgstr ""
+msgstr "この会話へ招待する"
 
 #: infinity/apps/users/forms.py:32
 msgid "Send invite"
