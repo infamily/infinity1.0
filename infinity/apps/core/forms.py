@@ -917,8 +917,8 @@ class DefinitionCreateForm(forms.ModelForm):
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder',
                                                          _("expression, e.g., 'intergalactic spaceflight'")),
-			   autocomplete='off',
-		    ),
+                          autocomplete='off',
+                    ),
                     css_class='col-sm-10',
                 ),
                 css_class='row'
