@@ -125,7 +125,7 @@ $(function() {
 
 $( document ).ready(function() {
 	$("#id_name").focus();
-	redirectIndex(15);
+	redirectIndex(60);
 });
 
 
