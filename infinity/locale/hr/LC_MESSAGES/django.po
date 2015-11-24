@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 15:42-0800\n"
+"POT-Creation-Date: 2015-11-23 18:52-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1322,7 +1322,9 @@ msgstr ""
 "\">promijeniti vašu e-mail adresu</a>."
 
 #: infinity/templates/base.html:66
-msgid "Solve Your Problems."
+#, fuzzy
+#| msgid "Solve Your Problems."
+msgid "Solving Problems"
 msgstr "Rješite vaše probleme."
 
 #: infinity/templates/base.html:106
