@@ -86,6 +86,19 @@ class TranslationUpdateForm(forms.ModelForm):
 
 class CommentCreateFormDetail(forms.ModelForm):
 
+    amount = forms.DecimalField(required=False)
+
+    USD = 0
+    EUR = 1
+
+    CURRENCIES = (
+        (USD, _("USD")),
+        (EUR, _("EUR"))
+    )
+
+    currency = forms.ChoiceField(choices=CURRENCIES, required=False)
+
+
     def __init__(self, *args, **kwargs):
         super(CommentCreateFormDetail, self).__init__(*args, **kwargs)
 
@@ -134,29 +147,6 @@ class CommentUpdateForm(forms.ModelForm):
         fields = [
             'text',
             'notify'
-        ]
-        widgets = {
-            'text': MarkdownWidget,
-        }
-
-
-class CommentCreateForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(CommentCreateForm, self).__init__(*args, **kwargs)
-        self.fields['text'].label = _('Comment')
-        self.fields['notify'].label = _('Notify mentioned users by e-mail.')
-
-        self.helper = FormHelper(self)
-
-        self.helper.layout.append(Submit('save', _('Create')))
-
-    class Meta:
-        model = Comment
-        exclude = [
-            'created_at',
-            'updated_at',
-            'user',
         ]
         widgets = {
             'text': MarkdownWidget,
