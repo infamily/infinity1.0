@@ -136,6 +136,34 @@ class Comment(models.Model):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
 
+class Vote(models.Model):
+    POSITIVE = 1
+    NEUTRAL = 0
+    NEGATIVE = -1
+
+    VOTE_STATES = (
+        (POSITIVE, 'Positive'),
+        (NEUTRAL, 'Neural'),
+        (NEGATIVE, 'Negative'),
+    )
+
+    value = models.IntegerField(
+        choices=VOTE_STATES,
+    )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='vote_user',
+        blank=False,
+        null=False
+    )
+
+    comment = models.ForeignKey(Comment, related_name='vote_comment')
+
+    class Meta:
+        unique_together = (('user', 'comment'))
+
+
 class BaseContentModel(models.Model):
     is_link = models.BooleanField(default=False)
     url = models.URLField(
