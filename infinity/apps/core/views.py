@@ -17,11 +17,14 @@ from django.views.generic import DeleteView
 from django.views.generic import FormView
 from django.views.generic import TemplateView
 from django.views.generic import RedirectView
+from django.views.generic import View
 from django.shortcuts import render
 from django.utils import timezone
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
+from braces.views import AjaxResponseMixin
+from braces.views import JSONResponseMixin
 from enhanced_cbv.views import ListFilteredView
 from clever_selects.views import ChainedSelectChoicesView
 
@@ -44,6 +47,23 @@ from core.models import Language
 
 from django.conf import settings
 from django.utils import translation as trans_settings
+
+
+
+class AjaxCommentVoteView(JSONResponseMixin, AjaxResponseMixin, View):
+    """ 
+    Vote view
+    """
+    def post_ajax(self, request, *args, **kwargs):
+        json_dict = {
+            'name': "Benny's Burritos",
+            'location': "New York, NY",
+        }
+        print request.user
+        print request.POST
+        json_dict = request.POST
+        return self.render_json_response(json_dict)
+	
 
 class SetLanguageView(RedirectView):
 

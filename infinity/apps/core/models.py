@@ -135,6 +135,9 @@ class Comment(models.Model):
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
 
+    def votes(self):
+        return sum([vote.value for vote in Vote.objects.filter(comment_id=self.id)])
+
 
 class Vote(models.Model):
     POSITIVE = 1

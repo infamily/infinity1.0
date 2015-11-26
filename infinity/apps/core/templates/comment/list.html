@@ -1,6 +1,16 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
+{% load staticfiles %}
 {% load django_markdown %}
+
+{% block extra_js %}
+  <script src="{% static 'js/comment_vote.js' %}"></script>
+{% endblock extra_js %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+{% endblock extra_css %}
+
 
 {% if request.user.is_authenticated %}
 <script>
@@ -54,17 +64,26 @@ function getfocus() {
     <div class="alignright date">
 
         --[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}<br/>
-        <div align="right">
+        <div class="alignright">
             {% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
             {% endif %}
         </div>
     </div>
+        <div style="float:left;">	
+			<form id="vote-form" action="/ajax/comment-vote/" method="post">{% csrf_token %}
+				{{ object.votes }}
+				<input type="submit" name="positive-vote-{{object.id}}" value="+1">
+				<input type="submit" name="negative-vote-{{object.id}}" value="-1">
+                </span>
+            </form>
+        </div>
     </div>
 
     <br>
     <hr>
 </div>
 {% endfor %}
+
 
 
 {% if request.user.is_authenticated %}
