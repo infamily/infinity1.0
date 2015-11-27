@@ -279,3 +279,16 @@ a:visited{
     background-color: black;
     color: white;
 }
+
+.fa-thumbs-o-up:hover {
+	color: green;
+}
+.fa-thumbs-up:hover {
+	color: green;
+}
+.fa-thumbs-o-down:hover {
+	color: brown;
+}
+.fa-thumbs-down:hover {
+	color: brown;
+}
