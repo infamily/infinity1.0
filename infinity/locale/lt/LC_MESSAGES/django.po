@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-27 05:30-0800\n"
-"PO-Revision-Date: 2015-11-27 15:31+0200\n"
+"POT-Creation-Date: 2015-11-27 12:10-0800\n"
+"PO-Revision-Date: 2015-11-27 22:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -20,17 +20,17 @@ msgstr ""
 "X-Generator: Poedit 1.8.5\n"
 
 #: infinity/apps/core/forms.py:68 infinity/apps/core/forms.py:170
-#: infinity/apps/core/forms.py:288 infinity/apps/core/forms.py:488
-#: infinity/apps/core/forms.py:604 infinity/apps/core/forms.py:729
-#: infinity/apps/core/forms.py:835 infinity/apps/core/forms.py:1057
+#: infinity/apps/core/forms.py:288 infinity/apps/core/forms.py:481
+#: infinity/apps/core/forms.py:597 infinity/apps/core/forms.py:722
+#: infinity/apps/core/forms.py:828 infinity/apps/core/forms.py:1050
 msgid "Create"
 msgstr "Sukurti"
 
 #: infinity/apps/core/forms.py:80 infinity/apps/core/forms.py:146
 #: infinity/apps/core/forms.py:241 infinity/apps/core/forms.py:379
-#: infinity/apps/core/forms.py:442 infinity/apps/core/forms.py:559
-#: infinity/apps/core/forms.py:681 infinity/apps/core/forms.py:792
-#: infinity/apps/core/forms.py:963 infinity/apps/core/forms.py:1003
+#: infinity/apps/core/forms.py:435 infinity/apps/core/forms.py:552
+#: infinity/apps/core/forms.py:674 infinity/apps/core/forms.py:785
+#: infinity/apps/core/forms.py:956 infinity/apps/core/forms.py:996
 #: infinity/apps/users/forms.py:60
 msgid "Update"
 msgstr ""
@@ -91,12 +91,12 @@ msgstr "Pranešti paminėtiems vartotojams el. paštu."
 
 #: infinity/apps/core/forms.py:141 infinity/apps/core/forms.py:195
 #: infinity/apps/core/forms.py:248 infinity/apps/core/forms.py:323
-#: infinity/apps/core/forms.py:386 infinity/apps/core/forms.py:447
-#: infinity/apps/core/forms.py:493 infinity/apps/core/forms.py:554
-#: infinity/apps/core/forms.py:629 infinity/apps/core/forms.py:686
-#: infinity/apps/core/forms.py:734 infinity/apps/core/forms.py:797
-#: infinity/apps/core/forms.py:840 infinity/apps/core/forms.py:890
-#: infinity/apps/core/forms.py:998 infinity/apps/core/forms.py:1052
+#: infinity/apps/core/forms.py:386 infinity/apps/core/forms.py:440
+#: infinity/apps/core/forms.py:486 infinity/apps/core/forms.py:547
+#: infinity/apps/core/forms.py:622 infinity/apps/core/forms.py:679
+#: infinity/apps/core/forms.py:727 infinity/apps/core/forms.py:790
+#: infinity/apps/core/forms.py:833 infinity/apps/core/forms.py:883
+#: infinity/apps/core/forms.py:991 infinity/apps/core/forms.py:1045
 msgid "Select the users to share with:"
 msgstr "Vartotojai, kuriem bus matomas."
 
@@ -106,7 +106,7 @@ msgid "Select the thing that you need..."
 msgstr "Pasirinkite su poreikiais susijusį objektą..."
 
 #: infinity/apps/core/forms.py:198 infinity/apps/core/forms.py:326
-#: infinity/apps/core/forms.py:641 infinity/apps/core/forms.py:1105
+#: infinity/apps/core/forms.py:634 infinity/apps/core/forms.py:1098
 msgid "Share with:"
 msgstr "Dalintis su:"
 
@@ -153,19 +153,19 @@ msgstr ""
 "konkrečių erdvėlaivio dizaino variantų bei logistikos.\""
 
 #: infinity/apps/core/forms.py:208 infinity/apps/core/forms.py:338
-#: infinity/apps/core/forms.py:506 infinity/apps/core/forms.py:638
-#: infinity/apps/core/forms.py:748 infinity/apps/core/forms.py:1113
+#: infinity/apps/core/forms.py:499 infinity/apps/core/forms.py:631
+#: infinity/apps/core/forms.py:741 infinity/apps/core/forms.py:1106
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
 msgstr "<b>Asmeninis</b> (bus matomas tik parinktiems žmonėms)"
 
 #: infinity/apps/core/forms.py:209 infinity/apps/core/forms.py:253
-#: infinity/apps/core/forms.py:339 infinity/apps/core/forms.py:407
-#: infinity/apps/core/forms.py:452 infinity/apps/core/forms.py:507
-#: infinity/apps/core/forms.py:561 infinity/apps/core/forms.py:639
-#: infinity/apps/core/forms.py:691 infinity/apps/core/forms.py:749
-#: infinity/apps/core/forms.py:802 infinity/apps/core/forms.py:848
-#: infinity/apps/core/forms.py:1004 infinity/apps/core/forms.py:1114
+#: infinity/apps/core/forms.py:339 infinity/apps/core/forms.py:400
+#: infinity/apps/core/forms.py:445 infinity/apps/core/forms.py:500
+#: infinity/apps/core/forms.py:554 infinity/apps/core/forms.py:632
+#: infinity/apps/core/forms.py:684 infinity/apps/core/forms.py:742
+#: infinity/apps/core/forms.py:795 infinity/apps/core/forms.py:841
+#: infinity/apps/core/forms.py:997 infinity/apps/core/forms.py:1107
 msgid "<b>Input Language</b> (the language you used to compose this post) "
 msgstr "<b>Įvesties kalba</b> (kalba, kuria parašėte šio straipsnio turinį)"
 
@@ -202,72 +202,72 @@ msgstr ""
 "<b>Aprašymas:</b> (pvz., daug žmonių pasaulyje trūksta švaraus geriamo "
 "vandens.)"
 
-#: infinity/apps/core/forms.py:341 infinity/apps/core/forms.py:409
-#: infinity/apps/core/forms.py:453 infinity/apps/core/forms.py:508
-#: infinity/apps/core/forms.py:562 infinity/apps/core/forms.py:642
-#: infinity/apps/core/forms.py:692 infinity/apps/core/forms.py:750
-#: infinity/apps/core/forms.py:803 infinity/apps/core/forms.py:849
-#: infinity/apps/core/forms.py:1005 infinity/apps/core/forms.py:1115
+#: infinity/apps/core/forms.py:341 infinity/apps/core/forms.py:402
+#: infinity/apps/core/forms.py:446 infinity/apps/core/forms.py:501
+#: infinity/apps/core/forms.py:555 infinity/apps/core/forms.py:635
+#: infinity/apps/core/forms.py:685 infinity/apps/core/forms.py:743
+#: infinity/apps/core/forms.py:796 infinity/apps/core/forms.py:842
+#: infinity/apps/core/forms.py:998 infinity/apps/core/forms.py:1108
 msgid ""
 "<b>This is a link</b> (check if you are only linking to existing content)"
 msgstr ""
 "<b>Tai yra nuoroda</b> (pažymėkite, jei turinys yra paimtas ir adaptuotas iš "
 "kitur)"
 
-#: infinity/apps/core/forms.py:342 infinity/apps/core/forms.py:410
-#: infinity/apps/core/forms.py:454 infinity/apps/core/forms.py:509
-#: infinity/apps/core/forms.py:563 infinity/apps/core/forms.py:643
-#: infinity/apps/core/forms.py:693 infinity/apps/core/forms.py:751
-#: infinity/apps/core/forms.py:804 infinity/apps/core/forms.py:850
-#: infinity/apps/core/forms.py:1006 infinity/apps/core/forms.py:1116
+#: infinity/apps/core/forms.py:342 infinity/apps/core/forms.py:403
+#: infinity/apps/core/forms.py:447 infinity/apps/core/forms.py:502
+#: infinity/apps/core/forms.py:556 infinity/apps/core/forms.py:636
+#: infinity/apps/core/forms.py:686 infinity/apps/core/forms.py:744
+#: infinity/apps/core/forms.py:797 infinity/apps/core/forms.py:843
+#: infinity/apps/core/forms.py:999 infinity/apps/core/forms.py:1109
 msgid "<b>Origin:</b> (of the source)"
 msgstr "<b>Šaltinis:</b> (originalo adresas)"
 
-#: infinity/apps/core/forms.py:343 infinity/apps/core/forms.py:411
-#: infinity/apps/core/forms.py:455 infinity/apps/core/forms.py:503
-#: infinity/apps/core/forms.py:510 infinity/apps/core/forms.py:564
-#: infinity/apps/core/forms.py:644 infinity/apps/core/forms.py:694
-#: infinity/apps/core/forms.py:752 infinity/apps/core/forms.py:805
-#: infinity/apps/core/forms.py:851 infinity/apps/core/forms.py:1007
-#: infinity/apps/core/forms.py:1117
+#: infinity/apps/core/forms.py:343 infinity/apps/core/forms.py:404
+#: infinity/apps/core/forms.py:448 infinity/apps/core/forms.py:496
+#: infinity/apps/core/forms.py:503 infinity/apps/core/forms.py:557
+#: infinity/apps/core/forms.py:637 infinity/apps/core/forms.py:687
+#: infinity/apps/core/forms.py:745 infinity/apps/core/forms.py:798
+#: infinity/apps/core/forms.py:844 infinity/apps/core/forms.py:1000
+#: infinity/apps/core/forms.py:1110
 msgid "http://"
 msgstr ""
 
-#: infinity/apps/core/forms.py:498
+#: infinity/apps/core/forms.py:491
 msgid ""
 "<b>Name:</b> (e.g., \"First attempt to assemble solar cells.\", used in "
 "title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:499
+#: infinity/apps/core/forms.py:492
 msgid "Give a title to your work."
 msgstr ""
 
-#: infinity/apps/core/forms.py:500
+#: infinity/apps/core/forms.py:493
 msgid "<b>Description:</b> (details about the work, used as body.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:501
+#: infinity/apps/core/forms.py:494
 msgid "Here is a little story of my work."
 msgstr ""
 
-#: infinity/apps/core/forms.py:502
+#: infinity/apps/core/forms.py:495
 msgid "<b>File:</b> (you can upload a file describing your work)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:504
+#: infinity/apps/core/forms.py:497
 msgid "<b>Parent Work Id:</b> (integer referring to other work)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:505
+#: infinity/apps/core/forms.py:498
 msgid "optional"
 msgstr ""
 
-#: infinity/apps/core/forms.py:613
+#: infinity/apps/core/forms.py:606
 msgid "Select a goal"
 msgstr ""
 
-#: infinity/apps/core/forms.py:623
+#: infinity/apps/core/forms.py:616
 #: infinity/apps/core/templates/goal/list2.html:6
 #: infinity/apps/core/templates/goal/list2.html:9
 #: infinity/apps/core/templates/need/detail.html:93
@@ -275,35 +275,35 @@ msgstr ""
 msgid "Goals"
 msgstr "Tikslai"
 
-#: infinity/apps/core/forms.py:635
+#: infinity/apps/core/forms.py:628
 msgid "<b>Name:</b> (e.g., \"Solar Water Condenser\", used in title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:636
+#: infinity/apps/core/forms.py:629
 msgid ""
 "<b>Summary:</b> (e.g., \"Use solar panels and Peltier effect to extract "
 "water from air.\", appears as subtitle.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:637
+#: infinity/apps/core/forms.py:630
 msgid "<b>Description:</b> (write full description here, used as body.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:739
+#: infinity/apps/core/forms.py:732
 msgid "<b>Milestone:</b> (e.g., \"assemble solar panels\", used in title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:740
+#: infinity/apps/core/forms.py:733
 msgid "Type the name of the milestone."
 msgstr ""
 
-#: infinity/apps/core/forms.py:741
+#: infinity/apps/core/forms.py:734
 msgid ""
 "<b>Objective:</b> (describe conditions, when you will consider the milestone "
 "to be 'achieved')"
 msgstr ""
 
-#: infinity/apps/core/forms.py:742
+#: infinity/apps/core/forms.py:735
 msgid ""
 "Example:\n"
 "\n"
@@ -312,103 +312,103 @@ msgid ""
 "- Passes certain tests of reliability."
 msgstr ""
 
-#: infinity/apps/core/forms.py:743
+#: infinity/apps/core/forms.py:736
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the milestone has to be done earlier)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:744
+#: infinity/apps/core/forms.py:737
 msgid ""
 "<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "invest on this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:745
+#: infinity/apps/core/forms.py:738
 msgid "people 1\\3, days 10\\20, usd 50\\70"
 msgstr ""
 
-#: infinity/apps/core/forms.py:746
+#: infinity/apps/core/forms.py:739
 msgid ""
 "<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "have by completion of this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:747
+#: infinity/apps/core/forms.py:740
 msgid "complete solar assembly drawings 0\\1, solar cell assembly 1\\2"
 msgstr ""
 
-#: infinity/apps/core/forms.py:845
+#: infinity/apps/core/forms.py:838
 msgid "<b>Task:</b> (e.g., \"Purchase solar cells\", text in title.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:846
+#: infinity/apps/core/forms.py:839
 msgid "Type the name of the task."
 msgstr ""
 
-#: infinity/apps/core/forms.py:847
+#: infinity/apps/core/forms.py:840
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the task has to be done earlier)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:897 infinity/apps/core/forms.py:903
+#: infinity/apps/core/forms.py:890 infinity/apps/core/forms.py:896
 msgid "Add & Go"
 msgstr "Pirmyn"
 
-#: infinity/apps/core/forms.py:912
+#: infinity/apps/core/forms.py:905
 msgid "expression, e.g., 'intergalactic spaceflight'"
 msgstr "kaip pavadinsi? pvz.: tarpgalaktinis skrydis"
 
-#: infinity/apps/core/forms.py:926
+#: infinity/apps/core/forms.py:919
 msgid "definition, e.g., 'spaceflight beyond the bounderies of galaxies'"
 msgstr "kaip apibrėši? pvz.: skrydis už galaktikų ribų"
 
-#: infinity/apps/core/forms.py:1067
+#: infinity/apps/core/forms.py:1060
 msgid "Select goal"
 msgstr ""
 
-#: infinity/apps/core/forms.py:1077
+#: infinity/apps/core/forms.py:1070
 #: infinity/apps/core/templates/idea/create.html:16
 #, fuzzy
 #| msgid "Goals"
 msgid "Goal"
 msgstr "Tikslai"
 
-#: infinity/apps/core/forms.py:1084
+#: infinity/apps/core/forms.py:1077
 msgid "Select idea"
 msgstr ""
 
-#: infinity/apps/core/forms.py:1094
+#: infinity/apps/core/forms.py:1087
 #: infinity/apps/core/templates/plan/create.html:16
 #, fuzzy
 #| msgid "Ideas"
 msgid "Idea"
 msgstr "Idėjos"
 
-#: infinity/apps/core/forms.py:1100
+#: infinity/apps/core/forms.py:1093
 #, fuzzy
 #| msgid "Select the users to share with:"
 msgid "Select the members for the equity..."
 msgstr "Vartotojai, kuriem bus matomas."
 
-#: infinity/apps/core/forms.py:1104
+#: infinity/apps/core/forms.py:1097
 msgid "Members"
 msgstr ""
 
-#: infinity/apps/core/forms.py:1107
+#: infinity/apps/core/forms.py:1100
 msgid "<b>Name:</b> (e.g., \"Solar Water Project\".)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:1109
+#: infinity/apps/core/forms.py:1102
 msgid ""
 "<b>Situation:</b> (Describe your current situation by listing the things "
 "that you have, including access.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:1110
+#: infinity/apps/core/forms.py:1103
 msgid ""
 "Example:\n"
 "\n"
@@ -421,11 +421,11 @@ msgid ""
 " - 150 USD for this project"
 msgstr ""
 
-#: infinity/apps/core/forms.py:1111
+#: infinity/apps/core/forms.py:1104
 msgid "<b>Deliverable:</b> (Describe what do you expect to get.)"
 msgstr ""
 
-#: infinity/apps/core/forms.py:1112
+#: infinity/apps/core/forms.py:1105
 msgid ""
 "Example:\n"
 "\n"
@@ -450,11 +450,25 @@ msgstr "redaguoti"
 msgid "delete"
 msgstr "ištrinti"
 
-#: infinity/apps/core/templates/comment/list.html:92
+#: infinity/apps/core/templates/comment/list.html:79
+#: infinity/apps/core/templates/comment/list.html:84
+#: infinity/apps/core/templates/comment/list.html:89
+#: infinity/apps/core/templates/comment/list.html:95
+msgid "Vote Up"
+msgstr "Balsuoti už"
+
+#: infinity/apps/core/templates/comment/list.html:80
+#: infinity/apps/core/templates/comment/list.html:85
+#: infinity/apps/core/templates/comment/list.html:90
+#: infinity/apps/core/templates/comment/list.html:96
+msgid "Vote Down"
+msgstr "Balsuoti prieš"
+
+#: infinity/apps/core/templates/comment/list.html:127
 msgid "credit"
 msgstr "kreditas"
 
-#: infinity/apps/core/templates/comment/list.html:121
+#: infinity/apps/core/templates/comment/list.html:162
 msgid "Invite a friend to help!"
 msgstr "Pakviesti draugą padėti."
 

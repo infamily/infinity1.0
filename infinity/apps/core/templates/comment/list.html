@@ -76,24 +76,24 @@ function getfocus() {
 			{% if request.user.is_authenticated %}
 			<!-- neutral vote -->
 			{% if object|cut:request.user == 0 %}
-			<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
-			<i id="thumb-down-{{object.id}}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
+			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 
 			<!-- positive vote -->
 			{% elif object|cut:request.user == 1 %}
-			<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
-			<i id="thumb-down-{{object.id}}"class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
+			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 
 			<!-- negative vote -->
 			{% elif object|cut:request.user == -1 %}
-			<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});" style="hover { background-color: black"></i> |
-			<i id="thumb-down-{{object.id}}"class="fa fa-thumbs-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});" style="hover { background-color: black"></i> |
+			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 			{% endif %}
 
 			{% else %} <!--not logged in-->
 
-				<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-o-up" onclick="location.href = '{% url "account_login" %}';"></i> |
-				<i id="thumb-down-{{object.id}}"class="fa fa-thumbs-o-down" onclick="location.href = '{% url "account_login" %}';"></i>
+				<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" title="Vote Up" class="fa fa-thumbs-o-up" onclick="location.href = '{% url "account_login" %}';"></i> |
+				<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="location.href = '{% url "account_login" %}';"></i>
 				<script>
 
 				var original_up = $("#thumb-up-{{object.id}}").attr("class");
@@ -133,6 +133,12 @@ function getfocus() {
 </div>
 {% endfor %}
 
+<script>
+// tooltip
+$(document).ready(function(){
+$('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
 
 {% if request.user.is_authenticated %}
 <div class="panel panel-default input-comment">

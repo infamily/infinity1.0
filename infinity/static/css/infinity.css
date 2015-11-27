@@ -281,7 +281,7 @@ a:visited{
 }
 
 .fa-thumbs-o-up:hover {
-	color: red;
+	color: green;
 	cursor: pointer;
 	cursor: hand;
 }
@@ -290,7 +290,7 @@ a:visited{
 	cursor: hand;
 }
 .fa-thumbs-o-down:hover {
-	color: blue;
+	color: green;
 	cursor: pointer;
 	cursor: hand;
 }
