@@ -81,7 +81,8 @@ class AjaxCommentVoteView(JSONResponseMixin, AjaxResponseMixin, View):
 
             response = {'value': vote.value,
                         'total': vote.comment.votes(),
-                        'success': True}
+                        'success': True,
+                        'comment_id': vote.comment.id}
 
         else:
             response = {'success': False}

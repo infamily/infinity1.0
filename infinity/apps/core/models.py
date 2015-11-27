@@ -138,6 +138,16 @@ class Comment(models.Model):
     def votes(self):
         return sum([vote.value for vote in Vote.objects.filter(comment_id=self.id)])
 
+    def user_vote(self, user_id):
+        try:
+            vote = Vote.objects.get(
+                comment_id=self.id,
+                user_id=user_id
+            )
+        except Vote.DoesNotExist:
+            vote = None
+        return vote
+
 
 class Vote(models.Model):
     POSITIVE = 1
