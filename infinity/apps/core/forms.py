@@ -391,18 +391,11 @@ class GoalUpdateForm(forms.ModelForm):
         self.fields['need'] = NeedChoiceField(
             widget=AutoHeavySelect2Widget(
                 select2_options={
-                    'minimumInputLength': 1,
+                    'minimumInputLength': 0,
                     'placeholder': unicode(_('Select the thing that you need...')),
-                    'ajax': {
-                        'dataType': 'json',
-                        'quietMillis': 100,
-                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
-                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-                    },
                 }
             ), required=False,
         )
-
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['hyper_equity'].label = _('Hyper equity')
