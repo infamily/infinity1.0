@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-24 08:09-0800\n"
+"POT-Creation-Date: 2015-11-27 05:30-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -395,7 +395,7 @@ msgid ""
 "published on GitHub, so others could easily replicate."
 msgstr ""
 
-#: infinity/apps/core/templates/comment/list.html:58
+#: infinity/apps/core/templates/comment/list.html:69
 #: infinity/apps/core/templates/goal/detail.html:81
 #: infinity/apps/core/templates/idea/detail.html:85
 #: infinity/apps/core/templates/need/detail.html:80
@@ -404,7 +404,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: infinity/apps/core/templates/comment/list.html:58
+#: infinity/apps/core/templates/comment/list.html:69
 #: infinity/apps/core/templates/goal/detail.html:81
 #: infinity/apps/core/templates/idea/detail.html:85
 #: infinity/apps/core/templates/need/detail.html:80
@@ -412,7 +412,11 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
-#: infinity/apps/core/templates/comment/list.html:89
+#: infinity/apps/core/templates/comment/list.html:92
+msgid "credit"
+msgstr ""
+
+#: infinity/apps/core/templates/comment/list.html:121
 msgid "Invite a friend to help!"
 msgstr ""
 
@@ -642,119 +646,119 @@ msgstr ""
 msgid "+New Step"
 msgstr ""
 
-#: infinity/apps/core/views.py:379
+#: infinity/apps/core/views.py:425
 msgid "Comment succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:393
+#: infinity/apps/core/views.py:439
 msgid "Comment succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:413
+#: infinity/apps/core/views.py:459
 msgid "Need succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:443
+#: infinity/apps/core/views.py:489
 msgid "Need succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:459
+#: infinity/apps/core/views.py:505
 msgid "Need succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:473 infinity/apps/core/views.py:604
-#: infinity/apps/core/views.py:772 infinity/apps/core/views.py:925
-#: infinity/apps/core/views.py:1081 infinity/apps/core/views.py:1231
-#: infinity/apps/core/views.py:1364 infinity/apps/core/views.py:1515
+#: infinity/apps/core/views.py:519 infinity/apps/core/views.py:650
+#: infinity/apps/core/views.py:818 infinity/apps/core/views.py:971
+#: infinity/apps/core/views.py:1127 infinity/apps/core/views.py:1277
+#: infinity/apps/core/views.py:1410 infinity/apps/core/views.py:1561
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:527
+#: infinity/apps/core/views.py:573
 msgid "Goal succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:574
+#: infinity/apps/core/views.py:620
 msgid "Goal succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:590
+#: infinity/apps/core/views.py:636
 msgid "Goal succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:695
+#: infinity/apps/core/views.py:741
 msgid "Work succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:715
+#: infinity/apps/core/views.py:761
 msgid "Work succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:739
+#: infinity/apps/core/views.py:785
 msgid "Work succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:843
+#: infinity/apps/core/views.py:889
 msgid "Idea succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:872
+#: infinity/apps/core/views.py:918
 msgid "Idea succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:894
+#: infinity/apps/core/views.py:940
 msgid "Idea succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:998
+#: infinity/apps/core/views.py:1044
 msgid "Step succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1018
+#: infinity/apps/core/views.py:1064
 msgid "Step succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:1042
+#: infinity/apps/core/views.py:1088
 msgid "Step succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:1153
+#: infinity/apps/core/views.py:1199
 msgid "Task succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1173
+#: infinity/apps/core/views.py:1219
 msgid "Task succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:1197
+#: infinity/apps/core/views.py:1243
 msgid "Task succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:1292
+#: infinity/apps/core/views.py:1338
 msgid "Definition succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1336
+#: infinity/apps/core/views.py:1382
 msgid "Definition succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:1432
+#: infinity/apps/core/views.py:1478
 msgid "Plan succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1452
+#: infinity/apps/core/views.py:1498
 msgid "Plan succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views.py:1483
+#: infinity/apps/core/views.py:1529
 msgid "Plan succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views.py:1620
+#: infinity/apps/core/views.py:1666
 msgid "Translation succesfully updated"
 msgstr ""
 
-#: infinity/apps/core/views.py:1670
+#: infinity/apps/core/views.py:1716
 msgid "Translation succesfully deleted"
 msgstr ""
 
@@ -853,7 +857,7 @@ msgstr ""
 msgid "User with this name already exists"
 msgstr ""
 
-#: infinity/apps/users/views.py:274
+#: infinity/apps/users/views.py:278
 msgid "User succesfully updated"
 msgstr ""
 
@@ -1011,7 +1015,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:124
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:126
 #, fuzzy
 #| msgid "Sign Up"
 msgid "Sign in"
@@ -1237,7 +1241,7 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: infinity/templates/base.html:127
+#: infinity/templates/base.html:129
 #, fuzzy
 #| msgid "Sign Up"
 msgid "Sign up"
