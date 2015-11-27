@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import Language
 from .models import Definition
+from .models import Vote
 from .models import Type
 from .models import Goal
 from .models import Need
@@ -21,6 +22,7 @@ class LanguageAdmin(admin.ModelAdmin):
 admin.site.register(Language, LanguageAdmin)
 admin.site.register(Definition)
 admin.site.register(Comment)
+admin.site.register(Vote)
 admin.site.register(Type)
 admin.site.register(Need)
 admin.site.register(Goal)

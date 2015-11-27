@@ -117,7 +117,9 @@
               <li>
               <a href="{% url "user-detail" request.user.username %}"><b>[{{ request.user }}]</b></a>
               </li>
-
+              <li>
+              <a href="{% url "user-detail" request.user.username %}"><span id="credit">{{ request.user.get_comment_credit|floatformat:1 }}</span> <b>ħ</b></a>
+              </li>
               {% else %}
 
               <li>

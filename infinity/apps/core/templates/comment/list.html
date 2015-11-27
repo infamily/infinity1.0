@@ -1,6 +1,17 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
+{% load staticfiles %}
+{% load vote_extras %}
 {% load django_markdown %}
+
+{% block extra_js %}
+  <script src="{% static 'js/comment_vote.js' %}"></script>
+{% endblock extra_js %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+{% endblock extra_css %}
+
 
 {% if request.user.is_authenticated %}
 <script>
@@ -54,11 +65,32 @@ function getfocus() {
     <div class="alignright date">
 
         --[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}<br/>
-        <div align="right">
+        <div class="alignright">
             {% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
             {% endif %}
         </div>
     </div>
+        <div style="float:left;">	
+			<span id="total-votes-{{object.id}}">{{ object.votes }}</span> - 
+
+			<!-- neutral vote -->
+			{% if object|cut:request.user == 0 %}
+			<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
+			<i id="thumb-down-{{object.id}}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+
+			<!-- positive vote -->
+			{% elif object|cut:request.user == 1 %}
+			<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
+			<i id="thumb-down-{{object.id}}"class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+
+			<!-- negative vote -->
+			{% elif object|cut:request.user == -1 %}
+			<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
+			<i id="thumb-down-{{object.id}}"class="fa fa-thumbs-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+			{% endif %}
+            
+			- {% trans "credit" %} <span id="comment-credit-{{object.id}}">{{ object.comment_credit|floatformat:1 }}</span> ħ
+        </div>
     </div>
 
     <br>
