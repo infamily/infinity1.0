@@ -148,6 +148,9 @@ class Comment(models.Model):
             vote = None
         return vote
 
+    def comment_credit(self):
+        return min([self.hours_claimed, self.votes()]) or 0.
+
 
 class Vote(models.Model):
 
