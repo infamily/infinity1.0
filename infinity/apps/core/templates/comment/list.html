@@ -73,6 +73,7 @@ function getfocus() {
         <div style="float:left;">	
 			<span id="total-votes-{{object.id}}">{{ object.votes }}</span> - 
 
+			{% if request.user.is_authenticated %}
 			<!-- neutral vote -->
 			{% if object|cut:request.user == 0 %}
 			<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
@@ -85,10 +86,44 @@ function getfocus() {
 
 			<!-- negative vote -->
 			{% elif object|cut:request.user == -1 %}
-			<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
+			<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});" style="hover { background-color: black"></i> |
 			<i id="thumb-down-{{object.id}}"class="fa fa-thumbs-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 			{% endif %}
-            
+
+			{% else %} <!--not logged in-->
+
+				<i id="thumb-up-{{object.id}}" class="fa fa-thumbs-o-up" onclick="location.href = '{% url "account_login" %}';"></i> |
+				<i id="thumb-down-{{object.id}}"class="fa fa-thumbs-o-down" onclick="location.href = '{% url "account_login" %}';"></i>
+				<script>
+
+				var original_up = $("#thumb-up-{{object.id}}").attr("class");
+				var original_down = $("#thumb-down-{{object.id}}").attr("class");
+
+				// visual feedback for thumbs down
+				$("#thumb-up-{{object.id}}").hover(
+				function () {
+					$(this).removeClass(original_up);
+					$(this).addClass("fa fa-thumbs-up");
+				},
+				function () {
+					$(this).removeClass("fa fa-thumbs-up");
+					$(this).addClass(original_up);
+				});
+
+				// visual feedback for thumbs down
+				$("#thumb-down-{{object.id}}").hover(
+				function () {
+					$(this).removeClass(original_down);
+					$(this).addClass("fa fa-thumbs-down");
+				},
+				function () {
+					$(this).removeClass("fa fa-thumbs-down");
+					$(this).addClass(original_down);
+				});
+				</script>
+
+			{% endif %}
+
 			- {% trans "credit" %} <span id="comment-credit-{{object.id}}">{{ object.comment_credit|floatformat:1 }}</span> ħ
         </div>
     </div>
