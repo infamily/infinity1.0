@@ -55,14 +55,10 @@ class AjaxCommentVoteView(JSONResponseMixin, AjaxResponseMixin, View):
     Vote view
     """
     def post_ajax(self, request, *args, **kwargs):
-        json_dict = {
-            'name': "Benny's Burritos",
-            'location': "New York, NY",
-        }
-        print request.user
-        print request.POST
-        json_dict = request.POST
-        return self.render_json_response(json_dict)
+        response = {'comment_id': request.POST['comment_id'],
+                    'vote_value': request.POST['vote_value'],
+                    'user_id': request.user.username}
+        return self.render_json_response(response)
 	
 
 class SetLanguageView(RedirectView):

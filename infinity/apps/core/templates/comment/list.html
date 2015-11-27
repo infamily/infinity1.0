@@ -70,12 +70,10 @@ function getfocus() {
         </div>
     </div>
         <div style="float:left;">	
-			<form id="vote-form" action="/ajax/comment-vote/" method="post">{% csrf_token %}
-				{{ object.votes }}
-				<input type="submit" name="positive-vote-{{object.id}}" value="+1">
-				<input type="submit" name="negative-vote-{{object.id}}" value="-1">
-                </span>
-            </form>
+			{{ object.votes }} - 
+			<i class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> | 
+			<i class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+        </form>
         </div>
     </div>
 
@@ -83,7 +81,6 @@ function getfocus() {
     <hr>
 </div>
 {% endfor %}
-
 
 
 {% if request.user.is_authenticated %}

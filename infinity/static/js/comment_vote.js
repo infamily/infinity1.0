@@ -1,19 +1,12 @@
 // VOTING logic
 // Submit post on submit
-$(document).ready(function(){
-  $('form#vote-form').on('submit', function(event){
-    event.preventDefault();
-    console.log("vote sent!")
-    send_vote();
-  });
-});
 
-function send_vote() {
-  console.log("send vote is working!")
+function send_vote(data) {
+  console.log(data)
   $.ajax({
       url : "/ajax/comment-vote/",
       type : "POST",
-      data : $('form').serialize(),
+      data : data,
       success : function(json) {
           console.log(json);
           console.log("success");
