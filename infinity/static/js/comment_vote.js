@@ -2,7 +2,7 @@
 // Submit post on submit
 
 function send_vote(data) {
-  console.log(data)
+  //console.log(data)
   $.ajax({
       url : "/ajax/comment-vote/",
       type : "POST",

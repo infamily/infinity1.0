@@ -44,10 +44,10 @@ from .filters import *
 
 from hours.models import HourValue
 from core.models import Language
+from core.models import Vote
 
 from django.conf import settings
 from django.utils import translation as trans_settings
-
 
 
 class AjaxCommentVoteView(JSONResponseMixin, AjaxResponseMixin, View):
@@ -55,9 +55,37 @@ class AjaxCommentVoteView(JSONResponseMixin, AjaxResponseMixin, View):
     Vote view
     """
     def post_ajax(self, request, *args, **kwargs):
-        response = {'comment_id': request.POST['comment_id'],
-                    'vote_value': request.POST['vote_value'],
-                    'user_id': request.user.username}
+
+        try:
+            vote = Vote.objects.get(
+                comment_id=request.POST['comment_id'],
+                user_id=request.user.id)
+        except:
+            vote = Vote.objects.create(
+                comment_id=request.POST['comment_id'],
+                value=request.POST['vote_value'],
+                user_id=request.user.id)
+            vote.save()
+
+        if 'vote' in locals():
+            if vote.value == int(request.POST['vote_value']):
+                if vote.value != 0:
+                    vote.value = 0
+                    vote.save()
+                else:
+                    vote.value = int(request.POST['vote_value'])
+                    vote.save()
+            else:
+                vote.value = int(request.POST['vote_value'])
+                vote.save()
+
+            response = {'value': vote.value,
+                        'total': vote.comment.votes(),
+                        'success': True}
+
+        else:
+            response = {'success': False}
+
         return self.render_json_response(response)
 	
 
