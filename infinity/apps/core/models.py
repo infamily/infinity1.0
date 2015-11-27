@@ -150,6 +150,23 @@ class Comment(models.Model):
 
 
 class Vote(models.Model):
+
+    created_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        auto_now_add=False,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+
     POSITIVE = 1
     NEUTRAL = 0
     NEGATIVE = -1
