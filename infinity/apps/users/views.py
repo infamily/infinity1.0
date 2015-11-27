@@ -206,7 +206,9 @@ class UserDetailView(DetailView):
             if comment.content_object:
 
                 if comment.content_type.name == u'definition':
-                    goals = None
+                    goals = []
+                elif comment.content_type.name == u'need':
+                    goals = []
                 elif comment.content_type.name == u'goal':
                     goals = [comment.content_object]
                 elif comment.content_type.name == u'idea':
@@ -219,6 +221,8 @@ class UserDetailView(DetailView):
                     goals = comment.content_object.step.plan.idea.goal.all().order_by('-id')
                 elif comment.content_type.name == u'work':
                     goals = comment.content_object.task.step.plan.idea.goal.all().order_by('-id')
+                else:
+                    goals = []
 
                 co = {'comment': comment,
                       'goals_hash': md5(str(goals)).hexdigest() }

@@ -10,6 +10,8 @@ from .signals import user_pre_save
 from .signals import user_post_save
 from .signals import conversation_post_save
 
+from core.models import Comment
+from decimal import Decimal
 
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
@@ -99,6 +101,12 @@ class User(AbstractUser):
         )
 
         return rel.exists()
+
+    def get_comment_credit(self):
+        credit = Decimal(0.)
+        for comment in Comment.objects.filter(user_id=self.id):
+            credit += comment.comment_credit()
+        return credit
 
 
 class ConversationInvite(models.Model):
