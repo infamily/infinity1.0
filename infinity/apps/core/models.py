@@ -149,7 +149,7 @@ class Comment(models.Model):
         return vote
 
     def comment_credit(self):
-        return min([self.hours_claimed, self.votes()]) or 0.
+        return min([self.hours_claimed, self.votes()]) or Decimal(0.)
 
 
 class Vote(models.Model):
