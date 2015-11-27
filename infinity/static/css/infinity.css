@@ -281,14 +281,20 @@ a:visited{
 }
 
 .fa-thumbs-o-up:hover {
-	color: green;
+	color: red;
+	cursor: pointer;
+	cursor: hand;
 }
 .fa-thumbs-up:hover {
-	color: green;
+	cursor: pointer;
+	cursor: hand;
 }
 .fa-thumbs-o-down:hover {
-	color: brown;
+	color: blue;
+	cursor: pointer;
+	cursor: hand;
 }
 .fa-thumbs-down:hover {
-	color: brown;
+	cursor: pointer;
+	cursor: hand;
 }
