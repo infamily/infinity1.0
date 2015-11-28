@@ -103,7 +103,7 @@ $(document).ready( function() {
 			<span class="badge">{% trans "link" %}</span>
 			{% endif %}
          <b>[{{object.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" object.pk %}">{{object.name}}</a> 
-         <p>{{object.objective}}</p>
+         <p>{{object.objective|markdown|truncatewords_html:35}}</p>
       </li>
     </ul>
 {% endfor %}
