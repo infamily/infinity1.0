@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-28 04:02-0800\n"
-"PO-Revision-Date: 2015-11-28 14:11+0200\n"
+"POT-Creation-Date: 2015-11-28 04:18-0800\n"
+"PO-Revision-Date: 2015-11-28 14:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -1062,15 +1062,20 @@ msgid "Sign in"
 msgstr "ログイン"
 
 #: infinity/templates/account/login.html:12
-msgid "here"
+msgid ""
+"\n"
+"Have no account? Sign up <a href=\"/user/signup/\">here</a>.\n"
 msgstr ""
+"\n"
+"アカウントがない？<b><a href=\"/user/signup/\">ここ</a></b>で登録してくださ"
+"い。\n"
 
-#: infinity/templates/account/login.html:17
+#: infinity/templates/account/login.html:19
 #: infinity/templates/account/signup_closed.html:18
 msgid "octocats get a free pass"
 msgstr ""
 
-#: infinity/templates/account/login.html:30
+#: infinity/templates/account/login.html:32
 msgid "Forgot password?"
 msgstr "パスワードを忘れましたか？"
 
@@ -1216,6 +1221,8 @@ msgstr ""
 #: infinity/templates/account/signup_closed.html:12
 msgid "Write an e-mail to <u>forever@infty.xyz</u>. We'll send you an invite."
 msgstr ""
+"登録するためには、<u>forever@infty.xyz</u>　まで電子メールを送ってください。"
+"私たちは招待を送ります。"
 
 #: infinity/templates/account/snippets/already_logged_in.html:5
 msgid "Note"
