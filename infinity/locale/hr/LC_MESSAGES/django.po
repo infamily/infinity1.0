@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-28 04:02-0800\n"
+"POT-Creation-Date: 2015-11-28 04:18-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1145,15 +1145,17 @@ msgid "Sign in"
 msgstr "Registracija"
 
 #: infinity/templates/account/login.html:12
-msgid "here"
+msgid ""
+"\n"
+"Have no account? Sign up <a href=\"/user/signup/\">here</a>.\n"
 msgstr ""
 
-#: infinity/templates/account/login.html:17
+#: infinity/templates/account/login.html:19
 #: infinity/templates/account/signup_closed.html:18
 msgid "octocats get a free pass"
 msgstr ""
 
-#: infinity/templates/account/login.html:30
+#: infinity/templates/account/login.html:32
 msgid "Forgot password?"
 msgstr "Zaboravili ste lozinku?"
 
