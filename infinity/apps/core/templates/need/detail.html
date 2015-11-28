@@ -99,7 +99,7 @@ $(document).ready( function() {
             <span class="badge">{% trans "link" %}</span>
             {% endif %}
            <a href="{% url "goal-detail" object.pk %}">{{object.name}}</a>
-           <p>{{object.description|truncatechars:120}}</p>
+           <p>{{object.reason|markdown|truncatewords_html:35}}</p>
         </li>
       </ul>
   {% endfor %}
