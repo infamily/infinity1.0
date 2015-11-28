@@ -110,7 +110,11 @@
                   <a href="{% url "inbox" %}"><b>{% trans "Inbox" %}</b></a><!--Inbox=Needs-->
                   {% endif %}
               {% else %}
-              <a href="{% url "about" %}"><b>{% trans "About" %}</b></a>
+                  {% if request.get_full_path == '/about/' %}
+                  <a href="{% url "index" %}"><b>{% trans "Index" %}</b></a>
+                  {% else %}
+                  <a href="{% url "about" %}"><b>{% trans "About" %}</b></a>
+                  {% endif %}
               {% endif %}
               </li>
 
