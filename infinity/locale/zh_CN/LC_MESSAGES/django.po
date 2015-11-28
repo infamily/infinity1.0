@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-27 12:10-0800\n"
-"PO-Revision-Date: 2015-11-27 22:19+0200\n"
+"POT-Creation-Date: 2015-11-28 04:02-0800\n"
+"PO-Revision-Date: 2015-11-28 14:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -1060,16 +1060,20 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:126
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:130
 msgid "Sign in"
 msgstr "登陆"
 
-#: infinity/templates/account/login.html:16
+#: infinity/templates/account/login.html:12
+msgid "here"
+msgstr ""
+
+#: infinity/templates/account/login.html:17
 #: infinity/templates/account/signup_closed.html:18
 msgid "octocats get a free pass"
 msgstr ""
 
-#: infinity/templates/account/login.html:29
+#: infinity/templates/account/login.html:30
 msgid "Forgot password?"
 msgstr "忘了密码？"
 
@@ -1273,21 +1277,21 @@ msgstr "解决问题"
 msgid "Help"
 msgstr "帮助"
 
-#: infinity/templates/base.html:107
+#: infinity/templates/base.html:108
+msgid "Index"
+msgstr "目录"
+
+#: infinity/templates/base.html:110
 msgid "Inbox"
 msgstr "需要"
 
-#: infinity/templates/base.html:109
+#: infinity/templates/base.html:113
 msgid "About"
 msgstr "关于"
 
-#: infinity/templates/base.html:115
+#: infinity/templates/base.html:119
 msgid "Logout"
 msgstr "登出"
-
-#: infinity/templates/base.html:129
-msgid "Sign up"
-msgstr "注册"
 
 #: infinity/templates/home.html:21 infinity/templates/inbox.html:16
 msgid "invitations"
@@ -1659,6 +1663,9 @@ msgstr ""
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr "记住"
+
+#~ msgid "Sign up"
+#~ msgstr "注册"
 
 #~ msgid "<b>Category:</b> (of the problem)"
 #~ msgstr "<b>类别:</b> (问题的分类)"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-27 12:10-0800\n"
+"POT-Creation-Date: 2015-11-28 04:02-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1140,16 +1140,20 @@ msgstr ""
 "Potvrdili ste da je <a href=\"mailto:%(email)s\">%(email)s</a> e-mail adresa "
 "korisnika %(user_display)s."
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:126
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:130
 msgid "Sign in"
 msgstr "Registracija"
 
-#: infinity/templates/account/login.html:16
+#: infinity/templates/account/login.html:12
+msgid "here"
+msgstr ""
+
+#: infinity/templates/account/login.html:17
 #: infinity/templates/account/signup_closed.html:18
 msgid "octocats get a free pass"
 msgstr ""
 
-#: infinity/templates/account/login.html:29
+#: infinity/templates/account/login.html:30
 msgid "Forgot password?"
 msgstr "Zaboravili ste lozinku?"
 
@@ -1375,21 +1379,23 @@ msgstr "Rješite vaše probleme."
 msgid "Help"
 msgstr "Pomoć"
 
-#: infinity/templates/base.html:107
+#: infinity/templates/base.html:108
+#, fuzzy
+#| msgid "my index"
+msgid "Index"
+msgstr "moj indeks"
+
+#: infinity/templates/base.html:110
 msgid "Inbox"
 msgstr ""
 
-#: infinity/templates/base.html:109
+#: infinity/templates/base.html:113
 msgid "About"
 msgstr "O nama"
 
-#: infinity/templates/base.html:115
+#: infinity/templates/base.html:119
 msgid "Logout"
 msgstr "Odjava"
-
-#: infinity/templates/base.html:129
-msgid "Sign up"
-msgstr "Registracija"
 
 #: infinity/templates/home.html:21 infinity/templates/inbox.html:16
 msgid "invitations"
@@ -1870,6 +1876,9 @@ msgstr "E-mail adresa i/ili lozinka koje ste unijeli nisu točni."
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Zapamti me"
+
+#~ msgid "Sign up"
+#~ msgstr "Registracija"
 
 #, fuzzy
 #~| msgid "Add a problem"
