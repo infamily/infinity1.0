@@ -104,7 +104,11 @@
               <li>
               {% if request.user.is_authenticated %}
               <!-- <a href="{% url "help" %}"><b>{% trans "Help" %}</b></a>-->
-              <a href="{% url "inbox" %}"><b>{% trans "Inbox" %}</b></a>
+                  {% if request.get_full_path == '/inbox' %}
+                  <a href="{% url "index" %}"><b>{% trans "Index" %}</b></a>
+                  {% else %}
+                  <a href="{% url "inbox" %}"><b>{% trans "Inbox" %}</b></a><!--Inbox=Needs-->
+                  {% endif %}
               {% else %}
               <a href="{% url "about" %}"><b>{% trans "About" %}</b></a>
               {% endif %}
