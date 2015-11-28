@@ -96,7 +96,7 @@ function showLess(){
 			<span class="badge">{% trans "link" %}</span>
 			{% endif %}
          <a href="{% url "work-detail" object.pk %}">{{object.name}}</a> 
-         <p>{{object.description}}</p>
+         <p>{{object.description|markdown|truncatewords_html:35}}</p>
       </li>
     </ul>
 {% endfor %}

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-27 12:10-0800\n"
-"PO-Revision-Date: 2015-11-27 22:22+0200\n"
+"POT-Creation-Date: 2015-11-28 04:18-0800\n"
+"PO-Revision-Date: 2015-11-28 14:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -1078,16 +1078,25 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:126
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:130
 msgid "Sign in"
 msgstr "Prisijungti"
 
-#: infinity/templates/account/login.html:16
+#: infinity/templates/account/login.html:12
+msgid ""
+"\n"
+"Have no account? Sign up <a href=\"/user/signup/\">here</a>.\n"
+msgstr ""
+"\n"
+"Neturite paskyros? Galite susikurti paskyrą <a href=\"/user/signup/\">čia</"
+"a>.\n"
+
+#: infinity/templates/account/login.html:19
 #: infinity/templates/account/signup_closed.html:18
 msgid "octocats get a free pass"
 msgstr ""
 
-#: infinity/templates/account/login.html:29
+#: infinity/templates/account/login.html:32
 msgid "Forgot password?"
 msgstr "Pamiršote slaptažodį?"
 
@@ -1295,21 +1304,21 @@ msgstr "Spręskim problemas"
 msgid "Help"
 msgstr "Pagalba"
 
-#: infinity/templates/base.html:107
+#: infinity/templates/base.html:108
+msgid "Index"
+msgstr "Turinys"
+
+#: infinity/templates/base.html:110
 msgid "Inbox"
 msgstr "Poreikiai"
 
-#: infinity/templates/base.html:109
+#: infinity/templates/base.html:113
 msgid "About"
 msgstr "Apie projektą"
 
-#: infinity/templates/base.html:115
+#: infinity/templates/base.html:119
 msgid "Logout"
 msgstr "Atsijungti"
-
-#: infinity/templates/base.html:129
-msgid "Sign up"
-msgstr "Registracija"
 
 #: infinity/templates/home.html:21 infinity/templates/inbox.html:16
 msgid "invitations"
@@ -1688,6 +1697,9 @@ msgstr ""
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Prisiminti"
+
+#~ msgid "Sign up"
+#~ msgstr "Registracija"
 
 #, fuzzy
 #~| msgid "Add a problem"

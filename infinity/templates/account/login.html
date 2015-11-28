@@ -9,6 +9,9 @@
 
 <h1>{% trans "Sign in" %}</h1>
 
+{% blocktrans %}
+Have no account? Sign up <a href="/user/signup/">here</a>.
+{% endblocktrans %}
 <center>
     <div>
         <a class="octocat-login" href="{% provider_login_url "github" %}"><i class="fa fa-github"></i></a>

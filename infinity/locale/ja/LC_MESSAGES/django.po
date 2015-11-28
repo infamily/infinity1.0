@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-27 12:10-0800\n"
-"PO-Revision-Date: 2015-11-27 22:22+0200\n"
+"POT-Creation-Date: 2015-11-28 04:18-0800\n"
+"PO-Revision-Date: 2015-11-28 14:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -1057,16 +1057,25 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:126
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:130
 msgid "Sign in"
 msgstr "ログイン"
 
-#: infinity/templates/account/login.html:16
+#: infinity/templates/account/login.html:12
+msgid ""
+"\n"
+"Have no account? Sign up <a href=\"/user/signup/\">here</a>.\n"
+msgstr ""
+"\n"
+"アカウントがない？<b><a href=\"/user/signup/\">ここ</a></b>で登録してくださ"
+"い。\n"
+
+#: infinity/templates/account/login.html:19
 #: infinity/templates/account/signup_closed.html:18
 msgid "octocats get a free pass"
 msgstr ""
 
-#: infinity/templates/account/login.html:29
+#: infinity/templates/account/login.html:32
 msgid "Forgot password?"
 msgstr "パスワードを忘れましたか？"
 
@@ -1212,6 +1221,8 @@ msgstr ""
 #: infinity/templates/account/signup_closed.html:12
 msgid "Write an e-mail to <u>forever@infty.xyz</u>. We'll send you an invite."
 msgstr ""
+"登録するためには、<u>forever@infty.xyz</u>　まで電子メールを送ってください。"
+"私たちは招待を送ります。"
 
 #: infinity/templates/account/snippets/already_logged_in.html:5
 msgid "Note"
@@ -1269,21 +1280,21 @@ msgstr "問題を解決します"
 msgid "Help"
 msgstr "ヘルプ"
 
-#: infinity/templates/base.html:107
+#: infinity/templates/base.html:108
+msgid "Index"
+msgstr "目次"
+
+#: infinity/templates/base.html:110
 msgid "Inbox"
 msgstr "欲求"
 
-#: infinity/templates/base.html:109
+#: infinity/templates/base.html:113
 msgid "About"
 msgstr "プロジェクトについて"
 
-#: infinity/templates/base.html:115
+#: infinity/templates/base.html:119
 msgid "Logout"
 msgstr "ログアウト"
-
-#: infinity/templates/base.html:129
-msgid "Sign up"
-msgstr "登録"
 
 #: infinity/templates/home.html:21 infinity/templates/inbox.html:16
 msgid "invitations"
@@ -1658,6 +1669,9 @@ msgstr ""
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr ""
+
+#~ msgid "Sign up"
+#~ msgstr "登録"
 
 #~ msgid "<b>Category:</b> (of the problem)"
 #~ msgstr "<b>種類：</b> （問題の）"

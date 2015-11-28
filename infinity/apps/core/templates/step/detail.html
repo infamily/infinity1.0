@@ -88,7 +88,7 @@ function showLess(){
 			<span class="badge">{% trans "link" %}</span>
 			{% endif %}
       <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}">{{object.name}}</a>
-           <p>{{object.description|truncatechars:120}}</p>
+           <p>{{object.description|markdown|truncatewords_html:35}}</p>
       </li>
     </ul>
 {% endfor %}

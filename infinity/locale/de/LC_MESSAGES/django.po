@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-27 12:10-0800\n"
+"POT-Creation-Date: 2015-11-28 04:18-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1026,16 +1026,22 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:126
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:130
 msgid "Sign in"
 msgstr ""
 
-#: infinity/templates/account/login.html:16
+#: infinity/templates/account/login.html:12
+msgid ""
+"\n"
+"Have no account? Sign up <a href=\"/user/signup/\">here</a>.\n"
+msgstr ""
+
+#: infinity/templates/account/login.html:19
 #: infinity/templates/account/signup_closed.html:18
 msgid "octocats get a free pass"
 msgstr ""
 
-#: infinity/templates/account/login.html:29
+#: infinity/templates/account/login.html:32
 msgid "Forgot password?"
 msgstr ""
 
@@ -1238,20 +1244,20 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: infinity/templates/base.html:107
+#: infinity/templates/base.html:108
+msgid "Index"
+msgstr ""
+
+#: infinity/templates/base.html:110
 msgid "Inbox"
 msgstr ""
 
-#: infinity/templates/base.html:109
+#: infinity/templates/base.html:113
 msgid "About"
 msgstr ""
 
-#: infinity/templates/base.html:115
+#: infinity/templates/base.html:119
 msgid "Logout"
-msgstr ""
-
-#: infinity/templates/base.html:129
-msgid "Sign up"
 msgstr ""
 
 #: infinity/templates/home.html:21 infinity/templates/inbox.html:16
