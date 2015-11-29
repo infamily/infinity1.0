@@ -37,6 +37,10 @@ from decimal import Decimal
 from core.models import Translation
 
 
+class ChangePriorityForm(forms.Form):
+    steps = forms.CharField()
+
+
 class ContentTypeSubscribeForm(forms.Form):
     object_id = forms.IntegerField()
     content_type = forms.ModelChoiceField(

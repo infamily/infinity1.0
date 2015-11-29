@@ -7,7 +7,27 @@
 {% load staticfiles %}
 {% block extra_js %}
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-{% endblock extra_js %}
+  {% if request.user == object.user %}
+  <script>
+      $(function() {
+          $( ".sortable" ).sortable({
+              update: function(event, ui) {
+                  var data = [];
+                  $(".list-group-item").each(function() {
+                      data.push({id: $(this).data("id"), index: $(this).index()});
+                  });
+                  $.ajax({
+                      method: "POST",
+                      url: "{% url 'change-step-priority' %}",
+                      data: {"steps": JSON.stringify(data)}
+                  });
+              }
+          });
+          $( ".sortable" ).disableSelection();
+      });
+  </script>
+  {% endif %}
+  {% endblock extra_js %}
 
 {% block title %}p: {{ object.name }}{% endblock title %}
 
@@ -93,25 +113,22 @@ $(document).ready( function() {
 </div>
 
 
-
 <div class="panel-heading">{% trans "Steps" %}</div>
 <div class="panel-body">
-{% for object in step_list %}
-    <ul class="list-group">
-      <li class="list-group-item">
-			{% if object.is_link %}
-			<span class="badge">{% trans "link" %}</span>
-			{% endif %}
-         <b>[{{object.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" object.pk %}">{{object.name}}</a> 
-         <p>{{object.objective|markdown|truncatewords_html:35}}</p>
-      </li>
+    <ul class="list-group sortable">
+        {% for step in step_list %}
+        <li id="{{ step.priority }}" data-id="{{ step.id }}" class="list-group-item{% if request.user == object.user %} cursor-move{%endif%}">
+        {% if step.is_link %}
+        <span class="badge">{% trans "link" %}</span>
+        {% endif %}
+        <b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}">{{step.name}}</a> 
+        <p>{{step.objective|markdown|truncatewords_html:35}}</p>
+        </li>
+        {% endfor %}
     </ul>
-{% endfor %}
-<a href="{% url "step-create" object.pk %}">{% trans "+New Step" %}</a>
+    <a href="{% url "step-create" object.pk %}">{% trans "+New Step" %}</a>
 </div>
-
 </div>
-
 
 {# Include comment list with transactions #}
 {% include "comment/list.html" %}

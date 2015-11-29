@@ -295,5 +295,10 @@ urlpatterns = patterns(
         r'^subscribe/$',
         ContentTypeSubscribeFormView.as_view(),
         name="subscribe"
+    ),
+    url(
+        r'^change-step-priority/$',
+        ChangeStepPriorityView.as_view(),
+        name='change-step-priority'
     )
 )
