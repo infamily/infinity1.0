@@ -23,6 +23,7 @@ from ..filters import PlanListViewFilter1
 from ..filters import PlanListViewFilter2
 from ..models import Plan
 from ..models import Idea
+from ..models import Step
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
