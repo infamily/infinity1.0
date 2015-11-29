@@ -7,9 +7,11 @@ from django.core.exceptions import FieldError
 from django.template.loader import render_to_string
 from django.views.generic import DetailView
 from django.views.generic import UpdateView
+from django.views.generic import View
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404
+from django.http import JsonResponse
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.core.mail import send_mail
@@ -270,4 +272,11 @@ class CreateViewWrapper(CreateView):
             notify_new_sharewith_users(all_sharewith_users, self.object)
         self.object.subscribers.add(self.request.user)
         return super(CreateViewWrapper, self).form_valid(form)
+
+
+class JsonView(View):
+
+    def json(self, data={}):
+
+        return JsonResponse(data, safe=False)
 
