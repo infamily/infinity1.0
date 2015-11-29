@@ -20,6 +20,8 @@ from django.views.generic import RedirectView
 from django.views.generic import View
 from django.shortcuts import render
 from django.utils import timezone
+from django.conf import settings
+from django.utils import translation as trans_settings
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
@@ -38,6 +40,7 @@ from .utils import ViewTypeWrapper
 from .utils import DetailViewWrapper
 from .utils import UpdateViewWrapper
 from .utils import CreateViewWrapper
+from .utils import JsonView
 from .models import *
 from .forms import *
 from .filters import *
@@ -45,9 +48,6 @@ from .filters import *
 from hours.models import HourValue
 from core.models import Language
 from core.models import Vote
-
-from django.conf import settings
-from django.utils import translation as trans_settings
 
 
 class AjaxCommentVoteView(JSONResponseMixin, AjaxResponseMixin, View):
@@ -1575,7 +1575,7 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
             'object_list': self.object_list,
         })
         context.update({
-            'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('id')
+            'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('priority')
         })
         context.update({
             'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
@@ -1715,3 +1715,27 @@ class TranslationDeleteView(DeleteView):
         )
         messages.success(self.request, _("Translation succesfully deleted"))
         return url
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class ChangeStepPriorityView(JsonView):
+    def post(self, request, *args, **kwargs):
+        form = ChangePriorityForm(request.POST)
+        if form.is_valid():
+            steps = json.loads(form.data.get('steps'))
+            for step in steps:
+                try:
+                    step_instance = Step.objects.get(id=step['id'])
+
+                    if not step_instance.plan.user == request.user:
+                        return self.json({'error': True, 'message': 'Access error'})
+
+                    step_instance.priority = step['index']
+                    step_instance.save()
+                    data = {'error': False}
+                except Step.DoesNotExist as e:
+                    data = {'error': True, 'message': e.message}
+        else:
+            data = {'error': True, 'message': form.errors }
+
+        return self.json(data)
