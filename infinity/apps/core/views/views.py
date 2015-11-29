@@ -10,16 +10,23 @@ from django.views.generic import RedirectView
 from django.utils import timezone
 from django.conf import settings
 from django.utils import translation as trans_settings
+from django.contrib.contenttypes.models import ContentType
 
 from clever_selects.views import ChainedSelectChoicesView
 
 from users.decorators import ForbiddenUser
-from ..models import *
-from ..forms import *
-from ..filters import *
-
+from users.models import User
 from hours.models import HourValue
 from core.models import Language
+
+from ..forms import ContentTypeSubscribeForm
+from ..models import Translation
+from ..models import Need
+from ..models import Goal
+from ..models import Idea
+from ..models import Plan
+from ..models import Step
+from ..models import Task
 
 
 class SetLanguageView(RedirectView):
@@ -170,8 +177,7 @@ class InboxView(TemplateView):
 
         context = {
             'need_hours': needs and
-                         '%0.2f' % in_hours(now-max(commented_at(list(needs))))
-                         or 0.,
+            '%0.2f' % in_hours(now-max(commented_at(list(needs)))) or 0.,
             'last_days': '%0.2f' % days,
             'number_of_items': len(objects_list),
             'hour_value': hour_value,
@@ -301,20 +307,15 @@ class IndexView(TemplateView):
 
         context = {
             'goal_hours': goals and
-                         '%0.2f' % in_hours(now-max(commented_at(list(goals))))
-                         or 0.,
+            '%0.2f' % in_hours(now-max(commented_at(list(goals)))) or 0.,
             'idea_hours': ideas and
-                         '%0.2f' % in_hours(now-max(commented_at(list(ideas))))
-                         or 0.,
+            '%0.2f' % in_hours(now-max(commented_at(list(ideas)))) or 0.,
             'plan_hours': plans and
-                         '%0.2f' % in_hours(now-max(commented_at(list(plans))))
-                         or 0,
+            '%0.2f' % in_hours(now-max(commented_at(list(plans)))) or 0,
             'step_hours': steps and
-                         '%0.2f' % in_hours(now-max(commented_at(list(steps))))
-                         or 0,
+            '%0.2f' % in_hours(now-max(commented_at(list(steps)))) or 0,
             'task_hours': tasks and
-                         '%0.2f' % in_hours(now-max(commented_at(list(tasks))))
-                         or 0,
+            '%0.2f' % in_hours(now-max(commented_at(list(tasks)))) or 0,
             'last_days': '%0.2f' % days,
             'number_of_items': len(objects_list),
             'hour_value': hour_value,
