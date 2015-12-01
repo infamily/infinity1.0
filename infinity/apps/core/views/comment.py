@@ -4,53 +4,50 @@ from django.views.generic import DeleteView
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 
-from braces.views import AjaxResponseMixin
-from braces.views import JSONResponseMixin
-
 from ..forms import CommentUpdateForm
 from ..models import Comment, Vote
 from users.mixins import OwnerMixin
 
+from ..utils import JsonView
 
-class AjaxCommentVoteView(JSONResponseMixin, AjaxResponseMixin, View):
+
+class AjaxCommentVoteView(JsonView):
     """
     Vote view
     """
-    def post_ajax(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
 
-        try:
-            vote = Vote.objects.get(
-                comment_id=request.POST['comment_id'],
-                user_id=request.user.id)
-        except:
+        votes = Vote.objects.filter(
+            comment_id=request.POST['comment_id'],
+            user_id=request.user.id)
+
+        if votes.exists():
+			vote = votes[0]
+        else:
             vote = Vote.objects.create(
                 comment_id=request.POST['comment_id'],
                 value=request.POST['vote_value'],
                 user_id=request.user.id)
             vote.save()
 
-        if 'vote' in locals():
-            if vote.value == int(request.POST['vote_value']):
-                if vote.value != 0:
-                    vote.value = 0
-                    vote.save()
-                else:
-                    vote.value = int(request.POST['vote_value'])
-                    vote.save()
+        if vote.value == int(request.POST['vote_value']):
+            if vote.value != 0:
+                vote.value = 0
+                vote.save()
             else:
                 vote.value = int(request.POST['vote_value'])
                 vote.save()
-
-            response = {'value': vote.value,
-                        'total': vote.comment.votes(),
-                        'success': True,
-                        'comment_id': vote.comment.id,
-                        'total_comment_credit': vote.comment.comment_credit()}
-
         else:
-            response = {'success': False}
+            vote.value = int(request.POST['vote_value'])
+            vote.save()
 
-        return self.render_json_response(response)
+        response = {'value': vote.value,
+                    'total': vote.comment.votes(),
+                    'success': True,
+                    'comment_id': vote.comment.id,
+                    'total_comment_credit': vote.comment.comment_credit()}
+
+        return self.json(response)
 
 
 class CommentUpdateView(OwnerMixin, UpdateView):
