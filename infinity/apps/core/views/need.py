@@ -15,7 +15,6 @@ from ..forms import NeedUpdateForm
 from ..utils import UpdateViewWrapper
 from ..utils import DetailViewWrapper
 from ..utils import CommentsContentTypeWrapper
-from ..utils import WikiDataGet
 from ..models import Goal
 from ..models import Need
 from ..models import Definition

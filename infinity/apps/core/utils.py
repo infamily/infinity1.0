@@ -284,11 +284,13 @@ class JsonView(View):
         return JsonResponse(data, safe=False)
 
 
-def WikiDataSearch(name, language):
+def WikiDataSearch(name, language, return_response=False):
     url = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=%s&language=%s&format=json' % \
         (name, language)
     dicts = json.loads(requests.get(url).content)['search']
-    print dicts
+
+    if return_response:
+        return dicts
 
     results = []
 
@@ -304,6 +306,8 @@ def WikiDataSearch(name, language):
 
         if 'description' in item.keys():
             if item['description'] == 'Wikimedia disambiguation page':
+                continue
+            if item['description'] == 'Wikipedia disambiguation page':
                 continue
 
         try:
@@ -323,14 +327,16 @@ def WikiDataGet(concept_q, language):
     url = 'https://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=%s&format=json' % \
         (concept_q, language)
     dicts = json.loads(requests.get(url).content)
+    expression = dicts['entities'][concept_q]['labels'][language]['value']
     try:
-        expression = dicts['entities'][concept_q]['labels'][language]['value']
-        try:
-            definition = dicts['entities'][concept_q]['descriptions'][language]['value']
-        except:
-            definition = '--'
+        definition = dicts['entities'][concept_q]['descriptions'][language]['value']
     except:
-        return {'success': False}
+        definition = None
+
+    if not definition:
+        dicts = WikiDataSearch(expression, language, return_response=True)
+        item = dicts[next(index for (index, d) in enumerate(dicts) if d["id"] == concept_q)]
+        definition = item['description']
 
     return {'expression': expression,
             'definition': definition,
