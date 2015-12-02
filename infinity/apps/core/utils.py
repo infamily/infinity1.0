@@ -327,20 +327,26 @@ def WikiDataGet(concept_q, language):
     url = 'https://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=%s&format=json' % \
         (concept_q, language)
     dicts = json.loads(requests.get(url).content)
-    expression = dicts['entities'][concept_q]['labels'][language]['value']
+
     try:
-        definition = dicts['entities'][concept_q]['descriptions'][language]['value']
+        expression = dicts['entities'][concept_q]['labels'][language]['value']
+        try:
+            try:
+                definition = dicts['entities'][concept_q]['descriptions'][language]['value']
+            except:
+                dicts = WikiDataSearch(expression, language, return_response=True)
+                item = dicts[next(index for (index, d) in enumerate(dicts) if d["id"] == concept_q)]
+                expression = item['match']['text']
+                definition = item['description']
+            return {'expression': expression,
+                    'definition': definition,
+                    'success': True}
+        except:
+            return {'success': False}
     except:
-        definition = None
+        return {'success': False}
 
-    if not definition:
-        dicts = WikiDataSearch(expression, language, return_response=True)
-        item = dicts[next(index for (index, d) in enumerate(dicts) if d["id"] == concept_q)]
-        definition = item['description']
-
-    return {'expression': expression,
-            'definition': definition,
-            'success': True}
+    return {'success': False}
 
 def LookupCreateDefinition(defined_meaning_id, language):
     # try to retrieve by .defined_meaning_id and language
@@ -352,6 +358,7 @@ def LookupCreateDefinition(defined_meaning_id, language):
     else:
     # query WikiData API, and create new definition based on response
         concept = WikiDataGet('Q'+str(defined_meaning_id), language.language_code)
+        print concept
         if concept['success']:
             definition = Definition.objects.create(name=concept['expression'],
                                                    definition=concept['definition'],
