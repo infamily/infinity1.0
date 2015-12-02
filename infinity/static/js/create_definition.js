@@ -18,7 +18,6 @@ function getCookie(c_name) {
     }
 }
 
-
 function searchOpen(name, language) {
     var name = name || $('#id_name').val();
     var language = language || $('#id_language').val();
@@ -26,6 +25,7 @@ function searchOpen(name, language) {
         name: name,
         language: language,
     };
+
     console.log(name);
     $.ajax({
         url: '.',
@@ -48,7 +48,7 @@ function searchResult(data) {
             document.getElementById('id_language').value = lang_pk;
         });
     };
-    console.log(data);
+//  console.log(data);
     if (data && data[0]) {
         console.log('show', data)
         showProposals(data);

@@ -14,9 +14,13 @@ from ..forms import NeedUpdateForm
 from ..utils import UpdateViewWrapper
 from ..utils import DetailViewWrapper
 from ..utils import CommentsContentTypeWrapper
+from ..utils import WikiDataGet
 from ..models import Goal
 from ..models import Need
 from ..models import Definition
+from ..models import Language
+
+from users.models import User
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -44,10 +48,45 @@ class NeedCreateView(CreateViewWrapper):
         return context
 
     def dispatch(self, *args, **kwargs):
-        if kwargs.get('definition_id'):
-            self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
+        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
+
+        if kwargs.get('concept_q'):
+
+            if kwargs['concept_q'].isdigit():
+                definitions = Definition.objects.filter(pk=int(kwargs['concept_q']))
+                if definitions:
+                    self.definition_instance = definitions[0]
+                    defined_meaning_id = definitions[0].defined_meaning_id
+                else:
+                    defined_meaning_id = None
+
+            elif kwargs['concept_q'][1:].isdigit():
+                definitions = None
+                defined_meaning_id = int(kwargs['concept_q'][1:])
+
+
+            if defined_meaning_id:
+                # we try to retrieve by .defined_meaning_id and language
+                definitions = Definition.objects.filter(defined_meaning_id=defined_meaning_id,
+                                                        language=language)
+                if definitions:
+                    self.definition_instance = definitions[0]
+                else:
+                # if we fail, we query WikiData API, and create new definition based on response
+                    concept = WikiDataGet('Q'+str(defined_meaning_id), self.request.LANGUAGE_CODE)
+                    if concept['success']:
+                        definition = Definition.objects.create(name=concept['expression'],
+                                                               definition=concept['definition'],
+                                                               language=language,
+                                                               defined_meaning_id=defined_meaning_id,
+                                                               user=User.objects.get(pk=1))
+                        definition.save()
+                        self.definition_instance = definition
+
+
         else:
             self.definition_instance = False
+
         return super(NeedCreateView, self).dispatch(*args, **kwargs)
 
     def get_form_kwargs(self):

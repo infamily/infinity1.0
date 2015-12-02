@@ -407,9 +407,9 @@ class Type(models.Model):
 
 class Need(BaseContentModel):
     definition = models.ForeignKey(
-	'Definition',
-	blank=False,
-	null=False,
+    'Definition',
+    blank=False,
+    null=False,
     )
     content = MarkdownField(blank=False)
 

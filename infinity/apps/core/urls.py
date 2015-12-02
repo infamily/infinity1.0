@@ -40,7 +40,7 @@ urlpatterns = patterns(
         name="need-create"
     ),
     url(
-        r'^need-create/(?P<definition_id>\d+)/$',
+        r'^need-create/(?P<concept_q>\w+)/$',
         NeedCreateView.as_view(),
         name="need-create"
     ),

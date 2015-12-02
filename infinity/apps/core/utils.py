@@ -28,6 +28,8 @@ from .models import Translation
 
 from users.mixins import OwnerMixin
 
+import json
+import requests
 
 def notify_mentioned_users(comment_instance):
     """
@@ -280,3 +282,44 @@ class JsonView(View):
 
         return JsonResponse(data, safe=False)
 
+
+def WikiDataSearch(name, language):
+    url = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=%s&language=%s&format=json' % \
+        (name, language)
+    dicts = json.loads(requests.get(url).content)['search']
+
+    results = []
+
+    for item in dicts:
+        if 'aliases' in item.keys():
+            definition = item['aliases'][0]
+        elif 'description' in item.keys():
+            definition = item['description']
+        else:
+            continue
+
+        if 'description' in item.keys():
+            if item['description'] == 'Wikimedia disambiguation page':
+                continue
+
+        results.append([definition, reverse('need-create', args=[item['title']])])
+
+    return results
+
+
+def WikiDataGet(concept_q, language):
+    url = 'https://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=%s&format=json' % \
+        (concept_q, language)
+    dicts = json.loads(requests.get(url).content)
+    try:
+        expression = dicts['entities'][concept_q]['labels'][language]['value']
+        try:
+            definition = dicts['entities'][concept_q]['descriptions'][language]['value']
+        except:
+            definition = '--'
+    except:
+        return {'success': False}
+
+    return {'expression': expression,
+            'definition': definition,
+            'success': True}

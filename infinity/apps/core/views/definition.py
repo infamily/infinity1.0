@@ -15,6 +15,7 @@ from braces.views import OrderableListMixin
 
 from ..utils import CommentsContentTypeWrapper
 from ..utils import ViewTypeWrapper, DetailViewWrapper
+from ..utils import WikiDataSearch
 from ..models import Definition, Language, Need
 from ..forms import DefinitionUpdateForm, DefinitionCreateForm
 from ..filters import DefinitionListViewFilter
@@ -78,7 +79,11 @@ class DefinitionCreateView(CreateView):
                 if definition.definition:
                     hints.append([definition.definition,
                                   reverse('need-create', args=[definition.pk])])
-            resp = json.dumps(hints)
+
+            # Add suggestions from WikiData
+            hints += WikiDataSearch(request.GET['name'], request.LANGUAGE_CODE)
+
+            resp = json.dumps(hints[::-1])
             return HttpResponse(resp, content_type='application/json')
         form = DefinitionCreateForm(request=request)
         return render(request, 'definition/create.html',
@@ -91,7 +96,7 @@ class DefinitionCreateView(CreateView):
             self.object.user = self.request.user
             self.object.save()
             messages.success(self.request, _("Definition succesfully created"))
-            return redirect(reverse('need-create', kwargs={'definition_id': self.object.pk}))
+            return redirect(reverse('need-create', kwargs={'concept_q': self.object.pk}))
 
         return render(request, 'definition/create.html',
                       {'form': form})
