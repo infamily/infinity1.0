@@ -73,11 +73,12 @@ class DefinitionCreateView(CreateView):
             hints = []
             similar_definitions = Definition.objects.filter(
                 language__pk=request.GET['language'],
-                name=request.GET['name']
+                name__iexact=request.GET['name']
             )
             for definition in similar_definitions:
                 if definition.definition:
-                    hints.append([definition.definition,
+                    hints.append([definition.name,
+                                  definition.definition,
                                   reverse('need-create', args=[definition.pk])])
 
             # Add suggestions from WikiData

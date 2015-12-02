@@ -63,10 +63,25 @@ function showProposals(data) {
     $('.hint').remove();
     var definitionsBlock = $(".hints-block")[0];
     data.forEach(function(entry) {
-        definitionsBlock.insertAdjacentHTML(
-            'afterend', '<div class="row hint form-group"><div class="col-sm-10"><p class="hint-text">' + entry[0] +
-            '</p></div><div class="col-sm-2"><a class="btn btn-primary choose-definition" style="color:white;" href="' + entry[1] + '">y</a></div></div>'
-        );
+
+        var is_q = entry[2].search(/\/Q\d+/i);
+        if (is_q > 0) {
+          var font_weight = 'normal';
+        }
+        else {
+          var font_weight = 'bold';
+         // Editing link directly to definition
+         // if (entry[1] == '--') {
+         //   var definition_id = entry[2].match(/need-create\/\d+/i).toString().split('\/')[1];
+         //   entry[1] = '<a href="/definition/'+definition_id+'/detail/">'+entry[1]+'</a>';
+         // }
+        }
+        if (entry[1] != '--') {
+          definitionsBlock.insertAdjacentHTML(
+              'afterend', '<div class="row hint form-group"><div class="col-sm-10"><p class="hint-text"><b>' + entry[0] + '</b>: <span style="font-weight:' + font_weight + ';">' +entry[1] + '</span>' +
+              '</p></div><div class="col-sm-2"><a class="btn btn-dark choose-definition" style="color:white;" href="' + entry[2] + '">y</a></div></div>'
+          );
+        }
     });
     // definitionsBlock.insertAdjacentHTML('afterend', '<div align="center" class="row hint form-group"><b>Did you mean?</b></div>');
 }

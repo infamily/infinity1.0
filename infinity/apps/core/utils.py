@@ -288,14 +288,17 @@ def WikiDataSearch(name, language):
     url = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=%s&language=%s&format=json' % \
         (name, language)
     dicts = json.loads(requests.get(url).content)['search']
+    print dicts
 
     results = []
 
     for item in dicts:
+        if 'match' in item.keys():
+            expression = item['match']['text']
         if 'aliases' in item.keys():
-            definition = item['aliases'][0]
-        elif 'description' in item.keys():
-            definition = item['description']
+            aliases = '; '.join(item['aliases'])
+        if 'description' in item.keys():
+            description = item['description']
         else:
             continue
 
@@ -303,7 +306,15 @@ def WikiDataSearch(name, language):
             if item['description'] == 'Wikimedia disambiguation page':
                 continue
 
-        results.append([definition, reverse('need-create', args=[item['title']])])
+        try:
+            if expression == aliases:
+                aliases = ''
+            else:
+                aliases = ' - ' + aliases
+        except:
+            aliases = ''
+
+        results.append([expression, aliases+description, reverse('need-create', args=[item['title']])])
 
     return results
 

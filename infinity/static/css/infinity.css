@@ -302,3 +302,9 @@ a:visited{
 .cursor-move {
     cursor: move;
 }
+
+.btn-dark {
+  color: #fff;
+  background-color: #000;
+  border-color: #505050;
+}
