@@ -9,6 +9,7 @@ from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
 from ..utils import CreateViewWrapper
+from ..utils import LookupCreateDefinition
 from ..forms import NeedCreateForm
 from ..forms import NeedUpdateForm
 from ..utils import UpdateViewWrapper
@@ -19,9 +20,6 @@ from ..models import Goal
 from ..models import Need
 from ..models import Definition
 from ..models import Language
-
-from users.models import User
-
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class NeedCreateView(CreateViewWrapper):
@@ -53,36 +51,27 @@ class NeedCreateView(CreateViewWrapper):
         if kwargs.get('concept_q'):
 
             if kwargs['concept_q'].isdigit():
-                definitions = Definition.objects.filter(pk=int(kwargs['concept_q']))
+                # Lookup or Create Definition by .pk
+                definitions = Definition.objects.filter(pk=int(kwargs['concept_q']), language=language)
+
                 if definitions:
                     self.definition_instance = definitions[0]
-                    defined_meaning_id = definitions[0].defined_meaning_id
                 else:
-                    defined_meaning_id = None
+                    definitions = Definition.objects.filter(pk=int(kwargs['concept_q']))
+                    if definitions:
+                        if definitions[0].defined_meaning_id:
+                            self.definition_instance = LookupCreateDefinition(definitions[0].defined_meaning_id, language)
+                        else:
+                            self.definition_instance = definitions[0]
 
             elif kwargs['concept_q'][1:].isdigit():
-                definitions = None
-                defined_meaning_id = int(kwargs['concept_q'][1:])
+                # Lookup Definition by .defined_meaning_id
+                definitions = Definition.objects.filter(defined_meaning_id=int(kwargs['concept_q'][1:]),language=language)
 
-
-            if defined_meaning_id:
-                # we try to retrieve by .defined_meaning_id and language
-                definitions = Definition.objects.filter(defined_meaning_id=defined_meaning_id,
-                                                        language=language)
                 if definitions:
                     self.definition_instance = definitions[0]
                 else:
-                # if we fail, we query WikiData API, and create new definition based on response
-                    concept = WikiDataGet('Q'+str(defined_meaning_id), self.request.LANGUAGE_CODE)
-                    if concept['success']:
-                        definition = Definition.objects.create(name=concept['expression'],
-                                                               definition=concept['definition'],
-                                                               language=language,
-                                                               defined_meaning_id=defined_meaning_id,
-                                                               user=User.objects.get(pk=1))
-                        definition.save()
-                        self.definition_instance = definition
-
+                    self.definition_instance = LookupCreateDefinition(int(kwargs['concept_q'][1:]),language=language)
 
         else:
             self.definition_instance = False

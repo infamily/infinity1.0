@@ -25,6 +25,7 @@ from core.models import Language
 from .forms import CommentCreateFormDetail
 from .models import Comment
 from .models import Translation
+from .models import Definition
 
 from users.mixins import OwnerMixin
 
@@ -323,3 +324,24 @@ def WikiDataGet(concept_q, language):
     return {'expression': expression,
             'definition': definition,
             'success': True}
+
+def LookupCreateDefinition(defined_meaning_id, language):
+    # try to retrieve by .defined_meaning_id and language
+    definitions = Definition.objects.filter(defined_meaning_id=defined_meaning_id,
+                                            language=language)
+    if definitions:
+        return definitions[0]
+
+    else:
+    # query WikiData API, and create new definition based on response
+        concept = WikiDataGet('Q'+str(defined_meaning_id), language.language_code)
+        if concept['success']:
+            definition = Definition.objects.create(name=concept['expression'],
+                                                   definition=concept['definition'],
+                                                   language=language,
+                                                   defined_meaning_id=defined_meaning_id,
+                                                   user=User.objects.get(pk=1))
+            definition.save()
+            return definition
+
+    return None
