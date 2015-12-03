@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: infinity/apps/core/forms.py:210 infinity/apps/core/forms.py:338
-#: infinity/apps/core/forms.py:341
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-03 00:47-0800\n"
-"PO-Revision-Date: 2015-11-16 00:05+0200\n"
+"PO-Revision-Date: 2015-12-03 14:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -434,7 +432,7 @@ msgstr ""
 
 #: infinity/apps/core/templates/definition/create.html:27
 msgid "Define what you need"
-msgstr ""
+msgstr "Type what you need"
 
 #: infinity/apps/core/templates/definition/create.html:32
 msgid "e.g.:"
