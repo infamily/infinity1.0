@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 {% load django_markdown %}
+{% load country_isocode %}
 
 {% block extra_js %}
   <script src="{% static 'js/create_definition.js' %}"></script>
@@ -17,6 +18,8 @@
 {% block title %}infty.xyz{% endblock title %}
 
 {% block content %}
+
+{{ request|get_client_ip }}, {{ request|get_country_by_ip }}
 
 <div align="center">
     <a href="{% url "wider" %}" style="text-decoration: none;"><span class="infin">f(x)=</span><span class="ity">y</span></a>
