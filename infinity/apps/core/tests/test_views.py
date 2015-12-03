@@ -1160,7 +1160,8 @@ class DefinitionTest(WebTest, AuthTestMixin):
         """
         self.init_users()
 
-        definition = mommy.make('core.Definition', _fill_optional=True)
+        language = mommy.make('core.Language', language_code='en', _fill_optional=True)
+        definition = mommy.make('core.Definition', language=language, user=self.user, _fill_optional=True)
 
         url = reverse('definition-create', kwargs={
         })

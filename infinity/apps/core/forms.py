@@ -934,6 +934,7 @@ class DefinitionCreateForm(forms.ModelForm):
         self.fields['name'].label = ''
         self.fields['language'].label = ''
         self.fields['definition'].label = ''
+        self.initial['language'] = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
 
 
     class Meta:
