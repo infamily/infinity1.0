@@ -3,11 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: infinity/apps/core/forms.py:210 infinity/apps/core/forms.py:338
+#: infinity/apps/core/forms.py:341 infinity/apps/core/forms.py:909
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 00:47-0800\n"
+"POT-Creation-Date: 2015-12-03 05:52-0800\n"
 "PO-Revision-Date: 2015-12-03 15:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,7 +22,7 @@ msgstr ""
 #: infinity/apps/core/forms.py:72 infinity/apps/core/forms.py:174
 #: infinity/apps/core/forms.py:292 infinity/apps/core/forms.py:485
 #: infinity/apps/core/forms.py:601 infinity/apps/core/forms.py:726
-#: infinity/apps/core/forms.py:832 infinity/apps/core/forms.py:1054
+#: infinity/apps/core/forms.py:832 infinity/apps/core/forms.py:1055
 msgid "Create"
 msgstr "创造"
 
@@ -28,7 +30,7 @@ msgstr "创造"
 #: infinity/apps/core/forms.py:245 infinity/apps/core/forms.py:383
 #: infinity/apps/core/forms.py:439 infinity/apps/core/forms.py:556
 #: infinity/apps/core/forms.py:678 infinity/apps/core/forms.py:789
-#: infinity/apps/core/forms.py:960 infinity/apps/core/forms.py:1000
+#: infinity/apps/core/forms.py:961 infinity/apps/core/forms.py:1001
 #: infinity/apps/users/forms.py:60
 msgid "Update"
 msgstr "更新"
@@ -92,7 +94,7 @@ msgstr "发给评论到提到的用户的邮箱"
 #: infinity/apps/core/forms.py:626 infinity/apps/core/forms.py:683
 #: infinity/apps/core/forms.py:731 infinity/apps/core/forms.py:794
 #: infinity/apps/core/forms.py:837 infinity/apps/core/forms.py:887
-#: infinity/apps/core/forms.py:995 infinity/apps/core/forms.py:1049
+#: infinity/apps/core/forms.py:996 infinity/apps/core/forms.py:1050
 msgid "Select the users to share with:"
 msgstr "选择用户谁能看到这内容"
 
@@ -102,7 +104,7 @@ msgid "Select the thing that you need..."
 msgstr "选择跟需要有关的对象..."
 
 #: infinity/apps/core/forms.py:202 infinity/apps/core/forms.py:330
-#: infinity/apps/core/forms.py:638 infinity/apps/core/forms.py:1102
+#: infinity/apps/core/forms.py:638 infinity/apps/core/forms.py:1103
 msgid "Share with:"
 msgstr "对谁可见："
 
@@ -142,7 +144,7 @@ msgstr ""
 
 #: infinity/apps/core/forms.py:212 infinity/apps/core/forms.py:342
 #: infinity/apps/core/forms.py:503 infinity/apps/core/forms.py:635
-#: infinity/apps/core/forms.py:745 infinity/apps/core/forms.py:1110
+#: infinity/apps/core/forms.py:745 infinity/apps/core/forms.py:1111
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
 msgstr "<b>私人</b> (把发布分享只跟您选择的用户)"
@@ -153,7 +155,7 @@ msgstr "<b>私人</b> (把发布分享只跟您选择的用户)"
 #: infinity/apps/core/forms.py:558 infinity/apps/core/forms.py:636
 #: infinity/apps/core/forms.py:688 infinity/apps/core/forms.py:746
 #: infinity/apps/core/forms.py:799 infinity/apps/core/forms.py:845
-#: infinity/apps/core/forms.py:1001 infinity/apps/core/forms.py:1111
+#: infinity/apps/core/forms.py:1002 infinity/apps/core/forms.py:1112
 msgid "<b>Input Language</b> (the language you used to compose this post) "
 msgstr "<b>输入语言</b> (选择您撰写这篇文的主要的语言) "
 
@@ -192,7 +194,7 @@ msgstr "<b>描写:</b> (比如，世界上有多人缺乏清洁饮用水)"
 #: infinity/apps/core/forms.py:559 infinity/apps/core/forms.py:639
 #: infinity/apps/core/forms.py:689 infinity/apps/core/forms.py:747
 #: infinity/apps/core/forms.py:800 infinity/apps/core/forms.py:846
-#: infinity/apps/core/forms.py:1002 infinity/apps/core/forms.py:1112
+#: infinity/apps/core/forms.py:1003 infinity/apps/core/forms.py:1113
 msgid ""
 "<b>This is a link</b> (check if you are only linking to existing content)"
 msgstr ""
@@ -204,7 +206,7 @@ msgstr ""
 #: infinity/apps/core/forms.py:560 infinity/apps/core/forms.py:640
 #: infinity/apps/core/forms.py:690 infinity/apps/core/forms.py:748
 #: infinity/apps/core/forms.py:801 infinity/apps/core/forms.py:847
-#: infinity/apps/core/forms.py:1003 infinity/apps/core/forms.py:1113
+#: infinity/apps/core/forms.py:1004 infinity/apps/core/forms.py:1114
 msgid "<b>Origin:</b> (of the source)"
 msgstr "<b>来自:</b> (输入网络地址)"
 
@@ -213,8 +215,8 @@ msgstr "<b>来自:</b> (输入网络地址)"
 #: infinity/apps/core/forms.py:507 infinity/apps/core/forms.py:561
 #: infinity/apps/core/forms.py:641 infinity/apps/core/forms.py:691
 #: infinity/apps/core/forms.py:749 infinity/apps/core/forms.py:802
-#: infinity/apps/core/forms.py:848 infinity/apps/core/forms.py:1004
-#: infinity/apps/core/forms.py:1114
+#: infinity/apps/core/forms.py:848 infinity/apps/core/forms.py:1005
+#: infinity/apps/core/forms.py:1115
 msgid "http://"
 msgstr ""
 
@@ -343,52 +345,48 @@ msgstr ""
 msgid "Add & Go"
 msgstr "进行"
 
-#: infinity/apps/core/forms.py:909
-msgid "expression, e.g., 'intergalactic spaceflight'"
-msgstr "叫什么？ 比如《星系际旅行》"
-
 #: infinity/apps/core/forms.py:923
 msgid "definition, e.g., 'spaceflight beyond the bounderies of galaxies'"
 msgstr "怎么下定义？ 比如《在星系间的空间旅行》"
 
-#: infinity/apps/core/forms.py:1064
+#: infinity/apps/core/forms.py:1065
 msgid "Select goal"
 msgstr "选择一个问题"
 
-#: infinity/apps/core/forms.py:1074
+#: infinity/apps/core/forms.py:1075
 #: infinity/apps/core/templates/idea/create.html:16
 msgid "Goal"
 msgstr "目标"
 
-#: infinity/apps/core/forms.py:1081
+#: infinity/apps/core/forms.py:1082
 msgid "Select idea"
 msgstr "选择一个思路"
 
-#: infinity/apps/core/forms.py:1091
+#: infinity/apps/core/forms.py:1092
 #: infinity/apps/core/templates/plan/create.html:16
 msgid "Idea"
 msgstr "思路"
 
-#: infinity/apps/core/forms.py:1097
+#: infinity/apps/core/forms.py:1098
 msgid "Select the members for the equity..."
 msgstr "选择用户跟谁分享产权"
 
-#: infinity/apps/core/forms.py:1101
+#: infinity/apps/core/forms.py:1102
 msgid "Members"
 msgstr "成员"
 
-#: infinity/apps/core/forms.py:1104
+#: infinity/apps/core/forms.py:1105
 msgid "<b>Name:</b> (e.g., \"Solar Water Project\".)"
 msgstr "<b>项目名:</b> (比如，太阳水项目)"
 
-#: infinity/apps/core/forms.py:1106
+#: infinity/apps/core/forms.py:1107
 msgid ""
 "<b>Situation:</b> (Describe your current situation by listing the things "
 "that you have, including access.)"
 msgstr ""
 "<b>情况:</b> (描写您的现实情况，包括你的地方，有关的财产，对资源的访问)"
 
-#: infinity/apps/core/forms.py:1107
+#: infinity/apps/core/forms.py:1108
 msgid ""
 "Example:\n"
 "\n"
@@ -410,11 +408,11 @@ msgstr ""
 "- 车\n"
 "- 1500人民币"
 
-#: infinity/apps/core/forms.py:1108
+#: infinity/apps/core/forms.py:1109
 msgid "<b>Deliverable:</b> (Describe what do you expect to get.)"
 msgstr "<b>目的地:</b> (描写您期待的后果)"
 
-#: infinity/apps/core/forms.py:1109
+#: infinity/apps/core/forms.py:1110
 msgid ""
 "Example:\n"
 "\n"
@@ -1671,6 +1669,9 @@ msgstr ""
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr "记住"
+
+#~ msgid "expression, e.g., 'intergalactic spaceflight'"
+#~ msgstr "叫什么？ 比如《星系际旅行》"
 
 #~ msgid "User account"
 #~ msgstr "用户账户"

@@ -4,12 +4,12 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #: infinity/apps/core/forms.py:210 infinity/apps/core/forms.py:338
-#: infinity/apps/core/forms.py:341
+#: infinity/apps/core/forms.py:341 infinity/apps/core/forms.py:909
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 00:47-0800\n"
+"POT-Creation-Date: 2015-12-03 05:52-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -24,7 +24,7 @@ msgstr ""
 #: infinity/apps/core/forms.py:72 infinity/apps/core/forms.py:174
 #: infinity/apps/core/forms.py:292 infinity/apps/core/forms.py:485
 #: infinity/apps/core/forms.py:601 infinity/apps/core/forms.py:726
-#: infinity/apps/core/forms.py:832 infinity/apps/core/forms.py:1054
+#: infinity/apps/core/forms.py:832 infinity/apps/core/forms.py:1055
 msgid "Create"
 msgstr "Stvori"
 
@@ -32,7 +32,7 @@ msgstr "Stvori"
 #: infinity/apps/core/forms.py:245 infinity/apps/core/forms.py:383
 #: infinity/apps/core/forms.py:439 infinity/apps/core/forms.py:556
 #: infinity/apps/core/forms.py:678 infinity/apps/core/forms.py:789
-#: infinity/apps/core/forms.py:960 infinity/apps/core/forms.py:1000
+#: infinity/apps/core/forms.py:961 infinity/apps/core/forms.py:1001
 #: infinity/apps/users/forms.py:60
 msgid "Update"
 msgstr "Ažuriraj"
@@ -103,7 +103,7 @@ msgstr "Obavijestite spomenute korisnike e-mailom."
 #: infinity/apps/core/forms.py:626 infinity/apps/core/forms.py:683
 #: infinity/apps/core/forms.py:731 infinity/apps/core/forms.py:794
 #: infinity/apps/core/forms.py:837 infinity/apps/core/forms.py:887
-#: infinity/apps/core/forms.py:995 infinity/apps/core/forms.py:1049
+#: infinity/apps/core/forms.py:996 infinity/apps/core/forms.py:1050
 msgid "Select the users to share with:"
 msgstr "Izaberite korisnike za dijeljenje:"
 
@@ -113,7 +113,7 @@ msgid "Select the thing that you need..."
 msgstr "Izaberite potrebnu stvar..."
 
 #: infinity/apps/core/forms.py:202 infinity/apps/core/forms.py:330
-#: infinity/apps/core/forms.py:638 infinity/apps/core/forms.py:1102
+#: infinity/apps/core/forms.py:638 infinity/apps/core/forms.py:1103
 msgid "Share with:"
 msgstr "Podijelite sa:"
 
@@ -155,7 +155,7 @@ msgstr ""
 
 #: infinity/apps/core/forms.py:212 infinity/apps/core/forms.py:342
 #: infinity/apps/core/forms.py:503 infinity/apps/core/forms.py:635
-#: infinity/apps/core/forms.py:745 infinity/apps/core/forms.py:1110
+#: infinity/apps/core/forms.py:745 infinity/apps/core/forms.py:1111
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
 msgstr "<b>Osobno</b> (omogućava vidljivost unosa odabranoj grupi ljudi)"
@@ -166,7 +166,7 @@ msgstr "<b>Osobno</b> (omogućava vidljivost unosa odabranoj grupi ljudi)"
 #: infinity/apps/core/forms.py:558 infinity/apps/core/forms.py:636
 #: infinity/apps/core/forms.py:688 infinity/apps/core/forms.py:746
 #: infinity/apps/core/forms.py:799 infinity/apps/core/forms.py:845
-#: infinity/apps/core/forms.py:1001 infinity/apps/core/forms.py:1111
+#: infinity/apps/core/forms.py:1002 infinity/apps/core/forms.py:1112
 msgid "<b>Input Language</b> (the language you used to compose this post) "
 msgstr ""
 "<b>Jezik unosa</b> (jezik koji ste koristili za sastavljanje ove objave) "
@@ -208,7 +208,7 @@ msgstr "<b>Opis:</b> (pr., Mnoštvu ljudi nedostaje čista pitka voda.)"
 #: infinity/apps/core/forms.py:559 infinity/apps/core/forms.py:639
 #: infinity/apps/core/forms.py:689 infinity/apps/core/forms.py:747
 #: infinity/apps/core/forms.py:800 infinity/apps/core/forms.py:846
-#: infinity/apps/core/forms.py:1002 infinity/apps/core/forms.py:1112
+#: infinity/apps/core/forms.py:1003 infinity/apps/core/forms.py:1113
 msgid ""
 "<b>This is a link</b> (check if you are only linking to existing content)"
 msgstr ""
@@ -218,7 +218,7 @@ msgstr ""
 #: infinity/apps/core/forms.py:560 infinity/apps/core/forms.py:640
 #: infinity/apps/core/forms.py:690 infinity/apps/core/forms.py:748
 #: infinity/apps/core/forms.py:801 infinity/apps/core/forms.py:847
-#: infinity/apps/core/forms.py:1003 infinity/apps/core/forms.py:1113
+#: infinity/apps/core/forms.py:1004 infinity/apps/core/forms.py:1114
 #, fuzzy
 #| msgid "<b>Category:</b> (of the problem)"
 msgid "<b>Origin:</b> (of the source)"
@@ -229,8 +229,8 @@ msgstr "<b>Kategorija:</b> (problema)"
 #: infinity/apps/core/forms.py:507 infinity/apps/core/forms.py:561
 #: infinity/apps/core/forms.py:641 infinity/apps/core/forms.py:691
 #: infinity/apps/core/forms.py:749 infinity/apps/core/forms.py:802
-#: infinity/apps/core/forms.py:848 infinity/apps/core/forms.py:1004
-#: infinity/apps/core/forms.py:1114
+#: infinity/apps/core/forms.py:848 infinity/apps/core/forms.py:1005
+#: infinity/apps/core/forms.py:1115
 msgid "http://"
 msgstr "http://"
 
@@ -382,45 +382,41 @@ msgstr ""
 msgid "Add & Go"
 msgstr "Dodaj & Idi"
 
-#: infinity/apps/core/forms.py:909
-msgid "expression, e.g., 'intergalactic spaceflight'"
-msgstr ""
-
 #: infinity/apps/core/forms.py:923
 msgid "definition, e.g., 'spaceflight beyond the bounderies of galaxies'"
 msgstr ""
 
-#: infinity/apps/core/forms.py:1064
+#: infinity/apps/core/forms.py:1065
 msgid "Select goal"
 msgstr "Izaberite cilj"
 
-#: infinity/apps/core/forms.py:1074
+#: infinity/apps/core/forms.py:1075
 #: infinity/apps/core/templates/idea/create.html:16
 msgid "Goal"
 msgstr "Cilj"
 
-#: infinity/apps/core/forms.py:1081
+#: infinity/apps/core/forms.py:1082
 msgid "Select idea"
 msgstr "Izaberite ideju"
 
-#: infinity/apps/core/forms.py:1091
+#: infinity/apps/core/forms.py:1092
 #: infinity/apps/core/templates/plan/create.html:16
 msgid "Idea"
 msgstr "Ideja"
 
-#: infinity/apps/core/forms.py:1097
+#: infinity/apps/core/forms.py:1098
 msgid "Select the members for the equity..."
 msgstr "Odaberite članove za udio."
 
-#: infinity/apps/core/forms.py:1101
+#: infinity/apps/core/forms.py:1102
 msgid "Members"
 msgstr "Članovi"
 
-#: infinity/apps/core/forms.py:1104
+#: infinity/apps/core/forms.py:1105
 msgid "<b>Name:</b> (e.g., \"Solar Water Project\".)"
 msgstr "<b>Naziv:</b> (pr., \"Projekt solarne vode\".)"
 
-#: infinity/apps/core/forms.py:1106
+#: infinity/apps/core/forms.py:1107
 msgid ""
 "<b>Situation:</b> (Describe your current situation by listing the things "
 "that you have, including access.)"
@@ -428,7 +424,7 @@ msgstr ""
 "<b>Situacija:</b> (Opišite svoju trenutnu situaciju koristeći stvari koje "
 "imate, uključujući pristup.)"
 
-#: infinity/apps/core/forms.py:1107
+#: infinity/apps/core/forms.py:1108
 msgid ""
 "Example:\n"
 "\n"
@@ -450,11 +446,11 @@ msgstr ""
 "- Autmobil\n"
 "- 150 USD za ovaj projekt"
 
-#: infinity/apps/core/forms.py:1108
+#: infinity/apps/core/forms.py:1109
 msgid "<b>Deliverable:</b> (Describe what do you expect to get.)"
 msgstr "<b>Dostavljivo:</b> (Opišite što očekujete dobiti.)"
 
-#: infinity/apps/core/forms.py:1109
+#: infinity/apps/core/forms.py:1110
 msgid ""
 "Example:\n"
 "\n"
