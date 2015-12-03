@@ -906,7 +906,7 @@ class DefinitionCreateForm(forms.ModelForm):
                 Div('language', css_class='col-sm-2',),
                 Div(
                     Field('name', placeholder=kwargs.pop('query_placeholder',
-                                                         _("expression, e.g., 'intergalactic spaceflight'")),
+                                                         _("")),
                           autocomplete='off',
                     ),
                     css_class='col-sm-10',
