@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: infinity/apps/core/forms.py:210 infinity/apps/core/forms.py:338
-#: infinity/apps/core/forms.py:341 infinity/apps/core/forms.py:909
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-03 05:52-0800\n"
-"PO-Revision-Date: 2015-12-03 15:49+0200\n"
+"PO-Revision-Date: 2015-12-03 22:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -495,15 +493,15 @@ msgstr "Определите, что вам необходимо"
 
 #: infinity/apps/core/templates/definition/create.html:32
 msgid "e.g.:"
-msgstr ""
+msgstr "напр."
 
 #: infinity/apps/core/templates/definition/create.html:32
 msgid "spaceship"
-msgstr ""
+msgstr "космический аппарат"
 
 #: infinity/apps/core/templates/definition/create.html:32
 msgid "vessel or machine designed to fly in outer space"
-msgstr ""
+msgstr "аппарат, предназначенный для работы в космосе"
 
 #: infinity/apps/core/templates/definition/detail.html:55
 #: infinity/apps/core/templates/goal/detail.html:101
@@ -1115,16 +1113,16 @@ msgstr ""
 "\">%(email)s</a>  принадлежит данному пользователю %(user_display)s."
 
 #: infinity/templates/account/login.html:10 infinity/templates/base.html:136
-#, fuzzy
-#| msgid "Sign Up"
 msgid "Sign in"
-msgstr "Регистрация"
+msgstr "Войти"
 
 #: infinity/templates/account/login.html:12
 msgid ""
 "\n"
 "Have no account? Sign up <a href=\"/user/signup/\">here</a>.\n"
 msgstr ""
+"\n"
+"Нет учётной записи? <a href=\"/user/signup/\">Присоединиться к проекту</a>.\n"
 
 #: infinity/templates/account/login.html:19
 #: infinity/templates/account/signup_closed.html:18
@@ -1353,10 +1351,8 @@ msgstr ""
 "\">change  изменить свой адрес электронной почты.</a>."
 
 #: infinity/templates/base.html:68
-#, fuzzy
-#| msgid "Solve Your Problems."
 msgid "Solving Problems"
-msgstr "Решите Свои Проблемы"
+msgstr "Решаем проблемы"
 
 #: infinity/templates/base.html:108
 msgid "Help"
