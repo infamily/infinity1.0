@@ -101,7 +101,7 @@ $(document).ready(function() {
         };
     })();
     $('#id_name').bind('input', function() { 
-        //searchOpen();
+        searchOpen();
     });
     searchResult()
 });
