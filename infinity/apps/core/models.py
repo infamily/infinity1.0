@@ -407,9 +407,9 @@ class Type(models.Model):
 
 class Need(BaseContentModel):
     definition = models.ForeignKey(
-	'Definition',
-	blank=False,
-	null=False,
+    'Definition',
+    blank=False,
+    null=False,
     )
     content = MarkdownField(blank=False)
 
@@ -593,6 +593,11 @@ class Definition(models.Model):
         related_name='user_definitions',
         blank=False,
         null=False,
+    )
+    subscribers = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name="%(class)s_subscribers"
     )
     hours_donated = models.DecimalField(
         default=0.,

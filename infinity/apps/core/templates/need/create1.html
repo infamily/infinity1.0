@@ -14,6 +14,14 @@
     </div>
         {{definition_object.definition}}
 </center>
+{% else %}
+<center>
+    <div>
+        {% trans "Definition not found in WikiData. Please, create a custom definition by entering your own." %}
+        <a href="{% url "definition-create" %}">{% trans "Create my definition" %}</a>
+    </div>
+        {{definition_object.definition}}
+</center>
 {% endif %}
 <div>
     
