@@ -9,6 +9,7 @@ from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
 from ..utils import CreateViewWrapper
+from ..utils import LookupCreateDefinition
 from ..forms import NeedCreateForm
 from ..forms import NeedUpdateForm
 from ..utils import UpdateViewWrapper
@@ -17,7 +18,7 @@ from ..utils import CommentsContentTypeWrapper
 from ..models import Goal
 from ..models import Need
 from ..models import Definition
-
+from ..models import Language
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class NeedCreateView(CreateViewWrapper):
@@ -44,10 +45,36 @@ class NeedCreateView(CreateViewWrapper):
         return context
 
     def dispatch(self, *args, **kwargs):
-        if kwargs.get('definition_id'):
-            self.definition_instance = get_object_or_404(Definition, pk=int(kwargs['definition_id']))
+        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
+
+        if kwargs.get('concept_q'):
+
+            if kwargs['concept_q'].isdigit():
+                # Lookup or Create Definition by .pk
+                definitions = Definition.objects.filter(pk=int(kwargs['concept_q']), language=language)
+
+                if definitions:
+                    self.definition_instance = definitions[0]
+                else:
+                    definitions = Definition.objects.filter(pk=int(kwargs['concept_q']))
+                    if definitions:
+                        if definitions[0].defined_meaning_id:
+                            self.definition_instance = LookupCreateDefinition(definitions[0].defined_meaning_id, language)
+                        else:
+                            self.definition_instance = definitions[0]
+
+            elif kwargs['concept_q'][1:].isdigit():
+                # Lookup Definition by .defined_meaning_id
+                definitions = Definition.objects.filter(defined_meaning_id=int(kwargs['concept_q'][1:]),language=language)
+
+                if definitions:
+                    self.definition_instance = definitions[0]
+                else:
+                    self.definition_instance = LookupCreateDefinition(int(kwargs['concept_q'][1:]),language=language)
+
         else:
             self.definition_instance = False
+
         return super(NeedCreateView, self).dispatch(*args, **kwargs)
 
     def get_form_kwargs(self):

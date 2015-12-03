@@ -25,9 +25,12 @@ from core.models import Language
 from .forms import CommentCreateFormDetail
 from .models import Comment
 from .models import Translation
+from .models import Definition
 
 from users.mixins import OwnerMixin
 
+import json
+import requests
 
 def notify_mentioned_users(comment_instance):
     """
@@ -280,3 +283,89 @@ class JsonView(View):
 
         return JsonResponse(data, safe=False)
 
+
+def WikiDataSearch(name, language, return_response=False):
+    url = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=%s&language=%s&format=json' % \
+        (name, language)
+    dicts = json.loads(requests.get(url).content)['search']
+
+    if return_response:
+        return dicts
+
+    results = []
+
+    for item in dicts:
+        if 'match' in item.keys():
+            expression = item['match']['text']
+        if 'aliases' in item.keys():
+            aliases = '; '.join(item['aliases'])
+        if 'description' in item.keys():
+            description = item['description']
+        else:
+            continue
+
+        if 'description' in item.keys():
+            if item['description'] == 'Wikimedia disambiguation page':
+                continue
+            if item['description'] == 'Wikipedia disambiguation page':
+                continue
+
+        try:
+            if expression == aliases:
+                aliases = ''
+            else:
+                aliases = ' - ' + aliases
+        except:
+            aliases = ''
+
+        results.append([expression, aliases+description, reverse('need-create', args=[item['title']])])
+
+    return results
+
+
+def WikiDataGet(concept_q, language):
+    url = 'https://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=%s&format=json' % \
+        (concept_q, language)
+    dicts = json.loads(requests.get(url).content)
+
+    try:
+        expression = dicts['entities'][concept_q]['labels'][language]['value']
+        try:
+            try:
+                definition = dicts['entities'][concept_q]['descriptions'][language]['value']
+            except:
+                dicts = WikiDataSearch(expression, language, return_response=True)
+                item = dicts[next(index for (index, d) in enumerate(dicts) if d["id"] == concept_q)]
+                expression = item['match']['text']
+                definition = item['description']
+            return {'expression': expression,
+                    'definition': definition,
+                    'success': True}
+        except:
+            return {'success': False}
+    except:
+        return {'success': False}
+
+    return {'success': False}
+
+def LookupCreateDefinition(defined_meaning_id, language):
+    # try to retrieve by .defined_meaning_id and language
+    definitions = Definition.objects.filter(defined_meaning_id=defined_meaning_id,
+                                            language=language)
+    if definitions:
+        return definitions[0]
+
+    else:
+    # query WikiData API, and create new definition based on response
+        concept = WikiDataGet('Q'+str(defined_meaning_id), language.language_code)
+        print concept
+        if concept['success']:
+            definition = Definition.objects.create(name=concept['expression'],
+                                                   definition=concept['definition'],
+                                                   language=language,
+                                                   defined_meaning_id=defined_meaning_id,
+                                                   user=User.objects.get(pk=1))
+            definition.save()
+            return definition
+
+    return None
