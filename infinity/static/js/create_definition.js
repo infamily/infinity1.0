@@ -88,11 +88,11 @@ function showProposals(data) {
 
 
 $(document).ready(function() {
-    document.getElementById('id_language').value = getCookie('infinity_search_lang');
-    $('#id_language').bind('input', function() {
-        setCookie('infinity_search_lang', $(this).val(), 365);
-        searchOpen($('#id_name').val(), $(this).val());
-    });
+//  document.getElementById('id_language').value = getCookie('infinity_search_lang');
+//  $('#id_language').bind('input', function() {
+//      setCookie('infinity_search_lang', $(this).val(), 365);
+//      searchOpen($('#id_name').val(), $(this).val());
+//  });
     var delay = (function(){
         var timer = 0;
         return function(callback, ms){
@@ -101,7 +101,7 @@ $(document).ready(function() {
         };
     })();
     $('#id_name').bind('input', function() { 
-        searchOpen();
+        //searchOpen();
     });
     searchResult()
 });
