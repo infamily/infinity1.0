@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-03 00:47-0800\n"
-"PO-Revision-Date: 2015-12-03 10:55+0200\n"
+"PO-Revision-Date: 2015-12-03 15:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -463,7 +463,7 @@ msgstr ""
 
 #: infinity/apps/core/templates/definition/create.html:27
 msgid "Define what you need"
-msgstr "自分の欲を定義してね"
+msgstr "欲しいものごとを入力してください"
 
 #: infinity/apps/core/templates/definition/create.html:32
 msgid "e.g.:"
