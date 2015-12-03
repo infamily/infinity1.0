@@ -75,17 +75,17 @@ function getfocus() {
 
 			{% if request.user.is_authenticated %}
 			<!-- neutral vote -->
-			{% if object|cut:request.user == 0 %}
+			{% if object|user_vote_info:request.user == 0 %}
 			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
 			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 
 			<!-- positive vote -->
-			{% elif object|cut:request.user == 1 %}
+			{% elif object|user_vote_info:request.user == 1 %}
 			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
 			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 
 			<!-- negative vote -->
-			{% elif object|cut:request.user == -1 %}
+			{% elif object|user_vote_info:request.user == -1 %}
 			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});" style="hover { background-color: black"></i> |
 			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 			{% endif %}
