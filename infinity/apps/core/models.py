@@ -594,6 +594,11 @@ class Definition(models.Model):
         blank=False,
         null=False,
     )
+    subscribers = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name="%(class)s_subscribers"
+    )
     hours_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
