@@ -15,7 +15,7 @@ urlpatterns = patterns(
     url(r'^set-lang/(?P<lang>\w+)/$', SetLanguageView.as_view(pattern_name='home'), name='lang_redirect'),
     url(r'^$', DefinitionCreateView.as_view(), name='home'),
     url(r'^i$', IndexView.as_view(), name='index'),
-    url(r'^w$', IndexView.as_view(), name='wider'),
+    url(r'^[!]$', IndexView.as_view(), name='wider'),
     url(r'^inbox$', InboxView.as_view(), name='inbox'),
     url(r'', include('apps.core.urls')),
     url(r'^user/', include('allauth.urls')),
