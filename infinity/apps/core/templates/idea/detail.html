@@ -5,8 +5,16 @@
 {% load django_markdown %}
 
 {% load staticfiles %}
+{% load country_isocode %}
+
 {% block extra_js %}
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+  {% if request|get_country_by_ip != 'CN' %}
+   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  {% else %}  
+   <script src="https://cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  {% endif %}
+
 {% endblock extra_js %}
 
 {% block title %}i: {% if not translation %}{{ object.name }}{% else %}{{ translation.name }}{% endif %}{% endblock title %}

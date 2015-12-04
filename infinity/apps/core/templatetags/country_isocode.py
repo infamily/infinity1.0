@@ -2,8 +2,10 @@ from django import template
 from django.template.defaultfilters import stringfilter
 
 import geoip2.database
+from django.conf import settings
+from os.path import join
 
-geoip2reader = geoip2.database.Reader('/run/media/mindey/files/Documents/geoip/GeoLite2-Country.mmdb')
+geoip2reader = geoip2.database.Reader(join(settings.GEOIP_PATH, settings.GEOIP_COUNTRY))
 
 register = template.Library()
 

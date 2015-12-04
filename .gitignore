@@ -7,6 +7,8 @@ infinity/settings/secret.py
 infinity/settings/local.py
 infinity/settings/production.py
 
+# not load geoip2 module files
+conf/geoip2data/
 
 # General stuff
 # Python bytecode:

@@ -3,13 +3,18 @@
 {% load staticfiles %}
 {% load vote_extras %}
 {% load django_markdown %}
+{% load country_isocode %}
 
 {% block extra_js %}
   <script src="{% static 'js/comment_vote.js' %}"></script>
 {% endblock extra_js %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+  {% if request|get_country_by_ip != 'CN' %}
+   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+  {% else %}
+   <link rel="stylesheet" href="https://cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.css" />
+  {% endif %}
 {% endblock extra_css %}
 
 
