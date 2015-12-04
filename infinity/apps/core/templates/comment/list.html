@@ -3,13 +3,18 @@
 {% load staticfiles %}
 {% load vote_extras %}
 {% load django_markdown %}
+{% load country_isocode %}
 
 {% block extra_js %}
   <script src="{% static 'js/comment_vote.js' %}"></script>
 {% endblock extra_js %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+  {% if request|get_country_by_ip != 'CN' %}
+   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+  {% else %}
+   <link rel="stylesheet" href="https://cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.css" />
+  {% endif %}
 {% endblock extra_css %}
 
 
@@ -75,17 +80,17 @@ function getfocus() {
 
 			{% if request.user.is_authenticated %}
 			<!-- neutral vote -->
-			{% if object|cut:request.user == 0 %}
+			{% if object|user_vote_info:request.user == 0 %}
 			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
 			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 
 			<!-- positive vote -->
-			{% elif object|cut:request.user == 1 %}
+			{% elif object|user_vote_info:request.user == 1 %}
 			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
 			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 
 			<!-- negative vote -->
-			{% elif object|cut:request.user == -1 %}
+			{% elif object|user_vote_info:request.user == -1 %}
 			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});" style="hover { background-color: black"></i> |
 			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
 			{% endif %}
