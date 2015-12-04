@@ -27,7 +27,7 @@
 <div class="alignleft">
     {% if not user.is_anonymous %}
     <b>
-        [{% if request.resolver_match.url_name == 'wider' %}<a href="{% url "home" %}">{% trans "my index" %}</a>{% else %}<a href="{% url "wider" %}">{% trans "wider index" %}</a>{% endif %}]
+        [{% if request.resolver_match.url_name == 'index' %}<a href="{% url "home" %}">{% trans "my index" %}</a>{% else %}<a href="{% url "index" %}">{% trans "index" %}</a>{% endif %}]
     </b>
     {% endif %}
     <!--<input autocomplete="off" tabindex="-1" type="url" aria-hidden="true" size="35" disabled><input type="submit" value="lookup" style="color: GrayText;" disabled>-->
@@ -91,7 +91,7 @@
                     <center>
                         <p>{% trans "Oops! You have no goals!" %}</p>
                         <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
-                        <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                        <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                     </center>
 
                     {% blocktrans %}
@@ -165,7 +165,7 @@
                 <center>
                     <p>{% trans "Oops! You have no ideas!" %}</p>
                     <p><a href="{% url "idea-create" %}">{% trans "Add a solution" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                 </center>
 
                 {% blocktrans %}
@@ -241,7 +241,7 @@
                 <center>
                     <p>{% trans "Oops! You have no plans!" %}</p>
                     <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                 </center>
                 {% blocktrans %}
 
@@ -316,7 +316,7 @@
                 <center>
                     <p>{% trans "Oops! You have no steps!" %}</p>
                     <p>{% trans "Start a project to add milestones" %}</p>
-                    <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                 </center>
 
                 {% blocktrans %}
@@ -394,7 +394,7 @@
                 <center>
                     <p>{% trans "Oops! You have no tasks!" %}</p>
                     <p>{% trans "Choose a milestone to add tasks" %}</p>
-                    <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                 </center>
                 {% blocktrans %}
                 <p><i><u>Example:</u></i></p>

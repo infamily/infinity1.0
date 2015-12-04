@@ -106,40 +106,35 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-              <!--
-              <li>
-              <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>
-                <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></a></i></a>
-              </li>
-              <li>
-              <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>
-                <a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></a></i></a>
-              </li>
-              <li>
-              <a href="{% url "plan-list" %}">{% trans "Plans" %}</a>
-                <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></a></i></a>
-              </li>
-              -->
-              <li>
               {% if request.user.is_authenticated %}
-              <!-- <a href="{% url "help" %}"><b>{% trans "Help" %}</b></a>-->
-                  {% if request.get_full_path == '/inbox' %}
-                  <a href="{% url "index" %}"><b>{% trans "Index" %}</b></a>
-                  {% else %}
-                  <a href="{% url "inbox" %}"><b>{% trans "Inbox" %}</b></a><!--Inbox=Needs-->
-                  {% endif %}
               {% else %}
                   {% if request.get_full_path == '/about/' %}
-                  <a href="{% url "index" %}"><b>{% trans "Index" %}</b></a>
                   {% else %}
+                  <li>
                   <a href="{% url "about" %}"><b>{% trans "About" %}</b></a>
+                  </li>
+                  {% endif %}
+                  {% if request.get_full_path == "/i" %}
+                  <li>
+                  <a href="{% url "home" %}"><b>?</b></a>
+                  </li>
+                  {% else %}
+                  <li>
+                  <a href="{% url "index" %}"><b>!</b></a>
+                  </li>
                   {% endif %}
               {% endif %}
-              </li>
 
               {% if request.user.is_authenticated %}
               <li>
               <a href="{% url "account_logout" %}"><b>{% trans "Logout" %}</b></a>
+              </li>
+              <li>
+                  {% if request.get_full_path == '/inbox' %}
+                  <a href="{% url "index" %}"><b>!</b></a>
+                  {% else %}
+                  <a href="{% url "inbox" %}"><b>i</b></a><!--Inbox-->
+                  {% endif %}
               </li>
               <li>
               <a href="{% url "user-detail" request.user.username %}"><b>[{{ request.user }}]</b></a>
