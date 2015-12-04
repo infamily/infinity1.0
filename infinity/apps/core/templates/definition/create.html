@@ -3,15 +3,25 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 {% load django_markdown %}
+{% load country_isocode %}
 
 {% block extra_js %}
   <script src="{% static 'js/create_definition.js' %}"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  {% if request|get_country_by_ip != 'CN' %}
+   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  {% else %}
+   <script src="https://cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  {% endif %}
 {% endblock extra_js %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cantarell" />
+  {% if request|get_country_by_ip != 'CN' %}
+   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Cantarell" />
+  {% else %}
+   <link rel="stylesheet" href="https://cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.css" />
+   <link rel="stylesheet" type="text/css" href="http://fonts.useso.com/css?family=Cantarell" />
+  {% endif %}
 {% endblock extra_css %}
 
 {% block title %}infty.xyz{% endblock title %}
