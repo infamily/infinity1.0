@@ -135,9 +135,9 @@ class IndexView(TemplateView):
 
         # Prepare base content access filters
         if self.request.user.is_authenticated():
-            if self.request.resolver_match.url_name == 'home':
+            if self.request.resolver_match.url_name == 'inbox':
                 q_object = (
-                    Q(user=self.request.user) |
+                    Q(personal=True, user=self.request.user) |
                     Q(personal=True, sharewith=self.request.user)
                 )
             else:
