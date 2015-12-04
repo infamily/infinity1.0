@@ -12,7 +12,7 @@
   {% if request|get_country_by_ip != 'CN' %}
    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   {% else %}  
-   <script src="https://cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.min.js"></script>
+   <script src="{% static "cdn/jqueryui/1.11.2/jquery-ui.min.js" %}"></script>
   {% endif %}
 
 {% endblock extra_js %}
