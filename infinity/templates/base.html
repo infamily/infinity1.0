@@ -16,12 +16,12 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
     {% if request|get_country_by_ip != 'CN' %}
-     <link href="https://netdna.bootstrapcdn.com/bootswatch/latest/lumen/bootstrap.min.css" rel="stylesheet">
+     <link href="https://netdna.bootstrapcdn.com/bootswatch/latest/umen/bootstrap.min.css" rel="stylesheet">
      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" rel="stylesheet">
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     {% else %}
-     <link href="https://cdn.bootcss.com/bootswatch/3.3.5/lumen/bootstrap.min.css" rel="stylesheet">
+     <link href="{% static "css/lumen.bootstrap.min.css" %}" rel="stylesheet" />
      <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.3.0/css/datepicker.min.css" rel="stylesheet">
      <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
      <link rel="stylesheet" href="https://cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.css">
