@@ -130,7 +130,7 @@
               <a href="{% url "account_logout" %}"><b>{% trans "Logout" %}</b></a>
               </li>
               <li>
-                  {% if request.get_full_path == '/inbox' %}
+                  {% if request.get_full_path == '/i' %}
                   <a href="{% url "index" %}"><b>!</b></a>
                   {% else %}
                   <a href="{% url "inbox" %}"><b>i</b></a><!--Inbox-->

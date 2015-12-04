@@ -27,7 +27,7 @@
 <div class="alignleft">
     {% if not user.is_anonymous %}
     <b>
-        [{% if request.resolver_match.url_name == 'index' %}<a href="{% url "home" %}">{% trans "my index" %}</a>{% else %}<a href="{% url "index" %}">{% trans "index" %}</a>{% endif %}]
+        [{% if request.resolver_match.url_name == 'index' %}<a href="{% url "inbox" %}">{% trans "my index" %}</a>{% else %}<a href="{% url "index" %}">{% trans "index" %}</a>{% endif %}]
     </b>
     {% endif %}
     <!--<input autocomplete="off" tabindex="-1" type="url" aria-hidden="true" size="35" disabled><input type="submit" value="lookup" style="color: GrayText;" disabled>-->

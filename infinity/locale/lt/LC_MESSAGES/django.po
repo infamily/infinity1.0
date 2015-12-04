@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: infinity/apps/core/forms.py:210 infinity/apps/core/forms.py:338
-#: infinity/apps/core/forms.py:341 infinity/apps/core/forms.py:909
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 05:52-0800\n"
-"PO-Revision-Date: 2015-12-03 15:29+0200\n"
+"POT-Creation-Date: 2015-12-04 15:12-0800\n"
+"PO-Revision-Date: 2015-12-05 01:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -272,8 +270,8 @@ msgstr ""
 #: infinity/apps/core/forms.py:620
 #: infinity/apps/core/templates/goal/list2.html:6
 #: infinity/apps/core/templates/goal/list2.html:9
-#: infinity/apps/core/templates/need/detail.html:93
-#: infinity/templates/base.html:94 infinity/templates/home.html:44
+#: infinity/apps/core/templates/need/detail.html:101
+#: infinity/templates/home.html:44
 msgid "Goals"
 msgstr "Tikslai"
 
@@ -431,66 +429,66 @@ msgid ""
 "published on GitHub, so others could easily replicate."
 msgstr ""
 
-#: infinity/apps/core/templates/comment/list.html:69
-#: infinity/apps/core/templates/goal/detail.html:81
-#: infinity/apps/core/templates/idea/detail.html:85
-#: infinity/apps/core/templates/need/detail.html:80
-#: infinity/apps/core/templates/plan/detail.html:96
+#: infinity/apps/core/templates/comment/list.html:74
+#: infinity/apps/core/templates/goal/detail.html:89
+#: infinity/apps/core/templates/idea/detail.html:93
+#: infinity/apps/core/templates/need/detail.html:88
+#: infinity/apps/core/templates/plan/detail.html:104
 #: infinity/templates/account/detail.html:12
 msgid "edit"
 msgstr "redaguoti"
 
-#: infinity/apps/core/templates/comment/list.html:69
-#: infinity/apps/core/templates/goal/detail.html:81
-#: infinity/apps/core/templates/idea/detail.html:85
-#: infinity/apps/core/templates/need/detail.html:80
-#: infinity/apps/core/templates/plan/detail.html:96
+#: infinity/apps/core/templates/comment/list.html:74
+#: infinity/apps/core/templates/goal/detail.html:89
+#: infinity/apps/core/templates/idea/detail.html:93
+#: infinity/apps/core/templates/need/detail.html:88
+#: infinity/apps/core/templates/plan/detail.html:104
 msgid "delete"
 msgstr "ištrinti"
 
-#: infinity/apps/core/templates/comment/list.html:79
 #: infinity/apps/core/templates/comment/list.html:84
 #: infinity/apps/core/templates/comment/list.html:89
-#: infinity/apps/core/templates/comment/list.html:95
+#: infinity/apps/core/templates/comment/list.html:94
+#: infinity/apps/core/templates/comment/list.html:100
 msgid "Vote Up"
 msgstr "Balsuoti už"
 
-#: infinity/apps/core/templates/comment/list.html:80
 #: infinity/apps/core/templates/comment/list.html:85
 #: infinity/apps/core/templates/comment/list.html:90
-#: infinity/apps/core/templates/comment/list.html:96
+#: infinity/apps/core/templates/comment/list.html:95
+#: infinity/apps/core/templates/comment/list.html:101
 msgid "Vote Down"
 msgstr "Balsuoti prieš"
 
-#: infinity/apps/core/templates/comment/list.html:127
+#: infinity/apps/core/templates/comment/list.html:132
 msgid "credit"
 msgstr "kreditas"
 
-#: infinity/apps/core/templates/comment/list.html:162
+#: infinity/apps/core/templates/comment/list.html:167
 msgid "Invite a friend to help!"
 msgstr "Pakviesti draugą padėti."
 
-#: infinity/apps/core/templates/definition/create.html:27
+#: infinity/apps/core/templates/definition/create.html:37
 msgid "Define what you need"
 msgstr "Rašyk ko reikia"
 
-#: infinity/apps/core/templates/definition/create.html:32
+#: infinity/apps/core/templates/definition/create.html:42
 msgid "e.g.:"
 msgstr "pvz.:"
 
-#: infinity/apps/core/templates/definition/create.html:32
+#: infinity/apps/core/templates/definition/create.html:42
 msgid "spaceship"
 msgstr "erdvėlaivis"
 
-#: infinity/apps/core/templates/definition/create.html:32
+#: infinity/apps/core/templates/definition/create.html:42
 msgid "vessel or machine designed to fly in outer space"
 msgstr "transporto priemonė skirta skrydžiams į kosmosą"
 
 #: infinity/apps/core/templates/definition/detail.html:55
-#: infinity/apps/core/templates/goal/detail.html:101
-#: infinity/apps/core/templates/idea/detail.html:105
-#: infinity/apps/core/templates/need/detail.html:99
-#: infinity/apps/core/templates/plan/detail.html:122
+#: infinity/apps/core/templates/goal/detail.html:109
+#: infinity/apps/core/templates/idea/detail.html:113
+#: infinity/apps/core/templates/need/detail.html:107
+#: infinity/apps/core/templates/plan/detail.html:130
 #: infinity/apps/core/templates/step/detail.html:88
 #: infinity/apps/core/templates/task/detail.html:76
 #: infinity/apps/core/templates/work/detail.html:96
@@ -514,112 +512,112 @@ msgstr ""
 "<center><i><font color=\"grey\">Tikslas yra problemos neiginys. Apibrėžkite "
 "problemą.</font></i></center>\n"
 
-#: infinity/apps/core/templates/goal/detail.html:23
-#: infinity/apps/core/templates/goal/detail.html:51
-#: infinity/apps/core/templates/idea/detail.html:22
-#: infinity/apps/core/templates/idea/detail.html:51
-#: infinity/apps/core/templates/need/detail.html:23
-#: infinity/apps/core/templates/need/detail.html:51
-#: infinity/apps/core/templates/plan/detail.html:42
-#: infinity/apps/core/templates/plan/detail.html:70
+#: infinity/apps/core/templates/goal/detail.html:31
+#: infinity/apps/core/templates/goal/detail.html:59
+#: infinity/apps/core/templates/idea/detail.html:30
+#: infinity/apps/core/templates/idea/detail.html:59
+#: infinity/apps/core/templates/need/detail.html:31
+#: infinity/apps/core/templates/need/detail.html:59
+#: infinity/apps/core/templates/plan/detail.html:50
+#: infinity/apps/core/templates/plan/detail.html:78
 msgid "needs"
 msgstr "reikia"
 
-#: infinity/apps/core/templates/goal/detail.html:23
-#: infinity/apps/core/templates/goal/detail.html:51
-#: infinity/apps/core/templates/idea/detail.html:22
-#: infinity/apps/core/templates/idea/detail.html:51
-#: infinity/apps/core/templates/need/detail.html:23
-#: infinity/apps/core/templates/need/detail.html:51
-#: infinity/apps/core/templates/plan/detail.html:42
-#: infinity/apps/core/templates/plan/detail.html:70
+#: infinity/apps/core/templates/goal/detail.html:31
+#: infinity/apps/core/templates/goal/detail.html:59
+#: infinity/apps/core/templates/idea/detail.html:30
+#: infinity/apps/core/templates/idea/detail.html:59
+#: infinity/apps/core/templates/need/detail.html:31
+#: infinity/apps/core/templates/need/detail.html:59
+#: infinity/apps/core/templates/plan/detail.html:50
+#: infinity/apps/core/templates/plan/detail.html:78
 msgid "for funding"
 msgstr "finansuoti"
 
-#: infinity/apps/core/templates/goal/detail.html:23
-#: infinity/apps/core/templates/goal/detail.html:51
-#: infinity/apps/core/templates/idea/detail.html:22
-#: infinity/apps/core/templates/idea/detail.html:51
-#: infinity/apps/core/templates/need/detail.html:23
-#: infinity/apps/core/templates/need/detail.html:51
-#: infinity/apps/core/templates/plan/detail.html:42
-#: infinity/apps/core/templates/plan/detail.html:70
+#: infinity/apps/core/templates/goal/detail.html:31
+#: infinity/apps/core/templates/goal/detail.html:59
+#: infinity/apps/core/templates/idea/detail.html:30
+#: infinity/apps/core/templates/idea/detail.html:59
+#: infinity/apps/core/templates/need/detail.html:31
+#: infinity/apps/core/templates/need/detail.html:59
+#: infinity/apps/core/templates/plan/detail.html:50
+#: infinity/apps/core/templates/plan/detail.html:78
 msgid "hours"
 msgstr "valandų"
 
-#: infinity/apps/core/templates/goal/detail.html:45
-#: infinity/apps/core/templates/idea/detail.html:45
-#: infinity/apps/core/templates/need/detail.html:45
-#: infinity/apps/core/templates/plan/detail.html:64
+#: infinity/apps/core/templates/goal/detail.html:53
+#: infinity/apps/core/templates/idea/detail.html:53
+#: infinity/apps/core/templates/need/detail.html:53
+#: infinity/apps/core/templates/plan/detail.html:72
 #: infinity/apps/core/templates/step/detail.html:30
 #: infinity/apps/core/templates/task/detail.html:30
 #: infinity/apps/core/templates/work/detail.html:30
 msgid "Unsubscribe"
 msgstr "Atsisakyti komentarų"
 
-#: infinity/apps/core/templates/goal/detail.html:45
-#: infinity/apps/core/templates/idea/detail.html:45
-#: infinity/apps/core/templates/need/detail.html:45
-#: infinity/apps/core/templates/plan/detail.html:64
+#: infinity/apps/core/templates/goal/detail.html:53
+#: infinity/apps/core/templates/idea/detail.html:53
+#: infinity/apps/core/templates/need/detail.html:53
+#: infinity/apps/core/templates/plan/detail.html:72
 #: infinity/apps/core/templates/step/detail.html:30
 #: infinity/apps/core/templates/task/detail.html:30
 #: infinity/apps/core/templates/work/detail.html:30
 msgid "Subscribe"
 msgstr "Užsisakyti komentarus"
 
-#: infinity/apps/core/templates/goal/detail.html:55
-#: infinity/apps/core/templates/need/detail.html:55
+#: infinity/apps/core/templates/goal/detail.html:63
+#: infinity/apps/core/templates/need/detail.html:63
 msgid "hyper-equity"
 msgstr "hyper-marža"
 
-#: infinity/apps/core/templates/goal/detail.html:56
-#: infinity/apps/core/templates/need/detail.html:56
+#: infinity/apps/core/templates/goal/detail.html:64
+#: infinity/apps/core/templates/need/detail.html:64
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much goal creator owns of all projects under this "
 "problem."
 msgstr ""
 
-#: infinity/apps/core/templates/goal/detail.html:61
+#: infinity/apps/core/templates/goal/detail.html:69
 msgid "category:"
 msgstr "sritis:"
 
-#: infinity/apps/core/templates/goal/detail.html:61
+#: infinity/apps/core/templates/goal/detail.html:69
 msgid "related need:"
 msgstr "susijęs noras:"
 
-#: infinity/apps/core/templates/goal/detail.html:62
-#: infinity/apps/core/templates/idea/detail.html:66
-#: infinity/apps/core/templates/need/detail.html:62
-#: infinity/apps/core/templates/plan/detail.html:79
+#: infinity/apps/core/templates/goal/detail.html:70
+#: infinity/apps/core/templates/idea/detail.html:74
+#: infinity/apps/core/templates/need/detail.html:70
+#: infinity/apps/core/templates/plan/detail.html:87
 msgid "translations:"
 msgstr "vertimai:"
 
-#: infinity/apps/core/templates/goal/detail.html:78
-#: infinity/apps/core/templates/idea/detail.html:82
-#: infinity/apps/core/templates/need/detail.html:77
-#: infinity/apps/core/templates/plan/detail.html:93
+#: infinity/apps/core/templates/goal/detail.html:86
+#: infinity/apps/core/templates/idea/detail.html:90
+#: infinity/apps/core/templates/need/detail.html:85
+#: infinity/apps/core/templates/plan/detail.html:101
 #: infinity/apps/core/templates/step/detail.html:53
 #: infinity/apps/core/templates/task/detail.html:53
 #: infinity/apps/core/templates/work/detail.html:54
 msgid "Source:"
 msgstr "Šaltinis:"
 
-#: infinity/apps/core/templates/goal/detail.html:92
-#: infinity/apps/core/templates/idea/detail.html:95
-#: infinity/apps/core/templates/need/detail.html:90
-#: infinity/apps/core/templates/plan/detail.html:111
+#: infinity/apps/core/templates/goal/detail.html:100
+#: infinity/apps/core/templates/idea/detail.html:103
+#: infinity/apps/core/templates/need/detail.html:98
+#: infinity/apps/core/templates/plan/detail.html:119
 msgid "shared with:"
 msgstr "Dalinamasi su:"
 
-#: infinity/apps/core/templates/goal/detail.html:95
+#: infinity/apps/core/templates/goal/detail.html:103
 #: infinity/apps/core/templates/idea/list2.html:6
 #: infinity/apps/core/templates/idea/list2.html:9
-#: infinity/templates/base.html:98 infinity/templates/home.html:108
+#: infinity/templates/home.html:108
 msgid "Ideas"
 msgstr "Idėjos"
 
-#: infinity/apps/core/templates/goal/detail.html:108
+#: infinity/apps/core/templates/goal/detail.html:116
 msgid "+New Idea"
 msgstr "+Nauja idėja"
 
@@ -628,29 +626,29 @@ msgstr "+Nauja idėja"
 msgid "Idea create"
 msgstr "Idėjos rašymas"
 
-#: infinity/apps/core/templates/idea/detail.html:56
+#: infinity/apps/core/templates/idea/detail.html:64
 msgid "super-equity"
 msgstr "super-marža"
 
-#: infinity/apps/core/templates/idea/detail.html:57
+#: infinity/apps/core/templates/idea/detail.html:65
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much idea creator owns of all projects under this idea."
 msgstr ""
 
-#: infinity/apps/core/templates/idea/detail.html:64
-#: infinity/apps/core/templates/need/detail.html:61
+#: infinity/apps/core/templates/idea/detail.html:72
+#: infinity/apps/core/templates/need/detail.html:69
 msgid "want:"
 msgstr "norim:"
 
-#: infinity/apps/core/templates/idea/detail.html:99
+#: infinity/apps/core/templates/idea/detail.html:107
 #: infinity/apps/core/templates/plan/list2.html:6
 #: infinity/apps/core/templates/plan/list2.html:9
-#: infinity/templates/base.html:102 infinity/templates/home.html:185
+#: infinity/templates/home.html:185
 msgid "Plans"
 msgstr "Planai"
 
-#: infinity/apps/core/templates/idea/detail.html:112
+#: infinity/apps/core/templates/idea/detail.html:120
 msgid "+New Plan"
 msgstr "+Naujas planas"
 
@@ -666,7 +664,7 @@ msgstr ""
 msgid "Create my definition"
 msgstr "Kurti apibrėžimą"
 
-#: infinity/apps/core/templates/need/detail.html:106
+#: infinity/apps/core/templates/need/detail.html:114
 msgid "+Add Goal"
 msgstr "+Pridėti tikslą"
 
@@ -675,41 +673,41 @@ msgstr "+Pridėti tikslą"
 msgid "Plan create"
 msgstr "Sukurti projektą"
 
-#: infinity/apps/core/templates/plan/detail.html:73
+#: infinity/apps/core/templates/plan/detail.html:81
 #, fuzzy
 #| msgid "Remember Me"
 msgid "members:"
 msgstr "Prisiminti"
 
-#: infinity/apps/core/templates/plan/detail.html:73
+#: infinity/apps/core/templates/plan/detail.html:81
 msgid "equity"
 msgstr "marža"
 
-#: infinity/apps/core/templates/plan/detail.html:74
+#: infinity/apps/core/templates/plan/detail.html:82
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much project <u>shareholders</u> own of all results "
 "under this project. The rest is owned by contributing users."
 msgstr ""
 
-#: infinity/apps/core/templates/plan/detail.html:78
+#: infinity/apps/core/templates/plan/detail.html:86
 msgid "approach to realizing idea"
 msgstr "būdas įgyvendinti idėją"
 
-#: infinity/apps/core/templates/plan/detail.html:99
+#: infinity/apps/core/templates/plan/detail.html:107
 msgid "situation"
 msgstr "situacija"
 
-#: infinity/apps/core/templates/plan/detail.html:104
+#: infinity/apps/core/templates/plan/detail.html:112
 msgid "deliverable"
 msgstr "tikimasis rezultatas"
 
-#: infinity/apps/core/templates/plan/detail.html:116
+#: infinity/apps/core/templates/plan/detail.html:124
 #: infinity/templates/home.html:259
 msgid "Steps"
 msgstr "Uždaviniai"
 
-#: infinity/apps/core/templates/plan/detail.html:129
+#: infinity/apps/core/templates/plan/detail.html:137
 msgid "+New Step"
 msgstr "+Naujas uždavinys"
 
@@ -734,7 +732,7 @@ msgid "Definition succesfully created"
 msgstr "Apibrėžkite tikslą"
 
 #: infinity/apps/core/views/definition.py:127
-#: infinity/apps/core/views/goal.py:121 infinity/apps/core/views/idea.py:148
+#: infinity/apps/core/views/goal.py:122 infinity/apps/core/views/idea.py:148
 #: infinity/apps/core/views/need.py:125 infinity/apps/core/views/plan.py:148
 #: infinity/apps/core/views/step.py:152 infinity/apps/core/views/task.py:141
 #: infinity/apps/core/views/work.py:141
@@ -742,15 +740,15 @@ msgstr "Apibrėžkite tikslą"
 msgid "%s succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views/goal.py:44
+#: infinity/apps/core/views/goal.py:45
 msgid "Goal succesfully created"
 msgstr "Apibrėžkite tikslą"
 
-#: infinity/apps/core/views/goal.py:91
+#: infinity/apps/core/views/goal.py:92
 msgid "Goal succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views/goal.py:107
+#: infinity/apps/core/views/goal.py:108
 msgid "Goal succesfully updated"
 msgstr ""
 
@@ -1089,7 +1087,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:136
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:148
 msgid "Sign in"
 msgstr "Prisijungti"
 
@@ -1307,27 +1305,15 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: infinity/templates/base.html:68
+#: infinity/templates/base.html:85
 msgid "Solving Problems"
 msgstr "Spręskim problemas"
 
-#: infinity/templates/base.html:108
-msgid "Help"
-msgstr "Pagalba"
-
-#: infinity/templates/base.html:110 infinity/templates/base.html.py:116
-msgid "Index"
-msgstr "Turinys"
-
-#: infinity/templates/base.html:112
-msgid "Inbox"
-msgstr "Poreikiai"
-
-#: infinity/templates/base.html:118
+#: infinity/templates/base.html:114
 msgid "About"
 msgstr "Apie projektą"
 
-#: infinity/templates/base.html:125
+#: infinity/templates/base.html:130
 msgid "Logout"
 msgstr "Atsijungti"
 
@@ -1348,7 +1334,7 @@ msgid "my index"
 msgstr "privatus turinys"
 
 #: infinity/templates/home.html:30 infinity/templates/inbox.html:25
-msgid "wider index"
+msgid "index"
 msgstr "viešas turinys"
 
 #: infinity/templates/home.html:45
@@ -1390,8 +1376,8 @@ msgstr "...arba žr."
 #: infinity/templates/home.html:94 infinity/templates/home.html.py:168
 #: infinity/templates/home.html:244 infinity/templates/home.html.py:319
 #: infinity/templates/home.html:397
-msgid "<u>wider index</u>"
-msgstr "mūsų turinį"
+msgid "<u>index</u>"
+msgstr "<u>viešą turinį</u>"
 
 #: infinity/templates/home.html:97
 msgid ""
@@ -1700,6 +1686,15 @@ msgstr ""
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Prisiminti"
+
+#~ msgid "Help"
+#~ msgstr "Pagalba"
+
+#~ msgid "Index"
+#~ msgstr "Turinys"
+
+#~ msgid "Inbox"
+#~ msgstr "Poreikiai"
 
 #~ msgid "expression, e.g., 'intergalactic spaceflight'"
 #~ msgstr "kaip pavadinsi? pvz.: tarpgalaktinis skrydis"
