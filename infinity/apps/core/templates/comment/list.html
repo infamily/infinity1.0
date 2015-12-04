@@ -13,7 +13,7 @@
   {% if request|get_country_by_ip != 'CN' %}
    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
   {% else %}
-   <link rel="stylesheet" href="https://cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.css" />
+   <link rel="stylesheet" href="{% static "cdn/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" %}" />
   {% endif %}
 {% endblock extra_css %}
 
