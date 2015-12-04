@@ -23,6 +23,7 @@ from ..filters import GoalListViewFilter1
 from ..filters import GoalListViewFilter2
 from ..models import Goal
 from ..models import Idea
+from ..models import Need
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
