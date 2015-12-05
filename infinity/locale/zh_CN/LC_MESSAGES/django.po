@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-04 15:12-0800\n"
-"PO-Revision-Date: 2015-12-05 01:31+0200\n"
+"POT-Creation-Date: 2015-12-04 17:00-0800\n"
+"PO-Revision-Date: 2015-12-05 03:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -256,7 +256,7 @@ msgstr "选择至少一个问题"
 #: infinity/apps/core/templates/goal/list2.html:6
 #: infinity/apps/core/templates/goal/list2.html:9
 #: infinity/apps/core/templates/need/detail.html:101
-#: infinity/templates/home.html:44
+#: infinity/templates/home.html:110
 msgid "Goals"
 msgstr "目标"
 
@@ -484,9 +484,10 @@ msgstr "在太空中航行的工具"
 #: infinity/apps/core/templates/step/detail.html:88
 #: infinity/apps/core/templates/task/detail.html:76
 #: infinity/apps/core/templates/work/detail.html:96
-#: infinity/templates/home.html:65 infinity/templates/home.html.py:134
-#: infinity/templates/home.html:210 infinity/templates/home.html.py:285
-#: infinity/templates/home.html:362 infinity/templates/inbox.html:60
+#: infinity/templates/home.html:66 infinity/templates/home.html.py:131
+#: infinity/templates/home.html:200 infinity/templates/home.html.py:274
+#: infinity/templates/home.html:349 infinity/templates/home.html.py:426
+#: infinity/templates/home.html:499
 msgid "link"
 msgstr "链接"
 
@@ -605,7 +606,7 @@ msgstr "谁可见:"
 #: infinity/apps/core/templates/goal/detail.html:103
 #: infinity/apps/core/templates/idea/list2.html:6
 #: infinity/apps/core/templates/idea/list2.html:9
-#: infinity/templates/home.html:108
+#: infinity/templates/home.html:174
 msgid "Ideas"
 msgstr "思路"
 
@@ -636,7 +637,7 @@ msgstr "需要:"
 #: infinity/apps/core/templates/idea/detail.html:107
 #: infinity/apps/core/templates/plan/list2.html:6
 #: infinity/apps/core/templates/plan/list2.html:9
-#: infinity/templates/home.html:185
+#: infinity/templates/home.html:249
 msgid "Plans"
 msgstr "计划"
 
@@ -691,7 +692,7 @@ msgid "deliverable"
 msgstr "目的地"
 
 #: infinity/apps/core/templates/plan/detail.html:124
-#: infinity/templates/home.html:259
+#: infinity/templates/home.html:323
 msgid "Steps"
 msgstr "步骤"
 
@@ -717,7 +718,7 @@ msgstr "定义创造成功"
 
 #: infinity/apps/core/views/definition.py:127
 #: infinity/apps/core/views/goal.py:122 infinity/apps/core/views/idea.py:148
-#: infinity/apps/core/views/need.py:125 infinity/apps/core/views/plan.py:148
+#: infinity/apps/core/views/need.py:128 infinity/apps/core/views/plan.py:148
 #: infinity/apps/core/views/step.py:152 infinity/apps/core/views/task.py:141
 #: infinity/apps/core/views/work.py:141
 #, python-format
@@ -752,11 +753,11 @@ msgstr ""
 msgid "Need succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views/need.py:95
+#: infinity/apps/core/views/need.py:98
 msgid "Need succesfully deleted"
 msgstr "需要创造成功"
 
-#: infinity/apps/core/views/need.py:111
+#: infinity/apps/core/views/need.py:114
 msgid "Need succesfully updated"
 msgstr ""
 
@@ -1292,100 +1293,132 @@ msgstr "关于"
 msgid "Logout"
 msgstr "登出"
 
-#: infinity/templates/home.html:21 infinity/templates/inbox.html:16
+#: infinity/templates/home.html:21
 msgid "invitations"
 msgstr "个邀请"
 
-#: infinity/templates/home.html:21 infinity/templates/inbox.html:16
+#: infinity/templates/home.html:21
 msgid "write bugs"
 msgstr "错误报告"
 
-#: infinity/templates/home.html:21 infinity/templates/inbox.html:16
+#: infinity/templates/home.html:21
 msgid "time value"
 msgstr "时间价值"
 
-#: infinity/templates/home.html:30 infinity/templates/inbox.html:25
+#: infinity/templates/home.html:30
 msgid "my index"
 msgstr "私人内容"
 
-#: infinity/templates/home.html:30 infinity/templates/inbox.html:25
+#: infinity/templates/home.html:30
 msgid "index"
 msgstr "公开内容"
 
 #: infinity/templates/home.html:45
-msgid "define a problem"
-msgstr "下定义个问题"
+msgid "Needs"
+msgstr "需要"
 
-#: infinity/templates/home.html:60 infinity/templates/home.html.py:127
-#: infinity/templates/home.html:205 infinity/templates/home.html.py:279
-#: infinity/templates/home.html:356 infinity/templates/inbox.html:55
+#: infinity/templates/home.html:46
+msgid "share a need"
+msgstr "分享个需要"
+
+#: infinity/templates/home.html:61 infinity/templates/home.html.py:126
+#: infinity/templates/home.html:193 infinity/templates/home.html.py:269
+#: infinity/templates/home.html:343 infinity/templates/home.html.py:420
+#: infinity/templates/home.html:493
 msgid "(last commented"
 msgstr "（最新的评论"
 
-#: infinity/templates/home.html:60 infinity/templates/home.html.py:127
-#: infinity/templates/home.html:205 infinity/templates/home.html.py:279
-#: infinity/templates/home.html:356 infinity/templates/inbox.html:55
+#: infinity/templates/home.html:61 infinity/templates/home.html.py:126
+#: infinity/templates/home.html:193 infinity/templates/home.html.py:269
+#: infinity/templates/home.html:343 infinity/templates/home.html.py:420
+#: infinity/templates/home.html:493
 msgid "hours ago)"
 msgstr "小时前）"
 
-#: infinity/templates/home.html:89 infinity/templates/home.html.py:162
-#: infinity/templates/home.html:238 infinity/templates/home.html.py:314
-#: infinity/templates/home.html:392
-msgid "see more"
-msgstr "查看更多"
-
 #: infinity/templates/home.html:92
-msgid "Oops! You have no goals!"
-msgstr "啊呀！您还没有目标！"
+msgid "Oops! You have no needs!"
+msgstr "啊呀！您还没有需要！"
 
 #: infinity/templates/home.html:93
-msgid "Add a problem"
-msgstr "下定义个问题"
+#, fuzzy
+#| msgid "define a need"
+msgid "Define a need"
+msgstr "下定义需要..."
 
-#: infinity/templates/home.html:94 infinity/templates/home.html.py:168
-#: infinity/templates/home.html:244 infinity/templates/home.html.py:319
-#: infinity/templates/home.html:397 infinity/templates/inbox.html:88
+#: infinity/templates/home.html:94 infinity/templates/home.html.py:160
+#: infinity/templates/home.html:234 infinity/templates/home.html.py:308
+#: infinity/templates/home.html:383 infinity/templates/home.html.py:461
+#: infinity/templates/home.html:534
 msgid "...or view"
 msgstr "...或者看"
 
-#: infinity/templates/home.html:94 infinity/templates/home.html.py:168
-#: infinity/templates/home.html:244 infinity/templates/home.html.py:319
-#: infinity/templates/home.html:397
-msgid "<u>index</u>"
-msgstr "目录"
+#: infinity/templates/home.html:94
+msgid "<u>discussion board</u>"
+msgstr ""
 
 #: infinity/templates/home.html:97
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
-"                    <p><b>$ 0.00 Having Omelette</b></p>\n"
+"                    <p><b>$ 0.00 I want an omelete</b></p>\n"
+"                    <p>Hi, Alice! Could you buy me omelete this afternoon "
+"before going home?</p>\n"
+"                    "
+msgstr ""
+
+#: infinity/templates/home.html:111
+msgid "define a problem"
+msgstr "下定义个问题"
+
+#: infinity/templates/home.html:155 infinity/templates/home.html.py:228
+#: infinity/templates/home.html:302 infinity/templates/home.html.py:378
+#: infinity/templates/home.html:456 infinity/templates/home.html.py:529
+msgid "see more"
+msgstr "查看更多"
+
+#: infinity/templates/home.html:158
+msgid "Oops! You have no goals!"
+msgstr "啊呀！您还没有目标！"
+
+#: infinity/templates/home.html:159
+msgid "Add a problem"
+msgstr "下定义个问题"
+
+#: infinity/templates/home.html:160 infinity/templates/home.html.py:234
+#: infinity/templates/home.html:308 infinity/templates/home.html.py:383
+#: infinity/templates/home.html:461 infinity/templates/home.html.py:534
+msgid "<u>index</u>"
+msgstr "目录"
+
+#: infinity/templates/home.html:163
+msgid ""
+"\n"
+"                    <p><i><u>Example:</u></i></p>\n"
+"                    <p><b>$ 0.00 Omelette Supply Problem</b></p>\n"
 "                    <p>Omelette is a healthy and delicious food, which can "
 "be flavored in desired tastes. I like it, and I would like to eat omelete "
 "every morning, without any extra expenses.</p>\n"
 "                    "
 msgstr ""
 
-#: infinity/templates/home.html:109
+#: infinity/templates/home.html:175
 msgid "suggest a solution"
 msgstr "提出解决方式"
 
-#: infinity/templates/home.html:166
+#: infinity/templates/home.html:232
 msgid "Oops! You have no ideas!"
 msgstr "啊呀！您还没有思路！"
 
-#: infinity/templates/home.html:167
+#: infinity/templates/home.html:233
 msgid "Add a solution"
 msgstr "提出解决方式"
 
-#: infinity/templates/home.html:171
+#: infinity/templates/home.html:237
 msgid ""
 "\n"
 "                <p><i><u>Example ideas:</u></i></p>\n"
-"                <p><b>$ 0.00 Go to buy eggs and spices, and cook one</b></"
-"p>\n"
-"                <p>It's easy enough just to cook.</p>\n"
-"                <p><b>$ 0.00 Hen Mini-Farm With Automated Egg Processor</b></"
-"p>\n"
+"                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</"
+"b></p>\n"
 "                <p>Hens don't really require much human work to maintain. "
 "Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, "
 "spicers, cookers and dispensers - and have a self-sustaining supply of fresh "
@@ -1393,19 +1426,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:187
+#: infinity/templates/home.html:251
 msgid "start a project"
 msgstr "开始个项目"
 
-#: infinity/templates/home.html:242
+#: infinity/templates/home.html:306
 msgid "Oops! You have no plans!"
 msgstr "啊呀！您还没有计划！"
 
-#: infinity/templates/home.html:243
+#: infinity/templates/home.html:307
 msgid "Add a project"
 msgstr "开始个项目"
 
-#: infinity/templates/home.html:246
+#: infinity/templates/home.html:310
 msgid ""
 "\n"
 "\n"
@@ -1418,19 +1451,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:261
+#: infinity/templates/home.html:325
 msgid "break it down"
 msgstr "把它分解"
 
-#: infinity/templates/home.html:317
+#: infinity/templates/home.html:381
 msgid "Oops! You have no steps!"
 msgstr "啊呀！您还没有步骤！"
 
-#: infinity/templates/home.html:318
+#: infinity/templates/home.html:382
 msgid "Start a project to add milestones"
 msgstr "开始个项目，然后对它附加步骤"
 
-#: infinity/templates/home.html:322
+#: infinity/templates/home.html:386
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1448,23 +1481,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:338
+#: infinity/templates/home.html:402
 msgid "Tasks"
 msgstr "任务"
 
-#: infinity/templates/home.html:340
+#: infinity/templates/home.html:404
 msgid "execute it"
 msgstr "把它执行"
 
-#: infinity/templates/home.html:395
+#: infinity/templates/home.html:459
 msgid "Oops! You have no tasks!"
 msgstr ""
 
-#: infinity/templates/home.html:396
+#: infinity/templates/home.html:460
 msgid "Choose a milestone to add tasks"
 msgstr ""
 
-#: infinity/templates/home.html:399
+#: infinity/templates/home.html:463
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1473,31 +1506,34 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:408 infinity/templates/inbox.html:96
+#: infinity/templates/home.html:475
+msgid "Works"
+msgstr "工作"
+
+#: infinity/templates/home.html:477
+msgid "did it"
+msgstr "做啦！"
+
+#: infinity/templates/home.html:532
+msgid "Oops! You have no works!"
+msgstr "啊呀！您还没有工作！"
+
+#: infinity/templates/home.html:533
+msgid "Choose a task to add works"
+msgstr ""
+
+#: infinity/templates/home.html:536
+msgid ""
+"\n"
+"                <p><i><u>Example:</u></i></p>\n"
+"                <p><b>$ 0.00 Here's my research paper.</b></p>\n"
+"                ...\n"
+"                "
+msgstr ""
+
+#: infinity/templates/home.html:546
 msgid "People-centric economy."
 msgstr "— 以人为本的经济 —"
-
-#: infinity/templates/inbox.html:39
-msgid "Needs"
-msgstr "需要"
-
-#: infinity/templates/inbox.html:40
-msgid "define a need"
-msgstr "下定义需要..."
-
-#: infinity/templates/inbox.html:86
-msgid "Oops! You have no needs!"
-msgstr "啊呀！您还没有需要！"
-
-#: infinity/templates/inbox.html:87
-#, fuzzy
-#| msgid "define a need"
-msgid "Define a need"
-msgstr "下定义需要..."
-
-#: infinity/templates/inbox.html:88
-msgid "<u>discussion board</u>"
-msgstr ""
 
 #: infinity/templates/invitations/email/email_invite_message.txt:3
 #, python-format
