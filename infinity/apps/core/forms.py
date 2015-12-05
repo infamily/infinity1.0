@@ -212,6 +212,7 @@ class NeedCreateForm(forms.ModelForm):
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['definition'].widget = forms.HiddenInput()
+        self.initial['personal'] = True
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
