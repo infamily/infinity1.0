@@ -39,8 +39,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap-horizon.css">
 
     <div class="row row-horizon">
-        <div class="panel panel-default col-md-4 block-content">
 
+{% if request.get_full_path == '/i' %}
+        <div class="panel panel-default col-md-4 block-content">
             <div class="panel-heading">
                 {% trans "Needs" %}
                 &nbsp; <a href="{% url "definition-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "share a need" %}</b>
@@ -103,7 +104,7 @@
                 {% endif %}
             </div>
         </div>
-
+{% endif %}
 
         <div class="panel panel-default col-md-4 block-content">
             <div class="panel-heading">
