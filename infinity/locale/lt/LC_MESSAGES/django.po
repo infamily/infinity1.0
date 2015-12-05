@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-04 15:12-0800\n"
-"PO-Revision-Date: 2015-12-05 01:30+0200\n"
+"POT-Creation-Date: 2015-12-04 17:00-0800\n"
+"PO-Revision-Date: 2015-12-05 03:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -271,7 +271,7 @@ msgstr ""
 #: infinity/apps/core/templates/goal/list2.html:6
 #: infinity/apps/core/templates/goal/list2.html:9
 #: infinity/apps/core/templates/need/detail.html:101
-#: infinity/templates/home.html:44
+#: infinity/templates/home.html:110
 msgid "Goals"
 msgstr "Tikslai"
 
@@ -492,9 +492,10 @@ msgstr "transporto priemonė skirta skrydžiams į kosmosą"
 #: infinity/apps/core/templates/step/detail.html:88
 #: infinity/apps/core/templates/task/detail.html:76
 #: infinity/apps/core/templates/work/detail.html:96
-#: infinity/templates/home.html:65 infinity/templates/home.html.py:134
-#: infinity/templates/home.html:210 infinity/templates/home.html.py:285
-#: infinity/templates/home.html:362 infinity/templates/inbox.html:60
+#: infinity/templates/home.html:66 infinity/templates/home.html.py:131
+#: infinity/templates/home.html:200 infinity/templates/home.html.py:274
+#: infinity/templates/home.html:349 infinity/templates/home.html.py:426
+#: infinity/templates/home.html:499
 msgid "link"
 msgstr "adaptuotas"
 
@@ -613,7 +614,7 @@ msgstr "Dalinamasi su:"
 #: infinity/apps/core/templates/goal/detail.html:103
 #: infinity/apps/core/templates/idea/list2.html:6
 #: infinity/apps/core/templates/idea/list2.html:9
-#: infinity/templates/home.html:108
+#: infinity/templates/home.html:174
 msgid "Ideas"
 msgstr "Idėjos"
 
@@ -644,7 +645,7 @@ msgstr "norim:"
 #: infinity/apps/core/templates/idea/detail.html:107
 #: infinity/apps/core/templates/plan/list2.html:6
 #: infinity/apps/core/templates/plan/list2.html:9
-#: infinity/templates/home.html:185
+#: infinity/templates/home.html:249
 msgid "Plans"
 msgstr "Planai"
 
@@ -703,7 +704,7 @@ msgid "deliverable"
 msgstr "tikimasis rezultatas"
 
 #: infinity/apps/core/templates/plan/detail.html:124
-#: infinity/templates/home.html:259
+#: infinity/templates/home.html:323
 msgid "Steps"
 msgstr "Uždaviniai"
 
@@ -733,7 +734,7 @@ msgstr "Apibrėžkite tikslą"
 
 #: infinity/apps/core/views/definition.py:127
 #: infinity/apps/core/views/goal.py:122 infinity/apps/core/views/idea.py:148
-#: infinity/apps/core/views/need.py:125 infinity/apps/core/views/plan.py:148
+#: infinity/apps/core/views/need.py:128 infinity/apps/core/views/plan.py:148
 #: infinity/apps/core/views/step.py:152 infinity/apps/core/views/task.py:141
 #: infinity/apps/core/views/work.py:141
 #, python-format
@@ -768,13 +769,13 @@ msgstr ""
 msgid "Need succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views/need.py:95
+#: infinity/apps/core/views/need.py:98
 #, fuzzy
 #| msgid "Goal succesfully created"
 msgid "Need succesfully deleted"
 msgstr "Apibrėžkite tikslą"
 
-#: infinity/apps/core/views/need.py:111
+#: infinity/apps/core/views/need.py:114
 msgid "Need succesfully updated"
 msgstr ""
 
@@ -1307,7 +1308,7 @@ msgstr ""
 
 #: infinity/templates/base.html:85
 msgid "Solving Problems"
-msgstr "Spręskim problemas"
+msgstr "Spręskime problemas"
 
 #: infinity/templates/base.html:114
 msgid "About"
@@ -1317,100 +1318,134 @@ msgstr "Apie projektą"
 msgid "Logout"
 msgstr "Atsijungti"
 
-#: infinity/templates/home.html:21 infinity/templates/inbox.html:16
+#: infinity/templates/home.html:21
 msgid "invitations"
 msgstr "pakvietimai"
 
-#: infinity/templates/home.html:21 infinity/templates/inbox.html:16
+#: infinity/templates/home.html:21
 msgid "write bugs"
 msgstr "pranešti apie klaidas"
 
-#: infinity/templates/home.html:21 infinity/templates/inbox.html:16
+#: infinity/templates/home.html:21
 msgid "time value"
 msgstr "laiko vertė"
 
-#: infinity/templates/home.html:30 infinity/templates/inbox.html:25
+#: infinity/templates/home.html:30
 msgid "my index"
 msgstr "privatus turinys"
 
-#: infinity/templates/home.html:30 infinity/templates/inbox.html:25
+#: infinity/templates/home.html:30
 msgid "index"
 msgstr "viešas turinys"
 
 #: infinity/templates/home.html:45
-msgid "define a problem"
-msgstr "apibrėžkite problemą"
+msgid "Needs"
+msgstr "Poreikiai"
 
-#: infinity/templates/home.html:60 infinity/templates/home.html.py:127
-#: infinity/templates/home.html:205 infinity/templates/home.html.py:279
-#: infinity/templates/home.html:356 infinity/templates/inbox.html:55
+#: infinity/templates/home.html:46
+msgid "share a need"
+msgstr "pasidalinti poreikiu"
+
+#: infinity/templates/home.html:61 infinity/templates/home.html.py:126
+#: infinity/templates/home.html:193 infinity/templates/home.html.py:269
+#: infinity/templates/home.html:343 infinity/templates/home.html.py:420
+#: infinity/templates/home.html:493
 msgid "(last commented"
 msgstr "(paskutinis komentaras prieš"
 
-#: infinity/templates/home.html:60 infinity/templates/home.html.py:127
-#: infinity/templates/home.html:205 infinity/templates/home.html.py:279
-#: infinity/templates/home.html:356 infinity/templates/inbox.html:55
+#: infinity/templates/home.html:61 infinity/templates/home.html.py:126
+#: infinity/templates/home.html:193 infinity/templates/home.html.py:269
+#: infinity/templates/home.html:343 infinity/templates/home.html.py:420
+#: infinity/templates/home.html:493
 msgid "hours ago)"
 msgstr "valandų)"
 
-#: infinity/templates/home.html:89 infinity/templates/home.html.py:162
-#: infinity/templates/home.html:238 infinity/templates/home.html.py:314
-#: infinity/templates/home.html:392
-msgid "see more"
-msgstr "skaityti daugiau..."
-
 #: infinity/templates/home.html:92
-msgid "Oops! You have no goals!"
-msgstr "Jūs dar neturite tikslų!"
+#, fuzzy
+#| msgid "Oops! You have no ideas!"
+msgid "Oops! You have no needs!"
+msgstr "Jūs dar neturite idėjų!"
 
 #: infinity/templates/home.html:93
-msgid "Add a problem"
-msgstr "Apibrėžkite problemą"
+#, fuzzy
+#| msgid "Define what you need"
+msgid "Define a need"
+msgstr "Apibrėžk, ko nori"
 
-#: infinity/templates/home.html:94 infinity/templates/home.html.py:168
-#: infinity/templates/home.html:244 infinity/templates/home.html.py:319
-#: infinity/templates/home.html:397 infinity/templates/inbox.html:88
+#: infinity/templates/home.html:94 infinity/templates/home.html.py:160
+#: infinity/templates/home.html:234 infinity/templates/home.html.py:308
+#: infinity/templates/home.html:383 infinity/templates/home.html.py:461
+#: infinity/templates/home.html:534
 msgid "...or view"
 msgstr "...arba žr."
 
-#: infinity/templates/home.html:94 infinity/templates/home.html.py:168
-#: infinity/templates/home.html:244 infinity/templates/home.html.py:319
-#: infinity/templates/home.html:397
-msgid "<u>index</u>"
-msgstr "<u>viešą turinį</u>"
+#: infinity/templates/home.html:94
+msgid "<u>discussion board</u>"
+msgstr ""
 
 #: infinity/templates/home.html:97
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
-"                    <p><b>$ 0.00 Having Omelette</b></p>\n"
+"                    <p><b>$ 0.00 I want an omelete</b></p>\n"
+"                    <p>Hi, Alice! Could you buy me omelete this afternoon "
+"before going home?</p>\n"
+"                    "
+msgstr ""
+
+#: infinity/templates/home.html:111
+msgid "define a problem"
+msgstr "apibrėžti problemą"
+
+#: infinity/templates/home.html:155 infinity/templates/home.html.py:228
+#: infinity/templates/home.html:302 infinity/templates/home.html.py:378
+#: infinity/templates/home.html:456 infinity/templates/home.html.py:529
+msgid "see more"
+msgstr "skaityti daugiau..."
+
+#: infinity/templates/home.html:158
+msgid "Oops! You have no goals!"
+msgstr "Jūs dar neturite tikslų!"
+
+#: infinity/templates/home.html:159
+msgid "Add a problem"
+msgstr "Apibrėžkite problemą"
+
+#: infinity/templates/home.html:160 infinity/templates/home.html.py:234
+#: infinity/templates/home.html:308 infinity/templates/home.html.py:383
+#: infinity/templates/home.html:461 infinity/templates/home.html.py:534
+msgid "<u>index</u>"
+msgstr "<u>viešą turinį</u>"
+
+#: infinity/templates/home.html:163
+msgid ""
+"\n"
+"                    <p><i><u>Example:</u></i></p>\n"
+"                    <p><b>$ 0.00 Omelette Supply Problem</b></p>\n"
 "                    <p>Omelette is a healthy and delicious food, which can "
 "be flavored in desired tastes. I like it, and I would like to eat omelete "
 "every morning, without any extra expenses.</p>\n"
 "                    "
 msgstr ""
 
-#: infinity/templates/home.html:109
+#: infinity/templates/home.html:175
 msgid "suggest a solution"
-msgstr "pasiūlykite sprendimą"
+msgstr "pasiūlyti sprendimą"
 
-#: infinity/templates/home.html:166
+#: infinity/templates/home.html:232
 msgid "Oops! You have no ideas!"
 msgstr "Jūs dar neturite idėjų!"
 
-#: infinity/templates/home.html:167
+#: infinity/templates/home.html:233
 msgid "Add a solution"
 msgstr "Pridėkite sumanymą"
 
-#: infinity/templates/home.html:171
+#: infinity/templates/home.html:237
 msgid ""
 "\n"
 "                <p><i><u>Example ideas:</u></i></p>\n"
-"                <p><b>$ 0.00 Go to buy eggs and spices, and cook one</b></"
-"p>\n"
-"                <p>It's easy enough just to cook.</p>\n"
-"                <p><b>$ 0.00 Hen Mini-Farm With Automated Egg Processor</b></"
-"p>\n"
+"                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</"
+"b></p>\n"
 "                <p>Hens don't really require much human work to maintain. "
 "Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, "
 "spicers, cookers and dispensers - and have a self-sustaining supply of fresh "
@@ -1418,19 +1453,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:187
+#: infinity/templates/home.html:251
 msgid "start a project"
-msgstr "pradėkite projektą"
+msgstr "pradėti projektą"
 
-#: infinity/templates/home.html:242
+#: infinity/templates/home.html:306
 msgid "Oops! You have no plans!"
 msgstr "Jūs dar neturite planų!"
 
-#: infinity/templates/home.html:243
+#: infinity/templates/home.html:307
 msgid "Add a project"
 msgstr "Pradėkite projektą"
 
-#: infinity/templates/home.html:246
+#: infinity/templates/home.html:310
 msgid ""
 "\n"
 "\n"
@@ -1443,19 +1478,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:261
+#: infinity/templates/home.html:325
 msgid "break it down"
-msgstr "išskaidykite į etapus"
+msgstr "išskaidyti į etapus"
 
-#: infinity/templates/home.html:317
+#: infinity/templates/home.html:381
 msgid "Oops! You have no steps!"
 msgstr "Jūs dar neturite uždavinių!"
 
-#: infinity/templates/home.html:318
+#: infinity/templates/home.html:382
 msgid "Start a project to add milestones"
 msgstr "Pradėkite projektą, ir prie jo pridėkite etapus"
 
-#: infinity/templates/home.html:322
+#: infinity/templates/home.html:386
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1473,23 +1508,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:338
+#: infinity/templates/home.html:402
 msgid "Tasks"
 msgstr "Užduotys"
 
-#: infinity/templates/home.html:340
+#: infinity/templates/home.html:404
 msgid "execute it"
-msgstr "vykdykite"
+msgstr "vykdyti"
 
-#: infinity/templates/home.html:395
+#: infinity/templates/home.html:459
 msgid "Oops! You have no tasks!"
 msgstr ""
 
-#: infinity/templates/home.html:396
+#: infinity/templates/home.html:460
 msgid "Choose a milestone to add tasks"
 msgstr ""
 
-#: infinity/templates/home.html:399
+#: infinity/templates/home.html:463
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1498,37 +1533,36 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:408 infinity/templates/inbox.html:96
+#: infinity/templates/home.html:475
+msgid "Works"
+msgstr "Darbai"
+
+#: infinity/templates/home.html:477
+msgid "did it"
+msgstr "padaryta!"
+
+#: infinity/templates/home.html:532
+#, fuzzy
+#| msgid "Oops! You have no goals!"
+msgid "Oops! You have no works!"
+msgstr "Jūs dar neturite tikslų!"
+
+#: infinity/templates/home.html:533
+msgid "Choose a task to add works"
+msgstr ""
+
+#: infinity/templates/home.html:536
+msgid ""
+"\n"
+"                <p><i><u>Example:</u></i></p>\n"
+"                <p><b>$ 0.00 Here's my research paper.</b></p>\n"
+"                ...\n"
+"                "
+msgstr ""
+
+#: infinity/templates/home.html:546
 msgid "People-centric economy."
 msgstr "— ekonomika žmogui —"
-
-#: infinity/templates/inbox.html:39
-#, fuzzy
-#| msgid "needs"
-msgid "Needs"
-msgstr "reikia"
-
-#: infinity/templates/inbox.html:40
-#, fuzzy
-#| msgid "Define what you need"
-msgid "define a need"
-msgstr "Apibrėžk, ko nori"
-
-#: infinity/templates/inbox.html:86
-#, fuzzy
-#| msgid "Oops! You have no ideas!"
-msgid "Oops! You have no needs!"
-msgstr "Jūs dar neturite idėjų!"
-
-#: infinity/templates/inbox.html:87
-#, fuzzy
-#| msgid "Define what you need"
-msgid "Define a need"
-msgstr "Apibrėžk, ko nori"
-
-#: infinity/templates/inbox.html:88
-msgid "<u>discussion board</u>"
-msgstr ""
 
 #: infinity/templates/invitations/email/email_invite_message.txt:3
 #, python-format
