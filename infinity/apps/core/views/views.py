@@ -27,6 +27,7 @@ from ..models import Idea
 from ..models import Plan
 from ..models import Step
 from ..models import Task
+from ..models import Work
 
 
 class SetLanguageView(RedirectView):
@@ -86,15 +87,27 @@ class ContentTypeSubscribeFormView(FormView):
         return super(ContentTypeSubscribeFormView, self).form_valid(form)
 
 
-class InboxView(TemplateView):
-    template_name = 'inbox.html'
-    dropdown_list = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+class IndexView(TemplateView):
+    template_name = 'home.html'
+    dropdown_list = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
 
     def post(self, request, *args, **kwargs):
         if self.request.POST.get('needs'):
             self.request.session['needs_number'] = int(self.request.POST['needs'])
+        if self.request.POST.get('goals'):
+            self.request.session['goals_number'] = int(self.request.POST['goals'])
+        if self.request.POST.get('ideas'):
+            self.request.session['ideas_number'] = int(self.request.POST['ideas'])
+        if self.request.POST.get('plans'):
+            self.request.session['plans_number'] = int(self.request.POST['plans'])
+        if self.request.POST.get('steps'):
+            self.request.session['steps_number'] = int(self.request.POST['steps'])
+        if self.request.POST.get('tasks'):
+            self.request.session['tasks_number'] = int(self.request.POST['tasks'])
+        if self.request.POST.get('works'):
+            self.request.session['works_number'] = int(self.request.POST['works'])
 
-        return redirect(reverse('inbox'))
+        return redirect(reverse('home'))
 
     def get_translation_by_instance(self, instance, content_type):
         language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
@@ -107,16 +120,35 @@ class InboxView(TemplateView):
         return translation.first()
 
     def get_context_data(self, **kwargs):
-        items = {'needs': 64}
+        items = {'needs': 32,
+                 'goals': 64,
+                 'ideas': 128,
+                 'plans': 256,
+                 'steps': 512,
+                 'tasks': 1024,
+                 'works': 2048}
 
-        if self.request.session.get('neeeds_number'):
-            items['needs'] = self.request.session['needs_number']
+        if self.request.session.get('needs_number'):
+            items['goals'] = self.request.session['needs_number']
+        if self.request.session.get('goals_number'):
+            items['goals'] = self.request.session['goals_number']
+        if self.request.session.get('ideas_number'):
+            items['ideas'] = self.request.session['ideas_number']
+        if self.request.session.get('plans_number'):
+            items['plans'] = self.request.session['plans_number']
+        if self.request.session.get('steps_number'):
+            items['steps'] = self.request.session['steps_number']
+        if self.request.session.get('tasks_number'):
+            items['tasks'] = self.request.session['tasks_number']
+        if self.request.session.get('works_number'):
+            items['works'] = self.request.session['works_number']
+
 
         # Prepare base content access filters
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'inbox':
                 q_object = (
-                    Q(user=self.request.user) |
+                    Q(personal=True, user=self.request.user) |
                     Q(personal=True, sharewith=self.request.user)
                 )
             else:
@@ -130,8 +162,8 @@ class InboxView(TemplateView):
                 Q(personal=False)
             )
 
-        # Get Content Types for Need
-        content_types = ContentType.objects.get_for_models(Need)
+        # Get Content Types for Goal, Idea, Plan, Step, Task
+        content_types = ContentType.objects.get_for_models(Need, Goal, Idea, Plan, Step, Task, Work)
 
         now = timezone.now()
         in_days = lambda x: float(x.seconds/86400.)
@@ -147,10 +179,16 @@ class InboxView(TemplateView):
 
 
         needs = instances['needs']
+        goals = instances['goals']
+        ideas = instances['ideas']
+        plans = instances['plans']
+        steps = instances['steps']
+        tasks = instances['tasks']
+        works = instances['works']
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
-        objects_list = list(chain(needs))
+        objects_list = list(chain(needs, goals, ideas, plans, steps, tasks, works))
         dates = commented_at(objects_list)
 
         if dates:
@@ -178,144 +216,18 @@ class InboxView(TemplateView):
         context = {
             'need_hours': needs and
             '%0.2f' % in_hours(now-max(commented_at(list(needs)))) or 0.,
-            'last_days': '%0.2f' % days,
-            'number_of_items': len(objects_list),
-            'hour_value': hour_value,
-            'dropdown_list': self.dropdown_list,
-            'items': items,
-        }
-
-        context.update(instances_list)
-        context.update(kwargs)
-
-        return context
-
-
-class IndexView(TemplateView):
-    template_name = 'home.html'
-    dropdown_list = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
-
-    def post(self, request, *args, **kwargs):
-        if self.request.POST.get('goals'):
-            self.request.session['goals_number'] = int(self.request.POST['goals'])
-        if self.request.POST.get('ideas'):
-            self.request.session['ideas_number'] = int(self.request.POST['ideas'])
-        if self.request.POST.get('plans'):
-            self.request.session['plans_number'] = int(self.request.POST['plans'])
-        if self.request.POST.get('steps'):
-            self.request.session['steps_number'] = int(self.request.POST['steps'])
-        if self.request.POST.get('tasks'):
-            self.request.session['tasks_number'] = int(self.request.POST['tasks'])
-
-        return redirect(reverse('home'))
-
-    def get_translation_by_instance(self, instance, content_type):
-        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
-        translation = Translation.objects.filter(
-            content_type=content_type,
-            object_id=instance.id,
-            language=language.id
-        )
-
-        return translation.first()
-
-    def get_context_data(self, **kwargs):
-        items = {'goals': 64,
-                 'ideas': 128,
-                 'plans': 256,
-                 'steps': 512,
-                 'tasks': 1024}
-
-        if self.request.session.get('goals_number'):
-            items['goals'] = self.request.session['goals_number']
-        if self.request.session.get('ideas_number'):
-            items['ideas'] = self.request.session['ideas_number']
-        if self.request.session.get('plans_number'):
-            items['plans'] = self.request.session['plans_number']
-        if self.request.session.get('steps_number'):
-            items['steps'] = self.request.session['steps_number']
-        if self.request.session.get('tasks_number'):
-            items['tasks'] = self.request.session['tasks_number']
-
-
-        # Prepare base content access filters
-        if self.request.user.is_authenticated():
-            if self.request.resolver_match.url_name == 'home':
-                q_object = (
-                    Q(user=self.request.user) |
-                    Q(personal=True, sharewith=self.request.user)
-                )
-            else:
-                q_object = (
-                    Q(personal=False) |
-                    Q(personal=True, user=self.request.user) |
-                    Q(personal=True, sharewith=self.request.user)
-                )
-        else:
-            q_object = (
-                Q(personal=False)
-            )
-
-        # Get Content Types for Goal, Idea, Plan, Step, Task
-        content_types = ContentType.objects.get_for_models(Goal, Idea, Plan, Step, Task)
-
-        now = timezone.now()
-        in_days = lambda x: float(x.seconds/86400.)
-        in_hours = lambda x: float(x.seconds/3600.)
-
-        instances = {}
-
-        for model_class, translations in content_types.items():
-            model_class_lower_name = model_class.__name__.lower() + 's'
-            instances[model_class_lower_name] = model_class.objects.filter(
-                q_object
-            ).order_by('-commented_at').distinct()[:items[model_class_lower_name]]
-
-
-        goals = instances['goals']
-        ideas = instances['ideas']
-        plans = instances['plans']
-        steps = instances['steps']
-        tasks = instances['tasks']
-
-        commented_at = lambda items: [obj.commented_at for obj in items]
-
-        objects_list = list(chain(goals, ideas, plans, steps, tasks))
-        dates = commented_at(objects_list)
-
-        if dates:
-            start = min(dates)
-            days = in_days(now-start)
-        else:
-            start = timezone.now()
-            days = 0.
-
-        try:
-            hour_value = HourValue.objects.latest('created_at')
-        except HourValue.DoesNotExist:
-            hour_value = 0
-
-        instances_list = {}
-
-        for model, content_type in content_types.items():
-            model_name = model.__name__.lower()
-            instances_list[model_name + '_list'] = [{
-                'object': instance,
-                'is_new': instance.created_at > start,
-                'translation': self.get_translation_by_instance(instance, content_type)
-            } for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
-
-        context = {
             'goal_hours': goals and
             '%0.2f' % in_hours(now-max(commented_at(list(goals)))) or 0.,
             'idea_hours': ideas and
             '%0.2f' % in_hours(now-max(commented_at(list(ideas)))) or 0.,
             'plan_hours': plans and
-            '%0.2f' % in_hours(now-max(commented_at(list(plans)))) or 0,
+            '%0.2f' % in_hours(now-max(commented_at(list(plans)))) or 0.,
             'step_hours': steps and
-            '%0.2f' % in_hours(now-max(commented_at(list(steps)))) or 0,
+            '%0.2f' % in_hours(now-max(commented_at(list(steps)))) or 0.,
             'task_hours': tasks and
-            '%0.2f' % in_hours(now-max(commented_at(list(tasks)))) or 0,
+            '%0.2f' % in_hours(now-max(commented_at(list(tasks)))) or 0.,
+            'work_hours': works and
+            '%0.2f' % in_hours(now-max(commented_at(list(works)))) or 0.,
             'last_days': '%0.2f' % days,
             'number_of_items': len(objects_list),
             'hour_value': hour_value,

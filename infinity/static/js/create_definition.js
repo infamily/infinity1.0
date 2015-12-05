@@ -113,7 +113,7 @@ function redirectIndex(seconds) {
             clearInterval(refresh);
             refresh = setTimeout(function() {
               if (!$("#id_name").val()) {
-                 location.href = '/w';
+                 location.href = '/!';
               }
             }, seconds * 1000);
         };

@@ -37,7 +37,10 @@ class NeedCreateView(CreateViewWrapper):
 
     def get_success_url(self):
         messages.success(self.request, _("Need succesfully created"))
-        return reverse("need-detail", args=[self.object.pk, ])
+        if self.object.personal:
+            return reverse("inbox")
+        else:
+            return reverse("need-detail", args=[self.object.pk, ])
 
     def get_context_data(self, **kwargs):
         context = super(NeedCreateView, self).get_context_data(**kwargs)
