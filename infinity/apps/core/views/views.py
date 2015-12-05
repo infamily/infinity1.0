@@ -27,6 +27,7 @@ from ..models import Idea
 from ..models import Plan
 from ..models import Step
 from ..models import Task
+from ..models import Work
 
 
 class SetLanguageView(RedirectView):
@@ -91,6 +92,8 @@ class IndexView(TemplateView):
     dropdown_list = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
 
     def post(self, request, *args, **kwargs):
+        if self.request.POST.get('needs'):
+            self.request.session['needs_number'] = int(self.request.POST['needs'])
         if self.request.POST.get('goals'):
             self.request.session['goals_number'] = int(self.request.POST['goals'])
         if self.request.POST.get('ideas'):
@@ -101,6 +104,8 @@ class IndexView(TemplateView):
             self.request.session['steps_number'] = int(self.request.POST['steps'])
         if self.request.POST.get('tasks'):
             self.request.session['tasks_number'] = int(self.request.POST['tasks'])
+        if self.request.POST.get('works'):
+            self.request.session['works_number'] = int(self.request.POST['works'])
 
         return redirect(reverse('home'))
 
@@ -115,12 +120,16 @@ class IndexView(TemplateView):
         return translation.first()
 
     def get_context_data(self, **kwargs):
-        items = {'goals': 64,
+        items = {'needs': 32,
+                 'goals': 64,
                  'ideas': 128,
                  'plans': 256,
                  'steps': 512,
-                 'tasks': 1024}
+                 'tasks': 1024,
+                 'works': 2048}
 
+        if self.request.session.get('needs_number'):
+            items['goals'] = self.request.session['needs_number']
         if self.request.session.get('goals_number'):
             items['goals'] = self.request.session['goals_number']
         if self.request.session.get('ideas_number'):
@@ -131,6 +140,8 @@ class IndexView(TemplateView):
             items['steps'] = self.request.session['steps_number']
         if self.request.session.get('tasks_number'):
             items['tasks'] = self.request.session['tasks_number']
+        if self.request.session.get('works_number'):
+            items['works'] = self.request.session['works_number']
 
 
         # Prepare base content access filters
@@ -152,7 +163,7 @@ class IndexView(TemplateView):
             )
 
         # Get Content Types for Goal, Idea, Plan, Step, Task
-        content_types = ContentType.objects.get_for_models(Goal, Idea, Plan, Step, Task)
+        content_types = ContentType.objects.get_for_models(Need, Goal, Idea, Plan, Step, Task, Work)
 
         now = timezone.now()
         in_days = lambda x: float(x.seconds/86400.)
@@ -167,15 +178,17 @@ class IndexView(TemplateView):
             ).order_by('-commented_at').distinct()[:items[model_class_lower_name]]
 
 
+        needs = instances['needs']
         goals = instances['goals']
         ideas = instances['ideas']
         plans = instances['plans']
         steps = instances['steps']
         tasks = instances['tasks']
+        works = instances['works']
 
         commented_at = lambda items: [obj.commented_at for obj in items]
 
-        objects_list = list(chain(goals, ideas, plans, steps, tasks))
+        objects_list = list(chain(needs, goals, ideas, plans, steps, tasks, works))
         dates = commented_at(objects_list)
 
         if dates:
@@ -201,6 +214,8 @@ class IndexView(TemplateView):
             } for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
 
         context = {
+            'need_hours': needs and
+            '%0.2f' % in_hours(now-max(commented_at(list(needs)))) or 0.,
             'goal_hours': goals and
             '%0.2f' % in_hours(now-max(commented_at(list(goals)))) or 0.,
             'idea_hours': ideas and
@@ -211,6 +226,8 @@ class IndexView(TemplateView):
             '%0.2f' % in_hours(now-max(commented_at(list(steps)))) or 0,
             'task_hours': tasks and
             '%0.2f' % in_hours(now-max(commented_at(list(tasks)))) or 0,
+            'work_hours': tasks and
+            '%0.2f' % in_hours(now-max(commented_at(list(works)))) or 0,
             'last_days': '%0.2f' % days,
             'number_of_items': len(objects_list),
             'hour_value': hour_value,
