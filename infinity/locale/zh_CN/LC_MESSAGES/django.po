@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: infinity/apps/core/forms.py:210 infinity/apps/core/forms.py:338
-#: infinity/apps/core/forms.py:341 infinity/apps/core/forms.py:909
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 05:52-0800\n"
-"PO-Revision-Date: 2015-12-03 15:38+0200\n"
+"POT-Creation-Date: 2015-12-04 17:00-0800\n"
+"PO-Revision-Date: 2015-12-05 03:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -257,8 +255,8 @@ msgstr "选择至少一个问题"
 #: infinity/apps/core/forms.py:620
 #: infinity/apps/core/templates/goal/list2.html:6
 #: infinity/apps/core/templates/goal/list2.html:9
-#: infinity/apps/core/templates/need/detail.html:93
-#: infinity/templates/base.html:94 infinity/templates/home.html:44
+#: infinity/apps/core/templates/need/detail.html:101
+#: infinity/templates/home.html:110
 msgid "Goals"
 msgstr "目标"
 
@@ -423,72 +421,73 @@ msgstr ""
 "\n"
 "可用的太阳能水冷凝器，高质量的开源的设计在GitHub上，为了别人也可以创造它"
 
-#: infinity/apps/core/templates/comment/list.html:69
-#: infinity/apps/core/templates/goal/detail.html:81
-#: infinity/apps/core/templates/idea/detail.html:85
-#: infinity/apps/core/templates/need/detail.html:80
-#: infinity/apps/core/templates/plan/detail.html:96
+#: infinity/apps/core/templates/comment/list.html:74
+#: infinity/apps/core/templates/goal/detail.html:89
+#: infinity/apps/core/templates/idea/detail.html:93
+#: infinity/apps/core/templates/need/detail.html:88
+#: infinity/apps/core/templates/plan/detail.html:104
 #: infinity/templates/account/detail.html:12
 msgid "edit"
 msgstr "编辑"
 
-#: infinity/apps/core/templates/comment/list.html:69
-#: infinity/apps/core/templates/goal/detail.html:81
-#: infinity/apps/core/templates/idea/detail.html:85
-#: infinity/apps/core/templates/need/detail.html:80
-#: infinity/apps/core/templates/plan/detail.html:96
+#: infinity/apps/core/templates/comment/list.html:74
+#: infinity/apps/core/templates/goal/detail.html:89
+#: infinity/apps/core/templates/idea/detail.html:93
+#: infinity/apps/core/templates/need/detail.html:88
+#: infinity/apps/core/templates/plan/detail.html:104
 msgid "delete"
 msgstr "删除"
 
-#: infinity/apps/core/templates/comment/list.html:79
 #: infinity/apps/core/templates/comment/list.html:84
 #: infinity/apps/core/templates/comment/list.html:89
-#: infinity/apps/core/templates/comment/list.html:95
+#: infinity/apps/core/templates/comment/list.html:94
+#: infinity/apps/core/templates/comment/list.html:100
 msgid "Vote Up"
 msgstr "投了"
 
-#: infinity/apps/core/templates/comment/list.html:80
 #: infinity/apps/core/templates/comment/list.html:85
 #: infinity/apps/core/templates/comment/list.html:90
-#: infinity/apps/core/templates/comment/list.html:96
+#: infinity/apps/core/templates/comment/list.html:95
+#: infinity/apps/core/templates/comment/list.html:101
 msgid "Vote Down"
 msgstr "否决"
 
-#: infinity/apps/core/templates/comment/list.html:127
+#: infinity/apps/core/templates/comment/list.html:132
 msgid "credit"
 msgstr "信用"
 
-#: infinity/apps/core/templates/comment/list.html:162
+#: infinity/apps/core/templates/comment/list.html:167
 msgid "Invite a friend to help!"
 msgstr "邀请好友帮忙！"
 
-#: infinity/apps/core/templates/definition/create.html:27
+#: infinity/apps/core/templates/definition/create.html:37
 msgid "Define what you need"
 msgstr "输入你需要什么"
 
-#: infinity/apps/core/templates/definition/create.html:32
+#: infinity/apps/core/templates/definition/create.html:42
 msgid "e.g.:"
 msgstr "如："
 
-#: infinity/apps/core/templates/definition/create.html:32
+#: infinity/apps/core/templates/definition/create.html:42
 msgid "spaceship"
 msgstr "宇宙飞船"
 
-#: infinity/apps/core/templates/definition/create.html:32
+#: infinity/apps/core/templates/definition/create.html:42
 msgid "vessel or machine designed to fly in outer space"
 msgstr "在太空中航行的工具"
 
 #: infinity/apps/core/templates/definition/detail.html:55
-#: infinity/apps/core/templates/goal/detail.html:101
-#: infinity/apps/core/templates/idea/detail.html:105
-#: infinity/apps/core/templates/need/detail.html:99
-#: infinity/apps/core/templates/plan/detail.html:122
+#: infinity/apps/core/templates/goal/detail.html:109
+#: infinity/apps/core/templates/idea/detail.html:113
+#: infinity/apps/core/templates/need/detail.html:107
+#: infinity/apps/core/templates/plan/detail.html:130
 #: infinity/apps/core/templates/step/detail.html:88
 #: infinity/apps/core/templates/task/detail.html:76
 #: infinity/apps/core/templates/work/detail.html:96
-#: infinity/templates/home.html:65 infinity/templates/home.html.py:134
-#: infinity/templates/home.html:210 infinity/templates/home.html.py:285
-#: infinity/templates/home.html:362 infinity/templates/inbox.html:60
+#: infinity/templates/home.html:66 infinity/templates/home.html.py:131
+#: infinity/templates/home.html:200 infinity/templates/home.html.py:274
+#: infinity/templates/home.html:349 infinity/templates/home.html.py:426
+#: infinity/templates/home.html:499
 msgid "link"
 msgstr "链接"
 
@@ -506,112 +505,112 @@ msgstr ""
 "<center><i><font color=\"grey\">目标是个问题的否定。下定义一下问题。</font></"
 "i></center>\n"
 
-#: infinity/apps/core/templates/goal/detail.html:23
-#: infinity/apps/core/templates/goal/detail.html:51
-#: infinity/apps/core/templates/idea/detail.html:22
-#: infinity/apps/core/templates/idea/detail.html:51
-#: infinity/apps/core/templates/need/detail.html:23
-#: infinity/apps/core/templates/need/detail.html:51
-#: infinity/apps/core/templates/plan/detail.html:42
-#: infinity/apps/core/templates/plan/detail.html:70
+#: infinity/apps/core/templates/goal/detail.html:31
+#: infinity/apps/core/templates/goal/detail.html:59
+#: infinity/apps/core/templates/idea/detail.html:30
+#: infinity/apps/core/templates/idea/detail.html:59
+#: infinity/apps/core/templates/need/detail.html:31
+#: infinity/apps/core/templates/need/detail.html:59
+#: infinity/apps/core/templates/plan/detail.html:50
+#: infinity/apps/core/templates/plan/detail.html:78
 msgid "needs"
 msgstr "需要"
 
-#: infinity/apps/core/templates/goal/detail.html:23
-#: infinity/apps/core/templates/goal/detail.html:51
-#: infinity/apps/core/templates/idea/detail.html:22
-#: infinity/apps/core/templates/idea/detail.html:51
-#: infinity/apps/core/templates/need/detail.html:23
-#: infinity/apps/core/templates/need/detail.html:51
-#: infinity/apps/core/templates/plan/detail.html:42
-#: infinity/apps/core/templates/plan/detail.html:70
+#: infinity/apps/core/templates/goal/detail.html:31
+#: infinity/apps/core/templates/goal/detail.html:59
+#: infinity/apps/core/templates/idea/detail.html:30
+#: infinity/apps/core/templates/idea/detail.html:59
+#: infinity/apps/core/templates/need/detail.html:31
+#: infinity/apps/core/templates/need/detail.html:59
+#: infinity/apps/core/templates/plan/detail.html:50
+#: infinity/apps/core/templates/plan/detail.html:78
 msgid "for funding"
 msgstr "为了支住"
 
-#: infinity/apps/core/templates/goal/detail.html:23
-#: infinity/apps/core/templates/goal/detail.html:51
-#: infinity/apps/core/templates/idea/detail.html:22
-#: infinity/apps/core/templates/idea/detail.html:51
-#: infinity/apps/core/templates/need/detail.html:23
-#: infinity/apps/core/templates/need/detail.html:51
-#: infinity/apps/core/templates/plan/detail.html:42
-#: infinity/apps/core/templates/plan/detail.html:70
+#: infinity/apps/core/templates/goal/detail.html:31
+#: infinity/apps/core/templates/goal/detail.html:59
+#: infinity/apps/core/templates/idea/detail.html:30
+#: infinity/apps/core/templates/idea/detail.html:59
+#: infinity/apps/core/templates/need/detail.html:31
+#: infinity/apps/core/templates/need/detail.html:59
+#: infinity/apps/core/templates/plan/detail.html:50
+#: infinity/apps/core/templates/plan/detail.html:78
 msgid "hours"
 msgstr "小时"
 
-#: infinity/apps/core/templates/goal/detail.html:45
-#: infinity/apps/core/templates/idea/detail.html:45
-#: infinity/apps/core/templates/need/detail.html:45
-#: infinity/apps/core/templates/plan/detail.html:64
+#: infinity/apps/core/templates/goal/detail.html:53
+#: infinity/apps/core/templates/idea/detail.html:53
+#: infinity/apps/core/templates/need/detail.html:53
+#: infinity/apps/core/templates/plan/detail.html:72
 #: infinity/apps/core/templates/step/detail.html:30
 #: infinity/apps/core/templates/task/detail.html:30
 #: infinity/apps/core/templates/work/detail.html:30
 msgid "Unsubscribe"
 msgstr "退订"
 
-#: infinity/apps/core/templates/goal/detail.html:45
-#: infinity/apps/core/templates/idea/detail.html:45
-#: infinity/apps/core/templates/need/detail.html:45
-#: infinity/apps/core/templates/plan/detail.html:64
+#: infinity/apps/core/templates/goal/detail.html:53
+#: infinity/apps/core/templates/idea/detail.html:53
+#: infinity/apps/core/templates/need/detail.html:53
+#: infinity/apps/core/templates/plan/detail.html:72
 #: infinity/apps/core/templates/step/detail.html:30
 #: infinity/apps/core/templates/task/detail.html:30
 #: infinity/apps/core/templates/work/detail.html:30
 msgid "Subscribe"
 msgstr "评论订阅"
 
-#: infinity/apps/core/templates/goal/detail.html:55
-#: infinity/apps/core/templates/need/detail.html:55
+#: infinity/apps/core/templates/goal/detail.html:63
+#: infinity/apps/core/templates/need/detail.html:63
 msgid "hyper-equity"
 msgstr "极端产权比例"
 
-#: infinity/apps/core/templates/goal/detail.html:56
-#: infinity/apps/core/templates/need/detail.html:56
+#: infinity/apps/core/templates/goal/detail.html:64
+#: infinity/apps/core/templates/need/detail.html:64
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much goal creator owns of all projects under this "
 "problem."
 msgstr ""
 
-#: infinity/apps/core/templates/goal/detail.html:61
+#: infinity/apps/core/templates/goal/detail.html:69
 msgid "category:"
 msgstr "分类："
 
-#: infinity/apps/core/templates/goal/detail.html:61
+#: infinity/apps/core/templates/goal/detail.html:69
 msgid "related need:"
 msgstr "有关的需要："
 
-#: infinity/apps/core/templates/goal/detail.html:62
-#: infinity/apps/core/templates/idea/detail.html:66
-#: infinity/apps/core/templates/need/detail.html:62
-#: infinity/apps/core/templates/plan/detail.html:79
+#: infinity/apps/core/templates/goal/detail.html:70
+#: infinity/apps/core/templates/idea/detail.html:74
+#: infinity/apps/core/templates/need/detail.html:70
+#: infinity/apps/core/templates/plan/detail.html:87
 msgid "translations:"
 msgstr "翻译:"
 
-#: infinity/apps/core/templates/goal/detail.html:78
-#: infinity/apps/core/templates/idea/detail.html:82
-#: infinity/apps/core/templates/need/detail.html:77
-#: infinity/apps/core/templates/plan/detail.html:93
+#: infinity/apps/core/templates/goal/detail.html:86
+#: infinity/apps/core/templates/idea/detail.html:90
+#: infinity/apps/core/templates/need/detail.html:85
+#: infinity/apps/core/templates/plan/detail.html:101
 #: infinity/apps/core/templates/step/detail.html:53
 #: infinity/apps/core/templates/task/detail.html:53
 #: infinity/apps/core/templates/work/detail.html:54
 msgid "Source:"
 msgstr "来自 "
 
-#: infinity/apps/core/templates/goal/detail.html:92
-#: infinity/apps/core/templates/idea/detail.html:95
-#: infinity/apps/core/templates/need/detail.html:90
-#: infinity/apps/core/templates/plan/detail.html:111
+#: infinity/apps/core/templates/goal/detail.html:100
+#: infinity/apps/core/templates/idea/detail.html:103
+#: infinity/apps/core/templates/need/detail.html:98
+#: infinity/apps/core/templates/plan/detail.html:119
 msgid "shared with:"
 msgstr "谁可见:"
 
-#: infinity/apps/core/templates/goal/detail.html:95
+#: infinity/apps/core/templates/goal/detail.html:103
 #: infinity/apps/core/templates/idea/list2.html:6
 #: infinity/apps/core/templates/idea/list2.html:9
-#: infinity/templates/base.html:98 infinity/templates/home.html:108
+#: infinity/templates/home.html:174
 msgid "Ideas"
 msgstr "思路"
 
-#: infinity/apps/core/templates/goal/detail.html:108
+#: infinity/apps/core/templates/goal/detail.html:116
 msgid "+New Idea"
 msgstr "+新的思路"
 
@@ -620,29 +619,29 @@ msgstr "+新的思路"
 msgid "Idea create"
 msgstr "创造思路"
 
-#: infinity/apps/core/templates/idea/detail.html:56
+#: infinity/apps/core/templates/idea/detail.html:64
 msgid "super-equity"
 msgstr "极端产权比例"
 
-#: infinity/apps/core/templates/idea/detail.html:57
+#: infinity/apps/core/templates/idea/detail.html:65
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much idea creator owns of all projects under this idea."
 msgstr ""
 
-#: infinity/apps/core/templates/idea/detail.html:64
-#: infinity/apps/core/templates/need/detail.html:61
+#: infinity/apps/core/templates/idea/detail.html:72
+#: infinity/apps/core/templates/need/detail.html:69
 msgid "want:"
 msgstr "需要:"
 
-#: infinity/apps/core/templates/idea/detail.html:99
+#: infinity/apps/core/templates/idea/detail.html:107
 #: infinity/apps/core/templates/plan/list2.html:6
 #: infinity/apps/core/templates/plan/list2.html:9
-#: infinity/templates/base.html:102 infinity/templates/home.html:185
+#: infinity/templates/home.html:249
 msgid "Plans"
 msgstr "计划"
 
-#: infinity/apps/core/templates/idea/detail.html:112
+#: infinity/apps/core/templates/idea/detail.html:120
 msgid "+New Plan"
 msgstr "+新的计划"
 
@@ -656,7 +655,7 @@ msgstr "抱歉，中文的词或者定义没发现。请创造自己的定义。
 msgid "Create my definition"
 msgstr "创造我的定义"
 
-#: infinity/apps/core/templates/need/detail.html:106
+#: infinity/apps/core/templates/need/detail.html:114
 msgid "+Add Goal"
 msgstr "+附加一个目标"
 
@@ -665,39 +664,39 @@ msgstr "+附加一个目标"
 msgid "Plan create"
 msgstr "创造项目"
 
-#: infinity/apps/core/templates/plan/detail.html:73
+#: infinity/apps/core/templates/plan/detail.html:81
 msgid "members:"
 msgstr "成员："
 
-#: infinity/apps/core/templates/plan/detail.html:73
+#: infinity/apps/core/templates/plan/detail.html:81
 msgid "equity"
 msgstr "产权比例"
 
-#: infinity/apps/core/templates/plan/detail.html:74
+#: infinity/apps/core/templates/plan/detail.html:82
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much project <u>shareholders</u> own of all results "
 "under this project. The rest is owned by contributing users."
 msgstr ""
 
-#: infinity/apps/core/templates/plan/detail.html:78
+#: infinity/apps/core/templates/plan/detail.html:86
 msgid "approach to realizing idea"
 msgstr "这计划实现思路"
 
-#: infinity/apps/core/templates/plan/detail.html:99
+#: infinity/apps/core/templates/plan/detail.html:107
 msgid "situation"
 msgstr "情况"
 
-#: infinity/apps/core/templates/plan/detail.html:104
+#: infinity/apps/core/templates/plan/detail.html:112
 msgid "deliverable"
 msgstr "目的地"
 
-#: infinity/apps/core/templates/plan/detail.html:116
-#: infinity/templates/home.html:259
+#: infinity/apps/core/templates/plan/detail.html:124
+#: infinity/templates/home.html:323
 msgid "Steps"
 msgstr "步骤"
 
-#: infinity/apps/core/templates/plan/detail.html:129
+#: infinity/apps/core/templates/plan/detail.html:137
 msgid "+New Step"
 msgstr "+新的步骤"
 
@@ -718,23 +717,23 @@ msgid "Definition succesfully created"
 msgstr "定义创造成功"
 
 #: infinity/apps/core/views/definition.py:127
-#: infinity/apps/core/views/goal.py:121 infinity/apps/core/views/idea.py:148
-#: infinity/apps/core/views/need.py:125 infinity/apps/core/views/plan.py:148
+#: infinity/apps/core/views/goal.py:122 infinity/apps/core/views/idea.py:148
+#: infinity/apps/core/views/need.py:128 infinity/apps/core/views/plan.py:148
 #: infinity/apps/core/views/step.py:152 infinity/apps/core/views/task.py:141
 #: infinity/apps/core/views/work.py:141
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views/goal.py:44
+#: infinity/apps/core/views/goal.py:45
 msgid "Goal succesfully created"
 msgstr "创造目标成功"
 
-#: infinity/apps/core/views/goal.py:91
+#: infinity/apps/core/views/goal.py:92
 msgid "Goal succesfully deleted"
 msgstr ""
 
-#: infinity/apps/core/views/goal.py:107
+#: infinity/apps/core/views/goal.py:108
 msgid "Goal succesfully updated"
 msgstr ""
 
@@ -754,11 +753,11 @@ msgstr ""
 msgid "Need succesfully created"
 msgstr ""
 
-#: infinity/apps/core/views/need.py:95
+#: infinity/apps/core/views/need.py:98
 msgid "Need succesfully deleted"
 msgstr "需要创造成功"
 
-#: infinity/apps/core/views/need.py:111
+#: infinity/apps/core/views/need.py:114
 msgid "Need succesfully updated"
 msgstr ""
 
@@ -1069,7 +1068,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:136
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:148
 msgid "Sign in"
 msgstr "登陆"
 
@@ -1282,124 +1281,144 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: infinity/templates/base.html:68
+#: infinity/templates/base.html:85
 msgid "Solving Problems"
 msgstr "解决问题"
 
-#: infinity/templates/base.html:108
-msgid "Help"
-msgstr "帮助"
-
-#: infinity/templates/base.html:110 infinity/templates/base.html.py:116
-msgid "Index"
-msgstr "目录"
-
-#: infinity/templates/base.html:112
-msgid "Inbox"
-msgstr "需要"
-
-#: infinity/templates/base.html:118
+#: infinity/templates/base.html:114
 msgid "About"
 msgstr "关于"
 
-#: infinity/templates/base.html:125
+#: infinity/templates/base.html:130
 msgid "Logout"
 msgstr "登出"
 
-#: infinity/templates/home.html:21 infinity/templates/inbox.html:16
+#: infinity/templates/home.html:21
 msgid "invitations"
 msgstr "个邀请"
 
-#: infinity/templates/home.html:21 infinity/templates/inbox.html:16
+#: infinity/templates/home.html:21
 msgid "write bugs"
 msgstr "错误报告"
 
-#: infinity/templates/home.html:21 infinity/templates/inbox.html:16
+#: infinity/templates/home.html:21
 msgid "time value"
 msgstr "时间价值"
 
-#: infinity/templates/home.html:30 infinity/templates/inbox.html:25
+#: infinity/templates/home.html:30
 msgid "my index"
-msgstr "私人的目录"
+msgstr "私人内容"
 
-#: infinity/templates/home.html:30 infinity/templates/inbox.html:25
-msgid "wider index"
-msgstr "公开的目录"
+#: infinity/templates/home.html:30
+msgid "index"
+msgstr "公开内容"
 
 #: infinity/templates/home.html:45
-msgid "define a problem"
-msgstr "下定义个问题"
+msgid "Needs"
+msgstr "需要"
 
-#: infinity/templates/home.html:60 infinity/templates/home.html.py:127
-#: infinity/templates/home.html:205 infinity/templates/home.html.py:279
-#: infinity/templates/home.html:356 infinity/templates/inbox.html:55
+#: infinity/templates/home.html:46
+msgid "share a need"
+msgstr "分享个需要"
+
+#: infinity/templates/home.html:61 infinity/templates/home.html.py:126
+#: infinity/templates/home.html:193 infinity/templates/home.html.py:269
+#: infinity/templates/home.html:343 infinity/templates/home.html.py:420
+#: infinity/templates/home.html:493
 msgid "(last commented"
 msgstr "（最新的评论"
 
-#: infinity/templates/home.html:60 infinity/templates/home.html.py:127
-#: infinity/templates/home.html:205 infinity/templates/home.html.py:279
-#: infinity/templates/home.html:356 infinity/templates/inbox.html:55
+#: infinity/templates/home.html:61 infinity/templates/home.html.py:126
+#: infinity/templates/home.html:193 infinity/templates/home.html.py:269
+#: infinity/templates/home.html:343 infinity/templates/home.html.py:420
+#: infinity/templates/home.html:493
 msgid "hours ago)"
 msgstr "小时前）"
 
-#: infinity/templates/home.html:89 infinity/templates/home.html.py:162
-#: infinity/templates/home.html:238 infinity/templates/home.html.py:314
-#: infinity/templates/home.html:392
-msgid "see more"
-msgstr "查看更多"
-
 #: infinity/templates/home.html:92
-msgid "Oops! You have no goals!"
-msgstr "啊呀！您还没有目标！"
+msgid "Oops! You have no needs!"
+msgstr "啊呀！您还没有需要！"
 
 #: infinity/templates/home.html:93
-msgid "Add a problem"
-msgstr "下定义个问题"
+#, fuzzy
+#| msgid "define a need"
+msgid "Define a need"
+msgstr "下定义需要..."
 
-#: infinity/templates/home.html:94 infinity/templates/home.html.py:168
-#: infinity/templates/home.html:244 infinity/templates/home.html.py:319
-#: infinity/templates/home.html:397 infinity/templates/inbox.html:88
+#: infinity/templates/home.html:94 infinity/templates/home.html.py:160
+#: infinity/templates/home.html:234 infinity/templates/home.html.py:308
+#: infinity/templates/home.html:383 infinity/templates/home.html.py:461
+#: infinity/templates/home.html:534
 msgid "...or view"
 msgstr "...或者看"
 
-#: infinity/templates/home.html:94 infinity/templates/home.html.py:168
-#: infinity/templates/home.html:244 infinity/templates/home.html.py:319
-#: infinity/templates/home.html:397
-msgid "<u>wider index</u>"
-msgstr "大家的目录"
+#: infinity/templates/home.html:94
+msgid "<u>discussion board</u>"
+msgstr ""
 
 #: infinity/templates/home.html:97
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
-"                    <p><b>$ 0.00 Having Omelette</b></p>\n"
+"                    <p><b>$ 0.00 I want an omelete</b></p>\n"
+"                    <p>Hi, Alice! Could you buy me omelete this afternoon "
+"before going home?</p>\n"
+"                    "
+msgstr ""
+
+#: infinity/templates/home.html:111
+msgid "define a problem"
+msgstr "下定义个问题"
+
+#: infinity/templates/home.html:155 infinity/templates/home.html.py:228
+#: infinity/templates/home.html:302 infinity/templates/home.html.py:378
+#: infinity/templates/home.html:456 infinity/templates/home.html.py:529
+msgid "see more"
+msgstr "查看更多"
+
+#: infinity/templates/home.html:158
+msgid "Oops! You have no goals!"
+msgstr "啊呀！您还没有目标！"
+
+#: infinity/templates/home.html:159
+msgid "Add a problem"
+msgstr "下定义个问题"
+
+#: infinity/templates/home.html:160 infinity/templates/home.html.py:234
+#: infinity/templates/home.html:308 infinity/templates/home.html.py:383
+#: infinity/templates/home.html:461 infinity/templates/home.html.py:534
+msgid "<u>index</u>"
+msgstr "目录"
+
+#: infinity/templates/home.html:163
+msgid ""
+"\n"
+"                    <p><i><u>Example:</u></i></p>\n"
+"                    <p><b>$ 0.00 Omelette Supply Problem</b></p>\n"
 "                    <p>Omelette is a healthy and delicious food, which can "
 "be flavored in desired tastes. I like it, and I would like to eat omelete "
 "every morning, without any extra expenses.</p>\n"
 "                    "
 msgstr ""
 
-#: infinity/templates/home.html:109
+#: infinity/templates/home.html:175
 msgid "suggest a solution"
 msgstr "提出解决方式"
 
-#: infinity/templates/home.html:166
+#: infinity/templates/home.html:232
 msgid "Oops! You have no ideas!"
 msgstr "啊呀！您还没有思路！"
 
-#: infinity/templates/home.html:167
+#: infinity/templates/home.html:233
 msgid "Add a solution"
 msgstr "提出解决方式"
 
-#: infinity/templates/home.html:171
+#: infinity/templates/home.html:237
 msgid ""
 "\n"
 "                <p><i><u>Example ideas:</u></i></p>\n"
-"                <p><b>$ 0.00 Go to buy eggs and spices, and cook one</b></"
-"p>\n"
-"                <p>It's easy enough just to cook.</p>\n"
-"                <p><b>$ 0.00 Hen Mini-Farm With Automated Egg Processor</b></"
-"p>\n"
+"                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</"
+"b></p>\n"
 "                <p>Hens don't really require much human work to maintain. "
 "Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, "
 "spicers, cookers and dispensers - and have a self-sustaining supply of fresh "
@@ -1407,19 +1426,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:187
+#: infinity/templates/home.html:251
 msgid "start a project"
 msgstr "开始个项目"
 
-#: infinity/templates/home.html:242
+#: infinity/templates/home.html:306
 msgid "Oops! You have no plans!"
 msgstr "啊呀！您还没有计划！"
 
-#: infinity/templates/home.html:243
+#: infinity/templates/home.html:307
 msgid "Add a project"
 msgstr "开始个项目"
 
-#: infinity/templates/home.html:246
+#: infinity/templates/home.html:310
 msgid ""
 "\n"
 "\n"
@@ -1432,19 +1451,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:261
+#: infinity/templates/home.html:325
 msgid "break it down"
 msgstr "把它分解"
 
-#: infinity/templates/home.html:317
+#: infinity/templates/home.html:381
 msgid "Oops! You have no steps!"
 msgstr "啊呀！您还没有步骤！"
 
-#: infinity/templates/home.html:318
+#: infinity/templates/home.html:382
 msgid "Start a project to add milestones"
 msgstr "开始个项目，然后对它附加步骤"
 
-#: infinity/templates/home.html:322
+#: infinity/templates/home.html:386
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1462,23 +1481,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:338
+#: infinity/templates/home.html:402
 msgid "Tasks"
 msgstr "任务"
 
-#: infinity/templates/home.html:340
+#: infinity/templates/home.html:404
 msgid "execute it"
 msgstr "把它执行"
 
-#: infinity/templates/home.html:395
+#: infinity/templates/home.html:459
 msgid "Oops! You have no tasks!"
 msgstr ""
 
-#: infinity/templates/home.html:396
+#: infinity/templates/home.html:460
 msgid "Choose a milestone to add tasks"
 msgstr ""
 
-#: infinity/templates/home.html:399
+#: infinity/templates/home.html:463
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1487,31 +1506,34 @@ msgid ""
 "                "
 msgstr ""
 
-#: infinity/templates/home.html:408 infinity/templates/inbox.html:96
+#: infinity/templates/home.html:475
+msgid "Works"
+msgstr "工作"
+
+#: infinity/templates/home.html:477
+msgid "did it"
+msgstr "做啦！"
+
+#: infinity/templates/home.html:532
+msgid "Oops! You have no works!"
+msgstr "啊呀！您还没有工作！"
+
+#: infinity/templates/home.html:533
+msgid "Choose a task to add works"
+msgstr ""
+
+#: infinity/templates/home.html:536
+msgid ""
+"\n"
+"                <p><i><u>Example:</u></i></p>\n"
+"                <p><b>$ 0.00 Here's my research paper.</b></p>\n"
+"                ...\n"
+"                "
+msgstr ""
+
+#: infinity/templates/home.html:546
 msgid "People-centric economy."
 msgstr "— 以人为本的经济 —"
-
-#: infinity/templates/inbox.html:39
-msgid "Needs"
-msgstr "需要"
-
-#: infinity/templates/inbox.html:40
-msgid "define a need"
-msgstr "下定义需要..."
-
-#: infinity/templates/inbox.html:86
-msgid "Oops! You have no needs!"
-msgstr "啊呀！您还没有需要！"
-
-#: infinity/templates/inbox.html:87
-#, fuzzy
-#| msgid "define a need"
-msgid "Define a need"
-msgstr "下定义需要..."
-
-#: infinity/templates/inbox.html:88
-msgid "<u>discussion board</u>"
-msgstr ""
 
 #: infinity/templates/invitations/email/email_invite_message.txt:3
 #, python-format
@@ -1669,6 +1691,15 @@ msgstr ""
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr "记住"
+
+#~ msgid "Help"
+#~ msgstr "帮助"
+
+#~ msgid "Index"
+#~ msgstr "目录"
+
+#~ msgid "Inbox"
+#~ msgstr "需要"
 
 #~ msgid "expression, e.g., 'intergalactic spaceflight'"
 #~ msgstr "叫什么？ 比如《星系际旅行》"

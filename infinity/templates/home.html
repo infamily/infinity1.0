@@ -27,7 +27,7 @@
 <div class="alignleft">
     {% if not user.is_anonymous %}
     <b>
-        [{% if request.resolver_match.url_name == 'wider' %}<a href="{% url "home" %}">{% trans "my index" %}</a>{% else %}<a href="{% url "wider" %}">{% trans "wider index" %}</a>{% endif %}]
+        [{% if request.resolver_match.url_name == 'index' %}<a href="{% url "inbox" %}">{% trans "my index" %}</a>{% else %}<a href="{% url "index" %}">{% trans "index" %}</a>{% endif %}]
     </b>
     {% endif %}
     <!--<input autocomplete="off" tabindex="-1" type="url" aria-hidden="true" size="35" disabled><input type="submit" value="lookup" style="color: GrayText;" disabled>-->
@@ -39,6 +39,73 @@
     <link rel="stylesheet" href="/static/css/bootstrap-horizon.css">
 
     <div class="row row-horizon">
+
+{% if request.get_full_path == '/i' %}
+        <div class="panel panel-default col-md-4 block-content">
+            <div class="panel-heading">
+                {% trans "Needs" %}
+                &nbsp; <a href="{% url "definition-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "share a need" %}</b>
+
+                <div style="display:inline-block; float: right;">
+                    <form method="post" style="display:inline;">{% csrf_token %}
+                        <select name="needs" onchange="this.form.submit()">
+                            {% for value in dropdown_list %}
+                            <option value="{{ value }}" {% if items.needs == value %}selected{% endif %}>{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                {% if need_list %}
+                    <p align="center"><i>{% trans "(last commented" %} {{ need_hours }} {% trans "hours ago)" %}</i></p>
+                    {% for need in need_list %}
+                        {% if need.translation %} {# if need translated #}
+
+                            {% if need.object.is_link %}
+                            <span class="badge">{% trans "link" %}</span>
+                            {% endif %}
+
+                            <b>
+                                {% if need.object.personal %}
+                                <i class="fa {% if need.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
+                                $ {{ need.object.get_usd|floatformat:2 }}/{{ need.object.get_remain_usd|floatformat:2 }}
+                                {% endif %}
+                            </b>
+                            
+                            {% if need.is_new %} {# if need is new #}
+                                <b><a href="{% url "need-detail" need.object.pk %}?lang={{need.translation.language.language_code}}#{{need.object.commented_at|date:"U"}}">{{ need.translation.name }}</a></b>
+
+                            {% else %} {# if need is old #}
+                                <a href="{% url "need-detail" need.object.pk %}?lang={{need.translation.language.language_code}}#{{need.object.commented_at|date:"U"}}">{{ need.translation.name }}</a>
+                            {% endif %}
+
+                            ({{need.object.comment_count}} comments)
+
+                            <br/>
+
+                            <p>{{need.translation.content|markdown|truncatewords_html:34}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <center>
+                        <p>{% trans "Oops! You have no needs!" %}</p>
+                        <p><a href="{% url "definition-create" %}">{% trans "Define a need" %}</a></p>
+                        <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>discussion board</u>" %}</a>.</p>
+                    </center>
+
+                    {% blocktrans %}
+                    <p><i><u>Example:</u></i></p>
+                    <p><b>$ 0.00 I want an omelete</b></p>
+                    <p>Hi, Alice! Could you buy me omelete this afternoon before going home?</p>
+                    {% endblocktrans %}
+
+                {% endif %}
+            </div>
+        </div>
+{% endif %}
+
         <div class="panel panel-default col-md-4 block-content">
             <div class="panel-heading">
                 <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>
@@ -91,12 +158,12 @@
                     <center>
                         <p>{% trans "Oops! You have no goals!" %}</p>
                         <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
-                        <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                        <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                     </center>
 
                     {% blocktrans %}
                     <p><i><u>Example:</u></i></p>
-                    <p><b>$ 0.00 Having Omelette</b></p>
+                    <p><b>$ 0.00 Omelette Supply Problem</b></p>
                     <p>Omelette is a healthy and delicious food, which can be flavored in desired tastes. I like it, and I would like to eat omelete every morning, without any extra expenses.</p>
                     {% endblocktrans %}
                 {% endif %}
@@ -165,14 +232,12 @@
                 <center>
                     <p>{% trans "Oops! You have no ideas!" %}</p>
                     <p><a href="{% url "idea-create" %}">{% trans "Add a solution" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                 </center>
 
                 {% blocktrans %}
                 <p><i><u>Example ideas:</u></i></p>
-                <p><b>$ 0.00 Go to buy eggs and spices, and cook one</b></p>
-                <p>It's easy enough just to cook.</p>
-                <p><b>$ 0.00 Hen Mini-Farm With Automated Egg Processor</b></p>
+                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</b></p>
                 <p>Hens don't really require much human work to maintain. Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, spicers, cookers and dispensers - and have a self-sustaining supply of fresh omelete.</p>
                 {% endblocktrans %}
 
@@ -241,7 +306,7 @@
                 <center>
                     <p>{% trans "Oops! You have no plans!" %}</p>
                     <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                 </center>
                 {% blocktrans %}
 
@@ -316,7 +381,7 @@
                 <center>
                     <p>{% trans "Oops! You have no steps!" %}</p>
                     <p>{% trans "Start a project to add milestones" %}</p>
-                    <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                 </center>
 
                 {% blocktrans %}
@@ -394,7 +459,7 @@
                 <center>
                     <p>{% trans "Oops! You have no tasks!" %}</p>
                     <p>{% trans "Choose a milestone to add tasks" %}</p>
-                    <p>{% trans "...or view" %} <a href="{% url "wider" %}">{% trans "<u>wider index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
                 </center>
                 {% blocktrans %}
                 <p><i><u>Example:</u></i></p>
@@ -404,6 +469,80 @@
                 {% endif %}
             </div>
         </div>
+
+
+        <div class="panel panel-default col-md-4 block-content">
+            <div class="panel-heading">
+                <a href="{% url "work-list" %}">{% trans "Works" %}</a>&nbsp;
+                <i class="fa fa-minus-square-o"></i>&nbsp; -
+                <b>{% trans "did it" %}</b>
+
+                <div style="display:inline-block; float: right;">
+                    <form method="post" style="display:inline;">{% csrf_token %}
+                        <select name="works" onchange="this.form.submit()">
+                            {% for value in dropdown_list %}
+                            <option value="{{ value }}" {% if items.works == value %}selected{% endif %}>{{ value }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                {% if work_list %}
+                <p align="center"><i>{% trans "(last commented" %} {{ work_hours }} {% trans "hours ago)" %}</i></p>
+
+                {% for work in work_list %}
+                    {% if work.translation %} {# if task translated #}
+
+                            {% if work.object.is_link %}
+                            <span class="badge">{% trans "link" %}</span>
+                            {% endif %}
+
+                        <b>
+                            {% if work.object.personal %}
+                            <i class="fa {% if work.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %}
+
+                            $ {{ work.object.get_usd|floatformat:2 }}/{{ work.object.get_remain_usd|floatformat:2 }}
+                        </b>
+
+                        {% if work.is_new %} {# if task is new #}
+
+                            <b><a href="{% url "work-detail" work.object.pk %}?lang={{work.translation.language.language_code}}#{{work.object.commented_at|date:"U"}}">{{ work.translation.name }}</a></b>
+
+                        {% else %}
+
+                            <a href="{% url "work-detail" work.object.pk %}?lang={{work.translation.language.language_code}}#{{work.object.commented_at|date:"U"}}">{{ work.translation.name }}</a>
+
+                        {% endif %}
+
+                        ({{work.object.comment_count}} comments)
+
+                        <!-- task has no body -->
+
+                        <br>
+
+                    {% endif %}
+
+                {% endfor %}
+
+                <a href="{% url "work-list" %}">{% trans "see more" %}</a>
+                {% else %}
+                <center>
+                    <p>{% trans "Oops! You have no works!" %}</p>
+                    <p>{% trans "Choose a task to add works" %}</p>
+                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
+                </center>
+                {% blocktrans %}
+                <p><i><u>Example:</u></i></p>
+                <p><b>$ 0.00 Here's my research paper.</b></p>
+                ...
+                {% endblocktrans %}
+                {% endif %}
+            </div>
+
+
     </div>
     <div align="center">{% trans "People-centric economy." %}</div>
 </div>
