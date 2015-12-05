@@ -221,13 +221,13 @@ class IndexView(TemplateView):
             'idea_hours': ideas and
             '%0.2f' % in_hours(now-max(commented_at(list(ideas)))) or 0.,
             'plan_hours': plans and
-            '%0.2f' % in_hours(now-max(commented_at(list(plans)))) or 0,
+            '%0.2f' % in_hours(now-max(commented_at(list(plans)))) or 0.,
             'step_hours': steps and
-            '%0.2f' % in_hours(now-max(commented_at(list(steps)))) or 0,
+            '%0.2f' % in_hours(now-max(commented_at(list(steps)))) or 0.,
             'task_hours': tasks and
-            '%0.2f' % in_hours(now-max(commented_at(list(tasks)))) or 0,
-            'work_hours': tasks and
-            '%0.2f' % in_hours(now-max(commented_at(list(works)))) or 0,
+            '%0.2f' % in_hours(now-max(commented_at(list(tasks)))) or 0.,
+            'work_hours': works and
+            '%0.2f' % in_hours(now-max(commented_at(list(works)))) or 0.,
             'last_days': '%0.2f' % days,
             'number_of_items': len(objects_list),
             'hour_value': hour_value,
