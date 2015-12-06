@@ -199,6 +199,7 @@ class Vote(models.Model):
 
 class BaseContentModel(models.Model):
     is_link = models.BooleanField(default=False)
+    is_historical = models.BooleanField(default=False)
     url = models.URLField(
         max_length=150,
         unique=False,

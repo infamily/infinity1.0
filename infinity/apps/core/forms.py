@@ -346,6 +346,7 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a problem of the past)')
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -362,6 +363,7 @@ class GoalCreateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'type',
             'name',
             'need',
@@ -407,6 +409,7 @@ class GoalUpdateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a problem of the past)')
 
     class Meta:
         model = Goal
@@ -417,6 +420,7 @@ class GoalUpdateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'type',
             'name',
             'need',
@@ -451,6 +455,7 @@ class WorkUpdateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical work)')
 
     class Meta:
         model = Work
@@ -461,6 +466,7 @@ class WorkUpdateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'name',
             'file',
             'description',
@@ -506,6 +512,7 @@ class WorkCreateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical work)')
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -522,6 +529,7 @@ class WorkCreateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'name',
             'description',
             'file',
@@ -560,6 +568,7 @@ class IdeaUpdateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting an idea of the past)')
 
     class Meta:
         model = Idea
@@ -570,6 +579,7 @@ class IdeaUpdateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'name',
             'summary',
             'description',
@@ -640,6 +650,7 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting an idea of the past)')
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -656,6 +667,7 @@ class IdeaCreateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'goal',
             'name',
             'summary',
@@ -690,6 +702,7 @@ class StepUpdateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a milestone of the past)')
 
     class Meta:
         model = Step
@@ -701,6 +714,7 @@ class StepUpdateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'name',
             'objective',
             'priority',
@@ -748,6 +762,7 @@ class StepCreateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a milestone of the past)')
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -766,6 +781,7 @@ class StepCreateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'name',
             'objective',
             'priority',
@@ -801,6 +817,7 @@ class TaskUpdateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical task)')
 
     class Meta:
         model = Task
@@ -812,6 +829,7 @@ class TaskUpdateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'name',
             'description',
             'priority',
@@ -847,6 +865,7 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical task)')
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -865,6 +884,7 @@ class TaskCreateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'name',
             'description',
             'priority',
@@ -1004,6 +1024,7 @@ class PlanUpdateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a project of the past)')
 
 
     class Meta:
@@ -1016,6 +1037,7 @@ class PlanUpdateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'name',
             'situation',
             'deliverable',
@@ -1114,6 +1136,7 @@ class PlanCreateForm(forms.ModelForm):
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
+        self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a project of the past)')
        #self.fields['plain_equity'].label = _('Plain equity')
 
         try:
@@ -1130,6 +1153,7 @@ class PlanCreateForm(forms.ModelForm):
         fields = [
             'is_link',
             'url',
+            'is_historical',
             'goal',
             'idea',
             'name',
