@@ -64,7 +64,15 @@
                         {% if need.translation %} {# if need translated #}
 
                             {% if need.object.is_link %}
-                            <span class="badge">{% trans "link" %}</span>
+                                {% if need.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% else %}
+                                <span class="badge">{% trans "link" %}</span>
+                                {% endif %}
+                            {% else %}
+                                {% if need.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% endif %}
                             {% endif %}
 
                             <b>
@@ -129,7 +137,15 @@
                         {% if goal.translation %} {# if goal translated #}
 
                             {% if goal.object.is_link %}
-                            <span class="badge">{% trans "link" %}</span>
+                                {% if goal.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% else %}
+                                <span class="badge">{% trans "link" %}</span>
+                                {% endif %}
+                            {% else %}
+                                {% if goal.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% endif %}
                             {% endif %}
 
                             <b>
@@ -194,11 +210,19 @@
                 <i>{% trans "(last commented" %} {{ idea_hours }} {% trans "hours ago)" %}</i>
                 </p>
                 {% for idea in idea_list %}
-                    
+
                     {% if idea.translation %} {# if idea translated #}
 
                             {% if idea.object.is_link %}
-                            <span class="badge">{% trans "link" %}</span>
+                                {% if idea.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% else %}
+                                <span class="badge">{% trans "link" %}</span>
+                                {% endif %}
+                            {% else %}
+                                {% if idea.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% endif %}
                             {% endif %}
 
                         <b>
@@ -272,7 +296,15 @@
                     {% if plan.translation %}  {# if plan translated #}
 
                             {% if plan.object.is_link %}
-                            <span class="badge">{% trans "link" %}</span>
+                                {% if plan.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% else %}
+                                <span class="badge">{% trans "link" %}</span>
+                                {% endif %}
+                            {% else %}
+                                {% if plan.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% endif %}
                             {% endif %}
 
                     <b>
@@ -347,7 +379,15 @@
                     {% if step.translation %} {# if step translated #}
 
                             {% if step.object.is_link %}
-                            <span class="badge">{% trans "link" %}</span>
+                                {% if step.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% else %}
+                                <span class="badge">{% trans "link" %}</span>
+                                {% endif %}
+                            {% else %}
+                                {% if step.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% endif %}
                             {% endif %}
 
                         <b>
@@ -424,7 +464,15 @@
                     {% if task.translation %} {# if task translated #}
 
                             {% if task.object.is_link %}
-                            <span class="badge">{% trans "link" %}</span>
+                                {% if task.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% else %}
+                                <span class="badge">{% trans "link" %}</span>
+                                {% endif %}
+                            {% else %}
+                                {% if task.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% endif %}
                             {% endif %}
 
                         <b>
@@ -497,7 +545,15 @@
                     {% if work.translation %} {# if task translated #}
 
                             {% if work.object.is_link %}
-                            <span class="badge">{% trans "link" %}</span>
+                                {% if work.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% else %}
+                                <span class="badge">{% trans "link" %}</span>
+                                {% endif %}
+                            {% else %}
+                                {% if work.object.is_historical %}
+                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                {% endif %}
                             {% endif %}
 
                         <b>

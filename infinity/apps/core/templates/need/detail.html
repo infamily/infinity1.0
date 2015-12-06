@@ -80,11 +80,17 @@ $(document).ready( function() {
       <!-- /translations-->
 
       <h1>{% if not translation %}{{object.name}}{% else %} {{ translation.name }} {% endif %}</h1>
-        {% if object.is_link %}
+
         <div>
+            {% if object.is_historical %}
+                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                <br />
+            {% endif %}
+            {% if object.is_link %}
             <i><span style="color:grey;">{% trans "Source:" %} <a href="{{ object.url }}" style="color:grey;">{{ object.url }}</a>.</span></i>
+            {% endif %}
         </div>
-        {% endif %}
+
     {% if object.user == request.user %}[<a href="{% if not translation %}{% url "need-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a>, <a href="{% if not translation %}{% url "need-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]<br/>{% endif %}
   <br/>
 
