@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: infinity/apps/core/forms.py:210 infinity/apps/core/forms.py:339
-#: infinity/apps/core/forms.py:342 infinity/apps/core/forms.py:930
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-06 10:01-0800\n"
-"PO-Revision-Date: 2015-12-05 03:18+0200\n"
+"POT-Creation-Date: 2015-12-08 05:19-0800\n"
+"PO-Revision-Date: 2015-12-08 15:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -286,7 +284,7 @@ msgstr "Выберите цель"
 #: infinity/apps/core/templates/goal/list2.html:6
 #: infinity/apps/core/templates/goal/list2.html:9
 #: infinity/apps/core/templates/need/detail.html:107
-#: infinity/templates/home.html:119
+#: infinity/templates/home.html:114
 msgid "Goals"
 msgstr "Цели"
 
@@ -544,10 +542,10 @@ msgstr "аппарат, предназначенный для работы в к
 #: infinity/apps/core/templates/step/detail.html:94
 #: infinity/apps/core/templates/task/detail.html:82
 #: infinity/apps/core/templates/work/detail.html:102
-#: infinity/templates/home.html:70 infinity/templates/home.html.py:143
-#: infinity/templates/home.html:220 infinity/templates/home.html.py:302
-#: infinity/templates/home.html:385 infinity/templates/home.html.py:470
-#: infinity/templates/home.html:551
+#: infinity/templates/home.html:65 infinity/templates/home.html.py:138
+#: infinity/templates/home.html:215 infinity/templates/home.html.py:297
+#: infinity/templates/home.html:380 infinity/templates/home.html.py:465
+#: infinity/templates/home.html:546
 msgid "link"
 msgstr ""
 
@@ -652,13 +650,13 @@ msgstr "перевод:"
 #: infinity/apps/core/templates/step/detail.html:54
 #: infinity/apps/core/templates/task/detail.html:54
 #: infinity/apps/core/templates/work/detail.html:55
-#: infinity/templates/home.html:68 infinity/templates/home.html.py:74
-#: infinity/templates/home.html:141 infinity/templates/home.html.py:147
-#: infinity/templates/home.html:218 infinity/templates/home.html.py:224
-#: infinity/templates/home.html:300 infinity/templates/home.html.py:306
-#: infinity/templates/home.html:383 infinity/templates/home.html.py:389
-#: infinity/templates/home.html:468 infinity/templates/home.html.py:474
-#: infinity/templates/home.html:549 infinity/templates/home.html.py:555
+#: infinity/templates/home.html:63 infinity/templates/home.html.py:69
+#: infinity/templates/home.html:136 infinity/templates/home.html.py:142
+#: infinity/templates/home.html:213 infinity/templates/home.html.py:219
+#: infinity/templates/home.html:295 infinity/templates/home.html.py:301
+#: infinity/templates/home.html:378 infinity/templates/home.html.py:384
+#: infinity/templates/home.html:463 infinity/templates/home.html.py:469
+#: infinity/templates/home.html:544 infinity/templates/home.html.py:550
 msgid "historical"
 msgstr ""
 
@@ -682,7 +680,7 @@ msgstr "поделиться с:"
 #: infinity/apps/core/templates/goal/detail.html:108
 #: infinity/apps/core/templates/idea/list2.html:6
 #: infinity/apps/core/templates/idea/list2.html:9
-#: infinity/templates/home.html:191
+#: infinity/templates/home.html:186
 msgid "Ideas"
 msgstr "Идеи"
 
@@ -713,7 +711,7 @@ msgstr "хотим:"
 #: infinity/apps/core/templates/idea/detail.html:113
 #: infinity/apps/core/templates/plan/list2.html:6
 #: infinity/apps/core/templates/plan/list2.html:9
-#: infinity/templates/home.html:274
+#: infinity/templates/home.html:269
 msgid "Plans"
 msgstr "Планы"
 
@@ -768,7 +766,7 @@ msgid "deliverable"
 msgstr "ожидаемый результат"
 
 #: infinity/apps/core/templates/plan/detail.html:130
-#: infinity/templates/home.html:356
+#: infinity/templates/home.html:351
 msgid "Steps"
 msgstr "Задачи"
 
@@ -1163,7 +1161,7 @@ msgstr ""
 "Вы подтверждаете, что это адрес электронной почты<a href=\"mailto:%(email)s"
 "\">%(email)s</a>  принадлежит данному пользователю %(user_display)s."
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:148
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:143
 msgid "Sign in"
 msgstr "Войти"
 
@@ -1401,17 +1399,25 @@ msgstr ""
 "<strong>Примечание:</strong>Вы все еще можете <a href=\"%(email_url)s"
 "\">change  изменить свой адрес электронной почты.</a>."
 
-#: infinity/templates/base.html:85
+#: infinity/templates/base.html:94
 msgid "Solving Problems"
 msgstr "Решаем проблемы"
 
-#: infinity/templates/base.html:114
+#: infinity/templates/base.html:120
+msgid "public index"
+msgstr "Содержание"
+
+#: infinity/templates/base.html:125
 msgid "About"
 msgstr "О проекте"
 
-#: infinity/templates/base.html:130
+#: infinity/templates/base.html:131
 msgid "Logout"
 msgstr "Выход"
+
+#: infinity/templates/base.html:133
+msgid "private inbox"
+msgstr "Входящие"
 
 #: infinity/templates/home.html:21
 msgid "invitations"
@@ -1425,58 +1431,50 @@ msgstr "сообщить об ошибке"
 msgid "time value"
 msgstr "оценка времени"
 
-#: infinity/templates/home.html:30
-msgid "my index"
-msgstr "частные содержание"
-
-#: infinity/templates/home.html:30
-msgid "index"
-msgstr "общественного содержание"
-
-#: infinity/templates/home.html:46
+#: infinity/templates/home.html:41
 msgid "Needs"
 msgstr "Потребности"
 
-#: infinity/templates/home.html:47
+#: infinity/templates/home.html:42
 msgid "share a need"
 msgstr "поделиться необходимость"
 
-#: infinity/templates/home.html:62 infinity/templates/home.html.py:135
-#: infinity/templates/home.html:210 infinity/templates/home.html.py:294
-#: infinity/templates/home.html:376 infinity/templates/home.html.py:461
-#: infinity/templates/home.html:542
+#: infinity/templates/home.html:57 infinity/templates/home.html.py:130
+#: infinity/templates/home.html:205 infinity/templates/home.html.py:289
+#: infinity/templates/home.html:371 infinity/templates/home.html.py:456
+#: infinity/templates/home.html:537
 msgid "(last commented"
 msgstr "(последний комментарий "
 
-#: infinity/templates/home.html:62 infinity/templates/home.html.py:135
-#: infinity/templates/home.html:210 infinity/templates/home.html.py:294
-#: infinity/templates/home.html:376 infinity/templates/home.html.py:461
-#: infinity/templates/home.html:542
+#: infinity/templates/home.html:57 infinity/templates/home.html.py:130
+#: infinity/templates/home.html:205 infinity/templates/home.html.py:289
+#: infinity/templates/home.html:371 infinity/templates/home.html.py:456
+#: infinity/templates/home.html:537
 msgid "hours ago)"
 msgstr "часа назад)"
 
-#: infinity/templates/home.html:101
+#: infinity/templates/home.html:96
 msgid "Oops! You have no needs!"
 msgstr "У вас не определены потребности"
 
-#: infinity/templates/home.html:102
+#: infinity/templates/home.html:97
 #, fuzzy
 #| msgid "define a need"
 msgid "Define a need"
 msgstr "Определить потребность"
 
-#: infinity/templates/home.html:103 infinity/templates/home.html.py:177
-#: infinity/templates/home.html:259 infinity/templates/home.html.py:341
-#: infinity/templates/home.html:424 infinity/templates/home.html.py:510
-#: infinity/templates/home.html:591
+#: infinity/templates/home.html:98 infinity/templates/home.html.py:172
+#: infinity/templates/home.html:254 infinity/templates/home.html.py:336
+#: infinity/templates/home.html:419 infinity/templates/home.html.py:505
+#: infinity/templates/home.html:586
 msgid "...or view"
 msgstr "... или смотрите."
 
-#: infinity/templates/home.html:103
+#: infinity/templates/home.html:98
 msgid "<u>discussion board</u>"
 msgstr ""
 
-#: infinity/templates/home.html:106
+#: infinity/templates/home.html:101
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1501,31 +1499,31 @@ msgstr ""
 "омлет на завтрак каждое утро.</p>\n"
 "                    "
 
-#: infinity/templates/home.html:120
+#: infinity/templates/home.html:115
 msgid "define a problem"
 msgstr "определите проблему"
 
-#: infinity/templates/home.html:172 infinity/templates/home.html.py:253
-#: infinity/templates/home.html:335 infinity/templates/home.html.py:419
-#: infinity/templates/home.html:505 infinity/templates/home.html.py:586
+#: infinity/templates/home.html:167 infinity/templates/home.html.py:248
+#: infinity/templates/home.html:330 infinity/templates/home.html.py:414
+#: infinity/templates/home.html:500 infinity/templates/home.html.py:581
 msgid "see more"
 msgstr "подробнее ..."
 
-#: infinity/templates/home.html:175
+#: infinity/templates/home.html:170
 msgid "Oops! You have no goals!"
 msgstr " У вас нету определенной цели!"
 
-#: infinity/templates/home.html:176
+#: infinity/templates/home.html:171
 msgid "Add a problem"
 msgstr "Добавить проблему"
 
-#: infinity/templates/home.html:177 infinity/templates/home.html.py:259
-#: infinity/templates/home.html:341 infinity/templates/home.html.py:424
-#: infinity/templates/home.html:510 infinity/templates/home.html.py:591
+#: infinity/templates/home.html:172 infinity/templates/home.html.py:254
+#: infinity/templates/home.html:336 infinity/templates/home.html.py:419
+#: infinity/templates/home.html:505 infinity/templates/home.html.py:586
 msgid "<u>index</u>"
 msgstr "содержание"
 
-#: infinity/templates/home.html:180
+#: infinity/templates/home.html:175
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1551,19 +1549,19 @@ msgstr ""
 "омлет на завтрак каждое утро.</p>\n"
 "                    "
 
-#: infinity/templates/home.html:192
+#: infinity/templates/home.html:187
 msgid "suggest a solution"
 msgstr "предложить решение"
 
-#: infinity/templates/home.html:257
+#: infinity/templates/home.html:252
 msgid "Oops! You have no ideas!"
 msgstr "У вас нету определенных идей."
 
-#: infinity/templates/home.html:258
+#: infinity/templates/home.html:253
 msgid "Add a solution"
 msgstr "Добавить решение"
 
-#: infinity/templates/home.html:262
+#: infinity/templates/home.html:257
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1603,19 +1601,19 @@ msgstr ""
 "омлета</p>\n"
 "                "
 
-#: infinity/templates/home.html:276
+#: infinity/templates/home.html:271
 msgid "start a project"
 msgstr "начать проект"
 
-#: infinity/templates/home.html:339
+#: infinity/templates/home.html:334
 msgid "Oops! You have no plans!"
 msgstr "У вас нету новых проектов."
 
-#: infinity/templates/home.html:340
+#: infinity/templates/home.html:335
 msgid "Add a project"
 msgstr "Добавить проект"
 
-#: infinity/templates/home.html:343
+#: infinity/templates/home.html:338
 msgid ""
 "\n"
 "\n"
@@ -1637,19 +1635,19 @@ msgstr ""
 "для владельцам домов.</p>\n"
 "                "
 
-#: infinity/templates/home.html:358
+#: infinity/templates/home.html:353
 msgid "break it down"
 msgstr "разделите на этапы"
 
-#: infinity/templates/home.html:422
+#: infinity/templates/home.html:417
 msgid "Oops! You have no steps!"
 msgstr "У вас еще нету задач"
 
-#: infinity/templates/home.html:423
+#: infinity/templates/home.html:418
 msgid "Start a project to add milestones"
 msgstr "Начните проект, и добавите его этапы"
 
-#: infinity/templates/home.html:427
+#: infinity/templates/home.html:422
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1681,23 +1679,23 @@ msgstr ""
 "                ...\n"
 "                "
 
-#: infinity/templates/home.html:443
+#: infinity/templates/home.html:438
 msgid "Tasks"
 msgstr "Задачи"
 
-#: infinity/templates/home.html:445
+#: infinity/templates/home.html:440
 msgid "execute it"
 msgstr "выполните"
 
-#: infinity/templates/home.html:508
+#: infinity/templates/home.html:503
 msgid "Oops! You have no tasks!"
 msgstr "У вас нету задач."
 
-#: infinity/templates/home.html:509
+#: infinity/templates/home.html:504
 msgid "Choose a milestone to add tasks"
 msgstr "Выберите этап для добавления задачи"
 
-#: infinity/templates/home.html:512
+#: infinity/templates/home.html:507
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1712,27 +1710,27 @@ msgstr ""
 "                ...\n"
 "                "
 
-#: infinity/templates/home.html:524
+#: infinity/templates/home.html:519
 msgid "Works"
 msgstr "Работа"
 
-#: infinity/templates/home.html:526
+#: infinity/templates/home.html:521
 msgid "did it"
 msgstr "сделал это"
 
-#: infinity/templates/home.html:589
+#: infinity/templates/home.html:584
 #, fuzzy
 #| msgid "Oops! You have no goals!"
 msgid "Oops! You have no works!"
 msgstr " У вас нету определенной цели!"
 
-#: infinity/templates/home.html:590
+#: infinity/templates/home.html:585
 #, fuzzy
 #| msgid "Choose a milestone to add tasks"
 msgid "Choose a task to add works"
 msgstr "Выберите этап для добавления задачи"
 
-#: infinity/templates/home.html:593
+#: infinity/templates/home.html:588
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1755,7 +1753,7 @@ msgstr ""
 "                ...\n"
 "                "
 
-#: infinity/templates/home.html:603
+#: infinity/templates/home.html:598
 msgid "People-centric economy."
 msgstr "Экономика для человека"
 
@@ -1926,6 +1924,9 @@ msgstr "Адрес электронной почты и / или пароль у
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Запомнить"
+
+#~ msgid "index"
+#~ msgstr "общественного содержание"
 
 #~ msgid "Help"
 #~ msgstr "Помощь"
