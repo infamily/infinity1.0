@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-06 10:01-0800\n"
+"POT-Creation-Date: 2015-12-08 05:19-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -289,7 +289,7 @@ msgstr "Izaberite cilj"
 #: infinity/apps/core/templates/goal/list2.html:6
 #: infinity/apps/core/templates/goal/list2.html:9
 #: infinity/apps/core/templates/need/detail.html:107
-#: infinity/templates/home.html:119
+#: infinity/templates/home.html:114
 msgid "Goals"
 msgstr "Ciljevi"
 
@@ -560,10 +560,10 @@ msgstr ""
 #: infinity/apps/core/templates/step/detail.html:94
 #: infinity/apps/core/templates/task/detail.html:82
 #: infinity/apps/core/templates/work/detail.html:102
-#: infinity/templates/home.html:70 infinity/templates/home.html.py:143
-#: infinity/templates/home.html:220 infinity/templates/home.html.py:302
-#: infinity/templates/home.html:385 infinity/templates/home.html.py:470
-#: infinity/templates/home.html:551
+#: infinity/templates/home.html:65 infinity/templates/home.html.py:138
+#: infinity/templates/home.html:215 infinity/templates/home.html.py:297
+#: infinity/templates/home.html:380 infinity/templates/home.html.py:465
+#: infinity/templates/home.html:546
 msgid "link"
 msgstr ""
 
@@ -671,13 +671,13 @@ msgstr "prijevodi:"
 #: infinity/apps/core/templates/step/detail.html:54
 #: infinity/apps/core/templates/task/detail.html:54
 #: infinity/apps/core/templates/work/detail.html:55
-#: infinity/templates/home.html:68 infinity/templates/home.html.py:74
-#: infinity/templates/home.html:141 infinity/templates/home.html.py:147
-#: infinity/templates/home.html:218 infinity/templates/home.html.py:224
-#: infinity/templates/home.html:300 infinity/templates/home.html.py:306
-#: infinity/templates/home.html:383 infinity/templates/home.html.py:389
-#: infinity/templates/home.html:468 infinity/templates/home.html.py:474
-#: infinity/templates/home.html:549 infinity/templates/home.html.py:555
+#: infinity/templates/home.html:63 infinity/templates/home.html.py:69
+#: infinity/templates/home.html:136 infinity/templates/home.html.py:142
+#: infinity/templates/home.html:213 infinity/templates/home.html.py:219
+#: infinity/templates/home.html:295 infinity/templates/home.html.py:301
+#: infinity/templates/home.html:378 infinity/templates/home.html.py:384
+#: infinity/templates/home.html:463 infinity/templates/home.html.py:469
+#: infinity/templates/home.html:544 infinity/templates/home.html.py:550
 msgid "historical"
 msgstr ""
 
@@ -701,7 +701,7 @@ msgstr "podijeljeno sa:"
 #: infinity/apps/core/templates/goal/detail.html:108
 #: infinity/apps/core/templates/idea/list2.html:6
 #: infinity/apps/core/templates/idea/list2.html:9
-#: infinity/templates/home.html:191
+#: infinity/templates/home.html:186
 msgid "Ideas"
 msgstr "Ideje"
 
@@ -735,7 +735,7 @@ msgstr "želi:"
 #: infinity/apps/core/templates/idea/detail.html:113
 #: infinity/apps/core/templates/plan/list2.html:6
 #: infinity/apps/core/templates/plan/list2.html:9
-#: infinity/templates/home.html:274
+#: infinity/templates/home.html:269
 msgid "Plans"
 msgstr "Planovi"
 
@@ -798,7 +798,7 @@ msgid "deliverable"
 msgstr "isporučljivo"
 
 #: infinity/apps/core/templates/plan/detail.html:130
-#: infinity/templates/home.html:356
+#: infinity/templates/home.html:351
 msgid "Steps"
 msgstr "Koraci"
 
@@ -1196,7 +1196,7 @@ msgstr ""
 "Potvrdili ste da je <a href=\"mailto:%(email)s\">%(email)s</a> e-mail adresa "
 "korisnika %(user_display)s."
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:148
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:143
 msgid "Sign in"
 msgstr "Registracija"
 
@@ -1427,19 +1427,29 @@ msgstr ""
 "<strong>Bilješka:</strong> još uvijek možete <a href=\"%(email_url)s"
 "\">promijeniti vašu e-mail adresu</a>."
 
-#: infinity/templates/base.html:85
+#: infinity/templates/base.html:94
 #, fuzzy
 #| msgid "Solve Your Problems."
 msgid "Solving Problems"
 msgstr "Rješite vaše probleme."
 
-#: infinity/templates/base.html:114
+#: infinity/templates/base.html:120
+#, fuzzy
+#| msgid "my index"
+msgid "public index"
+msgstr "moj indeks"
+
+#: infinity/templates/base.html:125
 msgid "About"
 msgstr "O nama"
 
-#: infinity/templates/base.html:130
+#: infinity/templates/base.html:131
 msgid "Logout"
 msgstr "Odjava"
+
+#: infinity/templates/base.html:133
+msgid "private inbox"
+msgstr ""
 
 #: infinity/templates/home.html:21
 msgid "invitations"
@@ -1453,64 +1463,56 @@ msgstr "napišite bugove"
 msgid "time value"
 msgstr "vremenska vrijednost"
 
-#: infinity/templates/home.html:30
-msgid "my index"
-msgstr "moj indeks"
-
-#: infinity/templates/home.html:30
-msgid "index"
-msgstr "indeks"
-
-#: infinity/templates/home.html:46
+#: infinity/templates/home.html:41
 #, fuzzy
 #| msgid "needs"
 msgid "Needs"
 msgstr "potrebe"
 
-#: infinity/templates/home.html:47
+#: infinity/templates/home.html:42
 #, fuzzy
 #| msgid "Select the thing that you need..."
 msgid "share a need"
 msgstr "Izaberite potrebnu stvar..."
 
-#: infinity/templates/home.html:62 infinity/templates/home.html.py:135
-#: infinity/templates/home.html:210 infinity/templates/home.html.py:294
-#: infinity/templates/home.html:376 infinity/templates/home.html.py:461
-#: infinity/templates/home.html:542
+#: infinity/templates/home.html:57 infinity/templates/home.html.py:130
+#: infinity/templates/home.html:205 infinity/templates/home.html.py:289
+#: infinity/templates/home.html:371 infinity/templates/home.html.py:456
+#: infinity/templates/home.html:537
 msgid "(last commented"
 msgstr "(zadnji komentar"
 
-#: infinity/templates/home.html:62 infinity/templates/home.html.py:135
-#: infinity/templates/home.html:210 infinity/templates/home.html.py:294
-#: infinity/templates/home.html:376 infinity/templates/home.html.py:461
-#: infinity/templates/home.html:542
+#: infinity/templates/home.html:57 infinity/templates/home.html.py:130
+#: infinity/templates/home.html:205 infinity/templates/home.html.py:289
+#: infinity/templates/home.html:371 infinity/templates/home.html.py:456
+#: infinity/templates/home.html:537
 msgid "hours ago)"
 msgstr "prije par sati)"
 
-#: infinity/templates/home.html:101
+#: infinity/templates/home.html:96
 #, fuzzy
 #| msgid "Oops! You have no ideas!"
 msgid "Oops! You have no needs!"
 msgstr "Oops! Nema ideja!"
 
-#: infinity/templates/home.html:102
+#: infinity/templates/home.html:97
 #, fuzzy
 #| msgid "Select the thing that you need..."
 msgid "Define a need"
 msgstr "Izaberite potrebnu stvar..."
 
-#: infinity/templates/home.html:103 infinity/templates/home.html.py:177
-#: infinity/templates/home.html:259 infinity/templates/home.html.py:341
-#: infinity/templates/home.html:424 infinity/templates/home.html.py:510
-#: infinity/templates/home.html:591
+#: infinity/templates/home.html:98 infinity/templates/home.html.py:172
+#: infinity/templates/home.html:254 infinity/templates/home.html.py:336
+#: infinity/templates/home.html:419 infinity/templates/home.html.py:505
+#: infinity/templates/home.html:586
 msgid "...or view"
 msgstr "...ili mišljenje"
 
-#: infinity/templates/home.html:103
+#: infinity/templates/home.html:98
 msgid "<u>discussion board</u>"
 msgstr ""
 
-#: infinity/templates/home.html:106
+#: infinity/templates/home.html:101
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1535,31 +1537,31 @@ msgstr ""
 "ukusima. Sviđa mi se, i htio bih jesti omlet svako jutro, bez dodatnih "
 "troškova. </p>"
 
-#: infinity/templates/home.html:120
+#: infinity/templates/home.html:115
 msgid "define a problem"
 msgstr "definiraj problem"
 
-#: infinity/templates/home.html:172 infinity/templates/home.html.py:253
-#: infinity/templates/home.html:335 infinity/templates/home.html.py:419
-#: infinity/templates/home.html:505 infinity/templates/home.html.py:586
+#: infinity/templates/home.html:167 infinity/templates/home.html.py:248
+#: infinity/templates/home.html:330 infinity/templates/home.html.py:414
+#: infinity/templates/home.html:500 infinity/templates/home.html.py:581
 msgid "see more"
 msgstr "vidi još"
 
-#: infinity/templates/home.html:175
+#: infinity/templates/home.html:170
 msgid "Oops! You have no goals!"
 msgstr "Oops! Nema ciljeva!"
 
-#: infinity/templates/home.html:176
+#: infinity/templates/home.html:171
 msgid "Add a problem"
 msgstr "Dodaj problem"
 
-#: infinity/templates/home.html:177 infinity/templates/home.html.py:259
-#: infinity/templates/home.html:341 infinity/templates/home.html.py:424
-#: infinity/templates/home.html:510 infinity/templates/home.html.py:591
+#: infinity/templates/home.html:172 infinity/templates/home.html.py:254
+#: infinity/templates/home.html:336 infinity/templates/home.html.py:419
+#: infinity/templates/home.html:505 infinity/templates/home.html.py:586
 msgid "<u>index</u>"
 msgstr "<u>indeks</u>"
 
-#: infinity/templates/home.html:180
+#: infinity/templates/home.html:175
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1585,19 +1587,19 @@ msgstr ""
 "ukusima. Sviđa mi se, i htio bih jesti omlet svako jutro, bez dodatnih "
 "troškova. </p>"
 
-#: infinity/templates/home.html:192
+#: infinity/templates/home.html:187
 msgid "suggest a solution"
 msgstr "predloži rješenje"
 
-#: infinity/templates/home.html:257
+#: infinity/templates/home.html:252
 msgid "Oops! You have no ideas!"
 msgstr "Oops! Nema ideja!"
 
-#: infinity/templates/home.html:258
+#: infinity/templates/home.html:253
 msgid "Add a solution"
 msgstr "Dodaj rješenje"
 
-#: infinity/templates/home.html:262
+#: infinity/templates/home.html:257
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1631,19 +1633,19 @@ msgstr ""
 "robotske hranilice, skupljače jaja, perilice, kočnice, tajmirane miksere, "
 "kuhala i dispenzere - i imate samoodrživu opskrbu svježeg omleta. </p>"
 
-#: infinity/templates/home.html:276
+#: infinity/templates/home.html:271
 msgid "start a project"
 msgstr "pokreni projekt"
 
-#: infinity/templates/home.html:339
+#: infinity/templates/home.html:334
 msgid "Oops! You have no plans!"
 msgstr "Oops! Nema planova!"
 
-#: infinity/templates/home.html:340
+#: infinity/templates/home.html:335
 msgid "Add a project"
 msgstr "Dodaj projekt"
 
-#: infinity/templates/home.html:343
+#: infinity/templates/home.html:338
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1671,19 +1673,19 @@ msgstr ""
 "    <p><u>Destinacija:</u> imamo rješenje mikrofarme za vlasnike kuća.</p>\n"
 "    "
 
-#: infinity/templates/home.html:358
+#: infinity/templates/home.html:353
 msgid "break it down"
 msgstr "razbijte ga"
 
-#: infinity/templates/home.html:422
+#: infinity/templates/home.html:417
 msgid "Oops! You have no steps!"
 msgstr "Oops! Nema koraka!"
 
-#: infinity/templates/home.html:423
+#: infinity/templates/home.html:418
 msgid "Start a project to add milestones"
 msgstr "Pokrenite projekt da bi dodali prekretnicu"
 
-#: infinity/templates/home.html:427
+#: infinity/templates/home.html:422
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1726,23 +1728,23 @@ msgstr ""
 "    <p><u>Cilj:</u> Smislite izvediv plan poslovanja.</p>\n"
 "    ..."
 
-#: infinity/templates/home.html:443
+#: infinity/templates/home.html:438
 msgid "Tasks"
 msgstr "Zadaci"
 
-#: infinity/templates/home.html:445
+#: infinity/templates/home.html:440
 msgid "execute it"
 msgstr "izvršite"
 
-#: infinity/templates/home.html:508
+#: infinity/templates/home.html:503
 msgid "Oops! You have no tasks!"
 msgstr "Oops! Nema zadataka!"
 
-#: infinity/templates/home.html:509
+#: infinity/templates/home.html:504
 msgid "Choose a milestone to add tasks"
 msgstr "Izaberite prekretnicu da bi dodali zadatak"
 
-#: infinity/templates/home.html:512
+#: infinity/templates/home.html:507
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1762,27 +1764,27 @@ msgstr ""
 "    <p><b>$ 0.00 Otvori internet i napravi istraživanje.</b></p>\n"
 "    ..."
 
-#: infinity/templates/home.html:524
+#: infinity/templates/home.html:519
 msgid "Works"
 msgstr ""
 
-#: infinity/templates/home.html:526
+#: infinity/templates/home.html:521
 msgid "did it"
 msgstr ""
 
-#: infinity/templates/home.html:589
+#: infinity/templates/home.html:584
 #, fuzzy
 #| msgid "Oops! You have no goals!"
 msgid "Oops! You have no works!"
 msgstr "Oops! Nema ciljeva!"
 
-#: infinity/templates/home.html:590
+#: infinity/templates/home.html:585
 #, fuzzy
 #| msgid "Choose a milestone to add tasks"
 msgid "Choose a task to add works"
 msgstr "Izaberite prekretnicu da bi dodali zadatak"
 
-#: infinity/templates/home.html:593
+#: infinity/templates/home.html:588
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1802,7 +1804,7 @@ msgstr ""
 "    <p><b>$ 0.00 Otvori internet i napravi istraživanje.</b></p>\n"
 "    ..."
 
-#: infinity/templates/home.html:603
+#: infinity/templates/home.html:598
 msgid "People-centric economy."
 msgstr "Ekonomija usredotočena na ljude."
 
@@ -1975,6 +1977,9 @@ msgstr "E-mail adresa i/ili lozinka koje ste unijeli nisu točni."
 #: infinity/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Zapamti me"
+
+#~ msgid "index"
+#~ msgstr "indeks"
 
 #~ msgid "Help"
 #~ msgstr "Pomoć"

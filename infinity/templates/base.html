@@ -34,6 +34,15 @@
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
+      {% if request.get_full_path == "/i" %}
+      body {
+      background-color: #c0c0c0;
+      }
+      .panel {
+      background-color: #f0f0f0;
+      }
+      {% endif %}
+      
     </style>
     <!-- This file store project specific CSS -->
     <link href="{% static 'css/infinity.css' %}" rel="stylesheet">
@@ -106,36 +115,22 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+              {% if request.get_full_path == "/!" %}
+              {% else %}
+              <li><a href="{% url "index" %}" class="btn-lg" style="color: white; background-color: black;">{% trans "public index" %}</a></li>
+              {% endif %}
               {% if request.user.is_authenticated %}
               {% else %}
-                  {% if request.get_full_path == '/about/' %}
-                  {% else %}
                   <li>
                   <a href="{% url "about" %}"><b>{% trans "About" %}</b></a>
                   </li>
-                  {% endif %}
-                  {% if request.get_full_path == "/i" %}
-                  <li>
-                  <a href="{% url "home" %}"><b>?</b></a>
-                  </li>
-                  {% else %}
-                  <li>
-                  <a href="{% url "index" %}"><b>!</b></a>
-                  </li>
-                  {% endif %}
               {% endif %}
 
               {% if request.user.is_authenticated %}
               <li>
               <a href="{% url "account_logout" %}"><b>{% trans "Logout" %}</b></a>
               </li>
-              <li>
-                  {% if request.get_full_path == '/i' %}
-                  <a href="{% url "index" %}"><b>!</b></a>
-                  {% else %}
-                  <a href="{% url "inbox" %}"><b>i</b></a><!--Inbox-->
-                  {% endif %}
-              </li>
+              <li><a href="{% url "inbox" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "private inbox" %}</a></li>
               <li>
               <a href="{% url "user-detail" request.user.username %}"><b>[{{ request.user }}]</b></a>
               </li>
