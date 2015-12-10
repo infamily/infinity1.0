@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-08 05:19-0800\n"
-"PO-Revision-Date: 2015-12-08 15:37+0200\n"
+"POT-Creation-Date: 2015-12-10 05:24-0800\n"
+"PO-Revision-Date: 2015-12-10 15:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -506,6 +506,16 @@ msgstr "宇宙飞船"
 #: infinity/apps/core/templates/definition/create.html:42
 msgid "vessel or machine designed to fly in outer space"
 msgstr "在太空中航行的工具"
+
+#: infinity/apps/core/templates/definition/create.html:45
+#: infinity/templates/base.html:119
+msgid "Open Data"
+msgstr "开放数据"
+
+#: infinity/apps/core/templates/definition/create.html:46
+#: infinity/templates/base.html:121
+msgid "Open Source"
+msgstr "开放代码"
 
 #: infinity/apps/core/templates/definition/detail.html:55
 #: infinity/apps/core/templates/goal/detail.html:114
@@ -1116,7 +1126,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:143
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:149
 msgid "Sign in"
 msgstr "登陆"
 
@@ -1333,19 +1343,19 @@ msgstr ""
 msgid "Solving Problems"
 msgstr "解决问题"
 
-#: infinity/templates/base.html:120
+#: infinity/templates/base.html:126
 msgid "public index"
 msgstr "探索内容"
 
-#: infinity/templates/base.html:125
+#: infinity/templates/base.html:131
 msgid "About"
 msgstr "关于"
 
-#: infinity/templates/base.html:131
+#: infinity/templates/base.html:137
 msgid "Logout"
 msgstr "登出"
 
-#: infinity/templates/base.html:133
+#: infinity/templates/base.html:139
 msgid "private inbox"
 msgstr "收件箱"
 
