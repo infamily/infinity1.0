@@ -33,6 +33,10 @@ urlpatterns = patterns(
         name="policy"),
     url(r'^membership/$', TemplateView.as_view(template_name='membership.html'),
         name="membership"),
+    url(r'^dev/$', TemplateView.as_view(template_name='dev.html'),
+        name="dev"),
+    url(r'^data/$', TemplateView.as_view(template_name='data.html'),
+        name="data"),
     url('^markdown/', include( 'django_markdown.urls')),
     url('^i18n/', include('django.conf.urls.i18n')),
 )

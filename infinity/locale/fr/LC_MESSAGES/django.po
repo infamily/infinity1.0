@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-08 05:19-0800\n"
+"POT-Creation-Date: 2015-12-10 05:24-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -474,6 +474,16 @@ msgstr ""
 
 #: infinity/apps/core/templates/definition/create.html:42
 msgid "vessel or machine designed to fly in outer space"
+msgstr ""
+
+#: infinity/apps/core/templates/definition/create.html:45
+#: infinity/templates/base.html:119
+msgid "Open Data"
+msgstr ""
+
+#: infinity/apps/core/templates/definition/create.html:46
+#: infinity/templates/base.html:121
+msgid "Open Source"
 msgstr ""
 
 #: infinity/apps/core/templates/definition/detail.html:55
@@ -1082,7 +1092,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:143
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:149
 msgid "Sign in"
 msgstr ""
 
@@ -1296,19 +1306,19 @@ msgstr ""
 msgid "Solving Problems"
 msgstr ""
 
-#: infinity/templates/base.html:120
+#: infinity/templates/base.html:126
 msgid "public index"
 msgstr ""
 
-#: infinity/templates/base.html:125
+#: infinity/templates/base.html:131
 msgid "About"
 msgstr ""
 
-#: infinity/templates/base.html:131
+#: infinity/templates/base.html:137
 msgid "Logout"
 msgstr ""
 
-#: infinity/templates/base.html:133
+#: infinity/templates/base.html:139
 msgid "private inbox"
 msgstr ""
 

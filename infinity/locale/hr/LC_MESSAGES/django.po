@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-08 05:19-0800\n"
+"POT-Creation-Date: 2015-12-10 05:24-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -550,6 +550,16 @@ msgstr ""
 
 #: infinity/apps/core/templates/definition/create.html:42
 msgid "vessel or machine designed to fly in outer space"
+msgstr ""
+
+#: infinity/apps/core/templates/definition/create.html:45
+#: infinity/templates/base.html:119
+msgid "Open Data"
+msgstr ""
+
+#: infinity/apps/core/templates/definition/create.html:46
+#: infinity/templates/base.html:121
+msgid "Open Source"
 msgstr ""
 
 #: infinity/apps/core/templates/definition/detail.html:55
@@ -1196,7 +1206,7 @@ msgstr ""
 "Potvrdili ste da je <a href=\"mailto:%(email)s\">%(email)s</a> e-mail adresa "
 "korisnika %(user_display)s."
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:143
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:149
 msgid "Sign in"
 msgstr "Registracija"
 
@@ -1433,21 +1443,21 @@ msgstr ""
 msgid "Solving Problems"
 msgstr "Rješite vaše probleme."
 
-#: infinity/templates/base.html:120
+#: infinity/templates/base.html:126
 #, fuzzy
 #| msgid "my index"
 msgid "public index"
 msgstr "moj indeks"
 
-#: infinity/templates/base.html:125
+#: infinity/templates/base.html:131
 msgid "About"
 msgstr "O nama"
 
-#: infinity/templates/base.html:131
+#: infinity/templates/base.html:137
 msgid "Logout"
 msgstr "Odjava"
 
-#: infinity/templates/base.html:133
+#: infinity/templates/base.html:139
 msgid "private inbox"
 msgstr ""
 
