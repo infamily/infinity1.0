@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load staticfiles %}
 
 {% block title %}About{% endblock %}
@@ -6,6 +7,7 @@
 {% block page_title %}About{% endblock page_title %}
 
 {% block content %}
+
 <h1>The Infinity Project</h1>
 
 <p>The Infinity Project is an optimization system to openly organize our needs, goals, ideas, plans, their steps, tasks, and works, and to display and manage the sharing of the relevant resources from person to person. (To learn more, see the <a href="/help/"><b>help section</b></a> and read <a href="/story/"><b>the story</b></a>.)</p>
@@ -43,5 +45,11 @@
 <p>We are looking for mathematicians and risk analysts to think about rational decision-making on top of the hierarchy, blockchain experts to record and store voting and financial data, Python developers and strategists to help with responsible scaling process, visual design thinkers who can design lightweight beautiful interfaces without using images. Works ahead include writing the API and developing client applications.</p>
 
 <p>Chat publicly with us on irc channel <a href="http://webchat.freenode.net/?channels=infty.xyz">#infty.xyz</a> at <u>irc.freenode.net</u> (<a href="http://irc.infty.xyz/">chatlog</a>).</p>
+
+<div align="right">
+<a href="{% url "data" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Data" %}</a>
+<a href="{% url "dev" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Source" %}</a>
+</div>
+<br/>
 
 {% endblock content %}
