@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block title %}About{% endblock %}
 
@@ -15,7 +16,7 @@
 <p>The domain <u>infty.xyz</u> name aims to emphasize <i>infinite love</i>, <i>long-term strategy</i>, and <i>cultural neutrality</i>. The project is to serve the interest of all life, aspiring to create the conditions where everything that anyone <u>truly</u> wishes would come true.</p>
 
 <h1>How?</h1>
-<p>By <u><b>collective hierarchical portfolio optimization</b></u> for <b>f(x)=y</b> (where <b>f</b> - world, <b>x</b> - actions, <b>y</b> - goals) via <b>rational cognitive hierarchy (<a href="/static/docs/need-to-work-hierarchy.pdf">paper</a>)</b>.</p>
+<p>By <u><b>collective hierarchical portfolio optimization</b></u> for <b>f(x)=y</b> (where <b>f</b> - world, <b>x</b> - actions, <b>y</b> - goals) via <b>rational cognitive hierarchy (<a href="{% static "docs/need-to-work-hierarchy.pdf" %}">paper</a>)</b>.</p>
 
 <h1>What?</h1>
 

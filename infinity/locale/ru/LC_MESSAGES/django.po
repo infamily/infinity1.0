@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-08 05:19-0800\n"
-"PO-Revision-Date: 2015-12-08 15:40+0200\n"
+"POT-Creation-Date: 2015-12-10 05:24-0800\n"
+"PO-Revision-Date: 2015-12-10 15:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -533,6 +533,16 @@ msgstr "космический аппарат"
 #: infinity/apps/core/templates/definition/create.html:42
 msgid "vessel or machine designed to fly in outer space"
 msgstr "аппарат, предназначенный для работы в космосе"
+
+#: infinity/apps/core/templates/definition/create.html:45
+#: infinity/templates/base.html:119
+msgid "Open Data"
+msgstr "Открытые данные"
+
+#: infinity/apps/core/templates/definition/create.html:46
+#: infinity/templates/base.html:121
+msgid "Open Source"
+msgstr "Открытый код"
 
 #: infinity/apps/core/templates/definition/detail.html:55
 #: infinity/apps/core/templates/goal/detail.html:114
@@ -1161,7 +1171,7 @@ msgstr ""
 "Вы подтверждаете, что это адрес электронной почты<a href=\"mailto:%(email)s"
 "\">%(email)s</a>  принадлежит данному пользователю %(user_display)s."
 
-#: infinity/templates/account/login.html:10 infinity/templates/base.html:143
+#: infinity/templates/account/login.html:10 infinity/templates/base.html:149
 msgid "Sign in"
 msgstr "Войти"
 
@@ -1403,19 +1413,19 @@ msgstr ""
 msgid "Solving Problems"
 msgstr "Решаем проблемы"
 
-#: infinity/templates/base.html:120
+#: infinity/templates/base.html:126
 msgid "public index"
 msgstr "Содержание"
 
-#: infinity/templates/base.html:125
+#: infinity/templates/base.html:131
 msgid "About"
 msgstr "О проекте"
 
-#: infinity/templates/base.html:131
+#: infinity/templates/base.html:137
 msgid "Logout"
 msgstr "Выход"
 
-#: infinity/templates/base.html:133
+#: infinity/templates/base.html:139
 msgid "private inbox"
 msgstr "Входящие"
 
