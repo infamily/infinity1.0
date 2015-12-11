@@ -140,7 +140,7 @@ $(function() {
 
 $( document ).ready(function() {
 	$("#id_name").focus();
-	redirectIndex(60);
+	redirectIndex(10000);
 });
 
 
