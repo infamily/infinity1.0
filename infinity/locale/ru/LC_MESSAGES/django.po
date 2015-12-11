@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 05:24-0800\n"
-"PO-Revision-Date: 2015-12-10 15:39+0200\n"
+"POT-Creation-Date: 2015-12-10 16:55-0800\n"
+"PO-Revision-Date: 2015-12-11 02:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -518,31 +518,26 @@ msgstr "редактировать"
 msgid "Invite a friend to help!"
 msgstr "Пригласить друга помочь!"
 
-#: infinity/apps/core/templates/definition/create.html:37
+#: infinity/apps/core/templates/definition/create.html:53
+#: infinity/apps/core/templates/definition/create.html:55
+msgid "Video"
+msgstr "Видео"
+
+#: infinity/apps/core/templates/definition/create.html:63
 msgid "Define what you need"
 msgstr "Определите, что вам необходимо"
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "e.g.:"
 msgstr "напр."
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "spaceship"
 msgstr "космический аппарат"
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "vessel or machine designed to fly in outer space"
 msgstr "аппарат, предназначенный для работы в космосе"
-
-#: infinity/apps/core/templates/definition/create.html:45
-#: infinity/templates/base.html:119
-msgid "Open Data"
-msgstr "Открытые данные"
-
-#: infinity/apps/core/templates/definition/create.html:46
-#: infinity/templates/base.html:121
-msgid "Open Source"
-msgstr "Открытый код"
 
 #: infinity/apps/core/templates/definition/detail.html:55
 #: infinity/apps/core/templates/goal/detail.html:114
@@ -1023,6 +1018,16 @@ msgstr "Хорватский"
 #: infinity/settings/base.py:83
 msgid "Japanese"
 msgstr "Японский"
+
+#: infinity/templates/about.html:55 infinity/templates/base.html:119
+#: infinity/templates/data.html:10
+msgid "Open Data"
+msgstr "Открытые данные"
+
+#: infinity/templates/about.html:56 infinity/templates/base.html:121
+#: infinity/templates/dev.html:10
+msgid "Open Source"
+msgstr "Открытый код"
 
 #: infinity/templates/account/account_inactive.html:5
 #: infinity/templates/account/account_inactive.html:8
