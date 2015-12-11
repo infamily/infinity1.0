@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-10 16:55-0800\n"
-"PO-Revision-Date: 2015-12-11 02:55+0200\n"
+"PO-Revision-Date: 2015-12-11 22:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -494,7 +494,7 @@ msgstr "邀请好友帮忙！"
 #: infinity/apps/core/templates/definition/create.html:53
 #: infinity/apps/core/templates/definition/create.html:55
 msgid "Video"
-msgstr "视频"
+msgstr "看视频"
 
 #: infinity/apps/core/templates/definition/create.html:63
 msgid "Define what you need"
