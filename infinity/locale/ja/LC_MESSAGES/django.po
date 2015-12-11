@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 05:24-0800\n"
-"PO-Revision-Date: 2015-12-10 15:36+0200\n"
+"POT-Creation-Date: 2015-12-10 16:55-0800\n"
+"PO-Revision-Date: 2015-12-11 02:58+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -500,31 +500,26 @@ msgstr "クレジット"
 msgid "Invite a friend to help!"
 msgstr ""
 
-#: infinity/apps/core/templates/definition/create.html:37
+#: infinity/apps/core/templates/definition/create.html:53
+#: infinity/apps/core/templates/definition/create.html:55
+msgid "Video"
+msgstr "動画"
+
+#: infinity/apps/core/templates/definition/create.html:63
 msgid "Define what you need"
 msgstr "欲しいものごとを入力してください"
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "e.g.:"
 msgstr "例："
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "spaceship"
 msgstr "宇宙船"
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "vessel or machine designed to fly in outer space"
 msgstr "宇宙空間に打ち上げられ，長時間人間を乗せて運航する飛行体"
-
-#: infinity/apps/core/templates/definition/create.html:45
-#: infinity/templates/base.html:119
-msgid "Open Data"
-msgstr "オープンデータ"
-
-#: infinity/apps/core/templates/definition/create.html:46
-#: infinity/templates/base.html:121
-msgid "Open Source"
-msgstr "オープンソース"
 
 #: infinity/apps/core/templates/definition/detail.html:55
 #: infinity/apps/core/templates/goal/detail.html:114
@@ -1005,6 +1000,16 @@ msgstr ""
 #: infinity/settings/base.py:83
 msgid "Japanese"
 msgstr ""
+
+#: infinity/templates/about.html:55 infinity/templates/base.html:119
+#: infinity/templates/data.html:10
+msgid "Open Data"
+msgstr "オープンデータ"
+
+#: infinity/templates/about.html:56 infinity/templates/base.html:121
+#: infinity/templates/dev.html:10
+msgid "Open Source"
+msgstr "オープンソース"
 
 #: infinity/templates/account/account_inactive.html:5
 #: infinity/templates/account/account_inactive.html:8

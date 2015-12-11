@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 05:24-0800\n"
-"PO-Revision-Date: 2015-12-10 15:25+0200\n"
+"POT-Creation-Date: 2015-12-10 16:55-0800\n"
+"PO-Revision-Date: 2015-12-11 02:57+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -511,31 +511,26 @@ msgstr "kreditas"
 msgid "Invite a friend to help!"
 msgstr "Pakviesti draugą padėti."
 
-#: infinity/apps/core/templates/definition/create.html:37
+#: infinity/apps/core/templates/definition/create.html:53
+#: infinity/apps/core/templates/definition/create.html:55
+msgid "Video"
+msgstr "Video"
+
+#: infinity/apps/core/templates/definition/create.html:63
 msgid "Define what you need"
 msgstr "Rašyk ko reikia"
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "e.g.:"
 msgstr "pvz.:"
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "spaceship"
 msgstr "erdvėlaivis"
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "vessel or machine designed to fly in outer space"
 msgstr "transporto priemonė skirta skrydžiams į kosmosą"
-
-#: infinity/apps/core/templates/definition/create.html:45
-#: infinity/templates/base.html:119
-msgid "Open Data"
-msgstr "Atviri duomenys"
-
-#: infinity/apps/core/templates/definition/create.html:46
-#: infinity/templates/base.html:121
-msgid "Open Source"
-msgstr "Atviras kodas"
 
 #: infinity/apps/core/templates/definition/detail.html:55
 #: infinity/apps/core/templates/goal/detail.html:114
@@ -1027,6 +1022,16 @@ msgstr ""
 #: infinity/settings/base.py:83
 msgid "Japanese"
 msgstr ""
+
+#: infinity/templates/about.html:55 infinity/templates/base.html:119
+#: infinity/templates/data.html:10
+msgid "Open Data"
+msgstr "Atviri duomenys"
+
+#: infinity/templates/about.html:56 infinity/templates/base.html:121
+#: infinity/templates/dev.html:10
+msgid "Open Source"
+msgstr "Atviras kodas"
 
 #: infinity/templates/account/account_inactive.html:5
 #: infinity/templates/account/account_inactive.html:8

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 05:24-0800\n"
+"POT-Creation-Date: 2015-12-10 16:55-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -461,30 +461,25 @@ msgstr ""
 msgid "Invite a friend to help!"
 msgstr ""
 
-#: infinity/apps/core/templates/definition/create.html:37
+#: infinity/apps/core/templates/definition/create.html:53
+#: infinity/apps/core/templates/definition/create.html:55
+msgid "Video"
+msgstr ""
+
+#: infinity/apps/core/templates/definition/create.html:63
 msgid "Define what you need"
 msgstr ""
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "e.g.:"
 msgstr ""
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "spaceship"
 msgstr ""
 
-#: infinity/apps/core/templates/definition/create.html:42
+#: infinity/apps/core/templates/definition/create.html:68
 msgid "vessel or machine designed to fly in outer space"
-msgstr ""
-
-#: infinity/apps/core/templates/definition/create.html:45
-#: infinity/templates/base.html:119
-msgid "Open Data"
-msgstr ""
-
-#: infinity/apps/core/templates/definition/create.html:46
-#: infinity/templates/base.html:121
-msgid "Open Source"
 msgstr ""
 
 #: infinity/apps/core/templates/definition/detail.html:55
@@ -961,6 +956,16 @@ msgstr ""
 
 #: infinity/settings/base.py:83
 msgid "Japanese"
+msgstr ""
+
+#: infinity/templates/about.html:55 infinity/templates/base.html:119
+#: infinity/templates/data.html:10
+msgid "Open Data"
+msgstr ""
+
+#: infinity/templates/about.html:56 infinity/templates/base.html:121
+#: infinity/templates/dev.html:10
+msgid "Open Source"
 msgstr ""
 
 #: infinity/templates/account/account_inactive.html:5
