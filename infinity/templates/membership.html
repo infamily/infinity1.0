@@ -7,6 +7,7 @@
 {% block page_title %}About{% endblock page_title %}
 
 {% block content %}
+
 {% trans "<h1>Membership</h1>" %}
 
 
@@ -20,78 +21,99 @@
 
 <center><font color="green"><b>Private posting and commenting is free. Paid memberships allow you to share in public.</b></font></center>
 <br/>
-<div class="col-sm-8 col-sm-offset-2">
-    <div class="row">
 
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                <div class="name"><b>{% trans "Commenter" %}</b></div>
-				<div class="amount">
-					<sup>$</sup>
-						1
-					<small>
-						{% trans "per month <p>every month</p>" %}
-					</small>
-				</div>
-				<ul>
-					<li><i class=""></i>{% trans "Commenting in public" %}</li>
-				</ul>
-				<div class="membership-footer">
-					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-					<input type="hidden" name="cmd" value="_s-xclick">
-					<input type="hidden" name="hosted_button_id" value="ZZ8XBSVL3YTHU">
-					<input type="submit" class="btn btn-lg btn-block btn-success" border="0" name="submit" value="subscribe">
-					</form>
-				</div>
-            </div>
-
-
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                <div class="name"><b>{% trans "Ideator" %}</b></div>
-				<div class="amount">
-					<sup>$</sup>
-						5
-					<small>
-						{% trans "per month <p>every month</p>" %}
-					</small>
-				</div>
-				<ul>
-					<li><i class=""></i>{% trans "Publishing ideas, plans" %}</li>
-				</ul>
-				<div class="membership-footer">
-					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-					<input type="hidden" name="cmd" value="_s-xclick">
-					<input type="hidden" name="hosted_button_id" value="D39EBVUBCAPPW">
-					<input type="submit" class="btn btn-lg btn-block btn-success" border="0" name="submit" value="subscribe">
-					</form>
-				</div>
-            </div>
-        
-        
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                <div class="name"><b>{% trans "Pursuer" %}</b></div>
-				<div class="amount">
-					<sup>$</sup>
-						50
-					<small>
-						{% trans "per month <p>every month</p>" %}
-					</small>
-				</div>
-				<ul>
-					<li><i class=""></i>{% trans "Publishing problems" %}</li>
-				</ul>
-				<div class="membership-footer">
-					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-					<input type="hidden" name="cmd" value="_s-xclick">
-					<input type="hidden" name="hosted_button_id" value="6RU6PT2HLHZ3E">
-					<input type="submit" class="btn btn-lg btn-block btn-success" border="0" name="submit" value="subscribe">
-					</form>
-				</div>
-            </div>
-        
-        
-        </div>
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="name"><b>{% trans "Commenter" %}</b></div>
+    <div class="amount">
+        <sup>$</sup>
+            1
+        <small>
+            {% trans "per month <p>every month</p>" %}
+        </small>
+    </div>
+    <ul>
+        <li><i class=""></i>{% trans "Commenting in public" %}</li>
+    </ul>
+    <div class="membership-footer">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="ZZ8XBSVL3YTHU">
+        <input type="submit" class="btn btn-lg btn-block btn-success" border="0" name="submit" value="subscribe">
+        </form>
     </div>
 </div>
+
+
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="name"><b>{% trans "Ideator" %}</b></div>
+    <div class="amount">
+        <sup>$</sup>
+            5
+        <small>
+            {% trans "per month <p>every month</p>" %}
+        </small>
+    </div>
+    <ul>
+        <li><i class=""></i>{% trans "Publishing ideas, plans" %}</li>
+    </ul>
+    <div class="membership-footer">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="D39EBVUBCAPPW">
+        <input type="submit" class="btn btn-lg btn-block btn-success" border="0" name="submit" value="subscribe">
+        </form>
+    </div>
+</div>
+
+
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="name"><b>{% trans "Pursuer" %}</b></div>
+    <div class="amount">
+        <sup>$</sup>
+            50
+        <small>
+            {% trans "per month <p>every month</p>" %}
+        </small>
+    </div>
+    <ul>
+        <li><i class=""></i>{% trans "Publishing problems" %}</li>
+    </ul>
+    <div class="membership-footer">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="6RU6PT2HLHZ3E">
+        <input type="submit" class="btn btn-lg btn-block btn-success" border="0" name="submit" value="subscribe">
+        </form>
+    </div>
+</div>
+<div style="clear:both;"></div>
+
+<h1>Partner Membership</h1>
+
+<p>Since our mission is overlapping with the missions of two other organizations, members of these organizations are eligible to full membership.</p>
+
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="membership-footer">
+        <form action="." method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="submit" class="btn btn-lg btn-block btn-success disabled" border="0" name="submit" value="organization 1">
+        </form>
+    </div>
+</div>
+
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="membership-footer">
+        <form action="." method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="submit" class="btn btn-lg btn-block btn-success disabled" border="0" name="submit" value="organization 2">
+        </form>
+    </div>
+</div>
+
+
+
 
 
 {% endblock content %}
