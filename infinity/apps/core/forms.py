@@ -347,6 +347,7 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a problem of the past)')
+        self.initial['personal'] = True
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -513,6 +514,7 @@ class WorkCreateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical work)')
+        self.initial['personal'] = True
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -651,6 +653,7 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting an idea of the past)')
+        self.initial['personal'] = True
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -763,6 +766,7 @@ class StepCreateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a milestone of the past)')
+        self.initial['personal'] = True
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -866,6 +870,7 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical task)')
+        self.initial['personal'] = True
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -1138,6 +1143,7 @@ class PlanCreateForm(forms.ModelForm):
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a project of the past)')
        #self.fields['plain_equity'].label = _('Plain equity')
+        self.initial['personal'] = True
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
