@@ -1,7 +1,7 @@
 import urllib
 from cgi import parse_qs
 import collections
-import httplib
+from http import client
 
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -107,9 +107,9 @@ class PayPal(object):
         """ Get payment information by payKey
         """
         if self.sandbox:
-            conn = httplib.HTTPSConnection("svcs.sandbox.paypal.com")
+            conn = client.HTTPConnection("svcs.sandbox.paypal.com", port=443)
         else:
-            conn = httplib.HTTPSConnection("svcs.paypal.com")
+            conn = client.HTTPConnection("svcs.paypal.com", port=443)
         params = collections.OrderedDict()
         params['payKey'] = payKey
         params['requestEnvelope.errorLanguage'] = self.error_language
