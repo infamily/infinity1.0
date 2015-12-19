@@ -328,7 +328,9 @@ def WikiDataSearch(name, language, return_response=False):
 def WikiDataGet(concept_q, language):
     url = 'https://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=%s&format=json' % \
         (concept_q, language)
-    dicts = json.loads(requests.get(url).content)
+
+    response = requests.get(url).content
+    dicts = json.loads(response.decode("utf-8"))
 
     try:
         expression = dicts['entities'][concept_q]['labels'][language]['value']
