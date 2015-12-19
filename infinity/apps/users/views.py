@@ -24,7 +24,8 @@ from .models import User
 from .decorators import ForbiddenUser
 from .models import ConversationInvite
 
-from md5 import md5
+from hashlib import md5
+
 
 class ConversationInviteView(FormView):
     form_class = ConversationInviteForm
@@ -197,7 +198,7 @@ class UserDetailView(DetailView):
         user = kwargs.get('object')
 
         comment_list = []
-        goals_hash = md5(u'').hexdigest()
+        goals_hash = md5(''.encode()).hexdigest()
         comments = user.comment_set.order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]
         interest_counts = {}
 
