@@ -2,10 +2,8 @@ import django_filters
 import django_select2
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Submit
 from crispy_forms.layout import Field
-from crispy_forms.layout import HTML
-from crispy_forms.bootstrap import StrictButton
 from crispy_forms.bootstrap import FieldWithButtons
 from django.contrib.auth import get_user_model
 
