@@ -19,7 +19,7 @@ django-allauth==0.21.0
 django-avatar
 django-autofixture
 django-filter
-git+https://github.com/fernandoPardo/django-enhanced-cbv
+https://github.com/rasca/django-enhanced-cbv/archive/master.zip
 https://github.com/yrik/django-allauth-multiple/archive/master.zip
 sendgrid-django
 pyopenssl

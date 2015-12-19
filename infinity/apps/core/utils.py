@@ -358,7 +358,7 @@ def LookupCreateDefinition(defined_meaning_id, language):
     else:
     # query WikiData API, and create new definition based on response
         concept = WikiDataGet('Q'+str(defined_meaning_id), language.language_code)
-        print concept
+        print(concept)
         if concept['success']:
             definition = Definition.objects.create(name=concept['expression'],
                                                    definition=concept['definition'],
