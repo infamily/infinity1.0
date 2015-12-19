@@ -226,7 +226,7 @@ class UserDetailView(DetailView):
                     goals = []
 
                 co = {'comment': comment,
-                      'goals_hash': md5(str(goals)).hexdigest() }
+                      'goals_hash': md5(str(goals).encode()).hexdigest() }
 
                 if co['goals_hash'] != goals_hash:
                     goals_hash = co['goals_hash']

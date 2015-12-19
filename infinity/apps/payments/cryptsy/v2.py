@@ -9,7 +9,7 @@ import logging
 import urllib
 
 # Configure properly:
-requests.pyopenssl.inject_into_urllib3()
+#requests.pyopenssl.inject_into_urllib3()
 requests.packages.urllib3.disable_warnings()
 # https://urllib3.readthedocs.org/en/latest/ 
 

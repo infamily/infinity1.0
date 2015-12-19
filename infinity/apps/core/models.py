@@ -368,7 +368,7 @@ class BaseContentModel(models.Model):
         ).count()
 
     def __unicode__(self):
-        return unicode(self.name[:50])
+        return self.name[:50]
 
     def get_absolute_url(self):
         return "/"
@@ -400,7 +400,7 @@ class Type(models.Model):
     )
 
     def __unicode__(self):
-        return unicode(self.name[:50])
+        return self.name[:50]
 
     def get_absolute_url(self):
         return "/"
@@ -655,7 +655,7 @@ class Definition(models.Model):
     )
 
     def __unicode__(self):
-        return unicode(self.name[:50])
+        return self.name[:50]
 
     def get_absolute_url(self):
         return "/"
@@ -744,9 +744,9 @@ class Language(models.Model):
 
     def __unicode__(self):
         try:
-            return unicode(self.name[:50])
+            return self.name[:50]
         except TypeError:
-            return unicode(self.pk)
+            return self.pk
 
 post_save.connect(_content_type_post_save, sender=Need)
 post_save.connect(_content_type_post_save, sender=Goal)
