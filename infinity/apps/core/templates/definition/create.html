@@ -56,7 +56,7 @@
 <br/>
 <h3 align="center">{% trans "Define what you need" %}</h3>
 <br/>
-{# {% crispy form %} #}
+{% crispy form %}
 {% markdown_media %}
 <br/>
 <center><a href="{% url "need-create" 1 %}"><span class="start-example">{% trans "e.g.:" %}</span> <span class="expression-example">{% trans "spaceship" %}</span><span class="definition-example">: {% trans "vessel or machine designed to fly in outer space" %}</span></a></center>

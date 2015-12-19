@@ -287,7 +287,9 @@ class JsonView(View):
 def WikiDataSearch(name, language, return_response=False):
     url = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=%s&language=%s&format=json' % \
         (name, language)
-    dicts = json.loads(requests.get(url).content)['search']
+    response = requests.get(url).content
+    data = json.loads(response.decode("utf-8"))
+    dicts = data['search']
 
     if return_response:
         return dicts

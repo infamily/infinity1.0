@@ -743,10 +743,7 @@ class Language(models.Model):
     language_code = models.CharField(max_length=5)
 
     def __unicode__(self):
-        try:
-            return self.name[:50]
-        except TypeError:
-            return self.pk
+        return self.name
 
 post_save.connect(_content_type_post_save, sender=Need)
 post_save.connect(_content_type_post_save, sender=Goal)

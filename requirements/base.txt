@@ -1,5 +1,4 @@
 Django==1.8.2
-bpython==0.13
 django-braces==1.4.0
 django-model-utils==2.0.3
 django-pure-pagination==0.2.1

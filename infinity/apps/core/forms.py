@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 from django import forms
 
 from crispy_forms.helper import FormHelper
@@ -954,7 +954,7 @@ class DefinitionCreateForm(forms.ModelForm):
                     submit_button,
                 ),
                 css_class='row',
-		css_id='div_id_define',
+                css_id='div_id_define',
             ),
         )
         self.fields['name'].label = ''
