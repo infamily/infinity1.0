@@ -1,6 +1,7 @@
-import urllib
-from cgi import parse_qs
+from urllib.parse import urlencode
+from urllib.parse import parse_qs
 import collections
+
 from http import client
 
 from django.contrib.sites.models import Site
@@ -113,7 +114,7 @@ class PayPal(object):
         params = collections.OrderedDict()
         params['payKey'] = payKey
         params['requestEnvelope.errorLanguage'] = self.error_language
-        enc_params = urllib.urlencode(params)
+        enc_params = urlencode(params)
         conn.request(
             "POST",
             "/AdaptivePayments/PaymentDetails/",
@@ -154,13 +155,13 @@ class PayPal(object):
         params['clientDetails.deviceId'] = 'mydevice'
         params['clientDetails.applicationId'] = 'PayNvpDemo'
 
-        enc_params = urllib.urlencode(params)
+        enc_params = urlencode(params)
 
         # Connect to sand box and POST.
         if self.sandbox:
-            conn = httplib.HTTPSConnection("svcs.sandbox.paypal.com")
+            conn = client.HTTPSConnection("svcs.sandbox.paypal.com", port=443)
         else:
-            conn = httplib.HTTPSConnection("svcs.paypal.com")
+            conn = client.HTTPSConnection("svcs.paypal.com", port=443)
 
         conn.request(
             "POST",
