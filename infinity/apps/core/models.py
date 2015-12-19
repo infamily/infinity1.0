@@ -68,7 +68,7 @@ class Comment(models.Model):
         blank=False,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return u"Comment #%s" % self.id
 
     def get_absolute_url(self):
@@ -367,7 +367,7 @@ class BaseContentModel(models.Model):
             object_id=self.id
         ).count()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name[:50]
 
     def get_absolute_url(self):
@@ -399,7 +399,7 @@ class Type(models.Model):
         blank=False,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name[:50]
 
     def get_absolute_url(self):
@@ -654,7 +654,7 @@ class Definition(models.Model):
         null=True,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name[:50]
 
     def get_absolute_url(self):
@@ -727,7 +727,7 @@ class Translation(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    def __unicode__(self):
+    def __str__(self):
         return "Language: %s, Content Type: %s, Object ID: %d" % (
             self.language.name,
             self.content_type,
@@ -742,8 +742,9 @@ class Language(models.Model):
     omegawiki_language_id = models.PositiveIntegerField(null=True, blank=True)
     language_code = models.CharField(max_length=5)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
+
 
 post_save.connect(_content_type_post_save, sender=Need)
 post_save.connect(_content_type_post_save, sender=Goal)

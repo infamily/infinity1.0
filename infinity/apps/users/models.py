@@ -55,7 +55,7 @@ class User(AbstractUser):
     def get_short_name(self):
         return str(self)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.username
 
     def get_absolute_url(self):
