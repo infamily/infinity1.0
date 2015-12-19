@@ -1,5 +1,5 @@
 import urllib
-import urlparse
+from cgi import parse_qs
 import collections
 import httplib
 
@@ -121,7 +121,7 @@ class PayPal(object):
             self.headers
         )
         response = conn.getresponse()
-        data = urlparse.parse_qs(response.read())
+        data = parse_qs(response.read())
         return data
 
     def adaptive_payment(self,
@@ -171,7 +171,7 @@ class PayPal(object):
         response = conn.getresponse()
 
         # Get the reply and print it out.
-        data = urlparse.parse_qs(response.read())
+        data = parse_qs(response.read())
 
         if data.get('error(0).message'):
             raise PayPalException(data.get('error(0).message'))
