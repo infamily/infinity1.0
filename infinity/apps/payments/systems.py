@@ -17,6 +17,10 @@ from .exceptions import PayPalException
 from constance import config
 
 
+class PayPalException(Exception):
+    pass
+
+
 class CryptsyPay(object):
     def __init__(self, publickey):
         self.credential = CryptsyCredential.objects.get(
@@ -179,7 +183,10 @@ class PayPal(object):
 
         # Set pay key
 
-        payKey = data['payKey'][0]
+        try:
+            payKey = data['payKey'][0]
+        except KeyError:
+            raise PayPalException(data)
 
         transaction = PayPalTransaction.objects.create(
             comment=comment_object,
