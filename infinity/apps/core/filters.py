@@ -165,15 +165,15 @@ class CommentListViewFilter1(django_filters.FilterSet):
         model = Comment
 
         fields = [
-            u'goal',
-            u'text',
-            u'created_at',
-            u'updated_at',
-            u'idea',
-            u'plan',
-            u'step',
-            u'task',
-            u'work']
+            'goal',
+            'text',
+            'created_at',
+            'updated_at',
+            'idea',
+            'plan',
+            'step',
+            'task',
+            'work']
 
         exclude = []
 
@@ -195,7 +195,7 @@ class CommentListViewFilter2(django_filters.FilterSet):
     class Meta:
         model = Comment
 
-        fields = [u'text']
+        fields = ['text']
 
         exclude = []
 
@@ -222,7 +222,7 @@ class GoalListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Goal
 
-        fields = [u'reason', u'name', u'user']
+        fields = ['reason', 'name', 'user']
 
         exclude = []
 
@@ -271,7 +271,7 @@ class WorkListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Work
 
-        fields = [u'name', u'description', u'url', u'parent_work_id', u'user']
+        fields = ['name', 'description', 'url', 'parent_work_id', 'user']
 
         exclude = []
 
@@ -321,7 +321,7 @@ class IdeaListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Idea
 
-        fields = [u'name', u'summary', u'description', u'user']
+        fields = ['name', 'summary', 'description', 'user']
 
         exclude = []
 
@@ -371,12 +371,12 @@ class StepListViewFilter1(django_filters.FilterSet):
         model = Step
 
         fields = [
-            u'name',
-            u'objective',
-            u'deliverables',
-            u'investables',
-            u'priority',
-            u'user']
+            'name',
+            'objective',
+            'deliverables',
+            'investables',
+            'priority',
+            'user']
 
         exclude = []
 
@@ -422,7 +422,7 @@ class TaskListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Task
 
-        fields = [u'name', u'priority', u'user']
+        fields = ['name', 'priority', 'user']
 
         exclude = []
 
@@ -517,7 +517,7 @@ class PlanListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Plan
 
-        fields = [u'name', u'name', u'deliverable', u'situation', u'user']
+        fields = ['name', 'name', 'deliverable', 'situation', 'user']
 
         exclude = []
 

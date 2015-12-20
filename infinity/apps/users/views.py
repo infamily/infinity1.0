@@ -206,21 +206,21 @@ class UserDetailView(DetailView):
 
             if comment.content_object:
 
-                if comment.content_type.name == u'definition':
+                if comment.content_type.name == 'definition':
                     goals = []
-                elif comment.content_type.name == u'need':
+                elif comment.content_type.name == 'need':
                     goals = []
-                elif comment.content_type.name == u'goal':
+                elif comment.content_type.name == 'goal':
                     goals = [comment.content_object]
-                elif comment.content_type.name == u'idea':
+                elif comment.content_type.name == 'idea':
                     goals = comment.content_object.goal.all().order_by('-id')
-                elif comment.content_type.name == u'plan':
+                elif comment.content_type.name == 'plan':
                     goals = comment.content_object.idea.goal.all().order_by('-id')
-                elif comment.content_type.name == u'step':
+                elif comment.content_type.name == 'step':
                     goals = comment.content_object.plan.idea.goal.all().order_by('-id')
-                elif comment.content_type.name == u'task':
+                elif comment.content_type.name == 'task':
                     goals = comment.content_object.step.plan.idea.goal.all().order_by('-id')
-                elif comment.content_type.name == u'work':
+                elif comment.content_type.name == 'work':
                     goals = comment.content_object.task.step.plan.idea.goal.all().order_by('-id')
                 else:
                     goals = []
@@ -247,7 +247,7 @@ class UserDetailView(DetailView):
                         """ interest counts """
                         if goals:
                             for goal in goals:
-                                if goal.type.name not in interest_counts.keys():
+                                if goal.type.name not in list(interest_counts.keys()):
                                     interest_counts[goal.type.name] = 1
                                 else:
                                     interest_counts[goal.type.name] += 1
@@ -262,7 +262,7 @@ class UserDetailView(DetailView):
         return context
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+@ForbiddenUser(forbidden_usertypes=['AnonymousUser'])
 class UserUpdateView(UpdateView):
 
     """User update view"""

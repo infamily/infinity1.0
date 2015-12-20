@@ -45,8 +45,8 @@ class CryptsyPay(object):
             currency_id
         )
 
-        currency = (item for item in cryptsy.currencies()['data']
-                    if item["id"] == str(currency_id)).next()
+        currency = next((item for item in cryptsy.currencies()['data']
+                    if item["id"] == str(currency_id)))
 
         try:
             destination_address = CoinAddress.objects.get(

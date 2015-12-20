@@ -69,7 +69,7 @@ class Comment(models.Model):
     )
 
     def __str__(self):
-        return u"Comment #%s" % self.id
+        return "Comment #%s" % self.id
 
     def get_absolute_url(self):
         return "/"
@@ -108,7 +108,7 @@ class Comment(models.Model):
         for m in finditer('\{([^}]+)\}', self.text):
             token = m.group(1)
             if token:
-                if token[0] == u'?':
+                if token[0] == '?':
                     try:
                         hours = float(token[1:])
                         self.hours_assumed += Decimal(hours)

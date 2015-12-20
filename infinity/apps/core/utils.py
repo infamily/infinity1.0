@@ -297,16 +297,16 @@ def WikiDataSearch(name, language, return_response=False):
     results = []
 
     for item in dicts:
-        if 'match' in item.keys():
+        if 'match' in list(item.keys()):
             expression = item['match']['text']
-        if 'aliases' in item.keys():
+        if 'aliases' in list(item.keys()):
             aliases = '; '.join(item['aliases'])
-        if 'description' in item.keys():
+        if 'description' in list(item.keys()):
             description = item['description']
         else:
             continue
 
-        if 'description' in item.keys():
+        if 'description' in list(item.keys()):
             if item['description'] == 'Wikimedia disambiguation page':
                 continue
             if item['description'] == 'Wikipedia disambiguation page':

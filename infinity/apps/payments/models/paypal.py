@@ -77,7 +77,7 @@ class PayPalTransaction(models.Model):
     comment = models.ForeignKey(Comment, related_name='paypal_transaction')
 
     def __str__(self):
-        return u"Transaction #%s" % self.id
+        return "Transaction #%s" % self.id
 
     def get_absolute_url(self):
         return "/"
