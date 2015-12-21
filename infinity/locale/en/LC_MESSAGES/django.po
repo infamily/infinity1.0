@@ -495,11 +495,11 @@ msgstr ""
 msgid "link"
 msgstr ""
 
-#: infinity/apps/core/templates/goal/create1.html:10
+#: infinity/apps/core/templates/goal/create.html:10
 msgid "Goal create"
 msgstr ""
 
-#: infinity/apps/core/templates/goal/create1.html:12
+#: infinity/apps/core/templates/goal/create.html:12
 msgid ""
 "\n"
 "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
@@ -663,13 +663,13 @@ msgstr ""
 msgid "+New Plan"
 msgstr ""
 
-#: infinity/apps/core/templates/need/create1.html:20
+#: infinity/apps/core/templates/need/create.html:20
 msgid ""
 "Definition not found in WikiData. Please, create a custom definition by "
 "entering your own."
 msgstr ""
 
-#: infinity/apps/core/templates/need/create1.html:21
+#: infinity/apps/core/templates/need/create.html:21
 msgid "Create my definition"
 msgstr ""
 

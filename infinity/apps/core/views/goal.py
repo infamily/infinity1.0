@@ -32,7 +32,7 @@ class GoalCreateView(CreateViewWrapper):
     """Goal create view"""
     model = Goal
     form_class = GoalCreateForm
-    template_name = "goal/create1.html"
+    template_name = "goal/create.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

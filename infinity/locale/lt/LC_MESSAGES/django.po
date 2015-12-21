@@ -547,11 +547,11 @@ msgstr "transporto priemonė skirta skrydžiams į kosmosą"
 msgid "link"
 msgstr "adaptuotas"
 
-#: infinity/apps/core/templates/goal/create1.html:10
+#: infinity/apps/core/templates/goal/create.html:10
 msgid "Goal create"
 msgstr "Apibrėžti tikslą"
 
-#: infinity/apps/core/templates/goal/create1.html:12
+#: infinity/apps/core/templates/goal/create.html:12
 msgid ""
 "\n"
 "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
@@ -718,7 +718,7 @@ msgstr "Planai"
 msgid "+New Plan"
 msgstr "+Naujas planas"
 
-#: infinity/apps/core/templates/need/create1.html:20
+#: infinity/apps/core/templates/need/create.html:20
 msgid ""
 "Definition not found in WikiData. Please, create a custom definition by "
 "entering your own."
@@ -726,7 +726,7 @@ msgstr ""
 "Atsiprašome, žodis arba jo apibrėžimas nerastas. Prašome įves savo "
 "apibrėžimą."
 
-#: infinity/apps/core/templates/need/create1.html:21
+#: infinity/apps/core/templates/need/create.html:21
 msgid "Create my definition"
 msgstr "Kurti apibrėžimą"
 

@@ -26,7 +26,7 @@ class NeedCreateView(CreateViewWrapper):
     """Need create view"""
     model = Need
     form_class = NeedCreateForm
-    template_name = "need/create1.html"
+    template_name = "need/create.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
