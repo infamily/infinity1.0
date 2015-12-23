@@ -9,7 +9,7 @@ from clever_selects.form_fields import ChainedModelChoiceField
 
 from .models import CryptsyCredential
 from .models import CoinAddress
-from .fields import UserChoiceField
+from users.models import User
 from .cryptsy.v2 import Cryptsy
 
 from decimal import Decimal
@@ -31,7 +31,7 @@ class CoinAddressForm(forms.ModelForm):
 class CryptsyTransactionForm(forms.Form):
     amount = forms.DecimalField()
     currency = forms.ChoiceField()
-    recipient_username = UserChoiceField()
+    recipient_username = forms.ModelChoiceField(queryset=User.objects.all())
     recipient_address = ChainedModelChoiceField(
         parent_field='recipient_username',
         ajax_url=reverse_lazy('ajax_chained_view'),
@@ -69,7 +69,7 @@ class CryptsyTransactionForm(forms.Form):
 
 
 class PayPalTransactionForm(forms.Form):
-    recipient_username = UserChoiceField()
+    recipient_username = forms.ModelChoiceField(queryset=User.objects.all())
     amount = forms.DecimalField()
 
     USD = 0

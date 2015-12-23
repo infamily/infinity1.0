@@ -1,12 +1,6 @@
 from django import forms
 from django.core.validators import EmailValidator
 
-from django_select2.fields import AutoModelSelect2Field
-
-
-class LanguageChoiceField(AutoModelSelect2Field):
-    search_fields = ['name__icontains']
-
 
 class MultipleEmailsField(forms.Field):
     def clean(self, value):
