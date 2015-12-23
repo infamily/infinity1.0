@@ -1327,9 +1327,8 @@ class PlanTest(WebTest, AuthTestMixin):
 
         self.login(self.user.email, 'test')
 
-        resp = self.app.get(url)
-
         member = mommy.make('users.User')
+        resp = self.app.get(url)
 
         form = resp.forms[1]
         form['name'] = plan.name

@@ -15,6 +15,7 @@ from core.models import Plan
 from core.models import Step
 from core.models import Task
 from core.models import Work
+from core.models import Type
 from core.models import Comment
 
 from django.contrib.contenttypes.models import ContentType
@@ -201,7 +202,7 @@ class NeedUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['name'].label = 'Description'
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
@@ -245,7 +246,7 @@ class GoalCreateForm(forms.ModelForm):
 
         self.fields['type'] = forms.ModelChoiceField(queryset=Type.objects.all())
         self.fields['need'] = forms.ModelChoiceField(queryset=Need.objects.all())
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
 
         self.fields['type'].label = _("<b>Problem category:</b>")
         self.fields['need'].label = _("""<b>Related Need:</b> (Optional)""")
@@ -304,7 +305,7 @@ class GoalUpdateForm(forms.ModelForm):
 
         self.fields['name'].label = 'Description'
         self.fields['need'] = forms.ModelChoiceField(queryset=Need.objects.all())
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['hyper_equity'].label = _('Hyper equity')
@@ -344,7 +345,7 @@ class WorkUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
@@ -494,7 +495,7 @@ class IdeaCreateForm(forms.ModelForm):
             self.initial['goal'] = [goal_instance, ]
 
         self.fields['goal'] = forms.ModelMultipleChoiceField(queryset=Goal.objects.all())
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
         self.fields['goal'].label = _('Goals')
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "Solar Water Condenser", used in title.)')
@@ -547,7 +548,7 @@ class StepUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
@@ -589,7 +590,7 @@ class StepCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
 
         self.fields['name'].label = _('<b>Milestone:</b> (e.g., "assemble solar panels", used in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the milestone.')})
@@ -648,7 +649,7 @@ class TaskUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
@@ -686,7 +687,7 @@ class TaskCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
         self.fields['name'].label = _('<b>Task:</b> (e.g., "Purchase solar cells", text in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the task.')})
         self.fields['priority'].label = _("<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number means the task has to be done earlier)")
@@ -731,7 +732,7 @@ class DefinitionCreateForm(forms.ModelForm):
         super(DefinitionCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all())
 
         if self.request.user.is_anonymous():
             submit_button = Div(
@@ -826,8 +827,8 @@ class PlanUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
-        self.fields['members'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all(), required=False)
+        self.fields['members'] = forms.ModelMultipleChoiceField(queryset=User.objects.all(), required=False)
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
@@ -880,8 +881,8 @@ class PlanCreateForm(forms.ModelForm):
             self.initial['idea'] = idea_instance
             self.initial['goal'] = idea_instance.goal.first()
 
-        self.fields['sharewith'] = forms.ModelChoiceField(queryset=User.objects.all())
-        self.fields['members'] = forms.ModelChoiceField(queryset=User.objects.all())
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(queryset=User.objects.all(), required=False)
+        self.fields['members'] = forms.ModelMultipleChoiceField(queryset=User.objects.all(), required=False)
         self.fields['idea'] = forms.ModelChoiceField(queryset=Idea.objects.all())
         self.fields['goal'] = forms.ModelChoiceField(queryset=Goal.objects.all())
 
