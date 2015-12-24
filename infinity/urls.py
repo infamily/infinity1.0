@@ -21,7 +21,7 @@ urlpatterns = patterns(
     url(r'^user/', include('apps.users.urls')),
     url(r'^payments/', include('payments.urls', namespace="payments")),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^ext/', include('django_select2.urls')),
+    url(r'^select2/', include('django_select2.urls')),
     url(r'^invite/', include('invitation.urls', namespace='invite')),
     url(r'^help/$', TemplateView.as_view(template_name='help.html'),
         name="help"),

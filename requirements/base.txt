@@ -5,7 +5,7 @@ django-model-utils==2.0.3
 django-pure-pagination==0.2.1
 Pygments==1.6
 logutils==0.3.3
-Django-Select2==4.3.1
+Django-Select2==5.5.0
 django-extensions
 webtest
 django-webtest==1.7.8
