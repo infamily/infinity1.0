@@ -947,6 +947,22 @@ class PlanUpdateForm(forms.ModelForm):
 #       choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
 #   )
 
+    goal = forms.ModelChoiceField(
+        widget=ModelSelect2Widget(
+            queryset=Goal.objects.all(),
+            search_fields=['name__icontains']
+        ),
+        queryset=Goal.objects.all()
+    )
+
+    idea = forms.ModelChoiceField(
+        widget=ModelSelect2Widget(
+            queryset=Idea.objects.all(),
+            search_fields=['name__icontains']
+        ),
+        queryset=Idea.objects.all()
+    )
+
     def __init__(self, *args, **kwargs):
         super(PlanUpdateForm, self).__init__(*args, **kwargs)
 
@@ -987,6 +1003,8 @@ class PlanUpdateForm(forms.ModelForm):
             'is_link',
             'url',
             'is_historical',
+            'goal',
+            'idea',
             'name',
             'situation',
             'deliverable',
