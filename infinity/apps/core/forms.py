@@ -165,6 +165,23 @@ class NeedCreateForm(forms.ModelForm):
         if definition_instance:
             self.initial['definition'] = definition_instance
 
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
+
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(),
+            required=False
+        )
+
         self.fields['definition'].label = _("""<b>Topic:</b> (relevant to problem,
                                       <a href="/definition-create/">click here</a> to
                                       add if you can't find it.)""")
@@ -209,6 +226,15 @@ class NeedUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['name'].label = 'Description'
+
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
+
         self.fields['sharewith'] = forms.ModelMultipleChoiceField(
             widget=ModelSelect2MultipleWidget(
                 queryset=User.objects.all(),
@@ -346,6 +372,32 @@ class GoalUpdateForm(forms.ModelForm):
 
         self.fields['name'].label = 'Description'
         self.fields['need'] = forms.ModelChoiceField(queryset=Need.objects.all())
+
+        self.fields['type'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Type.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Type.objects.all()
+        )
+
+        self.fields['need'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Need.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Need.objects.all(),
+            required=False
+        )
+
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
+
         self.fields['sharewith'] = forms.ModelMultipleChoiceField(
             widget=ModelSelect2MultipleWidget(
                 queryset=User.objects.all(),
@@ -391,12 +443,27 @@ class WorkUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
+
+        self.fields['task'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Task.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Task.objects.all()
+        )
         self.fields['sharewith'] = forms.ModelMultipleChoiceField(
             widget=ModelSelect2MultipleWidget(
                 queryset=User.objects.all(),
                 search_fields=['username__icontains']
             ),
             queryset=User.objects.all(), required=False)
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
@@ -411,6 +478,7 @@ class WorkUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'task',
             'is_link',
             'url',
             'is_historical',
@@ -418,7 +486,6 @@ class WorkUpdateForm(forms.ModelForm):
             'file',
             'description',
             'parent_work_id',
-            'task',
             'language',
             'personal',
             'sharewith',
@@ -512,6 +579,27 @@ class IdeaUpdateForm(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Update')))
 
+        self.fields['goal'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=Goal.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Goal.objects.all()
+        )
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
+
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
@@ -528,10 +616,10 @@ class IdeaUpdateForm(forms.ModelForm):
             'is_link',
             'url',
             'is_historical',
+            'goal',
             'name',
             'summary',
             'description',
-            'goal',
             'language',
             'personal',
             'sharewith',
@@ -639,6 +727,20 @@ class StepUpdateForm(forms.ModelForm):
                 search_fields=['username__icontains']
             ),
             queryset=User.objects.all(), required=False)
+        self.fields['plan'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Plan.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Plan.objects.all()
+        )
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
@@ -653,6 +755,7 @@ class StepUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'plan',
             'is_link',
             'url',
             'is_historical',
@@ -661,7 +764,6 @@ class StepUpdateForm(forms.ModelForm):
             'priority',
             'investables',
             'deliverables',
-            'plan',
             'language',
             'personal',
             'sharewith',
@@ -680,6 +782,13 @@ class StepCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
         self.fields['sharewith'] = forms.ModelMultipleChoiceField(
             widget=ModelSelect2MultipleWidget(
                 queryset=User.objects.all(),
@@ -744,12 +853,26 @@ class TaskUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
+        self.fields['step'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Step.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Step.objects.all()
+        )
         self.fields['sharewith'] = forms.ModelMultipleChoiceField(
             widget=ModelSelect2MultipleWidget(
                 queryset=User.objects.all(),
                 search_fields=['username__icontains']
             ),
             queryset=User.objects.all(), required=False)
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
@@ -765,13 +888,13 @@ class TaskUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'step',
             'is_link',
             'url',
             'is_historical',
             'name',
             'description',
             'priority',
-            'step',
             'language',
             'personal',
             'sharewith',
