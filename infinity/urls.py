@@ -37,7 +37,7 @@ urlpatterns = patterns(
         name="dev"),
     url(r'^data/$', TemplateView.as_view(template_name='data.html'),
         name="data"),
-    url('^markdown/', include( 'django_markdown.urls')),
+    url('^markdown/', include('django_markdown.urls')),
     url('^i18n/', include('django.conf.urls.i18n')),
 )
 

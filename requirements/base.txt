@@ -26,7 +26,6 @@ pyopenssl
 ndg-httpsclient
 pyasn1
 fabric
-django-clever-selects==0.6.9
 django-markdown==0.8.4
 https://github.com/mindey/django-money-rates/archive/master.zip
 fred==3.1

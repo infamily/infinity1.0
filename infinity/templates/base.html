@@ -1,7 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load country_isocode %}
-{% load clever_selects_extras %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -170,8 +169,6 @@
 
     </div> <!-- /container -->
     {{ form.media.js }}
+    {% block select2_js %}{% endblock %}
   </body>
-  {% clever_selects_js_import %}
-  {% block clever_js %}
-  {% endblock clever_js %}
 </html>

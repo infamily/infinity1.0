@@ -5,7 +5,6 @@ from core.views import *
 
 urlpatterns = patterns(
     '',
-    url(r'^ajax/custom-chained-view-url/$', AjaxChainedView.as_view(), name='ajax_chained_view'),
     url(r'^ajax/comment-vote/$', AjaxCommentVoteView.as_view(), name='ajax_comment_vote_view'),
     url(
         r'^comment/(?P<slug>.*)/update/$',
@@ -300,5 +299,15 @@ urlpatterns = patterns(
         r'^change-step-priority/$',
         ChangeStepPriorityView.as_view(),
         name='change-step-priority'
+    ),
+    url(
+        r'^heavy_data_idea_chained/$',
+        IdeaChainedView.as_view(),
+        name="heavy_data_idea_chained"
+    ),
+    url(
+        r'^heavy_data_goal_chained/$',
+        GoalChainedView.as_view(),
+        name="heavy_data_goal_chained"
     )
 )

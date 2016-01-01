@@ -12,8 +12,6 @@ from django.conf import settings
 from django.utils import translation as trans_settings
 from django.contrib.contenttypes.models import ContentType
 
-from clever_selects.views import ChainedSelectChoicesView
-
 from users.decorators import ForbiddenUser
 from users.models import User
 from hours.models import HourValue
@@ -239,18 +237,3 @@ class IndexView(TemplateView):
         context.update(kwargs)
 
         return context
-
-
-class AjaxChainedView(ChainedSelectChoicesView):
-    def get_choices(self):
-        vals_list = []
-        for x in range(1, 6):
-            vals_list.append(x*int(self.parent_value))
-        address = User.objects.get(pk=self.parent_value).address.all()
-        res = tuple(
-            zip(
-                [x.pk for x in address],
-                ['(%s) %s' % (x.currency_code, x.address) for x in address]
-            )
-        )
-        return res

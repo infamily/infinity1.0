@@ -1151,7 +1151,8 @@ class PlanCreateForm(forms.ModelForm):
     goal = forms.ModelChoiceField(
         widget=ModelSelect2Widget(
             queryset=Goal.objects.all(),
-            search_fields=['name__icontains']
+            search_fields=['name__icontains'],
+            data_view='heavy_data_goal_chained'
         ),
         queryset=Goal.objects.all()
     )
@@ -1159,7 +1160,8 @@ class PlanCreateForm(forms.ModelForm):
     idea = forms.ModelChoiceField(
         widget=ModelSelect2Widget(
             queryset=Idea.objects.all(),
-            search_fields=['name__icontains']
+            search_fields=['name__icontains'],
+            data_view='heavy_data_idea_chained'
         ),
         queryset=Idea.objects.all()
     )
