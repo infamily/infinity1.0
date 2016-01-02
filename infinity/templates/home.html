@@ -25,6 +25,20 @@
 {% endif %}
 
 <div class="alignleft">
+
+	<div class="btn-group" style="position: absolute; top:70px;">
+	  <button type="button" class="btn-lg btn" style='font-weight: normal; text-transform: none; color: white; background-color: black; font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif' onclick="window.location.href={% url 'need-create' %}">{% trans "compose" %}</button>
+	  <button type="button" class="btn-lg btn dropdown-toggle" style="color: white; background-color: grey;" data-toggle="dropdown">
+		<span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+		  <li><a href="{% url 'goal-create' %}">{% trans "Goal" %}</a></li>
+		  <li><a href="{% url 'idea-create' %}">{% trans "Idea" %}</a></li>
+		  <li><a href="{% url 'plan-create' %}">{% trans "Plan" %}</a></li>
+	  </ul>
+	</div>
+
+
     <!-- <input autocomplete="off" tabindex="-1" type="url" aria-hidden="true" size="35" disabled><input type="submit" value="lookup" style="color: GrayText;" disabled> -->
 </div>
 
