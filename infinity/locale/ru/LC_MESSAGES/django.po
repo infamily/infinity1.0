@@ -1422,7 +1422,7 @@ msgstr "оценка времени"
 
 #: infinity/templates/home.html:30
 msgid "compose"
-msgstr "Сочинять"
+msgstr "Написать"
 
 #: infinity/templates/home.html:37
 msgid "Plan"
