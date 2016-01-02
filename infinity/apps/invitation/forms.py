@@ -2,6 +2,7 @@ from django.utils.translation import ugettext as _
 from django import forms
 
 from crispy_forms.helper import FormHelper
+from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import (
     Submit, HTML, Layout, Fieldset, ButtonHolder
 )
@@ -30,7 +31,7 @@ class InvitationForm(forms.Form):
                 'language',
                 'email_body',
                 HTML("Invitations left: %s" % user.invitationoption.invitations_left),
-                ButtonHolder(
+                FormActions(
                     Submit('submit', 'Send', css_class='button')
                 )
             )

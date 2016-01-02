@@ -1,9 +1,12 @@
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.core import validators
+from django.utils import timezone
 from django.db.models import signals
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import (
-    AbstractUser, BaseUserManager, PermissionsMixin
+    BaseUserManager, PermissionsMixin, AbstractBaseUser
 )
 
 from .signals import user_pre_save
@@ -12,6 +15,7 @@ from .signals import conversation_post_save
 
 from core.models import Comment
 from decimal import Decimal
+
 
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
@@ -41,7 +45,40 @@ class Relationship(models.Model):
     to_person = models.ForeignKey('User', related_name='to_people')
 
 
-class User(AbstractUser):
+class User(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(
+        _('username'),
+        max_length=30,
+        unique=True,
+        help_text=_('Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        validators=[
+            validators.RegexValidator(
+                r'^[\w.@+-]+$',
+                _('Enter a valid username. This value may contain only '
+                  'letters, numbers ' 'and @/./+/-/_ characters.')
+            ),
+        ],
+        error_messages={
+            'unique': _("A user with that username already exists."),
+        },
+    )
+    first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    email = models.EmailField(_('email address'), blank=True, unique=True)
+    is_staff = models.BooleanField(
+        _('staff status'),
+        default=False,
+        help_text=_('Designates whether the user can log into this admin site.'),
+    )
+    is_active = models.BooleanField(
+        _('active'),
+        default=True,
+        help_text=_(
+            'Designates whether this user should be treated as active. '
+            'Unselect this instead of deleting accounts.'
+        ),
+    )
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     about = models.TextField(blank=True)
     friends = models.ManyToManyField('self', symmetrical=False, through='Relationship')
 

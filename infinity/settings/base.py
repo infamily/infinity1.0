@@ -295,10 +295,12 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-TEMPLATE_CONTEXT_PROCESSORS += (
-    "allauth.account.context_processors.account",
-    "allauth.socialaccount.context_processors.socialaccount",
-)
+# Removed from new module
+# http://django-allauth.readthedocs.org/en/latest/changelog.html#from-0-21-0
+# TEMPLATE_CONTEXT_PROCESSORS += (
+#     "allauth.account.context_processors.account",
+#     "allauth.socialaccount.context_processors.socialaccount",
+# )
 
 # auth and allauth settings
 LOGIN_REDIRECT_URL = '/'
