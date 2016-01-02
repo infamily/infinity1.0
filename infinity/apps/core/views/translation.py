@@ -4,7 +4,17 @@ from django.contrib import messages
 from django.views.generic import DeleteView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
-from django.db.models.loading import get_model
+try:
+    # django >= 1.7
+    from django.apps import apps
+    def get_model(app_label, model):
+        return apps.get_model(app_label, model)
+except ImportError:
+    # django < 1.7
+    from django.db.models.loading import get_model
+    def get_model(app_label, model):
+        return get_model(app_label, model)
+
 from django.shortcuts import redirect
 from django.contrib.contenttypes.models import ContentType
 
