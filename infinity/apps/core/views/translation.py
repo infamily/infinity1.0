@@ -64,7 +64,7 @@ class TranslationCreateView(CreateView):
         kwargs['content_type_instance'] = self.content_type_instance
         return kwargs
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         form = super(TranslationCreateView, self).get_form(form_class)
 
         model_fields = [x.name for x in self.content_type_model._meta.fields]
@@ -108,7 +108,7 @@ class TranslationUpdateView(UpdateView):
             return redirect(reverse(self.detail_url, kwargs={'slug': self.content_type_instance.id}))
         return super(TranslationUpdateView, self).dispatch(request, *args, **kwargs)
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         form = super(TranslationUpdateView, self).get_form(form_class)
 
         model_fields = [x.name for x in self.content_type_model._meta.fields]

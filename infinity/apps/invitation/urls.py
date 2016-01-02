@@ -1,11 +1,10 @@
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from invitation.views import *
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(
         '^$',
         InvitationFormView.as_view(),
@@ -21,4 +20,4 @@ urlpatterns = patterns(
         InvitationLetterTemplateView.as_view(),
         name="letter-detail"
     )
-)
+]

@@ -28,3 +28,4 @@ django-markdown==0.8.4
 https://github.com/WeFindX/django-money-rates/archive/django-1.9-fixes.zip
 fred==3.1
 geoip2==2.2.0
+py-moneyed

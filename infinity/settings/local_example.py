@@ -12,7 +12,7 @@ from .base import *
 DEBUG = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
-TEMPLATE_DEBUG = DEBUG
+TEMPLATES[0]['debug'] = DEBUG
 # END DEBUG CONFIGURATION
 
 

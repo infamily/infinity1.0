@@ -1,10 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from .views import *
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(
         r'^paypal/(?P<comment_id>\d+)/$',
         PayPalTransactionView.as_view(),
@@ -60,4 +59,4 @@ urlpatterns = patterns(
         CoinAddressDeleteView.as_view(),
         name='coin_address_delete'
     ),
-)
+]
