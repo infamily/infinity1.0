@@ -164,6 +164,15 @@ class NeedCreateForm(forms.ModelForm):
 
         if definition_instance:
             self.initial['definition'] = definition_instance
+            self.fields['definition'].widget = forms.HiddenInput()
+        else:
+            self.fields['definition'] = forms.ModelChoiceField(
+                widget=ModelSelect2Widget(
+                    queryset=Definition.objects.all(),
+                    search_fields=['name__icontains', ]
+                ),
+                queryset=Definition.objects.all()
+            )
 
         self.fields['language'] = forms.ModelChoiceField(
             widget=ModelSelect2Widget(
@@ -191,7 +200,6 @@ class NeedCreateForm(forms.ModelForm):
         self.fields['content'].widget.attrs.update({'placeholder': _('e.g., "I have been dreaming about travelling to explore other planets since childhood. I would enjoy going on a long journey to the unknown together with a group of close friends living in the spaceship like one family. It is not impossible. Who would like to join me in an attempt to consider all possible ways how we could do it, from laws of physics to specific designs and logistics."')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
-        self.fields['definition'].widget = forms.HiddenInput()
         self.initial['personal'] = True
 
         try:
@@ -199,7 +207,6 @@ class NeedCreateForm(forms.ModelForm):
             self.initial['language'] = language
         except Language.DoesNotExist:
             pass
-
 
     class Meta:
         model = Need
