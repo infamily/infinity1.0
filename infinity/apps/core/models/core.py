@@ -1,200 +1,14 @@
 from re import finditer
 from decimal import Decimal
-
 from django.db import models
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from django_markdown.models import MarkdownField
 from django.db.models.signals import post_save
-
-from djmoney_rates.utils import convert_money
-
-
-from .signals import _content_type_post_save
 from hours.models import HourValue
-
-
-class Comment(models.Model):
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-
-    text = MarkdownField(blank=False)
-    notify = models.BooleanField(default=True)
-    created_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        auto_now_add=False,
-        unique=False,
-        null=False,
-        blank=False,
-    )
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        blank=False,
-        null=False,
-    )
-    hours_donated = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    hours_claimed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    hours_assumed = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-    hours_matched = models.DecimalField(
-        default=0.,
-        decimal_places=8,
-        max_digits=20,
-        blank=False,
-    )
-
-    def __unicode__(self):
-        return u"Comment #%s" % self.id
-
-    def get_absolute_url(self):
-        return "/"
-
-    def save(self, *args, **kwargs):
-        "Save comment created date to parent object."
-        self.sum_hours_claimed()
-        self.match_hours()
-        super(Comment, self).save(*args, **kwargs)
-        if self.content_object:
-            self.content_object.commented_at = self.created_at
-            self.content_object.save()
-            self.content_object.sum_hours()
-            self.content_object.sum_totals()
-
-    def delete(self, *args, **kwargs):
-        "Update comment created date for parent object."
-        super(Comment, self).delete(*args, **kwargs)
-        comments = Comment.objects.filter(object_id=self.object_id)
-        if comments:
-            self.content_object.commented_at = comments.latest('created_at').created_at
-        else:
-            self.content_object.commented_at = self.content_object.created_at
-        self.content_object.sum_totals()
-        self.content_object.save()
-
-    def sum_hours_donated(self):
-        self.hours_donated = sum([tx.hours for tx in self.paypal_transaction.all()])
-        #+= sum([tx.amount for tx in self.cryptsy_transaction.all()])
-        self.match_hours()
-        self.save()
-
-    def sum_hours_claimed(self):
-        self.hours_claimed = Decimal(0.)
-        self.hours_assumed = Decimal(0.)
-        for m in finditer('\{([^}]+)\}', self.text):
-            token = m.group(1)
-            if token:
-                if token[0] == u'?':
-                    try:
-                        hours = float(token[1:])
-                        self.hours_assumed += Decimal(hours)
-                    except:
-                        pass
-                else:
-                    try:
-                        hours = float(token)
-                        self.hours_claimed += Decimal(hours)
-                    except:
-                        pass
-
-    def match_hours(self):
-        if self.hours_claimed >= self.hours_donated:
-            ratio = Decimal(1.)
-        elif self.hours_claimed < self.hours_donated:
-            ratio = self.hours_claimed/self.hours_donated
-
-        self.hours_matched = Decimal(0.)
-        for tx in self.paypal_transaction.all():
-            tx.hours_matched = tx.hours * ratio
-            self.hours_matched += tx.hours_matched
-
-    def get_usd(self):
-        return self.total_donated*HourValue.objects.latest('created_at').value
-
-    def votes(self):
-        return sum([vote.value for vote in Vote.objects.filter(comment_id=self.id)])
-
-    def user_vote(self, user_id):
-        try:
-            vote = Vote.objects.get(
-                comment_id=self.id,
-                user_id=user_id
-            )
-        except Vote.DoesNotExist:
-            vote = None
-        return vote
-
-    def comment_credit(self):
-        return min([self.hours_claimed, self.votes()]) or Decimal(0.)
-
-
-class Vote(models.Model):
-
-    created_at = models.DateTimeField(
-        auto_now=False,
-        auto_now_add=True,
-        unique=False,
-        null=False,
-        blank=False,
-    )
-
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        auto_now_add=False,
-        unique=False,
-        null=False,
-        blank=False,
-    )
-
-    POSITIVE = 1
-    NEUTRAL = 0
-    NEGATIVE = -1
-
-    VOTE_STATES = (
-        (POSITIVE, 'Positive'),
-        (NEUTRAL, 'Neural'),
-        (NEGATIVE, 'Negative'),
-    )
-
-    value = models.IntegerField(
-        choices=VOTE_STATES,
-    )
-
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='vote_user',
-        blank=False,
-        null=False
-    )
-
-    comment = models.ForeignKey(Comment, related_name='vote_comment')
-
-    class Meta:
-        unique_together = (('user', 'comment'))
+from ..signals import _content_type_post_save
 
 
 class BaseContentModel(models.Model):
@@ -390,6 +204,186 @@ class BaseContentModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Comment(models.Model):
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    text = MarkdownField(blank=False)
+    notify = models.BooleanField(default=True)
+    created_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        auto_now_add=False,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        blank=False,
+        null=False,
+    )
+    hours_donated = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_claimed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_assumed = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+    hours_matched = models.DecimalField(
+        default=0.,
+        decimal_places=8,
+        max_digits=20,
+        blank=False,
+    )
+
+    def __unicode__(self):
+        return u"Comment #%s" % self.id
+
+    def get_absolute_url(self):
+        return "/"
+
+    def save(self, *args, **kwargs):
+        "Save comment created date to parent object."
+        self.sum_hours_claimed()
+        self.match_hours()
+        super(Comment, self).save(*args, **kwargs)
+        if self.content_object:
+            self.content_object.commented_at = self.created_at
+            self.content_object.save()
+            self.content_object.sum_hours()
+            self.content_object.sum_totals()
+
+    def delete(self, *args, **kwargs):
+        "Update comment created date for parent object."
+        super(Comment, self).delete(*args, **kwargs)
+        comments = Comment.objects.filter(object_id=self.object_id)
+        if comments:
+            self.content_object.commented_at = comments.latest('created_at').created_at
+        else:
+            self.content_object.commented_at = self.content_object.created_at
+        self.content_object.sum_totals()
+        self.content_object.save()
+
+    def sum_hours_donated(self):
+        self.hours_donated = sum([tx.hours for tx in self.paypal_transaction.all()])
+        #+= sum([tx.amount for tx in self.cryptsy_transaction.all()])
+        self.match_hours()
+        self.save()
+
+    def sum_hours_claimed(self):
+        self.hours_claimed = Decimal(0.)
+        self.hours_assumed = Decimal(0.)
+        for m in finditer('\{([^}]+)\}', self.text):
+            token = m.group(1)
+            if token:
+                if token[0] == u'?':
+                    try:
+                        hours = float(token[1:])
+                        self.hours_assumed += Decimal(hours)
+                    except:
+                        pass
+                else:
+                    try:
+                        hours = float(token)
+                        self.hours_claimed += Decimal(hours)
+                    except:
+                        pass
+
+    def match_hours(self):
+        if self.hours_claimed >= self.hours_donated:
+            ratio = Decimal(1.)
+        elif self.hours_claimed < self.hours_donated:
+            ratio = self.hours_claimed/self.hours_donated
+
+        self.hours_matched = Decimal(0.)
+        for tx in self.paypal_transaction.all():
+            tx.hours_matched = tx.hours * ratio
+            self.hours_matched += tx.hours_matched
+
+    def get_usd(self):
+        return self.total_donated*HourValue.objects.latest('created_at').value
+
+    def votes(self):
+        return sum([vote.value for vote in Vote.objects.filter(comment_id=self.id)])
+
+    def user_vote(self, user_id):
+        try:
+            vote = Vote.objects.get(
+                comment_id=self.id,
+                user_id=user_id
+            )
+        except Vote.DoesNotExist:
+            vote = None
+        return vote
+
+    def comment_credit(self):
+        return min([self.hours_claimed, self.votes()]) or Decimal(0.)
+
+
+class Vote(models.Model):
+
+    created_at = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        auto_now_add=False,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+
+    POSITIVE = 1
+    NEUTRAL = 0
+    NEGATIVE = -1
+
+    VOTE_STATES = (
+        (POSITIVE, 'Positive'),
+        (NEUTRAL, 'Neural'),
+        (NEGATIVE, 'Negative'),
+    )
+
+    value = models.IntegerField(
+        choices=VOTE_STATES,
+    )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='vote_user',
+        blank=False,
+        null=False
+    )
+
+    comment = models.ForeignKey(Comment, related_name='vote_comment')
+
+    class Meta:
+        unique_together = (('user', 'comment'))
 
 
 class Type(models.Model):

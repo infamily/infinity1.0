@@ -1,15 +1,12 @@
 from django.utils.translation import ugettext as _
 from django import forms
 
-from django_select2.widgets import AutoHeavySelect2Widget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
     Submit, HTML, Layout, Fieldset, ButtonHolder
 )
 
 from core.models import Language
-from .fields import MultipleEmailsField
-from .fields import LanguageChoiceField
 
 
 class InvitationForm(forms.Form):
@@ -21,13 +18,8 @@ class InvitationForm(forms.Form):
 
         self.fields['email_body'] = forms.CharField(widget=forms.Textarea)
         self.fields['email_body'].help_text = _("You can use {{ invitation_url }} tag to past invitation url")
-        self.fields['language'] = LanguageChoiceField(
+        self.fields['language'] = forms.ModelChoiceField(
             queryset=Language.objects.all(),
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 0
-                }
-            )
         )
 
         self.helper = FormHelper(self)

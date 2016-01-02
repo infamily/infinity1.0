@@ -1,7 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load country_isocode %}
-{% load clever_selects_extras %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,9 +25,7 @@
      <link rel="stylesheet" href="{% static "cdn/font-awesome/4.3.0/css/font-awesome.min.css" %}">
      <link rel="stylesheet" href="{% static "cdn/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" %}">
     {% endif %}
-    <!-- Sometimes django_select2 does not load styles. for confidence redefine them here -->
-    <link href="{% static "django_select2/css/select2.css" %}" rel="stylesheet" />
-    <link href="{% static "django_select2/css/extra.css" %}" rel="stylesheet" />
+    {{ form.media.css }}
     
     <style>
       body {
@@ -171,8 +168,7 @@
       {% endblock javascript %}
 
     </div> <!-- /container -->
+    {{ form.media.js }}
+    {% block select2_js %}{% endblock %}
   </body>
-  {% clever_selects_js_import %}
-  {% block clever_js %}
-  {% endblock clever_js %}
 </html>

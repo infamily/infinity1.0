@@ -538,11 +538,11 @@ msgstr "在太空中航行的工具"
 msgid "link"
 msgstr "链接"
 
-#: infinity/apps/core/templates/goal/create1.html:10
+#: infinity/apps/core/templates/goal/create.html:10
 msgid "Goal create"
 msgstr "创造目标"
 
-#: infinity/apps/core/templates/goal/create1.html:12
+#: infinity/apps/core/templates/goal/create.html:12
 msgid ""
 "\n"
 "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
@@ -709,13 +709,13 @@ msgstr "计划"
 msgid "+New Plan"
 msgstr "+新的计划"
 
-#: infinity/apps/core/templates/need/create1.html:20
+#: infinity/apps/core/templates/need/create.html:20
 msgid ""
 "Definition not found in WikiData. Please, create a custom definition by "
 "entering your own."
 msgstr "抱歉，中文的词或者定义没发现。请创造自己的定义。"
 
-#: infinity/apps/core/templates/need/create1.html:21
+#: infinity/apps/core/templates/need/create.html:21
 msgid "Create my definition"
 msgstr "创造我的定义"
 

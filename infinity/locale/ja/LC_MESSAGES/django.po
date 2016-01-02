@@ -547,11 +547,11 @@ msgstr "宇宙空間に打ち上げられ，長時間人間を乗せて運航す
 msgid "link"
 msgstr "リンク"
 
-#: infinity/apps/core/templates/goal/create1.html:10
+#: infinity/apps/core/templates/goal/create.html:10
 msgid "Goal create"
 msgstr "目的の作成"
 
-#: infinity/apps/core/templates/goal/create1.html:12
+#: infinity/apps/core/templates/goal/create.html:12
 msgid ""
 "\n"
 "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
@@ -718,14 +718,14 @@ msgstr "企画"
 msgid "+New Plan"
 msgstr "+新規企画"
 
-#: infinity/apps/core/templates/need/create1.html:20
+#: infinity/apps/core/templates/need/create.html:20
 msgid ""
 "Definition not found in WikiData. Please, create a custom definition by "
 "entering your own."
 msgstr ""
 "申し訳ありません、定義は見つかれませんでした。自分の定義を作ってください。"
 
-#: infinity/apps/core/templates/need/create1.html:21
+#: infinity/apps/core/templates/need/create.html:21
 msgid "Create my definition"
 msgstr "定義の作成"
 

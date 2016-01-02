@@ -5,15 +5,16 @@ from django import forms
 import requests
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from clever_selects.form_fields import ChainedModelChoiceField
+from django_select2.forms import ModelSelect2Widget
 
 from .models import CryptsyCredential
 from .models import CoinAddress
-from .fields import UserChoiceField
+from users.models import User
 from .cryptsy.v2 import Cryptsy
 
 from decimal import Decimal
 from hours.models import HourValue
+
 
 class CoinAddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -31,12 +32,15 @@ class CoinAddressForm(forms.ModelForm):
 class CryptsyTransactionForm(forms.Form):
     amount = forms.DecimalField()
     currency = forms.ChoiceField()
-    recipient_username = UserChoiceField()
-    recipient_address = ChainedModelChoiceField(
-        parent_field='recipient_username',
-        ajax_url=reverse_lazy('ajax_chained_view'),
-        model=CoinAddress
+    recipient_username = forms.ModelChoiceField(
+        widget=ModelSelect2Widget(
+            queryset=User.objects.all(),
+            search_fields=['username__icontains']
+        ),
+        queryset=User.objects.all()
     )
+
+    recipient_address = forms.ModelChoiceField(queryset=CoinAddress.objects.all())
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
@@ -69,7 +73,7 @@ class CryptsyTransactionForm(forms.Form):
 
 
 class PayPalTransactionForm(forms.Form):
-    recipient_username = UserChoiceField()
+    recipient_username = forms.ModelChoiceField(queryset=User.objects.all())
     amount = forms.DecimalField()
 
     USD = 0
@@ -86,14 +90,20 @@ class PayPalTransactionForm(forms.Form):
         self.request = kwargs.pop('request')
         self.comment_model = kwargs.pop('comment_model')
         super(PayPalTransactionForm, self).__init__(*args, **kwargs)
+        self.fields['recipient_username'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all()
+        )
         self.initial['recipient_username'] = self.comment_model.user.id
 
-
         self.initial['amount'] = max(Decimal(0), round((self.comment_model.hours_assumed+\
-                                                 self.comment_model.hours_claimed-\
-                                                 self.comment_model.hours_donated)*\
-                                                 HourValue.objects.latest('created_at').value,2))
-                                
+                                                        self.comment_model.hours_claimed-\
+                                                        self.comment_model.hours_donated)*\
+                                                       HourValue.objects.latest('created_at').value,2))
+
         if self.request.session.get('amount') and self.request.session.get('currency'):
             self.initial['amount'] = Decimal(self.request.session.get('amount'))
             self.initial['currency'] = int(self.request.session.get('currency'))

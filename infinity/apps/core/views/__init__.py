@@ -8,4 +8,5 @@ from .step import *
 from .task import *
 from .translation import *
 from .work import *
+from .select import *
 from .views import *

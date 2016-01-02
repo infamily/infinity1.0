@@ -3,15 +3,11 @@ from django import forms
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div, Button
-from django_select2.widgets import AutoHeavySelect2Widget
-from django_select2.widgets import AutoHeavySelect2MultipleWidget
-from django_select2.fields import AutoModelSelect2Field
 from django.core.urlresolvers import reverse
 
 
 from core.models import Language
 from core.models import Definition
-from core.models import Type
 from core.models import Need
 from core.models import Goal
 from core.models import Idea
@@ -19,22 +15,17 @@ from core.models import Plan
 from core.models import Step
 from core.models import Task
 from core.models import Work
+from core.models import Type
 from core.models import Comment
-from .fields import DefinitionChoiceField
-from .fields import NeedChoiceField
-from .fields import TypeChoiceField
-from .fields import GoalChoiceField
-from .fields import GoalChoiceFieldMultiple
-from .fields import IdeaChoiceField
-from .fields import MembersChoiceField
 
-import django_select2
 from django.contrib.contenttypes.models import ContentType
-
+from django_select2.forms import ModelSelect2MultipleWidget
+from django_select2.forms import ModelSelect2Widget
 from django_markdown.widgets import MarkdownWidget
 
 from decimal import Decimal
 from core.models import Translation
+from users.models import User
 
 
 class ChangePriorityForm(forms.Form):
@@ -64,7 +55,13 @@ class TranslationCreateForm(forms.ModelForm):
             object_id=content_type_instance.pk
         )
 
-        self.fields['language'] = django_select2.ModelSelect2Field(
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all().exclude(id__in=[
+                    translation.language.id for translation in translations
+                ]),
+                search_fields=['name__icontains']
+            ),
             queryset=Language.objects.all().exclude(id__in=[
                 translation.language.id for translation in translations
             ])
@@ -138,14 +135,6 @@ class CommentUpdateForm(forms.ModelForm):
         self.fields['notify'].label = _('Notify mentioned users by e-mail.')
 
         self.helper = FormHelper(self)
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
-        )
 
         self.helper.layout.append(Submit('save', _('Update')))
 
@@ -175,31 +164,31 @@ class NeedCreateForm(forms.ModelForm):
 
         if definition_instance:
             self.initial['definition'] = definition_instance
-
-
-        self.fields['definition'] = DefinitionChoiceField(
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the thing that you need...')),
-                    'ajax': {
-                        'dataType': 'json',
-                        'quietMillis': 100,
-                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
-                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-                    },
-                }
+            self.fields['definition'].widget = forms.HiddenInput()
+        else:
+            self.fields['definition'] = forms.ModelChoiceField(
+                widget=ModelSelect2Widget(
+                    queryset=Definition.objects.all(),
+                    search_fields=['name__icontains', ]
+                ),
+                queryset=Definition.objects.all()
             )
+
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
         )
 
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False,
-            label=_('Share with:')
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(),
+            required=False
         )
 
         self.fields['definition'].label = _("""<b>Topic:</b> (relevant to problem,
@@ -211,7 +200,6 @@ class NeedCreateForm(forms.ModelForm):
         self.fields['content'].widget.attrs.update({'placeholder': _('e.g., "I have been dreaming about travelling to explore other planets since childhood. I would enjoy going on a long journey to the unknown together with a group of close friends living in the spaceship like one family. It is not impossible. Who would like to join me in an attempt to consider all possible ways how we could do it, from laws of physics to specific designs and logistics."')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
-        self.fields['definition'].widget = forms.HiddenInput()
         self.initial['personal'] = True
 
         try:
@@ -219,7 +207,6 @@ class NeedCreateForm(forms.ModelForm):
             self.initial['language'] = language
         except Language.DoesNotExist:
             pass
-
 
     class Meta:
         model = Need
@@ -246,14 +233,21 @@ class NeedUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['name'].label = 'Description'
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
+
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
         )
+
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 
@@ -295,40 +289,37 @@ class GoalCreateForm(forms.ModelForm):
         if need_instance:
             self.initial['need'] = need_instance
 
-        self.fields['type'] = TypeChoiceField(
-            queryset=Type.objects.all(),
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 0,
-                    'placeholder': unicode(_('Select the type of the problem...')),
-                }
+        self.fields['type'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Type.objects.all(),
+                search_fields=['name__icontains']
             ),
-            required=True
+            queryset=Type.objects.all()
         )
 
-        self.fields['need'] = NeedChoiceField(
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the thing that you need...')),
-                    'ajax': {
-                        'dataType': 'json',
-                        'quietMillis': 100,
-                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen, selector)*END*',
-                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-                    },
-                }
-            ), required=False,
+        self.fields['need'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Need.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Need.objects.all(),
+            required=False
         )
 
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False,
-            label=_('Share with:')
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(),
+            required=False
         )
 
         self.fields['type'].label = _("<b>Problem category:</b>")
@@ -387,23 +378,39 @@ class GoalUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['name'].label = 'Description'
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
+        self.fields['need'] = forms.ModelChoiceField(queryset=Need.objects.all())
+
+        self.fields['type'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Type.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Type.objects.all()
         )
 
-        self.fields['need'] = NeedChoiceField(
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 0,
-                    'placeholder': unicode(_('Select the thing that you need...')),
-                }
-            ), required=False,
+        self.fields['need'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Need.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Need.objects.all(),
+            required=False
         )
+
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
+
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
 #       self.fields['hyper_equity'].label = _('Hyper equity')
@@ -443,13 +450,26 @@ class WorkUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
+
+        self.fields['task'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Task.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Task.objects.all()
+        )
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
@@ -465,6 +485,7 @@ class WorkUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'task',
             'is_link',
             'url',
             'is_historical',
@@ -472,7 +493,6 @@ class WorkUpdateForm(forms.ModelForm):
             'file',
             'description',
             'parent_work_id',
-            'task',
             'language',
             'personal',
             'sharewith',
@@ -491,13 +511,21 @@ class WorkCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
+
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
+
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=User.objects.all()
         )
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "First attempt to assemble solar cells.", used in title.)')
@@ -555,16 +583,29 @@ class IdeaUpdateForm(forms.ModelForm):
         super(IdeaUpdateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
-        )
 
         self.helper.layout.append(Submit('save', _('Update')))
+
+        self.fields['goal'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=Goal.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Goal.objects.all()
+        )
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
@@ -582,10 +623,10 @@ class IdeaUpdateForm(forms.ModelForm):
             'is_link',
             'url',
             'is_historical',
+            'goal',
             'name',
             'summary',
             'description',
-            'goal',
             'language',
             'personal',
             'sharewith',
@@ -597,7 +638,6 @@ class IdeaUpdateForm(forms.ModelForm):
 
 class IdeaCreateForm(forms.ModelForm):
 
-    goal = GoalChoiceFieldMultiple()
 
 #   super_equity = forms.ChoiceField(
 #       choices=[(Decimal(x*0.01), '%.0f' % (x*1.)+ '%') for x in range(1,11)]
@@ -616,31 +656,27 @@ class IdeaCreateForm(forms.ModelForm):
         if goal_instance:
             self.initial['goal'] = [goal_instance, ]
 
-        self.fields['goal'] = GoalChoiceFieldMultiple(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 0,
-                    'placeholder': unicode(_('Select a goal')),
-                    'ajax': {
-                        'dataType': 'json',
-                        'quietMillis': 100,
-                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_goal, selector)*END*',
-                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-                    },
-                }
-            )
+        self.fields['goal'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=Goal.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Goal.objects.all()
         )
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
         self.fields['goal'].label = _('Goals')
-
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
-        )
-
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "Solar Water Condenser", used in title.)')
         self.fields['summary'].label = _('<b>Summary:</b> (e.g., "Use solar panels and Peltier effect to extract water from air.", appears as subtitle.)')
@@ -692,15 +728,26 @@ class StepUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
+        self.fields['plan'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Plan.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Plan.objects.all()
         )
-
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
@@ -715,6 +762,7 @@ class StepUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'plan',
             'is_link',
             'url',
             'is_historical',
@@ -723,7 +771,6 @@ class StepUpdateForm(forms.ModelForm):
             'priority',
             'investables',
             'deliverables',
-            'plan',
             'language',
             'personal',
             'sharewith',
@@ -742,14 +789,19 @@ class StepCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
         )
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
 
         self.fields['name'].label = _('<b>Milestone:</b> (e.g., "assemble solar panels", used in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the milestone.')})
@@ -808,13 +860,25 @@ class TaskUpdateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Update')))
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
+        self.fields['step'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Step.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Step.objects.all()
+        )
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
         )
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
@@ -831,13 +895,13 @@ class TaskUpdateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'step',
             'is_link',
             'url',
             'is_historical',
             'name',
             'description',
             'priority',
-            'step',
             'language',
             'personal',
             'sharewith',
@@ -853,15 +917,21 @@ class TaskCreateForm(forms.ModelForm):
         self.helper = FormHelper(self)
 
         self.helper.layout.append(Submit('save', _('Create')))
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
         )
-
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(),
+            required=False
+        )
         self.fields['name'].label = _('<b>Task:</b> (e.g., "Purchase solar cells", text in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the task.')})
         self.fields['priority'].label = _("<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number means the task has to be done earlier)")
@@ -906,14 +976,19 @@ class DefinitionCreateForm(forms.ModelForm):
         super(DefinitionCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
         )
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
 
         if self.request.user.is_anonymous():
             submit_button = Div(
@@ -954,7 +1029,7 @@ class DefinitionCreateForm(forms.ModelForm):
                     submit_button,
                 ),
                 css_class='row',
-		css_id='div_id_define',
+                css_id='div_id_define',
             ),
         )
         self.fields['name'].label = ''
@@ -1002,29 +1077,44 @@ class PlanUpdateForm(forms.ModelForm):
 #       choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
 #   )
 
+    goal = forms.ModelChoiceField(
+        widget=ModelSelect2Widget(
+            queryset=Goal.objects.all(),
+            search_fields=['name__icontains']
+        ),
+        queryset=Goal.objects.all()
+    )
+
+    idea = forms.ModelChoiceField(
+        widget=ModelSelect2Widget(
+            queryset=Idea.objects.all(),
+            search_fields=['name__icontains']
+        ),
+        queryset=Idea.objects.all()
+    )
+
     def __init__(self, *args, **kwargs):
         super(PlanUpdateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
-        self.fields['members'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': 'Select the members for the equity...',
-                }
-            )
-        )
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
-        )
-
         self.helper.layout.append(Submit('save', _('Update')))
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(),
+            required=False
+        )
+        self.fields['members'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(),
+            required=False
+        )
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
@@ -1043,6 +1133,8 @@ class PlanUpdateForm(forms.ModelForm):
             'is_link',
             'url',
             'is_historical',
+            'goal',
+            'idea',
             'name',
             'situation',
             'deliverable',
@@ -1059,11 +1151,26 @@ class PlanUpdateForm(forms.ModelForm):
 
 class PlanCreateForm(forms.ModelForm):
 
-    goal = GoalChoiceField()
-
 #   plain_equity = forms.ChoiceField(
 #       choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
 #   )
+
+    goal = forms.ModelChoiceField(
+        widget=ModelSelect2Widget(
+            queryset=Goal.objects.all(),
+            search_fields=['name__icontains']
+        ),
+        queryset=Goal.objects.all()
+    )
+
+    idea = forms.ModelChoiceField(
+        widget=ModelSelect2Widget(
+            queryset=Idea.objects.all(),
+            search_fields=['name__icontains'],
+            data_view='heavy_data_idea_chained'
+        ),
+        queryset=Idea.objects.all()
+    )
 
     def __init__(self, *args, **kwargs):
         idea_instance = kwargs.pop('idea_instance')
@@ -1071,62 +1178,38 @@ class PlanCreateForm(forms.ModelForm):
         super(PlanCreateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
-        self.fields['sharewith'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the users to share with:')),
-                }
-            ), required=False
-        )
-
         self.helper.layout.append(Submit('save', _('Create')))
 
         if idea_instance:
             self.initial['idea'] = idea_instance
             self.initial['goal'] = idea_instance.goal.first()
 
-        self.fields['goal'] = GoalChoiceField(
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 0,
-                    'placeholder': unicode(_('Select goal')),
-                    'ajax': {
-                        'dataType': 'json',
-                        'quietMillis': 100,
-                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_goal, selector)*END*',
-                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-                    },
-                }
-            )
+        self.fields['sharewith'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
+        self.fields['members'] = forms.ModelMultipleChoiceField(
+            widget=ModelSelect2MultipleWidget(
+                queryset=User.objects.all(),
+                search_fields=['username__icontains']
+            ),
+            queryset=User.objects.all(), required=False)
+
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains'],
+            ),
+            queryset=Language.objects.all()
         )
+
+
         self.fields['goal'].label = _('Goal')
 
-
-        self.fields['idea'] = IdeaChoiceField(
-            widget=AutoHeavySelect2Widget(
-                select2_options={
-                    'minimumInputLength': 0,
-                    'placeholder': unicode(_('Select idea')),
-                    'ajax': {
-                        'dataType': 'json',
-                        'quietMillis': 100,
-                        'data': '*START*django_select2.runInContextHelper(s2_endpoints_param_gen_for_idea, selector)*END*',
-                        'results': '*START*django_select2.runInContextHelper(django_select2.process_results, selector)*END*',
-                    },
-                }
-            )
-        )
         self.fields['idea'].label = _('Idea')
 
-        self.fields['members'] = MembersChoiceField(
-            widget=AutoHeavySelect2MultipleWidget(
-                select2_options={
-                    'minimumInputLength': 1,
-                    'placeholder': unicode(_('Select the members for the equity...')),
-                }
-            )
-        )
         self.fields['members'].label = _('Members')
         self.fields['sharewith'].label = _('Share with:')
 
@@ -1175,5 +1258,3 @@ class PlanCreateForm(forms.ModelForm):
             'situation': MarkdownWidget,
             'deliverable': MarkdownWidget,
         }
-
-

@@ -35,14 +35,3 @@
 
 {% endblock content %}
 
-{% block extra_js %}
-<script type="text/javascript">
-    var s2_endpoints_param_gen = function(term, page) {
-        var proxFunc = $.proxy(django_select2.get_url_params, this);
-        // no need for a custom func here.
-        var results = proxFunc(term, page, 'django_select2.process_results');
-        results.type = $('#id_type').val();
-        return results;
-    };
-</script>
-{% endblock %}

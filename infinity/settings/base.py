@@ -221,7 +221,6 @@ DJANGO_APPS = (
     'storages',
     'autofixture',
     'django_select2',
-    'clever_selects',
     'django_markdown',
     'djmoney_rates',
 )

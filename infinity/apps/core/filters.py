@@ -1,5 +1,4 @@
 import django_filters
-import django_select2
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
@@ -24,134 +23,7 @@ from .models import Plan
 User = get_user_model()
 
 
-class CommentChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Comment.objects.all()
-    search_fields = ['text__icontains', ]
-
-
-class GoalChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Goal.objects.all()
-    search_fields = ['name__icontains', 'reason__icontains', ]
-
-
-class WorkChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Work.objects.all()
-    search_fields = ['name__icontains', 'description__icontains']
-
-
-class IdeaChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Idea.objects.all()
-    search_fields = [
-        'description__icontains',
-        'name__icontains',
-        'summary__icontains',
-    ]
-
-
-class StepChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Step.objects.all()
-    search_fields = [
-        'name__icontains',
-        'deliverables__icontains',
-        'objective__icontains',
-        'investables__icontains']
-
-
-class TaskChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Task.objects.all()
-    search_fields = ['name__icontains', ]
-
-
-class UserChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = User.objects.all()
-    search_fields = ['introduction__icontains', ]
-
-
-class DefinitionChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Definition.objects.all()
-    search_fields = ['name__icontains']
-
-
-class TypeChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Type.objects.all()
-    search_fields = ['name__icontains']
-
-
-class PlanChoiceField(django_select2.AutoModelSelect2Field):
-    queryset = Plan.objects.all()
-    search_fields = [
-        'name__icontains',
-        'deliverable__icontains',
-        'situation__icontains']
-
-
-class CommentChoiceFilter(django_filters.Filter):
-    field_class = CommentChoiceField
-
-
-class GoalChoiceFilter(django_filters.Filter):
-    field_class = GoalChoiceField
-
-
-class WorkChoiceFilter(django_filters.Filter):
-    field_class = WorkChoiceField
-
-
-class IdeaChoiceFilter(django_filters.Filter):
-    field_class = IdeaChoiceField
-
-
-class StepChoiceFilter(django_filters.Filter):
-    field_class = StepChoiceField
-
-
-class TaskChoiceFilter(django_filters.Filter):
-    field_class = TaskChoiceField
-
-
-class UserChoiceFilter(django_filters.Filter):
-    field_class = UserChoiceField
-
-
-class DefinitionChoiceFilter(django_filters.Filter):
-    field_class = DefinitionChoiceField
-
-
-class TypeChoiceFilter(django_filters.Filter):
-    field_class = TypeChoiceField
-
-
-class PlanChoiceFilter(django_filters.Filter):
-    field_class = PlanChoiceField
-
-
 class CommentListViewFilter1(django_filters.FilterSet):
-    task = TaskChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Task'}))
-    goal = GoalChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Goal'}))
-    text = django_filters.CharFilter(lookup_type="icontains")
-    work = WorkChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Work'}))
-    idea = IdeaChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Idea'}))
-    step = StepChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Step'}))
-    plan = PlanChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'Plan'}))
-
     @property
     def form(self):
         form = super(CommentListViewFilter1, self).form
@@ -167,15 +39,7 @@ class CommentListViewFilter1(django_filters.FilterSet):
         model = Comment
 
         fields = [
-            u'goal',
-            u'text',
-            u'created_at',
-            u'updated_at',
-            u'idea',
-            u'plan',
-            u'step',
-            u'task',
-            u'work']
+        ]
 
         exclude = []
 
@@ -205,10 +69,6 @@ class CommentListViewFilter2(django_filters.FilterSet):
 class GoalListViewFilter1(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
     reason = django_filters.CharFilter(lookup_type="icontains")
-    user = UserChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'User'}))
 
     @property
     def form(self):
@@ -224,7 +84,7 @@ class GoalListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Goal
 
-        fields = [u'reason', u'name', u'user']
+        fields = [u'reason', u'name',]
 
         exclude = []
 
@@ -253,10 +113,6 @@ class GoalListViewFilter2(django_filters.FilterSet):
 
 class WorkListViewFilter1(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
-    user = UserChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'User'}))
     description = django_filters.CharFilter(lookup_type="icontains")
 
     @property
@@ -273,7 +129,7 @@ class WorkListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Work
 
-        fields = [u'name', u'description', u'url', u'parent_work_id', u'user']
+        fields = [u'name', u'description', u'url', u'parent_work_id',]
 
         exclude = []
 
@@ -304,10 +160,6 @@ class IdeaListViewFilter1(django_filters.FilterSet):
     description = django_filters.CharFilter(lookup_type="icontains")
     name = django_filters.CharFilter(lookup_type="icontains")
     summary = django_filters.CharFilter(lookup_type="icontains")
-    user = UserChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'User'}))
 
     @property
     def form(self):
@@ -323,7 +175,7 @@ class IdeaListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Idea
 
-        fields = [u'name', u'summary', u'description', u'user']
+        fields = [u'name', u'summary', u'description', ]
 
         exclude = []
 
@@ -349,10 +201,6 @@ class IdeaListViewFilter2(django_filters.FilterSet):
 
 
 class StepListViewFilter1(django_filters.FilterSet):
-    user = UserChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'User'}))
     name = django_filters.CharFilter(lookup_type="icontains")
     deliverables = django_filters.CharFilter(lookup_type="icontains")
     objective = django_filters.CharFilter(lookup_type="icontains")
@@ -378,7 +226,7 @@ class StepListViewFilter1(django_filters.FilterSet):
             u'deliverables',
             u'investables',
             u'priority',
-            u'user']
+        ]
 
         exclude = []
 
@@ -405,10 +253,6 @@ class StepListViewFilter2(django_filters.FilterSet):
 
 class TaskListViewFilter1(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
-    user = UserChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'User'}))
 
     @property
     def form(self):
@@ -424,7 +268,7 @@ class TaskListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Task
 
-        fields = [u'name', u'priority', u'user']
+        fields = [u'name', u'priority',]
 
         exclude = []
 
@@ -499,10 +343,6 @@ class DefinitionListViewFilter(django_filters.FilterSet):
 class PlanListViewFilter1(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
     deliverable = django_filters.CharFilter(lookup_type="icontains")
-    user = UserChoiceFilter(
-        widget=django_select2.AutoHeavySelect2Widget(
-            select2_options={
-                'placeholder': 'User'}))
     situation = django_filters.CharFilter(lookup_type="icontains")
 
     @property
@@ -519,7 +359,7 @@ class PlanListViewFilter1(django_filters.FilterSet):
     class Meta:
         model = Plan
 
-        fields = [u'name', u'name', u'deliverable', u'situation', u'user']
+        fields = [u'name', u'name', u'deliverable', u'situation', ]
 
         exclude = []
 
@@ -545,15 +385,3 @@ class PlanListViewFilter2(django_filters.FilterSet):
 
         exclude = []
 
-
-# Have to call it clearly to help django_select2 register fields
-CommentChoiceField()
-GoalChoiceField()
-WorkChoiceField()
-IdeaChoiceField()
-StepChoiceField()
-TaskChoiceField()
-UserChoiceField()
-DefinitionChoiceField()
-TypeChoiceField()
-PlanChoiceField()
