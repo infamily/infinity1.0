@@ -442,8 +442,7 @@ class Idea(BaseContentModel):
     goal = models.ManyToManyField(
         'Goal',
         related_name='goal_ideas',
-        blank=False,
-        null=False,
+        blank=False
     )
     super_equity = models.DecimalField(
         default=0.01,
@@ -474,8 +473,7 @@ class Plan(BaseContentModel):
     members = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name='user_members',
-        blank=False,
-        null=False,
+        blank=False
     )
 
     def get_usd(self):
@@ -644,8 +642,7 @@ class Definition(models.Model):
     )
     sharewith = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        blank=True,
-        null=True,
+        blank=True
     )
 
     def __unicode__(self):
