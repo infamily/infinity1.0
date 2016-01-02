@@ -25,6 +25,20 @@
 {% endif %}
 
 <div class="alignleft">
+
+	<div class="btn-group" style="position: absolute; top:70px;">
+	  <button type="button" class="btn-lg btn" style='font-weight: normal; text-transform: none; color: white; background-color: black; font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif' onclick="window.location.href={% url 'need-create' %}">{% trans "compose" %}</button>
+	  <button type="button" class="btn-lg btn dropdown-toggle" style="color: white; background-color: grey;" data-toggle="dropdown">
+		<span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+		  <li><a href="{% url 'goal-create' %}">{% trans "Goal" %}</a></li>
+		  <li><a href="{% url 'idea-create' %}">{% trans "Idea" %}</a></li>
+		  <li><a href="{% url 'plan-create' %}">{% trans "Plan" %}</a></li>
+	  </ul>
+	</div>
+
+
     <!-- <input autocomplete="off" tabindex="-1" type="url" aria-hidden="true" size="35" disabled><input type="submit" value="lookup" style="color: GrayText;" disabled> -->
 </div>
 
@@ -36,7 +50,7 @@
     <div class="row row-horizon">
 
 {% if request.get_full_path == '/i' %}
-        <div class="panel panel-default col-md-4 block-content">
+        <div class="panel panel-default col-md-7 block-content">
             <div class="panel-heading">
                 {% trans "Needs" %}
                 &nbsp; <a href="{% url "definition-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "share a need" %}</b>
@@ -109,7 +123,11 @@
         </div>
 {% endif %}
 
+    {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
+    {% else %}
+        <div class="panel panel-default col-md-7 block-content">
+    {% endif %}
             <div class="panel-heading">
                 <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>
                 &nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "define a problem" %}</b>
@@ -181,7 +199,11 @@
             </div>
         </div>
 
+    {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
+    {% else %}
+        <div class="panel panel-default col-md-7 block-content">
+    {% endif %}
             <div class="panel-heading">
                 <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>&nbsp;
                 <a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "suggest a solution" %}</b>
@@ -264,7 +286,11 @@
             </div>
         </div>
 
+    {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
+    {% else %}
+        <div class="panel panel-default col-md-7 block-content">
+    {% endif %}
             <div class="panel-heading">
                 <a href="{% url "plan-list" %}">{% trans "Plans" %}</a>&nbsp;
                 <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; -
@@ -346,7 +372,11 @@
             </div>
         </div>
 
+    {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
+    {% else %}
+        <div class="panel panel-default col-md-7 block-content">
+    {% endif %}
             <div class="panel-heading">
                 <a href="{% url "step-list" %}">{% trans "Steps" %}</a>&nbsp;
                 <i class="fa fa-minus-square-o"></i>&nbsp; -
@@ -433,7 +463,11 @@
             </div>
         </div>
 
+    {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
+    {% else %}
+        <div class="panel panel-default col-md-7 block-content">
+    {% endif %}
             <div class="panel-heading">
                 <a href="{% url "task-list" %}">{% trans "Tasks" %}</a>&nbsp;
                 <i class="fa fa-minus-square-o"></i>&nbsp; -
@@ -514,7 +548,11 @@
         </div>
 
 
+    {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
+    {% else %}
+        <div class="panel panel-default col-md-7 block-content">
+    {% endif %}
             <div class="panel-heading">
                 <a href="{% url "work-list" %}">{% trans "Works" %}</a>&nbsp;
                 <i class="fa fa-minus-square-o"></i>&nbsp; -

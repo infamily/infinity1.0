@@ -25,7 +25,7 @@
   width: 60%;
 }
 .row-horizon > .col-xs-7 {
-  width: 52.5%;
+  width: 50%;
 }
 .row-horizon > .col-xs-6 {
   width: 45%;
@@ -62,7 +62,7 @@
     width: 60%;
   }
   .row-horizon > .col-sm-7 {
-    width: 52.5%;
+    width: 50%;
   }
   .row-horizon > .col-sm-6 {
     width: 45%;
@@ -100,7 +100,7 @@
     width: 60%;
   }
   .row-horizon > .col-md-7 {
-    width: 52.5%;
+    width: 50%;
   }
   .row-horizon > .col-md-6 {
     width: 45%;
@@ -138,7 +138,7 @@
     width: 60%;
   }
   .row-horizon > .col-lg-7 {
-    width: 52.5%;
+    width: 50%;
   }
   .row-horizon > .col-lg-6 {
     width: 45%;
