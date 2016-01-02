@@ -172,12 +172,8 @@ TEMPLATES = [
 
                 'constance.context_processors.config',
             ],
+            'debug': DEBUG,
         },
-        'loaders': [
-            'django.template.loaders.filesystem.Loader',
-            'django.template.loaders.app_directories.Loader',
-        ],
-        'debug': DEBUG,
     },
 ]
 # END TEMPLATE CONFIGURATION
