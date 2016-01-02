@@ -40,7 +40,7 @@ def notify_mentioned_users(comment_instance):
     from django.contrib.sites.models import Site
 
     comment = comment_instance.text
-    usernames = [m.group(1) for m in finditer('\[([^]]+)\]', comment)]
+    usernames = [m.group(1) for m in finditer('(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9]+)', comment)]
     usernames = usernames[:config.MAX_MENTIONS_PER_COMMENT]
 
     subject_template_path = 'mail/comments/mention_notification_subject.txt'
