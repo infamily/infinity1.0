@@ -305,9 +305,4 @@ urlpatterns = patterns(
         IdeaChainedView.as_view(),
         name="heavy_data_idea_chained"
     ),
-    url(
-        r'^heavy_data_goal_chained/$',
-        GoalChainedView.as_view(),
-        name="heavy_data_goal_chained"
-    )
 )
