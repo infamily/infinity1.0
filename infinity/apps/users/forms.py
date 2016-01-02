@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
 from crispy_forms.helper import FormHelper
+from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import (
     Submit, HTML, Layout, Fieldset, ButtonHolder, Field
 )
@@ -28,7 +29,7 @@ class ConversationInviteForm(forms.ModelForm):
                 Field('name'),
                 Field('email'),
                 Field('invitation_text'),
-                ButtonHolder(
+                FormActions(
                     Submit('invite', _('Send invite'))
                 )
             )
