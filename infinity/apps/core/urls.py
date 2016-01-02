@@ -1,10 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from core.views import *
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^ajax/comment-vote/$', AjaxCommentVoteView.as_view(), name='ajax_comment_vote_view'),
     url(
         r'^comment/(?P<slug>.*)/update/$',
@@ -305,4 +304,4 @@ urlpatterns = patterns(
         IdeaChainedView.as_view(),
         name="heavy_data_idea_chained"
     ),
-)
+]

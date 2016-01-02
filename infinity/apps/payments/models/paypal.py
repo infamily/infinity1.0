@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.db.models.signals import pre_save
 
 from core.models import Comment
-# from djmoney_rates.utils import convert_money
+from djmoney_rates.utils import convert_money
 from hours.models import HourValue
 
 
@@ -83,9 +83,8 @@ class PayPalTransaction(models.Model):
         return "/"
 
     def compute_hours(self):
-        pass
-        # self.hours = convert_money(self.amount, self.currency,
-        #                            'USD')/HourValue.objects.latest('created_at').value
+        self.hours = convert_money(self.amount, self.currency,
+                                   'USD')/HourValue.objects.latest('created_at').value
 
 
 def comment_pre_save_signal(sender, instance, **kwargs):

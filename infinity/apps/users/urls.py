@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from users.views import *
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(
         r'^update/$',
         UserUpdateView.as_view(),
@@ -39,4 +38,4 @@ urlpatterns = patterns(
         UserDetailView.as_view(),
         name="user-detail"
     ),
-)
+]

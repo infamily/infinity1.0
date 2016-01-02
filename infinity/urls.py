@@ -1,8 +1,6 @@
-from django.conf.urls import patterns, include, url
-from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
-from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
 from core.views import IndexView, DefinitionCreateView, SetLanguageView
@@ -10,8 +8,7 @@ from core.views import IndexView, DefinitionCreateView, SetLanguageView
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^set-lang/(?P<lang>\w+)/$', SetLanguageView.as_view(pattern_name='home'), name='lang_redirect'),
     url(r'^$', DefinitionCreateView.as_view(), name='home'),
     url(r'^[!]$', IndexView.as_view(), name='index'),
@@ -39,7 +36,7 @@ urlpatterns = patterns(
         name="data"),
     url('^markdown/', include('django_markdown.urls')),
     url('^i18n/', include('django.conf.urls.i18n')),
-)
+]
 
 
 if settings.DEBUG:
@@ -48,6 +45,4 @@ if settings.DEBUG:
                           document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
-    urlpatterns += patterns('',
-                            url(r'^__debug__/', include(debug_toolbar.urls)),
-                            )
+    urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls)),]
