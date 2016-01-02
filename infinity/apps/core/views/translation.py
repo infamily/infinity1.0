@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.views.generic import DeleteView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
+
 try:
     # django >= 1.7
     from django.apps import apps
