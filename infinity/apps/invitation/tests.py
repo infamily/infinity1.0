@@ -8,8 +8,8 @@ from django.core import mail
 
 class InvitationTest(WebTest):
     def setUp(self):
-        self.user_with_invitations = mommy.make('users.User')
-        self.user_without_invitations = mommy.make('users.User')
+        self.user_with_invitations = mommy.make('users.User', email='qwewqe@sasda.com')
+        self.user_without_invitations = mommy.make('users.User', email='fjlskjdf@ajdalsk.com')
 
         self.language = mommy.make(Language)
 
@@ -56,7 +56,7 @@ class InvitationTest(WebTest):
         self.login(self.email_first.email, 'test')
         response = self.app.get(invitation_form_view_url)
         form = response.forms[1]
-        form['member_email'] = 'test@test.com'
+        form['member_email'] = 'test@test1.com'
         form['language'] = self.language.id
         form['email_body'] = 'Hello, World {{ invitation_url }}'
         form_response = form.submit()
