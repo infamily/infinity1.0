@@ -18,8 +18,14 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
 # EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-DEFAULT_FROM_EMAIL = "noreply@infty.xyz"
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if DEBUG:
+    DEFAULT_FROM_EMAIL = "noreply@infty.xyz"
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    DEFAULT_FROM_EMAIL = "noreply@infty.xyz"
+    EMAIL_BACKEND = "sgbackend.SendGridBackend"
+    SENDGRID_USER = "ironcoder-demo"
+    SENDGRID_PASSWORD = "123456789a"
 # END EMAIL CONFIGURATION
 
 
