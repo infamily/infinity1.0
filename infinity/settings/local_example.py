@@ -42,13 +42,20 @@ DATABASES = {
 # END DATABASE CONFIGURATION
 
 # CACHE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
 if not DEBUG:
+    # Enable redis cache for production
     CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        }
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379/1",
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            }
+        },
     }
+
+    # Set the cache backend to select2
+    SELECT2_CACHE_BACKEND = 'default'
 # END CACHE CONFIGURATION
 
 # TOOLBAR CONFIGURATION
