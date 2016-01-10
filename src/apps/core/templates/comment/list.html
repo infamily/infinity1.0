@@ -37,7 +37,15 @@ $(window).bind('scroll', function () {
 function getfocus() {
     document.getElementById("id_name").focus();
 }
+
+function fillfocus(text) {
+    document.getElementById("id_text").value = text;
+    document.getElementById("id_text").focus();
+}
 </script>
+<a style="color:black;" href="#comment"><button type="button">{% trans "New comment" %}</button></a>
+<br/>
+<br/>
 {% endif %}
 
 {% for object in object_list %}
@@ -72,6 +80,8 @@ function getfocus() {
         --[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}<br/>
         <div class="alignright">
             {% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
+            {% else %}
+            <button type="button" onclick="fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
             {% endif %}
         </div>
     </div>
@@ -146,7 +156,7 @@ $('[data-toggle="tooltip"]').tooltip();
 </script>
 
 {% if request.user.is_authenticated %}
-<div class="panel panel-default input-comment">
+<div id="comment" class="panel panel-default input-comment">
 <div class="panel-body">
 {% crispy form %}
 {% markdown_media %}
@@ -159,7 +169,7 @@ $('[data-toggle="tooltip"]').tooltip();
     </div>
 </div>
 {% else %}
-<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#id_text"><button type="button">comment</button></a>
+<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">comment</button></a>
 {% endif %}
 
 
