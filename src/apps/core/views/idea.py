@@ -142,13 +142,6 @@ class IdeaDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
     slug_field = "pk"
     template_name = "idea/detail.html"
 
-    def get_success_url(self):
-        messages.success(
-            self.request, _(
-                "%s succesfully created" %
-                self.form_class._meta.model.__name__))
-        return self.request.path
-
     def get_context_data(self, **kwargs):
         context = super(IdeaDetailView, self).get_context_data(**kwargs)
         obj = self.get_object()

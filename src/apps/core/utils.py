@@ -192,7 +192,8 @@ class CommentsContentTypeWrapper(CreateView):
             self.request, _(
                 "%s succesfully created" %
                 self.form_class._meta.model.__name__))
-        return self.request.path
+        success_url = "%s#comment-%d" % (self.request.path, self.object.id)
+        return success_url
 
     @property
     def object_list(self):
@@ -232,10 +233,6 @@ class CommentsContentTypeWrapper(CreateView):
             return redirect(reverse("payments:transaction_paypal", kwargs={'comment_id': self.object.id}))
 
         return super(CommentsContentTypeWrapper, self).form_valid(form)
-
-    def get_success_url(self):
-        messages.success(self.request, _("Goal succesfully created"))
-        return reverse("goal-detail", args=[self.object.pk, ])
 
 
 
