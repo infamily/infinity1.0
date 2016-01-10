@@ -14,15 +14,17 @@
 }
 </style>
 
-{% if not user.is_anonymous %}
 <div class="alignright">
+{% if not user.is_anonymous %}
     {% if user.invitationoption.invitations_left %}
     <b>
         [<a href="{% url "invite:send"  %}">{{user.invitationoption.invitations_left}} {% trans "invitations" %}</a>, <a href="/step/2/detail/">{% trans "write bugs" %}</a>, {% trans "time value" %}: 1 ħ = <a href="https://research.stlouisfed.org/fred2/series/CES0500000003">{{ hour_value.value|floatformat:2 }}</a> $]
     </b>
     {% endif %}
-</div>
+{% else %}
+&nbsp;
 {% endif %}
+</div>
 
 <div class="alignleft">
 
