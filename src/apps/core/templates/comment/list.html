@@ -43,7 +43,7 @@ function fillfocus(text) {
     document.getElementById("id_text").focus();
 }
 </script>
-<a style="color:black;" href="#comment"><button type="button">{% trans "New comment" %}</button></a>
+<button type="button" onclick="fillfocus('')">{% trans "New comment" %}</button>
 <br/>
 <br/>
 {% endif %}
