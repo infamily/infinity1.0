@@ -79,6 +79,16 @@ class TranslationUpdateForm(forms.ModelForm):
         super(TranslationUpdateForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.layout.append(Submit('save', _('Update')))
+        self.fields['name'] = forms.CharField()
+        self.fields['content'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['summary'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['description'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['reason'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['objective'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['situation'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['deliverable'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['investables'] = forms.CharField()
+        self.fields['deliverables'] = forms.CharField()
 
     class Meta:
         model = Translation
