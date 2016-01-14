@@ -18,6 +18,16 @@
 {% endblock extra_css %}
 
 
+<script>
+function getfocus() {
+    document.getElementById("id_name").focus();
+}
+
+function fillfocus(text) {
+    document.getElementById("id_text").value = text;
+    document.getElementById("id_text").focus();
+}
+</script>
 {% if request.user.is_authenticated %}
 <script>
 /* Dynamic top menu positioning */
@@ -32,18 +42,11 @@ $(window).bind('scroll', function () {
     }
 });
 </script>
-
-<script>
-function getfocus() {
-    document.getElementById("id_name").focus();
-}
-
-function fillfocus(text) {
-    document.getElementById("id_text").value = text;
-    document.getElementById("id_text").focus();
-}
-</script>
 <button type="button" onclick="fillfocus('')">{% trans "New comment" %}</button>
+<br/>
+<br/>
+{% else %}
+<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">comment</button></a>
 <br/>
 <br/>
 {% endif %}
@@ -169,7 +172,7 @@ $('[data-toggle="tooltip"]').tooltip();
     </div>
 </div>
 {% else %}
-<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">comment</button></a>
+<!-- logged out end of comment list -->
 {% endif %}
 
 
