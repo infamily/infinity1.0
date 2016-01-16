@@ -28,10 +28,11 @@ def _content_type_post_save(sender, instance, created, *args, **kwargs):
         translation.save()
     else:
         translations = Translation.objects.filter(
-            content_type=content_type, object_id=instance.id
+            content_type=content_type, object_id=instance.id, language=instance.language
         )
 
-        if translations.count == 1:
+        if translations.count() == 1:
+            tr = translations[0]
             for field in fields:
-                setattr(translations[0], field, getattr(instance, field))
-            translations[0].save()
+                setattr(tr, field, getattr(instance, field))
+            tr.save()
