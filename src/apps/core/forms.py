@@ -67,6 +67,16 @@ class TranslationCreateForm(forms.ModelForm):
             ])
         )
         self.helper.layout.append(Submit('save', _('Create')))
+        self.fields['name'] = forms.CharField()
+        self.fields['content'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['summary'] = forms.CharField()
+        self.fields['description'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['reason'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['objective'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['situation'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['deliverable'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['investables'] = forms.CharField()
+        self.fields['deliverables'] = forms.CharField()
 
     class Meta:
         model = Translation
@@ -81,7 +91,7 @@ class TranslationUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
         self.fields['name'] = forms.CharField()
         self.fields['content'] = forms.CharField(widget=MarkdownWidget())
-        self.fields['summary'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['summary'] = forms.CharField()
         self.fields['description'] = forms.CharField(widget=MarkdownWidget())
         self.fields['reason'] = forms.CharField(widget=MarkdownWidget())
         self.fields['objective'] = forms.CharField(widget=MarkdownWidget())
@@ -243,6 +253,7 @@ class NeedUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['name'].label = 'Description'
+        self.fields['name'].widget.attrs['readonly'] = True
 
         self.fields['language'] = forms.ModelChoiceField(
             widget=ModelSelect2Widget(
@@ -260,6 +271,7 @@ class NeedUpdateForm(forms.ModelForm):
             queryset=User.objects.all(), required=False)
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['content'].widget.attrs['readonly'] = True
 
     class Meta:
         model = Need
@@ -388,6 +400,7 @@ class GoalUpdateForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', _('Update')))
 
         self.fields['name'].label = 'Description'
+        self.fields['name'].widget.attrs['readonly'] = True
         self.fields['need'] = forms.ModelChoiceField(queryset=Need.objects.all())
 
         self.fields['type'] = forms.ModelChoiceField(
@@ -428,6 +441,7 @@ class GoalUpdateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a problem of the past)')
+        self.fields['reason'].widget.attrs['readonly'] = True
 
     class Meta:
         model = Goal
@@ -487,6 +501,8 @@ class WorkUpdateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical work)')
+        self.fields['name'].widget.attrs['readonly'] = True
+        self.fields['description'].widget.attrs['readonly'] = True
 
     class Meta:
         model = Work
@@ -622,6 +638,9 @@ class IdeaUpdateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting an idea of the past)')
+        self.fields['name'].widget.attrs['readonly'] = True
+        self.fields['summary'].widget.attrs['readonly'] = True
+        self.fields['description'].widget.attrs['readonly'] = True
 
     class Meta:
         model = Idea
@@ -763,6 +782,8 @@ class StepUpdateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a milestone of the past)')
+        self.fields['name'].widget.attrs['readonly'] = True
+        self.fields['objective'].widget.attrs['readonly'] = True
 
     class Meta:
         model = Step
@@ -896,6 +917,8 @@ class TaskUpdateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical task)')
+        self.fields['name'].widget.attrs['readonly'] = True
+        self.fields['description'].widget.attrs['readonly'] = True
 
     class Meta:
         model = Task
@@ -1130,6 +1153,9 @@ class PlanUpdateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a project of the past)')
+        self.fields['name'].widget.attrs['readonly'] = True
+        self.fields['situation'].widget.attrs['readonly'] = True
+        self.fields['deliverable'].widget.attrs['readonly'] = True
 
 
     class Meta:
