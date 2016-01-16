@@ -148,9 +148,7 @@ class IndexView(TemplateView):
             else:
                 q_object = (
                     (
-                    Q(personal=False) |
-                    Q(personal=True, user=self.request.user) |
-                    Q(personal=True, sharewith=self.request.user)
+                    Q(personal=False)
                     )
                     & Q(lang=language)
                 )
