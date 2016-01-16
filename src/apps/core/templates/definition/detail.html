@@ -54,7 +54,7 @@ Defined Meaning ID: {{object.defined_meaning_id}}
             {% if object.is_link %}
             <span class="badge">{% trans "link" %}</span>
             {% endif %}
-           <a href="{% url "need-detail" object.pk %}">{{object.name}}</a>
+            <a href="{% url "need-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
            <p>{{object.content}}</p>
         </li>
       </ul>

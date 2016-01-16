@@ -81,7 +81,7 @@ function showLess(){
 			{% if object.is_link %}
 			<span class="badge">{% trans "link" %}</span>
 			{% endif %}
-         <a href="{% url "work-detail" object.pk %}">{{object.name}}</a> 
+            <a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a> 
          <p>{{object.description|markdown|truncatewords_html:35}}</p>
       </li>
     </ul>
