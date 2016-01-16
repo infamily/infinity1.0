@@ -107,8 +107,7 @@ class IndexView(TemplateView):
 
         return redirect(reverse('home'))
 
-    def get_translation_by_instance(self, instance, content_type):
-        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
+    def get_translation_by_instance(self, instance, content_type, language):
         translation = Translation.objects.filter(
             content_type=content_type,
             object_id=instance.id,
@@ -135,16 +134,16 @@ class IndexView(TemplateView):
                 items[items[value]] = self.request.session['%ss_number' % items[value]]
 
 
-
         # Prepare base content access filters
+        INBOX = False
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'inbox':
+                INBOX = True
                 q_object = (
                     (
                         Q(personal=True, user=self.request.user) |
                         Q(personal=True, sharewith=self.request.user)
                     )
-                    & Q(lang=language)
                 )
             else:
                 q_object = (
@@ -181,7 +180,7 @@ class IndexView(TemplateView):
             instances_list[model_name + '_list'] = [{
                 'object': instance,
                 'is_new': instance.created_at > week_start.replace(hour=0, minute=0, second=0, microsecond=0),
-                'translation': self.get_translation_by_instance(instance, content_type)
+                'translation': self.get_translation_by_instance(instance, content_type, INBOX and instance.language or language)
             } for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
 
         try:
