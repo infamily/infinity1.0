@@ -184,9 +184,15 @@ class IndexView(TemplateView):
                 'translation': self.get_translation_by_instance(instance, content_type)
             } for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
 
+        try:
+            hour_value = HourValue.objects.latest('created_at')
+        except HourValue.DoesNotExist:
+            hour_value = 0
+
         context = {
+			'hour_value': hour_value,
             'dropdown_list': self.dropdown_list,
-            'items': items
+            'items': items,
         }
 
         context.update(instances_list)
