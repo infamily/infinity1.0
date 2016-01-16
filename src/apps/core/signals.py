@@ -1,3 +1,22 @@
+def _translation_post_save(sender, instance, created, *args, **kwargs):
+    """
+    Do after translation save
+    """
+    from django.contrib.contenttypes.models import ContentType
+    
+    # Copy fields to parent content object, if language match
+    if instance.language == instance.content_object.language:
+        ignored_fields = ['language', 'language_id', 'id']
+        for field in instance._meta.get_all_field_names():
+            if field in instance.content_object._meta.get_all_field_names():
+                if field in ignored_fields:
+                    continue
+                if getattr(instance.content_object, field) != getattr(instance, field):
+                    setattr(instance.content_object, field, getattr(instance, field))
+    
+    instance.content_object.save()
+
+
 def _content_type_post_save(sender, instance, created, *args, **kwargs):
     """
     Create default translation
@@ -26,13 +45,3 @@ def _content_type_post_save(sender, instance, created, *args, **kwargs):
             setattr(translation, field, getattr(instance, field))
 
         translation.save()
-    else:
-        translations = Translation.objects.filter(
-            content_type=content_type, object_id=instance.id, language=instance.language
-        )
-
-        if translations.count() == 1:
-            tr = translations[0]
-            for field in fields:
-                setattr(tr, field, getattr(instance, field))
-            tr.save()

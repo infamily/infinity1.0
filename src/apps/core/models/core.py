@@ -9,6 +9,7 @@ from django_markdown.models import MarkdownField
 from django.db.models.signals import post_save
 from hours.models import HourValue
 from ..signals import _content_type_post_save
+from ..signals import _translation_post_save
 
 
 class BaseContentModel(models.Model):
@@ -752,3 +753,4 @@ post_save.connect(_content_type_post_save, sender=Plan)
 post_save.connect(_content_type_post_save, sender=Step)
 post_save.connect(_content_type_post_save, sender=Task)
 post_save.connect(_content_type_post_save, sender=Work)
+post_save.connect(_translation_post_save, sender=Translation)
