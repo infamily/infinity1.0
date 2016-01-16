@@ -118,56 +118,54 @@ class IndexView(TemplateView):
         return translation.first()
 
     def get_context_data(self, **kwargs):
-        items = {'needs': 32,
-                 'goals': 64,
-                 'ideas': 128,
-                 'plans': 256,
-                 'steps': 512,
-                 'tasks': 1024,
-                 'works': 2048}
 
-        if self.request.session.get('needs_number'):
-            items['goals'] = self.request.session['needs_number']
-        if self.request.session.get('goals_number'):
-            items['goals'] = self.request.session['goals_number']
-        if self.request.session.get('ideas_number'):
-            items['ideas'] = self.request.session['ideas_number']
-        if self.request.session.get('plans_number'):
-            items['plans'] = self.request.session['plans_number']
-        if self.request.session.get('steps_number'):
-            items['steps'] = self.request.session['steps_number']
-        if self.request.session.get('tasks_number'):
-            items['tasks'] = self.request.session['tasks_number']
-        if self.request.session.get('works_number'):
-            items['works'] = self.request.session['works_number']
+        current_time = timezone.now()
+        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
+
+        items = {'needs': 16,
+                 'goals': 16,
+                 'ideas': 16,
+                 'plans': 16,
+                 'steps': 16,
+                 'tasks': 16,
+                 'works': 16}
+
+        for key, value in enumerate(items):
+            if self.request.session.get('%ss_number' % items[value]):
+                items[items[value]] = self.request.session['%ss_number' % items[value]]
+
 
 
         # Prepare base content access filters
         if self.request.user.is_authenticated():
             if self.request.resolver_match.url_name == 'inbox':
                 q_object = (
-                    Q(personal=True, user=self.request.user) |
-                    Q(personal=True, sharewith=self.request.user)
+                    (
+                        Q(personal=True, user=self.request.user) |
+                        Q(personal=True, sharewith=self.request.user)
+                    )
+                    & Q(lang=language)
                 )
             else:
                 q_object = (
+                    (
                     Q(personal=False) |
                     Q(personal=True, user=self.request.user) |
                     Q(personal=True, sharewith=self.request.user)
+                    )
+                    & Q(lang=language)
                 )
         else:
             q_object = (
+                (
                 Q(personal=False)
+                )
+                & Q(lang=language)
             )
 
         # Get Content Types for Goal, Idea, Plan, Step, Task
-        content_types = ContentType.objects.get_for_models(Need, Goal, Idea, Plan, Step, Task, Work)
-
-        now = timezone.now()
-        in_days = lambda x: float(x.seconds/86400.)
-        in_hours = lambda x: float(x.seconds/3600.)
-
         instances = {}
+        content_types = ContentType.objects.get_for_models(Need, Goal, Idea, Plan, Step, Task, Work)
 
         for model_class, translations in content_types.items():
             model_class_lower_name = model_class.__name__.lower() + 's'
@@ -175,65 +173,22 @@ class IndexView(TemplateView):
                 q_object
             ).order_by('-commented_at').distinct()[:items[model_class_lower_name]]
 
-
-        needs = instances['needs']
-        goals = instances['goals']
-        ideas = instances['ideas']
-        plans = instances['plans']
-        steps = instances['steps']
-        tasks = instances['tasks']
-        works = instances['works']
-
-        commented_at = lambda items: [obj.commented_at for obj in items]
-
-        objects_list = list(chain(needs, goals, ideas, plans, steps, tasks, works))
-        dates = commented_at(objects_list)
-
-        if dates:
-            start = min(dates)
-            days = in_days(now-start)
-        else:
-            start = timezone.now()
-            days = 0.
-
-        try:
-            hour_value = HourValue.objects.latest('created_at')
-        except HourValue.DoesNotExist:
-            hour_value = 0
-
         instances_list = {}
+        week_start = (current_time - timezone.timedelta(current_time.weekday()))
 
         for model, content_type in content_types.items():
             model_name = model.__name__.lower()
             instances_list[model_name + '_list'] = [{
                 'object': instance,
-                'is_new': instance.created_at > start,
+                'is_new': instance.created_at > week_start.replace(hour=0, minute=0, second=0, microsecond=0),
                 'translation': self.get_translation_by_instance(instance, content_type)
             } for instance in model.objects.filter(q_object).order_by('-commented_at').distinct()[:items[model_name + 's']]]
 
         context = {
-            'need_hours': needs and
-            '%0.2f' % in_hours(now-max(commented_at(list(needs)))) or 0.,
-            'goal_hours': goals and
-            '%0.2f' % in_hours(now-max(commented_at(list(goals)))) or 0.,
-            'idea_hours': ideas and
-            '%0.2f' % in_hours(now-max(commented_at(list(ideas)))) or 0.,
-            'plan_hours': plans and
-            '%0.2f' % in_hours(now-max(commented_at(list(plans)))) or 0.,
-            'step_hours': steps and
-            '%0.2f' % in_hours(now-max(commented_at(list(steps)))) or 0.,
-            'task_hours': tasks and
-            '%0.2f' % in_hours(now-max(commented_at(list(tasks)))) or 0.,
-            'work_hours': works and
-            '%0.2f' % in_hours(now-max(commented_at(list(works)))) or 0.,
-            'last_days': '%0.2f' % days,
-            'number_of_items': len(objects_list),
-            'hour_value': hour_value,
             'dropdown_list': self.dropdown_list,
-            'items': items,
+            'items': items
         }
 
         context.update(instances_list)
-        context.update(kwargs)
 
         return context
