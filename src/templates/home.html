@@ -53,11 +53,17 @@
 
     <div class="row row-horizon">
 
-{% if request.get_full_path == '/i' %}
+<!-- start of Need -->
         <div class="panel panel-default col-md-7 block-content">
             <div class="panel-heading">
                 {% trans "Needs" %}
-                &nbsp; <a href="{% url "definition-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "share a need" %}</b>
+                &nbsp; <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>
+                    {% if request.get_full_path == '/i' %}
+                    {% trans "share a need" %}
+                    {% else %}
+                    {% trans "write an open letter" %}
+                    {% endif %}
+                </b>
 
                 <div style="display:inline-block; float: right;">
                     <form method="post" style="display:inline;">{% csrf_token %}
@@ -119,13 +125,9 @@
                 {% endif %}
             </div>
         </div>
-{% endif %}
+<!-- end of Need -->
 
-    {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
-    {% else %}
-        <div class="panel panel-default col-md-7 block-content">
-    {% endif %}
             <div class="panel-heading">
                 <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>
                 &nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "define a problem" %}</b>
