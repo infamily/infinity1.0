@@ -2,8 +2,6 @@ def _translation_post_save(sender, instance, created, *args, **kwargs):
     """
     Do after translation save
     """
-    from django.contrib.contenttypes.models import ContentType
-    
     # Copy fields to parent content object, if language match
     if instance.language == instance.content_object.language:
         ignored_fields = ['language', 'language_id', 'id']
@@ -14,8 +12,14 @@ def _translation_post_save(sender, instance, created, *args, **kwargs):
                 if getattr(instance.content_object, field) != getattr(instance, field):
                     setattr(instance.content_object, field, getattr(instance, field))
     
+    # Save the translation language to object itself for faster filtering
+    instance.content_object.lang.add(instance.language)
     instance.content_object.save()
 
+def _translation_post_delete(sender, instance, *args, **kwargs):
+	# Remove the translation language upon deletion of translation
+    instance.content_object.lang.remove(instance.language)
+    instance.content_object.save()
 
 def _content_type_post_save(sender, instance, created, *args, **kwargs):
     """
