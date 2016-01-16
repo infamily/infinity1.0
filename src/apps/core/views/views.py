@@ -196,5 +196,6 @@ class IndexView(TemplateView):
         }
 
         context.update(instances_list)
+        context.update(kwargs)
 
         return context
