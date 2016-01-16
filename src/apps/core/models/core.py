@@ -85,6 +85,12 @@ class BaseContentModel(models.Model):
         null=True,
     )
 
+    lang = models.ManyToManyField(
+        'Language',
+        blank=True,
+        related_name='+',
+    )
+
     total_donated = models.DecimalField(
         default=0.,
         decimal_places=8,
