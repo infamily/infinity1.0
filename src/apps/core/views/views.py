@@ -133,6 +133,12 @@ class IndexView(TemplateView):
             if self.request.session.get('%ss_number' % items[value]):
                 items[items[value]] = self.request.session['%ss_number' % items[value]]
 
+        # Basic search by name in original language
+        if 's' in self.request.GET:
+            s = self.request.GET['s']
+            q_search = Q(name__icontains=s)
+        else:
+            q_search = Q()
 
         # Prepare base content access filters
         INBOX = False
@@ -144,6 +150,7 @@ class IndexView(TemplateView):
                         Q(personal=True, user=self.request.user) |
                         Q(personal=True, sharewith=self.request.user)
                     )
+                    & q_search
                 )
             else:
                 q_object = (
@@ -151,6 +158,7 @@ class IndexView(TemplateView):
                     Q(personal=False)
                     )
                     & Q(lang=language)
+                    & q_search
                 )
         else:
             q_object = (
@@ -158,6 +166,7 @@ class IndexView(TemplateView):
                 Q(personal=False)
                 )
                 & Q(lang=language)
+                & q_search
             )
 
         # Get Content Types for Goal, Idea, Plan, Step, Task
