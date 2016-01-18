@@ -35,7 +35,19 @@ function showLess(){
       <div align="right" id="stats">
         <span onmouseover="showMore()"><b>[<u>needs ${{ object.get_remain_usd|floatformat:2 }} for funding {{ object.not_funded_hours|floatformat:2}} hours</u>]</b></span>
       </div>
-      step of plan <a href="{% url "plan-detail" object.plan.pk %}">{{object.plan}}</a><br/>
+      step of plan <a href="{% url "plan-detail" object.plan.pk %}">
+          
+		  {% if object.plan.personal %}
+		    {% if request.user in object.plan.sharewith or request.user == object.plan.user %}
+		       {{ object.plan }}
+		    {% else %}
+               {% trans "private" %} {% trans "plan" %} (by {{ object.plan.user.username }})
+			{% endif %}
+		  {% else %}
+		  {{ object.plan }}
+		  {% endif %}
+      
+      </a><br/>
     translations:
     <!-- translations -->
     {% for translation in translations %}
