@@ -69,7 +69,19 @@ $(document).ready( function() {
 
 
 {% for goal in object.goal.all %}
-{% trans "want:" %} <a href="{% url "goal-detail" goal.pk %}">{{ goal }}</a></li>
+{% trans "want:" %} <a href="{% url "goal-detail" goal.pk %}">
+
+		  {% if goal.personal %}
+		    {% if request.user in goal.sharewith or request.user == goal.user %}
+		       {{goal}}
+		    {% else %}
+               {% trans "private" %} {% trans "goal" %} (by {{ goal.user.username }})
+			{% endif %}
+		  {% else %}
+            {{goal}}
+		  {% endif %}
+
+</a></li>
 {% endfor %}<br/>
 {% trans "translations:" %} 
     <!-- translations -->

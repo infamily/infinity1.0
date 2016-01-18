@@ -83,7 +83,19 @@ $(document).ready( function() {
     </span>
     </div>
 
-    {% trans "approach to realizing idea" %} <a href="{% url "idea-detail" object.idea.pk %}">{{object.idea }}</a><br/>
+    {% trans "approach to realizing idea" %} <a href="{% url "idea-detail" object.idea.pk %}">
+        
+		  {% if object.idea.personal %}
+		    {% if request.user in object.idea.sharewith or request.user == object.idea.user %}
+		       {{ object.idea }}
+		    {% else %}
+               {% trans "private" %} {% trans "idea" %} (by {{ object.idea.user.username }})
+			{% endif %}
+		  {% else %}
+		  {{ object.idea }}
+		  {% endif %}
+    
+    </a><br/>
     {% trans "translations:" %}
     <!-- translations -->
     {% for translation in translations %}
