@@ -90,11 +90,28 @@ function showLess(){
 {% for object in task_list reversed %}
     <ul class="list-group">
       <li class="list-group-item">
-			{% if object.is_link %}
-			<span class="badge">{% trans "link" %}</span>
-			{% endif %}
-            <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
-           <p>{{object.description|markdown|truncatewords_html:35}}</p>
+
+            {% if object.is_link %}
+            <span class="badge">{% trans "link" %}</span>
+            {% endif %}
+            {% if object.personal %}
+                {% if user.is_anonymous %}
+                <i class="fa fa-lock"></i>
+                {% else %}
+                <i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
+                {% endif %}
+                {% if request.user in object.sharewith or request.user == object.user %}
+                    <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
+                    <p>{{object.description|markdown|truncatewords_html:35}}</p>
+                {% else %}
+					<a href="{% url "task-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% trans "Private" %} {% trans "task" %}.</a>
+					<p>{% trans "Request access:" %} [<a href="{% url 'user-detail' object.user.username %}">{{object.user.username}}</a>]</p>
+                {% endif %}
+            {% else %}
+                <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
+                <p>{{object.description|markdown|truncatewords_html:35}}</p>
+            {% endif %}
+
       </li>
     </ul>
 {% endfor %}
