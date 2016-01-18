@@ -42,7 +42,9 @@
 
 
     <div style="margin-left: 165px; position: absolute; top: 70px;">
-        <input autocomplete="off" class="btn-lg" tabindex="-1" type="url" aria-hidden="true" size="35" style="height: 48px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="{% trans "Search" %}" style="height: 48px; color: GrayText;">
+        <form action="{{request.get_full_path}}" method="get">
+        <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="height: 48px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="{% trans "Search" %}" style="height: 48px; color: GrayText;">
+        </form>
     </div>
 </div>
 
