@@ -369,6 +369,10 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a problem of the past)')
         self.initial['personal'] = True
 
+        if need_instance:
+            self.initial['sharewith'] = need_instance.sharewith.all
+            self.initial['personal'] = need_instance.personal
+
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
             self.initial['language'] = language
@@ -538,6 +542,7 @@ class WorkUpdateForm(forms.ModelForm):
 class WorkCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        task_instance = kwargs.pop('task_instance') 
         request = kwargs.pop('request')
         super(WorkCreateForm, self).__init__(*args, **kwargs)
 
@@ -576,6 +581,10 @@ class WorkCreateForm(forms.ModelForm):
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical work)')
         self.initial['personal'] = True
+
+        if task_instance:
+            self.initial['sharewith'] = task_instance.sharewith.all
+            self.initial['personal'] = task_instance.personal
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -727,6 +736,10 @@ class IdeaCreateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting an idea of the past)')
         self.initial['personal'] = True
 
+        if goal_instance:
+            self.initial['sharewith'] = goal_instance.sharewith.all
+            self.initial['personal'] = goal_instance.personal
+
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
             self.initial['language'] = language
@@ -821,6 +834,7 @@ class StepUpdateForm(forms.ModelForm):
 class StepCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        plan_instance = kwargs.pop('plan_instance')
         request = kwargs.pop('request')
         super(StepCreateForm, self).__init__(*args, **kwargs)
 
@@ -857,6 +871,10 @@ class StepCreateForm(forms.ModelForm):
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a milestone of the past)')
         self.initial['personal'] = True
+
+        if plan_instance:
+            self.initial['sharewith'] = plan_instance.sharewith.all
+            self.initial['personal'] = plan_instance.personal
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -951,6 +969,7 @@ class TaskUpdateForm(forms.ModelForm):
 class TaskCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        step_instance = kwargs.pop('step_instance')
         request = kwargs.pop('request')
         super(TaskCreateForm, self).__init__(*args, **kwargs)
 
@@ -981,6 +1000,10 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical task)')
         self.initial['personal'] = True
+
+        if step_instance:
+            self.initial['sharewith'] = step_instance.sharewith.all
+            self.initial['personal'] = step_instance.personal
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -1277,6 +1300,10 @@ class PlanCreateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a project of the past)')
        #self.fields['plain_equity'].label = _('Plain equity')
         self.initial['personal'] = True
+
+        if idea_instance:
+            self.initial['sharewith'] = idea_instance.sharewith.all
+            self.initial['personal'] = idea_instance.personal
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
