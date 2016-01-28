@@ -151,6 +151,7 @@ class DetailViewWrapper(DetailView):
         obj = kwargs.get('object')
         subscribers = obj.subscribers.filter(pk=self.request.user.id)
 
+
         translations = Translation.objects.filter(
             object_id=self.get_object().id,
             content_type=ContentType.objects.get_for_model(
