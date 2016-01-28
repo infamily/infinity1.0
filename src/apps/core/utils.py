@@ -122,8 +122,7 @@ class ViewTypeWrapper(object):
 class DetailViewWrapper(DetailView):
     @property
     def translation(self):
-        obj = self.get_object()
-        content_type = ContentType.objects.get_for_model(obj.__class__)
+        content_type = ContentType.objects.get_for_model(self.obj.__class__)
 
         try:
             language = Language.objects.get(language_code=self.request.GET.get('lang'))
@@ -134,7 +133,7 @@ class DetailViewWrapper(DetailView):
         try:
             translation = Translation.objects.get(
                 language=language,
-                object_id=obj.id,
+                object_id=self.obj.id,
                 content_type=content_type
             )
         except Translation.DoesNotExist:
@@ -148,8 +147,7 @@ class DetailViewWrapper(DetailView):
         conversation_form = ConversationInviteForm()
         content_type = ContentType.objects.get_for_model(self.get_object().__class__)
         next_url = "?next=%s" % self.request.path
-        obj = kwargs.get('object')
-        subscribers = obj.subscribers.filter(pk=self.request.user.id)
+        subscribers = self.obj.subscribers.filter(pk=self.request.user.id)
 
 
         translations = Translation.objects.filter(
@@ -163,8 +161,8 @@ class DetailViewWrapper(DetailView):
             form = self.get_form_class()
 
         conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
-            'object_name': obj.__class__.__name__,
-            'object_id': obj.id
+            'object_name': self.obj.__class__.__name__,
+            'object_id': self.obj.id
         }) + next_url
 
         translate_url = reverse('create-translation', kwargs={
@@ -191,9 +189,9 @@ class DetailViewWrapper(DetailView):
         return context
 
     def dispatch(self, request, *args, **kwargs):
-        obj = self.get_object()
-        if not obj.user == request.user:
-            if obj.personal and not request.user in obj.sharewith.all():
+        self.obj = self.get_object()
+        if not self.obj.user == request.user:
+            if self.obj.personal and not request.user in self.obj.sharewith.all():
                 messages.error(request, 'You don\'t have access for this page')
                 return redirect('/')
         return super(DetailViewWrapper, self).dispatch(request, *args, **kwargs)
