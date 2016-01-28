@@ -145,13 +145,12 @@ class DetailViewWrapper(DetailView):
         context = super(DetailViewWrapper, self).get_context_data(**kwargs)
         form = None
         conversation_form = ConversationInviteForm()
-        content_type = ContentType.objects.get_for_model(self.get_object().__class__)
+        content_type = ContentType.objects.get_for_model(self.obj.__class__)
         next_url = "?next=%s" % self.request.path
         subscribers = self.obj.subscribers.filter(pk=self.request.user.id)
 
-
         translations = Translation.objects.filter(
-            object_id=self.get_object().id,
+            object_id=self.obj.id,
             content_type=ContentType.objects.get_for_model(
                 self.get_object().__class__
             )
@@ -166,8 +165,8 @@ class DetailViewWrapper(DetailView):
         }) + next_url
 
         translate_url = reverse('create-translation', kwargs={
-            'model_name': self.get_object().__class__.__name__.lower(),
-            'object_id': self.get_object().id
+            'model_name': self.obj.__class__.__name__.lower(),
+            'object_id': self.obj.id
         })
 
         context.update({
@@ -178,7 +177,7 @@ class DetailViewWrapper(DetailView):
             'translations': translations,
             'translate_url': translate_url,
             'content_type': content_type.id,
-            'object_id': self.get_object().id
+            'object_id': self.obj.id
         })
 
         if self.request.GET.get('lang'):
