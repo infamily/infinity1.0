@@ -135,40 +135,11 @@ class WorkDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
     slug_field = "pk"
     template_name = "work/detail.html"
 
-    def get_success_url(self):
-        messages.success(
-            self.request, _(
-                "%s succesfully created" %
-                self.form_class._meta.model.__name__))
-        return self.request.path
-
     def get_context_data(self, **kwargs):
         context = super(WorkDetailView, self).get_context_data(**kwargs)
-        obj = self.get_object()
-        form = None
-        if self.request.user.__class__.__name__ not in [u'AnonymousUser']:
-            form = self.get_form_class()
-        context.update({
-            'form': form,
-        })
-        context.update({
-            'object_list': self.object_list,
-        })
+
         context.update({
             'work_list': Work.objects.filter(parent_work_id=kwargs.get('object').id).order_by('-id')
         })
-        context.update({
-            'is_subscribed': kwargs.get('object').subscribers.filter(pk=self.request.user.id) and True or False
-        })
 
-        conversation_form = ConversationInviteForm()
-        next_url = "?next=%s" % self.request.path
-        obj = kwargs.get('object')
-        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
-            'object_name': obj.__class__.__name__,
-            'object_id': obj.id
-        }) + next_url
-        context.update({
-            'conversation_form': conversation_form
-        })
         return context

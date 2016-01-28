@@ -17,9 +17,10 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.html import strip_tags
-
+from django.utils.translation import ugettext as _
 from constance import config
 from users.models import User
+from users.forms import ConversationInviteForm
 from core.models import Language
 
 from .forms import CommentCreateFormDetail
@@ -32,9 +33,10 @@ from users.mixins import OwnerMixin
 import json
 import requests
 
+
 def notify_mentioned_users(comment_instance):
     """
-	notify mentioned users and unmentioned subscribers other than owner of comment
+    notify mentioned users and unmentioned subscribers other than owner of comment
     """
     from .utils import send_mail_template
     from django.contrib.sites.models import Site
@@ -46,8 +48,8 @@ def notify_mentioned_users(comment_instance):
     subject_template_path = 'mail/comments/mention_notification_subject.txt'
     email_template_path = 'mail/comments/mention_notification.html'
     url = "%s/%s/detail/#comment-%s" % (comment_instance.content_type,
-							  comment_instance.content_object.id,
-							  comment_instance.id)
+                                        comment_instance.content_object.id,
+                                        comment_instance.id)
     link = path.join(path.join('http://', Site.objects.get_current().domain), url)
 
     mentioned_users = User.objects.filter(username__in=usernames)
@@ -142,25 +144,40 @@ class DetailViewWrapper(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(DetailViewWrapper, self).get_context_data(**kwargs)
-
-        context.update({
-            'translations': Translation.objects.filter(
-                object_id=self.get_object().id,
-                content_type=ContentType.objects.get_for_model(
-                    self.get_object().__class__
-                )
-            )
-        })
-
-        context.update({
-            'translate_url': reverse('create-translation', kwargs={
-                'model_name': self.get_object().__class__.__name__.lower(),
-                'object_id': self.get_object().id
-            })
-        })
-
+        form = None
+        conversation_form = ConversationInviteForm()
         content_type = ContentType.objects.get_for_model(self.get_object().__class__)
+        next_url = "?next=%s" % self.request.path
+        obj = kwargs.get('object')
+        subscribers = obj.subscribers.filter(pk=self.request.user.id)
+
+        translations = Translation.objects.filter(
+            object_id=self.get_object().id,
+            content_type=ContentType.objects.get_for_model(
+                self.get_object().__class__
+            )
+        )
+
+        if self.request.user.__class__.__name__ not in [u'AnonymousUser']:
+            form = self.get_form_class()
+
+        conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
+            'object_name': obj.__class__.__name__,
+            'object_id': obj.id
+        }) + next_url
+
+        translate_url = reverse('create-translation', kwargs={
+            'model_name': self.get_object().__class__.__name__.lower(),
+            'object_id': self.get_object().id
+        })
+
         context.update({
+            'form': form,
+            'object_list': self.object_list,
+            'is_subscribed': subscribers.exists(),
+            'conversation_form': conversation_form,
+            'translations': translations,
+            'translate_url': translate_url,
             'content_type': content_type.id,
             'object_id': self.get_object().id
         })
@@ -179,6 +196,13 @@ class DetailViewWrapper(DetailView):
                 messages.error(request, 'You don\'t have access for this page')
                 return redirect('/')
         return super(DetailViewWrapper, self).dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        messages.success(
+            self.request, _(
+                "%s succesfully created" %
+                self.form_class._meta.model.__name__))
+        return self.request.path
 
 
 class CommentsContentTypeWrapper(CreateView):
@@ -210,7 +234,7 @@ class CommentsContentTypeWrapper(CreateView):
 
         notify_mentioned_users(self.object)
 
-		# temporary: subscribe commenter
+        # temporary: subscribe commenter
         self.object.content_object.subscribers.add(self.request.user)
         self.object.content_object.save()
 
@@ -232,7 +256,7 @@ def notify_new_sharewith_users(list_of_users, object_instance):
     subject_template_path = 'mail/content/sharewith_notification_subject.txt'
     email_template_path = 'mail/content/sharewith_notification.html'
     url = '%s/%s/detail' % (object_instance.__class__.__name__.lower(),
-							object_instance.id)
+                            object_instance.id)
     link = path.join(path.join('http://', Site.objects.get_current().domain), url)
 
     for user in list_of_users:
@@ -255,7 +279,7 @@ class UpdateViewWrapper(OwnerMixin, UpdateView):
             new_sharewith_users = all_sharewith_users.exclude(id__in=self.object.sharewith.all())
             # Send email logick here
             notify_new_sharewith_users(new_sharewith_users, self.object)
-		# The rest:
+        # The rest:
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
@@ -348,6 +372,7 @@ def WikiDataGet(concept_q, language):
 
     return {'success': False}
 
+
 def LookupCreateDefinition(defined_meaning_id, language):
     # try to retrieve by .defined_meaning_id and language
     definitions = Definition.objects.filter(defined_meaning_id=defined_meaning_id,
@@ -357,7 +382,7 @@ def LookupCreateDefinition(defined_meaning_id, language):
 
     else:
     # query WikiData API, and create new definition based on response
-        concept = WikiDataGet('Q'+str(defined_meaning_id), language.language_code)
+        concept = WikiDataGet('Q' + str(defined_meaning_id), language.language_code)
         print concept
         if concept['success']:
             definition = Definition.objects.create(name=concept['expression'],
