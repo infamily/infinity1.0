@@ -91,12 +91,7 @@
                                 {% endif %}
                             </b>
                             
-                            {% if need.is_new %} {# if need is new #}
-                                <b><a href="{% url "need-detail" need.object.pk %}?lang={{need.translation.language.language_code}}#{{need.object.commented_at|date:"U"}}">{{ need.translation.name }}</a></b>
-
-                            {% else %} {# if need is old #}
-                                <a href="{% url "need-detail" need.object.pk %}?lang={{need.translation.language.language_code}}#{{need.object.commented_at|date:"U"}}">{{ need.translation.name }}</a>
-                            {% endif %}
+                            <a {% if need.is_new %}style="font-weight: bold"{% endif %} href="{% url "need-detail" need.object.pk %}?lang={{need.translation.language.language_code}}#{{need.object.commented_at|date:"U"}}">{{ need.translation.name }}</a>
 
                             ({{need.object.comment_count}} comments)
 
@@ -168,12 +163,7 @@
                                 {% endif %}
                             </b>
                             
-                            {% if goal.is_new %} {# if goal is new #}
-                                <b><a href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a></b>
-
-                            {% else %} {# if goal is old #}
-                                <a href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
-                            {% endif %}
+                            <a {% if goal.is_new %}style="font-weight: bold"{% endif %} href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
 
                             ({{goal.object.comment_count}} comments) 
 
@@ -250,14 +240,7 @@
 
                         </b>
 
-                        {% if idea.is_new %} {# if idea is new #}
-
-                            <b><a href="{% url "idea-detail" idea.object.pk %}?lang={{idea.translation.language.language_code}}#{{idea.object.commented_at|date:"U"}}">{{ idea.translation.name }}</a></b>
-
-                        {% else %} {# if idea is old #}
-                            <a href="{% url "idea-detail" idea.object.pk %}?lang={{idea.object.language.language_code}}#{{idea.object.commented_at|date:"U"}}">{{ idea.translation.name }}</a>
-
-                        {% endif %}
+                        <a {% if idea.is_new%}style="font-weight: bold"{% endif %} href="{% url "idea-detail" idea.object.pk %}?lang={{idea.translation.language.language_code}}#{{idea.object.commented_at|date:"U"}}">{{ idea.translation.name }}</a>
 
                         ({{idea.object.comment_count}} comments</a>)
 
@@ -336,18 +319,11 @@
                         $ {{ plan.object.get_usd|floatformat:2 }}/{{ plan.object.get_remain_usd|floatformat:2 }}
                     </b>
 
-                    {% if plan.is_new %} {# if plan is new #}
+                    <a {% if plan.is_new%}style="font-weight: bold"{% endif %} href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.translation.name }}</a>
 
-                        <b><a href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.translation.name }}</a></b>
+                    ({{plan.object.comment_count}} comments)
 
-                    {% else %} {# if plan is old #}
-
-                        <a href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.translation.name }}</a>
-                    {% endif %}
-
-                ({{plan.object.comment_count}} comments)
-
-                <br/>
+                    <br/>
 
                 <p>{{plan.translation.situation|markdown|truncatewords_html:34}}</p>
 
@@ -422,15 +398,7 @@
                             $ {{ step.object.get_usd|floatformat:2 }}/{{ step.object.get_remain_usd|floatformat:2 }}
                         </b>
 
-                        {% if step.is_new %} {# if step is new #}
-
-                            <b><a href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.translation.commented_at|date:"U"}}">{{ step.translation.name }}</a></b>
-
-                        {% else %} {# if step is old #}
-
-                            <a href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.translation.commented_at|date:"U"}}">{{ step.translation.name }}</a>
-
-                        {% endif %}
+                        <a {% if step.is_new %}style="font-weight: bold"{% endif %} href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.translation.commented_at|date:"U"}}">{{ step.translation.name }}</a>
 
                         ({{step.object.comment_count}} comments)
 
@@ -511,15 +479,7 @@
                             $ {{ task.object.get_usd|floatformat:2 }}/{{ task.object.get_remain_usd|floatformat:2 }}
                         </b>
 
-                        {% if task.is_new %} {# if task is new #}
-
-                            <b><a href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.translation.name }}</a></b>
-
-                        {% else %}
-
-                            <a href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.translation.name }}</a>
-
-                        {% endif %}
+                        <a {% if task.is_new %}stype="font-weight: bold"{% endif %} href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.translation.name }}</a>
 
                         ({{task.object.comment_count}} comments)
 
@@ -596,15 +556,7 @@
                             $ {{ work.object.get_usd|floatformat:2 }}/{{ work.object.get_remain_usd|floatformat:2 }}
                         </b>
 
-                        {% if work.is_new %} {# if task is new #}
-
-                            <b><a href="{% url "work-detail" work.object.pk %}?lang={{work.translation.language.language_code}}#{{work.object.commented_at|date:"U"}}">{{ work.translation.name }}</a></b>
-
-                        {% else %}
-
-                            <a href="{% url "work-detail" work.object.pk %}?lang={{work.translation.language.language_code}}#{{work.object.commented_at|date:"U"}}">{{ work.translation.name }}</a>
-
-                        {% endif %}
+                        <a {% if work.is_new %}style="font-weight:bold;"{% endif %} href="{% url "work-detail" work.object.pk %}?lang={{work.translation.language.language_code}}#{{work.object.commented_at|date:"U"}}">{{ work.translation.name }}</a>
 
                         ({{work.object.comment_count}} comments)
 
