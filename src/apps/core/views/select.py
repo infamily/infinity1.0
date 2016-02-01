@@ -38,14 +38,21 @@ def heavy_data_definition_complete(request):
             })
 
         # If user wants to create his own definition
-        wiki_data.append({
-            'id': json.dumps({
-                'name': term,
-                'definition': term,
-                'defined_meaning_id': None
-            }),
-            'text': term
-        })
+        try:
+            term = term.split(':')
+            definition = term[0]
+            name = term[1]
+
+            wiki_data.append({
+                'id': json.dumps({
+                    'name': name,
+                    'definition': definition,
+                    'defined_meaning_id': None
+                }),
+                'text': 'Create definition %s with name %s' % (definition, name)
+            })
+        except IndexError:
+            pass
 
         response = json.dumps({
             'err': 'nil',
