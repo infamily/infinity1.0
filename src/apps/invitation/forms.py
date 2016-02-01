@@ -6,6 +6,7 @@ from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import (
     Submit, HTML, Layout, Fieldset, ButtonHolder
 )
+from django_select2.forms import ModelSelect2Widget
 
 from core.models import Language
 
@@ -20,7 +21,11 @@ class InvitationForm(forms.Form):
         self.fields['email_body'] = forms.CharField(widget=forms.Textarea)
         self.fields['email_body'].help_text = _("You can use {{ invitation_url }} tag to past invitation url")
         self.fields['language'] = forms.ModelChoiceField(
-            queryset=Language.objects.all(),
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
         )
 
         self.helper = FormHelper(self)
