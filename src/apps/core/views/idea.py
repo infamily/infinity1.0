@@ -92,7 +92,10 @@ class IdeaCreateView(CreateViewWrapper):
 
     def get_success_url(self):
         messages.success(self.request, _("Idea succesfully created"))
-        return reverse("idea-detail", args=[self.object.pk, ])
+        if self.object.personal:
+            return reverse("inbox")
+        else:
+            return reverse("idea-detail", args=[self.object.pk, ])
 
     def get_context_data(self, **kwargs):
         context = super(IdeaCreateView, self).get_context_data(**kwargs)
