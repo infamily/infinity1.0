@@ -173,15 +173,12 @@ class NeedCreateForm(forms.ModelForm):
 
         if definition_instance:
             self.initial['definition'] = definition_instance
-            self.fields['definition'].widget = forms.HiddenInput()
-        else:
-            self.fields['definition'] = forms.ModelChoiceField(
-                widget=ModelSelect2Widget(
-                    queryset=Definition.objects.all(),
-                    search_fields=['name__icontains', ]
-                ),
-                queryset=Definition.objects.all()
-            )
+            self.fields['select_definition'].widget = forms.HiddenInput()
+            self.fields['select_definition'].required = False
+
+        self.fields['definition'].widget = forms.HiddenInput()
+        self.fields['definition'].required = False
+        self.fields['select_definition'].required = True
 
         self.fields['language'] = forms.ModelChoiceField(
             widget=ModelSelect2Widget(
@@ -225,6 +222,7 @@ class NeedCreateForm(forms.ModelForm):
         fields = [
             'name',
             'definition',
+            'select_definition',
             'content',
             'language',
             'personal',

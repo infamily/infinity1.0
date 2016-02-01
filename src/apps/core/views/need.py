@@ -34,16 +34,19 @@ class NeedCreateView(CreateViewWrapper):
         request = self.request
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        definition_data = request.POST.get('select_definition')
-        definition_data = json.loads(definition_data)
-        definition_data.update({
-            'user': request.user,
-            'language': Language.objects.get(language_code=request.LANGUAGE_CODE)
-        })
 
-        #self.object.definition = form.cleaned_data.get('definition')
-        definition, created = Definition.objects.get_or_create(**definition_data)
-        self.object.definition = definition
+        if form.cleaned_data.get('definition'):
+            self.object.definition = form.cleaned_data.get('definition')
+        else:
+            definition_data = request.POST.get('select_definition')
+            definition_data = json.loads(definition_data)
+            definition, created = Definition.objects.get_or_create(**definition_data)
+            definition_data.update({
+                'user': request.user,
+                'language': Language.objects.get(language_code=request.LANGUAGE_CODE)
+            })
+            self.object.definition = definition
+
         self.object.save()
         return super(NeedCreateView, self).form_valid(form)
 

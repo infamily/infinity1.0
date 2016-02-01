@@ -29,8 +29,8 @@ def heavy_data_2(request):
 
             wiki_data.append({
                 'id': json.dumps({
-                    'name': name,
-                    'definition': definition,
+                    'name': name[0],
+                    'definition': definition[0],
                     'defined_meaning_id': defined_meaning_id
                 }),
                 'text': definition
