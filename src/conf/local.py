@@ -5,7 +5,21 @@ from .base import *
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 
-DEBUG = os.getenv("DEBUG", False)
+
+def debug():
+    """
+    returns True if DEBUG env is 1
+    returns False if DEBUG env is 0
+    returns True if DEBUG env is not established
+    """
+    debug_value = os.getenv("DEBUG", False)
+
+    if debug_value:
+        return bool(int(debug_value))
+    return True
+
+DEBUG = debug()
+
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
 # END DEBUG CONFIGURATION
@@ -16,8 +30,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv("DATABASE_NAME", "infty"),
-        'USER': os.getenv("DATABASE_USER", "infty"),
-        'PASSWORD': os.getenv("DATABASE_PASSWORD", "infty"),
+        'USER': os.getenv("DATABASE_USER", "root"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
         'HOST': os.getenv("DATABASE_HOST", "127.0.0.1"),
         'PORT': os.getenv("DATABASE_PORT", "")
     }
