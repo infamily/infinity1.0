@@ -43,7 +43,10 @@ class GoalCreateView(CreateViewWrapper):
 
     def get_success_url(self):
         messages.success(self.request, _("Goal succesfully created"))
-        return reverse("goal-detail", args=[self.object.pk, ])
+        if self.object.personal:
+            return reverse("inbox")
+        else:
+            return reverse("goal-detail", args=[self.object.pk, ])
 
     def get_context_data(self, **kwargs):
         context = super(GoalCreateView, self).get_context_data(**kwargs)
