@@ -340,7 +340,7 @@ def WikiDataSearch(name, language, return_response=False):
         except:
             aliases = ''
 
-        results.append([expression, aliases+description, reverse('need-create', args=[item['title']])])
+        results.append([expression, aliases + description, item['title'][1:]])
 
     return results
 

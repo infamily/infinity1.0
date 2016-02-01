@@ -148,10 +148,19 @@ class CommentUpdateForm(forms.ModelForm):
             'text': MarkdownWidget,
         }
 
+from django_select2.forms import HeavySelect2Widget
+
+class ChoiceFieldNoValidation(forms.ChoiceField):
+    def validate(self, value):
+        pass
 
 class NeedCreateForm(forms.ModelForm):
 
     content = forms.CharField(widget=MarkdownWidget())
+    select_definition = ChoiceFieldNoValidation(
+        widget=HeavySelect2Widget(data_view='heavy_data_2', choices=[()]),
+        required=False
+    )
 
     def __init__(self, *args, **kwargs):
         definition_instance = kwargs.pop('definition_instance')

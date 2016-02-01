@@ -1,3 +1,5 @@
+import json
+
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
@@ -29,9 +31,19 @@ class NeedCreateView(CreateViewWrapper):
     template_name = "need/create.html"
 
     def form_valid(self, form):
+        request = self.request
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.definition = form.cleaned_data.get('definition')
+        definition_data = request.POST.get('select_definition')
+        definition_data = json.loads(definition_data)
+        definition_data.update({
+            'user': request.user,
+            'language': Language.objects.get(language_code=request.LANGUAGE_CODE)
+        })
+
+        #self.object.definition = form.cleaned_data.get('definition')
+        definition, created = Definition.objects.get_or_create(**definition_data)
+        self.object.definition = definition
         self.object.save()
         return super(NeedCreateView, self).form_valid(form)
 
