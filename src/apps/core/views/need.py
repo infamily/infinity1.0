@@ -40,11 +40,13 @@ class NeedCreateView(CreateViewWrapper):
         else:
             definition_data = request.POST.get('select_definition')
             definition_data = json.loads(definition_data)
-            definition, created = Definition.objects.get_or_create(**definition_data)
             definition_data.update({
                 'user': request.user,
                 'language': Language.objects.get(language_code=request.LANGUAGE_CODE)
             })
+
+            definition, created = Definition.objects.get_or_create(**definition_data)
+
             self.object.definition = definition
 
         self.object.save()

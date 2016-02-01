@@ -17,9 +17,10 @@ class IdeaChainedView(AutoResponseView):
         return self.widget.filter_queryset(self.term, queryset)
 
 
-def heavy_data_2(request):
-    if request.GET.get('term'):
-        wiki_results = WikiDataSearch(request.GET.get('term'), request.LANGUAGE_CODE)
+def heavy_data_definition_complete(request):
+    term = request.GET.get('term')
+    if term:
+        wiki_results = WikiDataSearch(term, request.LANGUAGE_CODE)
         wiki_data = []
 
         for wiki_result in wiki_results:
@@ -35,6 +36,16 @@ def heavy_data_2(request):
                 }),
                 'text': definition
             })
+
+        # If user wants to create his own definition
+        wiki_data.append({
+            'id': json.dumps({
+                'name': term,
+                'definition': term,
+                'defined_meaning_id': None
+            }),
+            'text': term
+        })
 
         response = json.dumps({
             'err': 'nil',

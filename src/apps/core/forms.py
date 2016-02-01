@@ -158,7 +158,7 @@ class NeedCreateForm(forms.ModelForm):
 
     content = forms.CharField(widget=MarkdownWidget())
     select_definition = ChoiceFieldNoValidation(
-        widget=HeavySelect2Widget(data_view='heavy_data_2', choices=[()]),
+        widget=HeavySelect2Widget(data_view='heavy_data_definition_complete', choices=[()]),
         required=False
     )
 

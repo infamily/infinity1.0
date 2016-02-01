@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from core.views import IndexView, DefinitionCreateView, SetLanguageView, heavy_data_2
+from core.views import IndexView, DefinitionCreateView, SetLanguageView
 
 from django.contrib import admin
 admin.autodiscover()
@@ -36,7 +36,6 @@ urlpatterns = [
         name="data"),
     url('^markdown/', include('django_markdown.urls')),
     url('^i18n/', include('django.conf.urls.i18n')),
-    url('^heavy_data_2/$', heavy_data_2, name='heavy_data_2'),
 ]
 
 

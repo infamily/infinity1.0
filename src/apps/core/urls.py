@@ -304,4 +304,9 @@ urlpatterns = [
         IdeaChainedView.as_view(),
         name="heavy_data_idea_chained"
     ),
+    url(
+        r'^heavy_data_definition_complete/$',
+        heavy_data_definition_complete,
+        name="heavy_data_definition_complete"
+    )
 ]
