@@ -1065,6 +1065,13 @@ class DefinitionUpdateForm(forms.ModelForm):
         super(DefinitionUpdateForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
+        self.fields['language'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Language.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Language.objects.all()
+        )
 
         self.helper.layout.append(Submit('save', _('Update')))
 
