@@ -29,8 +29,8 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv("DATABASE_NAME", "infty"),
-        'USER': os.getenv("DATABASE_USER", "root"),
+        'NAME': os.getenv("DATABASE_NAME", ""),
+        'USER': os.getenv("DATABASE_USER", ""),
         'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
         'HOST': os.getenv("DATABASE_HOST", "127.0.0.1"),
         'PORT': os.getenv("DATABASE_PORT", "")
@@ -65,8 +65,8 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = ['.infty.xyz']
     EMAIL_BACKEND = "sgbackend.SendGridBackend"
-    SENDGRID_USER = os.getenv("SENDGRID_USER", "ironcoder-demo")
-    SENDGRID_PASSWORD = os.getenv("SENDGRID_PASSWORD", "123456789a")
+    SENDGRID_USER = os.getenv("SENDGRID_USER", "")
+    SENDGRID_PASSWORD = os.getenv("SENDGRID_PASSWORD", "")
 
     # CACHE CONFIGURATION
     CACHES = {
