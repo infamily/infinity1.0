@@ -10,7 +10,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^set-lang/(?P<lang>\w+)/$', SetLanguageView.as_view(pattern_name='home'), name='lang_redirect'),
-    url(r'^$', DefinitionCreateView.as_view(), name='home'),
+    url(r'^$', IndexView.as_view(), name='home'),
     url(r'^[!]$', IndexView.as_view(), name='index'),
     url(r'^i$', IndexView.as_view(), name='inbox'),
     url(r'', include('apps.core.urls')),
