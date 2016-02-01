@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext as _
 from os import path
 from re import finditer
 from django.contrib.contenttypes.models import ContentType
@@ -208,6 +209,14 @@ class CommentsContentTypeWrapper(CreateView):
 
     form_class = CommentCreateFormDetail
 
+    def get_success_url(self):
+        messages.success(
+            self.request, _(
+                "%s succesfully created" %
+                self.form_class._meta.model.__name__))
+        success_url = "%s#comment-%d" % (self.request.path, self.object.id)
+        return success_url
+
     @property
     def object_list(self):
         content_type = ContentType.objects.get_for_model(
@@ -246,6 +255,7 @@ class CommentsContentTypeWrapper(CreateView):
             return redirect(reverse("payments:transaction_paypal", kwargs={'comment_id': self.object.id}))
 
         return super(CommentsContentTypeWrapper, self).form_valid(form)
+
 
 
 def notify_new_sharewith_users(list_of_users, object_instance):

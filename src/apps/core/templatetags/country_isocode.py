@@ -20,8 +20,8 @@ def get_client_ip(request_object):
 
 @register.filter
 def get_country_by_ip(request_object):
-    ip_address = get_client_ip(request_object)
     try:
+        ip_address = get_client_ip(request_object)
         return geoip2reader.country(ip_address).country.iso_code
     except:
 		return 'XX'
