@@ -25,10 +25,11 @@ DATABASES = {
 
 # END DATABASE CONFIGURATION
 
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "noreply@infty.xyz")
+
 if DEBUG:
     # If debug is enabled this means we use the project locally
     # let's allow Django to display the letters in the console
-    DEFAULT_FROM_EMAIL = "noreply@infty.xyz"
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     # TOOLBAR CONFIGURATION
     # See:
@@ -50,7 +51,6 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = ['.infty.xyz']
     EMAIL_BACKEND = "sgbackend.SendGridBackend"
-    DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "noreply@infty.xyz")
     SENDGRID_USER = os.getenv("SENDGRID_USER", "ironcoder-demo")
     SENDGRID_PASSWORD = os.getenv("SENDGRID_PASSWORD", "123456789a")
 
