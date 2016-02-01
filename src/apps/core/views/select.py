@@ -40,8 +40,8 @@ def heavy_data_definition_complete(request):
         # If user wants to create his own definition
         try:
             term = term.split(':')
-            definition = term[0]
-            name = term[1]
+            name = term[0]
+            definition = term[1]
 
             wiki_data.append({
                 'id': json.dumps({
