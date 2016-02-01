@@ -157,7 +157,7 @@ class IndexView(TemplateView):
                     (
                     Q(personal=False)
                     )
-                    & Q(lang=language)
+#                     & Q(lang=language)
                     & q_search
                 )
         else:
@@ -165,7 +165,7 @@ class IndexView(TemplateView):
                 (
                 Q(personal=False)
                 )
-                & Q(lang=language)
+#                 & Q(lang=language)
                 & q_search
             )
 
