@@ -48,6 +48,7 @@ if DEBUG:
     INTERNAL_IPS = ('127.0.0.1',)
     # END TOOLBAR CONFIGURATION
 else:
+    ALLOWED_HOSTS = ['.infty.xyz']
     EMAIL_BACKEND = "sgbackend.SendGridBackend"
     DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "noreply@infty.xyz")
     SENDGRID_USER = os.getenv("SENDGRID_USER", "ironcoder-demo")
