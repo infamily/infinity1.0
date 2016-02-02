@@ -217,13 +217,14 @@ class NeedCreateForm(forms.ModelForm):
             required=False
         )
 
-        self.fields['select_definition'].label = _("""<b>What it is about?</b> (choose or define related concept by typing <mark style="background-color: #90EE90;"><i>expression<b>: </b>definition</i></mark>.)""")
-        self.fields['name'].label = _("""<b>Subject:</b>""")
-        self.fields['name'].widget.attrs.update({'placeholder': _('e.g., "Hi friends, who would also want a spaceship?"')})
-        self.fields['content'].label = _('')
-        self.fields['content'].widget.attrs.update({'placeholder': _('e.g., "I have been dreaming about travelling to explore other planets since childhood. I would enjoy going on a long journey to the unknown together with a group of close friends living in the spaceship like one family. It is not impossible. Who would like to join me in an attempt to consider all possible ways how we could do it, from laws of physics to specific designs and logistics."')})
+        self.fields['select_definition'].label = _("""<b>Category:</b> (Encyclopedic lookup. To add new entry, type <mark style="background-color: #90EE90;"><i>expression<b>: </b>definition</i></mark> in one line.)""")
+        self.fields['name'].label = _("""<b>Subject:</b> (The headline that others will see.)""")
+       #self.fields['name'].widget.attrs.update({'placeholder': _('e.g., "Hi friends, who would also want a spaceship?"')})
+        self.fields['content'].label = _('<b>Content:</b> (Text body.)')
+       #self.fields['content'].widget.attrs.update({'placeholder': _('e.g., "I have been dreaming about travelling to explore other planets since childhood. I would enjoy going on a long journey to the unknown together with a group of close friends living in the spaceship like one family. It is not impossible. Who would like to join me in an attempt to consider all possible ways how we could do it, from laws of physics to specific designs and logistics."')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
+        self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
 
         try:
@@ -277,6 +278,7 @@ class NeedUpdateForm(forms.ModelForm):
 
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['content'].widget.attrs['readonly'] = True
+        self.fields['sharewith'].label = _('Share with:')
 
     class Meta:
         model = Need
@@ -365,6 +367,7 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a problem of the past)')
+        self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
 
         if need_instance:
@@ -451,6 +454,7 @@ class GoalUpdateForm(forms.ModelForm):
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a problem of the past)')
         self.fields['reason'].widget.attrs['readonly'] = True
+        self.fields['sharewith'].label = _('Share with:')
 
     class Meta:
         model = Goal
@@ -512,6 +516,7 @@ class WorkUpdateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical work)')
         self.fields['name'].widget.attrs['readonly'] = True
         self.fields['description'].widget.attrs['readonly'] = True
+        self.fields['sharewith'].label = _('Share with:')
 
     class Meta:
         model = Work
@@ -578,6 +583,7 @@ class WorkCreateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical work)')
+        self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
 
         if task_instance:
@@ -655,6 +661,7 @@ class IdeaUpdateForm(forms.ModelForm):
         self.fields['name'].widget.attrs['readonly'] = True
         self.fields['summary'].widget.attrs['readonly'] = True
         self.fields['description'].widget.attrs['readonly'] = True
+        self.fields['sharewith'].label = _('Share with:')
 
     class Meta:
         model = Idea
@@ -802,6 +809,7 @@ class StepUpdateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a milestone of the past)')
         self.fields['name'].widget.attrs['readonly'] = True
         self.fields['objective'].widget.attrs['readonly'] = True
+        self.fields['sharewith'].label = _('Share with:')
 
     class Meta:
         model = Step
@@ -868,6 +876,7 @@ class StepCreateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a milestone of the past)')
+        self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
 
         if plan_instance:
@@ -942,6 +951,7 @@ class TaskUpdateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical task)')
         self.fields['name'].widget.attrs['readonly'] = True
         self.fields['description'].widget.attrs['readonly'] = True
+        self.fields['sharewith'].label = _('Share with:')
 
     class Meta:
         model = Task
@@ -997,6 +1007,7 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['url'].label = _('<b>Origin:</b> (of the source)')
         self.fields['url'].widget.attrs.update({'placeholder': _('http://')})
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical task)')
+        self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
 
         if step_instance:
@@ -1191,6 +1202,7 @@ class PlanUpdateForm(forms.ModelForm):
         self.fields['name'].widget.attrs['readonly'] = True
         self.fields['situation'].widget.attrs['readonly'] = True
         self.fields['deliverable'].widget.attrs['readonly'] = True
+        self.fields['sharewith'].label = _('Share with:')
 
 
     class Meta:

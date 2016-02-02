@@ -49,7 +49,7 @@ def heavy_data_definition_complete(request):
                     'definition': definition,
                     'defined_meaning_id': None
                 }),
-                'text': 'Create definition %s with name %s' % (definition, name)
+                'text': 'Create definition -> %s : %s' % (name, definition)
             })
         except IndexError:
             pass

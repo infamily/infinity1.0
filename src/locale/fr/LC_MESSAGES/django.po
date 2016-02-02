@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/apps/core/forms.py:225 src/apps/core/forms.py:359
-#: src/apps/core/forms.py:362 src/apps/core/forms.py:1073
+#: src/apps/core/forms.py:357 src/apps/core/forms.py:360
+#: src/apps/core/forms.py:1071
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-02 06:32-0800\n"
+"POT-Creation-Date: 2016-02-02 08:35-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,17 +21,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/apps/core/forms.py:69 src/apps/core/forms.py:192
-#: src/apps/core/forms.py:316 src/apps/core/forms.py:551
-#: src/apps/core/forms.py:699 src/apps/core/forms.py:843
-#: src/apps/core/forms.py:978 src/apps/core/forms.py:1254
+#: src/apps/core/forms.py:314 src/apps/core/forms.py:549
+#: src/apps/core/forms.py:697 src/apps/core/forms.py:841
+#: src/apps/core/forms.py:976 src/apps/core/forms.py:1252
 msgid "Create"
 msgstr ""
 
 #: src/apps/core/forms.py:91 src/apps/core/forms.py:159
-#: src/apps/core/forms.py:260 src/apps/core/forms.py:411
-#: src/apps/core/forms.py:487 src/apps/core/forms.py:629
-#: src/apps/core/forms.py:779 src/apps/core/forms.py:918
-#: src/apps/core/forms.py:1132 src/apps/core/forms.py:1171
+#: src/apps/core/forms.py:258 src/apps/core/forms.py:409
+#: src/apps/core/forms.py:485 src/apps/core/forms.py:627
+#: src/apps/core/forms.py:777 src/apps/core/forms.py:916
+#: src/apps/core/forms.py:1130 src/apps/core/forms.py:1169
 #: src/apps/users/forms.py:61
 msgid "Update"
 msgstr ""
@@ -83,56 +83,45 @@ msgstr ""
 
 #: src/apps/core/forms.py:220
 msgid ""
-"<b>Topic:</b> (relevant to problem,\n"
-"                                      <a href=\"/definition-create/\">click "
-"here</a> to\n"
-"                                      add if you can't find it.)"
+"<b>Category:</b> (Encyclopedic lookup. To add new entry, type <mark style="
+"\"background-color: #90EE90;\"><i>expression<b>: </b>definition</i></mark> "
+"in one line.)"
+msgstr ""
+
+#: src/apps/core/forms.py:221
+msgid "<b>Subject:</b> (The headline that others will see.)"
 msgstr ""
 
 #: src/apps/core/forms.py:223
-msgid "<b>Subject:</b>"
+msgid "<b>Content:</b> (Text body.)"
 msgstr ""
 
-#: src/apps/core/forms.py:224
-msgid "e.g., \"Hi friends, who would also want a spaceship?\""
-msgstr ""
-
-#: src/apps/core/forms.py:226
-msgid ""
-"e.g., \"I have been dreaming about travelling to explore other planets since "
-"childhood. I would enjoy going on a long journey to the unknown together "
-"with a group of close friends living in the spaceship like one family. It is "
-"not impossible. Who would like to join me in an attempt to consider all "
-"possible ways how we could do it, from laws of physics to specific designs "
-"and logistics.\""
-msgstr ""
-
-#: src/apps/core/forms.py:227 src/apps/core/forms.py:363
-#: src/apps/core/forms.py:577 src/apps/core/forms.py:729
-#: src/apps/core/forms.py:867 src/apps/core/forms.py:1295
+#: src/apps/core/forms.py:225 src/apps/core/forms.py:361
+#: src/apps/core/forms.py:575 src/apps/core/forms.py:727
+#: src/apps/core/forms.py:865 src/apps/core/forms.py:1293
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
 msgstr ""
 
-#: src/apps/core/forms.py:228 src/apps/core/forms.py:280
-#: src/apps/core/forms.py:364 src/apps/core/forms.py:449
-#: src/apps/core/forms.py:510 src/apps/core/forms.py:578
-#: src/apps/core/forms.py:652 src/apps/core/forms.py:730
-#: src/apps/core/forms.py:800 src/apps/core/forms.py:868
-#: src/apps/core/forms.py:940 src/apps/core/forms.py:997
-#: src/apps/core/forms.py:1188 src/apps/core/forms.py:1296
+#: src/apps/core/forms.py:226 src/apps/core/forms.py:278
+#: src/apps/core/forms.py:362 src/apps/core/forms.py:447
+#: src/apps/core/forms.py:508 src/apps/core/forms.py:576
+#: src/apps/core/forms.py:650 src/apps/core/forms.py:728
+#: src/apps/core/forms.py:798 src/apps/core/forms.py:866
+#: src/apps/core/forms.py:938 src/apps/core/forms.py:995
+#: src/apps/core/forms.py:1186 src/apps/core/forms.py:1294
 msgid "<b>Input Language</b> (the language you used to compose this post) "
 msgstr ""
 
-#: src/apps/core/forms.py:354
+#: src/apps/core/forms.py:352
 msgid "<b>Problem category:</b>"
 msgstr ""
 
-#: src/apps/core/forms.py:355
+#: src/apps/core/forms.py:353
 msgid "<b>Related Need:</b> (Optional)"
 msgstr ""
 
-#: src/apps/core/forms.py:356
+#: src/apps/core/forms.py:354
 msgid ""
 "<b>Title:</b> (e.g., Potable Water\n"
 "                                      Shortage, <a href=\"/goal/list/"
@@ -140,131 +129,131 @@ msgid ""
 "                                      defined yet.)"
 msgstr ""
 
-#: src/apps/core/forms.py:360
+#: src/apps/core/forms.py:358
 msgid ""
 "<b>Description:</b> (e.g., Many people in the world lack clean potable "
 "water.)"
 msgstr ""
 
-#: src/apps/core/forms.py:366 src/apps/core/forms.py:451
-#: src/apps/core/forms.py:511 src/apps/core/forms.py:579
-#: src/apps/core/forms.py:653 src/apps/core/forms.py:733
-#: src/apps/core/forms.py:801 src/apps/core/forms.py:869
-#: src/apps/core/forms.py:941 src/apps/core/forms.py:998
-#: src/apps/core/forms.py:1189 src/apps/core/forms.py:1297
+#: src/apps/core/forms.py:364 src/apps/core/forms.py:449
+#: src/apps/core/forms.py:509 src/apps/core/forms.py:577
+#: src/apps/core/forms.py:651 src/apps/core/forms.py:731
+#: src/apps/core/forms.py:799 src/apps/core/forms.py:867
+#: src/apps/core/forms.py:939 src/apps/core/forms.py:996
+#: src/apps/core/forms.py:1187 src/apps/core/forms.py:1295
 msgid ""
 "<b>This is a link</b> (check if you are only linking to existing content)"
 msgstr ""
 
-#: src/apps/core/forms.py:367 src/apps/core/forms.py:452
-#: src/apps/core/forms.py:512 src/apps/core/forms.py:580
-#: src/apps/core/forms.py:654 src/apps/core/forms.py:734
-#: src/apps/core/forms.py:802 src/apps/core/forms.py:870
-#: src/apps/core/forms.py:942 src/apps/core/forms.py:999
-#: src/apps/core/forms.py:1190 src/apps/core/forms.py:1298
+#: src/apps/core/forms.py:365 src/apps/core/forms.py:450
+#: src/apps/core/forms.py:510 src/apps/core/forms.py:578
+#: src/apps/core/forms.py:652 src/apps/core/forms.py:732
+#: src/apps/core/forms.py:800 src/apps/core/forms.py:868
+#: src/apps/core/forms.py:940 src/apps/core/forms.py:997
+#: src/apps/core/forms.py:1188 src/apps/core/forms.py:1296
 msgid "<b>Origin:</b> (of the source)"
 msgstr ""
 
-#: src/apps/core/forms.py:368 src/apps/core/forms.py:453
-#: src/apps/core/forms.py:513 src/apps/core/forms.py:574
-#: src/apps/core/forms.py:581 src/apps/core/forms.py:655
-#: src/apps/core/forms.py:735 src/apps/core/forms.py:803
-#: src/apps/core/forms.py:871 src/apps/core/forms.py:943
-#: src/apps/core/forms.py:1000 src/apps/core/forms.py:1191
-#: src/apps/core/forms.py:1299
+#: src/apps/core/forms.py:366 src/apps/core/forms.py:451
+#: src/apps/core/forms.py:511 src/apps/core/forms.py:572
+#: src/apps/core/forms.py:579 src/apps/core/forms.py:653
+#: src/apps/core/forms.py:733 src/apps/core/forms.py:801
+#: src/apps/core/forms.py:869 src/apps/core/forms.py:941
+#: src/apps/core/forms.py:998 src/apps/core/forms.py:1189
+#: src/apps/core/forms.py:1297
 msgid "http://"
 msgstr ""
 
-#: src/apps/core/forms.py:369 src/apps/core/forms.py:454
+#: src/apps/core/forms.py:367 src/apps/core/forms.py:452
 msgid ""
 "<b>This is a history</b> (check if you are documenting a problem of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:514 src/apps/core/forms.py:582
+#: src/apps/core/forms.py:512 src/apps/core/forms.py:580
 msgid ""
 "<b>This is a history</b> (check if you are documenting a historical work)"
 msgstr ""
 
-#: src/apps/core/forms.py:569
+#: src/apps/core/forms.py:567
 msgid ""
 "<b>Name:</b> (e.g., \"First attempt to assemble solar cells.\", used in "
 "title.)"
 msgstr ""
 
-#: src/apps/core/forms.py:570
+#: src/apps/core/forms.py:568
 msgid "Give a title to your work."
 msgstr ""
 
-#: src/apps/core/forms.py:571
+#: src/apps/core/forms.py:569
 msgid "<b>Description:</b> (details about the work, used as body.)"
 msgstr ""
 
-#: src/apps/core/forms.py:572
+#: src/apps/core/forms.py:570
 msgid "Here is a little story of my work."
 msgstr ""
 
-#: src/apps/core/forms.py:573
+#: src/apps/core/forms.py:571
 msgid "<b>File:</b> (you can upload a file describing your work)"
 msgstr ""
 
-#: src/apps/core/forms.py:575
+#: src/apps/core/forms.py:573
 msgid "<b>Parent Work Id:</b> (integer referring to other work)"
 msgstr ""
 
-#: src/apps/core/forms.py:576
+#: src/apps/core/forms.py:574
 msgid "optional"
 msgstr ""
 
-#: src/apps/core/forms.py:656 src/apps/core/forms.py:736
+#: src/apps/core/forms.py:654 src/apps/core/forms.py:734
 msgid ""
 "<b>This is a history</b> (check if you are documenting an idea of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:724 src/apps/core/templates/goal/list2.html.py:6
+#: src/apps/core/forms.py:722 src/apps/core/templates/goal/list2.html.py:6
 #: src/apps/core/templates/goal/list2.html:9
 #: src/apps/core/templates/need/detail.html:107 src/templates/home.html:178
 msgid "Goals"
 msgstr ""
 
-#: src/apps/core/forms.py:726
+#: src/apps/core/forms.py:724
 msgid "<b>Name:</b> (e.g., \"Solar Water Condenser\", used in title.)"
 msgstr ""
 
-#: src/apps/core/forms.py:727
+#: src/apps/core/forms.py:725
 msgid ""
 "<b>Summary:</b> (e.g., \"Use solar panels and Peltier effect to extract "
 "water from air.\", appears as subtitle.)"
 msgstr ""
 
-#: src/apps/core/forms.py:728
+#: src/apps/core/forms.py:726
 msgid "<b>Description:</b> (write full description here, used as body.)"
 msgstr ""
 
-#: src/apps/core/forms.py:732 src/apps/core/forms.py:1287
+#: src/apps/core/forms.py:730 src/apps/core/forms.py:1285
 msgid "Share with:"
 msgstr ""
 
-#: src/apps/core/forms.py:804 src/apps/core/forms.py:872
+#: src/apps/core/forms.py:802 src/apps/core/forms.py:870
 msgid ""
 "<b>This is a history</b> (check if you are documenting a milestone of the "
 "past)"
 msgstr ""
 
-#: src/apps/core/forms.py:858
+#: src/apps/core/forms.py:856
 msgid "<b>Milestone:</b> (e.g., \"assemble solar panels\", used in title.)"
 msgstr ""
 
-#: src/apps/core/forms.py:859
+#: src/apps/core/forms.py:857
 msgid "Type the name of the milestone."
 msgstr ""
 
-#: src/apps/core/forms.py:860
+#: src/apps/core/forms.py:858
 msgid ""
 "<b>Objective:</b> (describe conditions, when you will consider the milestone "
 "to be 'achieved')"
 msgstr ""
 
-#: src/apps/core/forms.py:861
+#: src/apps/core/forms.py:859
 msgid ""
 "Example:\n"
 "\n"
@@ -273,91 +262,91 @@ msgid ""
 "- Passes certain tests of reliability."
 msgstr ""
 
-#: src/apps/core/forms.py:862
+#: src/apps/core/forms.py:860
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the milestone has to be done earlier)"
 msgstr ""
 
-#: src/apps/core/forms.py:863
+#: src/apps/core/forms.py:861
 msgid ""
 "<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "invest on this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: src/apps/core/forms.py:864
+#: src/apps/core/forms.py:862
 msgid "people 1\\3, days 10\\20, usd 50\\70"
 msgstr ""
 
-#: src/apps/core/forms.py:865
+#: src/apps/core/forms.py:863
 msgid ""
 "<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "have by completion of this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: src/apps/core/forms.py:866
+#: src/apps/core/forms.py:864
 msgid "complete solar assembly drawings 0\\1, solar cell assembly 1\\2"
 msgstr ""
 
-#: src/apps/core/forms.py:944 src/apps/core/forms.py:1001
+#: src/apps/core/forms.py:942 src/apps/core/forms.py:999
 msgid ""
 "<b>This is a history</b> (check if you are documenting a historical task)"
 msgstr ""
 
-#: src/apps/core/forms.py:994
+#: src/apps/core/forms.py:992
 msgid "<b>Task:</b> (e.g., \"Purchase solar cells\", text in title.)"
 msgstr ""
 
-#: src/apps/core/forms.py:995
+#: src/apps/core/forms.py:993
 msgid "Type the name of the task."
 msgstr ""
 
-#: src/apps/core/forms.py:996
+#: src/apps/core/forms.py:994
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the task has to be done earlier)"
 msgstr ""
 
-#: src/apps/core/forms.py:1058 src/apps/core/forms.py:1064
+#: src/apps/core/forms.py:1056 src/apps/core/forms.py:1062
 msgid "Add & Go"
 msgstr ""
 
-#: src/apps/core/forms.py:1087
+#: src/apps/core/forms.py:1085
 msgid "definition, e.g., 'spaceflight beyond the bounderies of galaxies'"
 msgstr ""
 
-#: src/apps/core/forms.py:1192 src/apps/core/forms.py:1300
+#: src/apps/core/forms.py:1190 src/apps/core/forms.py:1298
 msgid ""
 "<b>This is a history</b> (check if you are documenting a project of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:1282 src/apps/core/templates/idea/create.html.py:16
+#: src/apps/core/forms.py:1280 src/apps/core/templates/idea/create.html.py:16
 #: src/templates/home.html:77
 msgid "Goal"
 msgstr ""
 
-#: src/apps/core/forms.py:1284 src/apps/core/templates/plan/create.html.py:16
+#: src/apps/core/forms.py:1282 src/apps/core/templates/plan/create.html.py:16
 #: src/templates/home.html:78
 msgid "Idea"
 msgstr ""
 
-#: src/apps/core/forms.py:1286
+#: src/apps/core/forms.py:1284
 msgid "Members"
 msgstr ""
 
-#: src/apps/core/forms.py:1289
+#: src/apps/core/forms.py:1287
 msgid "<b>Name:</b> (e.g., \"Solar Water Project\".)"
 msgstr ""
 
-#: src/apps/core/forms.py:1291
+#: src/apps/core/forms.py:1289
 msgid ""
 "<b>Situation:</b> (Describe your current situation by listing the things "
 "that you have, including access.)"
 msgstr ""
 
-#: src/apps/core/forms.py:1292
+#: src/apps/core/forms.py:1290
 msgid ""
 "Example:\n"
 "\n"
@@ -370,11 +359,11 @@ msgid ""
 " - 150 USD for this project"
 msgstr ""
 
-#: src/apps/core/forms.py:1293
+#: src/apps/core/forms.py:1291
 msgid "<b>Deliverable:</b> (Describe what do you expect to get.)"
 msgstr ""
 
-#: src/apps/core/forms.py:1294
+#: src/apps/core/forms.py:1292
 msgid ""
 "Example:\n"
 "\n"
@@ -694,16 +683,6 @@ msgstr ""
 msgid "+New Plan"
 msgstr ""
 
-#: src/apps/core/templates/need/create.html:20
-msgid ""
-"Definition not found in WikiData. Please, create a custom definition by "
-"entering your own."
-msgstr ""
-
-#: src/apps/core/templates/need/create.html:21
-msgid "Create my definition"
-msgstr ""
-
 #: src/apps/core/templates/need/detail.html:136
 msgid "+Add Goal"
 msgstr ""
@@ -809,15 +788,15 @@ msgstr ""
 msgid "Idea succesfully deleted"
 msgstr ""
 
-#: src/apps/core/views/need.py:56
+#: src/apps/core/views/need.py:58
 msgid "Need succesfully created"
 msgstr ""
 
-#: src/apps/core/views/need.py:115
+#: src/apps/core/views/need.py:117
 msgid "Need succesfully deleted"
 msgstr ""
 
-#: src/apps/core/views/need.py:131
+#: src/apps/core/views/need.py:133
 msgid "Need succesfully updated"
 msgstr ""
 
