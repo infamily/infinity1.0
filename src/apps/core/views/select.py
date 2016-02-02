@@ -34,7 +34,7 @@ def heavy_data_definition_complete(request):
                     'definition': definition[0],
                     'defined_meaning_id': defined_meaning_id
                 }),
-                'text': definition
+                'text': '%s: %s' % (name[0], definition[0])
             })
 
         # If user wants to create his own definition
