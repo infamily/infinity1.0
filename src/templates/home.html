@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% load staticfiles %}
 {% load django_markdown %}
+{% load country_isocode %}
 
 {% block title %}Index{% endblock %}
 
@@ -14,15 +16,53 @@
 }
 </style>
 
+<!-- for pop-up video -->
+<script type="text/javascript" src="{% static "cdn/jquery/jquery-migrate-1.2.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "cdn/fancybox/jquery.fancybox-1.3.4.pack.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static "cdn/fancybox/jquery.fancybox-1.3.4.css" %}" media="screen" />
+<script type="text/javascript" src="{% static "cdn/fancybox/video.js" %}"></script>
+
+<!-- for hiding button -->
+<script type="text/javascript">
+    function hideshow(which){
+    if (!document.getElementById)
+    return
+    if (which.style.display=="inline")
+    which.style.display="none"
+    else
+    which.style.display="inline"
+    }
+</script>
+
+
 <div class="alignright">
 {% if not user.is_anonymous %}
+
+    <span id="info" style="display:none; color: brown;">
     {% if user.invitationoption.invitations_left %}
     <b>
         [<a href="{% url "invite:send"  %}">{{user.invitationoption.invitations_left}} {% trans "invitations" %}</a>, <a href="/step/2/detail/">{% trans "write bugs" %}</a>, {% trans "time value" %}: 1 ħ = <a href="https://research.stlouisfed.org/fred2/series/CES0500000003">{{ hour_value.value|floatformat:2 }}</a> $]
     </b>
     {% endif %}
+    </span>
+    <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="javascript:hideshow(document.getElementById('info'))">{% trans "Info" %}</a>
+
+    {% if request|get_country_by_ip != 'CN' %}
+    <a class="video btn-lg" style="color: black; background-color: #F0F0F0;" href="https://www.youtube.com/v/a0mO143FfUI?hd=1&autoplay=1&autohide=1&showinfo=0&rel=0&wmode=transparent">{% trans "Help" %}</a>
+    <br/>
+    {% else %}
+    <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="http://player.youku.com/player.php/sid/XMTQyMTEyMjk3Mg/v.swf" target="_blank">{% trans "Video" %}</a>
+    {% endif %}
+
 {% else %}
-&nbsp;
+
+{% if request|get_country_by_ip != 'CN' %}
+<a class="video btn-lg" style="color: black; background-color: #F0F0F0;" href="https://www.youtube.com/v/zeBgP31KaqY?hd=1&autoplay=1&autohide=1&showinfo=0&rel=0&wmode=transparent">{% trans "Video" %}</a>
+<br/>
+{% else %}
+<a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="http://player.youku.com/player.php/sid/XMTQyMTEyMjk3Mg/v.swf" target="_blank">{% trans "Video" %}</a>
+{% endif %}
+
 {% endif %}
 </div>
 
