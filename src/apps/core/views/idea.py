@@ -95,7 +95,7 @@ class IdeaCreateView(CreateViewWrapper):
         if self.object.personal:
             return reverse("inbox")
         else:
-            return "%s?lang=%s" % (reverse("idea-detail", args=[self.object.pk, ]), self.request.LANGUAGE_CODE)
+            return "%s?lang=%s" % (reverse("idea-detail", args=[self.object.pk, ]), self.object.language.language_code)
 
     def get_context_data(self, **kwargs):
         context = super(IdeaCreateView, self).get_context_data(**kwargs)
