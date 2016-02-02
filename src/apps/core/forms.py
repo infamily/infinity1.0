@@ -217,7 +217,7 @@ class NeedCreateForm(forms.ModelForm):
             required=False
         )
 
-        self.fields['select_definition'].label = _("""<b>Category:</b> (Encyclopedic lookup. To define new term, type <mark style="background-color: #90EE90;"><i>expression<b>: </b>definition</i></mark> in one line.)""")
+        self.fields['select_definition'].label = _("""<b>Category:</b> (Encyclopedic lookup. To define new term, enter colon symbol, e.g. <mark style="background-color: #90EE90;"><i>expression<b>: </b>definition</i></mark> in one line.)""")
         self.fields['name'].label = _("""<b>Subject:</b> (The headline that others will see.)""")
         name_placeholder = _('e.g., "Hi friends, who would also want a spaceship?"')
         content_placeholder = _('e.g., "I have been dreaming about travelling to explore other planets since childhood. I would enjoy going on a long journey to the unknown together with a group of close friends living in the spaceship like one family. It is not impossible. Who would like to join me in an attempt to consider all possible ways how we could do it, from laws of physics to specific designs and logistics."')

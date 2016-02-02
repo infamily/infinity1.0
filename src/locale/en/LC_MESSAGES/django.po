@@ -80,11 +80,11 @@ msgstr ""
 
 #: src/apps/core/forms.py:220
 msgid ""
-"<b>Category:</b> (Encyclopedic lookup. To define new term, type <mark style="
+"<b>Category:</b> (Encyclopedic lookup. To define new term, enter colon symbol, e.g. <mark style="
 "\"background-color: #90EE90;\"><i>expression<b>: </b>definition</i></mark> "
 "in one line.)"
 msgstr ""
-"<b>Category:</b> (Encyclopedic lookup. To define new term, type <mark style="
+"<b>Category:</b> (Encyclopedic lookup. To define new term, enter colon symbol, e.g. <mark style="
 "\"background-color: #90EE90;\"><i>expression<b>: </b>definition</i></mark> "
 "in one line.)"
 
