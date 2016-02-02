@@ -179,7 +179,7 @@ class NeedCreateForm(forms.ModelForm):
     content = forms.CharField(widget=MarkdownWidget())
     select_definition = ChoiceFieldNoValidation(
         widget=HeavySelect2Widget(data_view='heavy_data_definition_complete', choices=[()]),
-        required=False
+        required=False 
     )
 
     def __init__(self, *args, **kwargs):
@@ -217,9 +217,7 @@ class NeedCreateForm(forms.ModelForm):
             required=False
         )
 
-        self.fields['definition'].label = _("""<b>Topic:</b> (relevant to problem,
-                                      <a href="/definition-create/">click here</a> to
-                                      add if you can't find it.)""")
+        self.fields['select_definition'].label = _("""<b>What it is about?</b> (choose or define related concept by typing <mark style="background-color: #90EE90;"><i>expression<b>: </b>definition</i></mark>.)""")
         self.fields['name'].label = _("""<b>Subject:</b>""")
         self.fields['name'].widget.attrs.update({'placeholder': _('e.g., "Hi friends, who would also want a spaceship?"')})
         self.fields['content'].label = _('')
@@ -240,9 +238,9 @@ class NeedCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
+            'select_definition',
             'name',
             'definition',
-            'select_definition',
             'content',
             'language',
             'personal',
