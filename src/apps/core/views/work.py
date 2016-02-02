@@ -82,7 +82,7 @@ class WorkCreateView(CreateViewWrapper):
 
     def get_success_url(self):
         messages.success(self.request, _("Work succesfully created"))
-        return reverse("work-detail", args=[self.object.pk, ])
+        return "%s?lang=%s" % (reverse("work-detail", args=[self.object.pk, ]), self.request.LANGUAGE_CODE)
 
     def get_context_data(self, **kwargs):
         context = super(WorkCreateView, self).get_context_data(**kwargs)

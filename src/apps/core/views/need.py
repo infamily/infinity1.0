@@ -57,7 +57,7 @@ class NeedCreateView(CreateViewWrapper):
         if self.object.personal:
             return reverse("inbox")
         else:
-            return reverse("need-detail", args=[self.object.pk, ])
+            return "%s?lang=%s" % (reverse("need-detail", args=[self.object.pk, ]), self.request.LANGUAGE_CODE)
 
     def get_context_data(self, **kwargs):
         context = super(NeedCreateView, self).get_context_data(**kwargs)
