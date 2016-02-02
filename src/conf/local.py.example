@@ -65,6 +65,7 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = ['.infty.xyz']
     # Because we're using https
+    # http://django-allauth.readthedocs.org/en/latest/configuration.html
     ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
     EMAIL_BACKEND = "sgbackend.SendGridBackend"
     SENDGRID_USER = os.getenv("SENDGRID_USER", "")
