@@ -84,7 +84,7 @@ class PayPalTransaction(models.Model):
 
     def compute_hours(self):
         self.hours = convert_money(self.amount, self.currency,
-                                   'USD')/HourValue.objects.latest('created_at').value
+                                   'USD').amount/HourValue.objects.latest('created_at').value
 
 
 def comment_pre_save_signal(sender, instance, **kwargs):
