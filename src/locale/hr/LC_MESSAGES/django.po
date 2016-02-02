@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/apps/core/forms.py:357 src/apps/core/forms.py:360
-#: src/apps/core/forms.py:1071
+#: src/apps/core/forms.py:359 src/apps/core/forms.py:362
+#: src/apps/core/forms.py:1082
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-02 08:35-0800\n"
+"POT-Creation-Date: 2016-02-02 10:07-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,17 +22,17 @@ msgstr ""
 "X-Generator: Poedit 1.8.5\n"
 
 #: src/apps/core/forms.py:69 src/apps/core/forms.py:192
-#: src/apps/core/forms.py:314 src/apps/core/forms.py:549
-#: src/apps/core/forms.py:697 src/apps/core/forms.py:841
-#: src/apps/core/forms.py:976 src/apps/core/forms.py:1252
+#: src/apps/core/forms.py:316 src/apps/core/forms.py:554
+#: src/apps/core/forms.py:704 src/apps/core/forms.py:849
+#: src/apps/core/forms.py:986 src/apps/core/forms.py:1264
 msgid "Create"
 msgstr "Stvori"
 
 #: src/apps/core/forms.py:91 src/apps/core/forms.py:159
-#: src/apps/core/forms.py:258 src/apps/core/forms.py:409
-#: src/apps/core/forms.py:485 src/apps/core/forms.py:627
-#: src/apps/core/forms.py:777 src/apps/core/forms.py:916
-#: src/apps/core/forms.py:1130 src/apps/core/forms.py:1169
+#: src/apps/core/forms.py:259 src/apps/core/forms.py:412
+#: src/apps/core/forms.py:489 src/apps/core/forms.py:633
+#: src/apps/core/forms.py:784 src/apps/core/forms.py:925
+#: src/apps/core/forms.py:1141 src/apps/core/forms.py:1180
 #: src/apps/users/forms.py:61
 msgid "Update"
 msgstr "Ažuriraj"
@@ -98,7 +98,7 @@ msgstr "Obavijestite spomenute korisnike e-mailom."
 
 #: src/apps/core/forms.py:220
 msgid ""
-"<b>Category:</b> (Encyclopedic lookup. To add new entry, type <mark style="
+"<b>Category:</b> (Encyclopedic lookup. To define new term, type <mark style="
 "\"background-color: #90EE90;\"><i>expression<b>: </b>definition</i></mark> "
 "in one line.)"
 msgstr ""
@@ -107,37 +107,61 @@ msgstr ""
 msgid "<b>Subject:</b> (The headline that others will see.)"
 msgstr ""
 
+#: src/apps/core/forms.py:222
+msgid "e.g., \"Hi friends, who would also want a spaceship?\""
+msgstr ""
+
 #: src/apps/core/forms.py:223
 msgid "<b>Content:</b> (Text body.)"
 msgstr ""
 
-#: src/apps/core/forms.py:225 src/apps/core/forms.py:361
-#: src/apps/core/forms.py:575 src/apps/core/forms.py:727
-#: src/apps/core/forms.py:865 src/apps/core/forms.py:1293
+#: src/apps/core/forms.py:224
+msgid ""
+"e.g., \"I have been dreaming about travelling to explore other planets since "
+"childhood. I would enjoy going on a long journey to the unknown together "
+"with a group of close friends living in the spaceship like one family. It is "
+"not impossible. Who would like to join me in an attempt to consider all "
+"possible ways how we could do it, from laws of physics to specific designs "
+"and logistics.\""
+msgstr ""
+
+#: src/apps/core/forms.py:225 src/apps/core/forms.py:363
+#: src/apps/core/forms.py:580 src/apps/core/forms.py:734
+#: src/apps/core/forms.py:873 src/apps/core/forms.py:1305
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
 msgstr "<b>Osobno</b> (omogućava vidljivost unosa odabranoj grupi ljudi)"
 
-#: src/apps/core/forms.py:226 src/apps/core/forms.py:278
-#: src/apps/core/forms.py:362 src/apps/core/forms.py:447
-#: src/apps/core/forms.py:508 src/apps/core/forms.py:576
-#: src/apps/core/forms.py:650 src/apps/core/forms.py:728
-#: src/apps/core/forms.py:798 src/apps/core/forms.py:866
-#: src/apps/core/forms.py:938 src/apps/core/forms.py:995
-#: src/apps/core/forms.py:1186 src/apps/core/forms.py:1294
+#: src/apps/core/forms.py:226 src/apps/core/forms.py:279
+#: src/apps/core/forms.py:364 src/apps/core/forms.py:450
+#: src/apps/core/forms.py:512 src/apps/core/forms.py:581
+#: src/apps/core/forms.py:656 src/apps/core/forms.py:735
+#: src/apps/core/forms.py:805 src/apps/core/forms.py:874
+#: src/apps/core/forms.py:947 src/apps/core/forms.py:1005
+#: src/apps/core/forms.py:1197 src/apps/core/forms.py:1306
 msgid "<b>Input Language</b> (the language you used to compose this post) "
 msgstr ""
 "<b>Jezik unosa</b> (jezik koji ste koristili za sastavljanje ove objave) "
 
-#: src/apps/core/forms.py:352
+#: src/apps/core/forms.py:227 src/apps/core/forms.py:281
+#: src/apps/core/forms.py:370 src/apps/core/forms.py:457
+#: src/apps/core/forms.py:519 src/apps/core/forms.py:586
+#: src/apps/core/forms.py:664 src/apps/core/forms.py:737
+#: src/apps/core/forms.py:812 src/apps/core/forms.py:879
+#: src/apps/core/forms.py:954 src/apps/core/forms.py:1010
+#: src/apps/core/forms.py:1205 src/apps/core/forms.py:1297
+msgid "Share with:"
+msgstr "Podijelite sa:"
+
+#: src/apps/core/forms.py:354
 msgid "<b>Problem category:</b>"
 msgstr ""
 
-#: src/apps/core/forms.py:353
+#: src/apps/core/forms.py:355
 msgid "<b>Related Need:</b> (Optional)"
 msgstr ""
 
-#: src/apps/core/forms.py:354
+#: src/apps/core/forms.py:356
 msgid ""
 "<b>Title:</b> (e.g., Potable Water\n"
 "                                      Shortage, <a href=\"/goal/list/"
@@ -149,54 +173,54 @@ msgstr ""
 "\">provjeri</a>nije li problem\n"
 "                                    već definiran.)"
 
-#: src/apps/core/forms.py:358
+#: src/apps/core/forms.py:360
 msgid ""
 "<b>Description:</b> (e.g., Many people in the world lack clean potable "
 "water.)"
 msgstr "<b>Opis:</b> (pr., Mnoštvu ljudi nedostaje čista pitka voda.)"
 
-#: src/apps/core/forms.py:364 src/apps/core/forms.py:449
-#: src/apps/core/forms.py:509 src/apps/core/forms.py:577
-#: src/apps/core/forms.py:651 src/apps/core/forms.py:731
-#: src/apps/core/forms.py:799 src/apps/core/forms.py:867
-#: src/apps/core/forms.py:939 src/apps/core/forms.py:996
-#: src/apps/core/forms.py:1187 src/apps/core/forms.py:1295
+#: src/apps/core/forms.py:366 src/apps/core/forms.py:452
+#: src/apps/core/forms.py:513 src/apps/core/forms.py:582
+#: src/apps/core/forms.py:657 src/apps/core/forms.py:738
+#: src/apps/core/forms.py:806 src/apps/core/forms.py:875
+#: src/apps/core/forms.py:948 src/apps/core/forms.py:1006
+#: src/apps/core/forms.py:1198 src/apps/core/forms.py:1307
 msgid ""
 "<b>This is a link</b> (check if you are only linking to existing content)"
 msgstr ""
 
-#: src/apps/core/forms.py:365 src/apps/core/forms.py:450
-#: src/apps/core/forms.py:510 src/apps/core/forms.py:578
-#: src/apps/core/forms.py:652 src/apps/core/forms.py:732
-#: src/apps/core/forms.py:800 src/apps/core/forms.py:868
-#: src/apps/core/forms.py:940 src/apps/core/forms.py:997
-#: src/apps/core/forms.py:1188 src/apps/core/forms.py:1296
+#: src/apps/core/forms.py:367 src/apps/core/forms.py:453
+#: src/apps/core/forms.py:514 src/apps/core/forms.py:583
+#: src/apps/core/forms.py:658 src/apps/core/forms.py:739
+#: src/apps/core/forms.py:807 src/apps/core/forms.py:876
+#: src/apps/core/forms.py:949 src/apps/core/forms.py:1007
+#: src/apps/core/forms.py:1199 src/apps/core/forms.py:1308
 #, fuzzy
 #| msgid "<b>Category:</b> (of the problem)"
 msgid "<b>Origin:</b> (of the source)"
 msgstr "<b>Kategorija:</b> (problema)"
 
-#: src/apps/core/forms.py:366 src/apps/core/forms.py:451
-#: src/apps/core/forms.py:511 src/apps/core/forms.py:572
-#: src/apps/core/forms.py:579 src/apps/core/forms.py:653
-#: src/apps/core/forms.py:733 src/apps/core/forms.py:801
-#: src/apps/core/forms.py:869 src/apps/core/forms.py:941
-#: src/apps/core/forms.py:998 src/apps/core/forms.py:1189
-#: src/apps/core/forms.py:1297
+#: src/apps/core/forms.py:368 src/apps/core/forms.py:454
+#: src/apps/core/forms.py:515 src/apps/core/forms.py:577
+#: src/apps/core/forms.py:584 src/apps/core/forms.py:659
+#: src/apps/core/forms.py:740 src/apps/core/forms.py:808
+#: src/apps/core/forms.py:877 src/apps/core/forms.py:950
+#: src/apps/core/forms.py:1008 src/apps/core/forms.py:1200
+#: src/apps/core/forms.py:1309
 msgid "http://"
 msgstr "http://"
 
-#: src/apps/core/forms.py:367 src/apps/core/forms.py:452
+#: src/apps/core/forms.py:369 src/apps/core/forms.py:455
 msgid ""
 "<b>This is a history</b> (check if you are documenting a problem of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:512 src/apps/core/forms.py:580
+#: src/apps/core/forms.py:516 src/apps/core/forms.py:585
 msgid ""
 "<b>This is a history</b> (check if you are documenting a historical work)"
 msgstr ""
 
-#: src/apps/core/forms.py:567
+#: src/apps/core/forms.py:572
 msgid ""
 "<b>Name:</b> (e.g., \"First attempt to assemble solar cells.\", used in "
 "title.)"
@@ -204,46 +228,46 @@ msgstr ""
 "<b>Ime:</b> (pr., \"Prvi pokušaj sastavljanja solarnih ćelija.\", korišten u "
 "naslovu.)"
 
-#: src/apps/core/forms.py:568
+#: src/apps/core/forms.py:573
 msgid "Give a title to your work."
 msgstr "Dodaj naslov svojoj djelatnosti."
 
-#: src/apps/core/forms.py:569
+#: src/apps/core/forms.py:574
 msgid "<b>Description:</b> (details about the work, used as body.)"
 msgstr "<b>Opis:</b> (detalji o radu, korišteni kao tijelo.)"
 
-#: src/apps/core/forms.py:570
+#: src/apps/core/forms.py:575
 msgid "Here is a little story of my work."
 msgstr "Evo kratka priča o mom radu."
 
-#: src/apps/core/forms.py:571
+#: src/apps/core/forms.py:576
 msgid "<b>File:</b> (you can upload a file describing your work)"
 msgstr "<b>Fajl:</b> (možete uploadati fajl koji opisuje vaš rad)"
 
-#: src/apps/core/forms.py:573
+#: src/apps/core/forms.py:578
 msgid "<b>Parent Work Id:</b> (integer referring to other work)"
 msgstr "<b>ID zajedničkog rada:</b> (cijeli broj koji se odnosi na drugi rad)"
 
-#: src/apps/core/forms.py:574
+#: src/apps/core/forms.py:579
 msgid "optional"
 msgstr "izborno"
 
-#: src/apps/core/forms.py:654 src/apps/core/forms.py:734
+#: src/apps/core/forms.py:660 src/apps/core/forms.py:741
 msgid ""
 "<b>This is a history</b> (check if you are documenting an idea of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:722 src/apps/core/templates/goal/list2.html.py:6
+#: src/apps/core/forms.py:729 src/apps/core/templates/goal/list2.html.py:6
 #: src/apps/core/templates/goal/list2.html:9
 #: src/apps/core/templates/need/detail.html:107 src/templates/home.html:178
 msgid "Goals"
 msgstr "Ciljevi"
 
-#: src/apps/core/forms.py:724
+#: src/apps/core/forms.py:731
 msgid "<b>Name:</b> (e.g., \"Solar Water Condenser\", used in title.)"
 msgstr "<b>Ime:</b> (npr., Kondenzator solarne vode\", korišteno u naslovu.)"
 
-#: src/apps/core/forms.py:725
+#: src/apps/core/forms.py:732
 msgid ""
 "<b>Summary:</b> (e.g., \"Use solar panels and Peltier effect to extract "
 "water from air.\", appears as subtitle.)"
@@ -251,37 +275,33 @@ msgstr ""
 "<b>Sažetak:</b> (npr., \"Korištenje solarnog panela i Peltierovog učinka za "
 "izvlačenje vode iz zraka.\", koji se pojavljuje kao podnaslov.)"
 
-#: src/apps/core/forms.py:726
+#: src/apps/core/forms.py:733
 msgid "<b>Description:</b> (write full description here, used as body.)"
 msgstr "<b>Opis:</b> (napišite puni opis ovdje, kao tijelo teksta.)"
 
-#: src/apps/core/forms.py:730 src/apps/core/forms.py:1285
-msgid "Share with:"
-msgstr "Podijelite sa:"
-
-#: src/apps/core/forms.py:802 src/apps/core/forms.py:870
+#: src/apps/core/forms.py:809 src/apps/core/forms.py:878
 msgid ""
 "<b>This is a history</b> (check if you are documenting a milestone of the "
 "past)"
 msgstr ""
 
-#: src/apps/core/forms.py:856
+#: src/apps/core/forms.py:864
 msgid "<b>Milestone:</b> (e.g., \"assemble solar panels\", used in title.)"
 msgstr ""
 "<b>Prekretnica:</b> (npr., \"sklapanje solarnog panela\", korištena u "
 "naslovu.)"
 
-#: src/apps/core/forms.py:857
+#: src/apps/core/forms.py:865
 msgid "Type the name of the milestone."
 msgstr "Upišite naslov prekretnice."
 
-#: src/apps/core/forms.py:858
+#: src/apps/core/forms.py:866
 msgid ""
 "<b>Objective:</b> (describe conditions, when you will consider the milestone "
 "to be 'achieved')"
 msgstr "<b>Cilj:</b> (opišite uvjete dostizanja prekretnice)"
 
-#: src/apps/core/forms.py:859
+#: src/apps/core/forms.py:867
 msgid ""
 "Example:\n"
 "\n"
@@ -295,7 +315,7 @@ msgstr ""
 "- Proizvodi očekivanu izlaznu snagu\n"
 "- Prolazi određene testove pouzdanosti. "
 
-#: src/apps/core/forms.py:860
+#: src/apps/core/forms.py:868
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the milestone has to be done earlier)"
@@ -303,7 +323,7 @@ msgstr ""
 "<b>Prioritet:</b> (cijeli broj, npr., 1,2,3.. - korišten za narudžbu, manji "
 "broj pokazuje da se prekretnica mora obaviti ranije)"
 
-#: src/apps/core/forms.py:861
+#: src/apps/core/forms.py:869
 msgid ""
 "<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "invest on this milestone in <a href=\"https://github.com/mindey/"
@@ -313,11 +333,11 @@ msgstr ""
 "po završetku ove prekretnice u <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, korištene za izračunavanje vrijednosti.)"
 
-#: src/apps/core/forms.py:862
+#: src/apps/core/forms.py:870
 msgid "people 1\\3, days 10\\20, usd 50\\70"
 msgstr "ljudi 1\\3, dana 10\\20, USD 50\\70"
 
-#: src/apps/core/forms.py:863
+#: src/apps/core/forms.py:871
 msgid ""
 "<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "have by completion of this milestone in <a href=\"https://github.com/mindey/"
@@ -327,26 +347,26 @@ msgstr ""
 "završetku ove prekretnice u <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, korištene za izračunavanje vrijednosti.)"
 
-#: src/apps/core/forms.py:864
+#: src/apps/core/forms.py:872
 msgid "complete solar assembly drawings 0\\1, solar cell assembly 1\\2"
 msgstr ""
 "kompletni crteži za sklapanje solarne ćelije 0\\1, sklapanje solarne ćelije "
 "1\\2"
 
-#: src/apps/core/forms.py:942 src/apps/core/forms.py:999
+#: src/apps/core/forms.py:951 src/apps/core/forms.py:1009
 msgid ""
 "<b>This is a history</b> (check if you are documenting a historical task)"
 msgstr ""
 
-#: src/apps/core/forms.py:992
+#: src/apps/core/forms.py:1002
 msgid "<b>Task:</b> (e.g., \"Purchase solar cells\", text in title.)"
 msgstr "<b>Zadatak:</b> (npr., \"Kupi solarne ćelije\", tekst u naslovu.)"
 
-#: src/apps/core/forms.py:993
+#: src/apps/core/forms.py:1003
 msgid "Type the name of the task."
 msgstr "Upišite naziv zadatka."
 
-#: src/apps/core/forms.py:994
+#: src/apps/core/forms.py:1004
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the task has to be done earlier)"
@@ -354,38 +374,38 @@ msgstr ""
 "<b>Prioritet:</b> (cijeli broj, npr., 1,2,3.. - koristi se za narudžbu, "
 "manji brojevi znače da je zadatak odrađen ranije)"
 
-#: src/apps/core/forms.py:1056 src/apps/core/forms.py:1062
+#: src/apps/core/forms.py:1067 src/apps/core/forms.py:1073
 msgid "Add & Go"
 msgstr "Dodaj & Idi"
 
-#: src/apps/core/forms.py:1085
+#: src/apps/core/forms.py:1096
 msgid "definition, e.g., 'spaceflight beyond the bounderies of galaxies'"
 msgstr ""
 
-#: src/apps/core/forms.py:1190 src/apps/core/forms.py:1298
+#: src/apps/core/forms.py:1201 src/apps/core/forms.py:1310
 msgid ""
 "<b>This is a history</b> (check if you are documenting a project of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:1280 src/apps/core/templates/idea/create.html.py:16
+#: src/apps/core/forms.py:1292 src/apps/core/templates/idea/create.html.py:16
 #: src/templates/home.html:77
 msgid "Goal"
 msgstr "Cilj"
 
-#: src/apps/core/forms.py:1282 src/apps/core/templates/plan/create.html.py:16
+#: src/apps/core/forms.py:1294 src/apps/core/templates/plan/create.html.py:16
 #: src/templates/home.html:78
 msgid "Idea"
 msgstr "Ideja"
 
-#: src/apps/core/forms.py:1284
+#: src/apps/core/forms.py:1296
 msgid "Members"
 msgstr "Članovi"
 
-#: src/apps/core/forms.py:1287
+#: src/apps/core/forms.py:1299
 msgid "<b>Name:</b> (e.g., \"Solar Water Project\".)"
 msgstr "<b>Naziv:</b> (pr., \"Projekt solarne vode\".)"
 
-#: src/apps/core/forms.py:1289
+#: src/apps/core/forms.py:1301
 msgid ""
 "<b>Situation:</b> (Describe your current situation by listing the things "
 "that you have, including access.)"
@@ -393,7 +413,7 @@ msgstr ""
 "<b>Situacija:</b> (Opišite svoju trenutnu situaciju koristeći stvari koje "
 "imate, uključujući pristup.)"
 
-#: src/apps/core/forms.py:1290
+#: src/apps/core/forms.py:1302
 msgid ""
 "Example:\n"
 "\n"
@@ -415,11 +435,11 @@ msgstr ""
 "- Autmobil\n"
 "- 150 USD za ovaj projekt"
 
-#: src/apps/core/forms.py:1291
+#: src/apps/core/forms.py:1303
 msgid "<b>Deliverable:</b> (Describe what do you expect to get.)"
 msgstr "<b>Dostavljivo:</b> (Opišite što očekujete dobiti.)"
 
-#: src/apps/core/forms.py:1292
+#: src/apps/core/forms.py:1304
 msgid ""
 "Example:\n"
 "\n"
