@@ -22,6 +22,8 @@ from ..models import Need
 from ..models import Definition
 from ..models import Language
 
+from users.models import User
+
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class NeedCreateView(CreateViewWrapper):
 
@@ -41,7 +43,7 @@ class NeedCreateView(CreateViewWrapper):
             definition_data = request.POST.get('select_definition')
             definition_data = json.loads(definition_data)
             definition_data.update({
-                'user': request.user,
+                'user': User.objects.get(pk=1),
                 'language': Language.objects.get(language_code=request.LANGUAGE_CODE)
             })
 
