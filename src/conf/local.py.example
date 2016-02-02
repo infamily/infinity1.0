@@ -64,6 +64,8 @@ if DEBUG:
     # END TOOLBAR CONFIGURATION
 else:
     ALLOWED_HOSTS = ['.infty.xyz']
+    # Because we're using https
+    ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
     EMAIL_BACKEND = "sgbackend.SendGridBackend"
     SENDGRID_USER = os.getenv("SENDGRID_USER", "")
     SENDGRID_PASSWORD = os.getenv("SENDGRID_PASSWORD", "")
