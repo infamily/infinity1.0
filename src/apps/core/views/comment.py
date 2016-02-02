@@ -74,5 +74,8 @@ class CommentDeleteView(DeleteView):
     template_name = "comment/delete.html"
 
     def get_success_url(self):
+        next_url = self.request.GET.get('next')
         messages.success(self.request, _("Comment succesfully deleted"))
+        if next_url:
+            return next_url
         return "/"
