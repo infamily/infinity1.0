@@ -39,11 +39,9 @@
 {% if not user.is_anonymous %}
 
     <span id="info" style="display:none; color: brown;">
-    {% if user.invitationoption.invitations_left %}
     <b>
         [<a href="{% url "invite:send"  %}">{{user.invitationoption.invitations_left}} {% trans "invitations" %}</a>, <a href="/step/2/detail/">{% trans "write bugs" %}</a>, {% trans "time value" %}: 1 ħ = <a href="https://research.stlouisfed.org/fred2/series/CES0500000003">{{ hour_value.value|floatformat:2 }}</a> $]
     </b>
-    {% endif %}
     </span>
     <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="javascript:hideshow(document.getElementById('info'))">{% trans "Info" %}</a>
 
