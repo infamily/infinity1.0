@@ -14,8 +14,8 @@
 <script type="text/javascript">
 
     $(function() {
-        $("#id_language").change(function(data) {
-            var language_id = data.val;
+        $("#id_language").on("change", function(data) {
+            var language_id = $(this).select2('data')[0].id;
             $.ajax({
                 method: "GET",
                 url: "/invite/letter/detail/" + language_id,
