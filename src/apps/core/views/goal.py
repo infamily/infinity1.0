@@ -46,7 +46,7 @@ class GoalCreateView(CreateViewWrapper):
         if self.object.personal:
             return reverse("inbox")
         else:
-            return reverse("goal-detail", args=[self.object.pk, ])
+            return "%s?lang=%s" % (reverse("goal-detail", args=[self.object.pk, ]), self.object.language.language_code)
 
     def get_context_data(self, **kwargs):
         context = super(GoalCreateView, self).get_context_data(**kwargs)

@@ -83,7 +83,7 @@ class ConversationInviteView(FormView):
         self.object.save()
 
         model_class = ContentType.objects.get(
-            model=self.kwargs.get('object_name').lower
+            model=self.kwargs.get('object_name').lower()
         ).model_class()
         model_instance = model_class.objects.get(pk=self.kwargs.get('object_id'))
 

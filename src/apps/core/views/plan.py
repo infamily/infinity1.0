@@ -83,7 +83,7 @@ class PlanCreateView(CreateViewWrapper):
 
     def get_success_url(self):
         messages.success(self.request, _("Plan succesfully created"))
-        return reverse("plan-detail", args=[self.object.pk, ])
+        return "%s?lang=%s" % (reverse("plan-detail", args=[self.object.pk, ]), self.object.language.language_code)
 
     def dispatch(self, request, *args, **kwargs):
         if kwargs.get('idea_id'):

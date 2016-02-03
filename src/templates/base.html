@@ -118,7 +118,7 @@
                 <li><a href="{% url "dev" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Source" %}</a></li>
               {% else %}
               {% endif %}
-              {% if request.get_full_path == "/!" %}
+              {% if request.get_full_path == "/!" or request.get_full_path == "/"%}
               <li><a href="#" class="btn-lg" style="color: white; background-color: black;">{% trans "public index" %}</a></li>
               {% else %}
               <li><a href="{% url "index" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "public index" %}</a></li>
@@ -157,7 +157,7 @@
 
       </div>
     </div>
-    <div class="container top-space">
+    <div class="container top-space" >
     {% for message in messages %}
         <div class="alert alert-{{ message.tags }}" role="alert">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
