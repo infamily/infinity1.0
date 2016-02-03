@@ -85,7 +85,7 @@ $(window).bind('scroll', function () {
             {% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
             {% else %}
             {% if request.user.is_authenticated %}
-                <button type="button" onclick="fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
+                <button type="button" onclick="window.location.href = '#div_id_text';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
             {% else %}
                 <a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">{% trans "reply" %}</button></a>
             {% endif %}
