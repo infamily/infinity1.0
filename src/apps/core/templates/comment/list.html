@@ -71,8 +71,9 @@ $(window).bind('scroll', function () {
         {% endfor %}
         <div align="right">
         {% if object.hours_claimed or object.hours_assumed %}
-        [<a href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> PayPal</a><!--,
-        <a href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Cryptsy</a>-->]
+        <button type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" object.id %}'"><font color="#c0c0c0">{{ object.invest_remains }} ħ </font>{% trans '<i class="fa fa-dollar"></i> INVEST' %}</button>
+  <!--  [<a href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> PayPal</a>,
+        <a href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Cryptsy</a>]-->
         {% endif %}
         </div>
     </div>
