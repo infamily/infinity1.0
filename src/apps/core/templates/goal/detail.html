@@ -42,6 +42,18 @@ $(document).ready( function() {
 });
 </script>
 
+{% if object.personal %}
+<style>
+  body {
+  background-color: #e0e0e0;
+  }
+  .panel {
+  background-color: #f0f0f0;
+  }
+</style>
+{% endif %}
+
+
 <div class="panel panel-default box col-sm-12 col-md-7">
   <div class="panel-body">
       <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
