@@ -107,6 +107,8 @@ class TranslationUpdateForm(forms.ModelForm):
 
 class CommentCreateFormDetail(forms.ModelForm):
 
+    monetary = forms.BooleanField(required=False)
+
     amount = forms.DecimalField(required=False)
 
     USD = 0
@@ -129,6 +131,7 @@ class CommentCreateFormDetail(forms.ModelForm):
                                       one comment, and use {?1.5} to indicate
                                       estimates.""")
         self.fields['notify'].label = _('Notify mentioned users (e.g., <i>Hi [User], how are you?</i>) by e-mail.')
+        self.fields['monetary'].label = _('Include money with the comment.')
         self.fields['amount'].label = _('Amount')
         self.fields['currency'].label = _('Currency')
         self.fields['amount'].initial = Decimal(0)
