@@ -10,10 +10,19 @@ try{
 }catch(e){}
 
 $(function() {
-  $("#id_personal").change(function() {$("#div_id_sharewith").toggle()});
+  $("#id_personal").change(function() {$("#div_id_sharewith").toggle(); 
+    // Also switch background color to indicate private with grey
+    if ($('body').css('background-color') != 'rgb(0, 0, 0)') {
+        $('body').css('background-color', '#ffffff');
+    }
+    if ($("#id_personal").is(":checked")) {
+        $('body').css('background-color', '#e0e0e0');
+    }
+  });
 
   if ($("#id_personal").is(":checked")) {
     // Show if Personal checkbox is checked
+    $('body').css('background-color', '#e0e0e0');
     $("#div_id_sharewith").show();
   }
 });
