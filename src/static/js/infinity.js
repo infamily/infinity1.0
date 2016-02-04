@@ -19,6 +19,16 @@ $(function() {
 });
 
 $(function() {
+  $("#id_monetary").change(function() {$("#div_id_amount").toggle(); $("#div_id_currency").toggle();});
+
+  if ($("#id_monetary").is(":checked")) {
+    // Show if Monetary checkbox is checked
+    $("#div_id_amount").show();
+    $("#div_id_currency").show();
+  }
+});
+
+$(function() {
   $("#id_is_link").change(function() {$("#div_id_url").toggle()});
 
   if ($("#id_is_link").is(":checked")) {

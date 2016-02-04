@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-02 10:07-0800\n"
-"PO-Revision-Date: 2016-02-02 20:12+0200\n"
+"POT-Creation-Date: 2016-02-04 04:07-0800\n"
+"PO-Revision-Date: 2016-02-04 14:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.6\n"
 
-#: src/apps/core/forms.py:69 src/apps/core/forms.py:192
-#: src/apps/core/forms.py:316 src/apps/core/forms.py:554
-#: src/apps/core/forms.py:704 src/apps/core/forms.py:849
-#: src/apps/core/forms.py:986 src/apps/core/forms.py:1264
+#: src/apps/core/forms.py:69 src/apps/core/forms.py:195
+#: src/apps/core/forms.py:321 src/apps/core/forms.py:559
+#: src/apps/core/forms.py:709 src/apps/core/forms.py:854
+#: src/apps/core/forms.py:991 src/apps/core/forms.py:1269
 msgid "Create"
 msgstr "作成"
 
-#: src/apps/core/forms.py:91 src/apps/core/forms.py:159
-#: src/apps/core/forms.py:259 src/apps/core/forms.py:412
-#: src/apps/core/forms.py:489 src/apps/core/forms.py:633
-#: src/apps/core/forms.py:784 src/apps/core/forms.py:925
-#: src/apps/core/forms.py:1141 src/apps/core/forms.py:1180
+#: src/apps/core/forms.py:91 src/apps/core/forms.py:162
+#: src/apps/core/forms.py:264 src/apps/core/forms.py:417
+#: src/apps/core/forms.py:494 src/apps/core/forms.py:638
+#: src/apps/core/forms.py:789 src/apps/core/forms.py:930
+#: src/apps/core/forms.py:1146 src/apps/core/forms.py:1185
 #: src/apps/users/forms.py:61
 msgid "Update"
 msgstr "更新"
 
-#: src/apps/core/forms.py:116 src/apps/payments/forms.py:83
+#: src/apps/core/forms.py:118 src/apps/payments/forms.py:83
 msgid "USD"
 msgstr ""
 
-#: src/apps/core/forms.py:117 src/apps/payments/forms.py:84
+#: src/apps/core/forms.py:119 src/apps/payments/forms.py:84
 msgid "EUR"
 msgstr ""
 
-#: src/apps/core/forms.py:126
+#: src/apps/core/forms.py:128
 msgid ""
 "<b>Comment</b> (to claim hours, just\n"
 "                                      enclose a number within curly braces, "
@@ -61,57 +61,57 @@ msgstr ""
 "は、「？」を使ってください。例えば\n"
 "                                       {?1.5}。"
 
-#: src/apps/core/forms.py:131
+#: src/apps/core/forms.py:133
 msgid ""
 "Notify mentioned users (e.g., <i>Hi [User], how are you?</i>) by e-mail."
 msgstr ""
 "申請した利用者（例えば、<i>こんにちは、[利用者]、お元気ですか？</i>）にメール"
 "で通知する。"
 
-#: src/apps/core/forms.py:132
+#: src/apps/core/forms.py:134
+msgid "Include money with the comment."
+msgstr "このコメントでお金も送る。"
+
+#: src/apps/core/forms.py:135
 msgid "Amount"
 msgstr "金額"
 
-#: src/apps/core/forms.py:133
+#: src/apps/core/forms.py:136
 msgid "Currency"
 msgstr "通貨"
 
-#: src/apps/core/forms.py:137
+#: src/apps/core/forms.py:140
 msgid "Send Comment"
 msgstr "コメントを送る"
 
-#: src/apps/core/forms.py:154
+#: src/apps/core/forms.py:157
 msgid "Comment"
 msgstr "コメント"
 
-#: src/apps/core/forms.py:155
+#: src/apps/core/forms.py:158
 msgid "Notify mentioned users by e-mail."
 msgstr "申請した利用者にメールで通知する。"
 
-#: src/apps/core/forms.py:220
+#: src/apps/core/forms.py:223
 msgid ""
-"<b>Category:</b> (Encyclopedic lookup. To define new term, enter colon symbol, e.g. <mark style="
-"\"background-color: #90EE90;\"><i>expression<b>: </b>definition</i></mark> "
-"in one line.)"
+"<b>Category:</b> (Encyclopedic lookup. To define new term, enter colon "
+"symbol, e.g. <mark style=\"background-color: #90EE90;\"><i>expression<b>: </"
+"b>definition</i></mark> in one line.)"
 msgstr ""
 "<b>カテゴリ:</b> (百科事典的検索。 1行で「:」を含めると新しいエントリを定義で"
 "きます。例 <mark style=\"background-color: #90EE90;\"><i>表現<b>: </b>定義</"
 "i></mark>.)"
 
-#: src/apps/core/forms.py:221
+#: src/apps/core/forms.py:224
 msgid "<b>Subject:</b> (The headline that others will see.)"
 msgstr "<b>件名:</b> (受信者は見えるタイトル.)"
 
-#: src/apps/core/forms.py:222
+#: src/apps/core/forms.py:225
 msgid "e.g., \"Hi friends, who would also want a spaceship?\""
 msgstr ""
 "例：『こんにちは。私と同じように宇宙船を欲しがっているのは誰だろうか？』"
 
-#: src/apps/core/forms.py:223
-msgid "<b>Content:</b> (Text body.)"
-msgstr "<b>内容:</b> (テキスト本文.)"
-
-#: src/apps/core/forms.py:224
+#: src/apps/core/forms.py:226
 msgid ""
 "e.g., \"I have been dreaming about travelling to explore other planets since "
 "childhood. I would enjoy going on a long journey to the unknown together "
@@ -126,42 +126,46 @@ msgstr ""
 "や事業の計画まで、私達がどのように宇宙旅行ができるかという方法を、私と一緒に"
 "考えたい人は誰だろうか。』"
 
-#: src/apps/core/forms.py:225 src/apps/core/forms.py:363
-#: src/apps/core/forms.py:580 src/apps/core/forms.py:734
-#: src/apps/core/forms.py:873 src/apps/core/forms.py:1305
+#: src/apps/core/forms.py:229
+msgid "<b>Content:</b> (Text body.)"
+msgstr "<b>内容:</b> (テキスト本文.)"
+
+#: src/apps/core/forms.py:230 src/apps/core/forms.py:368
+#: src/apps/core/forms.py:585 src/apps/core/forms.py:739
+#: src/apps/core/forms.py:878 src/apps/core/forms.py:1310
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
 msgstr "<b>個人的</b> （チェックすると、選択した利用者だけが見られる）"
 
-#: src/apps/core/forms.py:226 src/apps/core/forms.py:279
-#: src/apps/core/forms.py:364 src/apps/core/forms.py:450
-#: src/apps/core/forms.py:512 src/apps/core/forms.py:581
-#: src/apps/core/forms.py:656 src/apps/core/forms.py:735
-#: src/apps/core/forms.py:805 src/apps/core/forms.py:874
-#: src/apps/core/forms.py:947 src/apps/core/forms.py:1005
-#: src/apps/core/forms.py:1197 src/apps/core/forms.py:1306
+#: src/apps/core/forms.py:231 src/apps/core/forms.py:284
+#: src/apps/core/forms.py:369 src/apps/core/forms.py:455
+#: src/apps/core/forms.py:517 src/apps/core/forms.py:586
+#: src/apps/core/forms.py:661 src/apps/core/forms.py:740
+#: src/apps/core/forms.py:810 src/apps/core/forms.py:879
+#: src/apps/core/forms.py:952 src/apps/core/forms.py:1010
+#: src/apps/core/forms.py:1202 src/apps/core/forms.py:1311
 msgid "<b>Input Language</b> (the language you used to compose this post) "
 msgstr "<b>入力言語</b> （この投稿を構成している多岐に渡る言葉）"
 
-#: src/apps/core/forms.py:227 src/apps/core/forms.py:281
-#: src/apps/core/forms.py:370 src/apps/core/forms.py:457
-#: src/apps/core/forms.py:519 src/apps/core/forms.py:586
-#: src/apps/core/forms.py:664 src/apps/core/forms.py:737
-#: src/apps/core/forms.py:812 src/apps/core/forms.py:879
-#: src/apps/core/forms.py:954 src/apps/core/forms.py:1010
-#: src/apps/core/forms.py:1205 src/apps/core/forms.py:1297
+#: src/apps/core/forms.py:232 src/apps/core/forms.py:286
+#: src/apps/core/forms.py:375 src/apps/core/forms.py:462
+#: src/apps/core/forms.py:524 src/apps/core/forms.py:591
+#: src/apps/core/forms.py:669 src/apps/core/forms.py:742
+#: src/apps/core/forms.py:817 src/apps/core/forms.py:884
+#: src/apps/core/forms.py:959 src/apps/core/forms.py:1015
+#: src/apps/core/forms.py:1210 src/apps/core/forms.py:1302
 msgid "Share with:"
 msgstr "共有する人："
 
-#: src/apps/core/forms.py:354
+#: src/apps/core/forms.py:359
 msgid "<b>Problem category:</b>"
 msgstr "<b>問題の分野：</b>"
 
-#: src/apps/core/forms.py:355
+#: src/apps/core/forms.py:360
 msgid "<b>Related Need:</b> (Optional)"
 msgstr "<b>関係する需要：</b> （任意）"
 
-#: src/apps/core/forms.py:356
+#: src/apps/core/forms.py:361
 msgid ""
 "<b>Title:</b> (e.g., Potable Water\n"
 "                                      Shortage, <a href=\"/goal/list/"
@@ -173,115 +177,115 @@ msgstr ""
 "るかどうか <a href=\"/goal/list/\">ここで</a> 確かめて\n"
 "                                      ください。）"
 
-#: src/apps/core/forms.py:360
+#: src/apps/core/forms.py:365
 msgid ""
 "<b>Description:</b> (e.g., Many people in the world lack clean potable "
 "water.)"
 msgstr "<b>説明:</b> （例えば、世界中で飲料水が足りない人は多いです。）"
 
-#: src/apps/core/forms.py:366 src/apps/core/forms.py:452
-#: src/apps/core/forms.py:513 src/apps/core/forms.py:582
-#: src/apps/core/forms.py:657 src/apps/core/forms.py:738
-#: src/apps/core/forms.py:806 src/apps/core/forms.py:875
-#: src/apps/core/forms.py:948 src/apps/core/forms.py:1006
-#: src/apps/core/forms.py:1198 src/apps/core/forms.py:1307
+#: src/apps/core/forms.py:371 src/apps/core/forms.py:457
+#: src/apps/core/forms.py:518 src/apps/core/forms.py:587
+#: src/apps/core/forms.py:662 src/apps/core/forms.py:743
+#: src/apps/core/forms.py:811 src/apps/core/forms.py:880
+#: src/apps/core/forms.py:953 src/apps/core/forms.py:1011
+#: src/apps/core/forms.py:1203 src/apps/core/forms.py:1312
 msgid ""
 "<b>This is a link</b> (check if you are only linking to existing content)"
 msgstr ""
 "<b>これはリンクです</b> （もし自分の内容ではなくて、他の人の内容を描写してい"
 "るとしたら、選択してください）"
 
-#: src/apps/core/forms.py:367 src/apps/core/forms.py:453
-#: src/apps/core/forms.py:514 src/apps/core/forms.py:583
-#: src/apps/core/forms.py:658 src/apps/core/forms.py:739
-#: src/apps/core/forms.py:807 src/apps/core/forms.py:876
-#: src/apps/core/forms.py:949 src/apps/core/forms.py:1007
-#: src/apps/core/forms.py:1199 src/apps/core/forms.py:1308
+#: src/apps/core/forms.py:372 src/apps/core/forms.py:458
+#: src/apps/core/forms.py:519 src/apps/core/forms.py:588
+#: src/apps/core/forms.py:663 src/apps/core/forms.py:744
+#: src/apps/core/forms.py:812 src/apps/core/forms.py:881
+#: src/apps/core/forms.py:954 src/apps/core/forms.py:1012
+#: src/apps/core/forms.py:1204 src/apps/core/forms.py:1313
 msgid "<b>Origin:</b> (of the source)"
 msgstr "<b>由来：</b> （ソースのウェブアドレス）"
 
-#: src/apps/core/forms.py:368 src/apps/core/forms.py:454
-#: src/apps/core/forms.py:515 src/apps/core/forms.py:577
-#: src/apps/core/forms.py:584 src/apps/core/forms.py:659
-#: src/apps/core/forms.py:740 src/apps/core/forms.py:808
-#: src/apps/core/forms.py:877 src/apps/core/forms.py:950
-#: src/apps/core/forms.py:1008 src/apps/core/forms.py:1200
-#: src/apps/core/forms.py:1309
+#: src/apps/core/forms.py:373 src/apps/core/forms.py:459
+#: src/apps/core/forms.py:520 src/apps/core/forms.py:582
+#: src/apps/core/forms.py:589 src/apps/core/forms.py:664
+#: src/apps/core/forms.py:745 src/apps/core/forms.py:813
+#: src/apps/core/forms.py:882 src/apps/core/forms.py:955
+#: src/apps/core/forms.py:1013 src/apps/core/forms.py:1205
+#: src/apps/core/forms.py:1314
 msgid "http://"
 msgstr ""
 
-#: src/apps/core/forms.py:369 src/apps/core/forms.py:455
+#: src/apps/core/forms.py:374 src/apps/core/forms.py:460
 msgid ""
 "<b>This is a history</b> (check if you are documenting a problem of the past)"
 msgstr ""
 "<b>これは歴史です</b> （もし現在の問題ではなく、歴史の内容を描写しているとし"
 "たら、選択してください）"
 
-#: src/apps/core/forms.py:516 src/apps/core/forms.py:585
+#: src/apps/core/forms.py:521 src/apps/core/forms.py:590
 msgid ""
 "<b>This is a history</b> (check if you are documenting a historical work)"
 msgstr ""
 "<b>これは歴史です</b> （もし現在の事ではなく、歴史の内容を描写しているとした"
 "ら、選択してください）"
 
-#: src/apps/core/forms.py:572
+#: src/apps/core/forms.py:577
 msgid ""
 "<b>Name:</b> (e.g., \"First attempt to assemble solar cells.\", used in "
 "title.)"
 msgstr ""
 
-#: src/apps/core/forms.py:573
+#: src/apps/core/forms.py:578
 msgid "Give a title to your work."
 msgstr ""
 
-#: src/apps/core/forms.py:574
+#: src/apps/core/forms.py:579
 msgid "<b>Description:</b> (details about the work, used as body.)"
 msgstr ""
 
-#: src/apps/core/forms.py:575
+#: src/apps/core/forms.py:580
 msgid "Here is a little story of my work."
 msgstr ""
 
-#: src/apps/core/forms.py:576
+#: src/apps/core/forms.py:581
 msgid "<b>File:</b> (you can upload a file describing your work)"
 msgstr ""
 
-#: src/apps/core/forms.py:578
+#: src/apps/core/forms.py:583
 msgid "<b>Parent Work Id:</b> (integer referring to other work)"
 msgstr ""
 
-#: src/apps/core/forms.py:579
+#: src/apps/core/forms.py:584
 msgid "optional"
 msgstr ""
 
-#: src/apps/core/forms.py:660 src/apps/core/forms.py:741
+#: src/apps/core/forms.py:665 src/apps/core/forms.py:746
 msgid ""
 "<b>This is a history</b> (check if you are documenting an idea of the past)"
 msgstr ""
 "<b>これは歴史です</b> （もし現在の発想ではなく、歴史の内容を描写しているとし"
 "たら、選択してください）"
 
-#: src/apps/core/forms.py:729 src/apps/core/templates/goal/list2.html.py:6
+#: src/apps/core/forms.py:734 src/apps/core/templates/goal/list2.html.py:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:107 src/templates/home.html:178
+#: src/apps/core/templates/need/detail.html:107 src/templates/home.html:174
 msgid "Goals"
 msgstr "目的"
 
-#: src/apps/core/forms.py:731
+#: src/apps/core/forms.py:736
 msgid "<b>Name:</b> (e.g., \"Solar Water Condenser\", used in title.)"
 msgstr ""
 
-#: src/apps/core/forms.py:732
+#: src/apps/core/forms.py:737
 msgid ""
 "<b>Summary:</b> (e.g., \"Use solar panels and Peltier effect to extract "
 "water from air.\", appears as subtitle.)"
 msgstr ""
 
-#: src/apps/core/forms.py:733
+#: src/apps/core/forms.py:738
 msgid "<b>Description:</b> (write full description here, used as body.)"
 msgstr ""
 
-#: src/apps/core/forms.py:809 src/apps/core/forms.py:878
+#: src/apps/core/forms.py:814 src/apps/core/forms.py:883
 msgid ""
 "<b>This is a history</b> (check if you are documenting a milestone of the "
 "past)"
@@ -289,21 +293,21 @@ msgstr ""
 "<b>これは歴史です</b> （もし現在の段階ではなく、歴史の内容を描写しているとし"
 "たら、選択してください）"
 
-#: src/apps/core/forms.py:864
+#: src/apps/core/forms.py:869
 msgid "<b>Milestone:</b> (e.g., \"assemble solar panels\", used in title.)"
 msgstr ""
 
-#: src/apps/core/forms.py:865
+#: src/apps/core/forms.py:870
 msgid "Type the name of the milestone."
 msgstr ""
 
-#: src/apps/core/forms.py:866
+#: src/apps/core/forms.py:871
 msgid ""
 "<b>Objective:</b> (describe conditions, when you will consider the milestone "
 "to be 'achieved')"
 msgstr ""
 
-#: src/apps/core/forms.py:867
+#: src/apps/core/forms.py:872
 msgid ""
 "Example:\n"
 "\n"
@@ -312,95 +316,95 @@ msgid ""
 "- Passes certain tests of reliability."
 msgstr ""
 
-#: src/apps/core/forms.py:868
+#: src/apps/core/forms.py:873
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the milestone has to be done earlier)"
 msgstr ""
 
-#: src/apps/core/forms.py:869
+#: src/apps/core/forms.py:874
 msgid ""
 "<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "invest on this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: src/apps/core/forms.py:870
+#: src/apps/core/forms.py:875
 msgid "people 1\\3, days 10\\20, usd 50\\70"
 msgstr ""
 
-#: src/apps/core/forms.py:871
+#: src/apps/core/forms.py:876
 msgid ""
 "<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to "
 "have by completion of this milestone in <a href=\"https://github.com/mindey/"
 "IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
 msgstr ""
 
-#: src/apps/core/forms.py:872
+#: src/apps/core/forms.py:877
 msgid "complete solar assembly drawings 0\\1, solar cell assembly 1\\2"
 msgstr ""
 
-#: src/apps/core/forms.py:951 src/apps/core/forms.py:1009
+#: src/apps/core/forms.py:956 src/apps/core/forms.py:1014
 msgid ""
 "<b>This is a history</b> (check if you are documenting a historical task)"
 msgstr ""
 "<b>これは歴史です</b> （もし現在のタスクではなく、歴史の内容を描写していると"
 "したら、選択してください）"
 
-#: src/apps/core/forms.py:1002
+#: src/apps/core/forms.py:1007
 msgid "<b>Task:</b> (e.g., \"Purchase solar cells\", text in title.)"
 msgstr ""
 
-#: src/apps/core/forms.py:1003
+#: src/apps/core/forms.py:1008
 msgid "Type the name of the task."
 msgstr ""
 
-#: src/apps/core/forms.py:1004
+#: src/apps/core/forms.py:1009
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the task has to be done earlier)"
 msgstr ""
 
-#: src/apps/core/forms.py:1067 src/apps/core/forms.py:1073
+#: src/apps/core/forms.py:1072 src/apps/core/forms.py:1078
 msgid "Add & Go"
 msgstr "追加＆進む"
 
-#: src/apps/core/forms.py:1096
+#: src/apps/core/forms.py:1101
 msgid "definition, e.g., 'spaceflight beyond the bounderies of galaxies'"
 msgstr "定義、例えば「銀河間を移動する宇宙飛行」"
 
-#: src/apps/core/forms.py:1201 src/apps/core/forms.py:1310
+#: src/apps/core/forms.py:1206 src/apps/core/forms.py:1315
 msgid ""
 "<b>This is a history</b> (check if you are documenting a project of the past)"
 msgstr ""
 "<b>これは歴史です</b> （もし現在の企画ではなく、歴史の内容を描写しているとし"
 "たら、選択してください）"
 
-#: src/apps/core/forms.py:1292 src/apps/core/templates/idea/create.html.py:16
-#: src/templates/home.html:77
+#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:16
+#: src/templates/home.html:75
 msgid "Goal"
 msgstr "目的"
 
-#: src/apps/core/forms.py:1294 src/apps/core/templates/plan/create.html.py:16
-#: src/templates/home.html:78
+#: src/apps/core/forms.py:1299 src/apps/core/templates/plan/create.html.py:16
+#: src/templates/home.html:76
 msgid "Idea"
 msgstr "発想"
 
-#: src/apps/core/forms.py:1296
+#: src/apps/core/forms.py:1301
 msgid "Members"
 msgstr ""
 
-#: src/apps/core/forms.py:1299
+#: src/apps/core/forms.py:1304
 msgid "<b>Name:</b> (e.g., \"Solar Water Project\".)"
 msgstr ""
 
-#: src/apps/core/forms.py:1301
+#: src/apps/core/forms.py:1306
 msgid ""
 "<b>Situation:</b> (Describe your current situation by listing the things "
 "that you have, including access.)"
 msgstr ""
 
-#: src/apps/core/forms.py:1302
+#: src/apps/core/forms.py:1307
 msgid ""
 "Example:\n"
 "\n"
@@ -413,11 +417,11 @@ msgid ""
 " - 150 USD for this project"
 msgstr ""
 
-#: src/apps/core/forms.py:1303
+#: src/apps/core/forms.py:1308
 msgid "<b>Deliverable:</b> (Describe what do you expect to get.)"
 msgstr ""
 
-#: src/apps/core/forms.py:1304
+#: src/apps/core/forms.py:1309
 msgid ""
 "Example:\n"
 "\n"
@@ -426,8 +430,6 @@ msgid ""
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:45
-#, fuzzy
-#| msgid "Send Comment"
 msgid "New comment"
 msgstr "コメントを送る"
 
@@ -451,7 +453,7 @@ msgstr "削除"
 #: src/apps/core/templates/comment/list.html:88
 #: src/apps/core/templates/comment/list.html:90
 msgid "reply"
-msgstr ""
+msgstr "返事する"
 
 #: src/apps/core/templates/comment/list.html:101
 #: src/apps/core/templates/comment/list.html:106
@@ -471,7 +473,7 @@ msgstr "反対票"
 msgid "credit"
 msgstr "クレジット"
 
-#: src/apps/core/templates/comment/list.html:184
+#: src/apps/core/templates/comment/list.html:193
 msgid "Invite a friend to help!"
 msgstr ""
 
@@ -487,8 +489,8 @@ msgstr "理論"
 msgid "Practice"
 msgstr "実際"
 
-#: src/apps/core/templates/definition/create.html:57 src/templates/home.html:54
-#: src/templates/home.html.py:60 src/templates/home.html:63
+#: src/apps/core/templates/definition/create.html:57 src/templates/home.html:52
+#: src/templates/home.html.py:58 src/templates/home.html:61
 msgid "Video"
 msgstr "動画"
 
@@ -515,10 +517,10 @@ msgstr "宇宙空間に打ち上げられ，長時間人間を乗せて運航す
 #: src/apps/core/templates/plan/detail.html:148
 #: src/apps/core/templates/step/detail.html:107
 #: src/apps/core/templates/task/detail.html:95
-#: src/apps/core/templates/work/detail.html:115 src/templates/home.html:134
-#: src/templates/home.html.py:201 src/templates/home.html:276
-#: src/templates/home.html.py:354 src/templates/home.html:433
-#: src/templates/home.html.py:513 src/templates/home.html:589
+#: src/apps/core/templates/work/detail.html:115 src/templates/home.html:130
+#: src/templates/home.html.py:197 src/templates/home.html:272
+#: src/templates/home.html.py:350 src/templates/home.html:429
+#: src/templates/home.html.py:509 src/templates/home.html:585
 msgid "link"
 msgstr "リンク"
 
@@ -663,14 +665,14 @@ msgstr ""
 #: src/apps/core/templates/plan/detail.html:114
 #: src/apps/core/templates/step/detail.html:66
 #: src/apps/core/templates/task/detail.html:66
-#: src/apps/core/templates/work/detail.html:67 src/templates/home.html:132
-#: src/templates/home.html.py:138 src/templates/home.html:199
-#: src/templates/home.html.py:205 src/templates/home.html:274
-#: src/templates/home.html.py:280 src/templates/home.html:352
-#: src/templates/home.html.py:358 src/templates/home.html:431
-#: src/templates/home.html.py:437 src/templates/home.html:511
-#: src/templates/home.html.py:517 src/templates/home.html:587
-#: src/templates/home.html.py:593
+#: src/apps/core/templates/work/detail.html:67 src/templates/home.html:128
+#: src/templates/home.html.py:134 src/templates/home.html:195
+#: src/templates/home.html.py:201 src/templates/home.html:270
+#: src/templates/home.html.py:276 src/templates/home.html:348
+#: src/templates/home.html.py:354 src/templates/home.html:427
+#: src/templates/home.html.py:433 src/templates/home.html:507
+#: src/templates/home.html.py:513 src/templates/home.html:583
+#: src/templates/home.html.py:589
 msgid "historical"
 msgstr "歴史的"
 
@@ -693,7 +695,7 @@ msgstr ""
 
 #: src/apps/core/templates/goal/detail.html:118
 #: src/apps/core/templates/idea/list2.html:6
-#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:248
+#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:244
 msgid "Ideas"
 msgstr "発想"
 
@@ -733,7 +735,7 @@ msgstr ""
 
 #: src/apps/core/templates/idea/detail.html:125
 #: src/apps/core/templates/plan/list2.html:6
-#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:327
+#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:323
 msgid "Plans"
 msgstr "企画"
 
@@ -782,7 +784,7 @@ msgstr ""
 msgid "deliverable"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:142 src/templates/home.html:405
+#: src/apps/core/templates/plan/detail.html:142 src/templates/home.html:401
 msgid "Steps"
 msgstr "段階"
 
@@ -1469,72 +1471,72 @@ msgstr "ログアウト"
 msgid "private inbox"
 msgstr "私的索引"
 
-#: src/templates/home.html:44
+#: src/templates/home.html:43
 msgid "invitations"
 msgstr "招待"
 
-#: src/templates/home.html:44
+#: src/templates/home.html:43
 msgid "write bugs"
 msgstr "バグについて書く"
 
-#: src/templates/home.html:44
+#: src/templates/home.html:43
 msgid "time value"
 msgstr "時間の価値"
 
-#: src/templates/home.html:48
+#: src/templates/home.html:46
 msgid "Info"
 msgstr "情報"
 
-#: src/templates/home.html:51
+#: src/templates/home.html:49
 msgid "Help"
 msgstr "ヘルプ"
 
-#: src/templates/home.html:72
+#: src/templates/home.html:70
 msgid "compose"
 msgstr "作成"
 
-#: src/templates/home.html:79
+#: src/templates/home.html:77
 msgid "Plan"
 msgstr "企画"
 
-#: src/templates/home.html:86 src/templates/search_form.html.py:17
+#: src/templates/home.html:81 src/templates/search_form.html.py:17
 msgid "Search"
 msgstr ""
 
-#: src/templates/home.html:105
+#: src/templates/home.html:101
 msgid "Needs"
 msgstr "需要"
 
-#: src/templates/home.html:108
+#: src/templates/home.html:104
 msgid "share a need"
 msgstr "需要を共有する"
 
-#: src/templates/home.html:110
+#: src/templates/home.html:106
 msgid "write an open letter"
 msgstr "公開状を執筆する"
 
-#: src/templates/home.html:160
+#: src/templates/home.html:156
 msgid "Oops! You have no needs!"
 msgstr ""
 
-#: src/templates/home.html:161
+#: src/templates/home.html:157
 #, fuzzy
 #| msgid "Select the thing that you need..."
 msgid "Define a need"
 msgstr "需要と関連する対象の選択..."
 
-#: src/templates/home.html:162 src/templates/home.html.py:230
-#: src/templates/home.html:308 src/templates/home.html.py:386
-#: src/templates/home.html:464 src/templates/home.html.py:545
-#: src/templates/home.html:621
+#: src/templates/home.html:158 src/templates/home.html.py:226
+#: src/templates/home.html:304 src/templates/home.html.py:382
+#: src/templates/home.html:460 src/templates/home.html.py:541
+#: src/templates/home.html:617
 msgid "...or view"
 msgstr ""
 
-#: src/templates/home.html:162
+#: src/templates/home.html:158
 msgid "<u>discussion board</u>"
 msgstr ""
 
-#: src/templates/home.html:165
+#: src/templates/home.html:161
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
@@ -1544,31 +1546,31 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:179
+#: src/templates/home.html:175
 msgid "define a problem"
 msgstr "問題を定義する"
 
-#: src/templates/home.html:225 src/templates/home.html.py:302
-#: src/templates/home.html:380 src/templates/home.html.py:459
-#: src/templates/home.html:540 src/templates/home.html.py:616
+#: src/templates/home.html:221 src/templates/home.html.py:298
+#: src/templates/home.html:376 src/templates/home.html.py:455
+#: src/templates/home.html:536 src/templates/home.html.py:612
 msgid "see more"
 msgstr "つづく"
 
-#: src/templates/home.html:228
+#: src/templates/home.html:224
 msgid "Oops! You have no goals!"
 msgstr ""
 
-#: src/templates/home.html:229
+#: src/templates/home.html:225
 msgid "Add a problem"
 msgstr ""
 
-#: src/templates/home.html:230 src/templates/home.html.py:308
-#: src/templates/home.html:386 src/templates/home.html.py:464
-#: src/templates/home.html:545 src/templates/home.html.py:621
+#: src/templates/home.html:226 src/templates/home.html.py:304
+#: src/templates/home.html:382 src/templates/home.html.py:460
+#: src/templates/home.html:541 src/templates/home.html.py:617
 msgid "<u>index</u>"
 msgstr ""
 
-#: src/templates/home.html:233
+#: src/templates/home.html:229
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
@@ -1579,19 +1581,19 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:249
+#: src/templates/home.html:245
 msgid "suggest a solution"
 msgstr "解決を提案する"
 
-#: src/templates/home.html:306
+#: src/templates/home.html:302
 msgid "Oops! You have no ideas!"
 msgstr ""
 
-#: src/templates/home.html:307
+#: src/templates/home.html:303
 msgid "Add a solution"
 msgstr ""
 
-#: src/templates/home.html:311
+#: src/templates/home.html:307
 msgid ""
 "\n"
 "                <p><i><u>Example ideas:</u></i></p>\n"
@@ -1604,19 +1606,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:329
+#: src/templates/home.html:325
 msgid "start a project"
 msgstr "プロジェクトをはじめる"
 
-#: src/templates/home.html:384
+#: src/templates/home.html:380
 msgid "Oops! You have no plans!"
 msgstr ""
 
-#: src/templates/home.html:385
+#: src/templates/home.html:381
 msgid "Add a project"
 msgstr ""
 
-#: src/templates/home.html:388
+#: src/templates/home.html:384
 msgid ""
 "\n"
 "\n"
@@ -1629,19 +1631,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:407
+#: src/templates/home.html:403
 msgid "break it down"
 msgstr "節目を定義する"
 
-#: src/templates/home.html:462
+#: src/templates/home.html:458
 msgid "Oops! You have no steps!"
 msgstr ""
 
-#: src/templates/home.html:463
+#: src/templates/home.html:459
 msgid "Start a project to add milestones"
 msgstr ""
 
-#: src/templates/home.html:467
+#: src/templates/home.html:463
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1659,23 +1661,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:487
+#: src/templates/home.html:483
 msgid "Tasks"
 msgstr "タスク"
 
-#: src/templates/home.html:489
+#: src/templates/home.html:485
 msgid "execute it"
 msgstr "やることを定義する"
 
-#: src/templates/home.html:543
+#: src/templates/home.html:539
 msgid "Oops! You have no tasks!"
 msgstr ""
 
-#: src/templates/home.html:544
+#: src/templates/home.html:540
 msgid "Choose a milestone to add tasks"
 msgstr ""
 
-#: src/templates/home.html:547
+#: src/templates/home.html:543
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1684,23 +1686,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:563
+#: src/templates/home.html:559
 msgid "Works"
 msgstr "仕事"
 
-#: src/templates/home.html:565
+#: src/templates/home.html:561
 msgid "did it"
 msgstr "終わりました！"
 
-#: src/templates/home.html:619
+#: src/templates/home.html:615
 msgid "Oops! You have no works!"
 msgstr ""
 
-#: src/templates/home.html:620
+#: src/templates/home.html:616
 msgid "Choose a task to add works"
 msgstr ""
 
-#: src/templates/home.html:623
+#: src/templates/home.html:619
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1709,7 +1711,7 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:633
+#: src/templates/home.html:629
 msgid "People-centric economy."
 msgstr "─人への経済─"
 

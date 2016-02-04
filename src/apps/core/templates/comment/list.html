@@ -42,7 +42,7 @@ $(window).bind('scroll', function () {
     }
 });
 </script>
-<button type="button" onclick="window.location.href = '#div_id_text';fillfocus('');">{% trans "New comment" %}</button>
+<button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('');">{% trans "New comment" %}</button>
 <br/>
 <br/>
 {% else %}
@@ -85,7 +85,7 @@ $(window).bind('scroll', function () {
             {% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
             {% else %}
             {% if request.user.is_authenticated %}
-                <button type="button" onclick="window.location.href = '#div_id_text';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
+            <button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
             {% else %}
                 <a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">{% trans "reply" %}</button></a>
             {% endif %}
@@ -162,9 +162,18 @@ $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 
+<!-- this style should not be moved to global styles, as it will hide amount/currency fields elsewhere-->
+<style>
+    #div_id_amount {
+        display: none;
+    }
+    #div_id_currency {
+        display: none;
+    }
+</style>
 {% if request.user.is_authenticated %}
 <div id="comment" class="panel panel-default input-comment">
-<div class="panel-body">
+<div id="comment-{{ object_list.last.id|add:1 }}" class="panel-body">
 {% crispy form %}
 {% markdown_media %}
 </div>
