@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-04 04:07-0800\n"
-"PO-Revision-Date: 2016-02-04 14:12+0200\n"
+"POT-Creation-Date: 2016-02-04 07:54-0800\n"
+"PO-Revision-Date: 2016-02-04 17:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -254,7 +254,7 @@ msgstr "<b>这是历史</b> (如果你要记录个历史上的过去的思路，
 
 #: src/apps/core/forms.py:734 src/apps/core/templates/goal/list2.html.py:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:107 src/templates/home.html:174
+#: src/apps/core/templates/need/detail.html:118 src/templates/home.html:174
 msgid "Goals"
 msgstr "目标"
 
@@ -427,47 +427,51 @@ msgstr ""
 msgid "New comment"
 msgstr "新的评论"
 
-#: src/apps/core/templates/comment/list.html:85
-#: src/apps/core/templates/goal/detail.html:104
-#: src/apps/core/templates/idea/detail.html:111
-#: src/apps/core/templates/need/detail.html:94
-#: src/apps/core/templates/plan/detail.html:122
+#: src/apps/core/templates/comment/list.html:74
+msgid "<i class=\"fa fa-dollar\"></i> INVEST"
+msgstr "<i class=\"fa fa-rmb\"></i> 投资"
+
+#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/goal/detail.html:116
+#: src/apps/core/templates/idea/detail.html:122
+#: src/apps/core/templates/need/detail.html:105
+#: src/apps/core/templates/plan/detail.html:133
 #: src/templates/account/detail.html:12
 msgid "edit"
 msgstr "编辑"
 
-#: src/apps/core/templates/comment/list.html:85
-#: src/apps/core/templates/goal/detail.html:104
-#: src/apps/core/templates/idea/detail.html:111
-#: src/apps/core/templates/need/detail.html:94
-#: src/apps/core/templates/plan/detail.html:122
+#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/goal/detail.html:116
+#: src/apps/core/templates/idea/detail.html:122
+#: src/apps/core/templates/need/detail.html:105
+#: src/apps/core/templates/plan/detail.html:133
 msgid "delete"
 msgstr "删除"
 
-#: src/apps/core/templates/comment/list.html:88
-#: src/apps/core/templates/comment/list.html:90
+#: src/apps/core/templates/comment/list.html:89
+#: src/apps/core/templates/comment/list.html:91
 msgid "reply"
 msgstr "回复"
-
-#: src/apps/core/templates/comment/list.html:101
-#: src/apps/core/templates/comment/list.html:106
-#: src/apps/core/templates/comment/list.html:111
-#: src/apps/core/templates/comment/list.html:117
-msgid "Vote Up"
-msgstr "投了"
 
 #: src/apps/core/templates/comment/list.html:102
 #: src/apps/core/templates/comment/list.html:107
 #: src/apps/core/templates/comment/list.html:112
 #: src/apps/core/templates/comment/list.html:118
+msgid "Vote Up"
+msgstr "投了"
+
+#: src/apps/core/templates/comment/list.html:103
+#: src/apps/core/templates/comment/list.html:108
+#: src/apps/core/templates/comment/list.html:113
+#: src/apps/core/templates/comment/list.html:119
 msgid "Vote Down"
 msgstr "否决"
 
-#: src/apps/core/templates/comment/list.html:149
+#: src/apps/core/templates/comment/list.html:150
 msgid "credit"
 msgstr "信用"
 
-#: src/apps/core/templates/comment/list.html:193
+#: src/apps/core/templates/comment/list.html:194
 msgid "Invite a friend to help!"
 msgstr "邀请好友帮忙！"
 
@@ -505,13 +509,13 @@ msgid "vessel or machine designed to fly in outer space"
 msgstr "在太空中航行的工具"
 
 #: src/apps/core/templates/definition/detail.html:57
-#: src/apps/core/templates/goal/detail.html:124
-#: src/apps/core/templates/idea/detail.html:131
-#: src/apps/core/templates/need/detail.html:114
-#: src/apps/core/templates/plan/detail.html:148
-#: src/apps/core/templates/step/detail.html:107
-#: src/apps/core/templates/task/detail.html:95
-#: src/apps/core/templates/work/detail.html:115 src/templates/home.html:130
+#: src/apps/core/templates/goal/detail.html:136
+#: src/apps/core/templates/idea/detail.html:142
+#: src/apps/core/templates/need/detail.html:125
+#: src/apps/core/templates/plan/detail.html:159
+#: src/apps/core/templates/step/detail.html:118
+#: src/apps/core/templates/task/detail.html:106
+#: src/apps/core/templates/work/detail.html:126 src/templates/home.html:130
 #: src/templates/home.html.py:197 src/templates/home.html:272
 #: src/templates/home.html.py:350 src/templates/home.html:429
 #: src/templates/home.html.py:509 src/templates/home.html:585
@@ -519,33 +523,33 @@ msgid "link"
 msgstr "链接"
 
 #: src/apps/core/templates/definition/detail.html:69
-#: src/apps/core/templates/goal/detail.html:136
-#: src/apps/core/templates/idea/detail.html:143
-#: src/apps/core/templates/need/detail.html:126
-#: src/apps/core/templates/plan/detail.html:160
-#: src/apps/core/templates/step/detail.html:119
-#: src/apps/core/templates/task/detail.html:107
-#: src/apps/core/templates/work/detail.html:127
+#: src/apps/core/templates/goal/detail.html:148
+#: src/apps/core/templates/idea/detail.html:154
+#: src/apps/core/templates/need/detail.html:137
+#: src/apps/core/templates/plan/detail.html:171
+#: src/apps/core/templates/step/detail.html:130
+#: src/apps/core/templates/task/detail.html:118
+#: src/apps/core/templates/work/detail.html:138
 #, fuzzy
 #| msgid "private inbox"
 msgid "Private"
 msgstr "私人目录"
 
 #: src/apps/core/templates/definition/detail.html:69
-#: src/apps/core/templates/goal/detail.html:74
+#: src/apps/core/templates/goal/detail.html:86
 #, fuzzy
 #| msgid "needs"
 msgid "need"
 msgstr "需要"
 
 #: src/apps/core/templates/definition/detail.html:70
-#: src/apps/core/templates/goal/detail.html:137
-#: src/apps/core/templates/idea/detail.html:144
-#: src/apps/core/templates/need/detail.html:127
-#: src/apps/core/templates/plan/detail.html:161
-#: src/apps/core/templates/step/detail.html:120
-#: src/apps/core/templates/task/detail.html:108
-#: src/apps/core/templates/work/detail.html:128
+#: src/apps/core/templates/goal/detail.html:149
+#: src/apps/core/templates/idea/detail.html:155
+#: src/apps/core/templates/need/detail.html:138
+#: src/apps/core/templates/plan/detail.html:172
+#: src/apps/core/templates/step/detail.html:131
+#: src/apps/core/templates/task/detail.html:119
+#: src/apps/core/templates/work/detail.html:139
 msgid "Request access:"
 msgstr ""
 
@@ -564,104 +568,104 @@ msgstr ""
 "i></center>\n"
 
 #: src/apps/core/templates/goal/detail.html:31
-#: src/apps/core/templates/goal/detail.html:59
+#: src/apps/core/templates/goal/detail.html:71
 #: src/apps/core/templates/idea/detail.html:30
-#: src/apps/core/templates/idea/detail.html:59
+#: src/apps/core/templates/idea/detail.html:70
 #: src/apps/core/templates/need/detail.html:31
-#: src/apps/core/templates/need/detail.html:59
+#: src/apps/core/templates/need/detail.html:70
 #: src/apps/core/templates/plan/detail.html:50
-#: src/apps/core/templates/plan/detail.html:78
+#: src/apps/core/templates/plan/detail.html:89
 msgid "needs"
 msgstr "需要"
 
 #: src/apps/core/templates/goal/detail.html:31
-#: src/apps/core/templates/goal/detail.html:59
+#: src/apps/core/templates/goal/detail.html:71
 #: src/apps/core/templates/idea/detail.html:30
-#: src/apps/core/templates/idea/detail.html:59
+#: src/apps/core/templates/idea/detail.html:70
 #: src/apps/core/templates/need/detail.html:31
-#: src/apps/core/templates/need/detail.html:59
+#: src/apps/core/templates/need/detail.html:70
 #: src/apps/core/templates/plan/detail.html:50
-#: src/apps/core/templates/plan/detail.html:78
+#: src/apps/core/templates/plan/detail.html:89
 msgid "for funding"
 msgstr "为了支住"
 
 #: src/apps/core/templates/goal/detail.html:31
-#: src/apps/core/templates/goal/detail.html:59
+#: src/apps/core/templates/goal/detail.html:71
 #: src/apps/core/templates/idea/detail.html:30
-#: src/apps/core/templates/idea/detail.html:59
+#: src/apps/core/templates/idea/detail.html:70
 #: src/apps/core/templates/need/detail.html:31
-#: src/apps/core/templates/need/detail.html:59
+#: src/apps/core/templates/need/detail.html:70
 #: src/apps/core/templates/plan/detail.html:50
-#: src/apps/core/templates/plan/detail.html:78
+#: src/apps/core/templates/plan/detail.html:89
 msgid "hours"
 msgstr "小时"
 
-#: src/apps/core/templates/goal/detail.html:53
-#: src/apps/core/templates/idea/detail.html:53
-#: src/apps/core/templates/need/detail.html:53
-#: src/apps/core/templates/plan/detail.html:72
-#: src/apps/core/templates/step/detail.html:30
-#: src/apps/core/templates/task/detail.html:30
-#: src/apps/core/templates/work/detail.html:30
+#: src/apps/core/templates/goal/detail.html:65
+#: src/apps/core/templates/idea/detail.html:64
+#: src/apps/core/templates/need/detail.html:64
+#: src/apps/core/templates/plan/detail.html:83
+#: src/apps/core/templates/step/detail.html:41
+#: src/apps/core/templates/task/detail.html:41
+#: src/apps/core/templates/work/detail.html:41
 msgid "Unsubscribe"
 msgstr "退订"
 
-#: src/apps/core/templates/goal/detail.html:53
-#: src/apps/core/templates/idea/detail.html:53
-#: src/apps/core/templates/need/detail.html:53
-#: src/apps/core/templates/plan/detail.html:72
-#: src/apps/core/templates/step/detail.html:30
-#: src/apps/core/templates/task/detail.html:30
-#: src/apps/core/templates/work/detail.html:30
+#: src/apps/core/templates/goal/detail.html:65
+#: src/apps/core/templates/idea/detail.html:64
+#: src/apps/core/templates/need/detail.html:64
+#: src/apps/core/templates/plan/detail.html:83
+#: src/apps/core/templates/step/detail.html:41
+#: src/apps/core/templates/task/detail.html:41
+#: src/apps/core/templates/work/detail.html:41
 msgid "Subscribe"
 msgstr "评论订阅"
 
-#: src/apps/core/templates/goal/detail.html:63
-#: src/apps/core/templates/need/detail.html:63
+#: src/apps/core/templates/goal/detail.html:75
+#: src/apps/core/templates/need/detail.html:74
 msgid "hyper-equity"
 msgstr "极端产权比例"
 
-#: src/apps/core/templates/goal/detail.html:64
-#: src/apps/core/templates/need/detail.html:64
+#: src/apps/core/templates/goal/detail.html:76
+#: src/apps/core/templates/need/detail.html:75
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much goal creator owns of all projects under this "
 "problem."
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:69
+#: src/apps/core/templates/goal/detail.html:81
 msgid "category:"
 msgstr "分类："
 
-#: src/apps/core/templates/goal/detail.html:69
+#: src/apps/core/templates/goal/detail.html:81
 msgid "related need:"
 msgstr "有关的需要："
 
-#: src/apps/core/templates/goal/detail.html:74
-#: src/apps/core/templates/idea/detail.html:78
-#: src/apps/core/templates/plan/detail.html:92
-#: src/apps/core/templates/step/detail.html:44
-#: src/apps/core/templates/task/detail.html:44
-#: src/apps/core/templates/work/detail.html:44
+#: src/apps/core/templates/goal/detail.html:86
+#: src/apps/core/templates/idea/detail.html:89
+#: src/apps/core/templates/plan/detail.html:103
+#: src/apps/core/templates/step/detail.html:55
+#: src/apps/core/templates/task/detail.html:55
+#: src/apps/core/templates/work/detail.html:55
 #, fuzzy
 #| msgid "private inbox"
 msgid "private"
 msgstr "私人目录"
 
-#: src/apps/core/templates/goal/detail.html:80
-#: src/apps/core/templates/idea/detail.html:86
-#: src/apps/core/templates/need/detail.html:70
-#: src/apps/core/templates/plan/detail.html:99
+#: src/apps/core/templates/goal/detail.html:92
+#: src/apps/core/templates/idea/detail.html:97
+#: src/apps/core/templates/need/detail.html:81
+#: src/apps/core/templates/plan/detail.html:110
 msgid "translations:"
 msgstr "翻译:"
 
-#: src/apps/core/templates/goal/detail.html:96
-#: src/apps/core/templates/idea/detail.html:103
-#: src/apps/core/templates/need/detail.html:86
-#: src/apps/core/templates/plan/detail.html:114
-#: src/apps/core/templates/step/detail.html:66
-#: src/apps/core/templates/task/detail.html:66
-#: src/apps/core/templates/work/detail.html:67 src/templates/home.html:128
+#: src/apps/core/templates/goal/detail.html:108
+#: src/apps/core/templates/idea/detail.html:114
+#: src/apps/core/templates/need/detail.html:97
+#: src/apps/core/templates/plan/detail.html:125
+#: src/apps/core/templates/step/detail.html:77
+#: src/apps/core/templates/task/detail.html:77
+#: src/apps/core/templates/work/detail.html:78 src/templates/home.html:128
 #: src/templates/home.html.py:134 src/templates/home.html:195
 #: src/templates/home.html.py:201 src/templates/home.html:270
 #: src/templates/home.html.py:276 src/templates/home.html:348
@@ -672,35 +676,35 @@ msgstr "翻译:"
 msgid "historical"
 msgstr "历史的"
 
-#: src/apps/core/templates/goal/detail.html:100
-#: src/apps/core/templates/idea/detail.html:107
-#: src/apps/core/templates/need/detail.html:90
-#: src/apps/core/templates/plan/detail.html:118
-#: src/apps/core/templates/step/detail.html:70
-#: src/apps/core/templates/task/detail.html:70
-#: src/apps/core/templates/work/detail.html:71
+#: src/apps/core/templates/goal/detail.html:112
+#: src/apps/core/templates/idea/detail.html:118
+#: src/apps/core/templates/need/detail.html:101
+#: src/apps/core/templates/plan/detail.html:129
+#: src/apps/core/templates/step/detail.html:81
+#: src/apps/core/templates/task/detail.html:81
+#: src/apps/core/templates/work/detail.html:82
 msgid "Source:"
 msgstr "来自 "
 
-#: src/apps/core/templates/goal/detail.html:115
-#: src/apps/core/templates/idea/detail.html:121
-#: src/apps/core/templates/need/detail.html:104
-#: src/apps/core/templates/plan/detail.html:137
+#: src/apps/core/templates/goal/detail.html:127
+#: src/apps/core/templates/idea/detail.html:132
+#: src/apps/core/templates/need/detail.html:115
+#: src/apps/core/templates/plan/detail.html:148
 msgid "shared with:"
 msgstr "谁可见:"
 
-#: src/apps/core/templates/goal/detail.html:118
+#: src/apps/core/templates/goal/detail.html:130
 #: src/apps/core/templates/idea/list2.html:6
 #: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:244
 msgid "Ideas"
 msgstr "思路"
 
-#: src/apps/core/templates/goal/detail.html:136
-#: src/apps/core/templates/plan/detail.html:92
+#: src/apps/core/templates/goal/detail.html:148
+#: src/apps/core/templates/plan/detail.html:103
 msgid "idea"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:146
+#: src/apps/core/templates/goal/detail.html:158
 msgid "+New Idea"
 msgstr "+新的思路"
 
@@ -709,42 +713,42 @@ msgstr "+新的思路"
 msgid "Idea create"
 msgstr "创造思路"
 
-#: src/apps/core/templates/idea/detail.html:64
+#: src/apps/core/templates/idea/detail.html:75
 msgid "super-equity"
 msgstr "极端产权比例"
 
-#: src/apps/core/templates/idea/detail.html:65
+#: src/apps/core/templates/idea/detail.html:76
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much idea creator owns of all projects under this idea."
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:72
-#: src/apps/core/templates/need/detail.html:69
+#: src/apps/core/templates/idea/detail.html:83
+#: src/apps/core/templates/need/detail.html:80
 msgid "want:"
 msgstr "需要:"
 
-#: src/apps/core/templates/idea/detail.html:78
-#: src/apps/core/templates/need/detail.html:126
+#: src/apps/core/templates/idea/detail.html:89
+#: src/apps/core/templates/need/detail.html:137
 msgid "goal"
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:125
+#: src/apps/core/templates/idea/detail.html:136
 #: src/apps/core/templates/plan/list2.html:6
 #: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:323
 msgid "Plans"
 msgstr "计划"
 
-#: src/apps/core/templates/idea/detail.html:143
-#: src/apps/core/templates/step/detail.html:44
+#: src/apps/core/templates/idea/detail.html:154
+#: src/apps/core/templates/step/detail.html:55
 msgid "plan"
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:153
+#: src/apps/core/templates/idea/detail.html:164
 msgid "+New Plan"
 msgstr "+新的计划"
 
-#: src/apps/core/templates/need/detail.html:136
+#: src/apps/core/templates/need/detail.html:147
 msgid "+Add Goal"
 msgstr "+附加一个目标"
 
@@ -753,53 +757,53 @@ msgstr "+附加一个目标"
 msgid "Plan create"
 msgstr "创造项目"
 
-#: src/apps/core/templates/plan/detail.html:81
+#: src/apps/core/templates/plan/detail.html:92
 msgid "members:"
 msgstr "成员："
 
-#: src/apps/core/templates/plan/detail.html:81
+#: src/apps/core/templates/plan/detail.html:92
 msgid "equity"
 msgstr "产权比例"
 
-#: src/apps/core/templates/plan/detail.html:82
+#: src/apps/core/templates/plan/detail.html:93
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much project <u>shareholders</u> own of all results "
 "under this project. The rest is owned by contributing users."
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:86
+#: src/apps/core/templates/plan/detail.html:97
 msgid "approach to realizing idea"
 msgstr "这计划实现思路"
 
-#: src/apps/core/templates/plan/detail.html:125
+#: src/apps/core/templates/plan/detail.html:136
 msgid "situation"
 msgstr "情况"
 
-#: src/apps/core/templates/plan/detail.html:130
+#: src/apps/core/templates/plan/detail.html:141
 msgid "deliverable"
 msgstr "目的地"
 
-#: src/apps/core/templates/plan/detail.html:142 src/templates/home.html:401
+#: src/apps/core/templates/plan/detail.html:153 src/templates/home.html:401
 msgid "Steps"
 msgstr "步骤"
 
-#: src/apps/core/templates/plan/detail.html:160
-#: src/apps/core/templates/task/detail.html:44
+#: src/apps/core/templates/plan/detail.html:171
+#: src/apps/core/templates/task/detail.html:55
 msgid "step"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:171
+#: src/apps/core/templates/plan/detail.html:182
 msgid "+New Step"
 msgstr "+新的步骤"
 
-#: src/apps/core/templates/step/detail.html:119
-#: src/apps/core/templates/work/detail.html:44
+#: src/apps/core/templates/step/detail.html:130
+#: src/apps/core/templates/work/detail.html:55
 msgid "task"
 msgstr ""
 
-#: src/apps/core/templates/task/detail.html:107
-#: src/apps/core/templates/work/detail.html:127
+#: src/apps/core/templates/task/detail.html:118
+#: src/apps/core/templates/work/detail.html:138
 msgid "work"
 msgstr ""
 
@@ -1863,6 +1867,9 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "记住"
+
+#~ msgid "INVEST"
+#~ msgstr "投资"
 
 #, fuzzy
 #~ msgid ""
