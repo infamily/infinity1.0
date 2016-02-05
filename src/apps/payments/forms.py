@@ -111,7 +111,7 @@ class PayPalTransactionForm(forms.Form):
             del self.request.session['currency']
 
         self.helper = FormHelper(self)
-        self.helper.layout.append(Submit('transaction_form', _('Send')))
+        self.helper.layout.append(Submit('transaction_form', _('Invest'), css_class="btn-sm btn-info"))
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-sm-2'
         self.helper.field_class = 'col-sm-8'

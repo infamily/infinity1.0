@@ -33,6 +33,11 @@ class PayPalTransactionView(FormView):
         self.comment_model = get_object_or_404(Comment, pk=self.comment_id)
         return super(PayPalTransactionView, self).dispatch(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super(PayPalTransactionView, self).get_context_data(**kwargs)
+        context.update({'comment_object': self.comment_model})
+        return context
+
     def form_valid(self, form):
         current_site = get_current_site(self.request)
         returnUrl = "http://%s%s" % (
