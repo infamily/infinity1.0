@@ -25,15 +25,26 @@
 #id_amount {
   background-color: #90ee90;
 }
-.btn-info {
-  background-color: #c0c0c0;
+.btn {
+  background-color: #a0a0a0;
   border-color: #d9d9d9;
+  color: white; 
+  font-size: 18px;
+  margin-left: 20px;
+  border-radius: 0px;
+  font-weight: normal;
+  text-transform: none;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif
+}
+.btn:hover {
+  background-color: #000000;
+  border-color: #a0a0a0;
 }
 </style>
 
 <script src="//d3js.org/d3.v3.min.js"></script>
 
-<a href="/{{comment_object.content_type.name}}/{{comment_object.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{comment_object.id}}">< {{ comment_object }}</a>
+<div style="float:left;"><a href="/{{comment_object.content_type.name}}/{{comment_object.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{comment_object.id}}">< {{ comment_object }}</a></div>
 
 <div style="color:grey; text-decoration:italic; width:75%; margin-left:auto; margin-right:auto;">
 <center><p><a href="javascript:hideshow(document.getElementById('xdiv'))">- see claims you are investin in -</a></p></center>
