@@ -36,7 +36,7 @@
 <a href="/{{comment_object.content_type.name}}/{{comment_object.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{comment_object.id}}">< {{ comment_object }}</a>
 
 <div style="color:grey; text-decoration:italic; width:75%; margin-left:auto; margin-right:auto;">
-<center><p><a href="javascript:hideshow(document.getElementById('xdiv'))">- promise in concern -</a></p></center>
+<center><p><a href="javascript:hideshow(document.getElementById('xdiv'))">- see claims you are investin in -</a></p></center>
 	<div id="xdiv" style="display:none;">
     {{ comment_object.text }}
 	</div>
@@ -47,7 +47,7 @@
 {% crispy form %}
 
 <div style="color:grey; text-decoration:italic; width:75%; margin-left:auto; margin-right:auto;">
-<center><p><a href="javascript:hideshow(document.getElementById('ydiv'))">- investment information -</a></p></center>
+<center><p><a style="display:none;" href="javascript:hideshow(document.getElementById('ydiv'))">- investment information -</a></p></center>
 	<div id="ydiv" style="display:none;">
 	<p>Completing the transaction gives you the right to 50% of results of claimed XX hours of work, and assumed XX hours of future work, as written in the comment (#123) in question. The comment claim will be recorded for both parties of the transaction at the moment of transaction, and it will serve as a proof of what you had invested into. Make sure that the comment refers to unambiguous a work result, and that you have reasonable expectations about future results. You will receive additional matched hours if the assumed time you invested into will be converted to claimed time.</p>
 	</div>
@@ -67,79 +67,103 @@ which.style.display="block"
 
 <script>
 
-var investment = [
-	{"aspect": "Size of Opportunity (h+ĥ)", "assumed": {{comment_object.hours_assumed}}, "claimed": {{comment_object.hours_claimed}}, "donated": 0, "matched": 0},
-	{"aspect": "Amount to Invest (ħ)",    "assumed": 0, "claimed": 0, "donated": {{comment_object.invest_remains}}, "matched": 0},
-	{"aspect": "Matched Hours to be Created (ḥ)",       "assumed": 0, "claimed": 0, "donated": 0, "matched": {{comment_object.hours_claimed}}}];
+var hours_assumed = {{comment_object.hours_assumed}};
+var hours_claimed = {{comment_object.hours_claimed}};
+var invest_remains= {{comment_object.invest_remains}};
+
+var data = function() {
+    return [
+	{"aspect": "Size of Opportunity (h+ĥ)", "assumed": hours_assumed, "claimed": hours_claimed, "donated": 0, "matched": 0},
+	{"aspect": "Amount to Invest (ħ)",    "assumed": 0, "claimed": 0, "donated": invest_remains, "matched": 0},
+	{"aspect": "Matched Hours to be Created (ḥ)",       "assumed": 0, "claimed": 0, "donated": 0, "matched": hours_claimed}];
+}
 
 var aspects = ["assumed", "claimed", "donated", "matched"];
 
 var margin = {top: 20, right: 50, bottom: 30, left: 20},
-    width = 790 - margin.left - margin.right,
-    height = 250 - margin.top - margin.bottom;
+	width = 790 - margin.left - margin.right,
+	height = 250 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width]);
+	.rangeRoundBands([0, width]);
 
 var y = d3.scale.linear()
-    .rangeRound([height, 0]);
+	.rangeRound([height, 0]);
 
-//var colors = ["#636363","#969696", "#bdbdbd", "#d9d9d9"];
 var colors = ["#d9d9d9","#c0c0c0", "#90ee90", "#c0c0c0"];
 var z = d3.scale.ordinal().range(colors);
 
 var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
+	.scale(x)
+	.orient("bottom");
 
 var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("right");
+	.scale(y)
+	.orient("right");
 
 var svg = d3.select("#graph").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-  var layers = d3.layout.stack()(aspects.map(function(c) {
-    return investment.map(function(d) {
-      return {x: d.aspect, y: d[c]};
-    });
-  }));
+var renderData = function(investment) {
 
-  x.domain(layers[0].map(function(d) { return d.x; }));
-  y.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.y0 + d.y; })]).nice();
+	  var layers = d3.layout.stack()(aspects.map(function(c) {
+		return investment.map(function(d) {
+		  return {x: d.aspect, y: d[c]};
+		});
+	  }));
 
-  var layer = svg.selectAll(".layer")
-      .data(layers)
-    .enter().append("g")
-      .attr("class", "layer")
-      .style("fill", function(d, i) { console.log(z(i)); return z(i); });
+	  x.domain(layers[0].map(function(d) { return d.x; }));
+	  y.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.y0 + d.y; })]).nice();
 
-  layer.selectAll("rect")
-      .data(function(d) { return d; })
-    .enter().append("rect")
-      .attr("x", function(d) { return x(d.x); })
-      .attr("y", function(d) { return y(d.y + d.y0); })
-      .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
-      .attr("width", x.rangeBand() - 1);
+	  var layer = svg.selectAll(".layer")
+		  .data(layers)
+		.enter().append("g")
+		  .attr("class", "layer")
+		  .style("fill", function(d, i) { console.log(z(i)); return z(i); });
 
-  svg.append("g")
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+	  layer.selectAll("rect")
+		  .data(function(d) { return d; })
+		.enter().append("rect")
+		  .attr("x", function(d) { return x(d.x); })
+		  .attr("y", function(d) { return y(d.y + d.y0); })
+		  .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
+		  .attr("width", x.rangeBand() - 1);
 
-  svg.append("g")
-      .attr("class", "axis axis--y")
-      .attr("transform", "translate(" + width + ",0)")
-      .call(yAxis);
+	  svg.append("g")
+		  .attr("class", "axis axis--x")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(xAxis);
 
-function type(d) {
-  aspects.forEach(function(c) { d[c] = +d[c]; });
-  return d;
+	  svg.append("g")
+		  .attr("class", "axis axis--y")
+		  .attr("transform", "translate(" + width + ",0)")
+		  .call(yAxis);
+
+	function type(d) {
+	  aspects.forEach(function(c) { d[c] = +d[c]; });
+	  return d;
+	}
 }
+
+function redraw() {
+	svg.selectAll("*").remove();
+	renderData(data());
+}
+
+invest_remains = 3;
+redraw();
+
+$(function() {
+  $("#id_amount").change(function() {
+    invest_remains = $("#id_amount").val()/25.24; 
+    redraw();
+  });
+});
+
 
 </script>
 
