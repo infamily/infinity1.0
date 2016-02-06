@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/apps/core/forms.py:364 src/apps/core/forms.py:367
-#: src/apps/core/forms.py:1087
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-05 19:41-0800\n"
-"PO-Revision-Date: 2016-02-02 20:15+0200\n"
+"PO-Revision-Date: 2016-02-06 11:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -916,7 +914,7 @@ msgstr ""
 
 #: src/apps/payments/templates/paypal/transaction/create.html:48
 msgid "comment"
-msgstr ""
+msgstr "Comment"
 
 #: src/apps/payments/templates/paypal/transaction/create.html:51
 msgid "review the things you are investing into"
