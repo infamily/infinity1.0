@@ -55,7 +55,7 @@
 </div>
 
 <div align="center" id="graph"></div>
-<div align="center" id="match" style="margin-left:-25px; color:grey; font-size:24px;"></div>
+<div align="center" style="margin-left:-25px; color:grey; font-size:24px;"><span id="match" style="color:black;"></span> <span id="future_match"></span></div>
 {% crispy form %}
 
 <div style="color:grey; text-decoration:italic; width:75%; margin-left:auto; margin-right:auto;">
@@ -102,6 +102,7 @@ else {
 
 var invest_remains = hours_claimed+hours_assumed;
 var hours_matched = Math.min(hours_claimed, invest_remains)
+var future_matched = Math.min(hours_claimed+hours_assumed, invest_remains) - hours_matched;
 
 
 var data = function() {
@@ -187,14 +188,17 @@ function redraw() {
 	renderData(data());
 }
 
-$("#match").text( String(hours_matched.toFixed(4))+" ḥ");
+$("#match").text( "{% trans "matched hours:" %} " +String(hours_matched.toFixed(4))+" ḥ,");
+$("#future_match").text( " {% trans "rights to future matched hours:" %} " +String(future_matched.toFixed(4))+" ḥ");
 redraw();
 
 $(function() {
   $("#id_amount").change(function() {
     invest_remains = $("#id_amount").val()/hour_value; 
     hours_matched = Math.min(hours_claimed, invest_remains)
-	$("#match").text( String(hours_matched.toFixed(4))+" ḥ");
+    future_matched = Math.min(hours_claimed+hours_assumed, invest_remains) - hours_matched;
+	$("#match").text( "{% trans "matched hours:" %} " +String(hours_matched.toFixed(4))+" ḥ,");
+	$("#future_match").text( " {% trans "rights to future matched hours:" %} " +String(future_matched.toFixed(4))+" ḥ");
     redraw();
   });
 });

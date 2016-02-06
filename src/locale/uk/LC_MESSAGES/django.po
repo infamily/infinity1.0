@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 18:34-0800\n"
+"POT-Creation-Date: 2016-02-05 19:41-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -917,16 +917,26 @@ msgstr ""
 msgid "review the things you are investing into"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:109
+#: src/apps/payments/templates/paypal/transaction/create.html:110
 msgid "Size of Opportunity"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:110
+#: src/apps/payments/templates/paypal/transaction/create.html:111
 msgid "Amount to Invest"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:111
+#: src/apps/payments/templates/paypal/transaction/create.html:112
 msgid "Matched Hours to be Created"
+msgstr ""
+
+#: src/apps/payments/templates/paypal/transaction/create.html:191
+#: src/apps/payments/templates/paypal/transaction/create.html:200
+msgid "matched hours:"
+msgstr ""
+
+#: src/apps/payments/templates/paypal/transaction/create.html:192
+#: src/apps/payments/templates/paypal/transaction/create.html:201
+msgid "rights to future matched hours:"
 msgstr ""
 
 #: src/apps/payments/views/cryptsy.py:34

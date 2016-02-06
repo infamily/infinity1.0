@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 18:34-0800\n"
-"PO-Revision-Date: 2016-02-06 04:59+0200\n"
+"POT-Creation-Date: 2016-02-05 19:41-0800\n"
+"PO-Revision-Date: 2016-02-06 05:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -957,17 +957,27 @@ msgstr "コメント"
 msgid "review the things you are investing into"
 msgstr "投資している事を確認してください"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:109
+#: src/apps/payments/templates/paypal/transaction/create.html:110
 msgid "Size of Opportunity"
 msgstr "投資機会のサイズ"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:110
+#: src/apps/payments/templates/paypal/transaction/create.html:111
 msgid "Amount to Invest"
 msgstr "投資のサイズ"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:111
+#: src/apps/payments/templates/paypal/transaction/create.html:112
 msgid "Matched Hours to be Created"
 msgstr "合わせた時間数"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:191
+#: src/apps/payments/templates/paypal/transaction/create.html:200
+msgid "matched hours:"
+msgstr "合わせた時間:"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:192
+#: src/apps/payments/templates/paypal/transaction/create.html:201
+msgid "rights to future matched hours:"
+msgstr "未来の合わせた時間への権利:"
 
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
