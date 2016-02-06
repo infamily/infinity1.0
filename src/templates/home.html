@@ -46,9 +46,11 @@
     <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="javascript:hideshow(document.getElementById('info'))">{% trans "Info" %}</a>
 
     {% if request|get_country_by_ip != 'CN' %}
+    <a class="video btn-lg" style="color: black; background-color: #F0F0F0;" href="https://www.youtube.com/v/zeBgP31KaqY?hd=1&autoplay=1&autohide=1&showinfo=0&rel=0&wmode=transparent">{% trans "Intro" %}</a>
     <a class="video btn-lg" style="color: black; background-color: #F0F0F0;" href="https://www.youtube.com/v/a0mO143FfUI?hd=1&autoplay=1&autohide=1&showinfo=0&rel=0&wmode=transparent">{% trans "Help" %}</a>
     <br/>
     {% else %}
+    <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="http://player.youku.com/player.php/sid/XMTQyMTEyMjk3Mg/v.swf">{% trans "Intro" %}</a>
     <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="http://player.youku.com/player.php/sid/XMTQyMTEyMjk3Mg/v.swf" target="_blank">{% trans "Video" %}</a>
     {% endif %}
 

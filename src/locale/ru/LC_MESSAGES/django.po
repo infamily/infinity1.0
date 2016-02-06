@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-04 07:54-0800\n"
-"PO-Revision-Date: 2016-02-04 17:58+0200\n"
+"POT-Creation-Date: 2016-02-05 18:34-0800\n"
+"PO-Revision-Date: 2016-02-06 05:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -74,11 +74,11 @@ msgstr ""
 msgid "Include money with the comment."
 msgstr "C этим комментарием отправить деньги."
 
-#: src/apps/core/forms.py:135
+#: src/apps/core/forms.py:135 src/apps/payments/forms.py:107
 msgid "Amount"
 msgstr "Сумма"
 
-#: src/apps/core/forms.py:136
+#: src/apps/core/forms.py:136 src/apps/payments/forms.py:108
 msgid "Currency"
 msgstr "Валюта"
 
@@ -262,7 +262,7 @@ msgstr ""
 
 #: src/apps/core/forms.py:734 src/apps/core/templates/goal/list2.html.py:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:118 src/templates/home.html:174
+#: src/apps/core/templates/need/detail.html:118 src/templates/home.html:176
 msgid "Goals"
 msgstr "Цели"
 
@@ -395,12 +395,12 @@ msgid ""
 msgstr ""
 
 #: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:16
-#: src/templates/home.html:75
+#: src/templates/home.html:77
 msgid "Goal"
 msgstr "Цель"
 
 #: src/apps/core/forms.py:1299 src/apps/core/templates/plan/create.html.py:16
-#: src/templates/home.html:76
+#: src/templates/home.html:78
 msgid "Idea"
 msgstr "Идея"
 
@@ -509,8 +509,8 @@ msgstr "Теория"
 msgid "Practice"
 msgstr "Практика"
 
-#: src/apps/core/templates/definition/create.html:57 src/templates/home.html:52
-#: src/templates/home.html.py:58 src/templates/home.html:61
+#: src/apps/core/templates/definition/create.html:57 src/templates/home.html:54
+#: src/templates/home.html.py:60 src/templates/home.html:63
 msgid "Video"
 msgstr "Видео"
 
@@ -537,10 +537,10 @@ msgstr "аппарат, предназначенный для работы в к
 #: src/apps/core/templates/plan/detail.html:159
 #: src/apps/core/templates/step/detail.html:118
 #: src/apps/core/templates/task/detail.html:106
-#: src/apps/core/templates/work/detail.html:126 src/templates/home.html:130
-#: src/templates/home.html.py:197 src/templates/home.html:272
-#: src/templates/home.html.py:350 src/templates/home.html:429
-#: src/templates/home.html.py:509 src/templates/home.html:585
+#: src/apps/core/templates/work/detail.html:126 src/templates/home.html:132
+#: src/templates/home.html.py:199 src/templates/home.html:274
+#: src/templates/home.html.py:352 src/templates/home.html:431
+#: src/templates/home.html.py:511 src/templates/home.html:587
 msgid "link"
 msgstr ""
 
@@ -686,14 +686,14 @@ msgstr "перевод:"
 #: src/apps/core/templates/plan/detail.html:125
 #: src/apps/core/templates/step/detail.html:77
 #: src/apps/core/templates/task/detail.html:77
-#: src/apps/core/templates/work/detail.html:78 src/templates/home.html:128
-#: src/templates/home.html.py:134 src/templates/home.html:195
-#: src/templates/home.html.py:201 src/templates/home.html:270
-#: src/templates/home.html.py:276 src/templates/home.html:348
-#: src/templates/home.html.py:354 src/templates/home.html:427
-#: src/templates/home.html.py:433 src/templates/home.html:507
-#: src/templates/home.html.py:513 src/templates/home.html:583
-#: src/templates/home.html.py:589
+#: src/apps/core/templates/work/detail.html:78 src/templates/home.html:130
+#: src/templates/home.html.py:136 src/templates/home.html:197
+#: src/templates/home.html.py:203 src/templates/home.html:272
+#: src/templates/home.html.py:278 src/templates/home.html:350
+#: src/templates/home.html.py:356 src/templates/home.html:429
+#: src/templates/home.html.py:435 src/templates/home.html:509
+#: src/templates/home.html.py:515 src/templates/home.html:585
+#: src/templates/home.html.py:591
 msgid "historical"
 msgstr ""
 
@@ -716,7 +716,7 @@ msgstr "поделиться с:"
 
 #: src/apps/core/templates/goal/detail.html:130
 #: src/apps/core/templates/idea/list2.html:6
-#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:244
+#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:246
 msgid "Ideas"
 msgstr "Идеи"
 
@@ -756,7 +756,7 @@ msgstr ""
 
 #: src/apps/core/templates/idea/detail.html:136
 #: src/apps/core/templates/plan/list2.html:6
-#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:323
+#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:325
 msgid "Plans"
 msgstr "Планы"
 
@@ -805,7 +805,7 @@ msgstr "ситуация"
 msgid "deliverable"
 msgstr "ожидаемый результат"
 
-#: src/apps/core/templates/plan/detail.html:153 src/templates/home.html:401
+#: src/apps/core/templates/plan/detail.html:153 src/templates/home.html:403
 msgid "Steps"
 msgstr "Задачи"
 
@@ -950,13 +950,41 @@ msgstr ""
 msgid "Invitation"
 msgstr "Приглашение"
 
-#: src/apps/payments/forms.py:23 src/apps/payments/forms.py:125
+#: src/apps/payments/forms.py:23 src/apps/payments/forms.py:128
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/apps/payments/forms.py:69 src/apps/payments/forms.py:114
+#: src/apps/payments/forms.py:69
 msgid "Send"
 msgstr "Отправить"
+
+#: src/apps/payments/forms.py:106
+msgid "Recipient username"
+msgstr "Получатель"
+
+#: src/apps/payments/forms.py:117
+msgid "Invest"
+msgstr "Инвестировать"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:48
+msgid "comment"
+msgstr "Комментар"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:51
+msgid "review the things you are investing into"
+msgstr "рассмотреть то, что вы инвестируете в"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:109
+msgid "Size of Opportunity"
+msgstr "Максимальное инвестиции"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:110
+msgid "Amount to Invest"
+msgstr "Сумма инвестиций"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:111
+msgid "Matched Hours to be Created"
+msgstr "Создаваемого согласованные часов"
 
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
@@ -988,7 +1016,7 @@ msgid ""
 "default"
 msgstr ""
 
-#: src/apps/payments/views/paypal.py:110
+#: src/apps/payments/views/paypal.py:117
 msgid ""
 "Internal fault of the payment "
 "process.                                          Please refer to the site's "
@@ -1556,56 +1584,60 @@ msgstr "оценка времени"
 msgid "Info"
 msgstr "Информация"
 
-#: src/templates/home.html:49
+#: src/templates/home.html:49 src/templates/home.html.py:53
+msgid "Intro"
+msgstr "Введение"
+
+#: src/templates/home.html:50
 msgid "Help"
 msgstr "Помощь"
 
-#: src/templates/home.html:70
+#: src/templates/home.html:72
 msgid "compose"
 msgstr "Написать"
 
-#: src/templates/home.html:77
+#: src/templates/home.html:79
 msgid "Plan"
 msgstr "План"
 
-#: src/templates/home.html:81 src/templates/search_form.html.py:17
+#: src/templates/home.html:83 src/templates/search_form.html.py:17
 msgid "Search"
 msgstr "Поиск"
 
-#: src/templates/home.html:101
+#: src/templates/home.html:103
 msgid "Needs"
 msgstr "Потребности"
 
-#: src/templates/home.html:104
+#: src/templates/home.html:106
 msgid "share a need"
 msgstr "поделиться необходимость"
 
-#: src/templates/home.html:106
+#: src/templates/home.html:108
 msgid "write an open letter"
 msgstr "написать открытое письмо"
 
-#: src/templates/home.html:156
+#: src/templates/home.html:158
 msgid "Oops! You have no needs!"
 msgstr "У вас не определены потребности"
 
-#: src/templates/home.html:157
+#: src/templates/home.html:159
 #, fuzzy
 #| msgid "define a need"
 msgid "Define a need"
 msgstr "Определить потребность"
 
-#: src/templates/home.html:158 src/templates/home.html.py:226
-#: src/templates/home.html:304 src/templates/home.html.py:382
-#: src/templates/home.html:460 src/templates/home.html.py:541
-#: src/templates/home.html:617
+#: src/templates/home.html:160 src/templates/home.html.py:228
+#: src/templates/home.html:306 src/templates/home.html.py:384
+#: src/templates/home.html:462 src/templates/home.html.py:543
+#: src/templates/home.html:619
 msgid "...or view"
 msgstr "... или смотрите."
 
-#: src/templates/home.html:158
+#: src/templates/home.html:160
 msgid "<u>discussion board</u>"
 msgstr ""
 
-#: src/templates/home.html:161
+#: src/templates/home.html:163
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1630,31 +1662,31 @@ msgstr ""
 "омлет на завтрак каждое утро.</p>\n"
 "                    "
 
-#: src/templates/home.html:175
+#: src/templates/home.html:177
 msgid "define a problem"
 msgstr "определите проблему"
 
-#: src/templates/home.html:221 src/templates/home.html.py:298
-#: src/templates/home.html:376 src/templates/home.html.py:455
-#: src/templates/home.html:536 src/templates/home.html.py:612
+#: src/templates/home.html:223 src/templates/home.html.py:300
+#: src/templates/home.html:378 src/templates/home.html.py:457
+#: src/templates/home.html:538 src/templates/home.html.py:614
 msgid "see more"
 msgstr "подробнее ..."
 
-#: src/templates/home.html:224
+#: src/templates/home.html:226
 msgid "Oops! You have no goals!"
 msgstr " У вас нету определенной цели!"
 
-#: src/templates/home.html:225
+#: src/templates/home.html:227
 msgid "Add a problem"
 msgstr "Добавить проблему"
 
-#: src/templates/home.html:226 src/templates/home.html.py:304
-#: src/templates/home.html:382 src/templates/home.html.py:460
-#: src/templates/home.html:541 src/templates/home.html.py:617
+#: src/templates/home.html:228 src/templates/home.html.py:306
+#: src/templates/home.html:384 src/templates/home.html.py:462
+#: src/templates/home.html:543 src/templates/home.html.py:619
 msgid "<u>index</u>"
 msgstr "содержание"
 
-#: src/templates/home.html:229
+#: src/templates/home.html:231
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1680,19 +1712,19 @@ msgstr ""
 "омлет на завтрак каждое утро.</p>\n"
 "                    "
 
-#: src/templates/home.html:245
+#: src/templates/home.html:247
 msgid "suggest a solution"
 msgstr "предложить решение"
 
-#: src/templates/home.html:302
+#: src/templates/home.html:304
 msgid "Oops! You have no ideas!"
 msgstr "У вас нету определенных идей."
 
-#: src/templates/home.html:303
+#: src/templates/home.html:305
 msgid "Add a solution"
 msgstr "Добавить решение"
 
-#: src/templates/home.html:307
+#: src/templates/home.html:309
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1732,19 +1764,19 @@ msgstr ""
 "омлета</p>\n"
 "                "
 
-#: src/templates/home.html:325
+#: src/templates/home.html:327
 msgid "start a project"
 msgstr "начать проект"
 
-#: src/templates/home.html:380
+#: src/templates/home.html:382
 msgid "Oops! You have no plans!"
 msgstr "У вас нету новых проектов."
 
-#: src/templates/home.html:381
+#: src/templates/home.html:383
 msgid "Add a project"
 msgstr "Добавить проект"
 
-#: src/templates/home.html:384
+#: src/templates/home.html:386
 msgid ""
 "\n"
 "\n"
@@ -1766,19 +1798,19 @@ msgstr ""
 "для владельцам домов.</p>\n"
 "                "
 
-#: src/templates/home.html:403
+#: src/templates/home.html:405
 msgid "break it down"
 msgstr "разделите на этапы"
 
-#: src/templates/home.html:458
+#: src/templates/home.html:460
 msgid "Oops! You have no steps!"
 msgstr "У вас еще нету задач"
 
-#: src/templates/home.html:459
+#: src/templates/home.html:461
 msgid "Start a project to add milestones"
 msgstr "Начните проект, и добавите его этапы"
 
-#: src/templates/home.html:463
+#: src/templates/home.html:465
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1810,23 +1842,23 @@ msgstr ""
 "                ...\n"
 "                "
 
-#: src/templates/home.html:483
+#: src/templates/home.html:485
 msgid "Tasks"
 msgstr "Задачи"
 
-#: src/templates/home.html:485
+#: src/templates/home.html:487
 msgid "execute it"
 msgstr "выполните"
 
-#: src/templates/home.html:539
+#: src/templates/home.html:541
 msgid "Oops! You have no tasks!"
 msgstr "У вас нету задач."
 
-#: src/templates/home.html:540
+#: src/templates/home.html:542
 msgid "Choose a milestone to add tasks"
 msgstr "Выберите этап для добавления задачи"
 
-#: src/templates/home.html:543
+#: src/templates/home.html:545
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1841,27 +1873,27 @@ msgstr ""
 "                ...\n"
 "                "
 
-#: src/templates/home.html:559
+#: src/templates/home.html:561
 msgid "Works"
 msgstr "Работа"
 
-#: src/templates/home.html:561
+#: src/templates/home.html:563
 msgid "did it"
 msgstr "сделал это"
 
-#: src/templates/home.html:615
+#: src/templates/home.html:617
 #, fuzzy
 #| msgid "Oops! You have no goals!"
 msgid "Oops! You have no works!"
 msgstr " У вас нету определенной цели!"
 
-#: src/templates/home.html:616
+#: src/templates/home.html:618
 #, fuzzy
 #| msgid "Choose a milestone to add tasks"
 msgid "Choose a task to add works"
 msgstr "Выберите этап для добавления задачи"
 
-#: src/templates/home.html:619
+#: src/templates/home.html:621
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1884,7 +1916,7 @@ msgstr ""
 "                ...\n"
 "                "
 
-#: src/templates/home.html:629
+#: src/templates/home.html:631
 msgid "People-centric economy."
 msgstr "Экономика для человека"
 

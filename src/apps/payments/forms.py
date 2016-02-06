@@ -103,6 +103,9 @@ class PayPalTransactionForm(forms.Form):
                                                         self.comment_model.hours_claimed-\
                                                         self.comment_model.hours_donated)*\
                                                        HourValue.objects.latest('created_at').value,2))
+        self.fields['recipient_username'].label = _('Recipient username')
+        self.fields['amount'].label = _('Amount')
+        self.fields['currency'].label = _('Currency')
 
         if self.request.session.get('amount') and self.request.session.get('currency'):
             self.initial['amount'] = Decimal(self.request.session.get('amount'))
@@ -111,7 +114,7 @@ class PayPalTransactionForm(forms.Form):
             del self.request.session['currency']
 
         self.helper = FormHelper(self)
-        self.helper.layout.append(Submit('transaction_form', _('Send')))
+        self.helper.layout.append(Submit('transaction_form', _('Invest'), css_class="btn-sm"))
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-sm-2'
         self.helper.field_class = 'col-sm-8'
