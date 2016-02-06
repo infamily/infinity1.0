@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% block content %}
 
@@ -44,17 +45,17 @@
 
 <script src="//d3js.org/d3.v3.min.js"></script>
 
-<div style="float:left;"><a href="/{{comment_object.content_type.name}}/{{comment_object.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{comment_object.id}}">< {{ comment_object }}</a></div>
+<div style="float:left;"><a href="/{{comment_object.content_type.name}}/{{comment_object.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{comment_object.id}}">< {% trans "comment" %} #{{ comment_object.id }}</a></div>
 
 <div style="color:grey; text-decoration:italic; width:75%; margin-left:auto; margin-right:auto;">
-<center><p><a href="javascript:hideshow(document.getElementById('xdiv'))">- see claims you are investin in -</a></p></center>
+	<center><p><a href="javascript:hideshow(document.getElementById('xdiv'))" style="color:grey;">- {% trans "review the things you are investing into" %} -</a></p></center>
 	<div id="xdiv" style="display:none;">
     {{ comment_object.text }}
 	</div>
 </div>
 
 <div align="center" id="graph"></div>
-
+<div align="center" id="match" style="margin-left:-25px; color:grey; font-size:24px;"></div>
 {% crispy form %}
 
 <div style="color:grey; text-decoration:italic; width:75%; margin-left:auto; margin-right:auto;">
@@ -78,15 +79,36 @@ which.style.display="block"
 
 <script>
 
+var hours_donated = {{comment_object.hours_donated}};
 var hours_assumed = {{comment_object.hours_assumed}};
 var hours_claimed = {{comment_object.hours_claimed}};
-var invest_remains= {{comment_object.invest_remains}};
+var hour_value = {{ hour_value }};
+//var invest_remains= {{comment_object.invest_remains}};
+
+// Accounting
+if (hours_donated >= hours_claimed) { 
+	hours_claimed = 0;
+}
+else {
+	hours_claimed = hours_claimed - hours_donated;
+}
+
+if (hours_donated >= hours_assumed+hours_claimed) {
+	hours_assumed = 0;
+}
+else {
+	hours_assumed = hours_assumed + hours_claimed - hours_donated;
+}
+
+var invest_remains = hours_claimed+hours_assumed;
+var hours_matched = Math.min(hours_claimed, invest_remains)
+
 
 var data = function() {
     return [
-	{"aspect": "Size of Opportunity (h+ĥ)", "assumed": hours_assumed, "claimed": hours_claimed, "donated": 0, "matched": 0},
-	{"aspect": "Amount to Invest (ħ)",    "assumed": 0, "claimed": 0, "donated": invest_remains, "matched": 0},
-	{"aspect": "Matched Hours to be Created (ḥ)",       "assumed": 0, "claimed": 0, "donated": 0, "matched": hours_claimed}];
+	{"aspect": "{% trans "Size of Opportunity" %} (h+ĥ)", "assumed": hours_assumed, "claimed": hours_claimed, "donated": 0, "matched": 0},
+	{"aspect": "{% trans "Amount to Invest" %} (ħ)",    "assumed": 0, "claimed": 0, "donated": invest_remains, "matched": 0},
+	{"aspect": "{% trans "Matched Hours to be Created" %} (ḥ)",       "assumed": 0, "claimed": 0, "donated": 0, "matched": hours_matched}];
 }
 
 var aspects = ["assumed", "claimed", "donated", "matched"];
@@ -165,12 +187,14 @@ function redraw() {
 	renderData(data());
 }
 
-invest_remains = 3;
+$("#match").text( String(hours_matched.toFixed(4))+" ḥ");
 redraw();
 
 $(function() {
   $("#id_amount").change(function() {
-    invest_remains = $("#id_amount").val()/25.24; 
+    invest_remains = $("#id_amount").val()/hour_value; 
+    hours_matched = Math.min(hours_claimed, invest_remains)
+	$("#match").text( String(hours_matched.toFixed(4))+" ḥ");
     redraw();
   });
 });

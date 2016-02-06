@@ -18,6 +18,7 @@ from ..forms import PayPalTransactionForm
 
 from users.decorators import ForbiddenUser
 from core.models import Comment
+from hours.models import HourValue
 
 
 User = get_user_model()
@@ -35,7 +36,8 @@ class PayPalTransactionView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(PayPalTransactionView, self).get_context_data(**kwargs)
-        context.update({'comment_object': self.comment_model})
+        context.update({'comment_object': self.comment_model,
+                        'hour_value': HourValue.objects.latest('created_at').value})
         return context
 
     def form_valid(self, form):
