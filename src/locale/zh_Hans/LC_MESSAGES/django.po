@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 18:34-0800\n"
-"PO-Revision-Date: 2016-02-06 04:36+0200\n"
+"POT-Creation-Date: 2016-02-05 19:41-0800\n"
+"PO-Revision-Date: 2016-02-06 05:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -953,17 +953,27 @@ msgstr "评论"
 msgid "review the things you are investing into"
 msgstr "检查要投资于事"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:109
+#: src/apps/payments/templates/paypal/transaction/create.html:110
 msgid "Size of Opportunity"
 msgstr "机会的大小"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:110
+#: src/apps/payments/templates/paypal/transaction/create.html:111
 msgid "Amount to Invest"
 msgstr "投资的大小"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:111
+#: src/apps/payments/templates/paypal/transaction/create.html:112
 msgid "Matched Hours to be Created"
 msgstr "会生成的匹配小时数"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:191
+#: src/apps/payments/templates/paypal/transaction/create.html:200
+msgid "matched hours:"
+msgstr "匹配小时:"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:192
+#: src/apps/payments/templates/paypal/transaction/create.html:201
+msgid "rights to future matched hours:"
+msgstr "权利对未来会匹配小时:"
 
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
