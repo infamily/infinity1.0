@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-04 08:32-0800\n"
-"PO-Revision-Date: 2016-02-04 18:34+0200\n"
+"POT-Creation-Date: 2016-02-05 18:34-0800\n"
+"PO-Revision-Date: 2016-02-06 05:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -74,11 +74,11 @@ msgstr ""
 msgid "Include money with the comment."
 msgstr "C этим комментарием отправить деньги."
 
-#: src/apps/core/forms.py:135
+#: src/apps/core/forms.py:135 src/apps/payments/forms.py:107
 msgid "Amount"
 msgstr "Сумма"
 
-#: src/apps/core/forms.py:136
+#: src/apps/core/forms.py:136 src/apps/payments/forms.py:108
 msgid "Currency"
 msgstr "Валюта"
 
@@ -950,13 +950,41 @@ msgstr ""
 msgid "Invitation"
 msgstr "Приглашение"
 
-#: src/apps/payments/forms.py:23 src/apps/payments/forms.py:125
+#: src/apps/payments/forms.py:23 src/apps/payments/forms.py:128
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/apps/payments/forms.py:69 src/apps/payments/forms.py:114
+#: src/apps/payments/forms.py:69
 msgid "Send"
 msgstr "Отправить"
+
+#: src/apps/payments/forms.py:106
+msgid "Recipient username"
+msgstr "Получатель"
+
+#: src/apps/payments/forms.py:117
+msgid "Invest"
+msgstr "Инвестировать"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:48
+msgid "comment"
+msgstr "Комментар"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:51
+msgid "review the things you are investing into"
+msgstr "рассмотреть то, что вы инвестируете в"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:109
+msgid "Size of Opportunity"
+msgstr "Максимальное инвестиции"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:110
+msgid "Amount to Invest"
+msgstr "Сумма инвестиций"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:111
+msgid "Matched Hours to be Created"
+msgstr "Создаваемого согласованные часов"
 
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
@@ -988,7 +1016,7 @@ msgid ""
 "default"
 msgstr ""
 
-#: src/apps/payments/views/paypal.py:110
+#: src/apps/payments/views/paypal.py:117
 msgid ""
 "Internal fault of the payment "
 "process.                                          Please refer to the site's "

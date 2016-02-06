@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-04 08:32-0800\n"
-"PO-Revision-Date: 2016-02-04 18:41+0200\n"
+"POT-Creation-Date: 2016-02-05 18:34-0800\n"
+"PO-Revision-Date: 2016-02-06 04:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -35,11 +35,11 @@ msgstr "更新"
 
 #: src/apps/core/forms.py:118 src/apps/payments/forms.py:83
 msgid "USD"
-msgstr ""
+msgstr "美元"
 
 #: src/apps/core/forms.py:119 src/apps/payments/forms.py:84
 msgid "EUR"
-msgstr ""
+msgstr "欧元"
 
 #: src/apps/core/forms.py:128
 msgid ""
@@ -69,11 +69,11 @@ msgstr ""
 msgid "Include money with the comment."
 msgstr "跟这个评论发给钱。"
 
-#: src/apps/core/forms.py:135
+#: src/apps/core/forms.py:135 src/apps/payments/forms.py:107
 msgid "Amount"
 msgstr "数额"
 
-#: src/apps/core/forms.py:136
+#: src/apps/core/forms.py:136 src/apps/payments/forms.py:108
 msgid "Currency"
 msgstr "货币"
 
@@ -929,13 +929,41 @@ msgstr ""
 msgid "Invitation"
 msgstr ""
 
-#: src/apps/payments/forms.py:23 src/apps/payments/forms.py:125
+#: src/apps/payments/forms.py:23 src/apps/payments/forms.py:128
 msgid "Save"
 msgstr ""
 
-#: src/apps/payments/forms.py:69 src/apps/payments/forms.py:114
+#: src/apps/payments/forms.py:69
 msgid "Send"
 msgstr ""
+
+#: src/apps/payments/forms.py:106
+msgid "Recipient username"
+msgstr "钱收件用户名"
+
+#: src/apps/payments/forms.py:117
+msgid "Invest"
+msgstr "投资"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:48
+msgid "comment"
+msgstr "评论"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:51
+msgid "review the things you are investing into"
+msgstr "检查要投资于事"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:109
+msgid "Size of Opportunity"
+msgstr "机会的大小"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:110
+msgid "Amount to Invest"
+msgstr "投资的大小"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:111
+msgid "Matched Hours to be Created"
+msgstr "会生成的匹配小时数"
 
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
@@ -967,7 +995,7 @@ msgid ""
 "default"
 msgstr ""
 
-#: src/apps/payments/views/paypal.py:110
+#: src/apps/payments/views/paypal.py:117
 msgid ""
 "Internal fault of the payment "
 "process.                                          Please refer to the site's "

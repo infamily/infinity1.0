@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-04 08:32-0800\n"
-"PO-Revision-Date: 2016-02-04 18:43+0200\n"
+"POT-Creation-Date: 2016-02-05 18:34-0800\n"
+"PO-Revision-Date: 2016-02-06 04:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -72,11 +72,11 @@ msgstr ""
 msgid "Include money with the comment."
 msgstr "このコメントでお金も送る。"
 
-#: src/apps/core/forms.py:135
+#: src/apps/core/forms.py:135 src/apps/payments/forms.py:107
 msgid "Amount"
 msgstr "金額"
 
-#: src/apps/core/forms.py:136
+#: src/apps/core/forms.py:136 src/apps/payments/forms.py:108
 msgid "Currency"
 msgstr "通貨"
 
@@ -933,13 +933,41 @@ msgstr ""
 msgid "Invitation"
 msgstr ""
 
-#: src/apps/payments/forms.py:23 src/apps/payments/forms.py:125
+#: src/apps/payments/forms.py:23 src/apps/payments/forms.py:128
 msgid "Save"
 msgstr ""
 
-#: src/apps/payments/forms.py:69 src/apps/payments/forms.py:114
+#: src/apps/payments/forms.py:69
 msgid "Send"
 msgstr ""
+
+#: src/apps/payments/forms.py:106
+msgid "Recipient username"
+msgstr "受信利用者名"
+
+#: src/apps/payments/forms.py:117
+msgid "Invest"
+msgstr "投資する"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:48
+msgid "comment"
+msgstr "コメント"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:51
+msgid "review the things you are investing into"
+msgstr "投資している事を確認してください"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:109
+msgid "Size of Opportunity"
+msgstr "投資機会のサイズ"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:110
+msgid "Amount to Invest"
+msgstr "投資のサイズ"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:111
+msgid "Matched Hours to be Created"
+msgstr "合わせた時間数"
 
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
@@ -971,7 +999,7 @@ msgid ""
 "default"
 msgstr ""
 
-#: src/apps/payments/views/paypal.py:110
+#: src/apps/payments/views/paypal.py:117
 msgid ""
 "Internal fault of the payment "
 "process.                                          Please refer to the site's "
