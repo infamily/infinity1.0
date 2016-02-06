@@ -193,7 +193,7 @@ $("#future_match").text( " {% trans "rights to future matched hours:" %} " +Stri
 redraw();
 
 $(function() {
-  $("#id_amount").change(function() {
+  $("#id_amount").bind("keyup change", function() {
     invest_remains = $("#id_amount").val()/hour_value; 
     hours_matched = Math.min(hours_claimed, invest_remains)
     future_matched = Math.min(hours_claimed+hours_assumed, invest_remains) - hours_matched;
