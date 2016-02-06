@@ -343,6 +343,10 @@ class Comment(models.Model):
     def comment_credit(self):
         return min([self.hours_claimed, self.votes()]) or Decimal(0.)
 
+    def invest_remains(self):
+        return max(Decimal(0), round((self.hours_assumed+
+                                      self.hours_claimed-
+                                      self.hours_donated),2))
 
 class Vote(models.Model):
 

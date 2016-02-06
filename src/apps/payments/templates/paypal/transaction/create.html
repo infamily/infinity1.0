@@ -97,7 +97,7 @@ if (hours_donated >= hours_assumed+hours_claimed) {
 	hours_assumed = 0;
 }
 else {
-	hours_assumed = hours_assumed + hours_claimed - hours_donated;
+	hours_assumed = hours_assumed - (hours_donated - Math.min(hours_claimed, hours_donated))
 }
 
 var invest_remains = hours_claimed+hours_assumed;
