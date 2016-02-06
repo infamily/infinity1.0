@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load crispy_forms_tags %}
+{% load django_markdown %}
 {% block content %}
 
 <!-- graph -->
@@ -50,7 +51,7 @@
 <div style="color:grey; text-decoration:italic; width:75%; margin-left:auto; margin-right:auto;">
 	<center><p><a href="javascript:hideshow(document.getElementById('xdiv'))" style="color:grey;">- {% trans "review the things you are investing into" %} -</a></p></center>
 	<div id="xdiv" style="display:none;">
-    {{ comment_object.text }}
+    {{ comment_object.text|markdown }}
 	</div>
 </div>
 
