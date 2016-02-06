@@ -58,7 +58,11 @@ LOGIN_URL = '/user/login/'
 
 INVITATIONS_INVITATION_ONLY = True
 
-# Some autoslag handler that we need to create for make tests runnable
+# Request e-mail address from 3rd party account provider?
+# E.g. using OpenID AX
+SOCIALACCOUNT_QUERY_EMAIL = False
+
+# Some autoslug handler that we need to create for make tests runnable
 
 
 def auto_slag_handler():
