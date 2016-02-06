@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Up Closed" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Sign Up" %}</h1>
+
+<p>{% trans "Write an e-mail to <u>forever@infty.xyz</u>. We'll send you an invite." %}</p>
+
+<center>
+    <div>
+        <a class="octocat-login" href="{% provider_login_url "github" %}"><i class="fa fa-github"></i></a>
+    </div>
+    <span style="font-variant: small-caps;">{% trans "octocats get a free pass" %}</span>
+</center>
+
+{% endblock %}
+
+

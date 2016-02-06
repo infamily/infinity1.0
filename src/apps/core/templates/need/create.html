@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load django_markdown %}
+
+{% block title %}Need create{% endblock title %}
+
+{% block content %}
+
+{% if definition_object %}
+<center>
+    <div>
+        <a class="definition" href="{% url "definition-detail" definition_object.pk %}">{{definition_object}}</a>
+    </div>
+        {{definition_object.definition}}
+</center>
+{% else %}
+        <p style="font-size:85px; align:center;"><i class="fa fa-edit"></i></p>
+{% endif %}
+<div>
+    
+</div>
+<br/>
+
+{% crispy form %}
+
+{% csrf_token %}
+{% markdown_media %}
+
+{% endblock content %}
+
