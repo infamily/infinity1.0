@@ -87,18 +87,31 @@ var hour_value = {{ hour_value }};
 //var invest_remains= {{comment_object.invest_remains}};
 
 // Accounting
-if (hours_donated >= hours_claimed) { 
-	hours_claimed = 0;
+
+var remains = hours_claimed - hours_donated;
+
+if (remains < 0) { 
+  hours_claimed = 0;
 }
 else {
-	hours_claimed = hours_claimed - hours_donated;
+  if (remains < 0) {
+    hours_claimed = 0;
+  } 
+  else {
+    hours_claimed = remains;
+  }
 }
 
-if (hours_donated >= hours_assumed+hours_claimed) {
-	hours_assumed = 0;
+if (hours_donated >= (hours_assumed+hours_claimed)) {
+  hours_assumed = 0;
 }
 else {
-	hours_assumed = hours_assumed - (hours_donated - Math.min(hours_claimed, hours_donated))
+  if (remains > 0) {
+    // hours_assumed are untouched
+  }
+  else {
+    hours_assumed = hours_assumed + remains;
+  }
 }
 
 var invest_remains = hours_claimed+hours_assumed;
