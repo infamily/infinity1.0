@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 19:41-0800\n"
-"PO-Revision-Date: 2016-02-06 05:50+0200\n"
+"POT-Creation-Date: 2016-02-07 11:10-0800\n"
+"PO-Revision-Date: 2016-02-07 21:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -427,11 +427,37 @@ msgstr ""
 msgid "New comment"
 msgstr "新的评论"
 
+#: src/apps/core/templates/comment/list.html:73
+msgid "PayPal tx:"
+msgstr ""
+
 #: src/apps/core/templates/comment/list.html:74
+msgid "initiated"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+#, fuzzy
+#| msgid "compose"
+msgid "completed"
+msgstr "作文"
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "incomplete"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "error"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "reversalerror"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:85
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr "<i class=\"fa fa-rmb\"></i> 投资"
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -440,7 +466,7 @@ msgstr "<i class=\"fa fa-rmb\"></i> 投资"
 msgid "edit"
 msgstr "编辑"
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -448,30 +474,30 @@ msgstr "编辑"
 msgid "delete"
 msgstr "删除"
 
-#: src/apps/core/templates/comment/list.html:89
-#: src/apps/core/templates/comment/list.html:91
+#: src/apps/core/templates/comment/list.html:100
+#: src/apps/core/templates/comment/list.html:102
 msgid "reply"
 msgstr "回复"
 
-#: src/apps/core/templates/comment/list.html:102
-#: src/apps/core/templates/comment/list.html:107
-#: src/apps/core/templates/comment/list.html:112
+#: src/apps/core/templates/comment/list.html:113
 #: src/apps/core/templates/comment/list.html:118
+#: src/apps/core/templates/comment/list.html:123
+#: src/apps/core/templates/comment/list.html:129
 msgid "Vote Up"
 msgstr "投了"
 
-#: src/apps/core/templates/comment/list.html:103
-#: src/apps/core/templates/comment/list.html:108
-#: src/apps/core/templates/comment/list.html:113
+#: src/apps/core/templates/comment/list.html:114
 #: src/apps/core/templates/comment/list.html:119
+#: src/apps/core/templates/comment/list.html:124
+#: src/apps/core/templates/comment/list.html:130
 msgid "Vote Down"
 msgstr "否决"
 
-#: src/apps/core/templates/comment/list.html:150
+#: src/apps/core/templates/comment/list.html:161
 msgid "credit"
 msgstr "信用"
 
-#: src/apps/core/templates/comment/list.html:194
+#: src/apps/core/templates/comment/list.html:205
 msgid "Invite a friend to help!"
 msgstr "邀请好友帮忙！"
 
@@ -925,9 +951,35 @@ msgstr ""
 msgid "You can use {{ invitation_url }} tag to past invitation url"
 msgstr ""
 
+#: src/apps/invitation/forms.py:34
+#, fuzzy
+#| msgid "Invitations"
+msgid "Send Invitation"
+msgstr "邀请"
+
+#: src/apps/invitation/forms.py:35
+#, fuzzy
+#| msgid "Remember Me"
+msgid "member_email"
+msgstr "记住"
+
+#: src/apps/invitation/forms.py:36
+msgid "language"
+msgstr ""
+
+#: src/apps/invitation/forms.py:37
+msgid "email_body"
+msgstr ""
+
+#: src/apps/invitation/forms.py:38
+#, fuzzy, python-format
+#| msgid "Invitation text"
+msgid "Invitations left: %s"
+msgstr "邀请的短信"
+
 #: src/apps/invitation/templates/invitation/invite.html:6
 msgid "Invitation"
-msgstr ""
+msgstr "邀请"
 
 #: src/apps/payments/forms.py:23 src/apps/payments/forms.py:128
 msgid "Save"
@@ -945,33 +997,33 @@ msgstr "钱收件用户名"
 msgid "Invest"
 msgstr "投资"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:48
+#: src/apps/payments/templates/paypal/transaction/create.html:49
 msgid "comment"
 msgstr "评论"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:51
+#: src/apps/payments/templates/paypal/transaction/create.html:52
 msgid "review the things you are investing into"
 msgstr "检查要投资于事"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:110
+#: src/apps/payments/templates/paypal/transaction/create.html:120
 msgid "Size of Opportunity"
 msgstr "机会的大小"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:111
+#: src/apps/payments/templates/paypal/transaction/create.html:121
 msgid "Amount to Invest"
 msgstr "投资的大小"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:112
+#: src/apps/payments/templates/paypal/transaction/create.html:122
 msgid "Matched Hours to be Created"
 msgstr "会生成的匹配小时数"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:191
-#: src/apps/payments/templates/paypal/transaction/create.html:200
+#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:210
 msgid "matched hours:"
 msgstr "匹配小时:"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:192
-#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:202
+#: src/apps/payments/templates/paypal/transaction/create.html:211
 msgid "rights to future matched hours:"
 msgstr "权利对未来会匹配小时:"
 
@@ -1040,61 +1092,61 @@ msgstr "登陆"
 msgid "SignUp"
 msgstr "注册"
 
-#: src/apps/users/models.py:50
+#: src/apps/users/models.py:52
 #, fuzzy
 #| msgid "New Username"
 msgid "username"
 msgstr "新用户名"
 
-#: src/apps/users/models.py:53
+#: src/apps/users/models.py:55
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
-#: src/apps/users/models.py:57
+#: src/apps/users/models.py:59
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers and @/./"
 "+/-/_ characters."
 msgstr ""
 
-#: src/apps/users/models.py:62
+#: src/apps/users/models.py:64
 msgid "A user with that username already exists."
 msgstr ""
 
-#: src/apps/users/models.py:65
+#: src/apps/users/models.py:67
 msgid "first name"
 msgstr ""
 
-#: src/apps/users/models.py:66
+#: src/apps/users/models.py:68
 msgid "last name"
 msgstr ""
 
-#: src/apps/users/models.py:67
+#: src/apps/users/models.py:69
 #, fuzzy
 #| msgid "E-mail address"
 msgid "email address"
 msgstr "邮箱"
 
-#: src/apps/users/models.py:69
+#: src/apps/users/models.py:71
 msgid "staff status"
 msgstr ""
 
-#: src/apps/users/models.py:71
+#: src/apps/users/models.py:73
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: src/apps/users/models.py:74
+#: src/apps/users/models.py:76
 #, fuzzy
 #| msgid "Practice"
 msgid "active"
 msgstr "实践"
 
-#: src/apps/users/models.py:77
+#: src/apps/users/models.py:79
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: src/apps/users/models.py:81
+#: src/apps/users/models.py:83
 msgid "date joined"
 msgstr ""
 
@@ -1278,7 +1330,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:151
+#: src/templates/account/login.html:10 src/templates/base.html.py:154
 msgid "Sign in"
 msgstr "登陆"
 
@@ -1522,8 +1574,8 @@ msgid "time value"
 msgstr "时间价值"
 
 #: src/templates/home.html:46
-msgid "Info"
-msgstr "信息"
+msgid "Invitations"
+msgstr "邀请"
 
 #: src/templates/home.html:49 src/templates/home.html.py:53
 msgid "Intro"
@@ -1909,6 +1961,14 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "记住"
+
+#~ msgid "Info"
+#~ msgstr "信息"
+
+#, fuzzy
+#~| msgid "translations:"
+#~ msgid "transaction status"
+#~ msgstr "翻译:"
 
 #~ msgid "INVEST"
 #~ msgstr "投资"

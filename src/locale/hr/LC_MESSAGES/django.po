@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 19:41-0800\n"
+"POT-Creation-Date: 2016-02-07 11:10-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -461,11 +461,35 @@ msgstr ""
 msgid "New comment"
 msgstr "Komentar"
 
+#: src/apps/core/templates/comment/list.html:73
+msgid "PayPal tx:"
+msgstr ""
+
 #: src/apps/core/templates/comment/list.html:74
+msgid "initiated"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "completed"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "incomplete"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "error"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "reversalerror"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:85
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -474,7 +498,7 @@ msgstr ""
 msgid "edit"
 msgstr "uredi"
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -482,34 +506,34 @@ msgstr "uredi"
 msgid "delete"
 msgstr "izbriši"
 
-#: src/apps/core/templates/comment/list.html:89
-#: src/apps/core/templates/comment/list.html:91
+#: src/apps/core/templates/comment/list.html:100
+#: src/apps/core/templates/comment/list.html:102
 #, fuzzy
 #| msgid "Reply:"
 msgid "reply"
 msgstr "Odgovori:"
 
-#: src/apps/core/templates/comment/list.html:102
-#: src/apps/core/templates/comment/list.html:107
-#: src/apps/core/templates/comment/list.html:112
+#: src/apps/core/templates/comment/list.html:113
 #: src/apps/core/templates/comment/list.html:118
+#: src/apps/core/templates/comment/list.html:123
+#: src/apps/core/templates/comment/list.html:129
 msgid "Vote Up"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:103
-#: src/apps/core/templates/comment/list.html:108
-#: src/apps/core/templates/comment/list.html:113
+#: src/apps/core/templates/comment/list.html:114
 #: src/apps/core/templates/comment/list.html:119
+#: src/apps/core/templates/comment/list.html:124
+#: src/apps/core/templates/comment/list.html:130
 msgid "Vote Down"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:150
+#: src/apps/core/templates/comment/list.html:161
 #, fuzzy
 #| msgid "edit"
 msgid "credit"
 msgstr "uredi"
 
-#: src/apps/core/templates/comment/list.html:194
+#: src/apps/core/templates/comment/list.html:205
 msgid "Invite a friend to help!"
 msgstr "Pozovite prijatelja u pomoć!"
 
@@ -980,6 +1004,32 @@ msgstr "Rad uspješno obrisan"
 msgid "You can use {{ invitation_url }} tag to past invitation url"
 msgstr "Možete iskoristiti {{ invitation_url }} oznaku za prošli url pozivnice"
 
+#: src/apps/invitation/forms.py:34
+#, fuzzy
+#| msgid "Invitation"
+msgid "Send Invitation"
+msgstr "Pozivnica"
+
+#: src/apps/invitation/forms.py:35
+#, fuzzy
+#| msgid "Remember Me"
+msgid "member_email"
+msgstr "Zapamti me"
+
+#: src/apps/invitation/forms.py:36
+msgid "language"
+msgstr ""
+
+#: src/apps/invitation/forms.py:37
+msgid "email_body"
+msgstr ""
+
+#: src/apps/invitation/forms.py:38
+#, fuzzy, python-format
+#| msgid "Invitation text"
+msgid "Invitations left: %s"
+msgstr "Tekst pozivnice"
+
 #: src/apps/invitation/templates/invitation/invite.html:6
 msgid "Invitation"
 msgstr "Pozivnica"
@@ -1002,37 +1052,37 @@ msgstr "Novo korisničko ime"
 msgid "Invest"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:48
+#: src/apps/payments/templates/paypal/transaction/create.html:49
 #, fuzzy
 #| msgid "Comment"
 msgid "comment"
 msgstr "Komentar"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:51
+#: src/apps/payments/templates/paypal/transaction/create.html:52
 msgid "review the things you are investing into"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:110
+#: src/apps/payments/templates/paypal/transaction/create.html:120
 msgid "Size of Opportunity"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:111
+#: src/apps/payments/templates/paypal/transaction/create.html:121
 #, fuzzy
 #| msgid "Account Inactive"
 msgid "Amount to Invest"
 msgstr "Neaktivan račun"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:112
+#: src/apps/payments/templates/paypal/transaction/create.html:122
 msgid "Matched Hours to be Created"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:191
-#: src/apps/payments/templates/paypal/transaction/create.html:200
+#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:210
 msgid "matched hours:"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:192
-#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:202
+#: src/apps/payments/templates/paypal/transaction/create.html:211
 msgid "rights to future matched hours:"
 msgstr ""
 
@@ -1102,61 +1152,61 @@ msgstr "Prijava"
 msgid "SignUp"
 msgstr "Registracija"
 
-#: src/apps/users/models.py:50
+#: src/apps/users/models.py:52
 #, fuzzy
 #| msgid "New Username"
 msgid "username"
 msgstr "Novo korisničko ime"
 
-#: src/apps/users/models.py:53
+#: src/apps/users/models.py:55
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
-#: src/apps/users/models.py:57
+#: src/apps/users/models.py:59
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers and @/./"
 "+/-/_ characters."
 msgstr ""
 
-#: src/apps/users/models.py:62
+#: src/apps/users/models.py:64
 #, fuzzy
 #| msgid "User with this name already exists"
 msgid "A user with that username already exists."
 msgstr "Korisnik sa ovim imenom već postoji"
 
-#: src/apps/users/models.py:65
+#: src/apps/users/models.py:67
 msgid "first name"
 msgstr ""
 
-#: src/apps/users/models.py:66
+#: src/apps/users/models.py:68
 msgid "last name"
 msgstr ""
 
-#: src/apps/users/models.py:67
+#: src/apps/users/models.py:69
 #, fuzzy
 #| msgid "E-mail address"
 msgid "email address"
 msgstr "E-mail adresa"
 
-#: src/apps/users/models.py:69
+#: src/apps/users/models.py:71
 msgid "staff status"
 msgstr ""
 
-#: src/apps/users/models.py:71
+#: src/apps/users/models.py:73
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: src/apps/users/models.py:74
+#: src/apps/users/models.py:76
 msgid "active"
 msgstr ""
 
-#: src/apps/users/models.py:77
+#: src/apps/users/models.py:79
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: src/apps/users/models.py:81
+#: src/apps/users/models.py:83
 msgid "date joined"
 msgstr ""
 
@@ -1355,7 +1405,7 @@ msgstr ""
 "Potvrdili ste da je <a href=\"mailto:%(email)s\">%(email)s</a> e-mail adresa "
 "korisnika %(user_display)s."
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:151
+#: src/templates/account/login.html:10 src/templates/base.html.py:154
 msgid "Sign in"
 msgstr "Registracija"
 
@@ -1621,8 +1671,10 @@ msgid "time value"
 msgstr "vremenska vrijednost"
 
 #: src/templates/home.html:46
-msgid "Info"
-msgstr ""
+#, fuzzy
+#| msgid "Invitation"
+msgid "Invitations"
+msgstr "Pozivnica"
 
 #: src/templates/home.html:49 src/templates/home.html.py:53
 msgid "Intro"
@@ -2146,6 +2198,11 @@ msgstr "E-mail adresa i/ili lozinka koje ste unijeli nisu točni."
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Zapamti me"
+
+#, fuzzy
+#~| msgid "translations:"
+#~ msgid "transaction status"
+#~ msgstr "prijevodi:"
 
 #, fuzzy
 #~| msgid ""
