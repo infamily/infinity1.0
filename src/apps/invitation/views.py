@@ -44,6 +44,7 @@ class InvitationFormView(FormView):
     def get_form_kwargs(self):
         kwargs = super(InvitationFormView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
+        kwargs['language_code'] = self.request.LANGUAGE_CODE
         return kwargs
 
     def get_success_url(self):
