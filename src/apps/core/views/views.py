@@ -129,9 +129,9 @@ class IndexView(TemplateView):
                  'tasks': 16,
                  'works': 16}
 
-        for key, value in enumerate(items):
-            if self.request.session.get('%ss_number' % items[value]):
-                items[items[value]] = self.request.session['%ss_number' % items[value]]
+        for i, key in enumerate(items.keys()):
+            if self.request.session.get('%s_number' % key):
+                items[key] = self.request.session['%s_number' % key]
 
         # Basic search by name in original language
         if 's' in self.request.GET:

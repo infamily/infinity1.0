@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 19:41-0800\n"
+"POT-Creation-Date: 2016-02-07 11:10-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -400,11 +400,35 @@ msgstr ""
 msgid "New comment"
 msgstr ""
 
+#: src/apps/core/templates/comment/list.html:73
+msgid "PayPal tx:"
+msgstr ""
+
 #: src/apps/core/templates/comment/list.html:74
+msgid "initiated"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "completed"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "incomplete"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "error"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "reversalerror"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:85
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -413,7 +437,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -421,30 +445,30 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:89
-#: src/apps/core/templates/comment/list.html:91
+#: src/apps/core/templates/comment/list.html:100
+#: src/apps/core/templates/comment/list.html:102
 msgid "reply"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:102
-#: src/apps/core/templates/comment/list.html:107
-#: src/apps/core/templates/comment/list.html:112
+#: src/apps/core/templates/comment/list.html:113
 #: src/apps/core/templates/comment/list.html:118
+#: src/apps/core/templates/comment/list.html:123
+#: src/apps/core/templates/comment/list.html:129
 msgid "Vote Up"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:103
-#: src/apps/core/templates/comment/list.html:108
-#: src/apps/core/templates/comment/list.html:113
+#: src/apps/core/templates/comment/list.html:114
 #: src/apps/core/templates/comment/list.html:119
+#: src/apps/core/templates/comment/list.html:124
+#: src/apps/core/templates/comment/list.html:130
 msgid "Vote Down"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:150
+#: src/apps/core/templates/comment/list.html:161
 msgid "credit"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:194
+#: src/apps/core/templates/comment/list.html:205
 msgid "Invite a friend to help!"
 msgstr ""
 
@@ -889,6 +913,27 @@ msgstr ""
 msgid "You can use {{ invitation_url }} tag to past invitation url"
 msgstr ""
 
+#: src/apps/invitation/forms.py:34
+msgid "Send Invitation"
+msgstr ""
+
+#: src/apps/invitation/forms.py:35
+msgid "member_email"
+msgstr ""
+
+#: src/apps/invitation/forms.py:36
+msgid "language"
+msgstr ""
+
+#: src/apps/invitation/forms.py:37
+msgid "email_body"
+msgstr ""
+
+#: src/apps/invitation/forms.py:38
+#, python-format
+msgid "Invitations left: %s"
+msgstr ""
+
 #: src/apps/invitation/templates/invitation/invite.html:6
 msgid "Invitation"
 msgstr ""
@@ -909,33 +954,33 @@ msgstr ""
 msgid "Invest"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:48
+#: src/apps/payments/templates/paypal/transaction/create.html:49
 msgid "comment"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:51
+#: src/apps/payments/templates/paypal/transaction/create.html:52
 msgid "review the things you are investing into"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:110
+#: src/apps/payments/templates/paypal/transaction/create.html:120
 msgid "Size of Opportunity"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:111
+#: src/apps/payments/templates/paypal/transaction/create.html:121
 msgid "Amount to Invest"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:112
+#: src/apps/payments/templates/paypal/transaction/create.html:122
 msgid "Matched Hours to be Created"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:191
-#: src/apps/payments/templates/paypal/transaction/create.html:200
+#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:210
 msgid "matched hours:"
 msgstr ""
 
-#: src/apps/payments/templates/paypal/transaction/create.html:192
-#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:202
+#: src/apps/payments/templates/paypal/transaction/create.html:211
 msgid "rights to future matched hours:"
 msgstr ""
 
@@ -1004,55 +1049,55 @@ msgstr ""
 msgid "SignUp"
 msgstr ""
 
-#: src/apps/users/models.py:50
+#: src/apps/users/models.py:52
 msgid "username"
 msgstr ""
 
-#: src/apps/users/models.py:53
+#: src/apps/users/models.py:55
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
-#: src/apps/users/models.py:57
+#: src/apps/users/models.py:59
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers and @/./"
 "+/-/_ characters."
 msgstr ""
 
-#: src/apps/users/models.py:62
+#: src/apps/users/models.py:64
 msgid "A user with that username already exists."
 msgstr ""
 
-#: src/apps/users/models.py:65
+#: src/apps/users/models.py:67
 msgid "first name"
 msgstr ""
 
-#: src/apps/users/models.py:66
+#: src/apps/users/models.py:68
 msgid "last name"
 msgstr ""
 
-#: src/apps/users/models.py:67
+#: src/apps/users/models.py:69
 msgid "email address"
 msgstr ""
 
-#: src/apps/users/models.py:69
+#: src/apps/users/models.py:71
 msgid "staff status"
 msgstr ""
 
-#: src/apps/users/models.py:71
+#: src/apps/users/models.py:73
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: src/apps/users/models.py:74
+#: src/apps/users/models.py:76
 msgid "active"
 msgstr ""
 
-#: src/apps/users/models.py:77
+#: src/apps/users/models.py:79
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: src/apps/users/models.py:81
+#: src/apps/users/models.py:83
 msgid "date joined"
 msgstr ""
 
@@ -1236,7 +1281,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:151
+#: src/templates/account/login.html:10 src/templates/base.html.py:154
 msgid "Sign in"
 msgstr ""
 
@@ -1477,7 +1522,7 @@ msgid "time value"
 msgstr ""
 
 #: src/templates/home.html:46
-msgid "Info"
+msgid "Invitations"
 msgstr ""
 
 #: src/templates/home.html:49 src/templates/home.html.py:53

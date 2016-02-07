@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 19:41-0800\n"
-"PO-Revision-Date: 2016-02-06 05:48+0200\n"
+"POT-Creation-Date: 2016-02-07 11:10-0800\n"
+"PO-Revision-Date: 2016-02-07 21:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -447,11 +447,37 @@ msgstr ""
 msgid "New comment"
 msgstr "Новый коммент"
 
+#: src/apps/core/templates/comment/list.html:73
+msgid "PayPal tx:"
+msgstr ""
+
 #: src/apps/core/templates/comment/list.html:74
+msgid "initiated"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+#, fuzzy
+#| msgid "compose"
+msgid "completed"
+msgstr "Написать"
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "incomplete"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "error"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "reversalerror"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:85
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr "<i class=\"fa fa-rub\"></i> Инвестировать"
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -460,7 +486,7 @@ msgstr "<i class=\"fa fa-rub\"></i> Инвестировать"
 msgid "edit"
 msgstr "редактировать"
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -468,32 +494,32 @@ msgstr "редактировать"
 msgid "delete"
 msgstr "удалить"
 
-#: src/apps/core/templates/comment/list.html:89
-#: src/apps/core/templates/comment/list.html:91
+#: src/apps/core/templates/comment/list.html:100
+#: src/apps/core/templates/comment/list.html:102
 msgid "reply"
 msgstr "ответить"
 
-#: src/apps/core/templates/comment/list.html:102
-#: src/apps/core/templates/comment/list.html:107
-#: src/apps/core/templates/comment/list.html:112
+#: src/apps/core/templates/comment/list.html:113
 #: src/apps/core/templates/comment/list.html:118
+#: src/apps/core/templates/comment/list.html:123
+#: src/apps/core/templates/comment/list.html:129
 msgid "Vote Up"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:103
-#: src/apps/core/templates/comment/list.html:108
-#: src/apps/core/templates/comment/list.html:113
+#: src/apps/core/templates/comment/list.html:114
 #: src/apps/core/templates/comment/list.html:119
+#: src/apps/core/templates/comment/list.html:124
+#: src/apps/core/templates/comment/list.html:130
 msgid "Vote Down"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:150
+#: src/apps/core/templates/comment/list.html:161
 #, fuzzy
 #| msgid "edit"
 msgid "credit"
 msgstr "редактировать"
 
-#: src/apps/core/templates/comment/list.html:194
+#: src/apps/core/templates/comment/list.html:205
 msgid "Invite a friend to help!"
 msgstr "Пригласить друга помочь!"
 
@@ -946,6 +972,32 @@ msgstr "Работа успешно удалена"
 msgid "You can use {{ invitation_url }} tag to past invitation url"
 msgstr ""
 
+#: src/apps/invitation/forms.py:34
+#, fuzzy
+#| msgid "Invitation"
+msgid "Send Invitation"
+msgstr "Приглашение"
+
+#: src/apps/invitation/forms.py:35
+#, fuzzy
+#| msgid "Remember Me"
+msgid "member_email"
+msgstr "Запомнить"
+
+#: src/apps/invitation/forms.py:36
+msgid "language"
+msgstr ""
+
+#: src/apps/invitation/forms.py:37
+msgid "email_body"
+msgstr ""
+
+#: src/apps/invitation/forms.py:38
+#, fuzzy, python-format
+#| msgid "Invitation text"
+msgid "Invitations left: %s"
+msgstr "Текст приглашения"
+
 #: src/apps/invitation/templates/invitation/invite.html:6
 msgid "Invitation"
 msgstr "Приглашение"
@@ -966,33 +1018,33 @@ msgstr "Получатель"
 msgid "Invest"
 msgstr "Инвестировать"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:48
+#: src/apps/payments/templates/paypal/transaction/create.html:49
 msgid "comment"
 msgstr "Комментар"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:51
+#: src/apps/payments/templates/paypal/transaction/create.html:52
 msgid "review the things you are investing into"
 msgstr "рассмотреть то, что вы инвестируете в"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:110
+#: src/apps/payments/templates/paypal/transaction/create.html:120
 msgid "Size of Opportunity"
 msgstr "Максимальное инвестиции"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:111
+#: src/apps/payments/templates/paypal/transaction/create.html:121
 msgid "Amount to Invest"
 msgstr "Сумма инвестиций"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:112
+#: src/apps/payments/templates/paypal/transaction/create.html:122
 msgid "Matched Hours to be Created"
 msgstr "Создаваемого согласованные часов"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:191
-#: src/apps/payments/templates/paypal/transaction/create.html:200
+#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:210
 msgid "matched hours:"
 msgstr "согласованные часов:"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:192
-#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:202
+#: src/apps/payments/templates/paypal/transaction/create.html:211
 msgid "rights to future matched hours:"
 msgstr "право на будущих сог. часов"
 
@@ -1063,65 +1115,65 @@ msgstr "Присоединиться"
 msgid "SignUp"
 msgstr "Регистрация"
 
-#: src/apps/users/models.py:50
+#: src/apps/users/models.py:52
 #, fuzzy
 #| msgid "New Username"
 msgid "username"
 msgstr "Новый пользователь"
 
-#: src/apps/users/models.py:53
+#: src/apps/users/models.py:55
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
-#: src/apps/users/models.py:57
+#: src/apps/users/models.py:59
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers and @/./"
 "+/-/_ characters."
 msgstr ""
 
-#: src/apps/users/models.py:62
+#: src/apps/users/models.py:64
 #, fuzzy
 #| msgid "User with this name already exists"
 msgid "A user with that username already exists."
 msgstr "Пользователь с таким именем уже существует"
 
-#: src/apps/users/models.py:65
+#: src/apps/users/models.py:67
 msgid "first name"
 msgstr ""
 
-#: src/apps/users/models.py:66
+#: src/apps/users/models.py:68
 msgid "last name"
 msgstr ""
 
-#: src/apps/users/models.py:67
+#: src/apps/users/models.py:69
 #, fuzzy
 #| msgid "E-mail address"
 msgid "email address"
 msgstr "Адрес эл. почты"
 
-#: src/apps/users/models.py:69
+#: src/apps/users/models.py:71
 #, fuzzy
 #| msgid "Can apply for staff status"
 msgid "staff status"
 msgstr "Можно обратиться и стать персоналом"
 
-#: src/apps/users/models.py:71
+#: src/apps/users/models.py:73
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: src/apps/users/models.py:74
+#: src/apps/users/models.py:76
 #, fuzzy
 #| msgid "Practice"
 msgid "active"
 msgstr "Практика"
 
-#: src/apps/users/models.py:77
+#: src/apps/users/models.py:79
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: src/apps/users/models.py:81
+#: src/apps/users/models.py:83
 msgid "date joined"
 msgstr ""
 
@@ -1322,7 +1374,7 @@ msgstr ""
 "Вы подтверждаете, что это адрес электронной почты<a href=\"mailto:%(email)s"
 "\">%(email)s</a>  принадлежит данному пользователю %(user_display)s."
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:151
+#: src/templates/account/login.html:10 src/templates/base.html.py:154
 msgid "Sign in"
 msgstr "Войти"
 
@@ -1591,8 +1643,8 @@ msgid "time value"
 msgstr "оценка времени"
 
 #: src/templates/home.html:46
-msgid "Info"
-msgstr "Информация"
+msgid "Invitations"
+msgstr "Приглашение"
 
 #: src/templates/home.html:49 src/templates/home.html.py:53
 msgid "Intro"
@@ -2093,6 +2145,14 @@ msgstr "Адрес электронной почты и / или пароль у
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Запомнить"
+
+#~ msgid "Info"
+#~ msgstr "Информация"
+
+#, fuzzy
+#~| msgid "translations:"
+#~ msgid "transaction status"
+#~ msgstr "перевод:"
 
 #~ msgid ""
 #~ "<b>Topic:</b> (relevant to problem,\n"

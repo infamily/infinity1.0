@@ -140,7 +140,7 @@ class BaseContentModel(models.Model):
             self.hours_donated += comment.hours_donated
             self.hours_claimed += comment.hours_claimed
             self.hours_assumed += comment.hours_assumed
-            self.hours_matched += Decimal(2.)*comment.hours_matched
+            self.hours_matched += comment.hours_matched
         self.save()
 
     def sum_totals(self):
