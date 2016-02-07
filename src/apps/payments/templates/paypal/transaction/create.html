@@ -102,19 +102,15 @@ else {
   }
 }
 
-if (hours_donated >= (hours_assumed+hours_claimed)) {
-  hours_assumed = 0;
+if (remains > 0) {
+	// hours_assumed is untouched
 }
 else {
-  if (remains > 0) {
-    // hours_assumed are untouched
-  }
-  else {
-    hours_assumed = hours_assumed + remains;
-  }
+  hours_assumed = Math.max(0,hours_assumed + remains);
 }
 
 var invest_remains = hours_claimed+hours_assumed;
+
 var hours_matched = Math.min(hours_claimed, invest_remains)
 var future_matched = Math.min(hours_claimed+hours_assumed, invest_remains) - hours_matched;
 

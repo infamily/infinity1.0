@@ -63,7 +63,13 @@ $(window).bind('scroll', function () {
 
 
         {% for transaction in object.paypal_transaction.all %}
-        <div class="transaction" name="transaction-{{transaction.id}}"><b><span style="color:#c0c0c0; font-weight: normal;">+{{transaction.hours|floatformat:2}} <a href="https://research.stlouisfed.org/fred2/series/CES0500000003" style="color:#c0c0c0;" target="_blank">ħ</a></span> {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}]  
+        <div class="transaction" name="transaction-{{transaction.id}}"><b>
+                {% if transaction.hours_matched %}
+                <span style="color:#a0a0a0; font-weight: normal; text-decoration:underline;" data-toggle="tooltip" title="{{transaction.hours_matched}} ḥ">
+                {% else %}
+                <span style="color:#c0c0c0; font-weight: normal;">
+                {% endif %}
+                    +{{transaction.hours|floatformat:2}} <a href="https://research.stlouisfed.org/fred2/series/CES0500000003" style="color:#c0c0c0;" target="_blank">ħ</a></span> {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}]  
             <span style="color:#c0c0c0; font-weight: normal; font-variant: small-caps;">[{%trans "PayPal tx:"%} 
                 {% if transaction.paymentExecStatus == 'CREATED' %}<span style="color: orange;">{% trans "initiated" %}</span>{% elif transaction.paymentExecStatus == 'COMPLETED' %}<span style="color: green;">{% trans "completed" %}</font>{% elif transaction.paymentExecStatus == 'INCOMPLETE' %}<span style="color: brown;">{% trans "incomplete" %}</span>{% elif transaction.paymentExecStatus == 'ERROR' %}<span style="color: red;">{% trans "error" %}</span>{% elif transaction.paymentExecStatus == 'REVERSALERROR' %}<span style="color: red;">{% trans "reversalerror" %}</font>{% endif %}]</span>
                 </div>

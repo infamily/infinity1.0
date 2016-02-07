@@ -15,6 +15,8 @@ from .signals import conversation_post_save
 
 from core.models import Comment
 from decimal import Decimal
+from payments.models import PayPalTransaction
+from django.db.models import Q
 
 
 class CustomUserManager(BaseUserManager):
@@ -144,6 +146,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         for comment in Comment.objects.filter(user_id=self.id):
             credit += comment.comment_credit()
         return credit
+
+    def get_matched_hours(self):
+        assets = Decimal(0.)
+        for transaction in PayPalTransaction.objects.filter(Q(sender_user=self.id) | Q(receiver_user=self.id)):
+            if self.id == transaction.sender_user.id:
+                assets += Decimal(0.5)*transaction.hours_matched
+            if self.id == transaction.sender_user.id:
+                assets += Decimal(0.5)*transaction.hours_matched
+        return assets
 
 
 class ConversationInvite(models.Model):
