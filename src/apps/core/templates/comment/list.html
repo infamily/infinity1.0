@@ -60,10 +60,15 @@ $(window).bind('scroll', function () {
     </div>
 
     <div class="actions">
+
+
         {% for transaction in object.paypal_transaction.all %}
-        <div class="transaction" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}] <b>via</b> PayPal [{{transaction.paymentExecStatus}}]
-            </div>
+        <div class="transaction" name="transaction-{{transaction.id}}"><b><span style="color:#c0c0c0; font-weight: normal;">+{{transaction.hours|floatformat:2}} ħ</span> {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}]  
+            <span style="color:#c0c0c0; font-weight: normal; font-variant: small-caps;">[{%trans "PayPal tx:"%} 
+                {% if transaction.paymentExecStatus == 'CREATED' %}<span style="color: orange;">{% trans "initiated" %}</span>{% elif transaction.paymentExecStatus == 'COMPLETED' %}<span style="color: green;">{% trans "completed" %}</font>{% elif transaction.paymentExecStatus == 'INCOMPLETE' %}<span style="color: brown;">{% trans "incomplete" %}</span>{% elif transaction.paymentExecStatus == 'ERROR' %}<span style="color: red;">{% trans "error" %}</span>{% elif transaction.paymentExecStatus == 'REVERSALERROR' %}<span style="color: red;">{% trans "reversalerror" %}</font>{% endif %}]</span>
+                </div>
         {% endfor %}
+
 
         {% for transaction in object.cryptsy_transaction.all %}
         <div class="transaction" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.address.currency_code}}</b> [{{transaction.sender_credential.user}}] → [{{transaction.address.user}}] <b>via</b> Cryptsy [{{transaction.created_on}}]
