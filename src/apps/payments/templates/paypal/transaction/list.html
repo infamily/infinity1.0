@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load django_markdown %}
+{% block content %}
+
+{% for transaction in transactions %}
+{{ transaction }}
+{% empty %}
+No transactions for this user. Create one?
+{% endfor %}
+
+{% endblock content %}
