@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 19:41-0800\n"
-"PO-Revision-Date: 2016-02-06 05:46+0200\n"
+"POT-Creation-Date: 2016-02-07 11:10-0800\n"
+"PO-Revision-Date: 2016-02-07 21:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -437,11 +437,37 @@ msgstr ""
 msgid "New comment"
 msgstr "Naujas komentaras"
 
+#: src/apps/core/templates/comment/list.html:73
+msgid "PayPal tx:"
+msgstr ""
+
 #: src/apps/core/templates/comment/list.html:74
+msgid "initiated"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+#, fuzzy
+#| msgid "compose"
+msgid "completed"
+msgstr "Rašyti"
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "incomplete"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "error"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:74
+msgid "reversalerror"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:85
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr "<i class=\"fa fa-euro\"></i> INVESTUOTI"
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -450,7 +476,7 @@ msgstr "<i class=\"fa fa-euro\"></i> INVESTUOTI"
 msgid "edit"
 msgstr "redaguoti"
 
-#: src/apps/core/templates/comment/list.html:86
+#: src/apps/core/templates/comment/list.html:97
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -458,30 +484,30 @@ msgstr "redaguoti"
 msgid "delete"
 msgstr "ištrinti"
 
-#: src/apps/core/templates/comment/list.html:89
-#: src/apps/core/templates/comment/list.html:91
+#: src/apps/core/templates/comment/list.html:100
+#: src/apps/core/templates/comment/list.html:102
 msgid "reply"
 msgstr "atsakyti"
 
-#: src/apps/core/templates/comment/list.html:102
-#: src/apps/core/templates/comment/list.html:107
-#: src/apps/core/templates/comment/list.html:112
+#: src/apps/core/templates/comment/list.html:113
 #: src/apps/core/templates/comment/list.html:118
+#: src/apps/core/templates/comment/list.html:123
+#: src/apps/core/templates/comment/list.html:129
 msgid "Vote Up"
 msgstr "Balsuoti už"
 
-#: src/apps/core/templates/comment/list.html:103
-#: src/apps/core/templates/comment/list.html:108
-#: src/apps/core/templates/comment/list.html:113
+#: src/apps/core/templates/comment/list.html:114
 #: src/apps/core/templates/comment/list.html:119
+#: src/apps/core/templates/comment/list.html:124
+#: src/apps/core/templates/comment/list.html:130
 msgid "Vote Down"
 msgstr "Balsuoti prieš"
 
-#: src/apps/core/templates/comment/list.html:150
+#: src/apps/core/templates/comment/list.html:161
 msgid "credit"
 msgstr "kreditas"
 
-#: src/apps/core/templates/comment/list.html:194
+#: src/apps/core/templates/comment/list.html:205
 msgid "Invite a friend to help!"
 msgstr "Pakviesti draugą padėti."
 
@@ -941,11 +967,34 @@ msgstr ""
 
 #: src/apps/invitation/forms.py:22
 msgid "You can use {{ invitation_url }} tag to past invitation url"
+msgstr "Naudokite {{ invitation_url }} žymę įklijuoti pakvietimo adresui."
+
+#: src/apps/invitation/forms.py:34
+#, fuzzy
+#| msgid "Invitation"
+msgid "Send Invitation"
+msgstr "Pakvietimas"
+
+#: src/apps/invitation/forms.py:35
+msgid "member_email"
+msgstr "El. paštas"
+
+#: src/apps/invitation/forms.py:36
+msgid "language"
 msgstr ""
+
+#: src/apps/invitation/forms.py:37
+msgid "email_body"
+msgstr ""
+
+#: src/apps/invitation/forms.py:38
+#, python-format
+msgid "Invitations left: %s"
+msgstr "Liko pakvietimų: %s"
 
 #: src/apps/invitation/templates/invitation/invite.html:6
 msgid "Invitation"
-msgstr ""
+msgstr "Pakvietimas"
 
 #: src/apps/payments/forms.py:23 src/apps/payments/forms.py:128
 msgid "Save"
@@ -963,33 +1012,33 @@ msgstr "Gavėjo vartotojas"
 msgid "Invest"
 msgstr "Investuoti"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:48
+#: src/apps/payments/templates/paypal/transaction/create.html:49
 msgid "comment"
 msgstr "Komentaras"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:51
+#: src/apps/payments/templates/paypal/transaction/create.html:52
 msgid "review the things you are investing into"
 msgstr "peržiūrėti tai, į ką investuojate"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:110
+#: src/apps/payments/templates/paypal/transaction/create.html:120
 msgid "Size of Opportunity"
 msgstr "Maksimali investicija"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:111
+#: src/apps/payments/templates/paypal/transaction/create.html:121
 msgid "Amount to Invest"
 msgstr "Invsticijos dydis"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:112
+#: src/apps/payments/templates/paypal/transaction/create.html:122
 msgid "Matched Hours to be Created"
 msgstr "Sukursiamų suderintų valandų skaičius"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:191
-#: src/apps/payments/templates/paypal/transaction/create.html:200
+#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:210
 msgid "matched hours:"
 msgstr "suderintos valandos:"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:192
-#: src/apps/payments/templates/paypal/transaction/create.html:201
+#: src/apps/payments/templates/paypal/transaction/create.html:202
+#: src/apps/payments/templates/paypal/transaction/create.html:211
 msgid "rights to future matched hours:"
 msgstr "teisė į ateities suderintas valandas:"
 
@@ -1060,59 +1109,59 @@ msgstr "Prisijungti"
 msgid "SignUp"
 msgstr "Žmogus žmogui"
 
-#: src/apps/users/models.py:50
+#: src/apps/users/models.py:52
 #, fuzzy
 #| msgid "New Username"
 msgid "username"
 msgstr "Naujas vardas"
 
-#: src/apps/users/models.py:53
+#: src/apps/users/models.py:55
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
-#: src/apps/users/models.py:57
+#: src/apps/users/models.py:59
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers and @/./"
 "+/-/_ characters."
 msgstr ""
 
-#: src/apps/users/models.py:62
+#: src/apps/users/models.py:64
 msgid "A user with that username already exists."
 msgstr ""
 
-#: src/apps/users/models.py:65
+#: src/apps/users/models.py:67
 msgid "first name"
 msgstr ""
 
-#: src/apps/users/models.py:66
+#: src/apps/users/models.py:68
 msgid "last name"
 msgstr ""
 
-#: src/apps/users/models.py:67
+#: src/apps/users/models.py:69
 msgid "email address"
 msgstr ""
 
-#: src/apps/users/models.py:69
+#: src/apps/users/models.py:71
 msgid "staff status"
 msgstr ""
 
-#: src/apps/users/models.py:71
+#: src/apps/users/models.py:73
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: src/apps/users/models.py:74
+#: src/apps/users/models.py:76
 #, fuzzy
 #| msgid "Practice"
 msgid "active"
 msgstr "Praktika"
 
-#: src/apps/users/models.py:77
+#: src/apps/users/models.py:79
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: src/apps/users/models.py:81
+#: src/apps/users/models.py:83
 msgid "date joined"
 msgstr ""
 
@@ -1296,7 +1345,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:151
+#: src/templates/account/login.html:10 src/templates/base.html.py:154
 msgid "Sign in"
 msgstr "Prisijungti"
 
@@ -1545,8 +1594,8 @@ msgid "time value"
 msgstr "laiko vertė"
 
 #: src/templates/home.html:46
-msgid "Info"
-msgstr "Informacija"
+msgid "Invitations"
+msgstr "Pakvietimai"
 
 #: src/templates/home.html:49 src/templates/home.html.py:53
 msgid "Intro"
@@ -1936,6 +1985,14 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Prisiminti"
+
+#~ msgid "Info"
+#~ msgstr "Informacija"
+
+#, fuzzy
+#~| msgid "translations:"
+#~ msgid "transaction status"
+#~ msgstr "vertimai:"
 
 #, fuzzy
 #~| msgid ""

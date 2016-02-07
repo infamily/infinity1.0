@@ -9,11 +9,13 @@ from crispy_forms.layout import (
 from django_select2.forms import ModelSelect2Widget
 
 from core.models import Language
+from invitation.models import InvitationLetterTemplate
 
 
 class InvitationForm(forms.Form):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
+        language_code = kwargs.pop('language_code')
         super(InvitationForm, self).__init__(*args, **kwargs)
 
         self.fields['member_email'] = forms.EmailField()
@@ -27,6 +29,13 @@ class InvitationForm(forms.Form):
             ),
             queryset=Language.objects.all()
         )
+        try:
+            self.fields['email_body'].initial = \
+                InvitationLetterTemplate.objects.get(language__language_code=language_code).body
+            self.fields['language'].initial = Language.objects.get(language_code=language_code)
+        except:
+            # if no language found, just leave fields not prefilled
+            pass
 
         self.helper = FormHelper(self)
         self.helper.layout = Layout(
