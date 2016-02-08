@@ -871,10 +871,10 @@ class StepCreateForm(forms.ModelForm):
         self.fields['objective'].label = _("<b>Objective:</b> (describe conditions, when you will consider the milestone to be 'achieved')")
         self.fields['objective'].widget.attrs.update({'placeholder': _("Example:\n\nWe have solar cell assembly, which:\n- Generates expected electric power output\n- Passes certain tests of reliability.")})
         self.fields['priority'].label = _("<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number means the milestone has to be done earlier)")
-        self.fields['investables'].label = _('<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to invest on this milestone in <a href="https://github.com/mindey/IdeaLib#minimal">IDL syntax</a>, used used for value computation.)')
-        self.fields['investables'].widget.attrs.update({'placeholder': _('people 1\\3, days 10\\20, usd 50\\70')})
-        self.fields['deliverables'].label = _('<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to have by completion of this milestone in <a href="https://github.com/mindey/IdeaLib#minimal">IDL syntax</a>, used used for value computation.)')
-        self.fields['deliverables'].widget.attrs.update({'placeholder': _('complete solar assembly drawings 0\\1, solar cell assembly 1\\2')})
+        self.fields['investables'].label = _('<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to invest on this milestone.)')
+        self.fields['investables'].widget.attrs.update({'placeholder': _('people 1:3, days 10:20, usd 50:70')})
+        self.fields['deliverables'].label = _('<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to have by completion of this milestone.)')
+        self.fields['deliverables'].widget.attrs.update({'placeholder': _('complete solar assembly drawings 0:1, solar cell assembly 1:2')})
         self.fields['personal'].label = _('<b>Personal</b> (makes the entry visible only to a chosen set of people)')
         self.fields['language'].label = _('<b>Input Language</b> (the language you used to compose this post) ')
         self.fields['is_link'].label = _('<b>This is a link</b> (check if you are only linking to existing content)')
@@ -883,6 +883,8 @@ class StepCreateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a milestone of the past)')
         self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
+        self.initial['priority'] = 1
+        self.fields['priority'].widget = forms.HiddenInput()
 
         if plan_instance:
             self.initial['sharewith'] = plan_instance.sharewith.all
