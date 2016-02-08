@@ -146,7 +146,7 @@
               <a href="{% url "user-detail" request.user.username %}"><span id="credit">{{ request.user.get_comment_credit|floatformat:1 }}</span> <b>ħ</b></a>
               </li>
               <li>
-              <a href="{% url "payments:transaction_paypal_list_view" %}"><span id="credit">{{ request.user.get_matched_hours|floatformat:1 }}</span> <b>ḥ</b></a>
+              <a href="{% url "payments:transaction_paypal_list_view" %}"><span id="credit">{{ request.user.get_matched_hours|floatformat:2 }}</span> <b>ḥ</b></a>
               </li>
               {% else %}
 
