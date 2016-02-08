@@ -20,7 +20,7 @@ from ..forms import PayPalTransactionForm
 from users.decorators import ForbiddenUser
 from core.models import Comment
 from hours.models import HourValue
-
+from django.db.models import Q
 
 User = get_user_model()
 
@@ -33,7 +33,7 @@ class PayPalTransactionListView(ListView):
 
     def get_queryset(self):
         qs = super(PayPalTransactionListView, self).get_queryset()
-        qs = qs.filter(sender_user=self.request.user)
+        qs = qs.filter(Q(sender_user=self.request.user) | Q(receiver_user=self.request.user))
         return qs
 
 
