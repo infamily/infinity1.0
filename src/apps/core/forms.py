@@ -571,7 +571,7 @@ class WorkCreateForm(forms.ModelForm):
                 queryset=User.objects.all(),
                 search_fields=['name__icontains']
             ),
-            queryset=User.objects.all()
+            queryset=User.objects.all(), required=False
         )
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "First attempt to assemble solar cells.", used in title.)')
@@ -1016,6 +1016,8 @@ class TaskCreateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a historical task)')
         self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
+        self.initial['priority'] = 1
+        self.fields['priority'].widget = forms.HiddenInput()
 
         if step_instance:
             self.initial['sharewith'] = step_instance.sharewith.all
