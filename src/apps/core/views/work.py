@@ -113,7 +113,7 @@ class WorkDeleteView(OwnerMixin, DeleteView):
 class WorkListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name = "work/list2.html"
     model = Work
-    paginate_by = 10
+    paginate_by = 1000
     orderable_columns = [
         "task",
         "name",

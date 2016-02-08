@@ -124,7 +124,7 @@ class IdeaDeleteView(OwnerMixin, DeleteView):
 class IdeaListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name = "idea/list2.html"
     model = Idea
-    paginate_by = 10
+    paginate_by = 1000
     orderable_columns = [
         "description",
         "name",

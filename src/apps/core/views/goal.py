@@ -131,7 +131,7 @@ class GoalDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
     template_name = "goal/list2.html"
     model = Goal
-    paginate_by = 10
+    paginate_by = 1000
     orderable_columns = [
         "id",
     ]

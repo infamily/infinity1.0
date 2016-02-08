@@ -121,7 +121,7 @@ class PlanListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
 
     template_name = "plan/list2.html"
     model = Plan
-    paginate_by = 10
+    paginate_by = 1000
     orderable_columns = [
         "name",
         "created_at",

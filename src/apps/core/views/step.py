@@ -119,7 +119,7 @@ class StepListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
 
     template_name = "step/list2.html"
     model = Step
-    paginate_by = 10
+    paginate_by = 1000
     orderable_columns = [
         "user",
         "name",

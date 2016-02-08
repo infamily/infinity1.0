@@ -116,7 +116,7 @@ class TaskListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     template_name = "task/list2.html"
 
     model = Task
-    paginate_by = 10
+    paginate_by = 1000
     orderable_columns = [
         "name",
         "created_at",
