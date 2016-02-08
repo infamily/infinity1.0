@@ -120,7 +120,7 @@
 
           <ul class="nav navbar-nav navbar-right">
               {% if request.get_full_path == "/dev/" %}
-                <li><a href="{% url "data" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Data" %}</a></li>
+			  <!-- <li><a href="{% url "data" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Data" %}</a></li>-->
               {% elif request.get_full_path == "/data/" %}
                 <li><a href="{% url "dev" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Source" %}</a></li>
               {% else %}

@@ -106,7 +106,7 @@ class TaskDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Task succesfully deleted"))
-        return reverse("task-list1", args=[self.object.step.pk, ])
+        return reverse("step-detail", args=[self.object.step.pk, ])
 
 
 class TaskListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):

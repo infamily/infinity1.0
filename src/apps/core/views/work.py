@@ -107,7 +107,7 @@ class WorkDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Work succesfully deleted"))
-        return reverse("work-list1", args=[self.object.task.pk, ])
+        return reverse("task-detail", args=[self.object.task.pk, ])
 
 
 class WorkListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
