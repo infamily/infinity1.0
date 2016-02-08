@@ -87,6 +87,12 @@ class PayPalTransaction(models.Model):
                                    'USD').amount/HourValue.objects.latest('created_at').value
         self.hours_matched = min(self.hours, max(0,self.comment.hours_claimed-self.comment.hours_donated))
 
+    def get_matched_percent(self):
+        if self.hours > 0:
+            return int(100*self.hours_matched/self.hours)
+        else:
+            return 0
+
 
 def comment_pre_save_signal(sender, instance, **kwargs):
     instance.compute_hours()

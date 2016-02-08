@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic.base import View
+from django.views.generic import ListView
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
 from django.http import HttpResponseForbidden
@@ -19,9 +20,21 @@ from ..forms import PayPalTransactionForm
 from users.decorators import ForbiddenUser
 from core.models import Comment
 from hours.models import HourValue
-
+from django.db.models import Q
 
 User = get_user_model()
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class PayPalTransactionListView(ListView):
+    model = PayPalTransaction
+    template_name = 'paypal/transaction/list.html'
+    context_object_name = 'transactions'
+
+    def get_queryset(self):
+        qs = super(PayPalTransactionListView, self).get_queryset()
+        qs = qs.filter(Q(sender_user=self.request.user) | Q(receiver_user=self.request.user))
+        return qs
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])

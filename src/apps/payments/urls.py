@@ -5,6 +5,11 @@ from .views import *
 
 urlpatterns = [
     url(
+        r'^paypal/list/$',
+        PayPalTransactionListView.as_view(),
+        name='transaction_paypal_list_view'
+    ),
+    url(
         r'^paypal/(?P<comment_id>\d+)/$',
         PayPalTransactionView.as_view(),
         name='transaction_paypal'
