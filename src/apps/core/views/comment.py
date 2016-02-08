@@ -3,7 +3,7 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from re import compile as regex
+import re
 
 from ..forms import CommentUpdateForm
 from ..models import Comment, Vote
@@ -64,7 +64,8 @@ class CommentUpdateView(OwnerMixin, UpdateView):
         messages.success(self.request, _("Comment succesfully updated"))
 
         # We want to update here the comment's transactions to compute .hours_matched
-        is_match = regex('comment/(\d+)/update').search(self.request.path)
+        comment_regxp = re.compile('comment/(\d+)/update')
+        is_match = comment_regxp.search(self.request.path)
         if is_match:
             comment_id = int(is_match.group(1))
             comment = Comment.objects.get(pk=comment_id)
