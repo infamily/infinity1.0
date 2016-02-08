@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 11:10-0800\n"
+"POT-Creation-Date: 2016-02-08 07:47-0800\n"
 "PO-Revision-Date: 2015-11-10 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -391,13 +391,13 @@ msgid ""
 "<b>This is a history</b> (check if you are documenting a project of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:16
+#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:15
 #: src/templates/home.html:77
 msgid "Goal"
 msgstr "Cilj"
 
-#: src/apps/core/forms.py:1299 src/apps/core/templates/plan/create.html.py:16
-#: src/templates/home.html:78
+#: src/apps/core/forms.py:1299 src/apps/core/templates/need/create.html.py:42
+#: src/apps/core/templates/plan/create.html:15 src/templates/home.html.py:78
 msgid "Idea"
 msgstr "Ideja"
 
@@ -462,26 +462,32 @@ msgid "New comment"
 msgstr "Komentar"
 
 #: src/apps/core/templates/comment/list.html:73
-msgid "PayPal tx:"
+#: src/apps/payments/templates/paypal/transaction/list.html:36
+msgid "tx:"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "initiated"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "completed"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "incomplete"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "error"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "reversalerror"
 msgstr ""
 
@@ -615,11 +621,7 @@ msgstr "potrebe"
 msgid "Request access:"
 msgstr ""
 
-#: src/apps/core/templates/goal/create.html:10
-msgid "Goal create"
-msgstr "Stvori cilj"
-
-#: src/apps/core/templates/goal/create.html:12
+#: src/apps/core/templates/goal/create.html:11
 msgid ""
 "\n"
 "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
@@ -771,7 +773,6 @@ msgid "+New Idea"
 msgstr "+Nova ideja"
 
 #: src/apps/core/templates/idea/create.html:6
-#: src/apps/core/templates/idea/create.html:10
 msgid "Idea create"
 msgstr "Stvaranje ideje"
 
@@ -813,6 +814,22 @@ msgstr ""
 msgid "+New Plan"
 msgstr "+Novi plan"
 
+#: src/apps/core/templates/need/create.html:32
+msgid "Letter"
+msgstr ""
+
+#: src/apps/core/templates/need/create.html:37
+#, fuzzy
+#| msgid "Solve Your Problems."
+msgid "Problem"
+msgstr "Rješite vaše probleme."
+
+#: src/apps/core/templates/need/create.html:47
+#, fuzzy
+#| msgid "Add a project"
+msgid "Project"
+msgstr "Dodaj projekt"
+
 #: src/apps/core/templates/need/detail.html:147
 #, fuzzy
 #| msgid "Add & Go"
@@ -820,7 +837,6 @@ msgid "+Add Goal"
 msgstr "Dodaj & Idi"
 
 #: src/apps/core/templates/plan/create.html:6
-#: src/apps/core/templates/plan/create.html:10
 msgid "Plan create"
 msgstr "Stvaranje plana"
 
@@ -880,17 +896,17 @@ msgstr ""
 msgid "work"
 msgstr ""
 
-#: src/apps/core/utils.py:202 src/apps/core/utils.py:215
+#: src/apps/core/utils.py:211 src/apps/core/utils.py:224
 #: src/apps/core/views/definition.py:127 src/apps/core/views/step.py:153
 #, python-format
 msgid "%s succesfully created"
 msgstr "%s uspješno stvoren"
 
-#: src/apps/core/views/comment.py:63
+#: src/apps/core/views/comment.py:64
 msgid "Comment succesfully updated"
 msgstr "Komentar uspješno ažuriran"
 
-#: src/apps/core/views/comment.py:78
+#: src/apps/core/views/comment.py:88
 msgid "Comment succesfully deleted"
 msgstr "Komentar uspješno obrisan"
 
@@ -1000,35 +1016,9 @@ msgstr "Rad uspješno stvoren"
 msgid "Work succesfully deleted"
 msgstr "Rad uspješno obrisan"
 
-#: src/apps/invitation/forms.py:22
+#: src/apps/invitation/forms.py:24
 msgid "You can use {{ invitation_url }} tag to past invitation url"
 msgstr "Možete iskoristiti {{ invitation_url }} oznaku za prošli url pozivnice"
-
-#: src/apps/invitation/forms.py:34
-#, fuzzy
-#| msgid "Invitation"
-msgid "Send Invitation"
-msgstr "Pozivnica"
-
-#: src/apps/invitation/forms.py:35
-#, fuzzy
-#| msgid "Remember Me"
-msgid "member_email"
-msgstr "Zapamti me"
-
-#: src/apps/invitation/forms.py:36
-msgid "language"
-msgstr ""
-
-#: src/apps/invitation/forms.py:37
-msgid "email_body"
-msgstr ""
-
-#: src/apps/invitation/forms.py:38
-#, fuzzy, python-format
-#| msgid "Invitation text"
-msgid "Invitations left: %s"
-msgstr "Tekst pozivnice"
 
 #: src/apps/invitation/templates/invitation/invite.html:6
 msgid "Invitation"
@@ -1086,6 +1076,12 @@ msgstr ""
 msgid "rights to future matched hours:"
 msgstr ""
 
+#: src/apps/payments/templates/paypal/transaction/list.html:36
+#, fuzzy
+#| msgid "Comment"
+msgid "comment:"
+msgstr "Komentar"
+
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
 msgstr "Coin adresa uspješno ažurirana"
@@ -1117,7 +1113,7 @@ msgid ""
 msgstr ""
 "Niste dodali uvjerenje. Molimo vas dodajte Uvjerenje ili postavite na zadano"
 
-#: src/apps/payments/views/paypal.py:117
+#: src/apps/payments/views/paypal.py:130
 msgid ""
 "Internal fault of the payment "
 "process.                                          Please refer to the site's "
@@ -2198,6 +2194,24 @@ msgstr "E-mail adresa i/ili lozinka koje ste unijeli nisu točni."
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Zapamti me"
+
+#~ msgid "Goal create"
+#~ msgstr "Stvori cilj"
+
+#, fuzzy
+#~| msgid "Invitation"
+#~ msgid "Send Invitation"
+#~ msgstr "Pozivnica"
+
+#, fuzzy
+#~| msgid "Remember Me"
+#~ msgid "member_email"
+#~ msgstr "Zapamti me"
+
+#, fuzzy
+#~| msgid "Invitation text"
+#~ msgid "Invitations left: %s"
+#~ msgstr "Tekst pozivnice"
 
 #, fuzzy
 #~| msgid "translations:"

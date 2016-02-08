@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 11:10-0800\n"
-"PO-Revision-Date: 2016-02-07 21:13+0200\n"
+"POT-Creation-Date: 2016-02-08 07:47-0800\n"
+"PO-Revision-Date: 2016-02-08 19:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -164,7 +164,7 @@ msgstr "<b>Problemos sritis:</b>"
 
 #: src/apps/core/forms.py:360
 msgid "<b>Related Need:</b> (Optional)"
-msgstr "<b>Susijęs noras:</b> (nebūtinas)"
+msgstr "<b>Susijęs laiškas:</b> (nebūtinas)"
 
 #: src/apps/core/forms.py:361
 msgid ""
@@ -384,13 +384,13 @@ msgstr ""
 "<b>Tai istorinis įrašas</b> (pažymėkite, jei aprašote praeities istorinį "
 "projektą)"
 
-#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:16
+#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:15
 #: src/templates/home.html:77
 msgid "Goal"
 msgstr "Tikslas"
 
-#: src/apps/core/forms.py:1299 src/apps/core/templates/plan/create.html.py:16
-#: src/templates/home.html:78
+#: src/apps/core/forms.py:1299 src/apps/core/templates/need/create.html.py:42
+#: src/apps/core/templates/plan/create.html:15 src/templates/home.html.py:78
 msgid "Idea"
 msgstr "Idėja"
 
@@ -438,28 +438,34 @@ msgid "New comment"
 msgstr "Naujas komentaras"
 
 #: src/apps/core/templates/comment/list.html:73
-msgid "PayPal tx:"
+#: src/apps/payments/templates/paypal/transaction/list.html:36
+msgid "tx:"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "initiated"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 #, fuzzy
 #| msgid "compose"
 msgid "completed"
 msgstr "Rašyti"
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "incomplete"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "error"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "reversalerror"
 msgstr ""
 
@@ -589,11 +595,7 @@ msgstr "reikia"
 msgid "Request access:"
 msgstr ""
 
-#: src/apps/core/templates/goal/create.html:10
-msgid "Goal create"
-msgstr "Apibrėžti tikslą"
-
-#: src/apps/core/templates/goal/create.html:12
+#: src/apps/core/templates/goal/create.html:11
 msgid ""
 "\n"
 "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
@@ -745,7 +747,6 @@ msgid "+New Idea"
 msgstr "+Nauja idėja"
 
 #: src/apps/core/templates/idea/create.html:6
-#: src/apps/core/templates/idea/create.html:10
 msgid "Idea create"
 msgstr "Idėjos rašymas"
 
@@ -784,12 +785,23 @@ msgstr ""
 msgid "+New Plan"
 msgstr "+Naujas planas"
 
+#: src/apps/core/templates/need/create.html:32
+msgid "Letter"
+msgstr "Laiškas"
+
+#: src/apps/core/templates/need/create.html:37
+msgid "Problem"
+msgstr "Problema"
+
+#: src/apps/core/templates/need/create.html:47
+msgid "Project"
+msgstr "Projektas"
+
 #: src/apps/core/templates/need/detail.html:147
 msgid "+Add Goal"
 msgstr "+Pridėti tikslą"
 
 #: src/apps/core/templates/plan/create.html:6
-#: src/apps/core/templates/plan/create.html:10
 msgid "Plan create"
 msgstr "Sukurti projektą"
 
@@ -845,17 +857,17 @@ msgstr ""
 msgid "work"
 msgstr ""
 
-#: src/apps/core/utils.py:202 src/apps/core/utils.py:215
+#: src/apps/core/utils.py:211 src/apps/core/utils.py:224
 #: src/apps/core/views/definition.py:127 src/apps/core/views/step.py:153
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: src/apps/core/views/comment.py:63
+#: src/apps/core/views/comment.py:64
 msgid "Comment succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/comment.py:78
+#: src/apps/core/views/comment.py:88
 msgid "Comment succesfully deleted"
 msgstr ""
 
@@ -965,32 +977,9 @@ msgstr ""
 msgid "Work succesfully deleted"
 msgstr ""
 
-#: src/apps/invitation/forms.py:22
+#: src/apps/invitation/forms.py:24
 msgid "You can use {{ invitation_url }} tag to past invitation url"
 msgstr "Naudokite {{ invitation_url }} žymę įklijuoti pakvietimo adresui."
-
-#: src/apps/invitation/forms.py:34
-#, fuzzy
-#| msgid "Invitation"
-msgid "Send Invitation"
-msgstr "Pakvietimas"
-
-#: src/apps/invitation/forms.py:35
-msgid "member_email"
-msgstr "El. paštas"
-
-#: src/apps/invitation/forms.py:36
-msgid "language"
-msgstr ""
-
-#: src/apps/invitation/forms.py:37
-msgid "email_body"
-msgstr ""
-
-#: src/apps/invitation/forms.py:38
-#, python-format
-msgid "Invitations left: %s"
-msgstr "Liko pakvietimų: %s"
 
 #: src/apps/invitation/templates/invitation/invite.html:6
 msgid "Invitation"
@@ -1042,6 +1031,12 @@ msgstr "suderintos valandos:"
 msgid "rights to future matched hours:"
 msgstr "teisė į ateities suderintas valandas:"
 
+#: src/apps/payments/templates/paypal/transaction/list.html:36
+#, fuzzy
+#| msgid "comment"
+msgid "comment:"
+msgstr "Komentaras"
+
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
 msgstr ""
@@ -1072,7 +1067,7 @@ msgid ""
 "default"
 msgstr ""
 
-#: src/apps/payments/views/paypal.py:117
+#: src/apps/payments/views/paypal.py:130
 msgid ""
 "Internal fault of the payment "
 "process.                                          Please refer to the site's "
@@ -1985,6 +1980,20 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Prisiminti"
+
+#~ msgid "Goal create"
+#~ msgstr "Apibrėžti tikslą"
+
+#, fuzzy
+#~| msgid "Invitation"
+#~ msgid "Send Invitation"
+#~ msgstr "Pakvietimas"
+
+#~ msgid "member_email"
+#~ msgstr "El. paštas"
+
+#~ msgid "Invitations left: %s"
+#~ msgstr "Liko pakvietimų: %s"
 
 #~ msgid "Info"
 #~ msgstr "Informacija"
