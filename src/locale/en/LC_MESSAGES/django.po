@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/apps/core/forms.py:364 src/apps/core/forms.py:367
-#: src/apps/core/forms.py:1087
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-08 11:20-0800\n"
-"PO-Revision-Date: 2016-02-07 17:13+0200\n"
+"PO-Revision-Date: 2016-02-09 00:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -149,7 +147,7 @@ msgstr ""
 
 #: src/apps/core/forms.py:360
 msgid "<b>Related Need:</b> (Optional)"
-msgstr ""
+msgstr "<b>Related letter:</b> (Optional)"
 
 #: src/apps/core/forms.py:361
 msgid ""
@@ -789,7 +787,7 @@ msgstr ""
 
 #: src/apps/core/templates/plan/detail.html:141
 msgid "deliverable"
-msgstr ""
+msgstr "destination"
 
 #: src/apps/core/templates/plan/detail.html:153 src/templates/home.html:403
 msgid "Steps"
