@@ -11,7 +11,7 @@
 {% for transaction in transactions reversed %}
 
  <!-- progress bar -->
-<a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#pptx-{{transaction.id}}">
+<a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{transaction.comment.id}}">
 <div class="progress">
     <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{transaction.get_matched_percent}}%;">
         <span style="line-height: 35px;">{{transaction.hours_matched|floatformat:2}} ḥ</span>
@@ -33,7 +33,7 @@
          <span style="color:#c0c0c0; font-weight: normal;">
          {% endif %}
              +{{transaction.hours|floatformat:2}} <a href="https://research.stlouisfed.org/fred2/series/CES0500000003" style="color:#c0c0c0;" target="_blank">ħ</a></span> {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}]  
-     <span style="color:#c0c0c0; font-weight: normal; font-variant: small-caps;">[<i class="fa fa-cc-paypal"></i> <a href="#pptx-{{transaction.id}}">{%trans "tx:"%}</a> 
+	 <span style="color:#c0c0c0; font-weight: normal; font-variant: small-caps;">[<i class="fa fa-cc-paypal"></i> <a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#pptx-{{transaction.id}}">{%trans "tx:"%}{{transaction.id}}</a> @ <a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{transaction.comment.id}}">{%trans "comment:"%}{{transaction.comment.id}}</a> 
          {% if transaction.paymentExecStatus == 'CREATED' %}<span style="color: orange;">{% trans "initiated" %}</span>{% elif transaction.paymentExecStatus == 'COMPLETED' %}<span style="color: green;">{% trans "completed" %}</span>{% elif transaction.paymentExecStatus == 'INCOMPLETE' %}<span style="color: brown;">{% trans "incomplete" %}</span>{% elif transaction.paymentExecStatus == 'ERROR' %}<span style="color: red;">{% trans "error" %}</span>{% elif transaction.paymentExecStatus == 'REVERSALERROR' %}<span style="color: red;">{% trans "reversalerror" %}</span>{% endif %}]</span>
 </div>
 {% empty %}

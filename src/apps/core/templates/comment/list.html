@@ -62,7 +62,7 @@ $(window).bind('scroll', function () {
     <div class="actions">
 
 
-        {% for transaction in object.paypal_transaction.all %}
+        {% for transaction in object.paypal_transaction.all|dictsort:"id" %}
         <div class="transaction" name="transaction-{{transaction.id}}" style="line-height: 80%;"><b>
                 {% if transaction.hours_matched %}
                 <span style="color:#a0a0a0; font-weight: normal; text-decoration:underline;" data-toggle="tooltip" title="{{transaction.hours_matched}} ḥ">

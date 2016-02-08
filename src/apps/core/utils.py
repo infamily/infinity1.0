@@ -41,12 +41,8 @@ def update_child_paypal_transactions(comment_instance):
     """
     adjust tx.hours_matched as comment.hours_claimed and .hours_assumed change
     """
-    hours_claimed = copy(comment_instance.hours_claimed)
     for transaction in comment_instance.paypal_transaction.all():
-        transaction.hours_matched = min(hours_claimed, transaction.hours)
         transaction.save()
-        hours_claimed -= transaction.hours_matched
-
 
 def notify_mentioned_users(comment_instance):
     """
@@ -262,7 +258,6 @@ class CommentsContentTypeWrapper(CreateView):
         amount = form.cleaned_data.get('amount', False)
         currency = form.cleaned_data.get('currency', False)
 
-        update_child_paypal_transactions(self.object)
 
         if amount and currency:
             self.request.session['amount'] = str(amount)
