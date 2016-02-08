@@ -869,7 +869,7 @@ class StepCreateForm(forms.ModelForm):
         self.fields['name'].label = _('<b>Milestone:</b> (e.g., "assemble solar panels", used in title.)')
         self.fields['name'].widget.attrs.update({'placeholder': _('Type the name of the milestone.')})
         self.fields['objective'].label = _("<b>Objective:</b> (describe conditions, when you will consider the milestone to be 'achieved')")
-        self.fields['objective'].widget.attrs.update({'placeholder': _("Example:\n\nWe have solar cell assembly, which:\n- Generates expected electric power output\n- Passes certain tests of reliability.")})
+        self.fields['objective'].widget.attrs.update({'placeholder': _("Example:\n\nTo have solar cell assembly, which:\n- Generates expected electric power output\n- Passes certain tests of reliability.")})
         self.fields['priority'].label = _("<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number means the milestone has to be done earlier)")
         self.fields['investables'].label = _('<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to invest on this milestone.)')
         self.fields['investables'].widget.attrs.update({'placeholder': _('people 1:3, days 10:20, usd 50:70')})
