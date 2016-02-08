@@ -1,0 +1,93 @@
+{% load i18n %}
+<style>
+.inactive {
+    color:grey;
+}
+.inactive:hover { 
+    color: black;
+    cursor: pointer; 
+}
+#need:hover {
+    text-shadow: 0 0 25px cyan;
+}
+#goal:hover {
+    text-shadow: 0 0 25px #F6358A;
+}
+#idea:hover {
+    text-shadow: 0 0 25px lime;
+}
+#plan:hover {
+    text-shadow: 0 0 25px yellow;
+}
+</style>
+<script>
+$(document).on("click", "#need", function(){
+    window.location.href = "{% url "need-create" %}";
+});
+$(document).on("click", "#goal", function(){
+    window.location.href = "{% url "goal-create" %}";
+});
+$(document).on("click", "#idea", function(){
+    window.location.href = "{% url "idea-create" %}";
+});
+$(document).on("click", "#plan", function(){
+    window.location.href = "{% url "plan-create" %}";
+});
+
+var request_path = "{{ request.path }}";
+
+$(document).ready(function(){
+    if(request_path == '/need-create/') {
+		$('#need').css('color', 'black');
+    }
+    else if (request_path == '/goal-create/') {
+		$('#goal').css('color', 'black');
+    }
+    else if (request_path == '/idea-create/') {
+		$('#idea').css('color', 'black');
+    }
+    else if (request_path == '/plan-create/') {
+		$('#plan').css('color', 'black');
+    }
+});
+
+
+</script>
+
+
+<table width="80%" align="center">
+    <tr align="center">
+        <td class="inactive" id="need"> 
+            <p style="font-size:85px; align:center;">
+            <i class="fa fa-edit"></i>
+            </p>
+            <p style="font-size:45px; align:center;">
+            {% trans "Letter" %}
+            </p>
+        </td>
+        <td class="inactive" id="goal"> 
+            <p style="font-size:85px; align:center;">
+            <i class="fa fa-bug"></i>
+            </p>
+            <p style="font-size:45px; align:center;">
+            {% trans "Problem" %}
+            </p>
+        </td>
+        <td class="inactive" id="idea"> 
+            <p style="font-size:85px; align:center;">
+            <i class="fa fa-paper-plane"></i>
+            </p>
+            <p style="font-size:45px; align:center;">
+            {% trans "Idea" %}
+            </p>
+        </td>
+        <td class="inactive" id="plan"> 
+            <p style="font-size:85px; align:center;">
+            <i class="fa fa-rocket"></i>
+            </p>
+            <p style="font-size:45px; align:center;">
+            {% trans "Project" %}
+            </p>
+        </td>
+    </tr>
+</table>

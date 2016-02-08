@@ -1161,13 +1161,13 @@ class PlanUpdateForm(forms.ModelForm):
 #       choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
 #   )
 
-    goal = forms.ModelChoiceField(
-        widget=ModelSelect2Widget(
-            queryset=Goal.objects.all(),
-            search_fields=['name__icontains']
-        ),
-        queryset=Goal.objects.all()
-    )
+#     goal = forms.ModelChoiceField(
+#         widget=ModelSelect2Widget(
+#             queryset=Goal.objects.all(),
+#             search_fields=['name__icontains']
+#         ),
+#         queryset=Goal.objects.all()
+#     )
 
     idea = forms.ModelChoiceField(
         widget=ModelSelect2Widget(
@@ -1216,12 +1216,12 @@ class PlanUpdateForm(forms.ModelForm):
             'created_at',
             'updated_at',
             'user',
+            'goal',
         ]
         fields = [
             'is_link',
             'url',
             'is_historical',
-            'goal',
             'idea',
             'name',
             'situation',
@@ -1243,13 +1243,13 @@ class PlanCreateForm(forms.ModelForm):
 #       choices=[(Decimal(x*.1), '%.0f' % (x*10.)+ '%') for x in range(1,11)]
 #   )
 
-    goal = forms.ModelChoiceField(
-        widget=ModelSelect2Widget(
-            queryset=Goal.objects.all(),
-            search_fields=['name__icontains']
-        ),
-        queryset=Goal.objects.all()
-    )
+#   goal = forms.ModelChoiceField(
+#       widget=ModelSelect2Widget(
+#           queryset=Goal.objects.all(),
+#           search_fields=['name__icontains']
+#       ),
+#       queryset=Goal.objects.all()
+#   )
 
     idea = forms.ModelChoiceField(
         widget=ModelSelect2Widget(
@@ -1270,7 +1270,7 @@ class PlanCreateForm(forms.ModelForm):
 
         if idea_instance:
             self.initial['idea'] = idea_instance
-            self.initial['goal'] = idea_instance.goal.first()
+#           self.initial['goal'] = idea_instance.goal.first()
 
         self.fields['sharewith'] = forms.ModelMultipleChoiceField(
             widget=ModelSelect2MultipleWidget(
@@ -1294,7 +1294,7 @@ class PlanCreateForm(forms.ModelForm):
         )
 
 
-        self.fields['goal'].label = _('Goal')
+#       self.fields['goal'].label = _('Goal')
 
         self.fields['idea'].label = _('Idea')
 
@@ -1330,12 +1330,12 @@ class PlanCreateForm(forms.ModelForm):
         model = Plan
         exclude = [
             'user',
+            'goal',
         ]
         fields = [
             'is_link',
             'url',
             'is_historical',
-            'goal',
             'idea',
             'name',
             'situation',

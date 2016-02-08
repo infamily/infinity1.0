@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 11:10-0800\n"
+"POT-Creation-Date: 2016-02-08 07:47-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -347,13 +347,13 @@ msgid ""
 "<b>This is a history</b> (check if you are documenting a project of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:16
+#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:15
 #: src/templates/home.html:77
 msgid "Goal"
 msgstr ""
 
-#: src/apps/core/forms.py:1299 src/apps/core/templates/plan/create.html.py:16
-#: src/templates/home.html:78
+#: src/apps/core/forms.py:1299 src/apps/core/templates/need/create.html.py:42
+#: src/apps/core/templates/plan/create.html:15 src/templates/home.html.py:78
 msgid "Idea"
 msgstr ""
 
@@ -401,26 +401,32 @@ msgid "New comment"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:73
-msgid "PayPal tx:"
+#: src/apps/payments/templates/paypal/transaction/list.html:36
+msgid "tx:"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "initiated"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "completed"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "incomplete"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "error"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "reversalerror"
 msgstr ""
 
@@ -546,11 +552,7 @@ msgstr ""
 msgid "Request access:"
 msgstr ""
 
-#: src/apps/core/templates/goal/create.html:10
-msgid "Goal create"
-msgstr ""
-
-#: src/apps/core/templates/goal/create.html:12
+#: src/apps/core/templates/goal/create.html:11
 msgid ""
 "\n"
 "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
@@ -697,7 +699,6 @@ msgid "+New Idea"
 msgstr ""
 
 #: src/apps/core/templates/idea/create.html:6
-#: src/apps/core/templates/idea/create.html:10
 msgid "Idea create"
 msgstr ""
 
@@ -736,12 +737,23 @@ msgstr ""
 msgid "+New Plan"
 msgstr ""
 
+#: src/apps/core/templates/need/create.html:32
+msgid "Letter"
+msgstr ""
+
+#: src/apps/core/templates/need/create.html:37
+msgid "Problem"
+msgstr ""
+
+#: src/apps/core/templates/need/create.html:47
+msgid "Project"
+msgstr ""
+
 #: src/apps/core/templates/need/detail.html:147
 msgid "+Add Goal"
 msgstr ""
 
 #: src/apps/core/templates/plan/create.html:6
-#: src/apps/core/templates/plan/create.html:10
 msgid "Plan create"
 msgstr ""
 
@@ -795,17 +807,17 @@ msgstr ""
 msgid "work"
 msgstr ""
 
-#: src/apps/core/utils.py:202 src/apps/core/utils.py:215
+#: src/apps/core/utils.py:211 src/apps/core/utils.py:224
 #: src/apps/core/views/definition.py:127 src/apps/core/views/step.py:153
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: src/apps/core/views/comment.py:63
+#: src/apps/core/views/comment.py:64
 msgid "Comment succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/comment.py:78
+#: src/apps/core/views/comment.py:88
 msgid "Comment succesfully deleted"
 msgstr ""
 
@@ -909,29 +921,8 @@ msgstr ""
 msgid "Work succesfully deleted"
 msgstr ""
 
-#: src/apps/invitation/forms.py:22
+#: src/apps/invitation/forms.py:24
 msgid "You can use {{ invitation_url }} tag to past invitation url"
-msgstr ""
-
-#: src/apps/invitation/forms.py:34
-msgid "Send Invitation"
-msgstr ""
-
-#: src/apps/invitation/forms.py:35
-msgid "member_email"
-msgstr ""
-
-#: src/apps/invitation/forms.py:36
-msgid "language"
-msgstr ""
-
-#: src/apps/invitation/forms.py:37
-msgid "email_body"
-msgstr ""
-
-#: src/apps/invitation/forms.py:38
-#, python-format
-msgid "Invitations left: %s"
 msgstr ""
 
 #: src/apps/invitation/templates/invitation/invite.html:6
@@ -984,6 +975,10 @@ msgstr ""
 msgid "rights to future matched hours:"
 msgstr ""
 
+#: src/apps/payments/templates/paypal/transaction/list.html:36
+msgid "comment:"
+msgstr ""
+
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
 msgstr ""
@@ -1014,7 +1009,7 @@ msgid ""
 "default"
 msgstr ""
 
-#: src/apps/payments/views/paypal.py:117
+#: src/apps/payments/views/paypal.py:130
 msgid ""
 "Internal fault of the payment "
 "process.                                          Please refer to the site's "

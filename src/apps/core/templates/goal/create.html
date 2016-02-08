@@ -7,12 +7,11 @@
 
 {% block content %}
 
-<h1>{% trans "Goal create" %}</h1>
-<br/>
+{% include "create_menu_links.html" %}
+
 {% blocktrans %}
-<center><i><font color="grey">Goal is a negation of problem. Define a problem.</font></i></center>
+<center><i><font color="black" style="text-shadow: 0 0 25px yellow;">Goal is a negation of problem. Define a problem.</font></i></center>
 {% endblocktrans %}
-<br/>
 {% if need_object %}
 <table class="table">
     <tr>
