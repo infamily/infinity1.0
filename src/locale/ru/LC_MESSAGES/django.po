@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 07:47-0800\n"
-"PO-Revision-Date: 2016-02-08 19:28+0200\n"
+"POT-Creation-Date: 2016-02-08 11:20-0800\n"
+"PO-Revision-Date: 2016-02-08 21:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -394,12 +394,8 @@ msgid ""
 "<b>This is a history</b> (check if you are documenting a project of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:15
-#: src/templates/home.html:77
-msgid "Goal"
-msgstr "Цель"
-
-#: src/apps/core/forms.py:1299 src/apps/core/templates/need/create.html.py:42
+#: src/apps/core/forms.py:1299
+#: src/apps/core/templates/create_menu_links.html:81
 #: src/apps/core/templates/plan/create.html:15 src/templates/home.html.py:78
 msgid "Idea"
 msgstr "Идея"
@@ -529,6 +525,18 @@ msgstr "редактировать"
 msgid "Invite a friend to help!"
 msgstr "Пригласить друга помочь!"
 
+#: src/apps/core/templates/create_menu_links.html:65
+msgid "Letter"
+msgstr "Письмо"
+
+#: src/apps/core/templates/create_menu_links.html:73
+msgid "Problem"
+msgstr "Проблема"
+
+#: src/apps/core/templates/create_menu_links.html:89
+msgid "Project"
+msgstr "Проект"
+
 #: src/apps/core/templates/definition/create.html:44
 msgid "- how to get your share in projects -"
 msgstr ""
@@ -607,11 +615,11 @@ msgstr "потребности"
 msgid "Request access:"
 msgstr ""
 
-#: src/apps/core/templates/goal/create.html:11
+#: src/apps/core/templates/goal/create.html:12
 msgid ""
 "\n"
-"<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
-"problem.</font></i></center>\n"
+"<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;"
+"\">Goal is a negation of problem. Define a problem.</font></i></center>\n"
 msgstr ""
 
 #: src/apps/core/templates/goal/detail.html:31
@@ -761,6 +769,10 @@ msgstr "+ Новая идея"
 msgid "Idea create"
 msgstr "Написать идею"
 
+#: src/apps/core/templates/idea/create.html:15 src/templates/home.html.py:77
+msgid "Goal"
+msgstr "Цель"
+
 #: src/apps/core/templates/idea/detail.html:75
 msgid "super-equity"
 msgstr "супер-маржа"
@@ -795,18 +807,6 @@ msgstr ""
 #: src/apps/core/templates/idea/detail.html:164
 msgid "+New Plan"
 msgstr "+Новый план"
-
-#: src/apps/core/templates/need/create.html:32
-msgid "Letter"
-msgstr "Письмо"
-
-#: src/apps/core/templates/need/create.html:37
-msgid "Problem"
-msgstr "Проблема"
-
-#: src/apps/core/templates/need/create.html:47
-msgid "Project"
-msgstr "Проект"
 
 #: src/apps/core/templates/need/detail.html:147
 msgid "+Add Goal"
@@ -1209,12 +1209,12 @@ msgstr "Хорватский"
 msgid "Japanese"
 msgstr "Японский"
 
-#: src/templates/about.html:55 src/templates/base.html.py:116
+#: src/templates/about.html:55 src/templates/base.html.py:123
 #: src/templates/data.html:10
 msgid "Open Data"
 msgstr "Открытые данные"
 
-#: src/templates/about.html:56 src/templates/base.html.py:118
+#: src/templates/about.html:56 src/templates/base.html.py:125
 #: src/templates/dev.html:10
 msgid "Open Source"
 msgstr "Открытый код"
@@ -1366,7 +1366,7 @@ msgstr ""
 "Вы подтверждаете, что это адрес электронной почты<a href=\"mailto:%(email)s"
 "\">%(email)s</a>  принадлежит данному пользователю %(user_display)s."
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:154
+#: src/templates/account/login.html:10 src/templates/base.html.py:161
 msgid "Sign in"
 msgstr "Войти"
 
@@ -1606,19 +1606,23 @@ msgstr ""
 msgid "Solving Problems"
 msgstr "Решаем проблемы"
 
-#: src/templates/base.html:122 src/templates/base.html.py:124
+#: src/templates/base.html:110
+msgid "Support Us"
+msgstr "Поддержать нас"
+
+#: src/templates/base.html:129 src/templates/base.html.py:131
 msgid "public index"
 msgstr "Государственно"
 
-#: src/templates/base.html:129
+#: src/templates/base.html:136
 msgid "About"
 msgstr "О проекте"
 
-#: src/templates/base.html:135
+#: src/templates/base.html:142
 msgid "Logout"
 msgstr "Выход"
 
-#: src/templates/base.html:138 src/templates/base.html.py:140
+#: src/templates/base.html:145 src/templates/base.html.py:147
 msgid "private inbox"
 msgstr "Частное"
 
