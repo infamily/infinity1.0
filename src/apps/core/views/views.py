@@ -121,13 +121,13 @@ class IndexView(TemplateView):
         current_time = timezone.now()
         language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
 
-        items = {'needs': 16,
-                 'goals': 16,
-                 'ideas': 16,
-                 'plans': 16,
-                 'steps': 16,
-                 'tasks': 16,
-                 'works': 16}
+        items = {'needs': 32,
+                 'goals': 32,
+                 'ideas': 32,
+                 'plans': 32,
+                 'steps': 32,
+                 'tasks': 32,
+                 'works': 32}
 
         for i, key in enumerate(items.keys()):
             if self.request.session.get('%s_number' % key):
