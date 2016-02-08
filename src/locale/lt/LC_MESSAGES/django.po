@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 07:47-0800\n"
-"PO-Revision-Date: 2016-02-08 19:22+0200\n"
+"POT-Creation-Date: 2016-02-08 11:20-0800\n"
+"PO-Revision-Date: 2016-02-08 21:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -384,12 +384,8 @@ msgstr ""
 "<b>Tai istorinis įrašas</b> (pažymėkite, jei aprašote praeities istorinį "
 "projektą)"
 
-#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:15
-#: src/templates/home.html:77
-msgid "Goal"
-msgstr "Tikslas"
-
-#: src/apps/core/forms.py:1299 src/apps/core/templates/need/create.html.py:42
+#: src/apps/core/forms.py:1299
+#: src/apps/core/templates/create_menu_links.html:81
 #: src/apps/core/templates/plan/create.html:15 src/templates/home.html.py:78
 msgid "Idea"
 msgstr "Idėja"
@@ -517,6 +513,18 @@ msgstr "kreditas"
 msgid "Invite a friend to help!"
 msgstr "Pakviesti draugą padėti."
 
+#: src/apps/core/templates/create_menu_links.html:65
+msgid "Letter"
+msgstr "Laiškas"
+
+#: src/apps/core/templates/create_menu_links.html:73
+msgid "Problem"
+msgstr "Problema"
+
+#: src/apps/core/templates/create_menu_links.html:89
+msgid "Project"
+msgstr "Projektas"
+
 #: src/apps/core/templates/definition/create.html:44
 msgid "- how to get your share in projects -"
 msgstr "- kaip įgyti projektų dalį -"
@@ -595,11 +603,16 @@ msgstr "reikia"
 msgid "Request access:"
 msgstr ""
 
-#: src/apps/core/templates/goal/create.html:11
+#: src/apps/core/templates/goal/create.html:12
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
+#| "problem.</font></i></center>\n"
 msgid ""
 "\n"
-"<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
-"problem.</font></i></center>\n"
+"<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;"
+"\">Goal is a negation of problem. Define a problem.</font></i></center>\n"
 msgstr ""
 "\n"
 "<center><i><font color=\"grey\">Tikslas yra problemos neiginys. Apibrėžkite "
@@ -750,6 +763,10 @@ msgstr "+Nauja idėja"
 msgid "Idea create"
 msgstr "Idėjos rašymas"
 
+#: src/apps/core/templates/idea/create.html:15 src/templates/home.html.py:77
+msgid "Goal"
+msgstr "Tikslas"
+
 #: src/apps/core/templates/idea/detail.html:75
 msgid "super-equity"
 msgstr "super-marža"
@@ -784,18 +801,6 @@ msgstr ""
 #: src/apps/core/templates/idea/detail.html:164
 msgid "+New Plan"
 msgstr "+Naujas planas"
-
-#: src/apps/core/templates/need/create.html:32
-msgid "Letter"
-msgstr "Laiškas"
-
-#: src/apps/core/templates/need/create.html:37
-msgid "Problem"
-msgstr "Problema"
-
-#: src/apps/core/templates/need/create.html:47
-msgid "Project"
-msgstr "Projektas"
 
 #: src/apps/core/templates/need/detail.html:147
 msgid "+Add Goal"
@@ -1200,12 +1205,12 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
-#: src/templates/about.html:55 src/templates/base.html.py:116
+#: src/templates/about.html:55 src/templates/base.html.py:123
 #: src/templates/data.html:10
 msgid "Open Data"
 msgstr "Atviri duomenys"
 
-#: src/templates/about.html:56 src/templates/base.html.py:118
+#: src/templates/about.html:56 src/templates/base.html.py:125
 #: src/templates/dev.html:10
 msgid "Open Source"
 msgstr "Atviras kodas"
@@ -1340,7 +1345,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:154
+#: src/templates/account/login.html:10 src/templates/base.html.py:161
 msgid "Sign in"
 msgstr "Prisijungti"
 
@@ -1560,19 +1565,23 @@ msgstr ""
 msgid "Solving Problems"
 msgstr "Spręskime problemas"
 
-#: src/templates/base.html:122 src/templates/base.html.py:124
+#: src/templates/base.html:110
+msgid "Support Us"
+msgstr "Palaikykite mus"
+
+#: src/templates/base.html:129 src/templates/base.html.py:131
 msgid "public index"
 msgstr "Viešos"
 
-#: src/templates/base.html:129
+#: src/templates/base.html:136
 msgid "About"
 msgstr "Apie projektą"
 
-#: src/templates/base.html:135
+#: src/templates/base.html:142
 msgid "Logout"
 msgstr "Atsijungti"
 
-#: src/templates/base.html:138 src/templates/base.html.py:140
+#: src/templates/base.html:145 src/templates/base.html.py:147
 msgid "private inbox"
 msgstr "Privačios"
 
