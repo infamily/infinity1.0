@@ -494,7 +494,7 @@ class Step(BaseContentModel):
     deliverables = models.CharField(
         unique=False,
         max_length=150,
-        blank=False,
+        blank=True,
     )
     priority = models.IntegerField(
         unique=False,
@@ -511,7 +511,7 @@ class Step(BaseContentModel):
     investables = models.CharField(
         unique=False,
         max_length=150,
-        blank=False,
+        blank=True,
     )
 
     def get_usd(self):
