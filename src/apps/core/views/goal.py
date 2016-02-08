@@ -93,7 +93,7 @@ class GoalDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Goal succesfully deleted"))
-        return reverse("home") #reverse("definition-detail", args=[self.object.definition.pk, ])
+        return reverse("inbox") #reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
 class GoalUpdateView(UpdateViewWrapper):
