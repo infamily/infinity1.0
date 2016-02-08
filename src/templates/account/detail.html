@@ -28,8 +28,8 @@
 </div>
 
 <!-- display user's contributions -->
-<button class="btn">{{ object.username }} is interested in</button> : {% for key,value in interest_counts.items %} <button class="btn btn-default">{{ key }}: {{ value }}</button> {% endfor %}
-<br/>
+<!--<button class="btn">{{ object.username }} is interested in</button> : {% for key,value in interest_counts.items %} <button class="btn btn-default">{{ key }}: {{ value }}</button> {% endfor %}-->
+<center><h2 style="font-family:Courier New; font-size:24px;">Comment.objects.filter(hours_claimed__gt=0)</h2></center>
 <br/>
 <div class="panel panel-default">
 {% for comment_group in comment_list reversed %}
