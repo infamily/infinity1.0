@@ -112,7 +112,7 @@ class StepDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Step succesfully deleted"))
-        return reverse("step-list1", args=[self.object.plan.pk, ])
+        return reverse("plan-detail", args=[self.object.plan.pk, ])
 
 
 class StepListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):

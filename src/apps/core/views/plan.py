@@ -114,7 +114,7 @@ class PlanDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Plan succesfully deleted"))
-        return reverse("plan-list1", args=[self.object.idea.pk, ])
+        return reverse("idea-detail", args=[self.object.idea.pk, ])
 
 
 class PlanListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
