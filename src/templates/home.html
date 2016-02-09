@@ -98,7 +98,7 @@
 
 <!-- start of Need -->
 
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
             <div class="panel-heading">
                 {% trans "Needs" %}
                 &nbsp; <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>
@@ -240,7 +240,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>&nbsp;
@@ -319,7 +319,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "plan-list" %}">{% trans "Plans" %}</a>&nbsp;
@@ -397,7 +397,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "step-list" %}">{% trans "Steps" %}</a>&nbsp;
@@ -479,7 +479,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "task-list" %}">{% trans "Tasks" %}</a>&nbsp;
@@ -555,7 +555,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "work-list" %}">{% trans "Works" %}</a>&nbsp;
