@@ -348,8 +348,9 @@ $(document).ready(function(){
                             <span style="font-variant:small-caps;">
 					        <i class="fa fa-bug"></i>
 					        {% for goal in idea.object.goal.all %}
-							<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%}</span> 
+							<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
 							{% endfor %}
+                            </span>
 							<br/>
 
                         <p>{{idea.translation.description|markdown|truncatewords_html:34}}</p>
