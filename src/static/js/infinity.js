@@ -54,6 +54,7 @@ $(function(){
       $('#ithink').css('color', 'black');
       $('#ichart').css('color', 'grey');
       $('#icreate').css('color', 'grey');
+	    localStorage['scope'] = 'ithink';
 			event.preventDefault();
     });
 
@@ -62,6 +63,7 @@ $(function(){
       $('#ithink').css('color', 'grey');
       $('#ichart').css('color', 'grey');
       $('#icreate').css('color', 'black');
+   	  localStorage['scope'] = 'icreate';
 			event.preventDefault();
     });
 

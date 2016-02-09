@@ -91,9 +91,24 @@
 	</div>
 </div>
 <script>
+
 $(document).ready(function(){
-    $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
-    $('#ichart').css('color', 'black');
+
+    // keep the scope in session
+	var scope = localStorage['scope'];
+	if (!scope) {
+		localStorage['scope'] = "ichart";
+	}
+    $('#'.concat(scope)).css('color', 'black');
+    if (scope=='ithink') {
+      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
+    }
+    else if (scope=='ichart') {
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+    }
+    else if (scope=='icreate') {
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+    } 
 });
 
 // Click Actions
@@ -102,6 +117,7 @@ $(document).ready(function(){
       $('#ithink').css('color', 'black');
       $('#ichart').css('color', 'grey');
       $('#icreate').css('color', 'grey');
+	  localStorage['scope'] = 'ithink';
 		event.preventDefault();
     });
 
@@ -110,6 +126,7 @@ $(document).ready(function(){
       $('#ithink').css('color', 'grey');
       $('#ichart').css('color', 'black');
       $('#icreate').css('color', 'grey');
+	  localStorage['scope'] = 'ichart';
 		event.preventDefault();
     });
 
@@ -118,6 +135,7 @@ $(document).ready(function(){
       $('#ithink').css('color', 'grey');
       $('#ichart').css('color', 'grey');
       $('#icreate').css('color', 'black');
+	  localStorage['scope'] = 'icreate';
 		event.preventDefault();
     });
 </script>
