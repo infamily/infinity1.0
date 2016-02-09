@@ -435,7 +435,7 @@ $(document).ready(function(){
 							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
 							<br/>
 
-                <p>{{plan.translation.situation|markdown|truncatewords_html:34}}</p>
+                <p>{{plan.translation.deliverable|markdown|truncatewords_html:34}}</p>
 
                     {% endif %}
                 {% endfor %}
