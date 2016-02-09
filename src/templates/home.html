@@ -83,8 +83,14 @@
       <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; height: 49px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="{% trans "Search" %}" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
       </form>
 
+      <div style="display: inline; margin-left:10px;">
+      <input id="goal" class="btn-lg fa-input" type="submit" value="&#xf188;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input id="idea" class="btn-lg fa-input" type="submit" value="&#xf1d8;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input id="plan" class="btn-lg fa-input" type="submit" value="&#xf135;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      </div>
 	</div>
 </div>
+
 
 <div style="clear:both;">
     <br/>
@@ -99,7 +105,7 @@
 <!-- start of Need -->
 
         <div class="panel panel-default col-md-4 block-content">
-            <div class="panel-heading">
+            <div class="panel-heading" id="ithink">
                 {% trans "Needs" %}
                 &nbsp; <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>
                     {% if request.get_full_path == '/i' %}
@@ -242,7 +248,7 @@
     {% else %}
         <div class="panel panel-default col-md-4 block-content">
     {% endif %}
-            <div class="panel-heading">
+            <div class="panel-heading" id="iplan">
                 <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>&nbsp;
                 <a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "suggest a solution" %}</b>
             </div>
@@ -399,7 +405,7 @@
     {% else %}
         <div class="panel panel-default col-md-4 block-content">
     {% endif %}
-            <div class="panel-heading">
+            <div class="panel-heading" id="icreate">
                 <a href="{% url "step-list" %}">{% trans "Steps" %}</a>&nbsp;
                 <i class="fa fa-minus-square-o"></i>&nbsp; -
                 <b>{% trans "break it down" %}</b>
