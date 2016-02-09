@@ -9,16 +9,26 @@
 {% block content %}
 <h1>{% trans "Open Source" %}</h1>
 
+{% blocktrans %}
 <p>We believe in open development and in open communication between platforms. While people and organizations fork projects their custom needs and make project copies for securing information for strategic partners and friends, we want to do our best to make the forked projects able to communicate between each other, so that people can easily integrate the information from various forks, when they need to make global decisions accounting for the needs of everyone, and deciding on what's best for everyone.</p>
 
 <p>This requires time to get it right, therefore, we are not yet open source. We are working on it.</p>
 
 <p>Our future repositories, once we will be open source, are:</p>
+{% endblocktrans %}
 
 <ul>
     <li><a href="https://github.com/inxyz">https://github.com/inxyz</a></li>
 </ul>
-
+{% blocktrans %}
 <p>Send us an e-mail to <u>desk@infty.xyz</u> with subject "<b>dev</b>" if you want to get notified, when this will be available.</p>
+{% endblocktrans %}
+
+<h1>{% trans "About Support" %}</h1>
+{% blocktrans %}
+<p>We are not a traditional organization, and not trying to become one. We are a group of free individuals bound by common aspirations, and while we had registered a non-profit organization for technical reasons, we keep their accounts at zero. We want to keep this project not bound to any organization other than actual free people who do it. You can transparently support them by direct investment into task deliverables.</p>
+
+<p>You can find the tasks that have claimed time, and invest on user pages. People who worked on Infinity so far, are -- [<a href="/user/Mindey/">Mindey</a>], [<a href="/user/aliev/">aliev</a>], [<a href="/user/ruta/">ruta</a>], [<a href="/user/iulia-link/">iulia-link</a>], [<a href="/user/yrik/">yrik</a>]. We will add more people as they join us by simply showing their interest and desire to spend time with us.</p>
+{% endblocktrans %}
 
 {% endblock content %}

@@ -7,9 +7,8 @@
 
 {% block content %}
 
-<h1>{% trans "Idea create" %}</h1>
-<br/>
-<br/>
+{% include "create_menu_links.html" %}
+
 {% if goal_object %}
 <table class="table">
     <tr>

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 11:10-0800\n"
-"PO-Revision-Date: 2016-02-07 21:19+0200\n"
+"POT-Creation-Date: 2016-02-08 11:20-0800\n"
+"PO-Revision-Date: 2016-02-08 21:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -163,7 +163,7 @@ msgstr "<b>問題の分野：</b>"
 
 #: src/apps/core/forms.py:360
 msgid "<b>Related Need:</b> (Optional)"
-msgstr "<b>関係する需要：</b> （任意）"
+msgstr "<b>関係する手紙：</b> （任意）"
 
 #: src/apps/core/forms.py:361
 msgid ""
@@ -380,13 +380,9 @@ msgstr ""
 "<b>これは歴史です</b> （もし現在の企画ではなく、歴史の内容を描写しているとし"
 "たら、選択してください）"
 
-#: src/apps/core/forms.py:1297 src/apps/core/templates/idea/create.html.py:16
-#: src/templates/home.html:77
-msgid "Goal"
-msgstr "目的"
-
-#: src/apps/core/forms.py:1299 src/apps/core/templates/plan/create.html.py:16
-#: src/templates/home.html:78
+#: src/apps/core/forms.py:1299
+#: src/apps/core/templates/create_menu_links.html:81
+#: src/apps/core/templates/plan/create.html:15 src/templates/home.html.py:78
 msgid "Idea"
 msgstr "発想"
 
@@ -434,28 +430,34 @@ msgid "New comment"
 msgstr "コメントを送る"
 
 #: src/apps/core/templates/comment/list.html:73
-msgid "PayPal tx:"
+#: src/apps/payments/templates/paypal/transaction/list.html:36
+msgid "tx:"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "initiated"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 #, fuzzy
 #| msgid "compose"
 msgid "completed"
 msgstr "作成"
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "incomplete"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "error"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:74
+#: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "reversalerror"
 msgstr ""
 
@@ -506,6 +508,18 @@ msgstr "クレジット"
 #: src/apps/core/templates/comment/list.html:205
 msgid "Invite a friend to help!"
 msgstr ""
+
+#: src/apps/core/templates/create_menu_links.html:65
+msgid "Letter"
+msgstr "手紙"
+
+#: src/apps/core/templates/create_menu_links.html:73
+msgid "Problem"
+msgstr "問題"
+
+#: src/apps/core/templates/create_menu_links.html:89
+msgid "Project"
+msgstr "企画"
 
 #: src/apps/core/templates/definition/create.html:44
 msgid "- how to get your share in projects -"
@@ -583,15 +597,16 @@ msgstr ""
 msgid "Request access:"
 msgstr ""
 
-#: src/apps/core/templates/goal/create.html:10
-msgid "Goal create"
-msgstr "目的の作成"
-
 #: src/apps/core/templates/goal/create.html:12
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
+#| "problem.</font></i></center>\n"
 msgid ""
 "\n"
-"<center><i><font color=\"grey\">Goal is a negation of problem. Define a "
-"problem.</font></i></center>\n"
+"<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;"
+"\">Goal is a negation of problem. Define a problem.</font></i></center>\n"
 msgstr ""
 "\n"
 "<center><i><font color=\"grey\">目的とは問題の対極です。問題を定義しましょ"
@@ -739,9 +754,12 @@ msgid "+New Idea"
 msgstr "+新規発想"
 
 #: src/apps/core/templates/idea/create.html:6
-#: src/apps/core/templates/idea/create.html:10
 msgid "Idea create"
 msgstr ""
+
+#: src/apps/core/templates/idea/create.html:15 src/templates/home.html.py:77
+msgid "Goal"
+msgstr "目的"
 
 #: src/apps/core/templates/idea/detail.html:75
 msgid "super-equity"
@@ -783,7 +801,6 @@ msgid "+Add Goal"
 msgstr "+目的の追加"
 
 #: src/apps/core/templates/plan/create.html:6
-#: src/apps/core/templates/plan/create.html:10
 msgid "Plan create"
 msgstr ""
 
@@ -837,17 +854,17 @@ msgstr ""
 msgid "work"
 msgstr ""
 
-#: src/apps/core/utils.py:202 src/apps/core/utils.py:215
+#: src/apps/core/utils.py:211 src/apps/core/utils.py:224
 #: src/apps/core/views/definition.py:127 src/apps/core/views/step.py:153
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: src/apps/core/views/comment.py:63
+#: src/apps/core/views/comment.py:64
 msgid "Comment succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/comment.py:78
+#: src/apps/core/views/comment.py:88
 msgid "Comment succesfully deleted"
 msgstr ""
 
@@ -951,33 +968,9 @@ msgstr ""
 msgid "Work succesfully deleted"
 msgstr ""
 
-#: src/apps/invitation/forms.py:22
+#: src/apps/invitation/forms.py:24
 msgid "You can use {{ invitation_url }} tag to past invitation url"
 msgstr ""
-
-#: src/apps/invitation/forms.py:34
-#, fuzzy
-#| msgid "Invitations"
-msgid "Send Invitation"
-msgstr "招待"
-
-#: src/apps/invitation/forms.py:35
-msgid "member_email"
-msgstr ""
-
-#: src/apps/invitation/forms.py:36
-msgid "language"
-msgstr ""
-
-#: src/apps/invitation/forms.py:37
-msgid "email_body"
-msgstr ""
-
-#: src/apps/invitation/forms.py:38
-#, fuzzy, python-format
-#| msgid "Invitation text"
-msgid "Invitations left: %s"
-msgstr "招待のメッセージ"
 
 #: src/apps/invitation/templates/invitation/invite.html:6
 msgid "Invitation"
@@ -1029,6 +1022,12 @@ msgstr "合わせた時間:"
 msgid "rights to future matched hours:"
 msgstr "未来の合わせた時間への権利:"
 
+#: src/apps/payments/templates/paypal/transaction/list.html:36
+#, fuzzy
+#| msgid "comment"
+msgid "comment:"
+msgstr "コメント"
+
 #: src/apps/payments/views/cryptsy.py:34
 msgid "Coin address succesfully updated"
 msgstr ""
@@ -1059,7 +1058,7 @@ msgid ""
 "default"
 msgstr ""
 
-#: src/apps/payments/views/paypal.py:117
+#: src/apps/payments/views/paypal.py:130
 msgid ""
 "Internal fault of the payment "
 "process.                                          Please refer to the site's "
@@ -1190,12 +1189,12 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
-#: src/templates/about.html:55 src/templates/base.html.py:116
+#: src/templates/about.html:55 src/templates/base.html.py:123
 #: src/templates/data.html:10
 msgid "Open Data"
 msgstr "オープンデータ"
 
-#: src/templates/about.html:56 src/templates/base.html.py:118
+#: src/templates/about.html:56 src/templates/base.html.py:125
 #: src/templates/dev.html:10
 msgid "Open Source"
 msgstr "オープンソース"
@@ -1330,7 +1329,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:154
+#: src/templates/account/login.html:10 src/templates/base.html.py:161
 msgid "Sign in"
 msgstr "ログイン"
 
@@ -1547,19 +1546,23 @@ msgstr ""
 msgid "Solving Problems"
 msgstr "問題を解決します"
 
-#: src/templates/base.html:122 src/templates/base.html.py:124
+#: src/templates/base.html:110
+msgid "Support Us"
+msgstr "支援する"
+
+#: src/templates/base.html:129 src/templates/base.html.py:131
 msgid "public index"
 msgstr "公的索引"
 
-#: src/templates/base.html:129
+#: src/templates/base.html:136
 msgid "About"
 msgstr "プロジェクトについて"
 
-#: src/templates/base.html:135
+#: src/templates/base.html:142
 msgid "Logout"
 msgstr "ログアウト"
 
-#: src/templates/base.html:138 src/templates/base.html.py:140
+#: src/templates/base.html:145 src/templates/base.html.py:147
 msgid "private inbox"
 msgstr "私的索引"
 
@@ -1963,6 +1966,19 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr ""
+
+#~ msgid "Goal create"
+#~ msgstr "目的の作成"
+
+#, fuzzy
+#~| msgid "Invitations"
+#~ msgid "Send Invitation"
+#~ msgstr "招待"
+
+#, fuzzy
+#~| msgid "Invitation text"
+#~ msgid "Invitations left: %s"
+#~ msgstr "招待のメッセージ"
 
 #~ msgid "Info"
 #~ msgstr "情報"

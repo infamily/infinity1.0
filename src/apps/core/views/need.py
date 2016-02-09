@@ -115,7 +115,8 @@ class NeedDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Need succesfully deleted"))
-        return reverse("definition-detail", args=[self.object.definition.pk, ])
+        return reverse("inbox")
+        # return reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
 class NeedUpdateView(UpdateViewWrapper):

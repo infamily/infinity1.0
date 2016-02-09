@@ -6,6 +6,8 @@ from django.db.models.signals import pre_save
 from core.models import Comment
 from djmoney_rates.utils import convert_money
 from hours.models import HourValue
+from decimal import Decimal
+from copy import copy
 
 
 class PayPalTransaction(models.Model):
@@ -85,7 +87,12 @@ class PayPalTransaction(models.Model):
     def compute_hours(self):
         self.hours = convert_money(self.amount, self.currency,
                                    'USD').amount/HourValue.objects.latest('created_at').value
-        self.hours_matched = min(self.hours, max(0,self.comment.hours_claimed-self.comment.hours_donated))
+        # computing .hours_matched
+        h_claimed = copy(self.comment.hours_claimed)
+        for transaction in self.comment.paypal_transaction.all().order_by('id'):
+            if transaction.id == self.id:
+                self.hours_matched = min(h_claimed, transaction.hours)
+            h_claimed -= min(h_claimed, transaction.hours)
 
     def get_matched_percent(self):
         if self.hours > 0:

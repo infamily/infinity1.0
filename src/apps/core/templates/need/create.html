@@ -7,6 +7,8 @@
 
 {% block content %}
 
+{% include "create_menu_links.html" %}
+
 {% if definition_object %}
 <center>
     <div>
@@ -15,7 +17,6 @@
         {{definition_object.definition}}
 </center>
 {% else %}
-        <p style="font-size:85px; align:center;"><i class="fa fa-edit"></i></p>
 {% endif %}
 <div>
     
@@ -28,4 +29,3 @@
 {% markdown_media %}
 
 {% endblock content %}
-
