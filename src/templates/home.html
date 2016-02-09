@@ -84,13 +84,61 @@
       </form>
 
       <div style="display: inline; margin-left:10px;">
-      <input id="goal" class="btn-lg fa-input" type="submit" value="&#xf188;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
-      <input id="idea" class="btn-lg fa-input" type="submit" value="&#xf1d8;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
-      <input id="plan" class="btn-lg fa-input" type="submit" value="&#xf135;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input id="ithink" class="btn-lg fa-input" type="submit" value="&#xf188;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input id="ichart" class="btn-lg fa-input" type="submit" value="&#xf1d8;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input id="icreate" class="btn-lg fa-input" type="submit" value="&#xf135;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
       </div>
 	</div>
 </div>
+<script>
 
+$(document).ready(function(){
+
+    // keep the scope in session
+	var scope = localStorage['scope'];
+	if (!scope) {
+		localStorage['scope'] = "ichart";
+	}
+    $('#'.concat(scope)).css('color', 'black');
+    if (scope=='ithink') {
+      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
+    }
+    else if (scope=='ichart') {
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+    }
+    else if (scope=='icreate') {
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+    } 
+});
+
+// Click Actions
+    $('#ithink').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
+      $('#ithink').css('color', 'black');
+      $('#ichart').css('color', 'grey');
+      $('#icreate').css('color', 'grey');
+	  localStorage['scope'] = 'ithink';
+		event.preventDefault();
+    });
+
+    $('#ichart').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+      $('#ithink').css('color', 'grey');
+      $('#ichart').css('color', 'black');
+      $('#icreate').css('color', 'grey');
+	  localStorage['scope'] = 'ichart';
+		event.preventDefault();
+    });
+
+    $('#icreate').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+      $('#ithink').css('color', 'grey');
+      $('#ichart').css('color', 'grey');
+      $('#icreate').css('color', 'black');
+	  localStorage['scope'] = 'icreate';
+		event.preventDefault();
+    });
+</script>
 
 <div style="clear:both;">
     <br/>
@@ -105,7 +153,7 @@
 <!-- start of Need -->
 
         <div class="panel panel-default col-md-4 block-content">
-            <div class="panel-heading" id="ithink">
+            <div class="panel-heading">
                 {% trans "Needs" %}
                 &nbsp; <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>
                     {% if request.get_full_path == '/i' %}
@@ -248,7 +296,7 @@
     {% else %}
         <div class="panel panel-default col-md-4 block-content">
     {% endif %}
-            <div class="panel-heading" id="iplan">
+            <div class="panel-heading">
                 <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>&nbsp;
                 <a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "suggest a solution" %}</b>
             </div>
@@ -405,7 +453,7 @@
     {% else %}
         <div class="panel panel-default col-md-4 block-content">
     {% endif %}
-            <div class="panel-heading" id="icreate">
+            <div class="panel-heading">
                 <a href="{% url "step-list" %}">{% trans "Steps" %}</a>&nbsp;
                 <i class="fa fa-minus-square-o"></i>&nbsp; -
                 <b>{% trans "break it down" %}</b>
