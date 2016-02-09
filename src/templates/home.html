@@ -83,8 +83,62 @@
       <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; height: 49px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="{% trans "Search" %}" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
       </form>
 
+      <div style="display: inline; margin-left:10px;">
+      <input id="ithink" class="btn-lg fa-input" type="submit" value="&#xf188;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input id="ichart" class="btn-lg fa-input" type="submit" value="&#xf1d8;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input id="icreate" class="btn-lg fa-input" type="submit" value="&#xf135;" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      </div>
 	</div>
 </div>
+<script>
+
+$(document).ready(function(){
+
+    // keep the scope in session
+	var scope = localStorage['scope'];
+	if (!scope) {
+		localStorage['scope'] = "ichart";
+	}
+    $('#'.concat(scope)).css('color', 'black');
+    if (scope=='ithink') {
+      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
+    }
+    else if (scope=='ichart') {
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+    }
+    else if (scope=='icreate') {
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+    } 
+});
+
+// Click Actions
+    $('#ithink').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
+      $('#ithink').css('color', 'black');
+      $('#ichart').css('color', 'grey');
+      $('#icreate').css('color', 'grey');
+	  localStorage['scope'] = 'ithink';
+		event.preventDefault();
+    });
+
+    $('#ichart').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+      $('#ithink').css('color', 'grey');
+      $('#ichart').css('color', 'black');
+      $('#icreate').css('color', 'grey');
+	  localStorage['scope'] = 'ichart';
+		event.preventDefault();
+    });
+
+    $('#icreate').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+      $('#ithink').css('color', 'grey');
+      $('#ichart').css('color', 'grey');
+      $('#icreate').css('color', 'black');
+	  localStorage['scope'] = 'icreate';
+		event.preventDefault();
+    });
+</script>
 
 <div style="clear:both;">
     <br/>
@@ -98,7 +152,7 @@
 
 <!-- start of Need -->
 
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
             <div class="panel-heading">
                 {% trans "Needs" %}
                 &nbsp; <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>
@@ -240,7 +294,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>&nbsp;
@@ -319,7 +373,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "plan-list" %}">{% trans "Plans" %}</a>&nbsp;
@@ -397,7 +451,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "step-list" %}">{% trans "Steps" %}</a>&nbsp;
@@ -479,7 +533,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "task-list" %}">{% trans "Tasks" %}</a>&nbsp;
@@ -555,7 +609,7 @@
     {% if request.get_full_path == '/i' %}
         <div class="panel panel-default col-md-4 block-content">
     {% else %}
-        <div class="panel panel-default col-md-7 block-content">
+        <div class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
                 <a href="{% url "work-list" %}">{% trans "Works" %}</a>&nbsp;
