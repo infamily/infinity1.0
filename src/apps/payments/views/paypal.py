@@ -34,7 +34,7 @@ class PayPalTransactionListView(ListView):
     def get_queryset(self):
         qs = super(PayPalTransactionListView, self).get_queryset()
         qs = qs.filter(Q(sender_user=self.request.user) | Q(receiver_user=self.request.user))
-        return qs
+        return qs.order_by('id')
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
