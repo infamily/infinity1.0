@@ -102,7 +102,7 @@ function showLess(){
         <i>output:</i> {% if not translation %}{{object.deliverables}}{% else %}{{translation.deliverables}}{% endif %}
 	</div>
 
-	<div align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
+	<div id="task-list" align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 
     {% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>shared with:</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
 
