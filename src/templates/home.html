@@ -90,7 +90,37 @@
       </div>
 	</div>
 </div>
+<script>
+$(document).ready(function(){
+    $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+    $('#ichart').css('color', 'black');
+});
 
+// Click Actions
+    $('#ithink').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
+      $('#ithink').css('color', 'black');
+      $('#ichart').css('color', 'grey');
+      $('#icreate').css('color', 'grey');
+		event.preventDefault();
+    });
+
+    $('#ichart').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+      $('#ithink').css('color', 'grey');
+      $('#ichart').css('color', 'black');
+      $('#icreate').css('color', 'grey');
+		event.preventDefault();
+    });
+
+    $('#icreate').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+      $('#ithink').css('color', 'grey');
+      $('#ichart').css('color', 'grey');
+      $('#icreate').css('color', 'black');
+		event.preventDefault();
+    });
+</script>
 
 <div style="clear:both;">
     <br/>

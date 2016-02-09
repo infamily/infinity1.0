@@ -51,28 +51,18 @@ $(function(){
     // Scroll screen horizontally by one screen
     $('#scroll_arrowleft').on("click",function(event){
       $( "div.row-horizon" ).scrollLeft( -$(window).width() );
+      $('#ithink').css('color', 'black');
+      $('#ichart').css('color', 'grey');
+      $('#icreate').css('color', 'grey');
 			event.preventDefault();
     });
 
     $('#scroll_arrowright').on("click",function(event){
-      $( "div.row-horizon" ).scrollLeft( $(window).width() );
-			event.preventDefault();
-    });
-
-    $('#ithink').on("click",function(event){
-      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
-			event.preventDefault();
-    });
-
-    $('#ichart').on("click",function(event){
-      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
-			event.preventDefault();
-    });
-
-    $('#icreate').on("click",function(event){
       $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+      $('#ithink').css('color', 'grey');
+      $('#ichart').css('color', 'grey');
+      $('#icreate').css('color', 'black');
 			event.preventDefault();
     });
-
 
 });
