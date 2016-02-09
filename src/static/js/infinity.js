@@ -58,4 +58,21 @@ $(function(){
       $( "div.row-horizon" ).scrollLeft( $(window).width() );
 			event.preventDefault();
     });
+
+    $('#ithink').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
+			event.preventDefault();
+    });
+
+    $('#ichart').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+			event.preventDefault();
+    });
+
+    $('#icreate').on("click",function(event){
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+			event.preventDefault();
+    });
+
+
 });
