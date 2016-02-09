@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 11:20-0800\n"
-"PO-Revision-Date: 2016-02-08 21:21+0200\n"
+"POT-Creation-Date: 2016-02-09 03:21-0800\n"
+"PO-Revision-Date: 2016-02-09 13:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -20,15 +20,15 @@ msgstr ""
 #: src/apps/core/forms.py:69 src/apps/core/forms.py:195
 #: src/apps/core/forms.py:321 src/apps/core/forms.py:559
 #: src/apps/core/forms.py:709 src/apps/core/forms.py:854
-#: src/apps/core/forms.py:991 src/apps/core/forms.py:1269
+#: src/apps/core/forms.py:993 src/apps/core/forms.py:1273
 msgid "Create"
 msgstr "创造"
 
 #: src/apps/core/forms.py:91 src/apps/core/forms.py:162
 #: src/apps/core/forms.py:264 src/apps/core/forms.py:417
 #: src/apps/core/forms.py:494 src/apps/core/forms.py:638
-#: src/apps/core/forms.py:789 src/apps/core/forms.py:930
-#: src/apps/core/forms.py:1146 src/apps/core/forms.py:1185
+#: src/apps/core/forms.py:789 src/apps/core/forms.py:932
+#: src/apps/core/forms.py:1150 src/apps/core/forms.py:1189
 #: src/apps/users/forms.py:61
 msgid "Update"
 msgstr "更新"
@@ -125,7 +125,7 @@ msgstr "<b>正文:</b> (信息内容)"
 
 #: src/apps/core/forms.py:230 src/apps/core/forms.py:368
 #: src/apps/core/forms.py:585 src/apps/core/forms.py:739
-#: src/apps/core/forms.py:878 src/apps/core/forms.py:1310
+#: src/apps/core/forms.py:878 src/apps/core/forms.py:1314
 msgid ""
 "<b>Personal</b> (makes the entry visible only to a chosen set of people)"
 msgstr "<b>私人</b> (把发布分享只跟您选择的用户)"
@@ -135,8 +135,8 @@ msgstr "<b>私人</b> (把发布分享只跟您选择的用户)"
 #: src/apps/core/forms.py:517 src/apps/core/forms.py:586
 #: src/apps/core/forms.py:661 src/apps/core/forms.py:740
 #: src/apps/core/forms.py:810 src/apps/core/forms.py:879
-#: src/apps/core/forms.py:952 src/apps/core/forms.py:1010
-#: src/apps/core/forms.py:1202 src/apps/core/forms.py:1311
+#: src/apps/core/forms.py:954 src/apps/core/forms.py:1012
+#: src/apps/core/forms.py:1206 src/apps/core/forms.py:1315
 msgid "<b>Input Language</b> (the language you used to compose this post) "
 msgstr "<b>输入语言</b> (选择您撰写这篇文的主要的语言) "
 
@@ -145,8 +145,8 @@ msgstr "<b>输入语言</b> (选择您撰写这篇文的主要的语言) "
 #: src/apps/core/forms.py:524 src/apps/core/forms.py:591
 #: src/apps/core/forms.py:669 src/apps/core/forms.py:742
 #: src/apps/core/forms.py:817 src/apps/core/forms.py:884
-#: src/apps/core/forms.py:959 src/apps/core/forms.py:1015
-#: src/apps/core/forms.py:1210 src/apps/core/forms.py:1302
+#: src/apps/core/forms.py:961 src/apps/core/forms.py:1017
+#: src/apps/core/forms.py:1214 src/apps/core/forms.py:1306
 msgid "Share with:"
 msgstr "对谁可见："
 
@@ -180,8 +180,8 @@ msgstr "<b>描写:</b> (比如，世界上有多人缺乏清洁饮用水)"
 #: src/apps/core/forms.py:518 src/apps/core/forms.py:587
 #: src/apps/core/forms.py:662 src/apps/core/forms.py:743
 #: src/apps/core/forms.py:811 src/apps/core/forms.py:880
-#: src/apps/core/forms.py:953 src/apps/core/forms.py:1011
-#: src/apps/core/forms.py:1203 src/apps/core/forms.py:1312
+#: src/apps/core/forms.py:955 src/apps/core/forms.py:1013
+#: src/apps/core/forms.py:1207 src/apps/core/forms.py:1316
 msgid ""
 "<b>This is a link</b> (check if you are only linking to existing content)"
 msgstr ""
@@ -192,8 +192,8 @@ msgstr ""
 #: src/apps/core/forms.py:519 src/apps/core/forms.py:588
 #: src/apps/core/forms.py:663 src/apps/core/forms.py:744
 #: src/apps/core/forms.py:812 src/apps/core/forms.py:881
-#: src/apps/core/forms.py:954 src/apps/core/forms.py:1012
-#: src/apps/core/forms.py:1204 src/apps/core/forms.py:1313
+#: src/apps/core/forms.py:956 src/apps/core/forms.py:1014
+#: src/apps/core/forms.py:1208 src/apps/core/forms.py:1317
 msgid "<b>Origin:</b> (of the source)"
 msgstr "<b>来自:</b> (输入网络地址)"
 
@@ -201,9 +201,9 @@ msgstr "<b>来自:</b> (输入网络地址)"
 #: src/apps/core/forms.py:520 src/apps/core/forms.py:582
 #: src/apps/core/forms.py:589 src/apps/core/forms.py:664
 #: src/apps/core/forms.py:745 src/apps/core/forms.py:813
-#: src/apps/core/forms.py:882 src/apps/core/forms.py:955
-#: src/apps/core/forms.py:1013 src/apps/core/forms.py:1205
-#: src/apps/core/forms.py:1314
+#: src/apps/core/forms.py:882 src/apps/core/forms.py:957
+#: src/apps/core/forms.py:1015 src/apps/core/forms.py:1209
+#: src/apps/core/forms.py:1318
 msgid "http://"
 msgstr ""
 
@@ -254,7 +254,7 @@ msgstr "<b>这是历史</b> (如果你要记录个历史上的过去的思路，
 
 #: src/apps/core/forms.py:734 src/apps/core/templates/goal/list2.html.py:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:118 src/templates/home.html:176
+#: src/apps/core/templates/need/detail.html:118 src/templates/home.html:230
 msgid "Goals"
 msgstr "目标"
 
@@ -296,7 +296,7 @@ msgstr ""
 msgid ""
 "Example:\n"
 "\n"
-"We have solar cell assembly, which:\n"
+"To have solar cell assembly, which:\n"
 "- Generates expected electric power output\n"
 "- Passes certain tests of reliability."
 msgstr ""
@@ -310,79 +310,77 @@ msgstr ""
 #: src/apps/core/forms.py:874
 msgid ""
 "<b>Investables:</b> (e.g., enumerate the ranges of quantities you expect to "
-"invest on this milestone in <a href=\"https://github.com/mindey/"
-"IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
+"invest on this milestone.)"
 msgstr ""
 
 #: src/apps/core/forms.py:875
-msgid "people 1\\3, days 10\\20, usd 50\\70"
+msgid "people 1:3, days 10:20, usd 50:70"
 msgstr ""
 
 #: src/apps/core/forms.py:876
 msgid ""
 "<b>Deliverables:</b> (e.g., enumerate the ranges of quantities you expect to "
-"have by completion of this milestone in <a href=\"https://github.com/mindey/"
-"IdeaLib#minimal\">IDL syntax</a>, used used for value computation.)"
+"have by completion of this milestone.)"
 msgstr ""
 
 #: src/apps/core/forms.py:877
-msgid "complete solar assembly drawings 0\\1, solar cell assembly 1\\2"
+msgid "complete solar assembly drawings 0:1, solar cell assembly 1:2"
 msgstr ""
 
-#: src/apps/core/forms.py:956 src/apps/core/forms.py:1014
+#: src/apps/core/forms.py:958 src/apps/core/forms.py:1016
 msgid ""
 "<b>This is a history</b> (check if you are documenting a historical task)"
 msgstr "<b>这是历史</b> (如果你要记录个历史上的过去的任务，请选择这个)"
 
-#: src/apps/core/forms.py:1007
+#: src/apps/core/forms.py:1009
 msgid "<b>Task:</b> (e.g., \"Purchase solar cells\", text in title.)"
 msgstr ""
 
-#: src/apps/core/forms.py:1008
+#: src/apps/core/forms.py:1010
 msgid "Type the name of the task."
 msgstr ""
 
-#: src/apps/core/forms.py:1009
+#: src/apps/core/forms.py:1011
 msgid ""
 "<b>Priority:</b> (integer, e.g., 1,2,3.. - used for ordering, smaller number "
 "means the task has to be done earlier)"
 msgstr ""
 
-#: src/apps/core/forms.py:1072 src/apps/core/forms.py:1078
+#: src/apps/core/forms.py:1076 src/apps/core/forms.py:1082
 msgid "Add & Go"
 msgstr "进行"
 
-#: src/apps/core/forms.py:1101
+#: src/apps/core/forms.py:1105
 msgid "definition, e.g., 'spaceflight beyond the bounderies of galaxies'"
 msgstr "怎么下定义？ 比如《在星系间的空间旅行》"
 
-#: src/apps/core/forms.py:1206 src/apps/core/forms.py:1315
+#: src/apps/core/forms.py:1210 src/apps/core/forms.py:1319
 msgid ""
 "<b>This is a history</b> (check if you are documenting a project of the past)"
 msgstr "<b>这是历史</b> (如果你要记录个历史上的过去的计划，请选择这个)"
 
-#: src/apps/core/forms.py:1299
+#: src/apps/core/forms.py:1303
 #: src/apps/core/templates/create_menu_links.html:81
 #: src/apps/core/templates/plan/create.html:15 src/templates/home.html.py:78
 msgid "Idea"
 msgstr "思路"
 
-#: src/apps/core/forms.py:1301
+#: src/apps/core/forms.py:1305
 msgid "Members"
 msgstr "成员"
 
-#: src/apps/core/forms.py:1304
+#: src/apps/core/forms.py:1308
 msgid "<b>Name:</b> (e.g., \"Solar Water Project\".)"
 msgstr "<b>项目名:</b> (比如，太阳水项目)"
 
-#: src/apps/core/forms.py:1306
+#: src/apps/core/forms.py:1310
 msgid ""
 "<b>Situation:</b> (Describe your current situation by listing the things "
 "that you have, including access.)"
 msgstr ""
 "<b>情况:</b> (描写您的现实情况，包括你的地方，有关的财产，对资源的访问)"
 
-#: src/apps/core/forms.py:1307
+#: src/apps/core/forms.py:1311
 msgid ""
 "Example:\n"
 "\n"
@@ -404,11 +402,11 @@ msgstr ""
 "- 车\n"
 "- 1500人民币"
 
-#: src/apps/core/forms.py:1308
+#: src/apps/core/forms.py:1312
 msgid "<b>Deliverable:</b> (Describe what do you expect to get.)"
 msgstr "<b>目的地:</b> (描写您期待的后果)"
 
-#: src/apps/core/forms.py:1309
+#: src/apps/core/forms.py:1313
 msgid ""
 "Example:\n"
 "\n"
@@ -456,6 +454,7 @@ msgid "reversalerror"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:85
+#: src/templates/account/detail.html:61
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr "<i class=\"fa fa-rmb\"></i> 投资"
 
@@ -555,10 +554,10 @@ msgstr "在太空中航行的工具"
 #: src/apps/core/templates/plan/detail.html:159
 #: src/apps/core/templates/step/detail.html:118
 #: src/apps/core/templates/task/detail.html:106
-#: src/apps/core/templates/work/detail.html:126 src/templates/home.html:132
-#: src/templates/home.html.py:199 src/templates/home.html:274
-#: src/templates/home.html.py:352 src/templates/home.html:431
-#: src/templates/home.html.py:511 src/templates/home.html:587
+#: src/apps/core/templates/work/detail.html:126 src/templates/home.html:186
+#: src/templates/home.html.py:253 src/templates/home.html:328
+#: src/templates/home.html.py:406 src/templates/home.html:485
+#: src/templates/home.html.py:565 src/templates/home.html:641
 msgid "link"
 msgstr "链接"
 
@@ -706,14 +705,14 @@ msgstr "翻译:"
 #: src/apps/core/templates/plan/detail.html:125
 #: src/apps/core/templates/step/detail.html:77
 #: src/apps/core/templates/task/detail.html:77
-#: src/apps/core/templates/work/detail.html:78 src/templates/home.html:130
-#: src/templates/home.html.py:136 src/templates/home.html:197
-#: src/templates/home.html.py:203 src/templates/home.html:272
-#: src/templates/home.html.py:278 src/templates/home.html:350
-#: src/templates/home.html.py:356 src/templates/home.html:429
-#: src/templates/home.html.py:435 src/templates/home.html:509
-#: src/templates/home.html.py:515 src/templates/home.html:585
-#: src/templates/home.html.py:591
+#: src/apps/core/templates/work/detail.html:78 src/templates/home.html:184
+#: src/templates/home.html.py:190 src/templates/home.html:251
+#: src/templates/home.html.py:257 src/templates/home.html:326
+#: src/templates/home.html.py:332 src/templates/home.html:404
+#: src/templates/home.html.py:410 src/templates/home.html:483
+#: src/templates/home.html.py:489 src/templates/home.html:563
+#: src/templates/home.html.py:569 src/templates/home.html:639
+#: src/templates/home.html.py:645
 msgid "historical"
 msgstr "历史的"
 
@@ -736,7 +735,7 @@ msgstr "谁可见:"
 
 #: src/apps/core/templates/goal/detail.html:130
 #: src/apps/core/templates/idea/list2.html:6
-#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:246
+#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:300
 msgid "Ideas"
 msgstr "思路"
 
@@ -779,7 +778,7 @@ msgstr ""
 
 #: src/apps/core/templates/idea/detail.html:136
 #: src/apps/core/templates/plan/list2.html:6
-#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:325
+#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:379
 msgid "Plans"
 msgstr "计划"
 
@@ -827,7 +826,7 @@ msgstr "情况"
 msgid "deliverable"
 msgstr "目的地"
 
-#: src/apps/core/templates/plan/detail.html:153 src/templates/home.html:403
+#: src/apps/core/templates/plan/detail.html:153 src/templates/home.html:457
 msgid "Steps"
 msgstr "步骤"
 
@@ -904,7 +903,7 @@ msgstr ""
 msgid "Need succesfully deleted"
 msgstr "需要创造成功"
 
-#: src/apps/core/views/need.py:133
+#: src/apps/core/views/need.py:134
 msgid "Need succesfully updated"
 msgstr ""
 
@@ -996,25 +995,33 @@ msgstr "评论"
 msgid "review the things you are investing into"
 msgstr "检查要投资于事"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:120
+#: src/apps/payments/templates/paypal/transaction/create.html:62
+msgid ""
+"Read our <a href='/policy/'>policy</a>. It is our initial stage, don't "
+"invest or promote to people you don't know personally."
+msgstr ""
+"请阅读我们的 <a href='/policy/'>可接受使用策略</a>。这是我们的起步阶段，请不"
+"要投资或邀请不认识的者。"
+
+#: src/apps/payments/templates/paypal/transaction/create.html:121
 msgid "Size of Opportunity"
 msgstr "机会的大小"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:121
+#: src/apps/payments/templates/paypal/transaction/create.html:122
 msgid "Amount to Invest"
 msgstr "投资的大小"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:122
+#: src/apps/payments/templates/paypal/transaction/create.html:123
 msgid "Matched Hours to be Created"
 msgstr "会生成的匹配小时数"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:201
-#: src/apps/payments/templates/paypal/transaction/create.html:210
+#: src/apps/payments/templates/paypal/transaction/create.html:202
+#: src/apps/payments/templates/paypal/transaction/create.html:211
 msgid "matched hours:"
 msgstr "匹配小时:"
 
-#: src/apps/payments/templates/paypal/transaction/create.html:202
-#: src/apps/payments/templates/paypal/transaction/create.html:211
+#: src/apps/payments/templates/paypal/transaction/create.html:203
+#: src/apps/payments/templates/paypal/transaction/create.html:212
 msgid "rights to future matched hours:"
 msgstr "权利对未来会匹配小时:"
 
@@ -1147,19 +1154,19 @@ msgstr ""
 msgid "date joined"
 msgstr ""
 
-#: src/apps/users/views.py:34
+#: src/apps/users/views.py:35
 msgid "Invitation to conversation has been sent"
 msgstr ""
 
-#: src/apps/users/views.py:63
+#: src/apps/users/views.py:64
 msgid "User with this email already exists"
 msgstr ""
 
-#: src/apps/users/views.py:67
+#: src/apps/users/views.py:68
 msgid "User with this name already exists"
 msgstr ""
 
-#: src/apps/users/views.py:278
+#: src/apps/users/views.py:279
 msgid "User succesfully updated"
 msgstr "用户更新成功"
 
@@ -1187,12 +1194,12 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
-#: src/templates/about.html:55 src/templates/base.html.py:123
+#: src/templates/about.html:55 src/templates/base.html.py:128
 #: src/templates/data.html:10
 msgid "Open Data"
 msgstr "开放数据"
 
-#: src/templates/about.html:56 src/templates/base.html.py:125
+#: src/templates/about.html:56 src/templates/base.html.py:130
 #: src/templates/dev.html:10
 msgid "Open Source"
 msgstr "开放代码"
@@ -1327,7 +1334,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:161
+#: src/templates/account/login.html:10 src/templates/base.html.py:166
 msgid "Sign in"
 msgstr "登陆"
 
@@ -1538,29 +1545,74 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: src/templates/base.html:91
+#: src/templates/base.html:93 src/templates/base.html.py:95
 msgid "Solving Problems"
 msgstr "解决问题"
 
-#: src/templates/base.html:110
-msgid "Support Us"
-msgstr "支持我们"
-
-#: src/templates/base.html:129 src/templates/base.html.py:131
+#: src/templates/base.html:134 src/templates/base.html.py:136
 msgid "public index"
 msgstr "公共目录"
 
-#: src/templates/base.html:136
+#: src/templates/base.html:141
 msgid "About"
 msgstr "关于"
 
-#: src/templates/base.html:142
+#: src/templates/base.html:147
 msgid "Logout"
 msgstr "登出"
 
-#: src/templates/base.html:145 src/templates/base.html.py:147
+#: src/templates/base.html:150 src/templates/base.html.py:152
 msgid "private inbox"
 msgstr "私人目录"
+
+#: src/templates/dev.html:12
+msgid ""
+"\n"
+"<p>We believe in open development and in open communication between "
+"platforms. While people and organizations fork projects their custom needs "
+"and make project copies for securing information for strategic partners and "
+"friends, we want to do our best to make the forked projects able to "
+"communicate between each other, so that people can easily integrate the "
+"information from various forks, when they need to make global decisions "
+"accounting for the needs of everyone, and deciding on what's best for "
+"everyone.</p>\n"
+"\n"
+"<p>This requires time to get it right, therefore, we are not yet open "
+"source. We are working on it.</p>\n"
+"\n"
+"<p>Our future repositories, once we will be open source, are:</p>\n"
+msgstr ""
+
+#: src/templates/dev.html:23
+msgid ""
+"\n"
+"<p>Send us an e-mail to <u>desk@infty.xyz</u> with subject \"<b>dev</b>\" if "
+"you want to get notified, when this will be available.</p>\n"
+msgstr ""
+
+#: src/templates/dev.html:27
+#, fuzzy
+#| msgid "Support Us"
+msgid "About Support"
+msgstr "支持我们"
+
+#: src/templates/dev.html:28
+msgid ""
+"\n"
+"<p>We are not a traditional organization, and not trying to become one. We "
+"are a group of free individuals bound by common aspirations, and while we "
+"had registered a non-profit organization for technical reasons, we keep its "
+"accounts at zero. We want to keep this project not bound to any organization "
+"other than actual free people who do it. You can transparently support them "
+"by direct investment into task deliverables.</p>\n"
+"\n"
+"<p>You can find the tasks that have claimed time, and invest on user pages. "
+"People who worked on Infinity so far, are -- [<a href=\"/user/Mindey/"
+"\">Mindey</a>], [<a href=\"/user/aliev/\">aliev</a>], [<a href=\"/user/ruta/"
+"\">ruta</a>], [<a href=\"/user/iulia-link/\">iulia-link</a>], [<a href=\"/"
+"user/yrik/\">yrik</a>]. We will add more people as they join us by simply "
+"showing their interest and desire to spend time with us.</p>\n"
+msgstr ""
 
 #: src/templates/home.html:43
 msgid "invitations"
@@ -1598,40 +1650,40 @@ msgstr "计划"
 msgid "Search"
 msgstr "查找"
 
-#: src/templates/home.html:103
+#: src/templates/home.html:157
 msgid "Needs"
 msgstr "需要"
 
-#: src/templates/home.html:106
+#: src/templates/home.html:160
 msgid "share a need"
 msgstr "分享个需要"
 
-#: src/templates/home.html:108
+#: src/templates/home.html:162
 msgid "write an open letter"
 msgstr "写了一封公开信"
 
-#: src/templates/home.html:158
+#: src/templates/home.html:212
 msgid "Oops! You have no needs!"
 msgstr "啊呀！您还没有需要！"
 
-#: src/templates/home.html:159
+#: src/templates/home.html:213
 #, fuzzy
 #| msgid "define a need"
 msgid "Define a need"
 msgstr "下定义需要..."
 
-#: src/templates/home.html:160 src/templates/home.html.py:228
-#: src/templates/home.html:306 src/templates/home.html.py:384
-#: src/templates/home.html:462 src/templates/home.html.py:543
-#: src/templates/home.html:619
+#: src/templates/home.html:214 src/templates/home.html.py:282
+#: src/templates/home.html:360 src/templates/home.html.py:438
+#: src/templates/home.html:516 src/templates/home.html.py:597
+#: src/templates/home.html:673
 msgid "...or view"
 msgstr "...或者看"
 
-#: src/templates/home.html:160
+#: src/templates/home.html:214
 msgid "<u>discussion board</u>"
 msgstr ""
 
-#: src/templates/home.html:163
+#: src/templates/home.html:217
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
@@ -1641,31 +1693,31 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:177
+#: src/templates/home.html:231
 msgid "define a problem"
 msgstr "下定义个问题"
 
-#: src/templates/home.html:223 src/templates/home.html.py:300
-#: src/templates/home.html:378 src/templates/home.html.py:457
-#: src/templates/home.html:538 src/templates/home.html.py:614
+#: src/templates/home.html:277 src/templates/home.html.py:354
+#: src/templates/home.html:432 src/templates/home.html.py:511
+#: src/templates/home.html:592 src/templates/home.html.py:668
 msgid "see more"
 msgstr "查看更多"
 
-#: src/templates/home.html:226
+#: src/templates/home.html:280
 msgid "Oops! You have no goals!"
 msgstr "啊呀！您还没有目标！"
 
-#: src/templates/home.html:227
+#: src/templates/home.html:281
 msgid "Add a problem"
 msgstr "下定义个问题"
 
-#: src/templates/home.html:228 src/templates/home.html.py:306
-#: src/templates/home.html:384 src/templates/home.html.py:462
-#: src/templates/home.html:543 src/templates/home.html.py:619
+#: src/templates/home.html:282 src/templates/home.html.py:360
+#: src/templates/home.html:438 src/templates/home.html.py:516
+#: src/templates/home.html:597 src/templates/home.html.py:673
 msgid "<u>index</u>"
 msgstr "目录"
 
-#: src/templates/home.html:231
+#: src/templates/home.html:285
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
@@ -1676,19 +1728,19 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:247
+#: src/templates/home.html:301
 msgid "suggest a solution"
 msgstr "提出解决方式"
 
-#: src/templates/home.html:304
+#: src/templates/home.html:358
 msgid "Oops! You have no ideas!"
 msgstr "啊呀！您还没有思路！"
 
-#: src/templates/home.html:305
+#: src/templates/home.html:359
 msgid "Add a solution"
 msgstr "提出解决方式"
 
-#: src/templates/home.html:309
+#: src/templates/home.html:363
 msgid ""
 "\n"
 "                <p><i><u>Example ideas:</u></i></p>\n"
@@ -1701,19 +1753,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:327
+#: src/templates/home.html:381
 msgid "start a project"
 msgstr "开始个项目"
 
-#: src/templates/home.html:382
+#: src/templates/home.html:436
 msgid "Oops! You have no plans!"
 msgstr "啊呀！您还没有计划！"
 
-#: src/templates/home.html:383
+#: src/templates/home.html:437
 msgid "Add a project"
 msgstr "开始个项目"
 
-#: src/templates/home.html:386
+#: src/templates/home.html:440
 msgid ""
 "\n"
 "\n"
@@ -1726,19 +1778,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:405
+#: src/templates/home.html:459
 msgid "break it down"
 msgstr "把它分解"
 
-#: src/templates/home.html:460
+#: src/templates/home.html:514
 msgid "Oops! You have no steps!"
 msgstr "啊呀！您还没有步骤！"
 
-#: src/templates/home.html:461
+#: src/templates/home.html:515
 msgid "Start a project to add milestones"
 msgstr "开始个项目，然后对它附加步骤"
 
-#: src/templates/home.html:465
+#: src/templates/home.html:519
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1756,23 +1808,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:485
+#: src/templates/home.html:539
 msgid "Tasks"
 msgstr "任务"
 
-#: src/templates/home.html:487
+#: src/templates/home.html:541
 msgid "execute it"
 msgstr "把它执行"
 
-#: src/templates/home.html:541
+#: src/templates/home.html:595
 msgid "Oops! You have no tasks!"
 msgstr ""
 
-#: src/templates/home.html:542
+#: src/templates/home.html:596
 msgid "Choose a milestone to add tasks"
 msgstr ""
 
-#: src/templates/home.html:545
+#: src/templates/home.html:599
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1781,23 +1833,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:561
+#: src/templates/home.html:615
 msgid "Works"
 msgstr "工作"
 
-#: src/templates/home.html:563
+#: src/templates/home.html:617
 msgid "did it"
 msgstr "做啦！"
 
-#: src/templates/home.html:617
+#: src/templates/home.html:671
 msgid "Oops! You have no works!"
 msgstr "啊呀！您还没有工作！"
 
-#: src/templates/home.html:618
+#: src/templates/home.html:672
 msgid "Choose a task to add works"
 msgstr ""
 
-#: src/templates/home.html:621
+#: src/templates/home.html:675
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1806,7 +1858,7 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:631
+#: src/templates/home.html:685
 msgid "People-centric economy."
 msgstr "— 以人为本的经济 —"
 
