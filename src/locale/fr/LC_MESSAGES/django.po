@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 06:43-0800\n"
+"POT-Creation-Date: 2016-02-10 07:17-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -526,10 +526,10 @@ msgstr ""
 #: src/apps/core/templates/plan/detail.html:160
 #: src/apps/core/templates/step/detail.html:118
 #: src/apps/core/templates/task/detail.html:106
-#: src/apps/core/templates/work/detail.html:126 src/templates/home.html:186
-#: src/templates/home.html.py:253 src/templates/home.html:327
-#: src/templates/home.html.py:412 src/templates/home.html:495
-#: src/templates/home.html.py:576 src/templates/home.html:652
+#: src/apps/core/templates/work/detail.html:126 src/templates/home.html:182
+#: src/templates/home.html.py:249 src/templates/home.html:323
+#: src/templates/home.html.py:408 src/templates/home.html:491
+#: src/templates/home.html.py:572 src/templates/home.html:648
 msgid "link"
 msgstr ""
 
@@ -663,14 +663,14 @@ msgstr ""
 #: src/apps/core/templates/plan/detail.html:125
 #: src/apps/core/templates/step/detail.html:77
 #: src/apps/core/templates/task/detail.html:77
-#: src/apps/core/templates/work/detail.html:78 src/templates/home.html:184
-#: src/templates/home.html.py:190 src/templates/home.html:251
-#: src/templates/home.html.py:257 src/templates/home.html:325
-#: src/templates/home.html.py:331 src/templates/home.html:410
-#: src/templates/home.html.py:416 src/templates/home.html:493
-#: src/templates/home.html.py:499 src/templates/home.html:574
-#: src/templates/home.html.py:580 src/templates/home.html:650
-#: src/templates/home.html.py:656
+#: src/apps/core/templates/work/detail.html:78 src/templates/home.html:180
+#: src/templates/home.html.py:186 src/templates/home.html:247
+#: src/templates/home.html.py:253 src/templates/home.html:321
+#: src/templates/home.html.py:327 src/templates/home.html:406
+#: src/templates/home.html.py:412 src/templates/home.html:489
+#: src/templates/home.html.py:495 src/templates/home.html:570
+#: src/templates/home.html.py:576 src/templates/home.html:646
+#: src/templates/home.html.py:652
 msgid "historical"
 msgstr ""
 
@@ -693,7 +693,7 @@ msgstr ""
 
 #: src/apps/core/templates/goal/detail.html:130
 #: src/apps/core/templates/idea/list2.html:6
-#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:300
+#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:296
 msgid "Ideas"
 msgstr ""
 
@@ -708,7 +708,7 @@ msgstr ""
 
 #: src/apps/core/templates/goal/list2.html:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:118 src/templates/home.html:230
+#: src/apps/core/templates/need/detail.html:118 src/templates/home.html:226
 msgid "Goals"
 msgstr ""
 
@@ -742,7 +742,7 @@ msgstr ""
 
 #: src/apps/core/templates/idea/detail.html:136
 #: src/apps/core/templates/plan/list2.html:6
-#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:385
+#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:381
 msgid "Plans"
 msgstr ""
 
@@ -798,7 +798,7 @@ msgstr ""
 msgid "situation"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:154 src/templates/home.html:467
+#: src/apps/core/templates/plan/detail.html:154 src/templates/home.html:463
 msgid "Steps"
 msgstr ""
 
@@ -1611,34 +1611,30 @@ msgstr ""
 msgid "Needs"
 msgstr ""
 
-#: src/templates/home.html:160
-msgid "share a need"
+#: src/templates/home.html:159
+msgid "write a letter"
 msgstr ""
 
-#: src/templates/home.html:162
-msgid "write an open letter"
-msgstr ""
-
-#: src/templates/home.html:212
+#: src/templates/home.html:208
 msgid "Oops! You have no needs!"
 msgstr ""
 
-#: src/templates/home.html:213
+#: src/templates/home.html:209
 msgid "Define a need"
 msgstr ""
 
-#: src/templates/home.html:214 src/templates/home.html.py:282
-#: src/templates/home.html:366 src/templates/home.html.py:448
-#: src/templates/home.html:526 src/templates/home.html.py:608
-#: src/templates/home.html:684
+#: src/templates/home.html:210 src/templates/home.html.py:278
+#: src/templates/home.html:362 src/templates/home.html.py:444
+#: src/templates/home.html:522 src/templates/home.html.py:604
+#: src/templates/home.html:680
 msgid "...or view"
 msgstr ""
 
-#: src/templates/home.html:214
+#: src/templates/home.html:210
 msgid "<u>discussion board</u>"
 msgstr ""
 
-#: src/templates/home.html:217
+#: src/templates/home.html:213
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
@@ -1648,31 +1644,31 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:231
+#: src/templates/home.html:227
 msgid "define a problem"
 msgstr ""
 
-#: src/templates/home.html:277 src/templates/home.html.py:360
-#: src/templates/home.html:442 src/templates/home.html.py:521
-#: src/templates/home.html:603 src/templates/home.html.py:679
+#: src/templates/home.html:273 src/templates/home.html.py:356
+#: src/templates/home.html:438 src/templates/home.html.py:517
+#: src/templates/home.html:599 src/templates/home.html.py:675
 msgid "see more"
 msgstr ""
 
-#: src/templates/home.html:280
+#: src/templates/home.html:276
 msgid "Oops! You have no goals!"
 msgstr ""
 
-#: src/templates/home.html:281
+#: src/templates/home.html:277
 msgid "Add a problem"
 msgstr ""
 
-#: src/templates/home.html:282 src/templates/home.html.py:366
-#: src/templates/home.html:448 src/templates/home.html.py:526
-#: src/templates/home.html:608 src/templates/home.html.py:684
+#: src/templates/home.html:278 src/templates/home.html.py:362
+#: src/templates/home.html:444 src/templates/home.html.py:522
+#: src/templates/home.html:604 src/templates/home.html.py:680
 msgid "<u>index</u>"
 msgstr ""
 
-#: src/templates/home.html:285
+#: src/templates/home.html:281
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
@@ -1683,19 +1679,19 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:301
+#: src/templates/home.html:297
 msgid "suggest a solution"
 msgstr ""
 
-#: src/templates/home.html:364
+#: src/templates/home.html:360
 msgid "Oops! You have no ideas!"
 msgstr ""
 
-#: src/templates/home.html:365
+#: src/templates/home.html:361
 msgid "Add a solution"
 msgstr ""
 
-#: src/templates/home.html:369
+#: src/templates/home.html:365
 msgid ""
 "\n"
 "                <p><i><u>Example ideas:</u></i></p>\n"
@@ -1708,19 +1704,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:387
+#: src/templates/home.html:383
 msgid "start a project"
 msgstr ""
 
-#: src/templates/home.html:446
+#: src/templates/home.html:442
 msgid "Oops! You have no plans!"
 msgstr ""
 
-#: src/templates/home.html:447
+#: src/templates/home.html:443
 msgid "Add a project"
 msgstr ""
 
-#: src/templates/home.html:450
+#: src/templates/home.html:446
 msgid ""
 "\n"
 "\n"
@@ -1733,19 +1729,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:469
+#: src/templates/home.html:465
 msgid "break it down"
 msgstr ""
 
-#: src/templates/home.html:524
+#: src/templates/home.html:520
 msgid "Oops! You have no steps!"
 msgstr ""
 
-#: src/templates/home.html:525
+#: src/templates/home.html:521
 msgid "Start a project to add milestones"
 msgstr ""
 
-#: src/templates/home.html:529
+#: src/templates/home.html:525
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1763,23 +1759,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:549
+#: src/templates/home.html:545
 msgid "Tasks"
 msgstr ""
 
-#: src/templates/home.html:551
+#: src/templates/home.html:547
 msgid "execute it"
 msgstr ""
 
-#: src/templates/home.html:606
+#: src/templates/home.html:602
 msgid "Oops! You have no tasks!"
 msgstr ""
 
-#: src/templates/home.html:607
+#: src/templates/home.html:603
 msgid "Choose a milestone to add tasks"
 msgstr ""
 
-#: src/templates/home.html:610
+#: src/templates/home.html:606
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1788,23 +1784,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:626
+#: src/templates/home.html:622
 msgid "Works"
 msgstr ""
 
-#: src/templates/home.html:628
+#: src/templates/home.html:624
 msgid "did it"
 msgstr ""
 
-#: src/templates/home.html:682
+#: src/templates/home.html:678
 msgid "Oops! You have no works!"
 msgstr ""
 
-#: src/templates/home.html:683
+#: src/templates/home.html:679
 msgid "Choose a task to add works"
 msgstr ""
 
-#: src/templates/home.html:686
+#: src/templates/home.html:682
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1813,7 +1809,7 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:696
+#: src/templates/home.html:692
 msgid "People-centric economy."
 msgstr ""
 

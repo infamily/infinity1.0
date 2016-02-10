@@ -156,11 +156,7 @@ $(document).ready(function(){
             <div class="panel-heading">
                 {% trans "Needs" %}
                 &nbsp; <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>
-                    {% if request.get_full_path == '/i' %}
-                    {% trans "share a need" %}
-                    {% else %}
-                    {% trans "write an open letter" %}
-                    {% endif %}
+                    {% trans "write a letter" %}
                 </b>
 
                 <div style="display:inline-block; float: right;">
@@ -207,6 +203,7 @@ $(document).ready(function(){
                             <p>{{need.translation.content|markdown|truncatewords_html:34}}</p>
                         {% endif %}
                     {% endfor %}
+					<!--<a href="need-list">see more</a> -->
                 {% else %}
                     <center>
                         <p>{% trans "Oops! You have no needs!" %}</p>
