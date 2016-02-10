@@ -296,18 +296,18 @@ $(document).ready(function(){
             <div class="panel-heading">
                 <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>&nbsp;
                 <a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "suggest a solution" %}</b>
-            </div>
 
-            <div style="display:inline-block; float: right;">
-                <form method="post" style="display:inline;">{% csrf_token %}
-                    <select name="ideas" onchange="this.form.submit()">
-                        {% for value in dropdown_list %}
-                        <option value="{{ value }}" {% if items.ideas == value %}selected{% endif %}>
-                        {{ value }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </form>
+				<div style="display:inline-block; float: right;">
+					<form method="post" style="display:inline;">{% csrf_token %}
+						<select name="ideas" onchange="this.form.submit()">
+							{% for value in dropdown_list %}
+							<option value="{{ value }}" {% if items.ideas == value %}selected{% endif %}>
+							{{ value }}
+							</option>
+							{% endfor %}
+						</select>
+					</form>
+				</div>
             </div>
 
             <div class="panel-body">
