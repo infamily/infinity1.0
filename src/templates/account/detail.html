@@ -29,9 +29,8 @@
 
 <!-- display user's contributions -->
 <!--<button class="btn">{{ object.username }} is interested in</button> : {% for key,value in interest_counts.items %} <button class="btn btn-default">{{ key }}: {{ value }}</button> {% endfor %}-->
-<center><h2 style="font-family:Courier New; font-size:24px;">Comment.objects.filter(hours_claimed__gt=0)</h2></center>
-<br/>
-<div class="panel panel-default">
+<div class="panel panel-default" style="border-width: 1px 1px 1px 1px; background-color:#fcfcfc;">
+    <center><h2 style="font-family:Courier New; color: grey; font-size:20px;">{% trans "Comments with positive time claimed:"%}</h2></center>
 {% for comment_group in comment_list reversed %}
 {% if comment_group.items  %}
 <div class="panel-heading">{% if comment_group.goals %}<u>Problems</u>: {% for goal in comment_group.goals %} <a href="">{{ goal.type.name }}: {{ goal.name }}</a>{%if not forloop.last%}, {%endif%}{% endfor %} {% endif %}</div>

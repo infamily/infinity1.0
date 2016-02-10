@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 07:48-0800\n"
-"PO-Revision-Date: 2016-02-10 18:04+0200\n"
+"POT-Creation-Date: 2016-02-10 09:58-0800\n"
+"PO-Revision-Date: 2016-02-10 20:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -460,7 +460,7 @@ msgid "reversalerror"
 msgstr ""
 
 #: src/apps/core/templates/comment/list.html:85
-#: src/templates/account/detail.html:61
+#: src/templates/account/detail.html:60
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr "<i class=\"fa fa-rmb\"></i> 投资"
 
@@ -1243,6 +1243,10 @@ msgstr ""
 #: src/templates/account/account_inactive.html:10
 msgid "This account is inactive."
 msgstr ""
+
+#: src/templates/account/detail.html:33
+msgid "Comments with positive time claimed:"
+msgstr "申报时间大于零的评论:"
 
 #: src/templates/account/email.html:6
 msgid "Account"
