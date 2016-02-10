@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 09:58-0800\n"
-"PO-Revision-Date: 2016-02-10 20:04+0200\n"
+"POT-Creation-Date: 2016-02-10 10:19-0800\n"
+"PO-Revision-Date: 2016-02-10 20:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -367,7 +367,7 @@ msgstr "<b>这是历史</b> (如果你要记录个历史上的过去的计划，
 
 #: src/apps/core/forms.py:1303
 #: src/apps/core/templates/create_menu_links.html:65
-#: src/apps/core/templates/plan/create.html:19 src/templates/home.html.py:78
+#: src/apps/core/templates/plan/create.html:19
 msgid "Idea"
 msgstr "思路"
 
@@ -765,7 +765,7 @@ msgstr ""
 "<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;\">思路"
 "是一种原理。下定义方法或者发明。</font></i></center>\n"
 
-#: src/apps/core/templates/idea/create.html:19 src/templates/home.html.py:77
+#: src/apps/core/templates/idea/create.html:19
 msgid "Goal"
 msgstr "目标"
 
@@ -1677,9 +1677,17 @@ msgstr "帮助"
 msgid "compose"
 msgstr "作文"
 
+#: src/templates/home.html:77
+msgid "Goal (problem)"
+msgstr "目标 (问题)"
+
+#: src/templates/home.html:78
+msgid "Idea (solution)"
+msgstr "思路 (解决方式)"
+
 #: src/templates/home.html:79
-msgid "Plan"
-msgstr "计划"
+msgid "Plan (project)"
+msgstr "计划 (项目)"
 
 #: src/templates/home.html:83 src/templates/search_form.html.py:17
 msgid "Search"
@@ -2045,6 +2053,9 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "记住"
+
+#~ msgid "Plan"
+#~ msgstr "计划"
 
 #~ msgid "share a need"
 #~ msgstr "分享个需要"

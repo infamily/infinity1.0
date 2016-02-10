@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 09:58-0800\n"
-"PO-Revision-Date: 2016-02-10 20:14+0200\n"
+"POT-Creation-Date: 2016-02-10 10:19-0800\n"
+"PO-Revision-Date: 2016-02-10 20:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -386,7 +386,7 @@ msgstr ""
 
 #: src/apps/core/forms.py:1303
 #: src/apps/core/templates/create_menu_links.html:65
-#: src/apps/core/templates/plan/create.html:19 src/templates/home.html.py:78
+#: src/apps/core/templates/plan/create.html:19
 msgid "Idea"
 msgstr "発想"
 
@@ -769,7 +769,7 @@ msgstr ""
 "<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;\">発想"
 "とは原理である。方法を定義しましょう。</font></i></center>\n"
 
-#: src/apps/core/templates/idea/create.html:19 src/templates/home.html.py:77
+#: src/apps/core/templates/idea/create.html:19
 msgid "Goal"
 msgstr "目的"
 
@@ -1681,9 +1681,17 @@ msgstr "ヘルプ"
 msgid "compose"
 msgstr "作成"
 
+#: src/templates/home.html:77
+msgid "Goal (problem)"
+msgstr "目的（問題）"
+
+#: src/templates/home.html:78
+msgid "Idea (solution)"
+msgstr "発想（解決）"
+
 #: src/templates/home.html:79
-msgid "Plan"
-msgstr "企画"
+msgid "Plan (project)"
+msgstr "計画（企画）"
 
 #: src/templates/home.html:83 src/templates/search_form.html.py:17
 msgid "Search"
@@ -2049,6 +2057,9 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr ""
+
+#~ msgid "Plan"
+#~ msgstr "企画"
 
 #~ msgid "share a need"
 #~ msgstr "需要を共有する"

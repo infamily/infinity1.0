@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 09:58-0800\n"
-"PO-Revision-Date: 2016-02-10 20:08+0200\n"
+"POT-Creation-Date: 2016-02-10 10:19-0800\n"
+"PO-Revision-Date: 2016-02-10 20:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -401,7 +401,7 @@ msgstr ""
 
 #: src/apps/core/forms.py:1303
 #: src/apps/core/templates/create_menu_links.html:65
-#: src/apps/core/templates/plan/create.html:19 src/templates/home.html.py:78
+#: src/apps/core/templates/plan/create.html:19
 msgid "Idea"
 msgstr "Идея"
 
@@ -784,7 +784,7 @@ msgid ""
 "\">Idea is a principle. Define a rationale.</font></i></center>\n"
 msgstr ""
 
-#: src/apps/core/templates/idea/create.html:19 src/templates/home.html.py:77
+#: src/apps/core/templates/idea/create.html:19
 msgid "Goal"
 msgstr "Цель"
 
@@ -1742,9 +1742,17 @@ msgstr "Помощь"
 msgid "compose"
 msgstr "Написать"
 
+#: src/templates/home.html:77
+msgid "Goal (problem)"
+msgstr "Цель (проблема)"
+
+#: src/templates/home.html:78
+msgid "Idea (solution)"
+msgstr "Идея (решение)"
+
 #: src/templates/home.html:79
-msgid "Plan"
-msgstr "План"
+msgid "Plan (project)"
+msgstr "План (проект)"
 
 #: src/templates/home.html:83 src/templates/search_form.html.py:17
 msgid "Search"
@@ -2225,6 +2233,9 @@ msgstr "Адрес электронной почты и / или пароль у
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Запомнить"
+
+#~ msgid "Plan"
+#~ msgstr "План"
 
 #~ msgid "share a need"
 #~ msgstr "поделиться необходимость"

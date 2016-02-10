@@ -74,9 +74,9 @@
 		<span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
-		  <li><a href="{% url 'goal-create' %}">{% trans "Goal" %}</a></li>
-		  <li><a href="{% url 'idea-create' %}">{% trans "Idea" %}</a></li>
-		  <li><a href="{% url 'plan-create' %}">{% trans "Plan" %}</a></li>
+		  <li><a href="{% url 'goal-create' %}">{% trans "Goal (problem)" %}</a></li>
+		  <li><a href="{% url 'idea-create' %}">{% trans "Idea (solution)" %}</a></li>
+		  <li><a href="{% url 'plan-create' %}">{% trans "Plan (project)" %}</a></li>
 	  </ul>
 
       <form action="{{request.get_full_path}}" method="get" style="display: inline; margin-left:10px;">

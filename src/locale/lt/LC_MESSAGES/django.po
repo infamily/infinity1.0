@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 09:58-0800\n"
-"PO-Revision-Date: 2016-02-10 20:04+0200\n"
+"POT-Creation-Date: 2016-02-10 10:19-0800\n"
+"PO-Revision-Date: 2016-02-10 20:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -271,7 +271,7 @@ msgstr ""
 
 #: src/apps/core/forms.py:734
 msgid "Goals (problems)"
-msgstr "Tikslai (problemdos)"
+msgstr "Tikslai (problemos)"
 
 #: src/apps/core/forms.py:736
 msgid "<b>Name:</b> (e.g., \"Solar Water Condenser\", used in title.)"
@@ -390,7 +390,7 @@ msgstr ""
 
 #: src/apps/core/forms.py:1303
 #: src/apps/core/templates/create_menu_links.html:65
-#: src/apps/core/templates/plan/create.html:19 src/templates/home.html.py:78
+#: src/apps/core/templates/plan/create.html:19
 msgid "Idea"
 msgstr "Idėja"
 
@@ -777,7 +777,7 @@ msgstr ""
 "<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;"
 "\">Idėja yra principas. Apibrėžkite būdą arba išradimą.</font></i></center>\n"
 
-#: src/apps/core/templates/idea/create.html:19 src/templates/home.html.py:77
+#: src/apps/core/templates/idea/create.html:19
 msgid "Goal"
 msgstr "Tikslas"
 
@@ -1704,9 +1704,17 @@ msgstr "Pagalba"
 msgid "compose"
 msgstr "Rašyti"
 
+#: src/templates/home.html:77
+msgid "Goal (problem)"
+msgstr "Tikslas (problema)"
+
+#: src/templates/home.html:78
+msgid "Idea (solution)"
+msgstr "Idėja (sprendimas)"
+
 #: src/templates/home.html:79
-msgid "Plan"
-msgstr "Planas"
+msgid "Plan (project)"
+msgstr "Planas (projektas)"
 
 #: src/templates/home.html:83 src/templates/search_form.html.py:17
 msgid "Search"
@@ -2076,6 +2084,9 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Prisiminti"
+
+#~ msgid "Plan"
+#~ msgstr "Planas"
 
 #~ msgid "share a need"
 #~ msgstr "pasidalinti poreikiu"

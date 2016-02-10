@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 09:58-0800\n"
+"POT-Creation-Date: 2016-02-10 10:19-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -352,7 +352,7 @@ msgstr ""
 
 #: src/apps/core/forms.py:1303
 #: src/apps/core/templates/create_menu_links.html:65
-#: src/apps/core/templates/plan/create.html:19 src/templates/home.html.py:78
+#: src/apps/core/templates/plan/create.html:19
 msgid "Idea"
 msgstr ""
 
@@ -723,7 +723,7 @@ msgid ""
 "\">Idea is a principle. Define a rationale.</font></i></center>\n"
 msgstr ""
 
-#: src/apps/core/templates/idea/create.html:19 src/templates/home.html.py:77
+#: src/apps/core/templates/idea/create.html:19
 msgid "Goal"
 msgstr ""
 
@@ -1617,8 +1617,16 @@ msgstr ""
 msgid "compose"
 msgstr ""
 
+#: src/templates/home.html:77
+msgid "Goal (problem)"
+msgstr ""
+
+#: src/templates/home.html:78
+msgid "Idea (solution)"
+msgstr ""
+
 #: src/templates/home.html:79
-msgid "Plan"
+msgid "Plan (project)"
 msgstr ""
 
 #: src/templates/home.html:83 src/templates/search_form.html.py:17
