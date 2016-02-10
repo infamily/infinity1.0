@@ -244,8 +244,8 @@ class NeedCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
-            'select_definition',
             'name',
+            'select_definition',
             'definition',
             'content',
             'language',
@@ -397,8 +397,8 @@ class GoalCreateForm(forms.ModelForm):
             'is_historical',
             'type',
             'name',
-            'need',
             'reason',
+            'need',
             'language',
             'personal',
             'sharewith',
