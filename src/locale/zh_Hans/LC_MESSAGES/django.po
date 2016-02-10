@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 07:17-0800\n"
-"PO-Revision-Date: 2016-02-10 17:34+0200\n"
+"POT-Creation-Date: 2016-02-10 07:48-0800\n"
+"PO-Revision-Date: 2016-02-10 18:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -367,7 +367,7 @@ msgstr "<b>这是历史</b> (如果你要记录个历史上的过去的计划，
 
 #: src/apps/core/forms.py:1303
 #: src/apps/core/templates/create_menu_links.html:65
-#: src/apps/core/templates/plan/create.html:15 src/templates/home.html.py:78
+#: src/apps/core/templates/plan/create.html:19 src/templates/home.html.py:78
 msgid "Idea"
 msgstr "思路"
 
@@ -557,9 +557,9 @@ msgstr "在太空中航行的工具"
 #: src/apps/core/templates/step/detail.html:118
 #: src/apps/core/templates/task/detail.html:106
 #: src/apps/core/templates/work/detail.html:126 src/templates/home.html:182
-#: src/templates/home.html.py:249 src/templates/home.html:323
-#: src/templates/home.html.py:408 src/templates/home.html:491
-#: src/templates/home.html.py:572 src/templates/home.html:648
+#: src/templates/home.html.py:250 src/templates/home.html:324
+#: src/templates/home.html.py:409 src/templates/home.html:492
+#: src/templates/home.html.py:573 src/templates/home.html:649
 msgid "link"
 msgstr "链接"
 
@@ -601,8 +601,8 @@ msgid ""
 "\">Goal is a negation of problem. Define a problem.</font></i></center>\n"
 msgstr ""
 "\n"
-"<center><i><font color=\"grey\">目标是个问题的否定。下定义一下问题。</font></"
-"i></center>\n"
+"<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;\">目标"
+"是个问题的否定。下定义一下问题。</font></i></center>\n"
 
 #: src/apps/core/templates/goal/detail.html:31
 #: src/apps/core/templates/goal/detail.html:71
@@ -703,13 +703,13 @@ msgstr "翻译:"
 #: src/apps/core/templates/step/detail.html:77
 #: src/apps/core/templates/task/detail.html:77
 #: src/apps/core/templates/work/detail.html:78 src/templates/home.html:180
-#: src/templates/home.html.py:186 src/templates/home.html:247
-#: src/templates/home.html.py:253 src/templates/home.html:321
-#: src/templates/home.html.py:327 src/templates/home.html:406
-#: src/templates/home.html.py:412 src/templates/home.html:489
-#: src/templates/home.html.py:495 src/templates/home.html:570
-#: src/templates/home.html.py:576 src/templates/home.html:646
-#: src/templates/home.html.py:652
+#: src/templates/home.html.py:186 src/templates/home.html:248
+#: src/templates/home.html.py:254 src/templates/home.html:322
+#: src/templates/home.html.py:328 src/templates/home.html:407
+#: src/templates/home.html.py:413 src/templates/home.html:490
+#: src/templates/home.html.py:496 src/templates/home.html:571
+#: src/templates/home.html.py:577 src/templates/home.html:647
+#: src/templates/home.html.py:653
 msgid "historical"
 msgstr "历史的"
 
@@ -732,7 +732,7 @@ msgstr "谁可见:"
 
 #: src/apps/core/templates/goal/detail.html:130
 #: src/apps/core/templates/idea/list2.html:6
-#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:296
+#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:297
 msgid "Ideas"
 msgstr "思路"
 
@@ -747,7 +747,7 @@ msgstr "+新的思路"
 
 #: src/apps/core/templates/goal/list2.html:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:118 src/templates/home.html:226
+#: src/apps/core/templates/need/detail.html:118 src/templates/home.html:227
 msgid "Goals"
 msgstr "目标"
 
@@ -755,7 +755,17 @@ msgstr "目标"
 msgid "Idea create"
 msgstr "创造思路"
 
-#: src/apps/core/templates/idea/create.html:15 src/templates/home.html.py:77
+#: src/apps/core/templates/idea/create.html:12
+msgid ""
+"\n"
+"<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;"
+"\">Idea is a principle. Define a rationale.</font></i></center>\n"
+msgstr ""
+"\n"
+"<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;\">思路"
+"是一种原理。下定义方法或者发明。</font></i></center>\n"
+
+#: src/apps/core/templates/idea/create.html:19 src/templates/home.html.py:77
 msgid "Goal"
 msgstr "目标"
 
@@ -781,7 +791,7 @@ msgstr ""
 
 #: src/apps/core/templates/idea/detail.html:136
 #: src/apps/core/templates/plan/list2.html:6
-#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:381
+#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:382
 msgid "Plans"
 msgstr "计划"
 
@@ -810,6 +820,16 @@ msgstr "+附加一个目标"
 msgid "Plan create"
 msgstr "创造项目"
 
+#: src/apps/core/templates/plan/create.html:12
+msgid ""
+"\n"
+"<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;"
+"\">Plan is a journey. Define a destination.</font></i></center>\n"
+msgstr ""
+"\n"
+"<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;\">计划"
+"是一种旅程。下定义一下目的地。</font></i></center>\n"
+
 #: src/apps/core/templates/plan/detail.html:92
 msgid "members:"
 msgstr "成员："
@@ -837,7 +857,7 @@ msgstr "目的地"
 msgid "situation"
 msgstr "情况"
 
-#: src/apps/core/templates/plan/detail.html:154 src/templates/home.html:463
+#: src/apps/core/templates/plan/detail.html:154 src/templates/home.html:464
 msgid "Steps"
 msgstr "步骤"
 
@@ -1669,28 +1689,28 @@ msgstr "需要"
 msgid "write a letter"
 msgstr "写了一封信"
 
-#: src/templates/home.html:208
+#: src/templates/home.html:209
 msgid "Oops! You have no needs!"
 msgstr "啊呀！您还没有需要！"
 
-#: src/templates/home.html:209
+#: src/templates/home.html:210
 #, fuzzy
 #| msgid "define a need"
 msgid "Define a need"
 msgstr "下定义需要..."
 
-#: src/templates/home.html:210 src/templates/home.html.py:278
-#: src/templates/home.html:362 src/templates/home.html.py:444
-#: src/templates/home.html:522 src/templates/home.html.py:604
-#: src/templates/home.html:680
+#: src/templates/home.html:211 src/templates/home.html.py:279
+#: src/templates/home.html:363 src/templates/home.html.py:445
+#: src/templates/home.html:523 src/templates/home.html.py:605
+#: src/templates/home.html:681
 msgid "...or view"
 msgstr "...或者看"
 
-#: src/templates/home.html:210
+#: src/templates/home.html:211
 msgid "<u>discussion board</u>"
 msgstr ""
 
-#: src/templates/home.html:213
+#: src/templates/home.html:214
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
@@ -1700,31 +1720,31 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:227
+#: src/templates/home.html:228
 msgid "define a problem"
 msgstr "下定义个问题"
 
-#: src/templates/home.html:273 src/templates/home.html.py:356
-#: src/templates/home.html:438 src/templates/home.html.py:517
-#: src/templates/home.html:599 src/templates/home.html.py:675
+#: src/templates/home.html:274 src/templates/home.html.py:357
+#: src/templates/home.html:439 src/templates/home.html.py:518
+#: src/templates/home.html:600 src/templates/home.html.py:676
 msgid "see more"
 msgstr "查看更多"
 
-#: src/templates/home.html:276
+#: src/templates/home.html:277
 msgid "Oops! You have no goals!"
 msgstr "啊呀！您还没有目标！"
 
-#: src/templates/home.html:277
+#: src/templates/home.html:278
 msgid "Add a problem"
 msgstr "下定义个问题"
 
-#: src/templates/home.html:278 src/templates/home.html.py:362
-#: src/templates/home.html:444 src/templates/home.html.py:522
-#: src/templates/home.html:604 src/templates/home.html.py:680
+#: src/templates/home.html:279 src/templates/home.html.py:363
+#: src/templates/home.html:445 src/templates/home.html.py:523
+#: src/templates/home.html:605 src/templates/home.html.py:681
 msgid "<u>index</u>"
 msgstr "目录"
 
-#: src/templates/home.html:281
+#: src/templates/home.html:282
 msgid ""
 "\n"
 "                    <p><i><u>Example:</u></i></p>\n"
@@ -1735,19 +1755,19 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:297
+#: src/templates/home.html:298
 msgid "suggest a solution"
 msgstr "提出解决方式"
 
-#: src/templates/home.html:360
+#: src/templates/home.html:361
 msgid "Oops! You have no ideas!"
 msgstr "啊呀！您还没有思路！"
 
-#: src/templates/home.html:361
+#: src/templates/home.html:362
 msgid "Add a solution"
 msgstr "提出解决方式"
 
-#: src/templates/home.html:365
+#: src/templates/home.html:366
 msgid ""
 "\n"
 "                <p><i><u>Example ideas:</u></i></p>\n"
@@ -1760,19 +1780,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:383
+#: src/templates/home.html:384
 msgid "start a project"
 msgstr "开始个项目"
 
-#: src/templates/home.html:442
+#: src/templates/home.html:443
 msgid "Oops! You have no plans!"
 msgstr "啊呀！您还没有计划！"
 
-#: src/templates/home.html:443
+#: src/templates/home.html:444
 msgid "Add a project"
 msgstr "开始个项目"
 
-#: src/templates/home.html:446
+#: src/templates/home.html:447
 msgid ""
 "\n"
 "\n"
@@ -1785,19 +1805,19 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:465
+#: src/templates/home.html:466
 msgid "break it down"
 msgstr "把它分解"
 
-#: src/templates/home.html:520
+#: src/templates/home.html:521
 msgid "Oops! You have no steps!"
 msgstr "啊呀！您还没有步骤！"
 
-#: src/templates/home.html:521
+#: src/templates/home.html:522
 msgid "Start a project to add milestones"
 msgstr "开始个项目，然后对它附加步骤"
 
-#: src/templates/home.html:525
+#: src/templates/home.html:526
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1815,23 +1835,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:545
+#: src/templates/home.html:546
 msgid "Tasks"
 msgstr "任务"
 
-#: src/templates/home.html:547
+#: src/templates/home.html:548
 msgid "execute it"
 msgstr "把它执行"
 
-#: src/templates/home.html:602
+#: src/templates/home.html:603
 msgid "Oops! You have no tasks!"
 msgstr ""
 
-#: src/templates/home.html:603
+#: src/templates/home.html:604
 msgid "Choose a milestone to add tasks"
 msgstr ""
 
-#: src/templates/home.html:606
+#: src/templates/home.html:607
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1840,23 +1860,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:622
+#: src/templates/home.html:623
 msgid "Works"
 msgstr "工作"
 
-#: src/templates/home.html:624
+#: src/templates/home.html:625
 msgid "did it"
 msgstr "做啦！"
 
-#: src/templates/home.html:678
+#: src/templates/home.html:679
 msgid "Oops! You have no works!"
 msgstr "啊呀！您还没有工作！"
 
-#: src/templates/home.html:679
+#: src/templates/home.html:680
 msgid "Choose a task to add works"
 msgstr ""
 
-#: src/templates/home.html:682
+#: src/templates/home.html:683
 msgid ""
 "\n"
 "                <p><i><u>Example:</u></i></p>\n"
@@ -1865,7 +1885,7 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:692
+#: src/templates/home.html:693
 msgid "People-centric economy."
 msgstr "— 以人为本的经济 —"
 
