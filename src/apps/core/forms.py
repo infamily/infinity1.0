@@ -95,8 +95,8 @@ class TranslationUpdateForm(forms.ModelForm):
         self.fields['description'] = forms.CharField(widget=MarkdownWidget())
         self.fields['reason'] = forms.CharField(widget=MarkdownWidget())
         self.fields['objective'] = forms.CharField(widget=MarkdownWidget())
-        self.fields['situation'] = forms.CharField(widget=MarkdownWidget())
         self.fields['deliverable'] = forms.CharField(widget=MarkdownWidget())
+        self.fields['situation'] = forms.CharField(widget=MarkdownWidget())
         self.fields['investables'] = forms.CharField()
         self.fields['deliverables'] = forms.CharField()
 
@@ -731,7 +731,7 @@ class IdeaCreateForm(forms.ModelForm):
                 search_fields=['username__icontains']
             ),
             queryset=User.objects.all(), required=False)
-        self.fields['goal'].label = _('Goals')
+        self.fields['goal'].label = _('Goals (problems)')
 
         self.fields['name'].label = _('<b>Name:</b> (e.g., "Solar Water Condenser", used in title.)')
         self.fields['summary'].label = _('<b>Summary:</b> (e.g., "Use solar panels and Peltier effect to extract water from air.", appears as subtitle.)')
@@ -1228,8 +1228,8 @@ class PlanUpdateForm(forms.ModelForm):
             'is_historical',
             'idea',
             'name',
-            'situation',
             'deliverable',
+            'situation',
             'members',
             'language',
             'personal',
@@ -1342,8 +1342,8 @@ class PlanCreateForm(forms.ModelForm):
             'is_historical',
             'idea',
             'name',
-            'situation',
             'deliverable',
+            'situation',
             'name',
             'members',
             'language',
