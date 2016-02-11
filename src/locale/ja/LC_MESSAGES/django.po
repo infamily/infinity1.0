@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 10:19-0800\n"
-"PO-Revision-Date: 2016-02-10 20:29+0200\n"
+"POT-Creation-Date: 2016-02-10 18:23-0800\n"
+"PO-Revision-Date: 2016-02-11 04:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -429,48 +429,52 @@ msgid ""
 "published on GitHub, so others could easily replicate."
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:45
+#: src/apps/core/templates/comment/list.html:48
 msgid "New comment"
 msgstr "コメントを送る"
 
-#: src/apps/core/templates/comment/list.html:73
+#: src/apps/core/templates/comment/list.html:50
+msgid "Translate"
+msgstr "翻訳する"
+
+#: src/apps/core/templates/comment/list.html:82
 #: src/apps/payments/templates/paypal/transaction/list.html:36
 msgid "tx:"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "initiated"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 #, fuzzy
 #| msgid "compose"
 msgid "completed"
 msgstr "作成"
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "incomplete"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "error"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "reversalerror"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:85
+#: src/apps/core/templates/comment/list.html:94
 #: src/templates/account/detail.html:60
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr "<i class=\"fa fa-jpy\"></i> 投資する"
 
-#: src/apps/core/templates/comment/list.html:97
+#: src/apps/core/templates/comment/list.html:106
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -479,7 +483,7 @@ msgstr "<i class=\"fa fa-jpy\"></i> 投資する"
 msgid "edit"
 msgstr "編集"
 
-#: src/apps/core/templates/comment/list.html:97
+#: src/apps/core/templates/comment/list.html:106
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -487,30 +491,30 @@ msgstr "編集"
 msgid "delete"
 msgstr "削除"
 
-#: src/apps/core/templates/comment/list.html:100
-#: src/apps/core/templates/comment/list.html:102
+#: src/apps/core/templates/comment/list.html:109
+#: src/apps/core/templates/comment/list.html:111
 msgid "reply"
 msgstr "返事する"
 
-#: src/apps/core/templates/comment/list.html:113
-#: src/apps/core/templates/comment/list.html:118
-#: src/apps/core/templates/comment/list.html:123
-#: src/apps/core/templates/comment/list.html:129
+#: src/apps/core/templates/comment/list.html:122
+#: src/apps/core/templates/comment/list.html:127
+#: src/apps/core/templates/comment/list.html:132
+#: src/apps/core/templates/comment/list.html:138
 msgid "Vote Up"
 msgstr "支持票"
 
-#: src/apps/core/templates/comment/list.html:114
-#: src/apps/core/templates/comment/list.html:119
-#: src/apps/core/templates/comment/list.html:124
-#: src/apps/core/templates/comment/list.html:130
+#: src/apps/core/templates/comment/list.html:123
+#: src/apps/core/templates/comment/list.html:128
+#: src/apps/core/templates/comment/list.html:133
+#: src/apps/core/templates/comment/list.html:139
 msgid "Vote Down"
 msgstr "反対票"
 
-#: src/apps/core/templates/comment/list.html:161
+#: src/apps/core/templates/comment/list.html:170
 msgid "credit"
 msgstr "クレジット"
 
-#: src/apps/core/templates/comment/list.html:205
+#: src/apps/core/templates/comment/list.html:214
 msgid "Invite a friend to help!"
 msgstr ""
 
@@ -884,17 +888,17 @@ msgstr ""
 msgid "work"
 msgstr ""
 
-#: src/apps/core/utils.py:211 src/apps/core/utils.py:224
+#: src/apps/core/utils.py:212 src/apps/core/utils.py:225
 #: src/apps/core/views/definition.py:127 src/apps/core/views/step.py:153
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: src/apps/core/views/comment.py:64
+#: src/apps/core/views/comment.py:76
 msgid "Comment succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/comment.py:88
+#: src/apps/core/views/comment.py:100
 msgid "Comment succesfully deleted"
 msgstr ""
 
