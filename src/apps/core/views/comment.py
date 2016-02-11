@@ -11,6 +11,18 @@ from users.mixins import OwnerMixin
 
 from ..utils import JsonView
 from ..utils import update_child_paypal_transactions
+from ..utils import google_translate
+
+
+class AjaxCommentTranslateView(JsonView):
+    """
+    Translate View
+    """
+    def post(self, request, *args, **kwargs):
+        source =  request.POST.dict()
+        translations = google_translate(source,request.LANGUAGE_CODE)
+        return self.json(translations)
+
 
 class AjaxCommentVoteView(JsonView):
     """

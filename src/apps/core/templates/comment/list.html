@@ -7,6 +7,7 @@
 
 {% block extra_js %}
   <script src="{% static 'js/comment_vote.js' %}"></script>
+  <script src="{% static 'js/comment_translate.js' %}"></script>
 {% endblock extra_js %}
 
 {% block extra_css %}
@@ -42,7 +43,13 @@ $(window).bind('scroll', function () {
     }
 });
 </script>
-<button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('');">{% trans "New comment" %}</button>
+    <!-- these tr's seem to work fine without table -->
+    <tr><td align="left">
+    <button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('');">{% trans "New comment" %}</button>
+    </td><td align="right">
+	<button id="translate" type="button" onclick="get_translations();" style="float:right">{% trans "Translate" %}</button>
+    </td></tr>
+
 <br/>
 <br/>
 {% else %}
@@ -51,12 +58,14 @@ $(window).bind('scroll', function () {
 <br/>
 {% endif %}
 
+
 {% for object in object_list %}
 <div id="comment-{{object.id}}" class="comment">
 
-    <div>
+	<div id="source-{{object.id}}">
        {{object.text|markdown}}
-
+    </div>
+	<div id="translation-{{object.id}}" class="translation">
     </div>
 
     <div class="actions">

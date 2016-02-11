@@ -346,4 +346,7 @@ a:visited{
     z-index: 1;
 }
 
-
+.translation {
+    color:#36648b;
+    margin-bottom: 7px;
+}
