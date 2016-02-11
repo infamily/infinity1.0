@@ -3,11 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: src/apps/core/forms.py:364 src/apps/core/forms.py:367
+#: src/apps/core/forms.py:1091
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 07:48-0800\n"
+"POT-Creation-Date: 2016-02-10 18:23-0800\n"
 "PO-Revision-Date: 2016-02-10 17:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -352,7 +354,7 @@ msgstr ""
 
 #: src/apps/core/forms.py:1303
 #: src/apps/core/templates/create_menu_links.html:65
-#: src/apps/core/templates/plan/create.html:19 src/templates/home.html.py:78
+#: src/apps/core/templates/plan/create.html:19
 msgid "Idea"
 msgstr ""
 
@@ -395,48 +397,52 @@ msgid ""
 "published on GitHub, so others could easily replicate."
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:45
+#: src/apps/core/templates/comment/list.html:48
 msgid "New comment"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:73
+#: src/apps/core/templates/comment/list.html:50
+msgid "Translate"
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:82
 #: src/apps/payments/templates/paypal/transaction/list.html:36
 msgid "tx:"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "initiated"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 #, fuzzy
 #| msgid "compose"
 msgid "completed"
 msgstr "Compose"
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "incomplete"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "error"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "reversalerror"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:85
-#: src/templates/account/detail.html:61
+#: src/apps/core/templates/comment/list.html:94
+#: src/templates/account/detail.html:60
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:97
+#: src/apps/core/templates/comment/list.html:106
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -445,7 +451,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:97
+#: src/apps/core/templates/comment/list.html:106
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -453,30 +459,30 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:100
-#: src/apps/core/templates/comment/list.html:102
+#: src/apps/core/templates/comment/list.html:109
+#: src/apps/core/templates/comment/list.html:111
 msgid "reply"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:113
-#: src/apps/core/templates/comment/list.html:118
-#: src/apps/core/templates/comment/list.html:123
-#: src/apps/core/templates/comment/list.html:129
+#: src/apps/core/templates/comment/list.html:122
+#: src/apps/core/templates/comment/list.html:127
+#: src/apps/core/templates/comment/list.html:132
+#: src/apps/core/templates/comment/list.html:138
 msgid "Vote Up"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:114
-#: src/apps/core/templates/comment/list.html:119
-#: src/apps/core/templates/comment/list.html:124
-#: src/apps/core/templates/comment/list.html:130
+#: src/apps/core/templates/comment/list.html:123
+#: src/apps/core/templates/comment/list.html:128
+#: src/apps/core/templates/comment/list.html:133
+#: src/apps/core/templates/comment/list.html:139
 msgid "Vote Down"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:161
+#: src/apps/core/templates/comment/list.html:170
 msgid "credit"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:205
+#: src/apps/core/templates/comment/list.html:214
 msgid "Invite a friend to help!"
 msgstr ""
 
@@ -733,7 +739,7 @@ msgstr ""
 "\">Idea is a principle. Define a rationale or invention.</font></i></"
 "center>\n"
 
-#: src/apps/core/templates/idea/create.html:19 src/templates/home.html.py:77
+#: src/apps/core/templates/idea/create.html:19
 msgid "Goal"
 msgstr ""
 
@@ -845,17 +851,17 @@ msgstr ""
 msgid "work"
 msgstr ""
 
-#: src/apps/core/utils.py:211 src/apps/core/utils.py:224
+#: src/apps/core/utils.py:212 src/apps/core/utils.py:225
 #: src/apps/core/views/definition.py:127 src/apps/core/views/step.py:153
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: src/apps/core/views/comment.py:64
+#: src/apps/core/views/comment.py:76
 msgid "Comment succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/comment.py:88
+#: src/apps/core/views/comment.py:100
 msgid "Comment succesfully deleted"
 msgstr ""
 
@@ -1201,6 +1207,10 @@ msgstr ""
 
 #: src/templates/account/account_inactive.html:10
 msgid "This account is inactive."
+msgstr ""
+
+#: src/templates/account/detail.html:33
+msgid "Comments with positive time claimed:"
 msgstr ""
 
 #: src/templates/account/email.html:6
@@ -1627,8 +1637,16 @@ msgstr ""
 msgid "compose"
 msgstr "Compose"
 
+#: src/templates/home.html:77
+msgid "Goal (problem)"
+msgstr ""
+
+#: src/templates/home.html:78
+msgid "Idea (solution)"
+msgstr ""
+
 #: src/templates/home.html:79
-msgid "Plan"
+msgid "Plan (project)"
 msgstr ""
 
 #: src/templates/home.html:83 src/templates/search_form.html.py:17

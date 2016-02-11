@@ -118,7 +118,8 @@ $(document).ready( function() {
     {% endfor %}
     <a href="{{ translate_url }}">[+]</a>
     <!-- /translations -->
-    <h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>
+    <div id="source-title"><h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1></div>
+    <div id="translation-title"></div>
     
     <div>
         {% if object.is_historical %}
@@ -135,12 +136,18 @@ $(document).ready( function() {
 
 <center>{% trans "deliverable" %}</center>
 <div class="breadcrumb">
+    <div id="source-deliverable">
     {% if not translation %}{{object.deliverable|markdown}}{% else %}{{translation.deliverable|markdown}}{% endif %}
+    </div>
+    <div id="translation-deliverable" class="translation"></div>
 </div>
 
 <center>{% trans "situation" %}</center>
 <div class="breadcrumb">
-{% if not translation %}{{object.situation|markdown}}{% else %}{{translation.situation|markdown}}{% endif %}
+    <div id="source-situation">
+    {% if not translation %}{{object.situation|markdown}}{% else %}{{translation.situation|markdown}}{% endif %}
+    </div>
+    <div id="translation-situation" class="translation"></div>
 </div>
 
 

@@ -36,6 +36,7 @@ from payments.models import PayPalTransaction
 
 import json
 import requests
+import pygtaw
 
 def update_child_paypal_transactions(comment_instance):
     """
@@ -412,3 +413,17 @@ def LookupCreateDefinition(defined_meaning_id, language):
             )
             definition.save()
             return definition
+
+
+def google_translate(source, language_code):
+    """
+    Translate JSON values to target language
+    """
+    client = pygtaw.Client(settings.GOOGLE_TRANSLATE_API_KEY)
+
+    for key, value in enumerate(source):
+        t = client.translate(source[value], target=language_code)
+        if t:
+            source[value] = t.translated_text
+
+    return source
