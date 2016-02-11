@@ -106,8 +106,10 @@ $(document).ready( function() {
     <a href="{{ translate_url }}">[+]</a>
     <!-- /translations -->
 
-<h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1>
-<h2 style="font-size:22px;">{% if not translation %}{{ object.summary }}{% else %}{{ translation.summary}}{% endif %}</h2>
+    <div id="source-title"><h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1></div>
+    <div id="translation-title"></div>
+    <div id="source-subtitle"><h2 style="font-size:22px;">{% if not translation %}{{ object.summary }}{% else %}{{ translation.summary}}{% endif %}</h2></div>
+    <div id="translation-subtitle"></div>
 
         <div>
             {% if object.is_historical %}
@@ -121,12 +123,15 @@ $(document).ready( function() {
 
 {% if object.user == request.user %}[<a href="{% if not translation %}{% url "idea-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a>, <a href="{% if not translation %}{% url "idea-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]<br/>{% endif %}
 <br/>
-
+<div id="source-content">
 {% if not translation %}
 {{object.description|markdown}}
 {% else %}
 {{translation.description|markdown}}
 {% endif %}
+</div>
+<div id="translation-content" class="translation"></div>
+
 <div id="plan-list" align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 
 {% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>{% trans "shared with:" %}</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
