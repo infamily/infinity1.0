@@ -70,7 +70,8 @@ function showLess(){
     {% endfor %}
     <a href="{{ translate_url }}">[+]</a>
     <!-- /translations -->
-    <h1>{% if not translation %}{{object.name}}{% else %}{{ translation.name}}{% endif %}</h1>
+    <div id="source-title"><h1>{% if not translation %}{{object.name}}{% else %}{{ translation.name}}{% endif %}</h1></div>
+    <div id="translation-title"></div>
 
     <div>
         {% if object.is_historical %}
@@ -85,11 +86,14 @@ function showLess(){
     {% if object.user == request.user %}[<a href="{% if not translation %}{% url "step-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">edit</a>, <a href="{% if not translation %}{% url "step-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">delete</a>]<br/>{% endif %}
 	<br/>
 
+    <div id="source-content">
     {% if not translation %}
 	{{object.objective|markdown}}
     {% else %}
     {{translation.objective|markdown}}
     {% endif %}
+    </div>
+    <div id="translation-content" class="translation"></div>
 
 	<br/>
 	<br/>

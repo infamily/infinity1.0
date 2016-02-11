@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 07:48-0800\n"
-"PO-Revision-Date: 2016-02-10 18:00+0200\n"
+"POT-Creation-Date: 2016-02-10 18:23-0800\n"
+"PO-Revision-Date: 2016-02-11 04:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -386,7 +386,7 @@ msgstr ""
 
 #: src/apps/core/forms.py:1303
 #: src/apps/core/templates/create_menu_links.html:65
-#: src/apps/core/templates/plan/create.html:19 src/templates/home.html.py:78
+#: src/apps/core/templates/plan/create.html:19
 msgid "Idea"
 msgstr "発想"
 
@@ -429,48 +429,52 @@ msgid ""
 "published on GitHub, so others could easily replicate."
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:45
+#: src/apps/core/templates/comment/list.html:48
 msgid "New comment"
 msgstr "コメントを送る"
 
-#: src/apps/core/templates/comment/list.html:73
+#: src/apps/core/templates/comment/list.html:50
+msgid "Translate"
+msgstr "翻訳する"
+
+#: src/apps/core/templates/comment/list.html:82
 #: src/apps/payments/templates/paypal/transaction/list.html:36
 msgid "tx:"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "initiated"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 #, fuzzy
 #| msgid "compose"
 msgid "completed"
 msgstr "作成"
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "incomplete"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "error"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:74
+#: src/apps/core/templates/comment/list.html:83
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "reversalerror"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:85
-#: src/templates/account/detail.html:61
+#: src/apps/core/templates/comment/list.html:94
+#: src/templates/account/detail.html:60
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr "<i class=\"fa fa-jpy\"></i> 投資する"
 
-#: src/apps/core/templates/comment/list.html:97
+#: src/apps/core/templates/comment/list.html:106
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -479,7 +483,7 @@ msgstr "<i class=\"fa fa-jpy\"></i> 投資する"
 msgid "edit"
 msgstr "編集"
 
-#: src/apps/core/templates/comment/list.html:97
+#: src/apps/core/templates/comment/list.html:106
 #: src/apps/core/templates/goal/detail.html:116
 #: src/apps/core/templates/idea/detail.html:122
 #: src/apps/core/templates/need/detail.html:105
@@ -487,30 +491,30 @@ msgstr "編集"
 msgid "delete"
 msgstr "削除"
 
-#: src/apps/core/templates/comment/list.html:100
-#: src/apps/core/templates/comment/list.html:102
+#: src/apps/core/templates/comment/list.html:109
+#: src/apps/core/templates/comment/list.html:111
 msgid "reply"
 msgstr "返事する"
 
-#: src/apps/core/templates/comment/list.html:113
-#: src/apps/core/templates/comment/list.html:118
-#: src/apps/core/templates/comment/list.html:123
-#: src/apps/core/templates/comment/list.html:129
+#: src/apps/core/templates/comment/list.html:122
+#: src/apps/core/templates/comment/list.html:127
+#: src/apps/core/templates/comment/list.html:132
+#: src/apps/core/templates/comment/list.html:138
 msgid "Vote Up"
 msgstr "支持票"
 
-#: src/apps/core/templates/comment/list.html:114
-#: src/apps/core/templates/comment/list.html:119
-#: src/apps/core/templates/comment/list.html:124
-#: src/apps/core/templates/comment/list.html:130
+#: src/apps/core/templates/comment/list.html:123
+#: src/apps/core/templates/comment/list.html:128
+#: src/apps/core/templates/comment/list.html:133
+#: src/apps/core/templates/comment/list.html:139
 msgid "Vote Down"
 msgstr "反対票"
 
-#: src/apps/core/templates/comment/list.html:161
+#: src/apps/core/templates/comment/list.html:170
 msgid "credit"
 msgstr "クレジット"
 
-#: src/apps/core/templates/comment/list.html:205
+#: src/apps/core/templates/comment/list.html:214
 msgid "Invite a friend to help!"
 msgstr ""
 
@@ -769,7 +773,7 @@ msgstr ""
 "<center><i><font color=\"black\" style=\"text-shadow: 0 0 25px yellow;\">発想"
 "とは原理である。方法を定義しましょう。</font></i></center>\n"
 
-#: src/apps/core/templates/idea/create.html:19 src/templates/home.html.py:77
+#: src/apps/core/templates/idea/create.html:19
 msgid "Goal"
 msgstr "目的"
 
@@ -884,17 +888,17 @@ msgstr ""
 msgid "work"
 msgstr ""
 
-#: src/apps/core/utils.py:211 src/apps/core/utils.py:224
+#: src/apps/core/utils.py:212 src/apps/core/utils.py:225
 #: src/apps/core/views/definition.py:127 src/apps/core/views/step.py:153
 #, python-format
 msgid "%s succesfully created"
 msgstr ""
 
-#: src/apps/core/views/comment.py:64
+#: src/apps/core/views/comment.py:76
 msgid "Comment succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/comment.py:88
+#: src/apps/core/views/comment.py:100
 msgid "Comment succesfully deleted"
 msgstr ""
 
@@ -1245,6 +1249,10 @@ msgstr ""
 #: src/templates/account/account_inactive.html:10
 msgid "This account is inactive."
 msgstr ""
+
+#: src/templates/account/detail.html:33
+msgid "Comments with positive time claimed:"
+msgstr "正の時間数のコメント:"
 
 #: src/templates/account/email.html:6
 msgid "Account"
@@ -1677,9 +1685,17 @@ msgstr "ヘルプ"
 msgid "compose"
 msgstr "作成"
 
+#: src/templates/home.html:77
+msgid "Goal (problem)"
+msgstr "目的（問題）"
+
+#: src/templates/home.html:78
+msgid "Idea (solution)"
+msgstr "発想（解決）"
+
 #: src/templates/home.html:79
-msgid "Plan"
-msgstr "企画"
+msgid "Plan (project)"
+msgstr "計画（企画）"
 
 #: src/templates/home.html:83 src/templates/search_form.html.py:17
 msgid "Search"
@@ -2045,6 +2061,9 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr ""
+
+#~ msgid "Plan"
+#~ msgstr "企画"
 
 #~ msgid "share a need"
 #~ msgstr "需要を共有する"
