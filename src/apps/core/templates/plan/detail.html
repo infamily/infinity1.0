@@ -6,6 +6,7 @@
 
 {% load staticfiles %}
 {% load country_isocode %}
+{% load step_io %}
 
 {% block extra_js %}
 
@@ -180,10 +181,9 @@ $(document).ready( function() {
                 <p>{% trans "Request access:" %} [<a href="{% url 'user-detail' object.user.username %}">{{step.user.username}}</a>]</p>
             {% endif %}
         {% else %}
-            <b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> 
+        <b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> <span data-toggle="tooltip" title='{"input": {{step.investables|step_io}}, "output": {{step.deliverables|step_io}}}' style="color:green;"><b>.io</b></span>
             <p>{{step.objective|markdown|truncatewords_html:35}}</p>
         {% endif %}
-
         </li>
         {% endfor %}
     </ul>
