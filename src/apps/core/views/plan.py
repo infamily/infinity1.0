@@ -25,6 +25,8 @@ from ..models import Plan
 from ..models import Idea
 from ..models import Step
 
+from ..utils import get_plandf_json
+
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class PlanListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
@@ -145,8 +147,12 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
     def get_context_data(self, **kwargs):
         context = super(PlanDetailView, self).get_context_data(**kwargs)
 
+        steps = Step.objects.filter(plan=kwargs.get('object')).order_by('priority')
+        plan_tuples = [(step.investables, step.deliverables) for step in steps]
+
         context.update({
-            'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('priority')
+            'step_list': steps,
+            'plan_json': get_plandf_json(plan_tuples)
         })
 
         return context
