@@ -36,6 +36,9 @@
       });
   </script>
   {% endif %}
+
+  <script src="{% static 'js/plan_graph_data.js' %}"></script>
+
   {% endblock extra_js %}
 
 {% block title %}p: {{ object.name }}{% endblock title %}
@@ -156,7 +159,11 @@ $(document).ready( function() {
 
 {% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>{% trans "shared with:" %}</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
 
-<div>{{plan_json}}</div>
+<div>
+
+
+<button onclick="get_graph_data({'id': {{object.id}}});">hi</button>
+</div>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -223,22 +230,25 @@ $(document).ready( function() {
 // Data notice the structure
 //************************************************************
 
-var dict = {{ plan_dict|safe }};
+var dict = JSON.parse('{{ plan_json|safe }}');
 var x_min = dict['x_min'];
 var y_min = dict['y_min'];
 var x_max = dict['x_max'];
 var y_max = dict['y_max'];
-//var data = 	[
+var data = dict['data'];
+//
+// Example data:
+//var data2 = 	[
 //	[{'x':1,'y':0},{'x':2.5,'y':5},{'x':4,'y':0},{'x':5,'y':6},{'x':6,'y':11},{'x':7,'y':9},{'x':8,'y':4},{'x':9,'y':11},{'x':5000,'y':2}],
 //	[{'x':1,'y':1},{'x':2,'y':6},{'x':3,'y':11},{'x':4,'y':1},{'x':5,'y':7},{'x':6,'y':12},{'x':7,'y':8},{'x':8,'y':3},{'x':9,'y':13},{'x':10,'y':3}],
 //	[{'x':1,'y':2},{'x':2,'y':7},{'x':3,'y':12},{'x':4,'y':2},{'x':5,'y':8},{'x':6,'y':13},{'x':7,'y':7},{'x':8,'y':2},{'x':9,'y':4},{'x':10,'y':7}],
 //];
-var data = dict['data'];
- 
+// 
+
 var colors = [
-	'orange',
-	'green',
 	'red',
+	'green',
+	'orange',
 ]
 
 
@@ -253,7 +263,7 @@ var margin = {top: 0, right: 1, bottom: 25, left: LEFT+25},
     width = 610 - margin.left - margin.right,
     height = 350 - margin.top - margin.bottom;
 
-var x_margin = 0.05*(x_max-x_min);
+var x_margin = 0.03*(x_max-x_min);
 var y_margin = 0.05*(y_max-y_min);
 
 var x = d3.scale.linear()
@@ -280,13 +290,9 @@ var yAxis = d3.svg.axis()
 	
 var zoom = d3.behavior.zoom()
     .x(x)
-  //.y(y)  -- removed vertical zoom
-    .scaleExtent([0.01, 10000])
+    .y(y)
+    .scaleExtent([1, 1000000000])
     .on("zoom", zoomed);	
-	
-	
- 
-	
 	
 //******************************************************
 // Generate our SVG object
@@ -307,7 +313,7 @@ svg.append("g")
 	.attr("class", "x axis")
 	.append("text")
 	.attr("class", "axis-label")
-  .attr("x", width/2)
+    .attr("x", width/2)
 	.attr("y", (margin.top) + height - 3)
 	.text('days');
  
@@ -321,41 +327,15 @@ svg.append("g")
 	.attr("class", "axis-label")
 	.attr("transform", "rotate(-90)")
 	.attr("y",  12 ) 
-	.attr("x", -height/2 + 7)
-	.text('hours');
+	.attr("x", -height/2 -25)
+	.text('human-hours');
  
 svg.append("clipPath")
 	.attr("id", "clip")
 	.append("rect")
 	.attr("width", width)
-	.attr("height", height);
-	
-	
-	
-	
-	
-//************************************************************
-// Create D3 line object and draw data on our SVG object
-//************************************************************
-var line = d3.svg.line()
-    .interpolate("linear")	
-    .x(function(d) { return x(d.x); })
-    .y(function(d) { return y(d.y); });		
-	
-svg.selectAll('.line')
-	.data(data)
-	.enter()
-	.append("path")
-    .attr("class", "line")
-	.attr("clip-path", "url(#clip)")
-	.attr('stroke', function(d,i){ 			
-		return colors[i%colors.length];
-	})
-    .attr("d", line);		
-	
-	
-	
-	
+	.attr("height", height);	
+
 //************************************************************
 // Draw points on SVG object based on the data given
 //************************************************************
@@ -366,6 +346,29 @@ var points = svg.selectAll('.dots')
     .attr("class", "dots")
 	.attr("clip-path", "url(#clip)");	
  
+
+//************************************************************
+// Create D3 line object and draw data on our SVG object
+//************************************************************
+var line = d3.svg.line()
+    .interpolate("monotone")	
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });		
+
+
+var renderData = function(data) {
+
+svg.selectAll('.line')
+	.data(data)
+	.enter()
+	.append("path")
+    .attr("class", "line")
+	.attr("clip-path", "url(#clip)")
+	.attr('stroke', function(d,i){ 			
+		return colors[i%colors.length];
+	})
+    .attr("d", line);	
+	
 points.selectAll('.dot')
 	.data(function(d, index){ 		
 		var a = [];
@@ -384,11 +387,20 @@ points.selectAll('.dot')
 	.attr("transform", function(d) { 
 		return "translate(" + x(d.point.x) + "," + y(d.point.y) + ")"; }
 	);
-	
- 
-	
-	
-	
+
+}
+
+renderData(data);
+
+function redraw(data) {
+    svg.selectAll('.line').remove();
+    svg.selectAll('.dot').remove();
+	renderData(data);
+}
+
+// So, Ajax can just call Redraw with new data after sorting Steps.
+// This will no rescale the graph, but since we don't need to rescale, it is just fine!
+
 	
 //************************************************************
 // Zoom specific updates

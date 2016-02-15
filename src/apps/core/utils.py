@@ -446,7 +446,7 @@ def get_currency_rates():
 
     return rates
 
-def get_plandf_dicts(plan_tuples):
+def get_plandf_dict(plan_tuples):
     try:
         conversion_rates = plandf.plan_maker.pandas.DataFrame(
             get_currency_rates()
@@ -455,13 +455,8 @@ def get_plandf_dicts(plan_tuples):
 
         df.index /= 24. # hours -> days
 
-       # named:
+       # could be named variables:
        #dicts = [{column: [{'x': i[0], 'y': i[1]} 
-       #                    for i in df[column].dropna().iteritems()
-       #        ]}
-       #         for column in df.columns
-       #]
-
         dicts = [ [{'x': i[0], 'y': i[1]} 
                             for i in df[column].dropna().iteritems()
                 ]
