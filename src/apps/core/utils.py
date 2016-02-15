@@ -446,12 +446,33 @@ def get_currency_rates():
 
     return rates
 
-def get_plandf_json(plan_tuples):
+def get_plandf_dicts(plan_tuples):
     try:
         conversion_rates = plandf.plan_maker.pandas.DataFrame(
             get_currency_rates()
         )
-        return plandf.read(plan_tuples, conversion_rates).to_json()
+        df = plandf.read(plan_tuples, conversion_rates)
+
+        df.index /= 24. # hours -> days
+
+       # named:
+       #dicts = [{column: [{'x': i[0], 'y': i[1]} 
+       #                    for i in df[column].dropna().iteritems()
+       #        ]}
+       #         for column in df.columns
+       #]
+
+        dicts = [ [{'x': i[0], 'y': i[1]} 
+                            for i in df[column].dropna().iteritems()
+                ]
+                 for column in df.columns
+        ]
+
+        return {'data': dicts, 
+                'x_min': df.index.min(),
+                'x_max': df.index.max(),
+                'y_min': df.min().min(),
+                'y_max': df.max().max()}
     except:
         """ this can be uncaught, because often steps will have no estimations """
         return {}

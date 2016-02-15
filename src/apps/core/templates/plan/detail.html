@@ -222,35 +222,46 @@ $(document).ready( function() {
 //************************************************************
 // Data notice the structure
 //************************************************************
-var data = 	[
-	[{'x':1,'y':0},{'x':2,'y':5},{'x':4,'y':0},{'x':5,'y':6},{'x':6,'y':11},{'x':7,'y':9},{'x':8,'y':4},{'x':9,'y':11},{'x':5000,'y':2}],
-	[{'x':1,'y':1},{'x':2,'y':6},{'x':3,'y':11},{'x':4,'y':1},{'x':5,'y':7},{'x':6,'y':12},{'x':7,'y':8},{'x':8,'y':3},{'x':9,'y':13},{'x':10,'y':3}],
-	[{'x':1,'y':2},{'x':2,'y':7},{'x':3,'y':12},{'x':4,'y':2},{'x':5,'y':8},{'x':6,'y':13},{'x':7,'y':7},{'x':8,'y':2},{'x':9,'y':4},{'x':10,'y':7}],
-	[{'x':1,'y':3},{'x':2,'y':8},{'x':3,'y':13},{'x':4,'y':3},{'x':5,'y':9},{'x':6,'y':14},{'x':7,'y':6},{'x':8,'y':1},{'x':9,'y':7},{'x':10,'y':9}],
-	[{'x':1,'y':4},{'x':2,'y':9},{'x':3,'y':14},{'x':4,'y':4},{'x':5,'y':10},{'x':6,'y':15},{'x':7,'y':5},{'x':8,'y':0},{'x':9,'y':8},{'x':10,'y':5}]
-];
+
+var dict = {{ plan_dict|safe }};
+var x_min = dict['x_min'];
+var y_min = dict['y_min'];
+var x_max = dict['x_max'];
+var y_max = dict['y_max'];
+//var data = 	[
+//	[{'x':1,'y':0},{'x':2.5,'y':5},{'x':4,'y':0},{'x':5,'y':6},{'x':6,'y':11},{'x':7,'y':9},{'x':8,'y':4},{'x':9,'y':11},{'x':5000,'y':2}],
+//	[{'x':1,'y':1},{'x':2,'y':6},{'x':3,'y':11},{'x':4,'y':1},{'x':5,'y':7},{'x':6,'y':12},{'x':7,'y':8},{'x':8,'y':3},{'x':9,'y':13},{'x':10,'y':3}],
+//	[{'x':1,'y':2},{'x':2,'y':7},{'x':3,'y':12},{'x':4,'y':2},{'x':5,'y':8},{'x':6,'y':13},{'x':7,'y':7},{'x':8,'y':2},{'x':9,'y':4},{'x':10,'y':7}],
+//];
+var data = dict['data'];
  
 var colors = [
 	'orange',
 	'green',
 	'red',
-	'purple'
 ]
 
 
 //******************************************************
 // Create Margins and Axis and hook our zoom function
 //******************************************************
-var margin = {top: 0, right: 1, bottom: 25, left: 25},
+
+// Padding for the left axis, when the number of hours is large
+var LEFT = 3*Math.log(y_max-y_min);
+
+var margin = {top: 0, right: 1, bottom: 25, left: LEFT+25},
     width = 610 - margin.left - margin.right,
     height = 350 - margin.top - margin.bottom;
-	
+
+var x_margin = 0.05*(x_max-x_min);
+var y_margin = 0.05*(y_max-y_min);
+
 var x = d3.scale.linear()
-    .domain([0, 12])
+    .domain([x_min-x_margin, x_max+x_margin])
     .range([0, width]);
  
 var y = d3.scale.linear()
-    .domain([-1, 16])
+    .domain([y_min-y_margin, y_max+y_margin])
     .range([height, 0]);
 	
 var xAxis = d3.svg.axis()
@@ -262,7 +273,7 @@ var xAxis = d3.svg.axis()
 	
 var yAxis = d3.svg.axis()
     .scale(y)
-	.tickPadding(10)
+	.tickPadding(2)
 	.tickSize(-width)
 	.tickSubdivide(true)	
     .orient("left");
@@ -297,7 +308,7 @@ svg.append("g")
 	.append("text")
 	.attr("class", "axis-label")
   .attr("x", width/2)
-	.attr("y", (margin.top) + height - 5)
+	.attr("y", (margin.top) + height - 3)
 	.text('days');
  
 svg.append("g")
@@ -309,8 +320,8 @@ svg.append("g")
 	.append("text")
 	.attr("class", "axis-label")
 	.attr("transform", "rotate(-90)")
-	.attr("y", (-margin.left) + 40)
-	.attr("x", -height/2)
+	.attr("y",  12 ) 
+	.attr("x", -height/2 + 7)
 	.text('hours');
  
 svg.append("clipPath")

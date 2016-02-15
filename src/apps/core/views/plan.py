@@ -25,7 +25,7 @@ from ..models import Plan
 from ..models import Idea
 from ..models import Step
 
-from ..utils import get_plandf_json
+from ..utils import get_plandf_dicts
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
@@ -152,7 +152,7 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
         context.update({
             'step_list': steps,
-            'plan_json': get_plandf_json(plan_tuples)
+            'plan_dict': get_plandf_dicts(plan_tuples)
         })
 
         return context
