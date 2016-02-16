@@ -10,6 +10,7 @@ from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
 from hours.models import HourValue
 from ..signals import _content_type_post_save
+from ..signals import _content_type_post_delete
 from ..signals import _translation_post_save
 from ..signals import _translation_post_delete
 
@@ -771,5 +772,12 @@ post_save.connect(_content_type_post_save, sender=Plan)
 post_save.connect(_content_type_post_save, sender=Step)
 post_save.connect(_content_type_post_save, sender=Task)
 post_save.connect(_content_type_post_save, sender=Work)
+post_delete.connect(_content_type_post_delete, sender=Need)
+post_delete.connect(_content_type_post_delete, sender=Goal)
+post_delete.connect(_content_type_post_delete, sender=Idea)
+post_delete.connect(_content_type_post_delete, sender=Plan)
+post_delete.connect(_content_type_post_delete, sender=Step)
+post_delete.connect(_content_type_post_delete, sender=Task)
+post_delete.connect(_content_type_post_delete, sender=Work)
 post_save.connect(_translation_post_save, sender=Translation)
 post_delete.connect(_translation_post_delete, sender=Translation)

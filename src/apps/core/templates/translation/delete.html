@@ -12,11 +12,12 @@
 </div>
 <br/>
 
-<form action="" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
+<form action="" method="post" style="display:inline;">{% csrf_token %}
+    <p>You are about to delete translation: "{{ object }}". Are you sure?</p>
     <br/>
 
-    <input type="submit" value="Confirm" class="btn btn-danger" />
+    <input type="submit" value="Delete [{{ object.language.language_code }}] translation" class="btn btn-danger" style="background-color: #158cba; border-color: #35Acda;" />
 </form>
+<input type="submit" value="Delete object entirely" onclick="window.location.href='/{{ translation.content_type }}/{{ translation.content_object.id }}/delete/';" class="btn btn-danger" style="background-color:brown; border-color: #c54a4a;" />
 
 {% endblock content %}
