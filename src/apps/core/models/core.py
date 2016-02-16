@@ -205,6 +205,21 @@ class BaseContentModel(models.Model):
 
         return translations
 
+    def default_translation_id(self):
+        """
+        Returns translation of object's language.
+        """
+        try:
+            content_type = ContentType.objects.get_for_model(self)
+            translation = Translation.objects.get(
+                content_type=content_type,
+                object_id=self.pk,
+                language=self.language
+            )
+            return translation.id
+        except:
+            return 0
+
     class Meta:
         abstract = True
 
