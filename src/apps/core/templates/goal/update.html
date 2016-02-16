@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
@@ -6,8 +7,11 @@
 
 {% block content %}
 
-<h1>Goal update</h1>
+<h1>Goal object
+<span style="text-decoration:none;">[<span class="badge" style="background-color:brown;"><a style="color:white;" href="{% url "goal-detail" object.id %}">view</a></span>, <a href="{% url "goal-delete" object.id %}">delete</a>]</span>
+</h1>
 <br/>
+[{% trans "translation:"%} <span class="badge"><a style="color:white;" href="{% url "update-translation" object.default_translation_id %}">edit</a></span>, <a href="{% url "goal-detail" object.id %}?lang={{object.language.language_code}}">{% trans "view" %}</a>]
 <div>
     
 </div>
