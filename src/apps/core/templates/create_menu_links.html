@@ -31,14 +31,17 @@ $(document).on("click", "#plan", function(){
 var request_path = "{{ request.path }}";
 
 $(document).ready(function(){
-    if (request_path == '/goal-create/') {
+	if (request_path.indexOf('/goal-create/') > -1) {
 		$('#goal').css('color', 'black');
+		$('#goal').css('text-shadow', '0 0 25px #F6358A');
     }
-    else if (request_path == '/idea-create/') {
+	else if (request_path.indexOf('/idea-create/') > -1) {
 		$('#idea').css('color', 'black');
+		$('#idea').css('text-shadow', '0 0 25px lime');
     }
-    else if (request_path == '/plan-create/') {
+	else if (request_path.indexOf('/plan-create/') > -1) {
 		$('#plan').css('color', 'black');
+		$('#plan').css('text-shadow', '0 0 25px yellow');
     }
 });
 
