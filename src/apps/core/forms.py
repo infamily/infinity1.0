@@ -1323,6 +1323,7 @@ class PlanCreateForm(forms.ModelForm):
         self.initial['personal'] = True
 
         if idea_instance:
+            self.initial['name'] = "%s %s-V1" % (idea_instance.name[:8].upper(), request.user.username.upper())
             self.initial['sharewith'] = idea_instance.sharewith.all
             self.initial['personal'] = idea_instance.personal
 
