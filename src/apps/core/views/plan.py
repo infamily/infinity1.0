@@ -41,7 +41,7 @@ class AjaxPlanStepsGraphDataView(JsonView):
             plan_tuples = [(step.investables, step.deliverables) for step in steps]
             plan_dict = get_plandf_dict(plan_tuples)
             print plan_dict['data']
-            return self.json(plan_dict['data'])
+            return self.json(plan_dict)
         except:
             return self.json({"success": False})
 

@@ -395,7 +395,11 @@ renderData(data);
 function redraw(data) {
     svg.selectAll('.line').remove();
     svg.selectAll('.dot').remove();
-	renderData(data);
+
+	x.domain([data['x_min']-x_margin, data['x_max']+x_margin]);
+	y.domain([data['y_min']-y_margin, data['y_max']+y_margin]);
+
+	renderData(data['data']);
 }
 
 // So, Ajax can just call Redraw with new data after sorting Steps.
