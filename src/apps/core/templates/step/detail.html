@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load step_io %}
 
 {% load crispy_forms_tags %}
 {% load django_markdown %}
@@ -111,13 +112,25 @@ function showLess(){
 	<br/>
 	<br/>
 
-	<div class="breadcrumb">
+    {% if object.investables|step_io %}
+	<div class="breadcrumb" style="background-color:#90EE90; color:green;">
         <i>input:</i> {% if not translation %}{{object.investables}}{% else %}{{translation.investables}}{% endif %}
 	</div>
-
-	<div class="breadcrumb">
-        <i>output:</i> {% if not translation %}{{object.deliverables}}{% else %}{{translation.deliverables}}{% endif %}
+    {% else %}
+	<div class="breadcrumb" style="background-color:pink; color:red;">
+        <i>input:</i> {% if not translation %}{{object.investables}}{% else %}{{translation.investables}}{% endif %}
 	</div>
+    {% endif %}
+
+    {% if object.deliverables|step_io %}
+	<div class="breadcrumb" style="background-color:#90EE90; color:green;">
+        <i>output:</i> {% if not translation %}{{object.deliverables}}{% else %}{{translation.deliverables}}{% endif %} 
+	</div>
+    {% else %}
+	<div class="breadcrumb" style="background-color: pink; color:red;">
+        <i>output:</i> {% if not translation %}{{object.deliverables}}{% else %}{{translation.deliverables}}{% endif %} 
+	</div>
+    {% endif %}
 
 	<div id="task-list" align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 
