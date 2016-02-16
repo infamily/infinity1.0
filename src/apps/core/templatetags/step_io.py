@@ -11,10 +11,4 @@ def step_io(request_object):
         return stepio.parse(request_object)
     except:
         # return stepio.parse(':~')
-		return [{'': {'f_price': u'',
-                      'f_units': u'',
-                      'max_price': u'',
-                      'max_units': u'',
-                      'min_price': u'',
-                      'min_units': u'',
-                      'price_unit': u''}}]
+		return False

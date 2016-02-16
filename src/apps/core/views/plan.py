@@ -36,13 +36,10 @@ class AjaxPlanStepsGraphDataView(JsonView):
     Steps Graph Data View
     """
     def post(self, request, *args, **kwargs):
-        try:
-            steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
-            plan_tuples = [(step.investables, step.deliverables) for step in steps]
-            plan_dict = get_plandf_dict(plan_tuples)
-            return self.json(plan_dict)
-        except:
-            return self.json({"success": False})
+        steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
+        plan_tuples = [(step.investables, step.deliverables) for step in steps]
+        plan_dict = get_plandf_dict(plan_tuples)
+        return self.json(plan_dict)
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])

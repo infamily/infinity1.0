@@ -470,4 +470,4 @@ def get_plandf_dict(plan_tuples):
                 'y_max': df.max().max()}
     except:
         """ this can be uncaught, because often steps will have no estimations """
-        return {}
+        return {'data': False, 'info': "PlanDF could not generate Steps JSON. Check Step.investables, Step.deliverables syntax."}

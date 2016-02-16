@@ -245,11 +245,19 @@ $(document).ready( function() {
 //************************************************************
 
 var dict = JSON.parse('{{ plan_json|safe }}');
+var data = dict['data'];
+
+if (data==false) {
+    console.log('No data to generate graph.');
+}
+else {
+	// the whole program below to generate graph ->
+
 var x_min = dict['x_min'];
 var y_min = dict['y_min'];
 var x_max = dict['x_max'];
 var y_max = dict['y_max'];
-var data = dict['data'];
+
 //
 // Example data:
 //var data2 = 	[
@@ -372,7 +380,6 @@ var points = svg.selectAll('.dots')
 
 var renderData = function(data) {
 
-
 svg.selectAll('.line')
 	.data(data)
 	.enter()
@@ -402,6 +409,12 @@ points.selectAll('.dot')
 	.attr("transform", function(d) { 
 		return "translate(" + x(d.point.x) + "," + y(d.point.y) + ")"; }
 	);
+
+    if (data) {
+      $( "#plan_df" ).show();
+    } else { 
+     $( "#plan_df" ).hide();
+    }
 
 }
 
@@ -436,6 +449,12 @@ function zoomed() {
 		return "translate(" + x(d.point.x) + "," + y(d.point.y) + ")"; }
 	);  
 }
+
+
+
+	// the whole program above to generate graph ->
+}
+
 </script>
 
 
@@ -471,11 +490,19 @@ function zoomed() {
             {% endif %}
         {% else %}
 		{% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">edit</a>]{% endif %}
-        <b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> <span data-toggle="tooltip" title='{"input": {{step.investables|step_io}}, "output": {{step.deliverables|step_io}}}' style="color:green;"><b>.io</b></span>
+		<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> <span data-toggle="tooltip" title='{"input": {{step.investables|step_io}}, "output": {{step.deliverables|step_io}}}'><!-- .io toggle --><b>{% if not step.investables|step_io %}<span style="color:red;">.i</span>{% else %}<span style="color:green;">.i</span>{% endif %}{% if not step.deliverables|step_io %}<span style="color:red;">o</span>{% else %}<span style="color:green;">o</span>{% endif %}</b><!--end .io toggle--></span>
      		<p>
 		    <!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
-			<span style="color:grey; font-size:13px; font-family: Courier New;">[INPUT] {{step.investables}}</span><br/>
-			<span style="color:grey; font-size:13px; font-family: Courier New;">[OUTPUT] {{step.deliverables}}</span>
+			{% if not step.investables|step_io %}
+                 <span style="color:red; font-size:13px; font-family: Courier New;">[INPUT] {{step.investables}}</span><br/>
+            {% else %}
+                 <span style="color:grey; font-size:13px; font-family: Courier New;">[INPUT] {{step.investables}}</span><br/>
+            {% endif %}
+			{% if not step.deliverables|step_io %}
+   			    <span style="color:red; font-size:13px; font-family: Courier New;">[OUTPUT] {{step.deliverables}}</span>
+			{% else %}
+			    <span style="color:grey; font-size:13px; font-family: Courier New;">[OUTPUT] {{step.deliverables}}</span>
+			{% endif %}
 			</p>
         {% endif %}
         </li>
