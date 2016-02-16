@@ -445,15 +445,25 @@ function zoomed() {
             <i class="fa {% if step.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
             {% endif %}
             {% if request.user in object.sharewith or request.user == step.user %}
-                <b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a>
-                <p>{{step.objective|markdown|truncatewords_html:35}}</p>
+			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> {% if step.user == request.user %}[<a href="{% url "step-update" object.pk %}">edit</a>]{% endif %}
+
+
+				<!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
+			    <span style="color:grey; font-size:13px; font-family: Courier New;">[INPUT] {{step.investables}}</span><br/>
+    			<span style="color:grey; font-size:13px; font-family: Courier New;">[OUTPUT] {{step.deliverables}}</span>
+
             {% else %}
                 <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{% trans "Private" %} {% trans "step" %}.</a>
                 <p>{% trans "Request access:" %} [<a href="{% url 'user-detail' object.user.username %}">{{step.user.username}}</a>]</p>
             {% endif %}
         {% else %}
+{% if step.user == request.user %}[<a href="{% url "step-update" object.pk %}">edit</a>]{% endif %}
         <b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> <span data-toggle="tooltip" title='{"input": {{step.investables|step_io}}, "output": {{step.deliverables|step_io}}}' style="color:green;"><b>.io</b></span>
-            <p>{{step.objective|markdown|truncatewords_html:35}}</p>
+     		<p>
+		    <!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
+			<span style="color:grey; font-size:13px; font-family: Courier New;">[INPUT] {{step.investables}}</span><br/>
+			<span style="color:grey; font-size:13px; font-family: Courier New;">[OUTPUT] {{step.deliverables}}</span>
+			</p>
         {% endif %}
         </li>
         {% endfor %}
