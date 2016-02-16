@@ -29,6 +29,7 @@ from ..utils import get_plandf_dict
 from ..utils import JsonView
 
 import json
+import stepio
 
 
 class AjaxPlanStepsGraphDataView(JsonView):
@@ -37,7 +38,16 @@ class AjaxPlanStepsGraphDataView(JsonView):
     """
     def post(self, request, *args, **kwargs):
         steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
-        plan_tuples = [(step.investables, step.deliverables) for step in steps]
+        #plan_tuples = [(step.investables, step.deliverables) for step in steps]
+        plan_tuples = [] 
+        for step in steps:
+            try:
+                stepio.parse(step.investables)
+                stepio.parse(step.deliverables)
+                plan_tuples.append((step.investables, step.deliverables))
+            except:
+                """ skipping un-parse-able step """
+                pass
         plan_dict = get_plandf_dict(plan_tuples)
         return self.json(plan_dict)
 
@@ -162,7 +172,16 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         context = super(PlanDetailView, self).get_context_data(**kwargs)
 
         steps = Step.objects.filter(plan=kwargs.get('object')).order_by('priority')
-        plan_tuples = [(step.investables, step.deliverables) for step in steps]
+        #plan_tuples = [(step.investables, step.deliverables) for step in steps]
+        plan_tuples = [] 
+        for step in steps:
+            try:
+                stepio.parse(step.investables)
+                stepio.parse(step.deliverables)
+                plan_tuples.append((step.investables, step.deliverables))
+            except:
+                """ skipping un-parse-able step """
+                pass
 
         context.update({
             'step_list': steps,
