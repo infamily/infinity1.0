@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
@@ -6,10 +7,12 @@
 
 {% block content %}
 
-<h1>Step update</h1>
+<h1>Step object
+<span style="text-decoration:none;">[<span class="badge" style="background-color:brown;"><a style="color:white;" href="{% url "step-detail" object.id %}">view</a></span>, <a href="{% url "step-delete" object.id %}">delete</a>]</span>
+</h1>
 <br/>
-<div>
-    
+[{% trans "translation:"%} <span class="badge"><a style="color:white;" href="{% url "update-translation" object.default_translation_id %}">edit</a></span>, <a href="{% url "step-detail" object.id %}?lang={{object.language.language_code}}">{% trans "view" %}</a>]
+<div>    
 </div>
 <br/>
 

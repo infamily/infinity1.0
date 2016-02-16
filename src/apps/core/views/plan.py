@@ -25,6 +25,32 @@ from ..models import Plan
 from ..models import Idea
 from ..models import Step
 
+from ..utils import get_plandf_dict
+from ..utils import JsonView
+
+import json
+import stepio
+
+
+class AjaxPlanStepsGraphDataView(JsonView):
+    """
+    Steps Graph Data View
+    """
+    def post(self, request, *args, **kwargs):
+        steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
+        #plan_tuples = [(step.investables, step.deliverables) for step in steps]
+        plan_tuples = [] 
+        for step in steps:
+            try:
+                stepio.parse(step.investables)
+                stepio.parse(step.deliverables)
+                plan_tuples.append((step.investables, step.deliverables))
+            except:
+                """ skipping un-parse-able step """
+                pass
+        plan_dict = get_plandf_dict(plan_tuples)
+        return self.json(plan_dict)
+
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class PlanListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
@@ -145,8 +171,21 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
     def get_context_data(self, **kwargs):
         context = super(PlanDetailView, self).get_context_data(**kwargs)
 
+        steps = Step.objects.filter(plan=kwargs.get('object')).order_by('priority')
+        #plan_tuples = [(step.investables, step.deliverables) for step in steps]
+        plan_tuples = [] 
+        for step in steps:
+            try:
+                stepio.parse(step.investables)
+                stepio.parse(step.deliverables)
+                plan_tuples.append((step.investables, step.deliverables))
+            except:
+                """ skipping un-parse-able step """
+                pass
+
         context.update({
-            'step_list': Step.objects.filter(plan=kwargs.get('object')).order_by('priority')
+            'step_list': steps,
+            'plan_json': json.dumps(get_plandf_dict(plan_tuples))
         })
 
         return context

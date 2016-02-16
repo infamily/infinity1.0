@@ -6,6 +6,7 @@ from core.views import *
 urlpatterns = [
     url(r'^ajax/comment-vote/$', AjaxCommentVoteView.as_view(), name='ajax_comment_vote_view'),
     url(r'^ajax/comment-translate/$', AjaxCommentTranslateView.as_view(), name='ajax_comment_translate_view'),
+    url(r'^ajax/steps-graph-data/$', AjaxPlanStepsGraphDataView.as_view(), name='get-plan-steps-graph-data'),
     url(
         r'^comment/(?P<slug>.*)/update/$',
         CommentUpdateView.as_view(),

@@ -10,6 +10,7 @@ from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
 from hours.models import HourValue
 from ..signals import _content_type_post_save
+from ..signals import _content_type_post_delete
 from ..signals import _translation_post_save
 from ..signals import _translation_post_delete
 
@@ -197,13 +198,31 @@ class BaseContentModel(models.Model):
         """
         Returns False if there is no translation
         """
-        content_type = ContentType.objects.get_for_model(self)
-        translations = Translation.objects.filter(
-            content_type=content_type,
-            object_id=self.pk
-        ).exclude(default=True)
+        try:
+            content_type = ContentType.objects.get_for_model(self)
+            translations = Translation.objects.filter(
+                content_type=content_type,
+                object_id=self.pk
+            ).exclude(default=True)
+            return translations
+        except:
+            return False
 
-        return translations
+
+    def default_translation_id(self):
+        """
+        Returns translation of object's language.
+        """
+        try:
+            content_type = ContentType.objects.get_for_model(self)
+            translation = Translation.objects.get(
+                content_type=content_type,
+                object_id=self.pk,
+                language=self.language
+            )
+            return translation.id
+        except:
+            return 0
 
     class Meta:
         abstract = True
@@ -753,5 +772,12 @@ post_save.connect(_content_type_post_save, sender=Plan)
 post_save.connect(_content_type_post_save, sender=Step)
 post_save.connect(_content_type_post_save, sender=Task)
 post_save.connect(_content_type_post_save, sender=Work)
+post_delete.connect(_content_type_post_delete, sender=Need)
+post_delete.connect(_content_type_post_delete, sender=Goal)
+post_delete.connect(_content_type_post_delete, sender=Idea)
+post_delete.connect(_content_type_post_delete, sender=Plan)
+post_delete.connect(_content_type_post_delete, sender=Step)
+post_delete.connect(_content_type_post_delete, sender=Task)
+post_delete.connect(_content_type_post_delete, sender=Work)
 post_save.connect(_translation_post_save, sender=Translation)
 post_delete.connect(_translation_post_delete, sender=Translation)

@@ -23,6 +23,15 @@ def _translation_post_delete(sender, instance, *args, **kwargs):
    #instance.content_object.save()
     pass
 
+def _content_type_post_delete(sender, instance, *args, **kwargs):
+    """
+    Delete all translations
+    """
+    from .models import Translation
+    from django.contrib.contenttypes.models import ContentType
+    content_type = ContentType.objects.get_for_model(sender)
+    Translation.objects.filter(content_type=content_type,object_id=instance.id).delete()
+
 def _content_type_post_save(sender, instance, created, *args, **kwargs):
     """
     Create default translation

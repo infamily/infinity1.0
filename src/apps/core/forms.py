@@ -883,12 +883,14 @@ class StepCreateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a milestone of the past)')
         self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
-        self.initial['priority'] = 1
         self.fields['priority'].widget = forms.HiddenInput()
 
         if plan_instance:
+            self.initial['priority'] = plan_instance.plan_steps.latest('priority').priority
             self.initial['sharewith'] = plan_instance.sharewith.all
             self.initial['personal'] = plan_instance.personal
+        else:
+            self.initial['priority'] = 1
 
         try:
             language = Language.objects.get(language_code=request.LANGUAGE_CODE)
@@ -1321,6 +1323,7 @@ class PlanCreateForm(forms.ModelForm):
         self.initial['personal'] = True
 
         if idea_instance:
+            self.initial['name'] = "%s %s-V1" % (idea_instance.name[:8].upper(), request.user.username.upper())
             self.initial['sharewith'] = idea_instance.sharewith.all
             self.initial['personal'] = idea_instance.personal
 

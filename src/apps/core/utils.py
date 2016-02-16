@@ -38,6 +38,11 @@ import json
 import requests
 import pygtaw
 
+from hours.models import HourValue
+from djmoney_rates.models import Rate
+
+import plandf
+
 def update_child_paypal_transactions(comment_instance):
     """
     adjust tx.hours_matched as comment.hours_claimed and .hours_assumed change
@@ -427,3 +432,42 @@ def google_translate(source, language_code):
             source[value] = t.translated_text
 
     return source
+
+
+def get_currency_rates():
+    """
+    Get Currencies and HourValue
+    """
+
+    rates = {rate.currency.lower(): [float(rate.value)]
+             for rate in Rate.objects.all()}
+
+    rates['h'] = [float(HourValue.objects.latest('created_at').value)]
+
+    return rates
+
+def get_plandf_dict(plan_tuples):
+    try:
+        conversion_rates = plandf.plan_maker.pandas.DataFrame(
+            get_currency_rates()
+        )
+        df = plandf.read(plan_tuples, conversion_rates)
+
+        df.index /= 24. # hours -> days
+
+       # could be named variables:
+       #dicts = [{column: [{'x': i[0], 'y': i[1]} 
+        dicts = [ [{'x': i[0], 'y': i[1]} 
+                            for i in df[column].dropna().iteritems()
+                ]
+                 for column in df.columns
+        ]
+
+        return {'data': dicts, 
+                'x_min': df.index.min(),
+                'x_max': df.index.max(),
+                'y_min': df.min().min(),
+                'y_max': df.max().max()}
+    except:
+        """ this can be uncaught, because often steps will have no estimations """
+        return {'data': False, 'info': "PlanDF could not generate Steps JSON. Check Step.investables, Step.deliverables syntax."}

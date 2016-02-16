@@ -90,6 +90,17 @@
       </div>
 	</div>
 </div>
+<style>
+#ithink:hover {
+    text-shadow: 0 0 25px #F6358A;
+}
+#ichart:hover {
+    text-shadow: 0 0 25px lime;
+}
+#icreate:hover {
+    text-shadow: 0 0 25px yellow;
+}
+</style>
 <script>
 
 $(document).ready(function(){
@@ -100,14 +111,18 @@ $(document).ready(function(){
 		localStorage['scope'] = "ithink";
 	}
     $('#'.concat(scope)).css('color', 'black');
+
     if (scope=='ithink') {
       $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
+      $('#'.concat(scope)).css('text-shadow', '0 0 15px #F6358A');
     }
     else if (scope=='ichart') {
       $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+      $('#'.concat(scope)).css('text-shadow', '0 0 15px lime');
     }
     else if (scope=='icreate') {
       $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+      $('#'.concat(scope)).css('text-shadow', '0 0 15px yellow');
     } 
 });
 
@@ -115,8 +130,11 @@ $(document).ready(function(){
     $('#ithink').on("click",function(event){
       $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
       $('#ithink').css('color', 'black');
+      $('#ithink').css('text-shadow', '0 0 15px #F6358A');
       $('#ichart').css('color', 'grey');
+      $('#ichart').css('text-shadow', 'none');
       $('#icreate').css('color', 'grey');
+      $('#icreate').css('text-shadow', 'none');
 	  localStorage['scope'] = 'ithink';
 		event.preventDefault();
     });
@@ -124,8 +142,11 @@ $(document).ready(function(){
     $('#ichart').on("click",function(event){
       $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
       $('#ithink').css('color', 'grey');
+      $('#ithink').css('text-shadow', 'none');
       $('#ichart').css('color', 'black');
+      $('#ichart').css('text-shadow', '0 0 15px lime');
       $('#icreate').css('color', 'grey');
+      $('#icreate').css('text-shadow', 'none');
 	  localStorage['scope'] = 'ichart';
 		event.preventDefault();
     });
@@ -133,8 +154,11 @@ $(document).ready(function(){
     $('#icreate').on("click",function(event){
       $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
       $('#ithink').css('color', 'grey');
+      $('#ithink').css('text-shadow', 'none');
       $('#ichart').css('color', 'grey');
+      $('#ichart').css('text-shadow', 'none');
       $('#icreate').css('color', 'black');
+      $('#icreate').css('text-shadow', '0 0 15px yellow');
 	  localStorage['scope'] = 'icreate';
 		event.preventDefault();
     });

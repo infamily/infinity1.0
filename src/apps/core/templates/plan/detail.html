@@ -6,41 +6,52 @@
 
 {% load staticfiles %}
 {% load country_isocode %}
+{% load step_io %}
 
 {% block extra_js %}
 
+   <script src="https://d3js.org/d3.v3.min.js"></script>
   {% if request|get_country_by_ip != 'CN' %}
    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   {% else %}  
    <script src="{% static "cdn/jqueryui/1.11.2/jquery-ui.min.js" %}"></script>
   {% endif %}
 
-  {% if request.user == object.user %}
+  {% if request.user in object.members.all or request.user == object.user %}
   <script>
-      $(function() {
-          $( ".sortable" ).sortable({
-              update: function(event, ui) {
-                  var data = [];
-                  $(".list-group-item").each(function() {
-                      data.push({id: $(this).data("id"), index: $(this).index()});
-                  });
-                  $.ajax({
-                      method: "POST",
-                      url: "{% url 'change-step-priority' %}",
-                      data: {"steps": JSON.stringify(data)}
-                  });
-              }
-          });
-          $( ".sortable" ).disableSelection();
-      });
+
+    $(function() {
+        $( ".sortable" ).sortable({
+            update: function(event, ui) {
+                var data = [];
+                $(".list-group-item").each(function() {
+                    data.push({id: $(this).data("id"), index: $(this).index()});
+                });
+                $.ajax({
+                    method: "POST",
+                    url: "{% url 'change-step-priority' %}",
+                    data: {"steps": JSON.stringify(data)}
+                }).done(function() {
+                    get_graph_data({'id': {{object.id}}})
+                });
+            }
+        });
+        $( ".sortable" ).disableSelection();
+    });
+
+
+
+	  
   </script>
   {% endif %}
+
+  <script src="{% static 'js/plan_graph_data.js' %}"></script>
+
   {% endblock extra_js %}
 
 {% block title %}p: {{ object.name }}{% endblock title %}
 
 {% block content %}
-
 <script>
 function showMore(){
     document.getElementById("stats").innerHTML = "<span onmouseout='showLess()'>[<u>assumed</u> {{ object.total_assumed|floatformat:2 }} h, <u>donated</u> {{ object.total_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.total_claimed|floatformat:2 }}, <u>matched</u> {{ object.total_matched|floatformat:2}} ḥ]</span>";
@@ -109,14 +120,27 @@ $(document).ready( function() {
     </a><br/>
     {% trans "translations:" %}
     <!-- translations -->
-    {% for translation in translations %}
-    {% if translation.language.language_code %}
-    <a href="{% url "plan-detail" object.id %}?lang={{translation.language.language_code }}">
-        [{{ translation.language.language_code }}]
-    </a>
-    {% endif %}
-    {% endfor %}
-    <a href="{{ translate_url }}">[+]</a>
+      {% for translation in translations %}
+      {% if translation.language.language_code %}
+
+          {% if translation.language.language_code == request.GET.lang %}
+            <span class="badge">
+            <a style="color:white;" title="{{ translation.language.name }}" href="{% url "plan-detail" object.id %}?lang={{translation.language.language_code }}">
+              {{ translation.language.language_code }}
+            </a>
+            </span>
+          {% else %}
+            <span class="badge" style="color:grey;background-color:#e0e0e0;">
+            <a title="{{ translation.language.name }}" href="{% url "plan-detail" object.id %}?lang={{translation.language.language_code }}">
+              {{ translation.language.language_code }}
+            </a>
+            </span>
+          {% endif %}
+      {% endif %}
+      {% endfor %}
+      {% if object.user == request.user %}
+      <a title="Create new Translation" href="{{ translate_url }}">[+]</a>
+      {% endif %}
     <!-- /translations -->
     <div id="source-title"><h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1></div>
     <div id="translation-title"></div>
@@ -131,7 +155,7 @@ $(document).ready( function() {
         {% endif %}
     </div>
 
-    {% if object.user == request.user %}[<a href="{% if not translation %}{% url "plan-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a>, <a href="{% if not translation %}{% url "plan-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]<br/>{% endif %}
+        {% if object.user == request.user %}[<span class="badge" style="{% if not translation %}background-color:brown;{% endif %}"><a style="color:white;" href="{% if not translation %}{% url "plan-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a></span>, <a href="{% if not translation %}{% url "plan-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]<br/>{% endif %}
 <br/>
 
 <center>{% trans "deliverable" %}</center>
@@ -155,6 +179,289 @@ $(document).ready( function() {
 
 {% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>{% trans "shared with:" %}</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
 
+
+<div id="plan_df" style="margin-left:7px; margin-bottom:1px; margin-top: 15px;"></div>
+
+<style>
+#plan_df {
+  font: 10px sans-serif;
+  margin: 50px;
+}
+ 
+.grid .tick {
+	stroke: lightgrey;
+	opacity: 0.7;
+	shape-rendering: crispEdges;
+}
+ 
+.grid path {
+	stroke-width: 0;
+}
+ 
+.axis path {
+	fill: none;
+	stroke: #bbb;
+	shape-rendering: crispEdges;
+}
+ 
+.axis text {
+	fill: #555;
+	font-size: 12px;
+}
+ 
+.axis line {	
+	stroke: #e7e7e7;
+	shape-rendering: crispEdges;
+}
+ 
+.axis .axis-label {
+	font-size: 14px;
+}
+ 
+.line {
+	fill: none;
+	stroke-width: 1.5px;
+}
+ 
+.dot {
+	/* consider the stroke-with the mouse detect radius? */
+	stroke: transparent;
+	stroke-width: 10px;  
+	cursor: pointer;
+}
+ 
+.dot:hover {
+	stroke: rgba(68, 127, 255, 0.3);
+}
+
+
+</style>
+
+<script>
+
+//************************************************************
+// Data notice the structure
+//************************************************************
+
+var dict = JSON.parse('{{ plan_json|safe }}');
+var data = dict['data'];
+
+if (data==false) {
+    console.log('No data to generate graph.');
+}
+else {
+	// the whole program below to generate graph ->
+
+var x_min = dict['x_min'];
+var y_min = dict['y_min'];
+var x_max = dict['x_max'];
+var y_max = dict['y_max'];
+
+//
+// Example data:
+//var data2 = 	[
+//	[{'x':1,'y':0},{'x':2.5,'y':5},{'x':4,'y':0},{'x':5,'y':6},{'x':6,'y':11},{'x':7,'y':9},{'x':8,'y':4},{'x':9,'y':11},{'x':5000,'y':2}],
+//	[{'x':1,'y':1},{'x':2,'y':6},{'x':3,'y':11},{'x':4,'y':1},{'x':5,'y':7},{'x':6,'y':12},{'x':7,'y':8},{'x':8,'y':3},{'x':9,'y':13},{'x':10,'y':3}],
+//	[{'x':1,'y':2},{'x':2,'y':7},{'x':3,'y':12},{'x':4,'y':2},{'x':5,'y':8},{'x':6,'y':13},{'x':7,'y':7},{'x':8,'y':2},{'x':9,'y':4},{'x':10,'y':7}],
+//];
+// 
+
+var colors = [
+	'red',
+	'green',
+	'orange',
+]
+
+
+//******************************************************
+// Create Margins and Axis and hook our zoom function
+//******************************************************
+
+// Padding for the left axis, when the number of hours is large
+var LEFT = 3*Math.log(y_max-y_min);
+
+var margin = {top: 0, right: 1, bottom: 25, left: LEFT+25},
+    width = 610 - margin.left - margin.right,
+    height = 350 - margin.top - margin.bottom;
+
+var x_margin = 0.03*(x_max-x_min);
+var y_margin = 0.05*(y_max-y_min);
+
+var x = d3.scale.linear()
+    .domain([x_min-x_margin, x_max+x_margin])
+    .range([0, width]);
+ 
+var y = d3.scale.linear()
+    .domain([y_min-y_margin, y_max+y_margin])
+    .range([height, 0]);
+	
+var xAxis = d3.svg.axis()
+    .scale(x)
+	.tickSize(-height)
+	.tickPadding(10)	
+	.tickSubdivide(true)	
+    .orient("bottom");	
+	
+var yAxis = d3.svg.axis()
+    .scale(y)
+	.tickPadding(2)
+	.tickSize(-width)
+	.tickSubdivide(true)	
+    .orient("left");
+	
+var zoom = d3.behavior.zoom()
+    .x(x)
+    .y(y)
+    .scaleExtent([1, 1000000000])
+    .on("zoom", zoomed);	
+	
+//******************************************************
+// Generate our SVG object
+//******************************************************
+var svg = d3.select("#plan_df").append("svg")
+	.call(zoom)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+	.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+ 
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+svg.append("g")
+	.attr("class", "x axis")
+	.append("text")
+	.attr("class", "axis-label")
+    .attr("x", width/2)
+	.attr("y", (margin.top) + height - 3)
+	.text('days');
+ 
+svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+ 
+svg.append("g")
+	.attr("class", "y axis")
+	.append("text")
+	.attr("class", "axis-label")
+	.attr("transform", "rotate(-90)")
+	.attr("y",  12 ) 
+	.attr("x", -height/2 -25)
+	.text('human-hours');
+ 
+svg.append("clipPath")
+	.attr("id", "clip")
+	.append("rect")
+	.attr("width", width)
+	.attr("height", height);	
+
+//************************************************************
+// Create D3 line object and draw data on our SVG object
+//************************************************************
+var line = d3.svg.line()
+    .interpolate("linear")	
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });		
+
+
+//************************************************************
+// Draw points on SVG object based on the data given
+//************************************************************
+var points = svg.selectAll('.dots')
+	.data(data)
+	.enter()
+	.append("g")
+    .attr("class", "dots")
+	.attr("clip-path", "url(#clip)");	
+	
+
+var renderData = function(data) {
+
+svg.selectAll('.line')
+	.data(data)
+	.enter()
+	.append("path")
+    .attr("class", "line")
+	.attr("clip-path", "url(#clip)")
+	.attr('stroke', function(d,i){ 			
+		return colors[i%colors.length];
+	})
+    .attr("d", line);	
+
+points.selectAll('.dot')
+	.data(function(d, index){ 		
+		var a = [];
+		d.forEach(function(point,i){
+			a.push({'index': index, 'point': point});
+		});		
+		return a;
+	})
+	.enter()
+	.append('circle')
+	.attr('class','dot')
+	.attr("r", 2.5)
+	.attr('fill', function(d,i){ 	
+		return colors[d.index%colors.length];
+	})	
+	.attr("transform", function(d) { 
+		return "translate(" + x(d.point.x) + "," + y(d.point.y) + ")"; }
+	);
+
+    if (data) {
+      $( "#plan_df" ).show();
+    } else { 
+     $( "#plan_df" ).hide();
+    }
+
+}
+
+renderData(data);
+
+function redraw(data) {
+
+    if (data['data']==false) {
+	}
+	else {
+    svg.selectAll('.line').remove();
+    svg.selectAll('.dots').remove();
+
+	x.domain([data['x_min']-x_margin, data['x_max']+x_margin]);
+	y.domain([data['y_min']-y_margin, data['y_max']+y_margin]);
+
+    zoomed();
+
+	renderData(data['data']);
+    }
+}
+
+// So, Ajax can just call Redraw with new data after sorting Steps.
+// This will no rescale the graph, but since we don't need to rescale, it is just fine!
+
+	
+//************************************************************
+// Zoom specific updates
+//************************************************************
+function zoomed() {
+	svg.select(".x.axis").call(xAxis);
+	svg.select(".y.axis").call(yAxis);   
+	svg.selectAll('path.line').attr('d', line);  
+ 
+	points.selectAll('circle').attr("transform", function(d) { 
+		return "translate(" + x(d.point.x) + "," + y(d.point.y) + ")"; }
+	);  
+}
+
+
+
+	// the whole program above to generate graph ->
+}
+
+</script>
+
+
+
 </div>
 
 
@@ -162,7 +469,7 @@ $(document).ready( function() {
 <div class="panel-body">
     <ul class="list-group sortable">
         {% for step in step_list %}
-        <li id="{{ step.priority }}" data-id="{{ step.id }}" class="list-group-item{% if request.user == object.user %} cursor-move{%endif%}">
+        <li id="{{ step.priority }}" data-id="{{ step.id }}" class="list-group-item{% if request.user in object.members.all or request.user == object.user %} cursor-move{%endif%}">
         {% if step.is_link %}
         <span class="badge">{% trans "link" %}</span>
         {% endif %}
@@ -173,17 +480,34 @@ $(document).ready( function() {
             <i class="fa {% if step.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
             {% endif %}
             {% if request.user in object.sharewith or request.user == step.user %}
-                <b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a>
-                <p>{{step.objective|markdown|truncatewords_html:35}}</p>
+			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> {% if step.user == request.user %}[<a href="{% url "step-update" object.pk %}">edit</a>]{% endif %}
+
+
+				<!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
+			    <span style="color:grey; font-size:13px; font-family: Courier New;">[INPUT] {{step.investables}}</span><br/>
+    			<span style="color:grey; font-size:13px; font-family: Courier New;">[OUTPUT] {{step.deliverables}}</span>
+
             {% else %}
                 <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{% trans "Private" %} {% trans "step" %}.</a>
                 <p>{% trans "Request access:" %} [<a href="{% url 'user-detail' object.user.username %}">{{step.user.username}}</a>]</p>
             {% endif %}
         {% else %}
-            <b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> 
-            <p>{{step.objective|markdown|truncatewords_html:35}}</p>
+		{% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">edit</a>]{% endif %}
+		<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a data-toggle="tooltip" title="{{step.objective}}" href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> <span data-toggle="tooltip" title='{"input": {{step.investables|step_io}}, "output": {{step.deliverables|step_io}}}'><!-- .io toggle --><b>{% if not step.investables|step_io %}<span style="color:red;">.i</span>{% else %}<span style="color:green;">.i</span>{% endif %}{% if not step.deliverables|step_io %}<span style="color:red;">o</span>{% else %}<span style="color:green;">o</span>{% endif %}</b><!--end .io toggle--></span>
+     		<p>
+		    <!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
+			{% if not step.investables|step_io %}
+                 <span style="color:red; font-size:13px; font-family: Courier New;">[INPUT] {{step.investables}}</span><br/>
+            {% else %}
+                 <span style="color:grey; font-size:13px; font-family: Courier New;">[INPUT] {{step.investables}}</span><br/>
+            {% endif %}
+			{% if not step.deliverables|step_io %}
+   			    <span style="color:red; font-size:13px; font-family: Courier New;">[OUTPUT] {{step.deliverables}}</span>
+			{% else %}
+			    <span style="color:grey; font-size:13px; font-family: Courier New;">[OUTPUT] {{step.deliverables}}</span>
+			{% endif %}
+			</p>
         {% endif %}
-
         </li>
         {% endfor %}
     </ul>
