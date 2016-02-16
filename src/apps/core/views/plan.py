@@ -40,7 +40,6 @@ class AjaxPlanStepsGraphDataView(JsonView):
             steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
             plan_tuples = [(step.investables, step.deliverables) for step in steps]
             plan_dict = get_plandf_dict(plan_tuples)
-            print plan_dict['data']
             return self.json(plan_dict)
         except:
             return self.json({"success": False})

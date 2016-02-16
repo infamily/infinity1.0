@@ -10,6 +10,7 @@
 
 {% block extra_js %}
 
+   <script src="http://d3js.org/d3.v3.min.js"></script>
   {% if request|get_country_by_ip != 'CN' %}
    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   {% else %}  
@@ -18,22 +19,29 @@
 
   {% if request.user == object.user %}
   <script>
-      $(function() {
-          $( ".sortable" ).sortable({
-              update: function(event, ui) {
-                  var data = [];
-                  $(".list-group-item").each(function() {
-                      data.push({id: $(this).data("id"), index: $(this).index()});
-                  });
-                  $.ajax({
-                      method: "POST",
-                      url: "{% url 'change-step-priority' %}",
-                      data: {"steps": JSON.stringify(data)}
-                  });
-              }
-          });
-          $( ".sortable" ).disableSelection();
-      });
+
+    $(function() {
+        $( ".sortable" ).sortable({
+            update: function(event, ui) {
+                var data = [];
+                $(".list-group-item").each(function() {
+                    data.push({id: $(this).data("id"), index: $(this).index()});
+                });
+                $.ajax({
+                    method: "POST",
+                    url: "{% url 'change-step-priority' %}",
+                    data: {"steps": JSON.stringify(data)}
+                }).done(function() {
+                    get_graph_data({'id': {{object.id}}})
+                });
+            }
+        });
+        $( ".sortable" ).disableSelection();
+    });
+
+
+
+	  
   </script>
   {% endif %}
 
@@ -159,13 +167,6 @@ $(document).ready( function() {
 
 {% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>{% trans "shared with:" %}</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
 
-<div>
-
-
-<button onclick="get_graph_data({'id': {{object.id}}});">hi</button>
-</div>
-
-<script src="http://d3js.org/d3.v3.min.js"></script>
 
 <div id="plan_df" style="margin-left:7px; margin-bottom:1px; margin-top: 15px;"></div>
 
@@ -337,6 +338,15 @@ svg.append("clipPath")
 	.attr("height", height);	
 
 //************************************************************
+// Create D3 line object and draw data on our SVG object
+//************************************************************
+var line = d3.svg.line()
+    .interpolate("linear")	
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });		
+
+
+//************************************************************
 // Draw points on SVG object based on the data given
 //************************************************************
 var points = svg.selectAll('.dots')
@@ -345,18 +355,10 @@ var points = svg.selectAll('.dots')
 	.append("g")
     .attr("class", "dots")
 	.attr("clip-path", "url(#clip)");	
- 
-
-//************************************************************
-// Create D3 line object and draw data on our SVG object
-//************************************************************
-var line = d3.svg.line()
-    .interpolate("monotone")	
-    .x(function(d) { return x(d.x); })
-    .y(function(d) { return y(d.y); });		
-
+	
 
 var renderData = function(data) {
+
 
 svg.selectAll('.line')
 	.data(data)
@@ -368,7 +370,7 @@ svg.selectAll('.line')
 		return colors[i%colors.length];
 	})
     .attr("d", line);	
-	
+
 points.selectAll('.dot')
 	.data(function(d, index){ 		
 		var a = [];
@@ -394,12 +396,15 @@ renderData(data);
 
 function redraw(data) {
     svg.selectAll('.line').remove();
-    svg.selectAll('.dot').remove();
+    svg.selectAll('.dots').remove();
 
 	x.domain([data['x_min']-x_margin, data['x_max']+x_margin]);
 	y.domain([data['y_min']-y_margin, data['y_max']+y_margin]);
 
+    zoomed();
+
 	renderData(data['data']);
+
 }
 
 // So, Ajax can just call Redraw with new data after sorting Steps.
