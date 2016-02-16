@@ -17,7 +17,7 @@
    <script src="{% static "cdn/jqueryui/1.11.2/jquery-ui.min.js" %}"></script>
   {% endif %}
 
-  {% if request.user == object.user %}
+  {% if request.user in object.members.all or request.user == object.user %}
   <script>
 
     $(function() {
@@ -52,7 +52,6 @@
 {% block title %}p: {{ object.name }}{% endblock title %}
 
 {% block content %}
-
 <script>
 function showMore(){
     document.getElementById("stats").innerHTML = "<span onmouseout='showLess()'>[<u>assumed</u> {{ object.total_assumed|floatformat:2 }} h, <u>donated</u> {{ object.total_donated|floatformat:2 }} ħ, <u>claimed</u> {{ object.total_claimed|floatformat:2 }}, <u>matched</u> {{ object.total_matched|floatformat:2}} ḥ]</span>";
@@ -421,6 +420,10 @@ points.selectAll('.dot')
 renderData(data);
 
 function redraw(data) {
+
+    if (data['data']==false) {
+	}
+	else {
     svg.selectAll('.line').remove();
     svg.selectAll('.dots').remove();
 
@@ -430,7 +433,7 @@ function redraw(data) {
     zoomed();
 
 	renderData(data['data']);
-
+    }
 }
 
 // So, Ajax can just call Redraw with new data after sorting Steps.
@@ -466,7 +469,7 @@ function zoomed() {
 <div class="panel-body">
     <ul class="list-group sortable">
         {% for step in step_list %}
-        <li id="{{ step.priority }}" data-id="{{ step.id }}" class="list-group-item{% if request.user == object.user %} cursor-move{%endif%}">
+        <li id="{{ step.priority }}" data-id="{{ step.id }}" class="list-group-item{% if request.user in object.members.all or request.user == object.user %} cursor-move{%endif%}">
         {% if step.is_link %}
         <span class="badge">{% trans "link" %}</span>
         {% endif %}

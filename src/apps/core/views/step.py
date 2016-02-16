@@ -174,7 +174,7 @@ class ChangeStepPriorityView(JsonView):
                 try:
                     step_instance = Step.objects.get(id=step['id'])
 
-                    if not step_instance.plan.user == request.user:
+                    if not step_instance.plan.user == request.user and request.user not in step_instance.plan.members.all():
                         return self.json({'error': True, 'message': 'Access error'})
 
                     step_instance.priority = step['index']
