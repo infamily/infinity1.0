@@ -32,3 +32,4 @@ py-moneyed
 django-redis
 https://github.com/WeFindX/pygtaw/archive/master.zip
 stepio==0.1
+plandf==0.1.7

@@ -10,6 +10,7 @@
 
 {% block extra_js %}
 
+   <script src="http://d3js.org/d3.v3.min.js"></script>
   {% if request|get_country_by_ip != 'CN' %}
    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   {% else %}  
@@ -18,24 +19,34 @@
 
   {% if request.user == object.user %}
   <script>
-      $(function() {
-          $( ".sortable" ).sortable({
-              update: function(event, ui) {
-                  var data = [];
-                  $(".list-group-item").each(function() {
-                      data.push({id: $(this).data("id"), index: $(this).index()});
-                  });
-                  $.ajax({
-                      method: "POST",
-                      url: "{% url 'change-step-priority' %}",
-                      data: {"steps": JSON.stringify(data)}
-                  });
-              }
-          });
-          $( ".sortable" ).disableSelection();
-      });
+
+    $(function() {
+        $( ".sortable" ).sortable({
+            update: function(event, ui) {
+                var data = [];
+                $(".list-group-item").each(function() {
+                    data.push({id: $(this).data("id"), index: $(this).index()});
+                });
+                $.ajax({
+                    method: "POST",
+                    url: "{% url 'change-step-priority' %}",
+                    data: {"steps": JSON.stringify(data)}
+                }).done(function() {
+                    get_graph_data({'id': {{object.id}}})
+                });
+            }
+        });
+        $( ".sortable" ).disableSelection();
+    });
+
+
+
+	  
   </script>
   {% endif %}
+
+  <script src="{% static 'js/plan_graph_data.js' %}"></script>
+
   {% endblock extra_js %}
 
 {% block title %}p: {{ object.name }}{% endblock title %}
@@ -155,6 +166,266 @@ $(document).ready( function() {
 <div id="step-list" align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
 
 {% if object.personal %}<i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i> [<u>{% trans "shared with:" %}</u> {% for member in object.sharewith.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %}]{% endif %}
+
+
+<div id="plan_df" style="margin-left:7px; margin-bottom:1px; margin-top: 15px;"></div>
+
+<style>
+#plan_df {
+  font: 10px sans-serif;
+  margin: 50px;
+}
+ 
+.grid .tick {
+	stroke: lightgrey;
+	opacity: 0.7;
+	shape-rendering: crispEdges;
+}
+ 
+.grid path {
+	stroke-width: 0;
+}
+ 
+.axis path {
+	fill: none;
+	stroke: #bbb;
+	shape-rendering: crispEdges;
+}
+ 
+.axis text {
+	fill: #555;
+	font-size: 12px;
+}
+ 
+.axis line {	
+	stroke: #e7e7e7;
+	shape-rendering: crispEdges;
+}
+ 
+.axis .axis-label {
+	font-size: 14px;
+}
+ 
+.line {
+	fill: none;
+	stroke-width: 1.5px;
+}
+ 
+.dot {
+	/* consider the stroke-with the mouse detect radius? */
+	stroke: transparent;
+	stroke-width: 10px;  
+	cursor: pointer;
+}
+ 
+.dot:hover {
+	stroke: rgba(68, 127, 255, 0.3);
+}
+
+
+</style>
+
+<script>
+
+//************************************************************
+// Data notice the structure
+//************************************************************
+
+var dict = JSON.parse('{{ plan_json|safe }}');
+var x_min = dict['x_min'];
+var y_min = dict['y_min'];
+var x_max = dict['x_max'];
+var y_max = dict['y_max'];
+var data = dict['data'];
+//
+// Example data:
+//var data2 = 	[
+//	[{'x':1,'y':0},{'x':2.5,'y':5},{'x':4,'y':0},{'x':5,'y':6},{'x':6,'y':11},{'x':7,'y':9},{'x':8,'y':4},{'x':9,'y':11},{'x':5000,'y':2}],
+//	[{'x':1,'y':1},{'x':2,'y':6},{'x':3,'y':11},{'x':4,'y':1},{'x':5,'y':7},{'x':6,'y':12},{'x':7,'y':8},{'x':8,'y':3},{'x':9,'y':13},{'x':10,'y':3}],
+//	[{'x':1,'y':2},{'x':2,'y':7},{'x':3,'y':12},{'x':4,'y':2},{'x':5,'y':8},{'x':6,'y':13},{'x':7,'y':7},{'x':8,'y':2},{'x':9,'y':4},{'x':10,'y':7}],
+//];
+// 
+
+var colors = [
+	'red',
+	'green',
+	'orange',
+]
+
+
+//******************************************************
+// Create Margins and Axis and hook our zoom function
+//******************************************************
+
+// Padding for the left axis, when the number of hours is large
+var LEFT = 3*Math.log(y_max-y_min);
+
+var margin = {top: 0, right: 1, bottom: 25, left: LEFT+25},
+    width = 610 - margin.left - margin.right,
+    height = 350 - margin.top - margin.bottom;
+
+var x_margin = 0.03*(x_max-x_min);
+var y_margin = 0.05*(y_max-y_min);
+
+var x = d3.scale.linear()
+    .domain([x_min-x_margin, x_max+x_margin])
+    .range([0, width]);
+ 
+var y = d3.scale.linear()
+    .domain([y_min-y_margin, y_max+y_margin])
+    .range([height, 0]);
+	
+var xAxis = d3.svg.axis()
+    .scale(x)
+	.tickSize(-height)
+	.tickPadding(10)	
+	.tickSubdivide(true)	
+    .orient("bottom");	
+	
+var yAxis = d3.svg.axis()
+    .scale(y)
+	.tickPadding(2)
+	.tickSize(-width)
+	.tickSubdivide(true)	
+    .orient("left");
+	
+var zoom = d3.behavior.zoom()
+    .x(x)
+    .y(y)
+    .scaleExtent([1, 1000000000])
+    .on("zoom", zoomed);	
+	
+//******************************************************
+// Generate our SVG object
+//******************************************************
+var svg = d3.select("#plan_df").append("svg")
+	.call(zoom)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+	.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+ 
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+svg.append("g")
+	.attr("class", "x axis")
+	.append("text")
+	.attr("class", "axis-label")
+    .attr("x", width/2)
+	.attr("y", (margin.top) + height - 3)
+	.text('days');
+ 
+svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+ 
+svg.append("g")
+	.attr("class", "y axis")
+	.append("text")
+	.attr("class", "axis-label")
+	.attr("transform", "rotate(-90)")
+	.attr("y",  12 ) 
+	.attr("x", -height/2 -25)
+	.text('human-hours');
+ 
+svg.append("clipPath")
+	.attr("id", "clip")
+	.append("rect")
+	.attr("width", width)
+	.attr("height", height);	
+
+//************************************************************
+// Create D3 line object and draw data on our SVG object
+//************************************************************
+var line = d3.svg.line()
+    .interpolate("linear")	
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });		
+
+
+//************************************************************
+// Draw points on SVG object based on the data given
+//************************************************************
+var points = svg.selectAll('.dots')
+	.data(data)
+	.enter()
+	.append("g")
+    .attr("class", "dots")
+	.attr("clip-path", "url(#clip)");	
+	
+
+var renderData = function(data) {
+
+
+svg.selectAll('.line')
+	.data(data)
+	.enter()
+	.append("path")
+    .attr("class", "line")
+	.attr("clip-path", "url(#clip)")
+	.attr('stroke', function(d,i){ 			
+		return colors[i%colors.length];
+	})
+    .attr("d", line);	
+
+points.selectAll('.dot')
+	.data(function(d, index){ 		
+		var a = [];
+		d.forEach(function(point,i){
+			a.push({'index': index, 'point': point});
+		});		
+		return a;
+	})
+	.enter()
+	.append('circle')
+	.attr('class','dot')
+	.attr("r", 2.5)
+	.attr('fill', function(d,i){ 	
+		return colors[d.index%colors.length];
+	})	
+	.attr("transform", function(d) { 
+		return "translate(" + x(d.point.x) + "," + y(d.point.y) + ")"; }
+	);
+
+}
+
+renderData(data);
+
+function redraw(data) {
+    svg.selectAll('.line').remove();
+    svg.selectAll('.dots').remove();
+
+	x.domain([data['x_min']-x_margin, data['x_max']+x_margin]);
+	y.domain([data['y_min']-y_margin, data['y_max']+y_margin]);
+
+    zoomed();
+
+	renderData(data['data']);
+
+}
+
+// So, Ajax can just call Redraw with new data after sorting Steps.
+// This will no rescale the graph, but since we don't need to rescale, it is just fine!
+
+	
+//************************************************************
+// Zoom specific updates
+//************************************************************
+function zoomed() {
+	svg.select(".x.axis").call(xAxis);
+	svg.select(".y.axis").call(yAxis);   
+	svg.selectAll('path.line').attr('d', line);  
+ 
+	points.selectAll('circle').attr("transform", function(d) { 
+		return "translate(" + x(d.point.x) + "," + y(d.point.y) + ")"; }
+	);  
+}
+</script>
+
+
 
 </div>
 
