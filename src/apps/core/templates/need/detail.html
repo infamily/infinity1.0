@@ -82,12 +82,25 @@ $(document).ready( function() {
       <!-- translations -->
       {% for translation in translations %}
       {% if translation.language.language_code %}
-      <a title="{{ translation.language.name }}" href="{% url "need-detail" object.id %}?lang={{translation.language.language_code }}">
-          [{{ translation.language.language_code }}]
-      </a>
+
+          {% if translation.language.language_code == request.GET.lang %}
+            <span class="badge">
+            <a style="color:white;" title="{{ translation.language.name }}" href="{% url "need-detail" object.id %}?lang={{translation.language.language_code }}">
+              {{ translation.language.language_code }}
+            </a>
+            </span>
+          {% else %}
+            <span class="badge" style="color:grey;background-color:#e0e0e0;">
+            <a title="{{ translation.language.name }}" href="{% url "need-detail" object.id %}?lang={{translation.language.language_code }}">
+              {{ translation.language.language_code }}
+            </a>
+            </span>
+          {% endif %}
       {% endif %}
       {% endfor %}
+      {% if object.user == request.user %}
       <a title="Create new Translation" href="{{ translate_url }}">[+]</a>
+      {% endif %}
       <!-- /translations-->
 
       <div id="source-title"><h1>{% if not translation %}{{object.name}}{% else %} {{ translation.name }} {% endif %}</h1></div>
@@ -103,7 +116,7 @@ $(document).ready( function() {
             {% endif %}
         </div>
 
-    {% if object.user == request.user %}[<a href="{% if not translation %}{% url "need-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a>, <a href="{% if not translation %}{% url "need-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]<br/>{% endif %}
+        {% if object.user == request.user %}[<span class="badge" style="{% if not translation %}background-color:brown;{% endif %}"><a style="color:white;" href="{% if not translation %}{% url "need-update" object.pk %}{% else %}{% url "update-translation" translation.pk %}{% endif %}">{% trans "edit" %}</a></span>, <a href="{% if not translation %}{% url "need-delete" object.pk %}{% else %}{% url "delete-translation" translation.pk %}{% endif %}">{% trans "delete" %}</a>]<br/>{% endif %}
   <br/>
 
   <div id="source-content">
