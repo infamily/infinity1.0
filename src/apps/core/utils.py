@@ -439,7 +439,7 @@ def get_currency_rates():
     Get Currencies and HourValue
     """
 
-    rates = {rate.currency.lower(): [float(rate.value)]
+    rates = {rate.currency.lower(): [1./float(rate.value)]
              for rate in Rate.objects.all()}
 
     rates['h'] = [float(HourValue.objects.latest('created_at').value)]
