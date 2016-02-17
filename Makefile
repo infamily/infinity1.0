@@ -9,7 +9,9 @@ runserver:
 	.env/bin/python src/manage.py runserver --settings=conf.local
 
 wsgi:
-	uwsgi --http 127.0.0.1:8000 --need-app\
+	uwsgi\
+		--http 127.0.0.1:8000\
+		--need-app\
 		--disable-logging\
 		--wsgi-file src/wsgi.py\
 		--processes 1\
