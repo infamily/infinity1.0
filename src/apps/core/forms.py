@@ -886,7 +886,10 @@ class StepCreateForm(forms.ModelForm):
         self.fields['priority'].widget = forms.HiddenInput()
 
         if plan_instance:
-            self.initial['priority'] = plan_instance.plan_steps.latest('priority').priority
+            if plan_instance.plan_steps.all():
+                self.initial['priority'] = plan_instance.plan_steps.latest('priority').priority
+            else:
+                self.initial['priority'] = 1
             self.initial['sharewith'] = plan_instance.sharewith.all
             self.initial['personal'] = plan_instance.personal
         else:
