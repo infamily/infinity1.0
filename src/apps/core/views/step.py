@@ -168,6 +168,9 @@ class StepDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 class ChangeStepPriorityView(JsonView):
     def post(self, request, *args, **kwargs):
         form = ChangePriorityForm(request.POST)
+
+        username = request.GET.get('user', None)
+
         if form.is_valid():
             steps = json.loads(form.data.get('steps'))
             for step in steps:
@@ -177,7 +180,14 @@ class ChangeStepPriorityView(JsonView):
                     if not step_instance.plan.user == request.user and request.user not in step_instance.plan.members.all():
                         return self.json({'error': True, 'message': 'Access error'})
 
-                    step_instance.priority = step['index']
+                    if username:
+                        """ only change Step.user_priority"""
+                        step_instance.user_priority = step['index']
+                        print "changing user priority"
+                    else:
+                        """ change Step.priority """
+                        step_instance.priority = step['index']
+
                     step_instance.save()
                     data = {'error': False}
                 except Step.DoesNotExist as e:

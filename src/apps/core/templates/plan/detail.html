@@ -20,6 +20,22 @@
   {% if request.user in object.members.all or request.user == object.user %}
   <script>
 
+	function get_graph_data(json) {
+
+	  $.ajax({
+		  url : "/ajax/steps-graph-data/{% if request.GET.user %}?user={{request.GET.user}}{% endif %}",
+		  type : "POST",
+		  data : json,
+		  success : function(json) {
+			  redraw(json);
+			 // console.log(json);
+		  },
+		  error : function(xhr,errmsg,err) {
+			  console.log(xhr.status + ": " + xhr.responseText);
+		  }
+	  });
+	}
+
     $(function() {
         $( ".sortable" ).sortable({
             update: function(event, ui) {
@@ -29,7 +45,7 @@
                 });
                 $.ajax({
                     method: "POST",
-                    url: "{% url 'change-step-priority' %}",
+					url: "{% url 'change-step-priority' %}{% if request.GET.user %}?user={{request.GET.user}}{% endif %}",
                     data: {"steps": JSON.stringify(data)}
                 }).done(function() {
                     get_graph_data({'id': {{object.id}}})
@@ -45,7 +61,6 @@
   </script>
   {% endif %}
 
-  <script src="{% static 'js/plan_graph_data.js' %}"></script>
 
   {% endblock extra_js %}
 
@@ -477,7 +492,7 @@ function zoomed() {
 <div class="panel-body">
     <ul class="list-group sortable">
         {% for step in step_list %}
-        <li id="{{ step.priority }}" data-id="{{ step.id }}" class="list-group-item{% if request.user in object.members.all or request.user == object.user %} cursor-move{%endif%}">
+		<li id="{% if request.GET.user %}{{ step.user_priority }}{%else%}{{ step.priority }}{% endif %}" data-id="{{ step.id }}" class="list-group-item{% if request.user in object.members.all or request.user == object.user %} cursor-move{%endif%}">
         {% if step.is_link %}
         <span class="badge">{% trans "link" %}</span>
         {% endif %}
