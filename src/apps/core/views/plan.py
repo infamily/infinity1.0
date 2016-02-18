@@ -191,10 +191,11 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
             except:
                 """ skipping un-parse-able step """
                 pass
-
+        user_set = set([step.user for step in  Step.objects.filter(plan=kwargs.get('object'))])
         context.update({
             'step_list': steps,
-            'plan_json': json.dumps(get_plandf_dict(plan_tuples))
+            'plan_json': json.dumps(get_plandf_dict(plan_tuples)),
+            'user_set': user_set
         })
 
         return context
