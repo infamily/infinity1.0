@@ -1,4 +1,4 @@
-prepare-env:
+env:
 	virtualenv .env
 	pip install -r requirements.txt
 
@@ -8,8 +8,16 @@ shell:
 runserver:
 	.env/bin/python src/manage.py runserver --settings=conf.local
 
-run-wsgi:
-	uwsgi --http 127.0.0.1:8000 --need-app --disable-logging --wsgi-file src/wsgi.py --processes 1 --threads 5 --home .env
+wsgi:
+	uwsgi\
+		--http 127.0.0.1:8000\
+		--need-app\
+		--disable-logging\
+		--wsgi-file src/wsgi.py\
+		--processes 1\
+		--threads 5\
+		--py-autoreload 1\
+		--home .env
 
 clean:
 	@echo "--> Cleaning pyc files"

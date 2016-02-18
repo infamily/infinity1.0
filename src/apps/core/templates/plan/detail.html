@@ -480,7 +480,7 @@ function zoomed() {
             <i class="fa {% if step.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
             {% endif %}
             {% if request.user in object.sharewith or request.user == step.user %}
-			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> {% if step.user == request.user %}[<a href="{% url "step-update" object.pk %}">edit</a>]{% endif %}
+			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> {% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">edit</a>]{% endif %}
 
 
 				<!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
