@@ -473,6 +473,12 @@ function zoomed() {
         {% if step.is_link %}
         <span class="badge">{% trans "link" %}</span>
         {% endif %}
+		{% if step.included %}
+		    <button style="float:right;">{% trans "exclude" %}</button>
+		{% else %}
+		    <button style="float:right;">{% trans "include" %}</button>
+        {% endif %}
+
         {% if step.personal %}
             {% if user.is_anonymous %}
             <i class="fa fa-lock"></i>
