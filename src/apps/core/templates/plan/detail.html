@@ -473,6 +473,7 @@ function zoomed() {
         {% if step.is_link %}
         <span class="badge">{% trans "link" %}</span>
         {% endif %}
+
 		{% if request.user in step.plan.members.all or request.user == step.plan.user %}
 			{% if step.included %}
 				<button style="float:right;">{% trans "exclude" %}</button>

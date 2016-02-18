@@ -37,7 +37,12 @@ class AjaxPlanStepsGraphDataView(JsonView):
     Steps Graph Data View
     """
     def post(self, request, *args, **kwargs):
-        steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
+        username = self.request.GET.get('user', None)
+        if username:
+            steps = Step.objects.filter(plan__id=request.POST['id'], user__username=username).order_by('priority')
+        else:
+            steps = Step.objects.filter(plan__id=request.POST['id'], included=True).order_by('priority')
+        #steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
         #plan_tuples = [(step.investables, step.deliverables) for step in steps]
         plan_tuples = [] 
         for step in steps:
@@ -170,8 +175,12 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     def get_context_data(self, **kwargs):
         context = super(PlanDetailView, self).get_context_data(**kwargs)
-
-        steps = Step.objects.filter(plan=kwargs.get('object')).order_by('priority')
+        
+        username = self.request.GET.get('user', None)
+        if username:
+            steps = Step.objects.filter(plan=kwargs.get('object'), user__username=username).order_by('priority')
+        else:
+            steps = Step.objects.filter(plan=kwargs.get('object'), included=True).order_by('priority')
         #plan_tuples = [(step.investables, step.deliverables) for step in steps]
         plan_tuples = [] 
         for step in steps:
