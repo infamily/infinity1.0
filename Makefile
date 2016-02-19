@@ -3,6 +3,10 @@ env:
 	pip install -r requirements.txt
 	npm install -g bower
 
+prepare:
+	.env/bin/python src/manage.py bower install --settings=conf.local
+	.env/bin/python src/manage.py collectstatic --noinput --settings=conf.local
+
 shell:
 	.env/bin/python src/manage.py shell --settings=conf.local
 
