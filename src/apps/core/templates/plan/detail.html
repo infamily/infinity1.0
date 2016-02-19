@@ -515,7 +515,7 @@ function zoomed() {
 	{% if not forloop.last %},{% endif %} {% endfor %}
 </div>
 
-<div class="panel-heading">{% trans "Steps" %} <button style="float:right; color: grey; margin-right:19px;" onclick="window.location.href='?lang={{ request.LANGUAGE_CODE }}{% if request.GET.user %}&user={{ request.GET.user }}{% endif %}#step-list';window.location.reload(true);">{% trans "reload" %}</button></div>
+<div class="panel-heading">{% trans "Steps" %} <button style="float:right; color: grey; margin-right:15px;" onclick="window.location.href='?lang={{ request.LANGUAGE_CODE }}{% if request.GET.user %}&user={{ request.GET.user }}{% endif %}#step-list';window.location.reload(true);">{% trans "reload" %}</button></div>
 <div class="panel-body">
     <ul class="list-group sortable">
         {% for step in step_list %}
