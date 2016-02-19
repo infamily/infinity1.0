@@ -515,7 +515,7 @@ function zoomed() {
 	{% if not forloop.last %},{% endif %} {% endfor %}
 </div>
 
-<div class="panel-heading">{% trans "Steps" %} <button style="float:right; color: grey; margin-right:19px;" onclick="window.location.href='?lang={{ request.LANGUAGE_CODE }}{% if request.GET.user %}&user={{ request.GET.user }}{% endif %}#step-list';window.location.reload(true);">reload</button></div>
+<div class="panel-heading">{% trans "Steps" %} <button style="float:right; color: grey; margin-right:19px;" onclick="window.location.href='?lang={{ request.LANGUAGE_CODE }}{% if request.GET.user %}&user={{ request.GET.user }}{% endif %}#step-list';window.location.reload(true);">{% trans "reload" %}</button></div>
 <div class="panel-body">
     <ul class="list-group sortable">
         {% for step in step_list %}
@@ -539,7 +539,7 @@ function zoomed() {
             <i class="fa {% if step.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
             {% endif %}
             {% if request.user in object.sharewith or request.user == step.user %}
-			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> {% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">edit</a>]{% endif %}
+			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> {% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">{% trans "edit" %}</a>]{% endif %}
 
 
 				<!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
@@ -551,7 +551,7 @@ function zoomed() {
                 <p>{% trans "Request access:" %} [<a href="{% url 'user-detail' object.user.username %}">{{step.user.username}}</a>]</p>
             {% endif %}
         {% else %}
-		{% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">edit</a>]{% endif %}
+		{% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">{% trans "edit" %}</a>]{% endif %}
 		<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a data-toggle="tooltip" title="{{step.objective}}" href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> <span data-toggle="tooltip" title='{"input": {{step.investables|step_io}}, "output": {{step.deliverables|step_io}}}'><!-- .io toggle --><b>{% if not step.investables|step_io %}<span style="color:red;">.i</span>{% else %}<span style="color:green;">.i</span>{% endif %}{% if not step.deliverables|step_io %}<span style="color:red;">o</span>{% else %}<span style="color:green;">o</span>{% endif %}</b><!--end .io toggle--></span>
      		<p>
 		    <!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
