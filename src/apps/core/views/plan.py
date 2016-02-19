@@ -32,6 +32,22 @@ import json
 import stepio
 
 
+class AjaxStepIncludeView(JsonView):
+    """
+    Steps Graph Data View
+    """
+    def post(self, request, *args, **kwargs):
+        step_id = request.POST.get('step_id')
+        step = Step.objects.get(id=step_id)
+        if request.user in step.plan.members.all() or request.user == step.plan.user:
+            if step.included:
+                step.included = False
+            else:
+                step.included= True
+            step.save()
+        return self.json({'included': step.included, 'step_id': step_id})
+
+
 class AjaxPlanStepsGraphDataView(JsonView):
     """
     Steps Graph Data View

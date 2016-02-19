@@ -17,8 +17,34 @@
    <script src="{% static "cdn/jqueryui/1.11.2/jquery-ui.min.js" %}"></script>
   {% endif %}
 
+
   {% if request.user in object.members.all or request.user == object.user %}
   <script>
+	// STEP inclusion into plan
+
+	function step_include_toggle(json) {
+	  $.ajax({
+		  url : "/ajax/step-include/",
+		  type : "POST",
+		  data : json,
+		  success : function(json) {
+			  var button_id = "include-button-".concat(json['step_id']);
+			  if (json['included']) {
+				  document.getElementById(button_id).innerHTML = '{% trans "exclude" %}';
+				  document.getElementById(button_id).title = '{% trans "Exclude from our plan." %}';
+				  document.getElementById(button_id).style.backgroundColor = '#f0f0f0';
+			  }
+			  else {
+				  document.getElementById(button_id).innerHTML = '{% trans "include" %}';
+				  document.getElementById(button_id).title = '{% trans "Include into our plan." %}';
+				  document.getElementById(button_id).style.backgroundColor = 'white';
+			  }
+		  },
+		  error : function(xhr,errmsg,err) {
+			  console.log(xhr.status + ": " + xhr.responseText);
+		  }
+	  });
+	}
 
 	function get_graph_data(json) {
 
@@ -477,8 +503,9 @@ function zoomed() {
 </div>
 
 <div style="margin: 10px;" class="breadcrumb">
-	{% trans "Filter by:" %}
-	{% if request.GET.user %}(<a href="?lang={{request.LANGUAGE_CODE}}#step-list">default</a>){% endif %}
+	{% trans "Steps by:" %}
+	{% if request.GET.user %}
+	(<a href="?lang={{request.LANGUAGE_CODE}}#step-list">{% trans "our plan" %}</a>){% endif %}
 	{% for user in user_set %}
     	{% if request.GET.user == user.username %}
 		[<b>{{user.username}}</b>]
@@ -488,7 +515,7 @@ function zoomed() {
 	{% if not forloop.last %},{% endif %} {% endfor %}
 </div>
 
-<div class="panel-heading">{% trans "Steps" %}</div>
+<div class="panel-heading">{% trans "Steps" %} <button style="float:right; color: grey; margin-right:19px;" onclick="window.location.href='?lang={{ request.LANGUAGE_CODE }}{% if request.GET.user %}&user={{ request.GET.user }}{% endif %}#step-list';window.location.reload(true);">reload</button></div>
 <div class="panel-body">
     <ul class="list-group sortable">
         {% for step in step_list %}
@@ -499,9 +526,9 @@ function zoomed() {
 
 		{% if request.user in step.plan.members.all or request.user == step.plan.user %}
 			{% if step.included %}
-				<button style="float:right;">{% trans "exclude" %}</button>
+			<button id="include-button-{{step.id}}" style="float:right;background-color:#f0f0f0;" onclick="step_include_toggle({'step_id': {{step.id}}});" data-toggle="tooltip" title="{% trans "Exclude from our plan." %}">{% trans "exclude" %}</button>
 			{% else %}
-				<button style="float:right;">{% trans "include" %}</button>
+			<button id="include-button-{{step.id}}" style="float:right;background-color:white;" onclick="step_include_toggle({'step_id': {{step.id}}});" data-toggle="tooltip" title="{% trans "Include into our plan." %}">{% trans "include" %}</button>
 			{% endif %}
         {% endif %}
 
