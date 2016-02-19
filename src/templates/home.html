@@ -17,10 +17,10 @@
 </style>
 
 <!-- for pop-up video -->
-<script type="text/javascript" src="{% static "cdn/jquery/jquery-migrate-1.2.1.min.js" %}"></script>
-<script type="text/javascript" src="{% static "cdn/fancybox/jquery.fancybox-1.3.4.pack.js" %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static "cdn/fancybox/jquery.fancybox-1.3.4.css" %}" media="screen" />
-<script type="text/javascript" src="{% static "cdn/fancybox/video.js" %}"></script>
+<script type="text/javascript" src="{% static "jquery-migrate/jquery-migrate.min.js" %}"></script>
+<script type="text/javascript" src="{% static "fancybox/source/jquery.fancybox.pack.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static "fancybox/source/jquery.fancybox.css" %}" media="screen" />
+<script type="text/javascript" src="{% static "js/video.js" %}"></script>
 
 <!-- for hiding button -->
 <script type="text/javascript">
@@ -167,7 +167,7 @@ $(document).ready(function(){
 <div style="clear:both;">
     <br/>
 
-    <link rel="stylesheet" href="/static/css/bootstrap-horizon.css">
+    <link rel="stylesheet" href="{% static "bootstrap-horizon/bootstrap-horizon.css" %}">
 
     <div id="scroll_arrowleft"></div>
     <div id="scroll_arrowright"></div>

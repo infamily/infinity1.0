@@ -1,6 +1,7 @@
 env:
 	virtualenv .env
 	pip install -r requirements.txt
+	npm install -g bower
 
 shell:
 	.env/bin/python src/manage.py shell --settings=conf.local

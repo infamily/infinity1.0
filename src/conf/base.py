@@ -118,9 +118,27 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
 )
 # END STATIC FILE CONFIGURATION
 
+# BOWER CONFIGURATIONS
+BOWER_COMPONENTS_ROOT = os.path.join(SITE_ROOT, 'components')
+
+BOWER_PATH = '/usr/local/bin/bower'
+
+BOWER_INSTALLED_APPS = [
+    'bootstrap#3.3.6',
+    'bootstrap-datepicker#1.6.0',
+    'bootstrap-horizon#0.1.0',
+    'bootswatch#3.3.6+1',
+    'fancybox#2.1.5',
+    'font-awesome#4.5.0',
+    'jquery#2.2.0',
+    'jquery-migrate#1.3.0',
+    'jquery-ui#1.11.4',
+]
+# END BOWER CONFIGURATIONS
 
 # SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -223,6 +241,7 @@ DJANGO_APPS = (
     'django_select2',
     'django_markdown',
     'djmoney_rates',
+    'djangobower',
 )
 
 # DEBUG-specific apps
