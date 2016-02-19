@@ -32,12 +32,35 @@ import json
 import stepio
 
 
+class AjaxStepIncludeView(JsonView):
+    """
+    Steps Graph Data View
+    """
+    def post(self, request, *args, **kwargs):
+        step_id = request.POST.get('step_id')
+        step = Step.objects.get(id=step_id)
+        if request.user in step.plan.members.all() or request.user == step.plan.user:
+            if step.included:
+                step.included = False
+            else:
+                step.included= True
+            step.save()
+        return self.json({'included': step.included, 'step_id': step_id})
+
+
 class AjaxPlanStepsGraphDataView(JsonView):
     """
     Steps Graph Data View
     """
     def post(self, request, *args, **kwargs):
-        steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
+        username = self.request.GET.get('user', None)
+        if username:
+            steps = Step.objects.filter(plan__id=request.POST['id'], user__username=username).order_by('user_priority')
+            print 'username: ', username
+        else:
+            steps = Step.objects.filter(plan__id=request.POST['id'], included=True).order_by('priority')
+            print 'username: ', None
+        #steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
         #plan_tuples = [(step.investables, step.deliverables) for step in steps]
         plan_tuples = [] 
         for step in steps:
@@ -170,8 +193,12 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     def get_context_data(self, **kwargs):
         context = super(PlanDetailView, self).get_context_data(**kwargs)
-
-        steps = Step.objects.filter(plan=kwargs.get('object')).order_by('priority')
+        
+        username = self.request.GET.get('user', None)
+        if username:
+            steps = Step.objects.filter(plan=kwargs.get('object'), user__username=username).order_by('user_priority')
+        else:
+            steps = Step.objects.filter(plan=kwargs.get('object'), included=True).order_by('priority')
         #plan_tuples = [(step.investables, step.deliverables) for step in steps]
         plan_tuples = [] 
         for step in steps:
@@ -182,10 +209,11 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
             except:
                 """ skipping un-parse-able step """
                 pass
-
+        user_set = set([step.user for step in  Step.objects.filter(plan=kwargs.get('object'))])
         context.update({
             'step_list': steps,
-            'plan_json': json.dumps(get_plandf_dict(plan_tuples))
+            'plan_json': json.dumps(get_plandf_dict(plan_tuples)),
+            'user_set': user_set
         })
 
         return context

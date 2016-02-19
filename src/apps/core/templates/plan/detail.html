@@ -17,8 +17,50 @@
    <script src="{% static "cdn/jqueryui/1.11.2/jquery-ui.min.js" %}"></script>
   {% endif %}
 
+
   {% if request.user in object.members.all or request.user == object.user %}
   <script>
+	// STEP inclusion into plan
+
+	function step_include_toggle(json) {
+	  $.ajax({
+		  url : "/ajax/step-include/",
+		  type : "POST",
+		  data : json,
+		  success : function(json) {
+			  var button_id = "include-button-".concat(json['step_id']);
+			  if (json['included']) {
+				  document.getElementById(button_id).innerHTML = '{% trans "exclude" %}';
+				  document.getElementById(button_id).title = '{% trans "Exclude from our plan." %}';
+				  document.getElementById(button_id).style.backgroundColor = '#f0f0f0';
+			  }
+			  else {
+				  document.getElementById(button_id).innerHTML = '{% trans "include" %}';
+				  document.getElementById(button_id).title = '{% trans "Include into our plan." %}';
+				  document.getElementById(button_id).style.backgroundColor = 'white';
+			  }
+		  },
+		  error : function(xhr,errmsg,err) {
+			  console.log(xhr.status + ": " + xhr.responseText);
+		  }
+	  });
+	}
+
+	function get_graph_data(json) {
+
+	  $.ajax({
+		  url : "/ajax/steps-graph-data/{% if request.GET.user %}?user={{request.GET.user}}{% endif %}",
+		  type : "POST",
+		  data : json,
+		  success : function(json) {
+			  redraw(json);
+			 // console.log(json);
+		  },
+		  error : function(xhr,errmsg,err) {
+			  console.log(xhr.status + ": " + xhr.responseText);
+		  }
+	  });
+	}
 
     $(function() {
         $( ".sortable" ).sortable({
@@ -29,7 +71,7 @@
                 });
                 $.ajax({
                     method: "POST",
-                    url: "{% url 'change-step-priority' %}",
+					url: "{% url 'change-step-priority' %}{% if request.GET.user %}?user={{request.GET.user}}{% endif %}",
                     data: {"steps": JSON.stringify(data)}
                 }).done(function() {
                     get_graph_data({'id': {{object.id}}})
@@ -45,7 +87,6 @@
   </script>
   {% endif %}
 
-  <script src="{% static 'js/plan_graph_data.js' %}"></script>
 
   {% endblock extra_js %}
 
@@ -459,20 +500,38 @@ function zoomed() {
 }
 
 </script>
-
-
-
 </div>
 
+<div style="margin: 10px;" class="breadcrumb">
+	{% trans "Steps by:" %}
+	{% if request.GET.user %}
+	(<a href="?lang={{request.LANGUAGE_CODE}}#step-list">{% trans "our plan" %}</a>){% endif %}
+	{% for user in user_set %}
+    	{% if request.GET.user == user.username %}
+		[<b>{{user.username}}</b>]
+		{% else %}
+	    [<a href="?lang={{request.LANGUAGE_CODE}}&user={{user.username}}#step-list">{{user.username}}</a>]
+		{% endif %}
+	{% if not forloop.last %},{% endif %} {% endfor %}
+</div>
 
-<div class="panel-heading">{% trans "Steps" %}</div>
+<div class="panel-heading">{% trans "Steps" %} <button style="float:right; color: grey; margin-right:19px;" onclick="window.location.href='?lang={{ request.LANGUAGE_CODE }}{% if request.GET.user %}&user={{ request.GET.user }}{% endif %}#step-list';window.location.reload(true);">reload</button></div>
 <div class="panel-body">
     <ul class="list-group sortable">
         {% for step in step_list %}
-        <li id="{{ step.priority }}" data-id="{{ step.id }}" class="list-group-item{% if request.user in object.members.all or request.user == object.user %} cursor-move{%endif%}">
+		<li id="{% if request.GET.user %}{{ step.user_priority }}{%else%}{{ step.priority }}{% endif %}" data-id="{{ step.id }}" class="list-group-item{% if request.user in object.members.all or request.user == object.user %} cursor-move{%endif%}">
         {% if step.is_link %}
         <span class="badge">{% trans "link" %}</span>
         {% endif %}
+
+		{% if request.user in step.plan.members.all or request.user == step.plan.user %}
+			{% if step.included %}
+			<button id="include-button-{{step.id}}" style="float:right;background-color:#f0f0f0;" onclick="step_include_toggle({'step_id': {{step.id}}});" data-toggle="tooltip" title="{% trans "Exclude from our plan." %}">{% trans "exclude" %}</button>
+			{% else %}
+			<button id="include-button-{{step.id}}" style="float:right;background-color:white;" onclick="step_include_toggle({'step_id': {{step.id}}});" data-toggle="tooltip" title="{% trans "Include into our plan." %}">{% trans "include" %}</button>
+			{% endif %}
+        {% endif %}
+
         {% if step.personal %}
             {% if user.is_anonymous %}
             <i class="fa fa-lock"></i>
