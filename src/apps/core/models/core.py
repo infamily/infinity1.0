@@ -520,6 +520,12 @@ class Step(BaseContentModel):
         null=False,
         blank=False,
     )
+    user_priority = models.IntegerField(
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    included = models.BooleanField(default=False)
     plan = models.ForeignKey(
         'Plan',
         related_name='plan_steps',

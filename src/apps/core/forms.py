@@ -884,12 +884,21 @@ class StepCreateForm(forms.ModelForm):
         self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
         self.fields['priority'].widget = forms.HiddenInput()
+        self.fields['user_priority'].widget = forms.HiddenInput()
+        self.fields['included'].widget = forms.HiddenInput()
+
+        if request.user in plan_instance.members.all() or request.user == plan_instance.user:
+            self.initial['included'] = True
+        else:
+            self.initial['included'] = False
 
         if plan_instance:
             if plan_instance.plan_steps.all():
                 self.initial['priority'] = plan_instance.plan_steps.latest('priority').priority
+                self.initial['user_priority'] = plan_instance.plan_steps.latest('user_priority').priority
             else:
                 self.initial['priority'] = 1
+                self.initial['user_priority'] = 1
             self.initial['sharewith'] = plan_instance.sharewith.all
             self.initial['personal'] = plan_instance.personal
         else:
@@ -916,6 +925,8 @@ class StepCreateForm(forms.ModelForm):
             'name',
             'objective',
             'priority',
+            'user_priority',
+            'included',
             'investables',
             'deliverables',
             'language',

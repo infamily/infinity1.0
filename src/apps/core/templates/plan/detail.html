@@ -17,8 +17,50 @@
    <script src="{% static "cdn/jqueryui/1.11.2/jquery-ui.min.js" %}"></script>
   {% endif %}
 
+
   {% if request.user in object.members.all or request.user == object.user %}
   <script>
+	// STEP inclusion into plan
+
+	function step_include_toggle(json) {
+	  $.ajax({
+		  url : "/ajax/step-include/",
+		  type : "POST",
+		  data : json,
+		  success : function(json) {
+			  var button_id = "include-button-".concat(json['step_id']);
+			  if (json['included']) {
+				  document.getElementById(button_id).innerHTML = '{% trans "exclude" %}';
+				  document.getElementById(button_id).title = '{% trans "Exclude from our plan." %}';
+				  document.getElementById(button_id).style.backgroundColor = '#f0f0f0';
+			  }
+			  else {
+				  document.getElementById(button_id).innerHTML = '{% trans "include" %}';
+				  document.getElementById(button_id).title = '{% trans "Include into our plan." %}';
+				  document.getElementById(button_id).style.backgroundColor = 'white';
+			  }
+		  },
+		  error : function(xhr,errmsg,err) {
+			  console.log(xhr.status + ": " + xhr.responseText);
+		  }
+	  });
+	}
+
+	function get_graph_data(json) {
+
+	  $.ajax({
+		  url : "/ajax/steps-graph-data/{% if request.GET.user %}?user={{request.GET.user}}{% endif %}",
+		  type : "POST",
+		  data : json,
+		  success : function(json) {
+			  redraw(json);
+			 // console.log(json);
+		  },
+		  error : function(xhr,errmsg,err) {
+			  console.log(xhr.status + ": " + xhr.responseText);
+		  }
+	  });
+	}
 
     $(function() {
         $( ".sortable" ).sortable({
@@ -29,7 +71,7 @@
                 });
                 $.ajax({
                     method: "POST",
-                    url: "{% url 'change-step-priority' %}",
+					url: "{% url 'change-step-priority' %}{% if request.GET.user %}?user={{request.GET.user}}{% endif %}",
                     data: {"steps": JSON.stringify(data)}
                 }).done(function() {
                     get_graph_data({'id': {{object.id}}})
@@ -45,7 +87,6 @@
   </script>
   {% endif %}
 
-  <script src="{% static 'js/plan_graph_data.js' %}"></script>
 
   {% endblock extra_js %}
 
@@ -100,7 +141,7 @@ $(document).ready( function() {
         <span onmouseover="showMore()"><b>[<u>{% trans "needs" %} ${{ object.get_remain_usd|floatformat:2 }} {% trans "for funding" %} {{ object.not_funded_hours|floatformat:2}} {% trans "hours" %}</u>]</b></span>
     </div>
     <div align="right">
-        [<u>{% trans "members:" %}</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>, {% endfor %} <!--<span class="tiptext"><u>{% trans "equity" %}</u>: {{ object.get_equity|floatformat:0 }}% ḥ-->]<br/>
+        [<u>{% trans "members:" %}</u> {% for member in object.members.all %} <a href="{% url 'user-detail' member.username %}">{{ member.username }}</a>{%if not forloop.last%}, {%endif%}{% endfor %} <!--<span class="tiptext"><u>{% trans "equity" %}</u>: {{ object.get_equity|floatformat:0 }}% ḥ-->]<br/>
             <div class="description" align="left">{% trans "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), which indicates how much project <u>shareholders</u> own of all results under this project. The rest is owned by contributing users." %}</div>
     </span>
     </div>
@@ -459,20 +500,38 @@ function zoomed() {
 }
 
 </script>
-
-
-
 </div>
 
+<div style="margin: 10px;" class="breadcrumb">
+	{% trans "Steps by:" %}
+	{% if request.GET.user %}
+	(<a href="?lang={{request.LANGUAGE_CODE}}#step-list">{% trans "our plan" %}</a>){% endif %}
+	{% for user in user_set %}
+    	{% if request.GET.user == user.username %}
+		[<b>{{user.username}}</b>]
+		{% else %}
+	    [<a href="?lang={{request.LANGUAGE_CODE}}&user={{user.username}}#step-list">{{user.username}}</a>]
+		{% endif %}
+	{% if not forloop.last %},{% endif %} {% endfor %}
+</div>
 
-<div class="panel-heading">{% trans "Steps" %}</div>
+<div class="panel-heading">{% trans "Steps" %} <button style="float:right; color: grey; margin-right:15px;" onclick="window.location.href='?lang={{ request.LANGUAGE_CODE }}{% if request.GET.user %}&user={{ request.GET.user }}{% endif %}#step-list';window.location.reload(true);">{% trans "reload" %}</button></div>
 <div class="panel-body">
     <ul class="list-group sortable">
         {% for step in step_list %}
-        <li id="{{ step.priority }}" data-id="{{ step.id }}" class="list-group-item{% if request.user in object.members.all or request.user == object.user %} cursor-move{%endif%}">
+		<li id="{% if request.GET.user %}{{ step.user_priority }}{%else%}{{ step.priority }}{% endif %}" data-id="{{ step.id }}" class="list-group-item{% if request.user in object.members.all or request.user == object.user %} cursor-move{%endif%}">
         {% if step.is_link %}
         <span class="badge">{% trans "link" %}</span>
         {% endif %}
+
+		{% if request.user in step.plan.members.all or request.user == step.plan.user %}
+			{% if step.included %}
+			<button id="include-button-{{step.id}}" style="float:right;background-color:#f0f0f0;" onclick="step_include_toggle({'step_id': {{step.id}}});" data-toggle="tooltip" title="{% trans "Exclude from our plan." %}">{% trans "exclude" %}</button>
+			{% else %}
+			<button id="include-button-{{step.id}}" style="float:right;background-color:white;" onclick="step_include_toggle({'step_id': {{step.id}}});" data-toggle="tooltip" title="{% trans "Include into our plan." %}">{% trans "include" %}</button>
+			{% endif %}
+        {% endif %}
+
         {% if step.personal %}
             {% if user.is_anonymous %}
             <i class="fa fa-lock"></i>
@@ -480,7 +539,7 @@ function zoomed() {
             <i class="fa {% if step.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
             {% endif %}
             {% if request.user in object.sharewith or request.user == step.user %}
-			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> {% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">edit</a>]{% endif %}
+			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> {% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">{% trans "edit" %}</a>]{% endif %}
 
 
 				<!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
@@ -492,7 +551,7 @@ function zoomed() {
                 <p>{% trans "Request access:" %} [<a href="{% url 'user-detail' object.user.username %}">{{step.user.username}}</a>]</p>
             {% endif %}
         {% else %}
-		{% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">edit</a>]{% endif %}
+		{% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">{% trans "edit" %}</a>]{% endif %}
 		<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a data-toggle="tooltip" title="{{step.objective}}" href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> <span data-toggle="tooltip" title='{"input": {{step.investables|step_io}}, "output": {{step.deliverables|step_io}}}'><!-- .io toggle --><b>{% if not step.investables|step_io %}<span style="color:red;">.i</span>{% else %}<span style="color:green;">.i</span>{% endif %}{% if not step.deliverables|step_io %}<span style="color:red;">o</span>{% else %}<span style="color:green;">o</span>{% endif %}</b><!--end .io toggle--></span>
      		<p>
 		    <!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
