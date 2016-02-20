@@ -6,25 +6,21 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}infinity{% endblock title %}</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
     {% block head %}{% endblock head %}
-    <!-- Le styles -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
-    {% if request|get_country_by_ip != 'CN' %}
-     <link href="https://netdna.bootstrapcdn.com/bootswatch/latest/lumen/bootstrap.min.css" rel="stylesheet">
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" rel="stylesheet">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    {% else %}
-     <link href="{% static "cdn/bootswatch/latest/lumen/bootstrap.min.css" %}" rel="stylesheet" />
-     <link href="{% static "cdn/bootstrap-datepicker/1.3.0/css/datepicker.min.css" %}" rel="stylesheet">
-     <link rel="stylesheet" href="{% static "cdn/font-awesome/4.3.0/css/font-awesome.min.css" %}">
-     <link rel="stylesheet" href="{% static "cdn/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" %}">
-    {% endif %}
+    <!-- Le styles -->
+    <link href="{% static "bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "bootswatch/lumen/bootstrap.min.css" %}" rel="stylesheet" />
+    <link href="{% static "bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" %}" rel="stylesheet">
+    <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
+    <link href="{% static "jquery-ui/themes/smoothness/jquery-ui.min.css" %}" rel="stylesheet">
+
+    {# Form media css #}
     {{ form.media.css }}
     
     <style>
@@ -42,24 +38,17 @@
       
     </style>
     <!-- This file store project specific CSS -->
-    <link href="{% static 'css/infinity.css' %}" rel="stylesheet">
+    <link href="{% static "css/infinity.css" %}" rel="stylesheet">
 
-    <!-- Use this to quickly test CSS changes in a template,
-        then move to infinity.css -->
+    <!-- Use this to quickly test CSS changes in a template, then move to infinity.css -->
     {% block extra_css %}{% endblock extra_css %}
 
-    {% if request|get_country_by_ip != 'CN' %}
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-    {% else %}
-     <script src="{% static "cdn/jquery/1.11.3/jquery.min.js" %}"></script>
-     <script src="{% static "cdn/jqueryui/1.11.4/jquery-ui.min.js" %}"></script>
-     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-     <script src="{% static "cdn/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js" %}"></script>
-    {% endif %}
-    <script src="{% static 'js/infinity.js' %}"></script>
+    <script src="{% static "jquery/dist/jquery.min.js" %}"></script>
+    <script src="{% static "jquery-ui/jquery-ui.min.js" %}"></script>
+    <script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" %}"></script>
+
+    <script src="{% static "js/infinity.js" %}"></script>
 
     <script type="text/javascript">
 
@@ -188,7 +177,10 @@
       {% endblock javascript %}
 
     </div> <!-- /container -->
+
+    {# Form media js #}
     {{ form.media.js }}
+
     {% block select2_js %}{% endblock %}
   </body>
 </html>

@@ -33,3 +33,4 @@ django-redis
 https://github.com/WeFindX/pygtaw/archive/master.zip
 stepio==0.1
 plandf==0.1.9
+django-bower-5.1.0

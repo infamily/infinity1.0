@@ -2,6 +2,7 @@
 # folder to serve static files
 assets
 media
+components
 # file with secret information
 src/conf/local.py
 
