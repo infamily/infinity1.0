@@ -229,7 +229,9 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.admin',
+)
 
+DJANGO_APPS += (
     # Additional apps
     'django_extensions',
     'pure_pagination',
