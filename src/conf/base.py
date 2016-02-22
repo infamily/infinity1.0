@@ -244,6 +244,7 @@ DJANGO_APPS += (
     'django_markdown',
     'djmoney_rates',
     'djangobower',
+    'rest_framework',
 )
 
 # DEBUG-specific apps
