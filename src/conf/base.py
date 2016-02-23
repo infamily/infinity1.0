@@ -387,6 +387,12 @@ SHORT_DATE_FORMAT = 'Y-m-d'
 DATETIME_FORMAT = 'Y-m-d H:i'
 SHORT_DATETIME_FORMAT = 'Y-m-d H:i'
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 5
+}
+
 # APP CONFIGURATION
 from .app import LOCAL_APPS
 

@@ -10,6 +10,8 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^set-lang/(?P<lang>\w+)/$', SetLanguageView.as_view(pattern_name='home'), name='lang_redirect'),
+    url(r'^api/v1/', include('api.v1.urls', namespace='api.v1')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', IndexView.as_view(), name='home'),
     url(r'^[!]$', IndexView.as_view(), name='index'),
     url(r'^i$', IndexView.as_view(), name='inbox'),
