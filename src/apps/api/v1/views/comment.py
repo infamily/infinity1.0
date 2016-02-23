@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from api.v1.serializers import CommentSerializer
+from api.v1.serializers.comment import CommentSerializer
 from core.models import Comment
 
 
