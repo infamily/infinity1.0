@@ -121,13 +121,14 @@ class IndexView(TemplateView):
         current_time = timezone.now()
         language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
 
-        items = {'needs': 32,
-                 'goals': 32,
-                 'ideas': 32,
-                 'plans': 32,
-                 'steps': 32,
-                 'tasks': 32,
-                 'works': 32}
+        items = {#'needs': 64,
+                 'goals': 128,
+                 'ideas': 128,
+                 'plans': 128,
+                 #'steps': 64,
+                 #'tasks': 64,
+                 #'works': 64
+                }
 
         for i, key in enumerate(items.keys()):
             if self.request.session.get('%s_number' % key):
@@ -171,7 +172,8 @@ class IndexView(TemplateView):
 
         # Get Content Types for Goal, Idea, Plan, Step, Task
         instances = {}
-        content_types = ContentType.objects.get_for_models(Need, Goal, Idea, Plan, Step, Task, Work)
+        #content_types = ContentType.objects.get_for_models(Need, Goal, Idea, Plan, Step, Task, Work)
+        content_types = ContentType.objects.get_for_models(Goal, Idea, Plan)
 
         for model_class, translations in content_types.items():
             model_class_lower_name = model_class.__name__.lower() + 's'
