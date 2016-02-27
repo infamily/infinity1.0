@@ -1,0 +1,35 @@
+{% extends "mail/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<p>{% trans "User" %} [{{transaction.sender_user}}] {% trans "has itiated co-creation of an investment instrument:" %}</p>
+
+{% trans "Donor:" %} [{{transaction.sender_user}}]<br/>
+{% trans "Acceptor:" %} [{{transaction.receiver_user}}]<br/>
+{% trans "Transaction amount:" %} <b>{{transaction.amount}} {{transaction.currency}}</b> <br/>
+{%trans "Hours donated:" %} {{transaction.hours}} {% trans "hour value:" %} {{hour_value}}<br/>
+{%trans "Hours matched:" %} <b>{{transaction.hours_matched}}</b><br/>
+{%trans "Transaction initiation date:" %} <b>{{transaction.created_at}}</b><br/>
+{%trans "Comment URL:" %} <a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{transaction.comment.id}}"># {{transaction.comment.id}}</a>
+
+{{transaction}}: {% if transaction.paymentExecStatus == 'CREATED' %} {% trans "PENDING" %} {% elif transaction.paymentExecStatus == 'COMPLETED' %} {% trans "FINISHED" %} {% endif %} ({% trans "review status at:" %} <a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#pptx-{{transaction.id}}"># {{transaction.id}}</a> )
+
+{%trans "Work description:" %}
+==============================
+{{transaction.comment_text}} <br/>
+==============================
+
+
+<pre>
+    XXXXXXXX           XXXXXXXXXXX
+  XX       XX       XXXX         XX
+ X           XX   XXX            XX
+X              XXX               X
+XX            XX XXXX           XX
+ XX        XXX      XXXX       XX
+   XXXXXXXX             XXXXXXX
+
+        https://infty.xyz
+</pre>
+
+{% endblock content %}
