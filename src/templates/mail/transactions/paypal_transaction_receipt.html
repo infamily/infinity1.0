@@ -7,17 +7,15 @@
 {% trans "Donor:" %} [{{transaction.sender_user}}]<br/>
 {% trans "Acceptor:" %} [{{transaction.receiver_user}}]<br/>
 {% trans "Transaction amount:" %} <b>{{transaction.amount}} {{transaction.currency}}</b> <br/>
-{%trans "Hours donated:" %} {{transaction.hours}} {% trans "hour value:" %} {{hour_value}}<br/>
+{%trans "Hours donated:" %} {{transaction.hours}} {% trans "hour value:" %} {{hour_value}} (USD/h)<br/>
 {%trans "Hours matched:" %} <b>{{transaction.hours_matched}}</b><br/>
 {%trans "Transaction initiation date:" %} <b>{{transaction.created_at}}</b><br/>
-{%trans "Comment URL:" %} <a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{transaction.comment.id}}"># {{transaction.comment.id}}</a>
-
-{{transaction}}: {% if transaction.paymentExecStatus == 'CREATED' %} {% trans "PENDING" %} {% elif transaction.paymentExecStatus == 'COMPLETED' %} {% trans "FINISHED" %} {% endif %} ({% trans "review status at:" %} <a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#pptx-{{transaction.id}}"># {{transaction.id}}</a> )
-
+{%trans "Comment URL:" %} <a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{transaction.comment.id}}"># {{transaction.comment.id}}</a><br/>
+{{transaction}}: {% if transaction.paymentExecStatus == 'CREATED' %} {% trans "PENDING" %} {% elif transaction.paymentExecStatus == 'COMPLETED' %} {% trans "FINISHED" %} {% endif %} ({% trans "review status at:" %} <a href="/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#pptx-{{transaction.id}}"># {{transaction.id}}</a> )<br/><br/>
 {%trans "Work description:" %}
-==============================
+==============================<br/>
 {{transaction.comment_text}} <br/>
-==============================
+==============================<br/>
 
 
 <pre>
