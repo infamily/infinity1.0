@@ -12,7 +12,7 @@
 {%trans "Transaction initiation date:" %} <b>{{transaction.created_at}}</b><br/>
 {%trans "Comment URL:" %} <a href="{{domain}}/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{transaction.comment.id}}"># {{transaction.comment.id}}</a><br/>
 {{transaction}}: {% if transaction.paymentExecStatus == 'CREATED' %} {% trans "PENDING" %} {% elif transaction.paymentExecStatus == 'COMPLETED' %} {% trans "FINISHED" %} {% endif %} ({% trans "review status at:" %} <a href="{{domain}}/{{transaction.comment.content_type.name}}/{{transaction.comment.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#pptx-{{transaction.id}}"># {{transaction.id}}</a> )<br/><br/>
-{%trans "Work description:" %}
+{%trans "Work description:" %}<br/>
 ==============================<br/>
 {{transaction.comment_text}} <br/>
 ==============================<br/>
