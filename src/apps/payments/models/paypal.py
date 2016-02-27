@@ -10,6 +10,7 @@ from decimal import Decimal
 from copy import copy
 
 
+
 class PayPalTransaction(models.Model):
     CREATED = 'CREATED'
     COMPLETED = 'COMPLETED'
@@ -105,11 +106,14 @@ class PayPalTransaction(models.Model):
 
 def comment_pre_save_signal(sender, instance, **kwargs):
     instance.compute_hours()
+    if instance.pk is None: # (if created)
+        instance.comment_text = instance.comment.text
 
-def comment_save_signal(sender, instance, **kwargs):
+def comment_save_signal(sender, instance, created, **kwargs):
     instance.comment.sum_hours_donated()
     instance.comment.match_hours()
     instance.comment.content_object.sum_hours()
+
 
 pre_save.connect(comment_pre_save_signal, sender=PayPalTransaction)
 post_save.connect(comment_save_signal, sender=PayPalTransaction)
