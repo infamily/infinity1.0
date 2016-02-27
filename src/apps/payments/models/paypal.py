@@ -78,6 +78,8 @@ class PayPalTransaction(models.Model):
 
     comment = models.ForeignKey(Comment, related_name='paypal_transaction')
 
+    comment_text = models.TextField()
+
     def __unicode__(self):
         return u"Transaction #%s" % self.id
 
