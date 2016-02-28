@@ -441,6 +441,11 @@ class Goal(BaseContentModel):
         blank=False,
         null=False,
     )
+    definition = models.ForeignKey(
+    'Definition',
+    blank=True,
+    null=True,
+    )
     need = models.ForeignKey(
         'Need',
         blank=True,

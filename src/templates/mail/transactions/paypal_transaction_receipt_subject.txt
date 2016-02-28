@@ -1,0 +1,3 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}Investment instrument creation initiation notice{% endblocktrans %}
+{% endautoescape %}

@@ -309,12 +309,21 @@ class GoalCreateForm(forms.ModelForm):
 
     reason = forms.CharField(widget=MarkdownWidget())
 
+    select_definition = ChoiceFieldNoValidation(
+        widget=HeavySelect2Widget(data_view='heavy_data_definition_complete', choices=[()]),
+        required=False 
+    )
 #   hyper_equity = forms.ChoiceField(choices=[(Decimal(x*0.0001), '%.2f' % (x*0.01)+ '%') for x in range(1,11)])
 
     def __init__(self, *args, **kwargs):
         need_instance = kwargs.pop('need_instance')
         request = kwargs.pop('request')
         super(GoalCreateForm, self).__init__(*args, **kwargs)
+
+        self.fields['definition'].widget = forms.HiddenInput()
+        self.fields['definition'].required = False
+        self.fields['select_definition'].required = True
+        self.fields['select_definition'].label = _("""<b>Category:</b> (Encyclopedic lookup. To define new term, enter colon symbol, e.g. <mark style="background-color: #90EE90;"><i>expression<b>: </b>definition</i></mark> in one line.)""")
 
         self.helper = FormHelper(self)
 
@@ -357,6 +366,7 @@ class GoalCreateForm(forms.ModelForm):
         )
 
         self.fields['type'].label = _("<b>Problem category:</b>")
+        self.fields['need'].widget = forms.HiddenInput()
         self.fields['need'].label = _("""<b>Related Need:</b> (Optional)""")
         self.fields['name'].label = _("""<b>Title:</b> (e.g., Potable Water
                                       Shortage, <a href="/goal/list/">check</a> if the problem is not
@@ -374,6 +384,8 @@ class GoalCreateForm(forms.ModelForm):
         self.fields['is_historical'].label = _('<b>This is a history</b> (check if you are documenting a problem of the past)')
         self.fields['sharewith'].label = _('Share with:')
         self.initial['personal'] = True
+        self.fields['type'].widget = forms.HiddenInput()
+        self.initial['type'] = Type.objects.get(pk=1) # I guess, we'll need to deprecate Goal.type
 
         if need_instance:
             self.initial['sharewith'] = need_instance.sharewith.all
@@ -395,7 +407,9 @@ class GoalCreateForm(forms.ModelForm):
             'is_link',
             'url',
             'is_historical',
+            'definition',
             'type',
+            'select_definition',
             'name',
             'reason',
             'need',
@@ -416,6 +430,14 @@ class GoalUpdateForm(forms.ModelForm):
 
         self.helper.layout.append(Submit('save', _('Update')))
 
+        self.fields['definition'] = forms.ModelChoiceField(
+            widget=ModelSelect2Widget(
+                queryset=Definition.objects.all(),
+                search_fields=['name__icontains']
+            ),
+            queryset=Definition.objects.all()
+        )
+
         self.fields['name'].label = 'Description'
         self.fields['name'].widget.attrs['readonly'] = True
         self.fields['need'] = forms.ModelChoiceField(queryset=Need.objects.all())
@@ -427,6 +449,7 @@ class GoalUpdateForm(forms.ModelForm):
             ),
             queryset=Type.objects.all()
         )
+        self.fields['type'].widget = forms.HiddenInput()
 
         self.fields['need'] = forms.ModelChoiceField(
             widget=ModelSelect2Widget(
@@ -473,7 +496,7 @@ class GoalUpdateForm(forms.ModelForm):
             'is_historical',
             'type',
             'name',
-            'need',
+            'definition',
             'reason',
             'language',
             'personal',

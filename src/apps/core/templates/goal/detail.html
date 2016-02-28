@@ -78,7 +78,7 @@ $(document).ready( function() {
         -->
       </div>
  
-	  {% trans "category:" %} <a href="">{{ object.type }}</a>{% if object.need %}, {% trans "related need:" %} <a href="{% url "need-detail" object.need.pk %}">
+	  {% trans "category:" %} <a href="{% if object.definition %}{% url "definition-detail" object.definition.id %}{%else%}#{%endif%}">{{ object.definition }}</a>{% if object.need %}, {% trans "related need:" %} <a href="{% url "need-detail" object.need.pk %}">
 		  {% if object.need.personal %}
 		    {% if request.user in object.need.sharewith or request.user == object.need.user %}
 		       {{ object.need }}
