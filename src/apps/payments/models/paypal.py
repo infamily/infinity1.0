@@ -10,7 +10,6 @@ from decimal import Decimal
 from copy import copy
 
 from ..utils import send_mail_template
-from os import path
 
 
 class PayPalTransaction(models.Model):
@@ -118,14 +117,14 @@ def comment_save_signal(sender, instance, created, **kwargs):
     
     if created:
         from django.contrib.sites.models import Site
-        domain = path.join('https://', Site.objects.get_current().domain)
+        base_url = "https://{}".format(Site.objects.get_current().domain)
         send_mail_template('mail/transactions/paypal_transaction_receipt_subject.txt',
                            'mail/transactions/paypal_transaction_receipt.html',
                            recipient_list=[instance.sender_user.email,
                                            instance.receiver_user.email],
                            context={'transaction': instance,
                                     'hour_value': HourValue.objects.latest('created_at').value,
-                                    'domain': domain})
+                                    'base_url': base_url})
 
 
 pre_save.connect(comment_pre_save_signal, sender=PayPalTransaction)
