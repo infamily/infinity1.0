@@ -35,7 +35,7 @@ function showLess(){
 <br/>
 <br/>
 <div class="breadcrumb">
-Defined Meaning ID: {{object.defined_meaning_id}}
+    Defined Meaning ID: {% if object.defined_meaning_id %} <a href="https://www.wikidata.org/wiki/Q{{object.defined_meaning_id}}"># {{object.defined_meaning_id}}</a> {% endif %}
 </div>
 
 <div id="need-list" align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>
