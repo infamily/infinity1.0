@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Service{% endblock %}
+
+{% block page_title %}Terms{% endblock page_title %}
+
+{% block content %}
+<h1>The Infinity Project Social Contract</h1>
+<p><center>[working draft]</center></p>
+
+<p>This agreement ("user agreement" or "agreement") delineates mutual expectations between the <b>members</b> of the project ("<u>Infinity team</u>", "project members", "we", "us", "our") and all the <b>participants</b> ("Infinity users", "users", "project users", “the world”) about the <u>Infinity sites</u> (“our service”). By using Infinity project, you acknowledge that you have read, understood and agree to be bound by the terms of this agreement.</p>
+
+<center><h2>Summary</h2></center>
+<ol>
+	<li><a style="color:black;" href="#system-assurances">Project members take certain responsibilities for reliably running the service</a>,</li>
+	<li><a style="color:black;" href="#system-limitations">Project users agree to certain use regulations on our part, necessary to reliably run the service</a>,</li>
+	<li><a style="color:black;" href="#content-assurances">Project members give users certain expectations regarding the submitted content and actions</a>,</li>
+	<li><a style="color:black;" href="#content-limitations">Project users agree to certain content regulations on our part, necessary to provide harmonious social discourse, and achieve our mission.</a></li>
+</ol>
+
+<center><h2>Subjects of the agreement</h2></center>
+
+<ul>
+<li><b>Infinity sites</b>: [*.<u>infty.xyz</u>]</li>
+<li><b>Infinity team</b>: [<u>mindey.com</u>], [<u>aliev.me</u>], [<u>rutadanyte.com</u>].</li>
+
+<li>
+<b>Dependency providers</b>:
+<ul>
+	<b><u>Core</u></b>:
+	<ul>
+	<li>[<u>aws.amazon.com</u>] :		[Servers]</li>
+	<li>[<u>github.com</u>] :			[Repositories]</li>
+	<li>[<u>namecheap.com</u>] :		[SSL Certificates]</li>
+	<li>[<u>iv.lt</u>] :					[Domain Name]</li>
+	<li>[<u>webfaction.com</u>]:			[DNS Servers]</li>
+	<li>[<u>wikidata.org</u>]:			[WikiData API]</li>
+	<li>[<u>sendgrid.com</u>]:			[SMTP Servers]</li>
+	<li>[<u>paypal.com</u>] :			[Adaptive Payments API]</li>
+	<li>[<u>openexchangerates.org</u>]: 	[Currency Exchange Rates API]</li>
+	<li>[<u>research.stlouisfed.org</u>]:		[Federal Reserve Economic Data API]</li>
+	<li>[<u>apps.google.com</u>] :		[Translation API]</li>
+	<li>[<u>mailgun.com</u>]:			[Mail API]</li>
+	<li>[<u>legalzoom.com</u>]:			[Non-profit EIN]</li>
+    </ul>
+	<b><u>Periphery</u></b>:
+    <ul>
+	<li>[<u>telegram.org</u>] :			[Communication]</li>
+	<li>[<u>freenode.net</u>]:			[Public Communication]</li>
+    </ul>
+</ul>
+</li>
+
+</ul>
+
+<center><h2>Terms of the agreement</h2></center>
+
+<h3 id="system-assurances">1. Project members take certain responsibilities for reliably running the service</h3>
+
+<p>Being a group of people in different countries and different jurisdictions, and wishing to keep it that way indefinitely, we operate as a group of people without a legal entity for purposes that don’t strictly need it -- keeping our organization open for you to join based on trust, without having to sign any legal documents whatsoever. We do so with good expectations from society, which believes that and the legal entities associated should not own anything -- that it is the physical people who should be direct owners, and be directly responsible for everything they do.</p>
+
+<p>That said, while we take our responsibilities for running the service very seriously, we don’t take the responsibilities equally. Our responsibilities depend on our roles and what every of us does. Moreover, due to time constraints, there are limitations to the number of things we do to ensure that service runs reliably. In this document, we would like to share with you the things that we do so that you could make your reasonable expectations about our service. Please, let us know your suggestions and recommendations of what we should do to increase our service reliability for your business.</p>
+
+<p>Things that we do to make sure that we run reliably:</p>
+
+<ul>
+	<li>We have separate production and development servers on separate Amazon EC2 instances running (Ubuntu 14.04).</li>
+	<li>We keep both the development and production servers only accessible via key pairs. Password logins are disabled.</li>
+	<li>Both development and production servers are exposed only via SSL, and ordinary connection is disabled. (Ports open: 22, 80, 443).</li>
+	<li>We don’t run any JavaScript from 3rd parties or CDNs.</li>
+	<li>We make backups of the server and development.</li>
+	<li>We run exception logging system.</li>
+	<li>We control the deployment process via our own managed deployment system.</li>
+</ul>
+
+<h3 id="system-limitations">2. Project users agree to certain use regulations on our part, necessary to reliably run the service</h3>
+
+<p>Users understand, that at this early stage, we might actually go offline to do maintenance, or simply because we run out of money to maintain the service. It doesn’t mean that it will stop operating. Right now, our uptime percentage is approximately <b>1 minute of downtime in 20 days of uptime</b>. We will do our best to maintain the service. Please, be warned that:</p>
+
+<ul>
+	<li>We may have to do a planned database migration some day. So far, we had to do this only once in the last 6 months period, taking down the site for less than 1 hour.</li>
+	<li>We may have to take down the service due to unexpectedly high traffic or a discovery of security issue.</li>
+	<li>We may remove or suspend users engaging in attempts to abuse our service in any way.</li>
+	<li>We may need to take down the service for maintenance or running costs for an indefinite amount of time (but we will always be looking forward to your cooperation to bring it up again). It currently costs 97$/month to maintain.</li>
+</ul>
+
+<h3 id="content-assurances">3. Project members give users certain assurances and expectations regarding the submitted content and actions</h3>
+
+<p>Our service provides the options to post content both publicly and privately to your friends. We did our best and plan to do our best to make sure that the private content stays private, and public content is public. However, while we had ensured that access policy works correctly, we had not taken steps to encrypt user data, which at this stage is in plain text on our server database.</p>
+
+<p>We <b>do not</b> have plans at the moment to encrypt the data in servers. Creating a collaborative decision-making system, we think that, if a person does something that he or she does not want anyone to know, then probably, he or she shouldn’t do it in the first place. We keep nearly all of the data in the servers in plain text.</p>
+
+<p>While our members can read all of the database messages, we encourage our members not to snoop on people without a reason, and respect people’s privacy.</p>
+
+<p>To make sure that outsiders are unable to view your content, our team members who have access to your data, take the following measures:</p>
+
+<ul>
+	<li>Never to log-in to Infinity infrastructure via another person’s computer.</li>
+	<li>Keep work laptops up-to-date, running a Linux or MacOS.</li>
+	<li>Not to share any critical passwords and keys via mediums accessible via insecure smart phones or Windows devices. (for instance, not to share admin passwords on telegram, as this could potentially allow a phone screenshot malware acquire admin’s password, and read everyone’s messages on Infinity)</li>
+</ul>
+
+<p>That being said, while we value your contributions, please, don’t share any information that you want to keep private. The reason why we call the boolean field .personal on content types, rather than .private, is because we don’t believe in 100% privacy -- we think, people should share everything, have no secrets, but respect, and ask for permission to look at each other’s secrets -- respect what’s personal, and look at the .persona=True content with a good intent in your mind.</p>
+
+<p><b>Some gotchas:</b></p>
+
+<ul>
+	<li>Unlike in many social networks, the author of a private content item on Infinity can change the visibility of the item at will. So, if there were any comments written in private section, the owner of content item can decide to make them public, or choose to add more people to the conversation.</li>
+	<li>While most content can be chosen to be private, all definitions (“Categories”) are public and belong to [admin] user by default. There is no way to create a private definition. Therefore, if you create a category when creating a Need or Goal, know that it is public.</li>
+	<li>Although all private content is not publicly visible, it is possible to know that there is a hidden child or parent of an object of an object by another user. This is intended feature to allow others to know about existence of private content, and be able to ask for permissions to view it.</li>
+</ul>
+
+<p><b>Also note that:</b></p>
+
+<p>We had not yet done a penetration test by a bank-grade tester, and while we use many default security features of Django, such as:</p>
+
+<ul>
+	<li>Forms are protected with CSFR tokens, preventing cross-site scripting.</li>
+	<li>User passwords are not stored in database.</li>
+</ul>
+
+<p>and other security measures, we cannot guarantee that there is no loophole in our security.</p>
+
+<p>We provide no insurance against your information loss or leakage.</p>
+
+<h3 id="content-limitations">4. Project users agree to certain content regulations on our part, necessary to provide harmonious social discourse, and achieve our mission.</h3>
+
+<p>While it is our <b><a href="/policy">policy</a></b> to seek for ways to create a world where is everything that anyone truly wishes, in order to comply with local laws and regulations, as well as to ensure international security, we are looking forward to cooperation with international state-level power structures to ensure sharing on our platform stays useful and harmonious.</p>
+
+<ul>
+<li>we reserve the rights to take down content that violates local regulations and laws, also, content that is against our policy.
+<li>in our early stage, when there is no very advanced way of filtering content, we reserve the rights to curate and moderate the content to meet our quality expectations.
+<li>in our early stage, at our own discretion, we reserve our right to hide some of the content from <b>public index</b> by making it .personal=True, if a <b>problem</b> appears to be not globally important, an <b>idea</b> looks <b>not attempting to create a breakthrough</b> in solving it, or a <b>project</b> without a promise of deliverable important to <b>solving a globally important problem</b>. This is important in our initial stage, as we are trying to create.platform to address problems that really matter, ideas that have great promise, and projects with bold objectives. It is crucial to keep our platform relevant to exponential entrepreneurs and thinkers, thus, we may hide your content from public in this initial stage. The in such cases content will remain yours privately, and you will be able to discuss (or question our decision) in its private discussion.
+</ul>
+
+<p><b>Privacy policy:</b> our policy is not to share the content that was <b>not intended for us</b> with 3rd parties, if we are not required to do so by law. However, be informed that while we make sure that private content stays private, we don’t regulate what people can or cannot do with the information get inadvertantly get through process of development. We recommend you to investigate our members (3 of us) to judge if you can trust your data, and what kind of data with us. As we encourage free exchange of information, it is ultimately for our members’ discretion, and each member’s responsibility to decide what content to share with whom, and under what circumstances. Your suggestions for security and privacy practices are very welcome.</p>
+
+<p>This is a work in progress, and will be further edited.</p>
+
+<p>
+--Mindey</br>
+2016-03-02
+</p>
+
+
+{% endblock content %}
