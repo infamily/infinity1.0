@@ -18,6 +18,7 @@ from ..utils import UpdateViewWrapper
 from ..utils import DetailViewWrapper
 from ..utils import ViewTypeWrapper
 from ..utils import CommentsContentTypeWrapper
+from ..utils import DeleteViewWrapper
 from ..filters import TaskListViewFilter1
 from ..filters import TaskListViewFilter2
 from ..models import Step
@@ -64,7 +65,6 @@ class TaskUpdateView(UpdateViewWrapper):
         return reverse("step-detail", args=[self.object.step.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class TaskCreateView(CreateViewWrapper):
 
     """Task create view"""
@@ -97,7 +97,7 @@ class TaskCreateView(CreateViewWrapper):
         return kwargs
 
 
-class TaskDeleteView(OwnerMixin, DeleteView):
+class TaskDeleteView(DeleteViewWrapper):
 
     """Task delete view"""
     model = Task
