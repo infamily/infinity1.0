@@ -1,3 +1,5 @@
+import json
+
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
@@ -18,7 +20,8 @@ from ..utils import (
     DeleteViewWrapper,
     CommentsContentTypeWrapper,
     CreateViewWrapper,
-    ViewTypeWrapper
+    ViewTypeWrapper,
+    LookupCreateDefinition
 )
 
 from ..filters import (
@@ -28,8 +31,12 @@ from ..filters import (
 from ..models import (
     Goal,
     Idea,
-    Need
+    Need,
+    Language,
+    Definition,
 )
+
+from users.models import User
 
 
 class GoalCreateView(CreateViewWrapper):
@@ -40,9 +47,25 @@ class GoalCreateView(CreateViewWrapper):
     template_name = "goal/create.html"
 
     def form_valid(self, form):
+        request = self.request
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        #self.object.definition = form.cleaned_data.get('definition')
+        # self.object.definition = form.cleaned_data.get('definition')
+
+        if form.cleaned_data.get('definition'):
+            self.object.definition = form.cleaned_data.get('definition')
+        else:
+            definition_data = request.POST.get('select_definition')
+            definition_data = json.loads(definition_data)
+            definition_data.update({
+                'user': User.objects.get(pk=1),
+                'language': Language.objects.get(language_code=request.LANGUAGE_CODE)
+            })
+
+            definition, created = Definition.objects.get_or_create(**definition_data)
+
+            self.object.definition = definition
+
         self.object.save()
         return super(GoalCreateView, self).form_valid(form)
 
@@ -63,6 +86,40 @@ class GoalCreateView(CreateViewWrapper):
             self.need_instance = get_object_or_404(Need, pk=int(kwargs['need_id']))
         else:
             self.need_instance = False
+
+        # For definition creation, copied from NeedCreateView:
+        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
+
+        if kwargs.get('concept_q'):
+
+            if kwargs['concept_q'].isdigit():
+                # Lookup or Create Definition by .pk
+                definitions = Definition.objects.filter(pk=int(kwargs['concept_q']), language=language)
+
+                if definitions:
+                    self.definition_instance = definitions[0]
+                else:
+                    definitions = Definition.objects.filter(pk=int(kwargs['concept_q']))
+                    if definitions:
+                        if definitions[0].defined_meaning_id:
+                            self.definition_instance = LookupCreateDefinition(definitions[0].defined_meaning_id, language)
+                        else:
+                            self.definition_instance = definitions[0]
+
+            elif kwargs['concept_q'][1:].isdigit():
+                # Lookup Definition by .defined_meaning_id
+                definitions = Definition.objects.filter(defined_meaning_id=int(kwargs['concept_q'][1:]),language=language)
+
+                if definitions:
+                    self.definition_instance = definitions[0]
+                else:
+                    self.definition_instance = LookupCreateDefinition(int(kwargs['concept_q'][1:]),language=language)
+
+        else:
+            self.definition_instance = False
+
+
+
         return super(GoalCreateView, self).dispatch(*args, **kwargs)
 
     def get_form_kwargs(self):
@@ -98,7 +155,7 @@ class GoalDeleteView(DeleteViewWrapper):
 
     def get_success_url(self):
         messages.success(self.request, _("Goal succesfully deleted"))
-        return reverse("inbox") #reverse("definition-detail", args=[self.object.definition.pk, ])
+        return reverse("inbox") # reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
 class GoalUpdateView(UpdateViewWrapper):

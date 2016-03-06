@@ -70,7 +70,7 @@ def notify_mentioned_users(comment_instance):
     url = "%s/%s/detail/#comment-%s" % (comment_instance.content_type,
                                         comment_instance.content_object.id,
                                         comment_instance.id)
-    link = path.join(path.join('http://', Site.objects.get_current().domain), url)
+    link = path.join(path.join('https://', Site.objects.get_current().domain), url)
 
     mentioned_users = User.objects.filter(username__in=usernames)
 

@@ -9,6 +9,8 @@ from hours.models import HourValue
 from decimal import Decimal
 from copy import copy
 
+from ..utils import send_mail_template
+
 
 class PayPalTransaction(models.Model):
     CREATED = 'CREATED'
@@ -78,6 +80,8 @@ class PayPalTransaction(models.Model):
 
     comment = models.ForeignKey(Comment, related_name='paypal_transaction')
 
+    comment_text = models.TextField(default='')
+
     def __unicode__(self):
         return u"Transaction #%s" % self.id
 
@@ -103,11 +107,25 @@ class PayPalTransaction(models.Model):
 
 def comment_pre_save_signal(sender, instance, **kwargs):
     instance.compute_hours()
+    if instance.pk is None: # (if created)
+        instance.comment_text = instance.comment.text
 
-def comment_save_signal(sender, instance, **kwargs):
+def comment_save_signal(sender, instance, created, **kwargs):
     instance.comment.sum_hours_donated()
     instance.comment.match_hours()
     instance.comment.content_object.sum_hours()
+    
+    if created:
+        from django.contrib.sites.models import Site
+        base_url = "https://{}".format(Site.objects.get_current().domain)
+        send_mail_template('mail/transactions/paypal_transaction_receipt_subject.txt',
+                           'mail/transactions/paypal_transaction_receipt.html',
+                           recipient_list=[instance.sender_user.email,
+                                           instance.receiver_user.email],
+                           context={'transaction': instance,
+                                    'hour_value': HourValue.objects.latest('created_at').value,
+                                    'base_url': base_url})
+
 
 pre_save.connect(comment_pre_save_signal, sender=PayPalTransaction)
 post_save.connect(comment_save_signal, sender=PayPalTransaction)
