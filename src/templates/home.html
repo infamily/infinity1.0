@@ -74,15 +74,15 @@
 		<span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
-		  <li><a href="{% url 'goal-create' %}">{% trans "Goal (problem)" %}</a></li>
-		  <li><a href="{% url 'idea-create' %}">{% trans "Idea (solution)" %}</a></li>
-		  <li><a href="{% url 'plan-create' %}">{% trans "Plan (project)" %}</a></li>
+		  <li><a href="{% url 'goal-create' %}">{% trans "Problem" %}</a></li>
+		  <li><a href="{% url 'idea-create' %}">{% trans "Solution" %}</a></li>
+		  <li><a href="{% url 'plan-create' %}">{% trans "Project" %}</a></li>
 	  </ul>
 
       <form action="{{request.get_full_path}}" method="get" style="display: inline; margin-left:10px;">
-      <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; height: 49px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="{% trans "Search" %}" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; height: 49px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="{% trans "Search" %}" style="display: none; margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
       </form>
-
+      <!--
       <div style="display: inline; margin-left:10px;">
           <button type="submit" id="ithink" class="btn-lg" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
               <i class="fa fa-bug"></i>
@@ -94,6 +94,7 @@
               <i class="fa fa-rocket"></i>
           </button>
       </div>
+	  -->
 	</div>
 </div>
 <style>
@@ -205,8 +206,8 @@ $(document).ready(function(){
         <div id="goals" class="panel panel-default col-md-4 block-content">
             <div class="panel-heading">
 				<!-- <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>-->
-                &nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "define a problem" %}</b>
-
+				&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "goal-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "define a problem" %}</a></b>
+                <!-- drop-down
                 <div style="display:inline-block; float: right;">
                     <form method="post" style="display:inline;">{% csrf_token %}
                         <select name="goals" onchange="this.form.submit()">
@@ -216,6 +217,7 @@ $(document).ready(function(){
                         </select>
                     </form>
                 </div>
+				-->
             </div>
 
             <div class="panel-body">
@@ -276,8 +278,8 @@ $(document).ready(function(){
     {% endif %}
             <div class="panel-heading">
 				<!--<a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>-->&nbsp;
-                <a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "suggest a solution" %}</b>
-
+				<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "idea-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "suggest a solution" %}</a></b>
+                <!-- drop-down
 				<div style="display:inline-block; float: right;">
 					<form method="post" style="display:inline;">{% csrf_token %}
 						<select name="ideas" onchange="this.form.submit()">
@@ -289,6 +291,7 @@ $(document).ready(function(){
 						</select>
 					</form>
 				</div>
+				-->
             </div>
 
             <div class="panel-body">
@@ -362,8 +365,8 @@ $(document).ready(function(){
             <div class="panel-heading">
 				<!--<a href="{% url "plan-list" %}">{% trans "Plans" %}</a>-->&nbsp;
                 <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; -
-                <b>{% trans "start a project" %}</b>
-
+				<b><a href="{% url "plan-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "start a project" %}</a></b>
+                <!--
                 <div style="display:inline-block; float: right;">
                     <form method="post" style="display:inline;">{% csrf_token %}
                         <select name="plans" onchange="this.form.submit()">
@@ -375,6 +378,7 @@ $(document).ready(function(){
                         </select>
                     </form>
                 </div>
+				-->
             </div>
 
             <div class="panel-body">
