@@ -329,7 +329,7 @@ $(document).ready(function(){
 
                         <br/>
                             <span style="font-variant:small-caps;">
-					        <i class="fa fa-bug"></i>
+								<!-- <i class="fa fa-bug"></i>-->
 					        {% for goal in idea.object.goal.all %}
 							<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
 							{% endfor %}
@@ -415,7 +415,7 @@ $(document).ready(function(){
 
                     <br/>
                             <span style="font-variant:small-caps;">
-					        <i class="fa fa-paper-plane"></i>
+								<!--<i class="fa fa-paper-plane"></i>-->
 							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
 							<br/>
 
