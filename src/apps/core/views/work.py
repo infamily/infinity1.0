@@ -15,6 +15,7 @@ from ..utils import CreateViewWrapper
 from ..forms import WorkCreateForm
 from ..forms import WorkUpdateForm
 from ..utils import UpdateViewWrapper
+from ..utils import DeleteViewWrapper
 from ..utils import DetailViewWrapper
 from ..utils import ViewTypeWrapper
 from ..utils import CommentsContentTypeWrapper
@@ -65,7 +66,6 @@ class WorkUpdateView(UpdateViewWrapper):
         return reverse("work-detail", args=[self.object.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class WorkCreateView(CreateViewWrapper):
 
     """Work create view"""
@@ -98,7 +98,7 @@ class WorkCreateView(CreateViewWrapper):
         return kwargs
 
 
-class WorkDeleteView(OwnerMixin, DeleteView):
+class WorkDeleteView(DeleteViewWrapper):
 
     """Work delete view"""
     model = Work

@@ -17,6 +17,7 @@ from ..forms import PlanCreateForm
 from ..forms import PlanUpdateForm
 from ..utils import UpdateViewWrapper
 from ..utils import DetailViewWrapper
+from ..utils import DeleteViewWrapper
 from ..utils import ViewTypeWrapper
 from ..utils import CommentsContentTypeWrapper
 from ..filters import PlanListViewFilter1
@@ -115,7 +116,6 @@ class PlanUpdateView(UpdateViewWrapper):
         return reverse("plan-detail", args=[self.object.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class PlanCreateView(CreateViewWrapper):
 
     """Plan create view"""
@@ -153,8 +153,7 @@ class PlanCreateView(CreateViewWrapper):
         return context
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class PlanDeleteView(OwnerMixin, DeleteView):
+class PlanDeleteView(DeleteViewWrapper):
 
     """Plan delete view"""
     model = Plan
@@ -193,7 +192,7 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     def get_context_data(self, **kwargs):
         context = super(PlanDetailView, self).get_context_data(**kwargs)
-        
+
         username = self.request.GET.get('user', None)
         if username:
             steps = Step.objects.filter(plan=kwargs.get('object'), user__username=username).order_by('user_priority')

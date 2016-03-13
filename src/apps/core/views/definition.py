@@ -16,16 +16,14 @@ from braces.views import OrderableListMixin
 from ..utils import CommentsContentTypeWrapper
 from ..utils import ViewTypeWrapper, DetailViewWrapper
 from ..utils import WikiDataSearch
+from ..utils import UpdateViewWrapper
 from ..models import Definition, Language, Need
 from ..forms import DefinitionUpdateForm, DefinitionCreateForm
 from ..filters import DefinitionListViewFilter
-from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
-from users.decorators import ForbiddenUser
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class DefinitionUpdateView(OwnerMixin, UpdateView):
+class DefinitionUpdateView(UpdateViewWrapper):
 
     """Definition update view"""
     model = Definition

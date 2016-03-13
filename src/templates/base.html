@@ -78,11 +78,7 @@
             <span class="icon-bar"></span>
           </button>
 
-          {% if request.user.is_authenticated %}
-		  <a class="navbar-brand" href="{% url "inbox" %}"><span class='brand'>{% trans "Solving Problems" %}</span><!--<span class="infin">&infin;</span><span class='ity'>.xyz</span>--></a>
-		  {% else %}
 		  <a class="navbar-brand" href="{% url "home" %}"><span class='brand'>{% trans "Solving Problems" %}</span><!--<span class="infin">&infin;</span><span class='ity'>.xyz</span>--></a>
-		  {% endif %}
         </div>
 
         <div class="collapse navbar-collapse">
@@ -99,11 +95,11 @@
                     </option>
                     {% endfor %}
                 </select>
-                <!-- Support Us -->
+                <!-- Support Us
                 <ul class="nav navbar-right" style="float:right;margin-top:0px;">
                     <li>&nbsp;<a href="{% url "dev" %}" class="btn-sm" style="height:38px;color: white; background-color: grey; font-variant: small-caps;">XYZ</a>&nbsp;</li>
                 </ul>
-                <!--/Support Us -->
+                Support Us -->
             </div>
         </form>
 
@@ -119,37 +115,23 @@
                 <li><a href="{% url "dev" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Source" %}</a></li>
               {% else %}
               {% endif %}
-              {% if request.get_full_path == "/!" or request.get_full_path == "/"%}
-              <li><a href="#" class="btn-lg" style="color: white; background-color: black;">{% trans "public index" %}</a></li>
-              {% else %}
-              <li><a href="{% url "index" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "public index" %}</a></li>
-              {% endif %}
-              {% if request.user.is_authenticated %}
-              {% else %}
-                  <li>
-                  <a href="{% url "about" %}"><b>{% trans "About" %}</b></a>
-                  </li>
-              {% endif %}
 
               {% if request.user.is_authenticated %}
               <li>
-              <a href="{% url "account_logout" %}"><b>{% trans "Logout" %}</b></a>
+              <a href="{% url "inbox" %}"><b>[{{ request.user }}]</b></a>
               </li>
-              {% if request.get_full_path == "/i" %}
-              <li><a href="#" class="btn-lg" style="color: white; background-color: black;">{% trans "private inbox" %}</a></li>
-              {% else %}
-              <li><a href="{% url "inbox" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "private inbox" %}</a></li>
-              {% endif %}
-              <li>
-              <a href="{% url "user-detail" request.user.username %}"><b>[{{ request.user }}]</b></a>
-              </li>
+			  <!--
               <li>
               <a href="{% url "user-detail" request.user.username %}"><span id="credit">{{ request.user.get_comment_credit|floatformat:1 }}</span> <b>ħ</b></a>
               </li>
               <li>
               <a href="{% url "payments:transaction_paypal_list_view" %}"><span id="credit">{{ request.user.get_matched_hours|floatformat:2 }}</span> <b>ḥ</b></a>
               </li>
+			  -->
               {% else %}
+			  <li>
+			  <a href="{% url "about" %}"><b>{% trans "About" %}</b></a>
+			  </li>
 
               <li>
               <a href="{% url "account_login" %}"><b>{% trans "Sign in" %}</b></a>
@@ -173,7 +155,9 @@
         <p>Use this document as a way to quick start any new project.</p>
 
       {% endblock content %}
-	    <div align="center"><a href="/terms">Terms of Service</a>, <a href="/policy">Operation Policy</a></div>
+	    <hr>
+			  
+		<div align="center"><a href="{% url "about" %}"><b>{% trans "About" %}</b></a>, <a href="/terms">Terms of Service</a>, <a href="/policy">Operation Policy</a>, <a href="/dev">Development</a>{% if request.user.is_authenticated %}, <a href="{% url "account_logout" %}"><b>{% trans "Logout" %}</b></a> {% endif %}</div>
 
       {% block javascript %}
       {% endblock javascript %}

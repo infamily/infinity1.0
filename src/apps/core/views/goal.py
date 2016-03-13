@@ -4,34 +4,41 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.views.generic import DeleteView
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
 from enhanced_cbv.views import ListFilteredView
 
-from users.decorators import ForbiddenUser
-from users.mixins import OwnerMixin
-from users.forms import ConversationInviteForm
+from ..forms import (
+    GoalCreateForm,
+    GoalUpdateForm
+)
 
-from ..utils import CreateViewWrapper
-from ..utils import ViewTypeWrapper
-from ..forms import GoalCreateForm
-from ..forms import GoalUpdateForm
-from ..utils import UpdateViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import CommentsContentTypeWrapper
-from ..filters import GoalListViewFilter1
-from ..filters import GoalListViewFilter2
-from ..models import Goal
-from ..models import Idea
-from ..models import Need
-from ..models import Definition
-from ..models import Language
+from ..utils import (
+    UpdateViewWrapper,
+    DetailViewWrapper,
+    DeleteViewWrapper,
+    CommentsContentTypeWrapper,
+    CreateViewWrapper,
+    ViewTypeWrapper,
+    LookupCreateDefinition
+)
+
+from ..filters import (
+    GoalListViewFilter1,
+    GoalListViewFilter2
+)
+from ..models import (
+    Goal,
+    Idea,
+    Need,
+    Language,
+    Definition,
+)
 
 from users.models import User
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+
 class GoalCreateView(CreateViewWrapper):
 
     """Goal create view"""
@@ -43,7 +50,7 @@ class GoalCreateView(CreateViewWrapper):
         request = self.request
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        #self.object.definition = form.cleaned_data.get('definition')
+        # self.object.definition = form.cleaned_data.get('definition')
 
         if form.cleaned_data.get('definition'):
             self.object.definition = form.cleaned_data.get('definition')
@@ -139,7 +146,7 @@ class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
     filter_set = GoalListViewFilter1
 
 
-class GoalDeleteView(OwnerMixin, DeleteView):
+class GoalDeleteView(DeleteViewWrapper):
 
     """Goal delete view"""
     model = Goal
@@ -148,7 +155,7 @@ class GoalDeleteView(OwnerMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Goal succesfully deleted"))
-        return reverse("inbox") #reverse("definition-detail", args=[self.object.definition.pk, ])
+        return reverse("inbox") # reverse("definition-detail", args=[self.object.definition.pk, ])
 
 
 class GoalUpdateView(UpdateViewWrapper):
