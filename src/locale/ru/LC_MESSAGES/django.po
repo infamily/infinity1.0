@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-13 05:23-0700\n"
-"PO-Revision-Date: 2016-03-13 14:27+0200\n"
+"POT-Creation-Date: 2016-03-13 06:19-0700\n"
+"PO-Revision-Date: 2016-03-13 15:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -405,9 +405,7 @@ msgid ""
 "<b>This is a history</b> (check if you are documenting a project of the past)"
 msgstr ""
 
-#: src/apps/core/forms.py:1342
-#: src/apps/core/templates/create_menu_links.html:68
-#: src/apps/core/templates/plan/create.html:19
+#: src/apps/core/forms.py:1342 src/apps/core/templates/plan/create.html.py:19
 msgid "Idea"
 msgstr "Идея"
 
@@ -554,6 +552,10 @@ msgstr "Пригласить друга помочь!"
 msgid "Problem"
 msgstr "Проблема"
 
+#: src/apps/core/templates/create_menu_links.html:68 src/templates/home.html:80
+msgid "Solution"
+msgstr "Решения"
+
 #: src/apps/core/templates/create_menu_links.html:76 src/templates/home.html:81
 msgid "Project"
 msgstr "Проект"
@@ -598,8 +600,8 @@ msgstr "аппарат, предназначенный для работы в к
 #: src/apps/core/templates/plan/detail.html:524
 #: src/apps/core/templates/step/detail.html:148
 #: src/apps/core/templates/task/detail.html:124
-#: src/apps/core/templates/work/detail.html:144 src/templates/home.html:234
-#: src/templates/home.html.py:310 src/templates/home.html:396
+#: src/apps/core/templates/work/detail.html:144 src/templates/home.html:236
+#: src/templates/home.html.py:312 src/templates/home.html:398
 msgid "link"
 msgstr ""
 
@@ -741,10 +743,10 @@ msgstr "перевод:"
 #: src/apps/core/templates/plan/detail.html:191
 #: src/apps/core/templates/step/detail.html:92
 #: src/apps/core/templates/task/detail.html:91
-#: src/apps/core/templates/work/detail.html:92 src/templates/home.html:232
-#: src/templates/home.html.py:238 src/templates/home.html:308
-#: src/templates/home.html.py:314 src/templates/home.html:394
-#: src/templates/home.html.py:400
+#: src/apps/core/templates/work/detail.html:92 src/templates/home.html:234
+#: src/templates/home.html.py:240 src/templates/home.html:310
+#: src/templates/home.html.py:316 src/templates/home.html:396
+#: src/templates/home.html.py:402
 msgid "historical"
 msgstr ""
 
@@ -767,7 +769,7 @@ msgstr "поделиться с:"
 
 #: src/apps/core/templates/goal/detail.html:146
 #: src/apps/core/templates/idea/list2.html:6
-#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:282
+#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:284
 msgid "Ideas"
 msgstr "Идеи"
 
@@ -782,7 +784,7 @@ msgstr "+ Новая идея"
 
 #: src/apps/core/templates/goal/list2.html:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:135 src/templates/home.html:210
+#: src/apps/core/templates/need/detail.html:135 src/templates/home.html:212
 msgid "Goals"
 msgstr "Цели"
 
@@ -846,7 +848,7 @@ msgstr ""
 
 #: src/apps/core/templates/idea/detail.html:154
 #: src/apps/core/templates/plan/list2.html:6
-#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:368
+#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:370
 msgid "Plans"
 msgstr "Планы"
 
@@ -1723,11 +1725,11 @@ msgstr ""
 msgid "Solving Problems"
 msgstr "Решаем проблемы"
 
-#: src/templates/base.html:119
+#: src/templates/base.html:133 src/templates/base.html.py:160
 msgid "About"
 msgstr "О проекте"
 
-#: src/templates/base.html:159
+#: src/templates/base.html:160
 msgid "Logout"
 msgstr "Выход"
 
@@ -1820,40 +1822,34 @@ msgstr "Помощь"
 msgid "compose"
 msgstr "Написать"
 
-#: src/templates/home.html:80
-#, fuzzy
-#| msgid "Add a solution"
-msgid "Solution"
-msgstr "Добавить решение"
-
-#: src/templates/home.html:211
+#: src/templates/home.html:213
 msgid "define a problem"
 msgstr "определите проблему"
 
-#: src/templates/home.html:258 src/templates/home.html.py:343
-#: src/templates/home.html:426
+#: src/templates/home.html:260 src/templates/home.html.py:345
+#: src/templates/home.html:428
 msgid "see more"
 msgstr "подробнее ..."
 
-#: src/templates/home.html:261
+#: src/templates/home.html:263
 msgid "Oops! You have no goals!"
 msgstr " У вас нету определенной цели!"
 
-#: src/templates/home.html:262
+#: src/templates/home.html:264
 msgid "Add a problem"
 msgstr "Добавить проблему"
 
-#: src/templates/home.html:263 src/templates/home.html.py:349
-#: src/templates/home.html:432
+#: src/templates/home.html:265 src/templates/home.html.py:351
+#: src/templates/home.html:434
 msgid "...or view"
 msgstr "... или смотрите."
 
-#: src/templates/home.html:263 src/templates/home.html.py:349
-#: src/templates/home.html:432
+#: src/templates/home.html:265 src/templates/home.html.py:351
+#: src/templates/home.html:434
 msgid "<u>index</u>"
 msgstr "содержание"
 
-#: src/templates/home.html:266
+#: src/templates/home.html:268
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1879,19 +1875,19 @@ msgstr ""
 "омлет на завтрак каждое утро.</p>\n"
 "                    "
 
-#: src/templates/home.html:283
+#: src/templates/home.html:285
 msgid "suggest a solution"
 msgstr "предложить решение"
 
-#: src/templates/home.html:347
+#: src/templates/home.html:349
 msgid "Oops! You have no ideas!"
 msgstr "У вас нету определенных идей."
 
-#: src/templates/home.html:348
+#: src/templates/home.html:350
 msgid "Add a solution"
 msgstr "Добавить решение"
 
-#: src/templates/home.html:352
+#: src/templates/home.html:354
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1931,19 +1927,19 @@ msgstr ""
 "омлета</p>\n"
 "                "
 
-#: src/templates/home.html:370
+#: src/templates/home.html:372
 msgid "start a project"
 msgstr "начать проект"
 
-#: src/templates/home.html:430
+#: src/templates/home.html:432
 msgid "Oops! You have no plans!"
 msgstr "У вас нету новых проектов."
 
-#: src/templates/home.html:431
+#: src/templates/home.html:433
 msgid "Add a project"
 msgstr "Добавить проект"
 
-#: src/templates/home.html:434
+#: src/templates/home.html:436
 msgid ""
 "\n"
 "\n"
@@ -1965,7 +1961,7 @@ msgstr ""
 "для владельцам домов.</p>\n"
 "                "
 
-#: src/templates/home.html:448
+#: src/templates/home.html:450
 msgid "People-centric economy."
 msgstr "Экономика для человека"
 
