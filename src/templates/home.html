@@ -37,13 +37,15 @@
 
 <div class="alignright">
 {% if not user.is_anonymous %}
-
+    <!--
     <span id="info" style="display:none; color: brown;">
     <b>
         [<a href="{% url "invite:send"  %}">{{user.invitationoption.invitations_left}} {% trans "invitations" %}</a>, <a href="/step/2/detail/">{% trans "write bugs" %}</a>, {% trans "time value" %}: 1 ħ = <a href="https://research.stlouisfed.org/fred2/series/CES0500000003">{{ hour_value.value|floatformat:2 }}</a> $]
     </b>
     </span>
-    <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="javascript:hideshow(document.getElementById('info'))">{{user.invitationoption.invitations_left}} <i class="fa fa-envelope-o"></i> {% trans "Invitations" %}</a>
+    <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="javascript:hideshow(document.getElementById('info'))">{{user.invitationoption.invitations_left}} <i class="fa fa-envelope-o"></i> {% trans "invite a friend" %}</a>
+	-->
+	<a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="{% url "invite:send" %}">{{user.invitationoption.invitations_left}} <i class="fa fa-envelope-o"></i> {% trans "invite a friend" %}</a>
 
     {% if request|get_country_by_ip != 'CN' %}
     <a class="video btn-lg" style="color: black; background-color: #F0F0F0;" href="https://www.youtube.com/v/zeBgP31KaqY?hd=1&autoplay=1&autohide=1&showinfo=0&rel=0&wmode=transparent">{% trans "Intro" %}</a>
@@ -80,7 +82,7 @@
 	  </ul>
 
       <form action="{{request.get_full_path}}" method="get" style="display: inline; margin-left:10px;">
-      <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; height: 49px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="{% trans "Search" %}" style="display: none; margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; height: 49px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value=" " style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
       </form>
       <!--
       <div style="display: inline; margin-left:10px;">
@@ -317,7 +319,7 @@ $(document).ready(function(){
                             {% if idea.object.personal %}
                             <i class="fa {% if idea.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
                             {% endif %}
-                            $ {{ idea.object.get_usd|floatformat:2 }}/{{ idea.object.get_remain_usd|floatformat:2 }}
+							<!-- $ {{ idea.object.get_usd|floatformat:2 }}/{{ idea.object.get_remain_usd|floatformat:2 }}-->
 
                         </b>
 
