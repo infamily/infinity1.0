@@ -115,7 +115,9 @@
 $(document).ready(function(){
 
     // keep the scope in session
-	var scope = localStorage['scope'];
+	//var scope = localStorage['scope'];
+    localStorage['scope'] = "ichart";
+
 	if (!scope) {
 		localStorage['scope'] = "ichart";
 	}
