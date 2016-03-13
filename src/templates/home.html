@@ -204,7 +204,7 @@ $(document).ready(function(){
     <! -- Start of Goals -- >
         <div id="goals" class="panel panel-default col-md-4 block-content">
             <div class="panel-heading">
-                <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>
+				<!-- <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>-->
                 &nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "define a problem" %}</b>
 
                 <div style="display:inline-block; float: right;">
@@ -275,7 +275,7 @@ $(document).ready(function(){
         <div id="ideas" class="panel panel-default col-md-5 block-content">
     {% endif %}
             <div class="panel-heading">
-                <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>&nbsp;
+				<!--<a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>-->&nbsp;
                 <a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "suggest a solution" %}</b>
 
 				<div style="display:inline-block; float: right;">
@@ -360,7 +360,7 @@ $(document).ready(function(){
         <div id="plans" class="panel panel-default col-md-4 block-content">
     {% endif %}
             <div class="panel-heading">
-                <a href="{% url "plan-list" %}">{% trans "Plans" %}</a>&nbsp;
+				<!--<a href="{% url "plan-list" %}">{% trans "Plans" %}</a>-->&nbsp;
                 <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; -
                 <b>{% trans "start a project" %}</b>
 
