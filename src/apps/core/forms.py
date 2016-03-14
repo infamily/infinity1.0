@@ -404,14 +404,14 @@ class GoalCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
-            'is_link',
-            'url',
-            'is_historical',
             'definition',
             'type',
             'name',
-            'select_definition',
             'reason',
+            'select_definition',
+            'is_link',
+            'url',
+            'is_historical',
             'need',
             'language',
             'personal',
