@@ -207,8 +207,8 @@ $(document).ready(function(){
     <div class="row row-horizon">
 
     <! -- Start of Goals -- >
-        <div id="goals" class="panel panel-default col-md-4 block-content">
-            <div class="panel-heading">
+        <div id="goals" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; margin-left:15px;">
+            <div class="panel-heading" style="border-bottom: 1px dotted;">
 				<!-- <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>-->
 				&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "goal-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "define a problem" %}</a></b>
                 <!-- drop-down
@@ -224,37 +224,48 @@ $(document).ready(function(){
 				-->
             </div>
 
-            <div class="panel-body">
+            <div class="panel-body" style="padding: 0; margin-top: 0px;">
                 {% if goal_list %}
                     {% for goal in goal_list %}
+
                         {% if goal.translation %} {# if goal translated #}
 
-                            {% if goal.object.is_link %}
-                                {% if goal.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% else %}
-                                <span class="badge">{% trans "link" %}</span>
-                                {% endif %}
-                            {% else %}
-                                {% if goal.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% endif %}
-                            {% endif %}
+						    <!-- card style -->
+							{% if forloop.counter|divisibleby:2 %}
+							<div style="background-color:#f9f9f9; padding: 10px;">
+							{% else %}
+							<div style="background-color:#f0f0f0; padding: 10px;">
+							{% endif %}
 
-                            <b>
-                                {% if goal.object.personal %}
-                                <i class="fa {% if goal.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
-                                $ {{ goal.object.get_usd|floatformat:2 }}/{{ goal.object.get_remain_usd|floatformat:2 }}
-                                {% endif %}
-                            </b>
-                            
-                            <a {% if goal.is_new %}style="font-weight: bold"{% endif %} href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
+                                 {% if goal.object.is_link %}
+                                     {% if goal.object.is_historical %}
+                                     <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                     {% else %}
+                                     <span class="badge">{% trans "link" %}</span>
+                                     {% endif %}
+                                 {% else %}
+                                     {% if goal.object.is_historical %}
+                                     <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                     {% endif %}
+                                 {% endif %}
+ 
+                                 <b>
+                                     {% if goal.object.personal %}
+                                     <i class="fa {% if goal.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
+                                     $ {{ goal.object.get_usd|floatformat:2 }}/{{ goal.object.get_remain_usd|floatformat:2 }}
+                                     {% endif %}
+                                 </b>
+                                 
+                                 <a {% if goal.is_new %}style="font-weight: bold"{% endif %} href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
 
                             ({{goal.object.comment_count}} comments) 
 
                             <br/>
 
                             <p>{{goal.translation.reason|markdown|truncatewords_html:34}}</p>
+
+          					</div> <!--/card style div-->
+
                         {% endif %}
                     {% endfor %}
                     <a href="{% url "goal-list" %}">{% trans "see more" %}</a>
@@ -276,11 +287,11 @@ $(document).ready(function(){
 
 	<!-- Start of Idea -->
     {% if request.get_full_path == '/i' %}
-        <div id="ideas" class="panel panel-default col-md-5 block-content">
+        <div id="ideas" class="panel panel-default col-md-5 block-content" style="border: none; padding: 0px; padding-left: 6px; padding-right: 0px;">
     {% else %}
-        <div id="ideas" class="panel panel-default col-md-5 block-content">
+        <div id="ideas" class="panel panel-default col-md-5 block-content" style="border: none; padding: 0px; padding-left: 6px; padding-right: 0px;">
     {% endif %}
-            <div class="panel-heading">
+            <div class="panel-heading" style="border-bottom: 1px dotted;">
 				<!--<a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>-->&nbsp;
 				<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "idea-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "suggest a solution" %}</a></b>
                 <!-- drop-down
@@ -298,13 +309,21 @@ $(document).ready(function(){
 				-->
             </div>
 
-            <div class="panel-body">
+            <div class="panel-body" style="padding: 0;  margin-top: -10px;">
                 {% if idea_list %}
                 <p align="center">
                 </p>
                 {% for idea in idea_list %}
 
+
                     {% if idea.translation %} {# if idea translated #}
+
+						{% if forloop.counter|divisibleby:2 %}
+						<div style="background-color:#f9f9f9; padding: 10px;">
+						{% else %}
+						<div style="background-color:#f0f0f0; padding: 10px;">
+						{% endif %}
+
                             {% if idea.object.is_link %}
                                 {% if idea.object.is_historical %}
                                 <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
@@ -340,6 +359,7 @@ $(document).ready(function(){
 
                         <p>{{idea.translation.description|markdown|truncatewords_html:34}}</p>
 
+				        </div>
                     {% endif %}
                 {% endfor %}
                 <a href="{% url "idea-list" %}">{% trans "see more" %}</a>
@@ -362,11 +382,11 @@ $(document).ready(function(){
         </div>
 
     {% if request.get_full_path == '/i' %}
-        <div id="plans" class="panel panel-default col-md-4 block-content">
+        <div id="plans" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; padding-left: 6px;">
     {% else %}
-        <div id="plans" class="panel panel-default col-md-4 block-content">
+        <div id="plans" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; padding-left: 6px;">
     {% endif %}
-            <div class="panel-heading">
+            <div class="panel-heading" style="border-bottom: 1px dotted;">
 				<!--<a href="{% url "plan-list" %}">{% trans "Plans" %}</a>-->&nbsp;
                 <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; -
 				<b><a href="{% url "plan-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "start a project" %}</a></b>
@@ -385,11 +405,19 @@ $(document).ready(function(){
 				-->
             </div>
 
-            <div class="panel-body">
+            <div class="panel-body" style="padding: 0; margin-top: 0px;">
                 {% if plan_list %}
 
                 {% for plan in plan_list %}
+
+
                     {% if plan.translation %}  {# if plan translated #}
+
+						{% if forloop.counter|divisibleby:2 %}
+						<div style="background-color:#f9f9f9; padding: 10px;">
+						{% else %}
+						<div style="background-color:#f0f0f0; padding: 10px;">
+						{% endif %}
 
                             {% if plan.object.is_link %}
                                 {% if plan.object.is_historical %}
@@ -421,7 +449,9 @@ $(document).ready(function(){
 							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
 							<br/>
 
-                <p>{{plan.translation.deliverable|markdown|truncatewords_html:34}}</p>
+                        <p>{{plan.translation.deliverable|markdown|truncatewords_html:34}}</p>
+
+				    </div>
 
                     {% endif %}
                 {% endfor %}
