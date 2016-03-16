@@ -352,7 +352,21 @@ $(document).ready(function(){
                             <span style="font-variant:small-caps;">
 								<!-- <i class="fa fa-bug"></i>-->
 					        {% for goal in idea.object.goal.all %}
-							<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
+
+								{% if goal.personal %}
+									{% if request.user in goal.sharewith or request.user == goal.user %}
+
+										<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
+
+									{% else %}
+
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{% trans "Private" %} (u:{{goal.user.username}})</a>{% if forloop.last %}{% else %}, {%endif%} 
+
+									{% endif %}
+								{% else %}
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
+								{% endif %}
+
 							{% endfor %}
                             </span>
 							<br/>
@@ -446,7 +460,15 @@ $(document).ready(function(){
                     <br/>
                             <span style="font-variant:small-caps;">
 								<!--<i class="fa fa-paper-plane"></i>-->
-							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
+							{% if plan.object.idea.personal %}
+							    {% if request.user in plan.object.idea.sharewith or request.user == plan.object.idea.user %}
+        							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
+ 							    {% else %}
+								<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{% trans "Private" %} (u:{{plan.object.idea.user.username}})</a></span> 
+								{% endif %}
+							{% else %}
+    							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
+							{% endif %}
 							<br/>
 
                         <p>{{plan.translation.deliverable|markdown|truncatewords_html:34}}</p>
