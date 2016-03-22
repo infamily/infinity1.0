@@ -131,7 +131,7 @@ class PlanCreateView(CreateViewWrapper):
         return super(PlanCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Plan succesfully created"))
+        #messages.success(self.request, _("Plan succesfully created"))
         return "%s?lang=%s" % (reverse("plan-detail", args=[self.object.pk, ]), self.object.language.language_code)
 
     def dispatch(self, request, *args, **kwargs):

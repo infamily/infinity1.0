@@ -81,7 +81,7 @@ class WorkCreateView(CreateViewWrapper):
         return super(WorkCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Work succesfully created"))
+        #messages.success(self.request, _("Work succesfully created"))
         return "%s?lang=%s" % (reverse("work-detail", args=[self.object.pk, ]), self.object.language.language_code)
 
     def get_context_data(self, **kwargs):
