@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/apps/core/forms.py:375 src/apps/core/forms.py:378
-#: src/apps/core/forms.py:1131
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-22 13:41-0700\n"
-"PO-Revision-Date: 2016-03-16 04:56+0200\n"
+"PO-Revision-Date: 2016-03-23 00:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -1108,7 +1106,7 @@ msgstr ""
 
 #: src/apps/users/forms.py:28
 msgid "Invite to this conversation"
-msgstr ""
+msgstr "Invite a friend"
 
 #: src/apps/users/forms.py:33
 msgid "Send invite"
