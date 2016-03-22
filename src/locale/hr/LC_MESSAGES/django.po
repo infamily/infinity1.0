@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-22 10:38-0700\n"
+"POT-Creation-Date: 2016-03-22 13:19-0700\n"
 "PO-Revision-Date: 2016-02-11 04:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1031,16 +1031,6 @@ msgstr "Komentar uspješno obrisan"
 msgid "Definition succesfully updated"
 msgstr "Prijevod uspješno ažuriran"
 
-#: src/apps/core/views/definition.py:97
-#, fuzzy
-#| msgid "Credential succesfully created"
-msgid "Definition succesfully created"
-msgstr "Uvjerenje uspješno stvoreno"
-
-#: src/apps/core/views/goal.py:73
-msgid "Goal succesfully created"
-msgstr "Cilj uspješno stvoren"
-
 #: src/apps/core/views/goal.py:157
 msgid "Goal succesfully deleted"
 msgstr "Cilj uspješno obrisan"
@@ -1053,17 +1043,9 @@ msgstr "Cilj uspješno ažuriran"
 msgid "Idea succesfully updated"
 msgstr "Ideja uspješno ažurirana"
 
-#: src/apps/core/views/idea.py:93
-msgid "Idea succesfully created"
-msgstr "Ideja uspješno stvorena"
-
 #: src/apps/core/views/idea.py:119
 msgid "Idea succesfully deleted"
 msgstr "Ideja uspješno obrisana"
-
-#: src/apps/core/views/need.py:59
-msgid "Need succesfully created"
-msgstr "Potreba uspješno stvorena"
 
 #: src/apps/core/views/need.py:118
 #, fuzzy
@@ -1079,10 +1061,6 @@ msgstr "Potreba uspješno ažurirana"
 msgid "Plan succesfully updated"
 msgstr "Plan uspješno ažuriran"
 
-#: src/apps/core/views/plan.py:134
-msgid "Plan succesfully created"
-msgstr "Plan uspješno stvoren"
-
 #: src/apps/core/views/plan.py:164
 msgid "Plan succesfully deleted"
 msgstr "Plan uspješno obrisan"
@@ -1091,10 +1069,6 @@ msgstr "Plan uspješno obrisan"
 msgid "Step succesfully updated"
 msgstr "Korak uspješno ažuriran"
 
-#: src/apps/core/views/step.py:89
-msgid "Step succesfully created"
-msgstr "Korak uspješno stvoren"
-
 #: src/apps/core/views/step.py:114
 msgid "Step succesfully deleted"
 msgstr "Korak uspješno obrisan"
@@ -1102,10 +1076,6 @@ msgstr "Korak uspješno obrisan"
 #: src/apps/core/views/task.py:64
 msgid "Task succesfully updated"
 msgstr "Zadatak uspješno ažuriran"
-
-#: src/apps/core/views/task.py:83
-msgid "Task succesfully created"
-msgstr "Zadatak uspješno stvoren"
 
 #: src/apps/core/views/task.py:108
 msgid "Task succesfully deleted"
@@ -1122,10 +1092,6 @@ msgstr "Prijevod uspješno obrisan"
 #: src/apps/core/views/work.py:65
 msgid "Work succesfully updated"
 msgstr "Rad uspješno ažuriran"
-
-#: src/apps/core/views/work.py:84
-msgid "Work succesfully created"
-msgstr "Rad uspješno stvoren"
 
 #: src/apps/core/views/work.py:109
 msgid "Work succesfully deleted"
@@ -1875,25 +1841,31 @@ msgstr "definiraj problem"
 msgid "see more"
 msgstr "vidi još"
 
-#: src/templates/home.html:274
+#: src/templates/home.html:275
 msgid "Oops! You have no goals!"
 msgstr "Oops! Nema ciljeva!"
 
-#: src/templates/home.html:275
+#: src/templates/home.html:276
 msgid "Add a problem"
 msgstr "Dodaj problem"
 
-#: src/templates/home.html:276 src/templates/home.html.py:385
-#: src/templates/home.html:486
+#: src/templates/home.html:277 src/templates/home.html.py:386
+#: src/templates/home.html:487
 msgid "...or view"
 msgstr "...ili mišljenje"
 
-#: src/templates/home.html:276 src/templates/home.html.py:385
-#: src/templates/home.html:486
-msgid "<u>index</u>"
-msgstr "<u>indeks</u>"
+#: src/templates/home.html:277
+#, fuzzy
+#| msgid "Solve Your Problems."
+msgid "all problems"
+msgstr "Rješite vaše probleme."
 
-#: src/templates/home.html:279
+#: src/templates/home.html:280 src/templates/home.html.py:389
+#: src/templates/home.html:490
+msgid "Example:"
+msgstr ""
+
+#: src/templates/home.html:281
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1905,8 +1877,7 @@ msgstr "<u>indeks</u>"
 #| "    "
 msgid ""
 "\n"
-"                    <p><i><u>Example:</u></i></p>\n"
-"                    <p><b>$ 0.00 Omelette Supply Problem</b></p>\n"
+"                    <p><b>Omelette Supply Problem</b></p>\n"
 "                    <p>Omelette is a healthy and delicious food, which can "
 "be flavored in desired tastes. I like it, and I would like to eat omelete "
 "every morning, without any extra expenses.</p>\n"
@@ -1923,15 +1894,17 @@ msgstr ""
 msgid "suggest a solution"
 msgstr "predloži rješenje"
 
-#: src/templates/home.html:383
-msgid "Oops! You have no ideas!"
-msgstr "Oops! Nema ideja!"
-
-#: src/templates/home.html:384
+#: src/templates/home.html:385
 msgid "Add a solution"
 msgstr "Dodaj rješenje"
 
-#: src/templates/home.html:388
+#: src/templates/home.html:386
+#, fuzzy
+#| msgid "Add a solution"
+msgid "all solutions"
+msgstr "Dodaj rješenje"
+
+#: src/templates/home.html:390
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1946,9 +1919,7 @@ msgstr "Dodaj rješenje"
 #| "    "
 msgid ""
 "\n"
-"                <p><i><u>Example ideas:</u></i></p>\n"
-"                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</"
-"b></p>\n"
+"                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>\n"
 "                <p>Hens don't really require much human work to maintain. "
 "Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, "
 "spicers, cookers and dispensers - and have a self-sustaining supply of fresh "
@@ -1969,15 +1940,21 @@ msgstr ""
 msgid "start a project"
 msgstr "pokreni projekt"
 
-#: src/templates/home.html:484
+#: src/templates/home.html:485
 msgid "Oops! You have no plans!"
 msgstr "Oops! Nema planova!"
 
-#: src/templates/home.html:485
+#: src/templates/home.html:486
 msgid "Add a project"
 msgstr "Dodaj projekt"
 
-#: src/templates/home.html:488
+#: src/templates/home.html:487
+#, fuzzy
+#| msgid "Add a project"
+msgid "all projects"
+msgstr "Dodaj projekt"
+
+#: src/templates/home.html:491
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1989,13 +1966,10 @@ msgstr "Dodaj projekt"
 #| "    "
 msgid ""
 "\n"
-"\n"
-"                <p><i><u>Example:</u></i></p>\n"
 "                <p><b>$ 0.00 Omelette Microfarm Project</b></p>\n"
-"                <p><u>Situation:</u> I in Dublin, Ireland, with my friend X."
-"</p>\n"
-"                <p><u>Destination:</u> we have a microfarm solution to home "
-"owners.</p>\n"
+"                We expect to have a microfarm solutions provider, which "
+"sustains itself via a business model based on demand and supply, based on "
+"simple-to-install construction kits supply chain for home owners.</p>\n"
 "                "
 msgstr ""
 "\n"
@@ -2005,7 +1979,7 @@ msgstr ""
 "    <p><u>Destinacija:</u> imamo rješenje mikrofarme za vlasnike kuća.</p>\n"
 "    "
 
-#: src/templates/home.html:502
+#: src/templates/home.html:501
 msgid "People-centric economy."
 msgstr "Ekonomija usredotočena na ljude."
 
@@ -2241,6 +2215,38 @@ msgstr "E-mail adresa i/ili lozinka koje ste unijeli nisu točni."
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Zapamti me"
+
+#~ msgid "<u>index</u>"
+#~ msgstr "<u>indeks</u>"
+
+#, fuzzy
+#~| msgid "Credential succesfully created"
+#~ msgid "Definition succesfully created"
+#~ msgstr "Uvjerenje uspješno stvoreno"
+
+#~ msgid "Goal succesfully created"
+#~ msgstr "Cilj uspješno stvoren"
+
+#~ msgid "Idea succesfully created"
+#~ msgstr "Ideja uspješno stvorena"
+
+#~ msgid "Need succesfully created"
+#~ msgstr "Potreba uspješno stvorena"
+
+#~ msgid "Plan succesfully created"
+#~ msgstr "Plan uspješno stvoren"
+
+#~ msgid "Step succesfully created"
+#~ msgstr "Korak uspješno stvoren"
+
+#~ msgid "Task succesfully created"
+#~ msgstr "Zadatak uspješno stvoren"
+
+#~ msgid "Work succesfully created"
+#~ msgstr "Rad uspješno stvoren"
+
+#~ msgid "Oops! You have no ideas!"
+#~ msgstr "Oops! Nema ideja!"
 
 #, fuzzy
 #~| msgid "my index"

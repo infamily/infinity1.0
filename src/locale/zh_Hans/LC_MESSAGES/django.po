@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-22 10:38-0700\n"
-"PO-Revision-Date: 2016-03-22 19:46+0200\n"
+"POT-Creation-Date: 2016-03-22 13:19-0700\n"
+"PO-Revision-Date: 2016-03-22 22:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -968,14 +968,6 @@ msgstr ""
 msgid "Definition succesfully updated"
 msgstr "定义更新成功"
 
-#: src/apps/core/views/definition.py:97
-msgid "Definition succesfully created"
-msgstr "定义创造成功"
-
-#: src/apps/core/views/goal.py:73
-msgid "Goal succesfully created"
-msgstr "创造目标成功"
-
 #: src/apps/core/views/goal.py:157
 msgid "Goal succesfully deleted"
 msgstr ""
@@ -988,16 +980,8 @@ msgstr ""
 msgid "Idea succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/idea.py:93
-msgid "Idea succesfully created"
-msgstr ""
-
 #: src/apps/core/views/idea.py:119
 msgid "Idea succesfully deleted"
-msgstr ""
-
-#: src/apps/core/views/need.py:59
-msgid "Need succesfully created"
 msgstr ""
 
 #: src/apps/core/views/need.py:118
@@ -1012,10 +996,6 @@ msgstr ""
 msgid "Plan succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/plan.py:134
-msgid "Plan succesfully created"
-msgstr ""
-
 #: src/apps/core/views/plan.py:164
 msgid "Plan succesfully deleted"
 msgstr ""
@@ -1024,20 +1004,12 @@ msgstr ""
 msgid "Step succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/step.py:89
-msgid "Step succesfully created"
-msgstr ""
-
 #: src/apps/core/views/step.py:114
 msgid "Step succesfully deleted"
 msgstr ""
 
 #: src/apps/core/views/task.py:64
 msgid "Task succesfully updated"
-msgstr ""
-
-#: src/apps/core/views/task.py:83
-msgid "Task succesfully created"
 msgstr ""
 
 #: src/apps/core/views/task.py:108
@@ -1054,10 +1026,6 @@ msgstr ""
 
 #: src/apps/core/views/work.py:65
 msgid "Work succesfully updated"
-msgstr ""
-
-#: src/apps/core/views/work.py:84
-msgid "Work succesfully created"
 msgstr ""
 
 #: src/apps/core/views/work.py:109
@@ -1764,86 +1732,104 @@ msgstr "问题"
 msgid "see more"
 msgstr "查看更多"
 
-#: src/templates/home.html:274
+#: src/templates/home.html:275
 msgid "Oops! You have no goals!"
 msgstr "啊呀！您还没有目标！"
 
-#: src/templates/home.html:275
+#: src/templates/home.html:276
 msgid "Add a problem"
 msgstr "下定义个问题"
 
-#: src/templates/home.html:276 src/templates/home.html.py:385
-#: src/templates/home.html:486
+#: src/templates/home.html:277 src/templates/home.html.py:386
+#: src/templates/home.html:487
 msgid "...or view"
 msgstr "...或者看"
 
-#: src/templates/home.html:276 src/templates/home.html.py:385
-#: src/templates/home.html:486
-msgid "<u>index</u>"
-msgstr "目录"
+#: src/templates/home.html:277
+msgid "all problems"
+msgstr "所有的问题"
 
-#: src/templates/home.html:279
+#: src/templates/home.html:280 src/templates/home.html.py:389
+#: src/templates/home.html:490
+msgid "Example:"
+msgstr "如:"
+
+#: src/templates/home.html:281
 msgid ""
 "\n"
-"                    <p><i><u>Example:</u></i></p>\n"
-"                    <p><b>$ 0.00 Omelette Supply Problem</b></p>\n"
+"                    <p><b>Omelette Supply Problem</b></p>\n"
 "                    <p>Omelette is a healthy and delicious food, which can "
 "be flavored in desired tastes. I like it, and I would like to eat omelete "
 "every morning, without any extra expenses.</p>\n"
 "                    "
 msgstr ""
+"\n"
+"                    <p><b>煎蛋供给问题</b></p>\n"
+"                    <p>煎蛋是个健康和美味的食物，它可以在需要的口味来调味。我"
+"喜欢它，我想，每天早上吃煎蛋，而且没有任何额外的费用。</p>\n"
+"                    "
 
 #: src/templates/home.html:296
 msgid "suggest a solution"
 msgstr "解决方案"
 
-#: src/templates/home.html:383
-msgid "Oops! You have no ideas!"
-msgstr "啊呀！您还没有思路！"
-
-#: src/templates/home.html:384
+#: src/templates/home.html:385
 msgid "Add a solution"
 msgstr "提出解决方式"
 
-#: src/templates/home.html:388
+#: src/templates/home.html:386
+msgid "all solutions"
+msgstr "所有的解决方式"
+
+#: src/templates/home.html:390
 msgid ""
 "\n"
-"                <p><i><u>Example ideas:</u></i></p>\n"
-"                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</"
-"b></p>\n"
+"                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>\n"
 "                <p>Hens don't really require much human work to maintain. "
 "Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, "
 "spicers, cookers and dispensers - and have a self-sustaining supply of fresh "
 "omelete.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p><b>屋顶小型农场自动蛋处理器</b></p>\n"
+"                <p>母鸡并不真正需要多人工为了作来维持。成立了机器人送料器，蛋"
+"收藏器，蛋垫圈器，自动附加香辛器，炊具，事物分配器，- 就可以有新鲜的煎蛋的自"
+"我维持供应。</p>\n"
+"                "
 
 #: src/templates/home.html:406
 msgid "start a project"
 msgstr "项目"
 
-#: src/templates/home.html:484
+#: src/templates/home.html:485
 msgid "Oops! You have no plans!"
 msgstr "啊呀！您还没有计划！"
 
-#: src/templates/home.html:485
+#: src/templates/home.html:486
 msgid "Add a project"
 msgstr "开始个项目"
 
-#: src/templates/home.html:488
+#: src/templates/home.html:487
+msgid "all projects"
+msgstr "所有的项目"
+
+#: src/templates/home.html:491
 msgid ""
 "\n"
-"\n"
-"                <p><i><u>Example:</u></i></p>\n"
 "                <p><b>$ 0.00 Omelette Microfarm Project</b></p>\n"
-"                <p><u>Situation:</u> I in Dublin, Ireland, with my friend X."
-"</p>\n"
-"                <p><u>Destination:</u> we have a microfarm solution to home "
-"owners.</p>\n"
+"                We expect to have a microfarm solutions provider, which "
+"sustains itself via a business model based on demand and supply, based on "
+"simple-to-install construction kits supply chain for home owners.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p><b>$ 0.00 煎蛋小型农场项目</b></p>\n"
+"                我们计划有一个小型农场解决提供商，它通过基于需求和供给的商业"
+"模型本身维持的基础上，业主简单安装的施工工具包的供应链。</p>\n"
+"                "
 
-#: src/templates/home.html:502
+#: src/templates/home.html:501
 msgid "People-centric economy."
 msgstr "— 以人为本的经济 —"
 
@@ -2070,6 +2056,18 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "记住"
+
+#~ msgid "<u>index</u>"
+#~ msgstr "目录"
+
+#~ msgid "Definition succesfully created"
+#~ msgstr "定义创造成功"
+
+#~ msgid "Goal succesfully created"
+#~ msgstr "创造目标成功"
+
+#~ msgid "Oops! You have no ideas!"
+#~ msgstr "啊呀！您还没有思路！"
 
 #~ msgid "public index"
 #~ msgstr "公共目录"

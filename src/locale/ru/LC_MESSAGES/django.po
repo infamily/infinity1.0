@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-22 10:38-0700\n"
+"POT-Creation-Date: 2016-03-22 13:19-0700\n"
 "PO-Revision-Date: 2016-03-13 15:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -993,14 +993,6 @@ msgstr "Комментарий удален успешно"
 msgid "Definition succesfully updated"
 msgstr "Определение успешно обновлено"
 
-#: src/apps/core/views/definition.py:97
-msgid "Definition succesfully created"
-msgstr "Определение успешно создано"
-
-#: src/apps/core/views/goal.py:73
-msgid "Goal succesfully created"
-msgstr "Цель успешно создана"
-
 #: src/apps/core/views/goal.py:157
 msgid "Goal succesfully deleted"
 msgstr "Цель успешно удалена"
@@ -1013,17 +1005,9 @@ msgstr "Цель успешно обновлена"
 msgid "Idea succesfully updated"
 msgstr "Идея успешно обновлена"
 
-#: src/apps/core/views/idea.py:93
-msgid "Idea succesfully created"
-msgstr "Идея успешно создана"
-
 #: src/apps/core/views/idea.py:119
 msgid "Idea succesfully deleted"
 msgstr "Идея успешно удалена"
-
-#: src/apps/core/views/need.py:59
-msgid "Need succesfully created"
-msgstr "Потребность успешно создана."
 
 #: src/apps/core/views/need.py:118
 msgid "Need succesfully deleted"
@@ -1037,10 +1021,6 @@ msgstr "Потребность успешно обновлена."
 msgid "Plan succesfully updated"
 msgstr "План успешно обновлен"
 
-#: src/apps/core/views/plan.py:134
-msgid "Plan succesfully created"
-msgstr "План успешно создан"
-
 #: src/apps/core/views/plan.py:164
 msgid "Plan succesfully deleted"
 msgstr "План успешно удален"
@@ -1049,10 +1029,6 @@ msgstr "План успешно удален"
 msgid "Step succesfully updated"
 msgstr "Стадия успешно обновлена"
 
-#: src/apps/core/views/step.py:89
-msgid "Step succesfully created"
-msgstr "Стадия успешно создана"
-
 #: src/apps/core/views/step.py:114
 msgid "Step succesfully deleted"
 msgstr "Стадия успешно удалена"
@@ -1060,10 +1036,6 @@ msgstr "Стадия успешно удалена"
 #: src/apps/core/views/task.py:64
 msgid "Task succesfully updated"
 msgstr "Задача успешно обновлена"
-
-#: src/apps/core/views/task.py:83
-msgid "Task succesfully created"
-msgstr "Задача успешно создана"
 
 #: src/apps/core/views/task.py:108
 msgid "Task succesfully deleted"
@@ -1080,10 +1052,6 @@ msgstr "Перевод успешно удален"
 #: src/apps/core/views/work.py:65
 msgid "Work succesfully updated"
 msgstr "Работа успешно обновлена"
-
-#: src/apps/core/views/work.py:84
-msgid "Work succesfully created"
-msgstr "Работа успешно создана"
 
 #: src/apps/core/views/work.py:109
 msgid "Work succesfully deleted"
@@ -1840,25 +1808,31 @@ msgstr "определите проблему"
 msgid "see more"
 msgstr "подробнее ..."
 
-#: src/templates/home.html:274
+#: src/templates/home.html:275
 msgid "Oops! You have no goals!"
 msgstr " У вас нету определенной цели!"
 
-#: src/templates/home.html:275
+#: src/templates/home.html:276
 msgid "Add a problem"
 msgstr "Добавить проблему"
 
-#: src/templates/home.html:276 src/templates/home.html.py:385
-#: src/templates/home.html:486
+#: src/templates/home.html:277 src/templates/home.html.py:386
+#: src/templates/home.html:487
 msgid "...or view"
 msgstr "... или смотрите."
 
-#: src/templates/home.html:276 src/templates/home.html.py:385
-#: src/templates/home.html:486
-msgid "<u>index</u>"
-msgstr "содержание"
+#: src/templates/home.html:277
+#, fuzzy
+#| msgid "Goals (problems)"
+msgid "all problems"
+msgstr "Цели (проблемы)"
 
-#: src/templates/home.html:279
+#: src/templates/home.html:280 src/templates/home.html.py:389
+#: src/templates/home.html:490
+msgid "Example:"
+msgstr ""
+
+#: src/templates/home.html:281
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1870,8 +1844,7 @@ msgstr "содержание"
 #| "                    "
 msgid ""
 "\n"
-"                    <p><i><u>Example:</u></i></p>\n"
-"                    <p><b>$ 0.00 Omelette Supply Problem</b></p>\n"
+"                    <p><b>Omelette Supply Problem</b></p>\n"
 "                    <p>Omelette is a healthy and delicious food, which can "
 "be flavored in desired tastes. I like it, and I would like to eat omelete "
 "every morning, without any extra expenses.</p>\n"
@@ -1888,15 +1861,17 @@ msgstr ""
 msgid "suggest a solution"
 msgstr "предложить решение"
 
-#: src/templates/home.html:383
-msgid "Oops! You have no ideas!"
-msgstr "У вас нету определенных идей."
-
-#: src/templates/home.html:384
+#: src/templates/home.html:385
 msgid "Add a solution"
 msgstr "Добавить решение"
 
-#: src/templates/home.html:388
+#: src/templates/home.html:386
+#, fuzzy
+#| msgid "Add a solution"
+msgid "all solutions"
+msgstr "Добавить решение"
+
+#: src/templates/home.html:390
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1913,9 +1888,7 @@ msgstr "Добавить решение"
 #| "                "
 msgid ""
 "\n"
-"                <p><i><u>Example ideas:</u></i></p>\n"
-"                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</"
-"b></p>\n"
+"                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>\n"
 "                <p>Hens don't really require much human work to maintain. "
 "Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, "
 "spicers, cookers and dispensers - and have a self-sustaining supply of fresh "
@@ -1940,24 +1913,38 @@ msgstr ""
 msgid "start a project"
 msgstr "начать проект"
 
-#: src/templates/home.html:484
+#: src/templates/home.html:485
 msgid "Oops! You have no plans!"
 msgstr "У вас нету новых проектов."
 
-#: src/templates/home.html:485
+#: src/templates/home.html:486
 msgid "Add a project"
 msgstr "Добавить проект"
 
-#: src/templates/home.html:488
+#: src/templates/home.html:487
+#, fuzzy
+#| msgid "Add a project"
+msgid "all projects"
+msgstr "Добавить проект"
+
+#: src/templates/home.html:491
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "\n"
+#| "                <p><i><u>Example:</u></i></p>\n"
+#| "                <p><b>$ 0.00 Omelette Microfarm Project</b></p>\n"
+#| "                <p><u>Situation:</u> I in Dublin, Ireland, with my friend "
+#| "X.</p>\n"
+#| "                <p><u>Destination:</u> we have a microfarm solution to "
+#| "home owners.</p>\n"
+#| "                "
 msgid ""
 "\n"
-"\n"
-"                <p><i><u>Example:</u></i></p>\n"
 "                <p><b>$ 0.00 Omelette Microfarm Project</b></p>\n"
-"                <p><u>Situation:</u> I in Dublin, Ireland, with my friend X."
-"</p>\n"
-"                <p><u>Destination:</u> we have a microfarm solution to home "
-"owners.</p>\n"
+"                We expect to have a microfarm solutions provider, which "
+"sustains itself via a business model based on demand and supply, based on "
+"simple-to-install construction kits supply chain for home owners.</p>\n"
 "                "
 msgstr ""
 "\n"
@@ -1970,7 +1957,7 @@ msgstr ""
 "для владельцам домов.</p>\n"
 "                "
 
-#: src/templates/home.html:502
+#: src/templates/home.html:501
 msgid "People-centric economy."
 msgstr "Экономика для человека"
 
@@ -2208,6 +2195,36 @@ msgstr "Адрес электронной почты и / или пароль у
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Запомнить"
+
+#~ msgid "<u>index</u>"
+#~ msgstr "содержание"
+
+#~ msgid "Definition succesfully created"
+#~ msgstr "Определение успешно создано"
+
+#~ msgid "Goal succesfully created"
+#~ msgstr "Цель успешно создана"
+
+#~ msgid "Idea succesfully created"
+#~ msgstr "Идея успешно создана"
+
+#~ msgid "Need succesfully created"
+#~ msgstr "Потребность успешно создана."
+
+#~ msgid "Plan succesfully created"
+#~ msgstr "План успешно создан"
+
+#~ msgid "Step succesfully created"
+#~ msgstr "Стадия успешно создана"
+
+#~ msgid "Task succesfully created"
+#~ msgstr "Задача успешно создана"
+
+#~ msgid "Work succesfully created"
+#~ msgstr "Работа успешно создана"
+
+#~ msgid "Oops! You have no ideas!"
+#~ msgstr "У вас нету определенных идей."
 
 #~ msgid "public index"
 #~ msgstr "Государственно"

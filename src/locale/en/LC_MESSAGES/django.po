@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-22 10:38-0700\n"
+"POT-Creation-Date: 2016-03-22 13:19-0700\n"
 "PO-Revision-Date: 2016-03-16 04:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -939,14 +939,6 @@ msgstr ""
 msgid "Definition succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/definition.py:97
-msgid "Definition succesfully created"
-msgstr ""
-
-#: src/apps/core/views/goal.py:73
-msgid "Goal succesfully created"
-msgstr ""
-
 #: src/apps/core/views/goal.py:157
 msgid "Goal succesfully deleted"
 msgstr ""
@@ -959,16 +951,8 @@ msgstr ""
 msgid "Idea succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/idea.py:93
-msgid "Idea succesfully created"
-msgstr ""
-
 #: src/apps/core/views/idea.py:119
 msgid "Idea succesfully deleted"
-msgstr ""
-
-#: src/apps/core/views/need.py:59
-msgid "Need succesfully created"
 msgstr ""
 
 #: src/apps/core/views/need.py:118
@@ -983,10 +967,6 @@ msgstr ""
 msgid "Plan succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/plan.py:134
-msgid "Plan succesfully created"
-msgstr ""
-
 #: src/apps/core/views/plan.py:164
 msgid "Plan succesfully deleted"
 msgstr ""
@@ -995,20 +975,12 @@ msgstr ""
 msgid "Step succesfully updated"
 msgstr ""
 
-#: src/apps/core/views/step.py:89
-msgid "Step succesfully created"
-msgstr ""
-
 #: src/apps/core/views/step.py:114
 msgid "Step succesfully deleted"
 msgstr ""
 
 #: src/apps/core/views/task.py:64
 msgid "Task succesfully updated"
-msgstr ""
-
-#: src/apps/core/views/task.py:83
-msgid "Task succesfully created"
 msgstr ""
 
 #: src/apps/core/views/task.py:108
@@ -1025,10 +997,6 @@ msgstr ""
 
 #: src/apps/core/views/work.py:65
 msgid "Work succesfully updated"
-msgstr ""
-
-#: src/apps/core/views/work.py:84
-msgid "Work succesfully created"
 msgstr ""
 
 #: src/apps/core/views/work.py:109
@@ -1722,29 +1690,34 @@ msgstr "Problems"
 msgid "see more"
 msgstr ""
 
-#: src/templates/home.html:274
+#: src/templates/home.html:275
 msgid "Oops! You have no goals!"
 msgstr ""
 
-#: src/templates/home.html:275
+#: src/templates/home.html:276
 msgid "Add a problem"
 msgstr ""
 
-#: src/templates/home.html:276 src/templates/home.html.py:385
-#: src/templates/home.html:486
+#: src/templates/home.html:277 src/templates/home.html.py:386
+#: src/templates/home.html:487
 msgid "...or view"
 msgstr ""
 
-#: src/templates/home.html:276 src/templates/home.html.py:385
-#: src/templates/home.html:486
-msgid "<u>index</u>"
+#: src/templates/home.html:277
+#, fuzzy
+#| msgid "Goals (problems)"
+msgid "all problems"
+msgstr "<b>Problems</b>"
+
+#: src/templates/home.html:280 src/templates/home.html.py:389
+#: src/templates/home.html:490
+msgid "Example:"
 msgstr ""
 
-#: src/templates/home.html:279
+#: src/templates/home.html:281
 msgid ""
 "\n"
-"                    <p><i><u>Example:</u></i></p>\n"
-"                    <p><b>$ 0.00 Omelette Supply Problem</b></p>\n"
+"                    <p><b>Omelette Supply Problem</b></p>\n"
 "                    <p>Omelette is a healthy and delicious food, which can "
 "be flavored in desired tastes. I like it, and I would like to eat omelete "
 "every morning, without any extra expenses.</p>\n"
@@ -1755,20 +1728,20 @@ msgstr ""
 msgid "suggest a solution"
 msgstr "Solutions"
 
-#: src/templates/home.html:383
-msgid "Oops! You have no ideas!"
-msgstr ""
-
-#: src/templates/home.html:384
+#: src/templates/home.html:385
 msgid "Add a solution"
 msgstr ""
 
-#: src/templates/home.html:388
+#: src/templates/home.html:386
+#, fuzzy
+#| msgid "suggest a solution"
+msgid "all solutions"
+msgstr "Solutions"
+
+#: src/templates/home.html:390
 msgid ""
 "\n"
-"                <p><i><u>Example ideas:</u></i></p>\n"
-"                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</"
-"b></p>\n"
+"                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>\n"
 "                <p>Hens don't really require much human work to maintain. "
 "Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, "
 "spicers, cookers and dispensers - and have a self-sustaining supply of fresh "
@@ -1780,28 +1753,31 @@ msgstr ""
 msgid "start a project"
 msgstr "Projects"
 
-#: src/templates/home.html:484
+#: src/templates/home.html:485
 msgid "Oops! You have no plans!"
 msgstr ""
 
-#: src/templates/home.html:485
+#: src/templates/home.html:486
 msgid "Add a project"
 msgstr ""
 
-#: src/templates/home.html:488
+#: src/templates/home.html:487
+#, fuzzy
+#| msgid "start a project"
+msgid "all projects"
+msgstr "Projects"
+
+#: src/templates/home.html:491
 msgid ""
 "\n"
-"\n"
-"                <p><i><u>Example:</u></i></p>\n"
 "                <p><b>$ 0.00 Omelette Microfarm Project</b></p>\n"
-"                <p><u>Situation:</u> I in Dublin, Ireland, with my friend X."
-"</p>\n"
-"                <p><u>Destination:</u> we have a microfarm solution to home "
-"owners.</p>\n"
+"                We expect to have a microfarm solutions provider, which "
+"sustains itself via a business model based on demand and supply, based on "
+"simple-to-install construction kits supply chain for home owners.</p>\n"
 "                "
 msgstr ""
 
-#: src/templates/home.html:502
+#: src/templates/home.html:501
 msgid "People-centric economy."
 msgstr "— economy for people —"
 
