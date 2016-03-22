@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-22 13:19-0700\n"
+"POT-Creation-Date: 2016-03-22 13:41-0700\n"
 "PO-Revision-Date: 2016-03-13 15:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1705,6 +1705,18 @@ msgstr "Решаем проблемы"
 #: src/templates/base.html:133 src/templates/base.html.py:160
 msgid "About"
 msgstr "О проекте"
+
+#: src/templates/base.html:160
+msgid "Terms of Service"
+msgstr ""
+
+#: src/templates/base.html:160
+msgid "Operation Policy"
+msgstr ""
+
+#: src/templates/base.html:160
+msgid "Development"
+msgstr ""
 
 #: src/templates/base.html:160
 msgid "Logout"

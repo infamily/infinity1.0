@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-22 13:19-0700\n"
-"PO-Revision-Date: 2016-03-22 22:20+0200\n"
+"POT-Creation-Date: 2016-03-22 13:41-0700\n"
+"PO-Revision-Date: 2016-03-22 22:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -1652,6 +1652,18 @@ msgstr "Spręskime problemas"
 #: src/templates/base.html:133 src/templates/base.html.py:160
 msgid "About"
 msgstr "Apie projektą"
+
+#: src/templates/base.html:160
+msgid "Terms of Service"
+msgstr "Naudojimosi sąlygos"
+
+#: src/templates/base.html:160
+msgid "Operation Policy"
+msgstr "Veiklos politika"
+
+#: src/templates/base.html:160
+msgid "Development"
+msgstr "Programinės įrangos kūrimas"
 
 #: src/templates/base.html:160
 msgid "Logout"

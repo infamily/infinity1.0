@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-22 13:19-0700\n"
-"PO-Revision-Date: 2016-03-22 22:40+0200\n"
+"POT-Creation-Date: 2016-03-22 13:41-0700\n"
+"PO-Revision-Date: 2016-03-22 22:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -1629,6 +1629,18 @@ msgstr "解决问题"
 #: src/templates/base.html:133 src/templates/base.html.py:160
 msgid "About"
 msgstr "关于"
+
+#: src/templates/base.html:160
+msgid "Terms of Service"
+msgstr "使用条款"
+
+#: src/templates/base.html:160
+msgid "Operation Policy"
+msgstr "经营方针"
+
+#: src/templates/base.html:160
+msgid "Development"
+msgstr "开发"
 
 #: src/templates/base.html:160
 msgid "Logout"
