@@ -86,7 +86,7 @@ class StepCreateView(CreateViewWrapper):
         return super(StepCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Step succesfully created"))
+        #messages.success(self.request, _("Step succesfully created"))
         return "%s?lang=%s" % (reverse("plan-detail", args=[self.object.plan.pk, ]), self.request.LANGUAGE_CODE)
 
     def get_context_data(self, **kwargs):

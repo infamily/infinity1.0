@@ -136,6 +136,7 @@ class CommentCreateFormDetail(forms.ModelForm):
         self.fields['currency'].label = _('Currency')
         self.fields['amount'].initial = Decimal(0)
         self.helper = FormHelper(self)
+        self.fields['text'].widget.attrs.update({'style': 'font-size: 14px; text-shadow: 1px 0 #c0c0c0;'})
 
         self.helper.layout.append(Submit('save', _('Send Comment')))
 
@@ -942,9 +943,6 @@ class StepCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
-            'is_link',
-            'url',
-            'is_historical',
             'name',
             'objective',
             'priority',
@@ -952,6 +950,9 @@ class StepCreateForm(forms.ModelForm):
             'included',
             'investables',
             'deliverables',
+            'is_link',
+            'url',
+            'is_historical',
             'language',
             'personal',
             'sharewith',
@@ -1077,12 +1078,12 @@ class TaskCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
-            'is_link',
-            'url',
-            'is_historical',
             'name',
             'description',
             'priority',
+            'is_link',
+            'url',
+            'is_historical',
             'language',
             'personal',
             'sharewith',

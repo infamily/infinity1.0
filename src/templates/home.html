@@ -268,20 +268,20 @@ $(document).ready(function(){
 
                         {% endif %}
                     {% endfor %}
-                    <a href="{% url "goal-list" %}">{% trans "see more" %}</a>
+					<!--<a href="{% url "goal-list" %}">{% trans "see more" %}</a>-->
                 {% else %}
+                {% endif %}
                     <center>
-                        <p>{% trans "Oops! You have no goals!" %}</p>
+						<p><!--{% trans "Oops! You have no goals!" %}--></p>
                         <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
-                        <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
+                        <p>{% trans "...or view" %} <a href="{% url "goal-list" %}">{% trans "all problems" %}</a>.</p>
                     </center>
 
+					<p><i><u>{% trans "Example:" %}</u></i></p>
                     {% blocktrans %}
-                    <p><i><u>Example:</u></i></p>
-                    <p><b>$ 0.00 Omelette Supply Problem</b></p>
+                    <p><b>Omelette Supply Problem</b></p>
                     <p>Omelette is a healthy and delicious food, which can be flavored in desired tastes. I like it, and I would like to eat omelete every morning, without any extra expenses.</p>
                     {% endblocktrans %}
-                {% endif %}
             </div>
         </div>
 
@@ -376,22 +376,22 @@ $(document).ready(function(){
 				        </div>
                     {% endif %}
                 {% endfor %}
-                <a href="{% url "idea-list" %}">{% trans "see more" %}</a>
+				<!--<a href="{% url "idea-list" %}">{% trans "see more" %}</a>-->
 
                 {% else %}
+                {% endif %}
                 <center>
-                    <p>{% trans "Oops! You have no ideas!" %}</p>
+					<br>
                     <p><a href="{% url "idea-create" %}">{% trans "Add a solution" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "idea-list" %}">{% trans "all solutions" %}</a>.</p>
                 </center>
 
+				<p><i><u>{% trans "Example:" %}</u></i></p>
                 {% blocktrans %}
-                <p><i><u>Example ideas:</u></i></p>
-                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</b></p>
+                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>
                 <p>Hens don't really require much human work to maintain. Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, spicers, cookers and dispensers - and have a self-sustaining supply of fresh omelete.</p>
                 {% endblocktrans %}
 
-                {% endif %}
             </div>
         </div>
 
@@ -477,22 +477,21 @@ $(document).ready(function(){
 
                     {% endif %}
                 {% endfor %}
-                <a href="{% url "plan-list" %}">{% trans "see more" %}</a>
+				<!--<a href="{% url "plan-list" %}">{% trans "see more" %}</a>-->
 
                 {% else %}
-                <center>
-                    <p>{% trans "Oops! You have no plans!" %}</p>
-                    <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
-                </center>
-                {% blocktrans %}
-
-                <p><i><u>Example:</u></i></p>
-                <p><b>$ 0.00 Omelette Microfarm Project</b></p>
-                <p><u>Situation:</u> I in Dublin, Ireland, with my friend X.</p>
-                <p><u>Destination:</u> we have a microfarm solution to home owners.</p>
-                {% endblocktrans %}
                 {% endif %}
+                <center>
+					<p><!--{% trans "Oops! You have no plans!" %}--></p>
+                    <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
+                    <p>{% trans "...or view" %} <a href="{% url "plan-list" %}">{% trans "all projects" %}</a>.</p>
+                </center>
+
+				<p><i><u>{% trans "Example:" %}</u></i></p>
+                {% blocktrans %}
+                <p><b>$ 0.00 Omelette Microfarm Project</b></p>
+                We expect to have a microfarm solutions provider, which sustains itself via a business model based on demand and supply, based on simple-to-install construction kits supply chain for home owners.</p>
+                {% endblocktrans %}
             </div>
         </div>
 

@@ -56,7 +56,7 @@ class NeedCreateView(CreateViewWrapper):
         return super(NeedCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Need succesfully created"))
+        #messages.success(self.request, _("Need succesfully created"))
         if self.object.personal:
             return reverse("inbox")
         else:

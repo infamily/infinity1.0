@@ -70,7 +70,7 @@ class GoalCreateView(CreateViewWrapper):
         return super(GoalCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Goal succesfully created"))
+        #messages.success(self.request, _("Goal succesfully created"))
         if self.object.personal:
             return reverse("inbox")
         else:
