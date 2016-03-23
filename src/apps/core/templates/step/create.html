@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load django_markdown %}
+{% load i18n %}
 
 {% block title %}Step create{% endblock title %}
 
@@ -11,7 +12,7 @@
 <br/>
 <table class="table">
     <tr>
-        <td>Plan</td>
+        <td>{% trans "Project" %}</td>
         <td>
 
             <a href="{% url "plan-detail" plan_object.pk %}">{{plan_object}}

@@ -94,7 +94,7 @@ class DefinitionCreateView(CreateView):
             self.object = form.save(commit=False)
             self.object.user = self.request.user
             self.object.save()
-            messages.success(self.request, _("Definition succesfully created"))
+            #messages.success(self.request, _("Definition succesfully created"))
             return redirect(reverse('need-create', kwargs={'concept_q': self.object.pk}))
 
         return render(request, 'definition/create.html',

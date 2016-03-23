@@ -80,7 +80,7 @@ class TaskCreateView(CreateViewWrapper):
         return super(TaskCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Task succesfully created"))
+        #messages.success(self.request, _("Task succesfully created"))
         return "%s?lang=%s" % (reverse("step-detail", args=[self.object.step.pk, ]), self.request.LANGUAGE_CODE)
 
     def get_context_data(self, **kwargs):
