@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/apps/core/forms.py:375 src/apps/core/forms.py:378
-#: src/apps/core/forms.py:1131
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-22 13:41-0700\n"
-"PO-Revision-Date: 2016-03-13 15:27+0200\n"
+"POT-Creation-Date: 2016-03-22 18:05-0700\n"
+"PO-Revision-Date: 2016-03-23 03:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -455,7 +453,7 @@ msgid "New comment"
 msgstr "Новый коммент"
 
 #: src/apps/core/templates/comment/list.html:50
-msgid "Translate"
+msgid "Auto-Translate"
 msgstr "Переводить"
 
 #: src/apps/core/templates/comment/list.html:82
@@ -558,7 +556,8 @@ msgstr "Проблема"
 msgid "Solution"
 msgstr "Решения"
 
-#: src/apps/core/templates/create_menu_links.html:76 src/templates/home.html:81
+#: src/apps/core/templates/create_menu_links.html:76
+#: src/apps/core/templates/step/create.html:15 src/templates/home.html.py:81
 msgid "Project"
 msgstr "Проект"
 

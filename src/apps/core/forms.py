@@ -943,9 +943,6 @@ class StepCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
-            'is_link',
-            'url',
-            'is_historical',
             'name',
             'objective',
             'priority',
@@ -953,6 +950,9 @@ class StepCreateForm(forms.ModelForm):
             'included',
             'investables',
             'deliverables',
+            'is_link',
+            'url',
+            'is_historical',
             'language',
             'personal',
             'sharewith',
@@ -1078,12 +1078,12 @@ class TaskCreateForm(forms.ModelForm):
             'user',
         ]
         fields = [
-            'is_link',
-            'url',
-            'is_historical',
             'name',
             'description',
             'priority',
+            'is_link',
+            'url',
+            'is_historical',
             'language',
             'personal',
             'sharewith',

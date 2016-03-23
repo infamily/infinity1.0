@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-22 13:41-0700\n"
+"POT-Creation-Date: 2016-03-22 18:05-0700\n"
 "PO-Revision-Date: 2016-02-11 04:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -471,7 +471,9 @@ msgid "New comment"
 msgstr "Komentar"
 
 #: src/apps/core/templates/comment/list.html:50
-msgid "Translate"
+#, fuzzy
+#| msgid "Translate"
+msgid "Auto-Translate"
 msgstr "Prijevodi"
 
 #: src/apps/core/templates/comment/list.html:82
@@ -578,7 +580,8 @@ msgstr "Rješite vaše probleme."
 msgid "Solution"
 msgstr "Dodaj rješenje"
 
-#: src/apps/core/templates/create_menu_links.html:76 src/templates/home.html:81
+#: src/apps/core/templates/create_menu_links.html:76
+#: src/apps/core/templates/step/create.html:15 src/templates/home.html.py:81
 #, fuzzy
 #| msgid "Add a project"
 msgid "Project"
