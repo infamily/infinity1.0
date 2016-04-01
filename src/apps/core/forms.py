@@ -28,6 +28,11 @@ from core.models import Translation
 from users.models import User
 
 
+
+class SearchForm(forms.Form):
+    s = forms.CharField()
+
+
 class ChangePriorityForm(forms.Form):
     steps = forms.CharField()
 
