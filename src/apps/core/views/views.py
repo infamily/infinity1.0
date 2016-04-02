@@ -202,6 +202,7 @@ class IndexView(TemplateView):
 			'hour_value': hour_value,
             'dropdown_list': self.dropdown_list,
             'items': items,
+            'search_form': search_form
         }
 
         context.update(instances_list)
