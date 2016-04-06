@@ -30,3 +30,4 @@ class GoalTest(TestCase):
         goal_create_view = GoalCreateView.as_view()(request)
         self.assertEqual(goal_create_view.status_code, httplib.FOUND)
         self.assertEqual(goal_create_view.url, goal_create_url_with_login)
+        self.assertTrue(False)
