@@ -95,3 +95,4 @@ class GoalTest(TestCase):
 
         self.assertTrue(goal.count() == 2)
         self.assertEqual(response.url, reverse('inbox'))
+        self.assertEqual(response.status_code, httplib.FOUND)
