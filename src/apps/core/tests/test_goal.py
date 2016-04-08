@@ -1,10 +1,12 @@
 import httplib
+from random import randint
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase, RequestFactory
 from model_mommy import mommy
 from users.models import User
 from core.models import Need
+from core.models import Type
 from core.views import GoalCreateView
 from core.models import Language
 
@@ -30,3 +32,28 @@ class GoalTest(TestCase):
         goal_create_view = GoalCreateView.as_view()(request)
         self.assertEqual(goal_create_view.status_code, httplib.FOUND)
         self.assertEqual(goal_create_view.url, goal_create_url_with_login)
+
+    def test_goal_create(self):
+        mommy.make(Type)
+        password = str(randint(1, 100))
+        user = mommy.make(User)
+        user.set_password(password)
+        user.save()
+
+        user_logged_in = self.client.login(username=user.email, password=password)
+
+        self.assertTrue(user_logged_in)
+
+        response = self.client.get(reverse('goal-create'), follow=True)
+
+        # Check status code
+        self.assertTrue(response.status_code, httplib.OK)
+
+        # Test form with invalid data
+        response = response.client.post(reverse('goal-create'))
+
+        # Get form from context
+        form = response.context['form']
+
+        # Form should returns validation error
+        self.assertFalse(form.is_valid())
