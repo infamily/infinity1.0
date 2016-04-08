@@ -7,6 +7,8 @@ from model_mommy import mommy
 from users.models import User
 from core.models import Need
 from core.models import Type
+from core.models import Goal
+from core.models import Definition
 from core.views import GoalCreateView
 from core.models import Language
 
@@ -34,7 +36,8 @@ class GoalTest(TestCase):
         self.assertEqual(goal_create_view.url, goal_create_url_with_login)
 
     def test_goal_create(self):
-        mommy.make(Type)
+        type_ = mommy.make(Type)
+        definition = mommy.make(Definition)
         password = str(randint(1, 100))
         user = mommy.make(User)
         user.set_password(password)
@@ -57,3 +60,29 @@ class GoalTest(TestCase):
 
         # Form should returns validation error
         self.assertFalse(form.is_valid())
+
+        goal = Goal.objects.first()
+        self.assertFalse(goal)
+
+        response = response.client.post(reverse('goal-create'), {
+            'reason': str(randint(1, 100)),
+            'type': type_.pk,
+            'name': str(randint(1, 2000)),
+            'language': self.language.pk,
+            'definition': definition.pk
+        })
+
+        goal = Goal.objects.first()
+
+        # Goal has been created
+        self.assertTrue(goal)
+
+        kwargs = {
+            'goal_url': reverse('goal-detail', kwargs={'slug': goal.pk}),
+            'language_code': self.language.language_code
+        }
+
+        goal_detail_url = "{goal_url}?lang={language_code}".format(**kwargs)
+
+        self.assertEqual(response.status_code, httplib.FOUND)
+        self.assertEqual(goal_detail_url, response.url)
