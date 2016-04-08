@@ -64,21 +64,23 @@ class GoalTest(TestCase):
         goal = Goal.objects.first()
         self.assertFalse(goal)
 
-        response = response.client.post(reverse('goal-create'), {
+        data = {
             'reason': str(randint(1, 100)),
             'type': type_.pk,
             'name': str(randint(1, 2000)),
             'language': self.language.pk,
             'definition': definition.pk
-        })
+        }
 
-        goal = Goal.objects.first()
+        response = response.client.post(reverse('goal-create'), data)
+
+        goal = Goal.objects.filter()
 
         # Goal has been created
-        self.assertTrue(goal)
+        self.assertTrue(goal.exists())
 
         kwargs = {
-            'goal_url': reverse('goal-detail', kwargs={'slug': goal.pk}),
+            'goal_url': reverse('goal-detail', kwargs={'slug': goal.first().pk}),
             'language_code': self.language.language_code
         }
 
@@ -86,3 +88,10 @@ class GoalTest(TestCase):
 
         self.assertEqual(response.status_code, httplib.FOUND)
         self.assertEqual(goal_detail_url, response.url)
+
+        # Check personal goal
+        data.update({'personal': True})
+        response = response.client.post(reverse('goal-create'), data)
+
+        self.assertTrue(goal.count() == 2)
+        self.assertEqual(response.url, reverse('inbox'))
