@@ -1,3 +1,4 @@
+import json
 import httplib
 from random import randint
 from django.core.urlresolvers import reverse
@@ -96,3 +97,27 @@ class GoalTest(TestCase):
         self.assertTrue(goal.count() == 2)
         self.assertEqual(response.url, reverse('inbox'))
         self.assertEqual(response.status_code, httplib.FOUND)
+
+        definition_data = {
+            "definition": "computer program",
+            "defined_meaning_id": "131303",
+            "name": "Hello"
+        }
+
+        data = {
+            'reason': str(randint(1, 100)),
+            'type': type_.pk,
+            'name': str(randint(1, 2000)),
+            'language': self.language.pk,
+            'select_definition': json.dumps(definition_data)
+        }
+
+        response = response.client.post(reverse('goal-create'), data)
+
+        definition = Definition.objects.filter(**definition_data)
+
+        # Check goal created
+        self.assertTrue(goal.count() == 3)
+
+        # Check if definition was created
+        self.assertTrue(definition.exists())
