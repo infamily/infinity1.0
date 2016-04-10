@@ -62,8 +62,11 @@ class GoalTest(TestCase):
         # Form should returns validation error
         self.assertFalse(form.is_valid())
 
-        goal = Goal.objects.first()
-        self.assertFalse(goal)
+        # Get goals list
+        goals = Goal.objects.filter()
+
+        # Goal list is empty (there is no goals yet)
+        self.assertTrue(goals.count() == 0)
 
         data = {
             'reason': str(randint(1, 100)),
@@ -75,13 +78,14 @@ class GoalTest(TestCase):
 
         response = response.client.post(reverse('goal-create'), data)
 
-        goal = Goal.objects.filter()
-
         # Goal has been created
-        self.assertTrue(goal.exists())
+        self.assertTrue(goals.exists())
+
+        # Is created first goal?
+        self.assertTrue(goals.count() == 1)
 
         kwargs = {
-            'goal_url': reverse('goal-detail', kwargs={'slug': goal.first().pk}),
+            'goal_url': reverse('goal-detail', kwargs={'slug': goals.first().pk}),
             'language_code': self.language.language_code
         }
 
@@ -94,7 +98,7 @@ class GoalTest(TestCase):
         data.update({'personal': True})
         response = response.client.post(reverse('goal-create'), data)
 
-        self.assertTrue(goal.count() == 2)
+        self.assertTrue(goals.count() == 2)
         self.assertEqual(response.url, reverse('inbox'))
         self.assertEqual(response.status_code, httplib.FOUND)
 
@@ -117,7 +121,7 @@ class GoalTest(TestCase):
         definition = Definition.objects.filter(**definition_data)
 
         # Check goal created
-        self.assertTrue(goal.count() == 3)
+        self.assertTrue(goals.count() == 3)
 
         # Check if definition was created
         self.assertTrue(definition.exists())
