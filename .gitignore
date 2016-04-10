@@ -5,6 +5,7 @@ media
 components
 # file with secret information
 src/conf/local.py
+htmlcov
 
 # General stuff
 # Python bytecode:
