@@ -45,12 +45,6 @@ urlpatterns = [
         NeedCreateView.as_view(),
         name="need-create"
     ),
-
-    url(
-        r'^goal/(?P<definition>.*)/list/1$',
-        GoalListView1.as_view(),
-        name="goal-list1"
-    ),
     url(
         r'^goal/(?P<slug>[a-zA-Z-_0-9]+)/delete/$',
         GoalDeleteView.as_view(),
@@ -67,13 +61,8 @@ urlpatterns = [
         name="goal-detail"
     ),
     url(
-        r'^goal/(?P<definition>.*)/list/2$',
-        GoalListView2.as_view(),
-        name="goal-list2"
-    ),
-    url(
         r'^goal/list/$',
-        GoalListView2.as_view(),
+        GoalListView.as_view(),
         name="goal-list"
     ),
     url(
@@ -120,11 +109,6 @@ urlpatterns = [
         name="work-detail"
     ),
     url(
-        r'^idea/(?P<goal>.*)/list/1$',
-        IdeaListView1.as_view(),
-        name="idea-list1"
-    ),
-    url(
         r'^idea/(?P<slug>.*)/update/$',
         IdeaUpdateView.as_view(),
         name="idea-update"
@@ -147,7 +131,7 @@ urlpatterns = [
 
     url(
         r'^idea/list/$',
-        IdeaListView2.as_view(),
+        IdeaListView.as_view(),
         name="idea-list"
     ),
     url(

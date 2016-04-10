@@ -24,78 +24,12 @@ from .models import Plan
 User = get_user_model()
 
 
-class CommentListViewFilter1(django_filters.FilterSet):
-    @property
-    def form(self):
-        form = super(CommentListViewFilter1, self).form
-        form.helper = FormHelper()
-        form.helper.form_method = 'get'
-        form.helper.form_class = 'form-inline'
-        form.helper.field_template = 'bootstrap3/layout/inline_field.html'
-        form.helper.add_input(Submit('submit', 'Search'))
-
-        return form
-
-    class Meta:
-        model = Comment
-
-        fields = [
-        ]
-
-        exclude = []
-
-
-class CommentListViewFilter2(django_filters.FilterSet):
-    text = django_filters.CharFilter(lookup_type="icontains")
-
-    @property
-    def form(self):
-        form = super(CommentListViewFilter2, self).form
-        form.helper = FormHelper()
-        form.helper.form_method = 'get'
-        form.helper.form_class = 'form-inline'
-        form.helper.field_template = 'bootstrap3/layout/inline_field.html'
-        form.helper.add_input(Submit('submit', 'Search'))
-
-        return form
-
-    class Meta:
-        model = Comment
-
-        fields = [u'text']
-
-        exclude = []
-
-
-class GoalListViewFilter1(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_type="icontains")
-    reason = django_filters.CharFilter(lookup_type="icontains")
-
-    @property
-    def form(self):
-        form = super(GoalListViewFilter1, self).form
-        form.helper = FormHelper()
-        form.helper.form_method = 'get'
-        form.helper.form_class = 'form-inline'
-        form.helper.field_template = 'bootstrap3/layout/inline_field.html'
-        form.helper.add_input(Submit('submit', 'Search'))
-
-        return form
-
-    class Meta:
-        model = Goal
-
-        fields = [u'reason', u'name',]
-
-        exclude = []
-
-
-class GoalListViewFilter2(django_filters.FilterSet):
+class GoalListViewFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
 
     @property
     def form(self):
-        form = super(GoalListViewFilter2, self).form
+        form = super(GoalListViewFilter, self).form
         form.helper = FormHelper()
         form.helper.form_method = 'get'
         form.helper.form_class = 'form-inline'
@@ -157,36 +91,12 @@ class WorkListViewFilter2(django_filters.FilterSet):
         exclude = []
 
 
-class IdeaListViewFilter1(django_filters.FilterSet):
-    description = django_filters.CharFilter(lookup_type="icontains")
-    name = django_filters.CharFilter(lookup_type="icontains")
-    summary = django_filters.CharFilter(lookup_type="icontains")
-
-    @property
-    def form(self):
-        form = super(IdeaListViewFilter1, self).form
-        form.helper = FormHelper()
-        form.helper.form_method = 'get'
-        form.helper.form_class = 'form-inline'
-        form.helper.field_template = 'bootstrap3/layout/inline_field.html'
-        form.helper.add_input(Submit('submit', 'Search'))
-
-        return form
-
-    class Meta:
-        model = Idea
-
-        fields = [u'name', u'summary', u'description', ]
-
-        exclude = []
-
-
-class IdeaListViewFilter2(django_filters.FilterSet):
+class IdeaListViewFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type="icontains")
 
     @property
     def form(self):
-        form = super(IdeaListViewFilter2, self).form
+        form = super(IdeaListViewFilter, self).form
         form.helper = FormHelper()
         form.helper.form_method = 'get'
         form.helper.form_class = 'form-inline'
