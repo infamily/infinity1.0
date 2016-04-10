@@ -22,6 +22,9 @@ test:
 coverage:
 	coverage run src/manage.py test --settings=conf.test
 
+coverage-report:
+	coverage html
+
 wsgi:
 	uwsgi\
 		--http 127.0.0.1:8000\
