@@ -48,6 +48,11 @@ class GoalTest(TestCase):
 
         self.assertTrue(user_logged_in)
 
+        response = self.client.get(reverse('goal-create', kwargs={'need_id': 1}), follow=True)
+
+        # If need is specified but need is not found in db, return 404
+        self.assertTrue(response.status_code, httplib.NOT_FOUND)
+
         response = self.client.get(reverse('goal-create'), follow=True)
 
         # Check status code
