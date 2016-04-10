@@ -19,6 +19,9 @@ runserver:
 test:
 	.env/bin/python src/manage.py test --settings=conf.test
 
+coverage:
+	coverage run src/manage.py test --settings=conf.test
+
 wsgi:
 	uwsgi\
 		--http 127.0.0.1:8000\
