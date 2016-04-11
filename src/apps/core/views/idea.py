@@ -12,18 +12,27 @@ from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
-from ..utils import CreateViewWrapper
-from ..utils import ViewTypeWrapper
-from ..utils import UpdateViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import CommentsContentTypeWrapper
-from ..utils import DeleteViewWrapper
+from ..utils import (
+    CreateViewWrapper,
+    ViewTypeWrapper,
+    UpdateViewWrapper,
+    DetailViewWrapper,
+    CommentsContentTypeWrapper,
+    DeleteViewWrapper,
+)
+
+from ..models import (
+    Goal,
+    Idea,
+    Plan,
+)
+
+from ..forms import (
+    IdeaUpdateForm,
+    IdeaCreateForm
+)
+
 from ..filters import IdeaListViewFilter
-from ..models import Goal
-from ..models import Idea
-from ..models import Plan
-from ..forms import IdeaUpdateForm
-from ..forms import IdeaCreateForm
 
 
 class IdeaUpdateView(UpdateViewWrapper):

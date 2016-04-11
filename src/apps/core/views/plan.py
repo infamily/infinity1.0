@@ -1,8 +1,12 @@
+import json
+
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.views.generic import DeleteView
+
+import stepio
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
@@ -12,24 +16,33 @@ from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
-from ..utils import CreateViewWrapper
-from ..forms import PlanCreateForm
-from ..forms import PlanUpdateForm
-from ..utils import UpdateViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import DeleteViewWrapper
-from ..utils import ViewTypeWrapper
-from ..utils import CommentsContentTypeWrapper
+from ..forms import (
+    PlanCreateForm,
+    PlanUpdateForm,
+)
+
+from ..utils import (
+    UpdateViewWrapper,
+    DetailViewWrapper,
+    DeleteViewWrapper,
+    ViewTypeWrapper,
+    CommentsContentTypeWrapper,
+)
+
+
+from ..models import (
+    Plan,
+    Idea,
+    Step,
+)
+
+from ..utils import (
+    get_plandf_dict,
+    JsonView,
+    CreateViewWrapper
+)
+
 from ..filters import PlanListViewFilter
-from ..models import Plan
-from ..models import Idea
-from ..models import Step
-
-from ..utils import get_plandf_dict
-from ..utils import JsonView
-
-import json
-import stepio
 
 
 class AjaxStepIncludeView(JsonView):

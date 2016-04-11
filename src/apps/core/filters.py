@@ -1,25 +1,36 @@
+from django import forms
+from django.contrib.auth import get_user_model
+
 import django_filters
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.bootstrap import FormActions
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
-from crispy_forms.layout import Field
-from crispy_forms.layout import HTML
-from crispy_forms.bootstrap import StrictButton
-from crispy_forms.bootstrap import FieldWithButtons
-from django.contrib.auth import get_user_model
 
-from django import forms
+from crispy_forms.bootstrap import (
+    FormActions,
+    StrictButton,
+    FieldWithButtons,
+)
 
-from .models import Comment
-from .models import Goal
-from .models import Work
-from .models import Idea
-from .models import Step
-from .models import Task
-from .models import Definition
-from .models import Type
-from .models import Plan
+from crispy_forms.layout import (
+    Layout,
+    Fieldset,
+    ButtonHolder,
+    Submit,
+    Field,
+    HTML,
+)
+
+from .models import (
+    Comment,
+    Goal,
+    Work,
+    Idea,
+    Step,
+    Task,
+    Definition,
+    Type,
+    Plan,
+)
 
 User = get_user_model()
 

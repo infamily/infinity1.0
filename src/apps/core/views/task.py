@@ -11,18 +11,27 @@ from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
+from ..forms import (
+    TaskCreateForm,
+    TaskUpdateForm,
+)
+
+from ..utils import (
+    UpdateViewWrapper,
+    DetailViewWrapper,
+    ViewTypeWrapper,
+    CommentsContentTypeWrapper,
+    DeleteViewWrapper,
+)
+
+from ..models import (
+    Step,
+    Task,
+    Work,
+)
+
 from ..utils import CreateViewWrapper
-from ..forms import TaskCreateForm
-from ..forms import TaskUpdateForm
-from ..utils import UpdateViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import ViewTypeWrapper
-from ..utils import CommentsContentTypeWrapper
-from ..utils import DeleteViewWrapper
 from ..filters import TaskListViewFilter
-from ..models import Step
-from ..models import Task
-from ..models import Work
 
 
 class TaskUpdateView(UpdateViewWrapper):

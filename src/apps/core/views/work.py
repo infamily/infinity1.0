@@ -12,16 +12,26 @@ from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
 from ..utils import CreateViewWrapper
-from ..forms import WorkCreateForm
-from ..forms import WorkUpdateForm
-from ..utils import UpdateViewWrapper
-from ..utils import DeleteViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import ViewTypeWrapper
-from ..utils import CommentsContentTypeWrapper
+
+from ..forms import (
+    WorkCreateForm,
+    WorkUpdateForm,
+)
+
+from ..utils import (
+    UpdateViewWrapper,
+    DeleteViewWrapper,
+    DetailViewWrapper,
+    ViewTypeWrapper,
+    CommentsContentTypeWrapper,
+)
+
+from ..models import (
+    Task,
+    Work,
+)
+
 from ..filters import WorkListViewFilter
-from ..models import Task
-from ..models import Work
 
 
 class WorkUpdateView(UpdateViewWrapper):

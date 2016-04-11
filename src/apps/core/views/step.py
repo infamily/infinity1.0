@@ -13,20 +13,29 @@ from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
+from ..forms import (
+    StepCreateForm,
+    StepUpdateForm,
+    ChangePriorityForm,
+)
+
+from ..utils import (
+    UpdateViewWrapper,
+    DetailViewWrapper,
+    ViewTypeWrapper,
+    CommentsContentTypeWrapper,
+    JsonView,
+    DeleteViewWrapper,
+)
+
+from ..models import (
+    Plan,
+    Step,
+    Task,
+)
+
 from ..utils import CreateViewWrapper
-from ..forms import StepCreateForm
-from ..forms import StepUpdateForm
-from ..forms import ChangePriorityForm
-from ..utils import UpdateViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import ViewTypeWrapper
-from ..utils import CommentsContentTypeWrapper
-from ..utils import JsonView
-from ..utils import DeleteViewWrapper
 from ..filters import StepListViewFilter
-from ..models import Plan
-from ..models import Step
-from ..models import Task
 
 
 class StepUpdateView(UpdateViewWrapper):

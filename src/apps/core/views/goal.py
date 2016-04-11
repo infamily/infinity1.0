@@ -9,6 +9,8 @@ from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
 from enhanced_cbv.views import ListFilteredView
 
+from users.models import User
+
 from ..forms import (
     GoalCreateForm,
     GoalUpdateForm
@@ -33,8 +35,6 @@ from ..models import (
     Language,
     Definition,
 )
-
-from users.models import User
 
 
 class GoalCreateView(CreateViewWrapper):
