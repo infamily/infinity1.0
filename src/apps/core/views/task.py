@@ -19,34 +19,10 @@ from ..utils import DetailViewWrapper
 from ..utils import ViewTypeWrapper
 from ..utils import CommentsContentTypeWrapper
 from ..utils import DeleteViewWrapper
-from ..filters import TaskListViewFilter1
-from ..filters import TaskListViewFilter2
+from ..filters import TaskListViewFilter
 from ..models import Step
 from ..models import Task
 from ..models import Work
-
-
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class TaskListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    template_name = "task/list1.html"
-    model = Task
-    paginate_by = 10
-    orderable_columns = [
-        "name",
-        "created_at",
-        "updated_at",
-        "priority",
-        "step",
-        "user",
-    ]
-    orderable_columns_default = "-id"
-    filter_set = TaskListViewFilter1
-
-    def get_base_queryset(self):
-        queryset = super(TaskListView1, self).get_base_queryset()
-        queryset = queryset.filter(step__pk=self.kwargs['step'])
-        return queryset
 
 
 class TaskUpdateView(UpdateViewWrapper):
@@ -109,11 +85,11 @@ class TaskDeleteView(DeleteViewWrapper):
         return reverse("step-detail", args=[self.object.step.pk, ])
 
 
-class TaskListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
+class TaskListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
     """Task list view"""
 
-    template_name = "task/list2.html"
+    template_name = "task/list.html"
 
     model = Task
     paginate_by = 1000
@@ -126,7 +102,7 @@ class TaskListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         "user",
     ]
     orderable_columns_default = "-id"
-    filter_set = TaskListViewFilter2
+    filter_set = TaskListViewFilter
 
 
 class TaskDetailView(DetailViewWrapper, CommentsContentTypeWrapper):

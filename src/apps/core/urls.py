@@ -75,12 +75,6 @@ urlpatterns = [
         GoalCreateView.as_view(),
         name="goal-create"
     ),
-
-    url(
-        r'^work/(?P<task>.*)/list/1$',
-        WorkListView1.as_view(),
-        name="work-list1"
-    ),
     url(
         r'^work/(?P<slug>.*)/update/$',
         WorkUpdateView.as_view(),
@@ -100,7 +94,7 @@ urlpatterns = [
 
     url(
         r'^work/list/$',
-        WorkListView2.as_view(),
+        WorkListView.as_view(),
         name="work-list"
     ),
     url(
@@ -140,11 +134,6 @@ urlpatterns = [
         name="idea-detail"
     ),
     url(
-        r'^step/(?P<plan>.*)/list/1$',
-        StepListView1.as_view(),
-        name="step-list1"
-    ),
-    url(
         r'^step/(?P<slug>.*)/update/$',
         StepUpdateView.as_view(),
         name="step-update"
@@ -163,18 +152,13 @@ urlpatterns = [
 
     url(
         r'^step/list/$',
-        StepListView2.as_view(),
+        StepListView.as_view(),
         name="step-list"
     ),
     url(
         r'^step/(?P<slug>[a-zA-Z-_0-9]+)/detail/$',
         StepDetailView.as_view(),
         name="step-detail"
-    ),
-    url(
-        r'^task/(?P<step>.*)/list/1$',
-        TaskListView1.as_view(),
-        name="task-list1"
     ),
     url(
         r'^task/(?P<slug>.*)/update/$',
@@ -195,7 +179,7 @@ urlpatterns = [
 
     url(
         r'^task/list/$',
-        TaskListView2.as_view(),
+        TaskListView.as_view(),
         name="task-list"
     ),
     url(
@@ -224,11 +208,6 @@ urlpatterns = [
         name="definition-detail"
     ),
     url(
-        r'^plan/(?P<idea>.*)/list/1$',
-        PlanListView1.as_view(),
-        name="plan-list1"
-    ),
-    url(
         r'^plan/(?P<slug>.*)/update/$',
         PlanUpdateView.as_view(),
         name="plan-update"
@@ -252,7 +231,7 @@ urlpatterns = [
 
     url(
         r'^plan/list/$',
-        PlanListView2.as_view(),
+        PlanListView.as_view(),
         name="plan-list"
     ),
     url(
