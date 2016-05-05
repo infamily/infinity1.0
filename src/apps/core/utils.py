@@ -23,6 +23,9 @@ from constance import config
 from users.models import User
 from users.forms import ConversationInviteForm
 from core.models import Language
+from users.decorators import ForbiddenUser
+from django.views.generic import DeleteView
+from users.mixins import OwnerMixin
 
 from .forms import CommentCreateFormDetail
 from .models import Comment
@@ -42,6 +45,7 @@ from hours.models import HourValue
 from djmoney_rates.models import Rate
 
 import plandf
+
 
 def update_child_paypal_transactions(comment_instance):
     """
@@ -66,7 +70,7 @@ def notify_mentioned_users(comment_instance):
     url = "%s/%s/detail/#comment-%s" % (comment_instance.content_type,
                                         comment_instance.content_object.id,
                                         comment_instance.id)
-    link = path.join(path.join('http://', Site.objects.get_current().domain), url)
+    link = path.join(path.join('https://', Site.objects.get_current().domain), url)
 
     mentioned_users = User.objects.filter(username__in=usernames)
 
@@ -273,7 +277,6 @@ class CommentsContentTypeWrapper(CreateView):
         return super(CommentsContentTypeWrapper, self).form_valid(form)
 
 
-
 def notify_new_sharewith_users(list_of_users, object_instance):
 
     from django.contrib.sites.models import Site
@@ -291,6 +294,15 @@ def notify_new_sharewith_users(list_of_users, object_instance):
                     'content_object': object_instance,
                     'link': link})
 
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+class DeleteViewWrapper(OwnerMixin, DeleteView):
+    """
+    Only the owner may remove content
+    """
+
+
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class UpdateViewWrapper(OwnerMixin, UpdateView):
 
     def form_valid(self, form):
@@ -310,6 +322,7 @@ class UpdateViewWrapper(OwnerMixin, UpdateView):
         return super(UpdateViewWrapper, self).form_valid(form)
 
 
+@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class CreateViewWrapper(CreateView):
 
     def form_valid(self, form):
@@ -445,6 +458,7 @@ def get_currency_rates():
     rates['h'] = [float(HourValue.objects.latest('created_at').value)]
 
     return rates
+
 
 def get_plandf_dict(plan_tuples):
     try:

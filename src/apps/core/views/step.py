@@ -22,6 +22,7 @@ from ..utils import DetailViewWrapper
 from ..utils import ViewTypeWrapper
 from ..utils import CommentsContentTypeWrapper
 from ..utils import JsonView
+from ..utils import DeleteViewWrapper
 from ..filters import StepListViewFilter1
 from ..filters import StepListViewFilter2
 from ..models import Plan
@@ -70,7 +71,6 @@ class StepUpdateView(UpdateViewWrapper):
         return reverse("plan-detail", args=[self.object.plan.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class StepCreateView(CreateViewWrapper):
 
     """Step create view"""
@@ -86,7 +86,7 @@ class StepCreateView(CreateViewWrapper):
         return super(StepCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Step succesfully created"))
+        #messages.success(self.request, _("Step succesfully created"))
         return "%s?lang=%s" % (reverse("plan-detail", args=[self.object.plan.pk, ]), self.request.LANGUAGE_CODE)
 
     def get_context_data(self, **kwargs):
@@ -103,7 +103,7 @@ class StepCreateView(CreateViewWrapper):
         return kwargs
 
 
-class StepDeleteView(OwnerMixin, DeleteView):
+class StepDeleteView(DeleteViewWrapper):
 
     """Step delete view"""
     model = Step

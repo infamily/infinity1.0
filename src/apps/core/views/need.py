@@ -12,6 +12,7 @@ from users.forms import ConversationInviteForm
 
 from ..utils import CreateViewWrapper
 from ..utils import LookupCreateDefinition
+from ..utils import DeleteViewWrapper
 from ..forms import NeedCreateForm
 from ..forms import NeedUpdateForm
 from ..utils import UpdateViewWrapper
@@ -24,7 +25,7 @@ from ..models import Language
 
 from users.models import User
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
+
 class NeedCreateView(CreateViewWrapper):
 
     """Need create view"""
@@ -55,7 +56,7 @@ class NeedCreateView(CreateViewWrapper):
         return super(NeedCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Need succesfully created"))
+        #messages.success(self.request, _("Need succesfully created"))
         if self.object.personal:
             return reverse("inbox")
         else:
@@ -106,7 +107,7 @@ class NeedCreateView(CreateViewWrapper):
         return kwargs
 
 
-class NeedDeleteView(OwnerMixin, DeleteView):
+class NeedDeleteView(DeleteViewWrapper):
 
     """Need delete view"""
     model = Need

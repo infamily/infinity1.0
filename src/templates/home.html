@@ -37,13 +37,15 @@
 
 <div class="alignright">
 {% if not user.is_anonymous %}
-
+    <!--
     <span id="info" style="display:none; color: brown;">
     <b>
         [<a href="{% url "invite:send"  %}">{{user.invitationoption.invitations_left}} {% trans "invitations" %}</a>, <a href="/step/2/detail/">{% trans "write bugs" %}</a>, {% trans "time value" %}: 1 ħ = <a href="https://research.stlouisfed.org/fred2/series/CES0500000003">{{ hour_value.value|floatformat:2 }}</a> $]
     </b>
     </span>
-    <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="javascript:hideshow(document.getElementById('info'))">{{user.invitationoption.invitations_left}} <i class="fa fa-envelope-o"></i> {% trans "Invitations" %}</a>
+    <a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="javascript:hideshow(document.getElementById('info'))">{{user.invitationoption.invitations_left}} <i class="fa fa-envelope-o"></i> {% trans "invite a friend" %}</a>
+	-->
+	<a class="btn-lg" style="color: black; background-color: #F0F0F0;" href="{% url "invite:send" %}">{{user.invitationoption.invitations_left}} <i class="fa fa-envelope-o"></i> {% trans "invite a friend" %}</a>
 
     {% if request|get_country_by_ip != 'CN' %}
     <a class="video btn-lg" style="color: black; background-color: #F0F0F0;" href="https://www.youtube.com/v/zeBgP31KaqY?hd=1&autoplay=1&autohide=1&showinfo=0&rel=0&wmode=transparent">{% trans "Intro" %}</a>
@@ -69,20 +71,20 @@
 <div class="alignleft">
 
 	<div class="btn-group" style="position: relative; height:10px; bottom:24px;">
-	  <button type="button" class="btn-lg btn" style='font-weight: normal; text-transform: none; color: white; background-color: black; font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif' onclick="window.location.href={% url 'need-create' %}">{% trans "compose" %}</button>
+	  <button type="button" class="btn-lg btn" style='font-weight: normal; text-transform: none; color: white; background-color: black; font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif' onclick="window.location.href={% url 'goal-create' %}">{% trans "compose" %}</button>
 	  <button type="button" class="btn-lg btn dropdown-toggle" style="color: white; background-color: grey;" data-toggle="dropdown">
 		<span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
-		  <li><a href="{% url 'goal-create' %}">{% trans "Goal (problem)" %}</a></li>
-		  <li><a href="{% url 'idea-create' %}">{% trans "Idea (solution)" %}</a></li>
-		  <li><a href="{% url 'plan-create' %}">{% trans "Plan (project)" %}</a></li>
+		  <li><a href="{% url 'goal-create' %}">{% trans "Problem" %}</a></li>
+		  <li><a href="{% url 'idea-create' %}">{% trans "Solution" %}</a></li>
+		  <li><a href="{% url 'plan-create' %}">{% trans "Project" %}</a></li>
 	  </ul>
 
       <form action="{{request.get_full_path}}" method="get" style="display: inline; margin-left:10px;">
-      <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; height: 49px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="{% trans "Search" %}" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; height: 49px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="🔍" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
       </form>
-
+      <!--
       <div style="display: inline; margin-left:10px;">
           <button type="submit" id="ithink" class="btn-lg" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
               <i class="fa fa-bug"></i>
@@ -94,6 +96,7 @@
               <i class="fa fa-rocket"></i>
           </button>
       </div>
+	  -->
 	</div>
 </div>
 <style>
@@ -112,23 +115,34 @@
 $(document).ready(function(){
 
     // keep the scope in session
-	var scope = localStorage['scope'];
+	//var scope = localStorage['scope'];
+    localStorage['scope'] = "ichart";
+
 	if (!scope) {
-		localStorage['scope'] = "ithink";
+		localStorage['scope'] = "ichart";
 	}
     $('#'.concat(scope)).css('color', 'black');
 
     if (scope=='ithink') {
       $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
       $('#'.concat(scope)).css('text-shadow', '0 0 15px #F6358A');
+	  $('#goals').removeClass('col-md-4').addClass('col-md-5');
+	  $('#ideas').removeClass('col-md-5').addClass('col-md-4');
+	  $('#plans').removeClass('col-md-5').addClass('col-md-4');
     }
     else if (scope=='ichart') {
-      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*1.01 );
       $('#'.concat(scope)).css('text-shadow', '0 0 15px lime');
+	  $('#goals').removeClass('col-md-5').addClass('col-md-4');
+	  $('#ideas').removeClass('col-md-4').addClass('col-md-5');
+	  $('#plans').removeClass('col-md-5').addClass('col-md-4');
     }
     else if (scope=='icreate') {
-      $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*2.01 );
       $('#'.concat(scope)).css('text-shadow', '0 0 15px yellow');
+	  $('#goals').removeClass('col-md-5').addClass('col-md-4');
+	  $('#ideas').removeClass('col-md-5').addClass('col-md-4');
+	  $('#plans').removeClass('col-md-4').addClass('col-md-5');
     } 
 });
 
@@ -141,30 +155,42 @@ $(document).ready(function(){
       $('#ichart').css('text-shadow', 'none');
       $('#icreate').css('color', 'grey');
       $('#icreate').css('text-shadow', 'none');
+
+	  $('#goals').removeClass('col-md-4').addClass('col-md-5');
+	  $('#ideas').removeClass('col-md-5').addClass('col-md-4');
+	  $('#plans').removeClass('col-md-5').addClass('col-md-4');
 	  localStorage['scope'] = 'ithink';
 		event.preventDefault();
     });
 
     $('#ichart').on("click",function(event){
-      $( "div.row-horizon" ).scrollLeft( $(window).width()*2/3 );
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*1.01 );
       $('#ithink').css('color', 'grey');
       $('#ithink').css('text-shadow', 'none');
       $('#ichart').css('color', 'black');
       $('#ichart').css('text-shadow', '0 0 15px lime');
       $('#icreate').css('color', 'grey');
       $('#icreate').css('text-shadow', 'none');
+
+	  $('#goals').removeClass('col-md-5').addClass('col-md-4');
+	  $('#ideas').removeClass('col-md-4').addClass('col-md-5');
+	  $('#plans').removeClass('col-md-5').addClass('col-md-4');
 	  localStorage['scope'] = 'ichart';
 		event.preventDefault();
     });
 
     $('#icreate').on("click",function(event){
-      $( "div.row-horizon" ).scrollLeft( $(window).width()*4/3 );
+      $( "div.row-horizon" ).scrollLeft( $(window).width()*2.01 );
       $('#ithink').css('color', 'grey');
       $('#ithink').css('text-shadow', 'none');
       $('#ichart').css('color', 'grey');
       $('#ichart').css('text-shadow', 'none');
       $('#icreate').css('color', 'black');
       $('#icreate').css('text-shadow', '0 0 15px yellow');
+
+	  $('#goals').removeClass('col-md-5').addClass('col-md-4');
+	  $('#ideas').removeClass('col-md-5').addClass('col-md-4');
+	  $('#plans').removeClass('col-md-4').addClass('col-md-5');
 	  localStorage['scope'] = 'icreate';
 		event.preventDefault();
     });
@@ -174,89 +200,18 @@ $(document).ready(function(){
     <br/>
 
     <link rel="stylesheet" href="{% static "bootstrap-horizon/bootstrap-horizon.css" %}">
-
+<!--
     <div id="scroll_arrowleft"></div>
     <div id="scroll_arrowright"></div>
-
+-->
     <div class="row row-horizon">
 
-<!-- start of Need -->
-
-        <div class="panel panel-default col-md-4 block-content">
-            <div class="panel-heading">
-                {% trans "Needs" %}
-                &nbsp; <a href="{% url "need-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>
-                    {% trans "write a letter" %}
-                </b>
-
-                <div style="display:inline-block; float: right;">
-                    <form method="post" style="display:inline;">{% csrf_token %}
-                        <select name="needs" onchange="this.form.submit()">
-                            {% for value in dropdown_list %}
-                            <option value="{{ value }}" {% if items.needs == value %}selected{% endif %}>{{ value }}</option>
-                            {% endfor %}
-                        </select>
-                    </form>
-                </div>
-            </div>
-
-            <div class="panel-body">
-                {% if need_list %}
-                    {% for need in need_list %}
-                        {% if need.translation %} {# if need translated #}
-
-                            {% if need.object.is_link %}
-                                {% if need.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% else %}
-                                <span class="badge">{% trans "link" %}</span>
-                                {% endif %}
-                            {% else %}
-                                {% if need.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% endif %}
-                            {% endif %}
-
-                            <b>
-                                {% if need.object.personal %}
-                                <i class="fa {% if need.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
-                                $ {{ need.object.get_usd|floatformat:2 }}/{{ need.object.get_remain_usd|floatformat:2 }}
-                                {% endif %}
-                            </b>
-                            
-                            <a {% if need.is_new %}style="font-weight: bold"{% endif %} href="{% url "need-detail" need.object.pk %}?lang={{need.translation.language.language_code}}#{{need.object.commented_at|date:"U"}}">{{ need.translation.name }}</a>
-
-                            ({{need.object.comment_count}} comments)
-
-                            <br/>
-
-                            <p>{{need.translation.content|markdown|truncatewords_html:34}}</p>
-                        {% endif %}
-                    {% endfor %}
-					<!--<a href="need-list">see more</a> -->
-                {% else %}
-                    <center>
-                        <p>{% trans "Oops! You have no needs!" %}</p>
-                        <p><a href="{% url "definition-create" %}">{% trans "Define a need" %}</a></p>
-                        <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>discussion board</u>" %}</a>.</p>
-                    </center>
-
-                    {% blocktrans %}
-                    <p><i><u>Example:</u></i></p>
-                    <p><b>$ 0.00 I want an omelete</b></p>
-                    <p>Hi, Alice! Could you buy me omelete this afternoon before going home?</p>
-                    {% endblocktrans %}
-
-                {% endif %}
-            </div>
-        </div>
-<!-- end of Need -->
-
-        <div class="panel panel-default col-md-4 block-content">
-            <div class="panel-heading">
-                <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>
-                &nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "define a problem" %}</b>
-
+    <! -- Start of Goals -- >
+        <div id="goals" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; margin-left:15px;">
+            <div class="panel-heading" style="border-bottom: 1px dotted;">
+				<!-- <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>-->
+				&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "goal-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "define a problem" %}</a></b>
+                <!-- drop-down
                 <div style="display:inline-block; float: right;">
                     <form method="post" style="display:inline;">{% csrf_token %}
                         <select name="goals" onchange="this.form.submit()">
@@ -266,67 +221,80 @@ $(document).ready(function(){
                         </select>
                     </form>
                 </div>
+				-->
             </div>
 
-            <div class="panel-body">
+            <div class="panel-body" style="padding: 0; margin-top: 0px;">
                 {% if goal_list %}
                     {% for goal in goal_list %}
+
                         {% if goal.translation %} {# if goal translated #}
 
-                            {% if goal.object.is_link %}
-                                {% if goal.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% else %}
-                                <span class="badge">{% trans "link" %}</span>
-                                {% endif %}
-                            {% else %}
-                                {% if goal.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% endif %}
-                            {% endif %}
+						    <!-- card style -->
+							{% if forloop.counter|divisibleby:2 %}
+							<div style="background-color:#f9f9f9; padding: 10px;">
+							{% else %}
+							<div style="background-color:#f0f0f0; padding: 10px;">
+							{% endif %}
 
-                            <b>
-                                {% if goal.object.personal %}
-                                <i class="fa {% if goal.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
-                                $ {{ goal.object.get_usd|floatformat:2 }}/{{ goal.object.get_remain_usd|floatformat:2 }}
-                                {% endif %}
-                            </b>
-                            
-                            <a {% if goal.is_new %}style="font-weight: bold"{% endif %} href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
+                                 {% if goal.object.is_link %}
+                                     {% if goal.object.is_historical %}
+                                     <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                     {% else %}
+                                     <span class="badge">{% trans "link" %}</span>
+                                     {% endif %}
+                                 {% else %}
+                                     {% if goal.object.is_historical %}
+                                     <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
+                                     {% endif %}
+                                 {% endif %}
+ 
+                                 <b>
+                                     {% if goal.object.personal %}
+                                     <i class="fa {% if goal.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
+                                     $ {{ goal.object.get_usd|floatformat:2 }}/{{ goal.object.get_remain_usd|floatformat:2 }}
+                                     {% endif %}
+                                 </b>
+                                 
+                                 <a {% if goal.is_new %}style="font-weight: bold"{% endif %} href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
 
                             ({{goal.object.comment_count}} comments) 
 
                             <br/>
 
                             <p>{{goal.translation.reason|markdown|truncatewords_html:34}}</p>
+
+          					</div> <!--/card style div-->
+
                         {% endif %}
                     {% endfor %}
-                    <a href="{% url "goal-list" %}">{% trans "see more" %}</a>
+					<!--<a href="{% url "goal-list" %}">{% trans "see more" %}</a>-->
                 {% else %}
+                {% endif %}
                     <center>
-                        <p>{% trans "Oops! You have no goals!" %}</p>
+						<p><!--{% trans "Oops! You have no goals!" %}--></p>
                         <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
-                        <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
+                        <p>{% trans "...or view" %} <a href="{% url "goal-list" %}">{% trans "all problems" %}</a>.</p>
                     </center>
 
+					<p><i><u>{% trans "Example:" %}</u></i></p>
                     {% blocktrans %}
-                    <p><i><u>Example:</u></i></p>
-                    <p><b>$ 0.00 Omelette Supply Problem</b></p>
+                    <p><b>Omelette Supply Problem</b></p>
                     <p>Omelette is a healthy and delicious food, which can be flavored in desired tastes. I like it, and I would like to eat omelete every morning, without any extra expenses.</p>
                     {% endblocktrans %}
-                {% endif %}
             </div>
         </div>
 
+	<!-- Start of Idea -->
     {% if request.get_full_path == '/i' %}
-        <div class="panel panel-default col-md-4 block-content">
+        <div id="ideas" class="panel panel-default col-md-5 block-content" style="border: none; padding: 0px; padding-left: 6px; padding-right: 0px;">
     {% else %}
-        <div class="panel panel-default col-md-4 block-content">
+        <div id="ideas" class="panel panel-default col-md-5 block-content" style="border: none; padding: 0px; padding-left: 6px; padding-right: 0px;">
     {% endif %}
-            <div class="panel-heading">
-                <a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>&nbsp;
-                <a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b>{% trans "suggest a solution" %}</b>
-
+            <div class="panel-heading" style="border-bottom: 1px dotted;">
+				<!--<a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>-->&nbsp;
+				<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "idea-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "suggest a solution" %}</a></b>
+                <!-- drop-down
 				<div style="display:inline-block; float: right;">
 					<form method="post" style="display:inline;">{% csrf_token %}
 						<select name="ideas" onchange="this.form.submit()">
@@ -338,15 +306,24 @@ $(document).ready(function(){
 						</select>
 					</form>
 				</div>
+				-->
             </div>
 
-            <div class="panel-body">
+            <div class="panel-body" style="padding: 0;  margin-top: -10px;">
                 {% if idea_list %}
                 <p align="center">
                 </p>
                 {% for idea in idea_list %}
 
+
                     {% if idea.translation %} {# if idea translated #}
+
+						{% if forloop.counter|divisibleby:2 %}
+						<div style="background-color:#f9f9f9; padding: 10px;">
+						{% else %}
+						<div style="background-color:#f0f0f0; padding: 10px;">
+						{% endif %}
+
                             {% if idea.object.is_link %}
                                 {% if idea.object.is_historical %}
                                 <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
@@ -363,7 +340,7 @@ $(document).ready(function(){
                             {% if idea.object.personal %}
                             <i class="fa {% if idea.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
                             {% endif %}
-                            $ {{ idea.object.get_usd|floatformat:2 }}/{{ idea.object.get_remain_usd|floatformat:2 }}
+							<!-- $ {{ idea.object.get_usd|floatformat:2 }}/{{ idea.object.get_remain_usd|floatformat:2 }}-->
 
                         </b>
 
@@ -373,46 +350,61 @@ $(document).ready(function(){
 
                         <br/>
                             <span style="font-variant:small-caps;">
-					        <i class="fa fa-bug"></i>
+								<!-- <i class="fa fa-bug"></i>-->
 					        {% for goal in idea.object.goal.all %}
-							<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
+
+								{% if goal.personal %}
+									{% if request.user in goal.sharewith or request.user == goal.user %}
+
+										<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
+
+									{% else %}
+
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{% trans "Private" %} (u:{{goal.user.username}})</a>{% if forloop.last %}{% else %}, {%endif%} 
+
+									{% endif %}
+								{% else %}
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
+								{% endif %}
+
 							{% endfor %}
                             </span>
 							<br/>
 
                         <p>{{idea.translation.description|markdown|truncatewords_html:34}}</p>
 
+				        </div>
                     {% endif %}
                 {% endfor %}
-                <a href="{% url "idea-list" %}">{% trans "see more" %}</a>
+				<!--<a href="{% url "idea-list" %}">{% trans "see more" %}</a>-->
 
                 {% else %}
+                {% endif %}
                 <center>
-                    <p>{% trans "Oops! You have no ideas!" %}</p>
+					<br>
                     <p><a href="{% url "idea-create" %}">{% trans "Add a solution" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "idea-list" %}">{% trans "all solutions" %}</a>.</p>
                 </center>
 
+				<p><i><u>{% trans "Example:" %}</u></i></p>
                 {% blocktrans %}
-                <p><i><u>Example ideas:</u></i></p>
-                <p><b>$ 0.00 Roof Mini-Farm With Automated Egg Processor</b></p>
+                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>
                 <p>Hens don't really require much human work to maintain. Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, spicers, cookers and dispensers - and have a self-sustaining supply of fresh omelete.</p>
                 {% endblocktrans %}
 
-                {% endif %}
             </div>
         </div>
 
     {% if request.get_full_path == '/i' %}
-        <div class="panel panel-default col-md-4 block-content">
+        <div id="plans" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; padding-left: 6px;">
     {% else %}
-        <div class="panel panel-default col-md-4 block-content">
+        <div id="plans" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; padding-left: 6px;">
     {% endif %}
-            <div class="panel-heading">
-                <a href="{% url "plan-list" %}">{% trans "Plans" %}</a>&nbsp;
+            <div class="panel-heading" style="border-bottom: 1px dotted;">
+				<!--<a href="{% url "plan-list" %}">{% trans "Plans" %}</a>-->&nbsp;
                 <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; -
-                <b>{% trans "start a project" %}</b>
-
+				<b><a href="{% url "plan-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "start a project" %}</a></b>
+                <!--
                 <div style="display:inline-block; float: right;">
                     <form method="post" style="display:inline;">{% csrf_token %}
                         <select name="plans" onchange="this.form.submit()">
@@ -424,13 +416,22 @@ $(document).ready(function(){
                         </select>
                     </form>
                 </div>
+				-->
             </div>
 
-            <div class="panel-body">
+            <div class="panel-body" style="padding: 0; margin-top: 0px;">
                 {% if plan_list %}
 
                 {% for plan in plan_list %}
+
+
                     {% if plan.translation %}  {# if plan translated #}
+
+						{% if forloop.counter|divisibleby:2 %}
+						<div style="background-color:#f9f9f9; padding: 10px;">
+						{% else %}
+						<div style="background-color:#f0f0f0; padding: 10px;">
+						{% endif %}
 
                             {% if plan.object.is_link %}
                                 {% if plan.object.is_historical %}
@@ -458,268 +459,46 @@ $(document).ready(function(){
 
                     <br/>
                             <span style="font-variant:small-caps;">
-					        <i class="fa fa-paper-plane"></i>
-							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
+								<!--<i class="fa fa-paper-plane"></i>-->
+							{% if plan.object.idea.personal %}
+							    {% if request.user in plan.object.idea.sharewith or request.user == plan.object.idea.user %}
+        							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
+ 							    {% else %}
+								<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{% trans "Private" %} (u:{{plan.object.idea.user.username}})</a></span> 
+								{% endif %}
+							{% else %}
+    							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
+							{% endif %}
 							<br/>
 
-                <p>{{plan.translation.deliverable|markdown|truncatewords_html:34}}</p>
+                        <p>{{plan.translation.deliverable|markdown|truncatewords_html:34}}</p>
+
+				    </div>
 
                     {% endif %}
                 {% endfor %}
-                <a href="{% url "plan-list" %}">{% trans "see more" %}</a>
+				<!--<a href="{% url "plan-list" %}">{% trans "see more" %}</a>-->
 
                 {% else %}
+                {% endif %}
                 <center>
-                    <p>{% trans "Oops! You have no plans!" %}</p>
+					<p><!--{% trans "Oops! You have no plans!" %}--></p>
                     <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
+                    <p>{% trans "...or view" %} <a href="{% url "plan-list" %}">{% trans "all projects" %}</a>.</p>
                 </center>
-                {% blocktrans %}
 
-                <p><i><u>Example:</u></i></p>
+				<p><i><u>{% trans "Example:" %}</u></i></p>
+                {% blocktrans %}
                 <p><b>$ 0.00 Omelette Microfarm Project</b></p>
-                <p><u>Situation:</u> I in Dublin, Ireland, with my friend X.</p>
-                <p><u>Destination:</u> we have a microfarm solution to home owners.</p>
+                We expect to have a microfarm solutions provider, which sustains itself via a business model based on demand and supply, based on simple-to-install construction kits supply chain for home owners.</p>
                 {% endblocktrans %}
-                {% endif %}
             </div>
         </div>
 
-    {% if request.get_full_path == '/i' %}
-        <div class="panel panel-default col-md-4 block-content">
-    {% else %}
-        <div class="panel panel-default col-md-4 block-content">
-    {% endif %}
-            <div class="panel-heading">
-                <a href="{% url "step-list" %}">{% trans "Steps" %}</a>&nbsp;
-                <i class="fa fa-minus-square-o"></i>&nbsp; -
-                <b>{% trans "break it down" %}</b>
-
-                <div style="display:inline-block; float: right;">
-                    <form method="post" style="display:inline;">{% csrf_token %}
-                        <select name="steps" onchange="this.form.submit()">
-                            {% for value in dropdown_list %}
-                            <option value="{{ value }}" {% if items.steps == value %}selected{% endif %}>
-                            {{ value }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                    </form>
-                </div>
-            </div>
-
-            <div class="panel-body">
-                {% if step_list %}
-
-
-                {% for step in step_list %}
-                    {% if step.translation %} {# if step translated #}
-					<span style="font-variant:small-caps;"><i class="fa fa-rocket"></i> <a style="color:grey;" href="{% url "plan-detail" step.object.plan.id %}">{{ step.object.plan.name }}</a></span><br/>
-                            {% if step.object.is_link %}
-                                {% if step.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% else %}
-                                <span class="badge">{% trans "link" %}</span>
-                                {% endif %}
-                            {% else %}
-                                {% if step.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% endif %}
-                            {% endif %}
-
-                        <b>
-                            {% if step.object.personal %}
-                            <i class="fa {% if step.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
-                            {% endif %}
-                            $ {{ step.object.get_usd|floatformat:2 }}/{{ step.object.get_remain_usd|floatformat:2 }}
-                        </b>
-
-                        <a {% if step.is_new %}style="font-weight: bold"{% endif %} href="{% url "step-detail" step.object.pk %}?lang={{step.translation.language.language_code}}#{{step.translation.commented_at|date:"U"}}">{{ step.translation.name }}</a>
-
-                        ({{step.object.comment_count}} comments)
-
-                        <br/>
-
-                        <p>{{step.translation.objective|markdown|truncatewords_html:34}}</p>
-
-                    {% endif %}
-                {% endfor %}
-
-                <a href="{% url "step-list" %}">{% trans "see more" %}</a>
-                {% else %}
-                <center>
-                    <p>{% trans "Oops! You have no steps!" %}</p>
-                    <p>{% trans "Start a project to add milestones" %}</p>
-                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
-                </center>
-
-                {% blocktrans %}
-                <p><i><u>Example:</u></i></p>
-                <p><b>$ 0.00 Check existing solutions</b></p>
-                <p><u>Objective:</u> find out best technologies small farms use.</p>
-                <p><b>$ 0.00 Ideate on specific combination of them</b></p>
-                <p><u>Objective:</u> Come out with a viable candidate of full integration.</p>
-                <p><b>$ 0.00 Compute the expected costs of development and returns. </b></p>
-                <p><u>Objective:</u> Come out with a viable business plan.</p>
-                ...
-                {% endblocktrans %}
-                {% endif %}
-            </div>
-        </div>
-
-    {% if request.get_full_path == '/i' %}
-        <div class="panel panel-default col-md-4 block-content">
-    {% else %}
-        <div class="panel panel-default col-md-4 block-content">
-    {% endif %}
-            <div class="panel-heading">
-                <a href="{% url "task-list" %}">{% trans "Tasks" %}</a>&nbsp;
-                <i class="fa fa-minus-square-o"></i>&nbsp; -
-                <b>{% trans "execute it" %}</b>
-
-                <div style="display:inline-block; float: right;">
-                    <form method="post" style="display:inline;">{% csrf_token %}
-                        <select name="tasks" onchange="this.form.submit()">
-                            {% for value in dropdown_list %}
-                            <option value="{{ value }}" {% if items.tasks == value %}selected{% endif %}>{{ value }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                    </form>
-                </div>
-            </div>
-
-            <div class="panel-body">
-                {% if task_list %}
-
-                {% for task in task_list %}
-                    {% if task.translation %} {# if task translated #}
-					<span style="font-variant:small-caps;"><a style="color:grey;" href="{% url "plan-detail" task.object.step.plan.id %}#step-list">{{ task.object.step.plan.name }}</a>:
-						<a style="color:grey;" href="{% url "step-detail" task.object.step.id %}#task-list">{{ task.object.step.name }}</a></span><br/>
-                            {% if task.object.is_link %}
-                                {% if task.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% else %}
-                                <span class="badge">{% trans "link" %}</span>
-                                {% endif %}
-                            {% else %}
-                                {% if task.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% endif %}
-                            {% endif %}
-
-                        <b>
-                            {% if task.object.personal %}
-                            <i class="fa {% if task.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %}
-
-                            $ {{ task.object.get_usd|floatformat:2 }}/{{ task.object.get_remain_usd|floatformat:2 }}
-                        </b>
-
-                        <a {% if task.is_new %}stype="font-weight: bold"{% endif %} href="{% url "task-detail" task.object.pk %}?lang={{task.translation.language.language_code}}#{{task.object.commented_at|date:"U"}}">{{ task.translation.name }}</a>
-
-                        ({{task.object.comment_count}} comments)
-
-                        <!-- task has no body -->
-
-                        <br>
-
-                    {% endif %}
-
-                {% endfor %}
-
-                <a href="{% url "task-list" %}">{% trans "see more" %}</a>
-                {% else %}
-                <center>
-                    <p>{% trans "Oops! You have no tasks!" %}</p>
-                    <p>{% trans "Choose a milestone to add tasks" %}</p>
-                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
-                </center>
-                {% blocktrans %}
-                <p><i><u>Example:</u></i></p>
-                <p><b>$ 0.00 Open the internet and do a research.</b></p>
-                ...
-                {% endblocktrans %}
-                {% endif %}
-            </div>
-        </div>
-
-
-    {% if request.get_full_path == '/i' %}
-        <div class="panel panel-default col-md-4 block-content">
-    {% else %}
-        <div class="panel panel-default col-md-4 block-content">
-    {% endif %}
-            <div class="panel-heading">
-                <a href="{% url "work-list" %}">{% trans "Works" %}</a>&nbsp;
-                <i class="fa fa-minus-square-o"></i>&nbsp; -
-                <b>{% trans "did it" %}</b>
-
-                <div style="display:inline-block; float: right;">
-                    <form method="post" style="display:inline;">{% csrf_token %}
-                        <select name="works" onchange="this.form.submit()">
-                            {% for value in dropdown_list %}
-                            <option value="{{ value }}" {% if items.works == value %}selected{% endif %}>{{ value }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                    </form>
-                </div>
-            </div>
-
-            <div class="panel-body">
-                {% if work_list %}
-
-                {% for work in work_list %}
-                    {% if work.translation %} {# if task translated #}
-					<span style="font-variant:small-caps;"><a style="color:grey;" href="{% url "plan-detail" work.object.task.step.plan.id %}#step-list">{{ work.object.task.step.plan.name }}</a>: <a style="color:grey;" href="{% url "step-detail" work.object.task.step.id %}#task-list">{{work.object.task.step.name}}</a>: <a style="color:grey;" href="{% url "task-detail" work.object.task.id %}#work-list">{{work.object.task.name}}</a></span><br/>
-                            {% if work.object.is_link %}
-                                {% if work.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% else %}
-                                <span class="badge">{% trans "link" %}</span>
-                                {% endif %}
-                            {% else %}
-                                {% if work.object.is_historical %}
-                                <span class="badge" style="background-color: brown;">{% trans "historical" %}</span>
-                                {% endif %}
-                            {% endif %}
-
-                        <b>
-                            {% if work.object.personal %}
-                            <i class="fa {% if work.object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>{% endif %}
-
-                            $ {{ work.object.get_usd|floatformat:2 }}/{{ work.object.get_remain_usd|floatformat:2 }}
-                        </b>
-
-                        <a {% if work.is_new %}style="font-weight:bold;"{% endif %} href="{% url "work-detail" work.object.pk %}?lang={{work.translation.language.language_code}}#{{work.object.commented_at|date:"U"}}">{{ work.translation.name }}</a>
-
-                        ({{work.object.comment_count}} comments)
-
-                        <!-- task has no body -->
-
-                        <br>
-
-                    {% endif %}
-
-                {% endfor %}
-
-                <a href="{% url "work-list" %}">{% trans "see more" %}</a>
-                {% else %}
-                <center>
-                    <p>{% trans "Oops! You have no works!" %}</p>
-                    <p>{% trans "Choose a task to add works" %}</p>
-                    <p>{% trans "...or view" %} <a href="{% url "index" %}">{% trans "<u>index</u>" %}</a>.</p>
-                </center>
-                {% blocktrans %}
-                <p><i><u>Example:</u></i></p>
-                <p><b>$ 0.00 Here's my research paper.</b></p>
-                ...
-                {% endblocktrans %}
-                {% endif %}
-            </div>
 
 
     </div>
     <div align="center">{% trans "People-centric economy." %}</div>
+
 </div>
 {% endblock content %}

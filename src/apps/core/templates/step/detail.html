@@ -112,24 +112,28 @@ function showLess(){
 	<br/>
 	<br/>
 
-    {% if object.investables|step_io %}
-	<div class="breadcrumb" style="background-color:#90EE90; color:green;">
-        <i>input:</i> {% if not translation %}{{object.investables}}{% else %}{{translation.investables}}{% endif %}
-	</div>
-    {% else %}
-	<div class="breadcrumb" style="background-color:pink; color:red;">
-        <i>input:</i> {% if not translation %}{{object.investables}}{% else %}{{translation.investables}}{% endif %}
-	</div>
+    {% if object.investables %}
+        {% if object.investables|step_io %}
+        <div class="breadcrumb" style="background-color:#90EE90; color:green;">
+            <i>input:</i> {% if not translation %}{{object.investables}}{% else %}{{translation.investables}}{% endif %}
+        </div>
+        {% else %}
+        <div class="breadcrumb" style="background-color:pink; color:red;">
+            <i>input:</i> {% if not translation %}{{object.investables}}{% else %}{{translation.investables}}{% endif %}
+        </div>
+        {% endif %}
     {% endif %}
 
-    {% if object.deliverables|step_io %}
-	<div class="breadcrumb" style="background-color:#90EE90; color:green;">
-        <i>output:</i> {% if not translation %}{{object.deliverables}}{% else %}{{translation.deliverables}}{% endif %} 
-	</div>
-    {% else %}
-	<div class="breadcrumb" style="background-color: pink; color:red;">
-        <i>output:</i> {% if not translation %}{{object.deliverables}}{% else %}{{translation.deliverables}}{% endif %} 
-	</div>
+    {% if object.deliverables %}
+        {% if object.deliverables|step_io %}
+        <div class="breadcrumb" style="background-color:#90EE90; color:green;">
+            <i>output:</i> {% if not translation %}{{object.deliverables}}{% else %}{{translation.deliverables}}{% endif %} 
+        </div>
+        {% else %}
+        <div class="breadcrumb" style="background-color: pink; color:red;">
+            <i>output:</i> {% if not translation %}{{object.deliverables}}{% else %}{{translation.deliverables}}{% endif %} 
+        </div>
+        {% endif %}
     {% endif %}
 
 	<div id="task-list" align="right">--[<a href="{% url 'user-detail' object.user.username %}">{{object.user}}</a>], {{object.created_at}}</div>

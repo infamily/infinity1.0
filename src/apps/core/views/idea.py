@@ -17,6 +17,7 @@ from ..utils import ViewTypeWrapper
 from ..utils import UpdateViewWrapper
 from ..utils import DetailViewWrapper
 from ..utils import CommentsContentTypeWrapper
+from ..utils import DeleteViewWrapper
 from ..filters import IdeaListViewFilter1
 from ..filters import IdeaListViewFilter2
 from ..models import Goal
@@ -49,7 +50,6 @@ class IdeaListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         return queryset
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class IdeaUpdateView(UpdateViewWrapper):
 
     """Idea update view"""
@@ -66,7 +66,6 @@ class IdeaUpdateView(UpdateViewWrapper):
         return reverse("idea-detail", args=[self.object.pk, ])
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
 class IdeaCreateView(CreateViewWrapper):
 
     """Idea create view"""
@@ -91,7 +90,7 @@ class IdeaCreateView(CreateViewWrapper):
         return super(IdeaCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, _("Idea succesfully created"))
+        #messages.success(self.request, _("Idea succesfully created"))
         if self.object.personal:
             return reverse("inbox")
         else:
@@ -109,7 +108,7 @@ class IdeaCreateView(CreateViewWrapper):
         return kwargs
 
 
-class IdeaDeleteView(OwnerMixin, DeleteView):
+class IdeaDeleteView(DeleteViewWrapper):
 
     """Idea delete view"""
     model = Idea

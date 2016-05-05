@@ -16,16 +16,14 @@ from braces.views import OrderableListMixin
 from ..utils import CommentsContentTypeWrapper
 from ..utils import ViewTypeWrapper, DetailViewWrapper
 from ..utils import WikiDataSearch
+from ..utils import UpdateViewWrapper
 from ..models import Definition, Language, Need
 from ..forms import DefinitionUpdateForm, DefinitionCreateForm
 from ..filters import DefinitionListViewFilter
-from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
-from users.decorators import ForbiddenUser
 
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class DefinitionUpdateView(OwnerMixin, UpdateView):
+class DefinitionUpdateView(UpdateViewWrapper):
 
     """Definition update view"""
     model = Definition
@@ -96,7 +94,7 @@ class DefinitionCreateView(CreateView):
             self.object = form.save(commit=False)
             self.object.user = self.request.user
             self.object.save()
-            messages.success(self.request, _("Definition succesfully created"))
+            #messages.success(self.request, _("Definition succesfully created"))
             return redirect(reverse('need-create', kwargs={'concept_q': self.object.pk}))
 
         return render(request, 'definition/create.html',
