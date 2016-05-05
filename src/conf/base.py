@@ -78,6 +78,11 @@ LANGUAGES = (
     ('ja', _('Japanese')),
 )
 
+LANGUAGES_DOMAINS = {
+    'infty.xyz': 'en',
+    'sumanymai.lt': 'lt',
+}
+
 import os
 LOCALE_PATHS = (
     os.path.join(DJANGO_ROOT, 'locale'),
@@ -199,7 +204,7 @@ TEMPLATES = [
 
 # MIDDLEWARE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#middleware-classes
-MIDDLEWARE_CLASSES = (
+DJANGO_MIDDLEWARE_CLASSES = (
     # Default Django middleware.
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -388,10 +393,13 @@ SHORT_DATETIME_FORMAT = 'Y-m-d H:i'
 
 # APP CONFIGURATION
 from .app import LOCAL_APPS
+from .app import LOCAL_MIDDLEWARE_CLASSES
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 # END APP CONFIGURATION
+
+MIDDLEWARE_CLASSES = DJANGO_MIDDLEWARE_CLASSES + LOCAL_MIDDLEWARE_CLASSES
 
 # App settings have bigger priority
 from .app import *
