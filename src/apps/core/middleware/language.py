@@ -13,6 +13,8 @@ class DomainLocaleMiddleware(object):
             del request.META['HTTP_ACCEPT_LANGUAGE']
 
         current_domain = request.META['HTTP_HOST']
-        lang_code = settings.LANGUAGES_DOMAINS[current_domain]
-        translation.activate(lang_code)
-        request.LANGUAGE_CODE = lang_code
+        lang_code = settings.LANGUAGES_DOMAINS.get(current_domain)
+        
+        if lang_code:
+            translation.activate(lang_code)
+            request.LANGUAGE_CODE = lang_code
