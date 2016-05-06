@@ -79,7 +79,7 @@ LANGUAGES = (
 )
 
 LANGUAGES_DOMAINS = {
-    #'infty.xyz': 'en',
+    'infty.xyz': 'en',
     'sumanymai.lt': 'lt',
 }
 
