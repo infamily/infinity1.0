@@ -7,7 +7,7 @@ class DomainLocaleMiddleware(object):
     """
     Set language regarding of domain
     """
-    def precoess_request(self, request):
+    def process_request(self, request):
         if request.META.has_key('HTTP_ACCEPT_LANGUAGE'):
             # Totally ignore the browser settings... 
             del request.META['HTTP_ACCEPT_LANGUAGE']
