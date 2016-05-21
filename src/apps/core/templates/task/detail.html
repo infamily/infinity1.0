@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load django_markdown %}
 
+
+{% block extra_js %}
+   <script src="{% static "js/sharelink.js" %}"></script>
+{% endblock extra_js %}
+{% block extra_css %}
+   <link rel="stylesheet" href="{% static "css/sharelink.css" %}">
+{% endblock extra_css %}
 
 {% block title %}t: {{ object.name }}{% endblock title %}
 
@@ -32,7 +40,16 @@ function showLess(){
 
 <div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
-    <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
+
+	  <div class="alignleft">
+          <div class="dropdown" >
+              <input onclick="showLink()" type="submit" class="dropbtn" value="{% trans "Share link" %}  ▾" style="color:white;background-color:#76c85a; border-color:#76c85a;border-radius: 5px 5px 5px 5px;">
+              <div id="myDropdown" class="dropdown-content">
+                <div style="margin:20px;">
+                    <input id="sharelink" style="width: 13em;" type="text" value="http://{{request.META.HTTP_HOST}}/t/{{ object.id }}/{{ request.GET.lang }}" onclick="this.select();" onmouseover="this.select();"></div>
+              </div>
+          </div>
+	  </div>
 
       <div class="alignright">
           <form style="text-align: right;" action="/subscribe/" method="post" accept-charset="utf-8">{% csrf_token %}
