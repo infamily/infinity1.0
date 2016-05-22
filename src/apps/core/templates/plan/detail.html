@@ -133,7 +133,7 @@ $(document).ready( function() {
 
 	  <div class="alignleft">
           <div class="dropdown" >
-              <input onclick="showLink()" type="submit" class="dropbtn" value="{% trans "Share link" %}  ▾" style="color:white;background-color:#76c85a; border-color:#76c85a;border-radius: 5px 5px 5px 5px;">
+              <button onclick="showLink()" type="button" class="dropbtn" style="color: white; background-color: #76c85a; border-color: #76c85a; border-radius: 5px 5px 5px 5px;">{% trans "Share link" %} <i class="fa fa-caret-down"></i></button>
               <div id="myDropdown" class="dropdown-content">
                 <div style="margin:20px;">
                     <input id="sharelink" style="width: 13em;" type="text" value="http://{{request.META.HTTP_HOST}}/p/{{ object.id }}/{{ request.GET.lang }}" onclick="this.select();" onmouseover="this.select();"></div>
