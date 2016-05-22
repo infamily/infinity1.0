@@ -208,7 +208,7 @@ $('[data-toggle="tooltip"]').tooltip();
 {% else %}
 <!-- logged out end of comment list -->
     {% if object_list %}
-    <a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button" style="color: white; background-color: #444444; border-color: #444444; border-radius: 5px 5px 5px 5px;">{% trans "Sign in to comment" %} <i class="fa fa-github"></i></button></a>
+    <a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button" style="color: white; background-color: #888888; border-color: #888888; border-radius: 5px 5px 5px 5px;">{% trans "Sign in to comment" %} <i class="fa fa-github"></i></button></a>
     {% endif %}
 {% endif %}
 
