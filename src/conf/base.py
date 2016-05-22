@@ -81,6 +81,7 @@ LANGUAGES = (
 LANGUAGES_DOMAINS = {
     #'infty.xyz': 'en',
     'sumanymai.lt': 'lt',
+    'nsiku.com': 'zh-hans',
 }
 
 import os
@@ -333,6 +334,7 @@ DJANGO_APPS += (
 # Allauth providers
 DJANGO_APPS += (
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
 )
 
 AUTHENTICATION_BACKENDS = (
