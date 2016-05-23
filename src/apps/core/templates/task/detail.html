@@ -4,6 +4,7 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load django_markdown %}
+{% load get_translation %}
 
 
 {% block extra_js %}
@@ -13,7 +14,7 @@
    <link rel="stylesheet" href="{% static "css/sharelink.css" %}">
 {% endblock extra_css %}
 
-{% block title %}t: {{ object.name }}{% endblock title %}
+{% block title %}t: {% if not translation %}{{ object.name }}{% else %}{{ translation.name }}{% endif %}{% endblock title %}
 
 {% block content %}
 
@@ -67,12 +68,12 @@ function showLess(){
           
 		  {% if object.step.personal %}
 		    {% if request.user in object.step.sharewith or request.user == object.step.user %}
-		       {{ object.step }}
+               {% get_translation object.step request.LANGUAGE_CODE "name" %}
 		    {% else %}
                {% trans "private" %} {% trans "step" %} (by {{ object.step.user.username }})
 			{% endif %}
 		  {% else %}
-		  {{ object.step }}
+          {% get_translation object.step request.LANGUAGE_CODE "name" %}
 		  {% endif %}
       
       </a><br/>
@@ -147,15 +148,15 @@ function showLess(){
                 <i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
                 {% endif %}
                 {% if request.user in object.sharewith or request.user == object.user %}
-                    <a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
-                    <p>{{object.description|markdown|truncatewords_html:35}}</p>
+                <a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% get_translation object request.LANGUAGE_CODE "name" %}</a>
+                    <p>{% get_translation object request.LANGUAGE_CODE "description" as detail %}{{detail|markdown|truncatewords_html:35 }}</p>
                 {% else %}
 					<a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% trans "Private" %} {% trans "work" %}.</a>
 					<p>{% trans "Request access:" %} [<a href="{% url 'user-detail' object.user.username %}">{{object.user.username}}</a>]</p>
                 {% endif %}
             {% else %}
-                <a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
-                <p>{{object.description|markdown|truncatewords_html:35}}</p>
+            <a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% get_translation object request.LANGUAGE_CODE "name" %}</a>
+                <p>{% get_translation object request.LANGUAGE_CODE "description" as detail %}{{detail|markdown|truncatewords_html:35 }}</p>
             {% endif %}
 
       </li>

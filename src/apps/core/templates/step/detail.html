@@ -4,6 +4,7 @@
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load get_translation %}
 {% load django_markdown %}
 
 {% block extra_js %}
@@ -14,7 +15,7 @@
 {% endblock extra_css %}
 
 
-{% block title %}s: {{ object.name }}{% endblock title %}
+{% block title %}s: {% if not translation %}{{ object.name }}{% else %}{{ translation.name }}{% endif %}{% endblock title %}
 
 {% block content %}
 
@@ -68,12 +69,12 @@ function showLess(){
           
 		  {% if object.plan.personal %}
 		    {% if request.user in object.plan.sharewith or request.user == object.plan.user %}
-		       {{ object.plan }}
+                {% get_translation object.plan request.LANGUAGE_CODE "name" %}
 		    {% else %}
                {% trans "private" %} {% trans "plan" %} (by {{ object.plan.user.username }})
 			{% endif %}
 		  {% else %}
-		  {{ object.plan }}
+          {% get_translation object.plan request.LANGUAGE_CODE "name" %}
 		  {% endif %}
       
       </a><br/>
@@ -175,15 +176,15 @@ function showLess(){
                 <i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
                 {% endif %}
                 {% if request.user in object.sharewith or request.user == object.user %}
-                    <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
-                    <p>{{object.description|markdown|truncatewords_html:35}}</p>
+                <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% get_translation object request.LANGUAGE_CODE "name" %}</a>
+                <p>{% get_translation object request.LANGUAGE_CODE "description" as detail %}{{detail|markdown|truncatewords_html:35 }}</p>
                 {% else %}
 					<a href="{% url "task-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% trans "Private" %} {% trans "task" %}.</a>
 					<p>{% trans "Request access:" %} [<a href="{% url 'user-detail' object.user.username %}">{{object.user.username}}</a>]</p>
                 {% endif %}
             {% else %}
-                <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
-                <p>{{object.description|markdown|truncatewords_html:35}}</p>
+            <b>[{{object.total_claimed|floatformat:1}}/{{object.total_assumed|floatformat:1}} h]</b> <a href="{% url "task-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% get_translation object request.LANGUAGE_CODE "name" %}</a>
+            <p>{% get_translation object request.LANGUAGE_CODE "description" as detail %}{{detail|markdown|truncatewords_html:35 }}</p>
             {% endif %}
 
       </li>

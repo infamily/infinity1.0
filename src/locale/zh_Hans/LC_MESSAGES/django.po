@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-22 00:34-0700\n"
-"PO-Revision-Date: 2016-05-22 10:50+0300\n"
+"PO-Revision-Date: 2016-05-23 13:58+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -1640,7 +1640,7 @@ msgstr ""
 
 #: src/templates/base.html:81
 msgid "Solving Problems"
-msgstr "解决问题"
+msgstr "n-思库"
 
 #: src/templates/base.html:133 src/templates/base.html.py:160
 msgid "About"

@@ -6,6 +6,7 @@
 
 {% load staticfiles %}
 {% load country_isocode %}
+{% load get_translation %}
 {% load step_io %}
 
 {% block extra_js %}
@@ -94,7 +95,7 @@
    <link rel="stylesheet" href="{% static "css/sharelink.css" %}">
 {% endblock extra_css %}
 
-{% block title %}p: {{ object.name }}{% endblock title %}
+{% block title %}p: {% if not translation %}{{ object.name }}{% else %}{{ translation.name }}{% endif %}{% endblock title %}
 
 {% block content %}
 <script>
@@ -163,12 +164,12 @@ $(document).ready( function() {
         
 		  {% if object.idea.personal %}
 		    {% if request.user in object.idea.sharewith or request.user == object.idea.user %}
-		       {{ object.idea }}
+            {% get_translation object.idea request.LANGUAGE_CODE "name" %}
 		    {% else %}
                {% trans "private" %} {% trans "idea" %} (by {{ object.idea.user.username }})
 			{% endif %}
 		  {% else %}
-		  {{ object.idea }}
+		  {% get_translation object.idea request.LANGUAGE_CODE "name" %}
 		  {% endif %}
     
     </a><br/>
@@ -552,7 +553,7 @@ function zoomed() {
             <i class="fa {% if step.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
             {% endif %}
             {% if request.user in object.sharewith or request.user == step.user %}
-			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> {% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">{% trans "edit" %}</a>]{% endif %}
+			<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{% get_translation step request.LANGUAGE_CODE "name" %}</a> {% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">{% trans "edit" %}</a>]{% endif %}
 
 
 				<!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
@@ -565,7 +566,7 @@ function zoomed() {
             {% endif %}
         {% else %}
 		{% if step.user == request.user %}[<a href="{% url "update-translation" step.default_translation_id %}?lang={{step.language.language_code}}">{% trans "edit" %}</a>]{% endif %}
-		<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a data-toggle="tooltip" title="{{step.objective}}" href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{{step.name}}</a> <span data-toggle="tooltip" title='{"input": {{step.investables|step_io}}, "output": {{step.deliverables|step_io}}}'><!-- .io toggle --><b>{% if not step.investables|step_io %}<span style="color:red;">.i</span>{% else %}<span style="color:green;">.i</span>{% endif %}{% if not step.deliverables|step_io %}<span style="color:red;">o</span>{% else %}<span style="color:green;">o</span>{% endif %}</b><!--end .io toggle--></span>
+		<b>[{{step.not_funded_hours|floatformat:1}} h]</b> <a data-toggle="tooltip" title="{{step.objective}}" href="{% url "step-detail" step.pk %}?lang={{ request.LANGUAGE_CODE }}">{% get_translation step request.LANGUAGE_CODE "name" %}</a> <span data-toggle="tooltip" title='{"input": {{step.investables|step_io}}, "output": {{step.deliverables|step_io}}}'><!-- .io toggle --><b>{% if not step.investables|step_io %}<span style="color:red;">.i</span>{% else %}<span style="color:green;">.i</span>{% endif %}{% if not step.deliverables|step_io %}<span style="color:red;">o</span>{% else %}<span style="color:green;">o</span>{% endif %}</b><!--end .io toggle--></span>
      		<p>
 		    <!--<p>{{step.objective|markdown|truncatewords_html:35}}</p>-->
 			{% if not step.investables|step_io %}

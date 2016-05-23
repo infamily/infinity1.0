@@ -4,6 +4,7 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load django_markdown %}
+{% load get_translation %}
 
 
 {% block extra_js %}
@@ -13,7 +14,7 @@
    <link rel="stylesheet" href="{% static "css/sharelink.css" %}">
 {% endblock extra_css %}
 
-{% block title %}w: {{ object.name }}{% endblock title %}
+{% block title %}w: {% if not translation %}{{ object.name }}{% else %}{{ translation.name }}{% endif %}{% endblock title %}
 
 {% block content %}
 
@@ -67,12 +68,12 @@ function showLess(){
 
 		  {% if object.task.personal %}
 		    {% if request.user in object.task.sharewith or request.user == object.task.user %}
-		       {{ object.task }}
+                {% get_translation object.task request.LANGUAGE_CODE "name" %}
 		    {% else %}
                {% trans "private" %} {% trans "task" %} (by {{ object.task.user.username }})
 			{% endif %}
 		  {% else %}
-		  {{ object.task }}
+          {% get_translation object.task request.LANGUAGE_CODE "name" %}
 		  {% endif %}
       
       </a></br>
