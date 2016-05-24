@@ -90,7 +90,7 @@ class InvitationsAdapter(DefaultAccountAdapter):
     #  site = get_current_site()
     # without request parameter, resulting in error.
     def format_email_subject(self, subject):
-        return _("Solving Problems")+": "+ force_text(subject)
+        return "%s: %s" % (_(settings.MAIN_DOMAIN), force_text(subject))
 
 
 def _invitation_created(sender, instance, created, *args, **kwargs):

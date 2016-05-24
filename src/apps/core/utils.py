@@ -72,7 +72,7 @@ def notify_mentioned_users(comment_instance):
                                         comment_instance.id)
     # Getting domain to use in notification mail
     # Site.objects.get_current().domain without request object fails.
-    link = path.join(path.join('https://', 'infty.xyz'), url)
+    link = path.join(path.join('https://', _(settings.MAIN_DOMAIN)), url)
 
     mentioned_users = User.objects.filter(username__in=usernames)
 
@@ -288,7 +288,7 @@ def notify_new_sharewith_users(list_of_users, object_instance):
                             object_instance.id)
     # Getting domain to use in notification mail
     # Site.objects.get_current().domain without request object fails.
-    link = path.join(path.join('http://', 'infty.xyz'), url)
+    link = path.join(path.join('http://', _(settings.MAIN_DOMAIN)), url)
 
     for user in list_of_users:
         send_mail_template(subject_template_path,

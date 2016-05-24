@@ -5,6 +5,8 @@ from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 from decimal import Decimal
 
+from django.utils.translation import ugettext_lazy as _
+
 import dj_database_url
 
 # PATH CONFIGURATION
@@ -60,6 +62,7 @@ LANGUAGE_CODE = 'en-us'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = None
+MAIN_DOMAIN = _('infty.xyz')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True

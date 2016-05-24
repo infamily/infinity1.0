@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 05:21-0700\n"
+"POT-Creation-Date: 2016-05-24 09:43-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -917,7 +917,7 @@ msgstr ""
 msgid "object:"
 msgstr ""
 
-#: src/apps/core/utils.py:221 src/apps/core/utils.py:234
+#: src/apps/core/utils.py:223 src/apps/core/utils.py:236
 #: src/apps/core/views/definition.py:125 src/apps/core/views/step.py:153
 #, python-format
 msgid "%s succesfully created"
@@ -1196,27 +1196,31 @@ msgstr ""
 msgid "User succesfully updated"
 msgstr ""
 
-#: src/conf/base.py:69
+#: src/conf/base.py:65
+msgid "infty.xyz"
+msgstr ""
+
+#: src/conf/base.py:72
 msgid "English"
 msgstr ""
 
-#: src/conf/base.py:70
+#: src/conf/base.py:73
 msgid "Russian"
 msgstr ""
 
-#: src/conf/base.py:73
+#: src/conf/base.py:76
 msgid "Chinese"
 msgstr ""
 
-#: src/conf/base.py:75
+#: src/conf/base.py:78
 msgid "Lithuanian"
 msgstr ""
 
-#: src/conf/base.py:77
+#: src/conf/base.py:80
 msgid "Croatian"
 msgstr ""
 
-#: src/conf/base.py:78
+#: src/conf/base.py:81
 msgid "Japanese"
 msgstr ""
 
