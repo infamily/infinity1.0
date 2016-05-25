@@ -93,7 +93,7 @@ $(document).ready( function() {
 
 
 {% for goal in object.goal.all %}
-{% trans "want:" %} <a href="{% url "goal-detail" goal.pk %}">
+{% trans "want:" %} <a href="{% url "goal-detail" goal.pk %}?lang={{request.LANGUAGE_CODE}}">
 
 		  {% if goal.personal %}
 		    {% if request.user in goal.sharewith or request.user == goal.user %}

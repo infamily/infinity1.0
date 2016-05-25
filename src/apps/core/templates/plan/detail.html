@@ -160,7 +160,7 @@ $(document).ready( function() {
     </span>
     </div>
 
-    {% trans "approach to realizing idea" %} <a href="{% url "idea-detail" object.idea.pk %}">
+    {% trans "approach to realizing idea" %} <a href="{% url "idea-detail" object.idea.pk %}?lang={{request.LANGUAGE_CODE}}">
         
 		  {% if object.idea.personal %}
 		    {% if request.user in object.idea.sharewith or request.user == object.idea.user %}

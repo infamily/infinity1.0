@@ -357,15 +357,15 @@ $(document).ready(function(){
 								{% if goal.personal %}
 									{% if request.user in goal.sharewith or request.user == goal.user %}
 
-										<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{% get_translation goal request.LANGUAGE_CODE "name" %}</a>{% if forloop.last %}{% else %}, {%endif%} 
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}?lang={{request.LANGUAGE_CODE}}">{% get_translation goal request.LANGUAGE_CODE "name" %}</a>{% if forloop.last %}{% else %}, {%endif%} 
 
 									{% else %}
 
-									<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{% trans "Private" %} (u:{{goal.user.username}})</a>{% if forloop.last %}{% else %}, {%endif%} 
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}?lang={{request.LANGUAGE_CODE}}">{% trans "Private" %} (u:{{goal.user.username}})</a>{% if forloop.last %}{% else %}, {%endif%} 
 
 									{% endif %}
 								{% else %}
-									<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{% get_translation goal request.LANGUAGE_CODE "name" %}</a>{% if forloop.last %}{% else %}, {%endif%} 
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}?lang={{request.LANGUAGE_CODE}}">{% get_translation goal request.LANGUAGE_CODE "name" %}</a>{% if forloop.last %}{% else %}, {%endif%} 
 								{% endif %}
 
 							{% endfor %}
@@ -463,12 +463,12 @@ $(document).ready(function(){
 								<!--<i class="fa fa-paper-plane"></i>-->
 							{% if plan.object.idea.personal %}
 							    {% if request.user in plan.object.idea.sharewith or request.user == plan.object.idea.user %}
-								<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{% get_translation plan.object.idea request.LANGUAGE_CODE "name" %}</a></span> 
+								<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}?lang={{request.LANGUAGE_CODE}}">{% get_translation plan.object.idea request.LANGUAGE_CODE "name" %}</a></span> 
  							    {% else %}
-								<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{% trans "Private" %} (u:{{plan.object.idea.user.username}})</a></span> 
+								<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}?lang={{request.LANGUAGE_CODE}}">{% trans "Private" %} (u:{{plan.object.idea.user.username}})</a></span> 
 								{% endif %}
 							{% else %}
-							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{% get_translation plan.object.idea request.LANGUAGE_CODE "name" %}</a></span> 
+							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}?lang={{request.LANGUAGE_CODE}}">{% get_translation plan.object.idea request.LANGUAGE_CODE "name" %}</a></span> 
 							{% endif %}
 							<br/>
 
