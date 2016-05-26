@@ -99,21 +99,8 @@ $(window).bind('scroll', function () {
     </div>
 
     <div class="actions">
-    <div class="alignright date">
-
-        --[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}<br/>
-        <div class="alignright">
-            {% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
-            {% else %}
-            {% if request.user.is_authenticated %}
-            <button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
-            {% else %}
-                <a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">{% trans "reply" %}</button></a>
-            {% endif %}
-            {% endif %}
-        </div>
-    </div>
-        <div style="float:left;">	
+		<br>
+        <div style="float:left; margin-top:-10px;">	
 			<span id="total-votes-{{object.id}}">{{ object.votes }}</span> - 
 
 			{% if request.user.is_authenticated %}
@@ -169,6 +156,23 @@ $(window).bind('scroll', function () {
 
 			- {% trans "credit" %} <span id="comment-credit-{{object.id}}">{{ object.comment_credit|floatformat:1 }}</span> ħ
         </div>
+
+		<div class="alignright date">
+
+			--[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}<br/>
+			<div class="alignright">
+				{% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
+				{% else %}
+				{% if request.user.is_authenticated %}
+				<button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
+				{% else %}
+					<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">{% trans "reply" %}</button></a>
+				{% endif %}
+				{% endif %}
+			</div>
+		</div>
+
+		<br>
     </div>
 
     <br>
@@ -208,7 +212,7 @@ $('[data-toggle="tooltip"]').tooltip();
 {% else %}
 <!-- logged out end of comment list -->
     {% if object_list %}
-    <a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button" style="color: white; background-color: #888888; border-color: #888888; border-radius: 5px 5px 5px 5px;">{% trans "Sign in to comment" %} <i class="fa fa-github"></i></button></a>
+	<div align="left" style="display:block"><a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button" style="color: white; background-color: #888888; border-color: #888888; border-radius: 5px 5px 5px 5px;">{% trans "Sign in to comment" %} <i class="fa fa-github"></i></button></a></div>
     {% endif %}
 {% endif %}
 

@@ -35,8 +35,25 @@
     }
 </script>
 
+{% if user.is_anonymous %}
+	<style>
+	@media screen and (max-width:740px){
+		 #toprightbuttons {
+			display:none;
+		}
+	}
+	</style>
+{% else %}
+	<style>
+	@media screen and (max-width:920px){
+		 #toprightbuttons {
+			display:none;
+		}
+	}
+	</style>
+{% endif %}
 
-<div class="alignright">
+<div id="toprightbuttons" class="alignright">
 {% if not user.is_anonymous %}
     <!--
     <span id="info" style="display:none; color: brown;">
@@ -72,8 +89,8 @@
 <div class="alignleft">
 
 	<div class="btn-group" style="position: relative; height:10px; bottom:24px;">
-	  <button type="button" class="btn-lg btn" style='font-weight: normal; text-transform: none; color: white; background-color: black; font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif' onclick="window.location.href={% url 'goal-create' %}">{% trans "compose" %}</button>
-	  <button type="button" class="btn-lg btn dropdown-toggle" style="color: white; background-color: grey;" data-toggle="dropdown">
+	  <button type="button" class="btn-lg btn" style='font-weight: normal; text-transform: none; color: white; background-color: black; font-size: 18px; font-family: "Droid Serif",sans-serif' onclick="window.location.href={% url 'goal-create' %}">{% trans "compose" %}</button>
+	  <button type="button" class="btn-lg btn dropdown-toggle" style="color: black; border-radius: 0px; background-color: #f0f0f0;" data-toggle="dropdown">
 		<span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
@@ -82,8 +99,15 @@
 		  <li><a href="{% url 'plan-create' %}">{% trans "Project" %}</a></li>
 	  </ul>
 
+      <style>
+      @media screen and (max-width:650px){    
+      #searchbox {
+	       max-width: 300px;
+          }
+      }
+	  </style>
       <form action="{{request.get_full_path}}" method="get" style="display: inline; margin-left:10px;">
-      <input name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; height: 49px; font-weight: normal; text-transform: none; color: white; background-color: #c0c0c0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="🔍" style="margin-left: 5px; margin-bottom: 1px; height: 49px; color: GrayText; border:none;">
+      <input id="searchbox" name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="35" style="display: inline; border-radius: 0px; height: 46px; font-weight: normal; text-transform: none; color: blue; background-color: #f0f0f0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="🔍" style="margin-left: 5px; margin-bottom: 2px; height: 48px; color: GrayText; background-color: #f0f0f0;">
       </form>
       <!--
       <div style="display: inline; margin-left:10px;">
@@ -209,7 +233,7 @@ $(document).ready(function(){
 
     <! -- Start of Goals -- >
         <div id="goals" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; margin-left:15px;">
-            <div class="panel-heading" style="border-bottom: 1px dotted;">
+            <div class="panel-heading" style="border-bottom: 1px dotted; background-color: #ffffff;">
 				<!-- <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>-->
 				&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "goal-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "define a problem" %}</a></b>
                 <!-- drop-down
@@ -233,9 +257,9 @@ $(document).ready(function(){
 
 						    <!-- card style -->
 							{% if forloop.counter|divisibleby:2 %}
-							<div style="background-color:#f9f9f9; padding: 10px;">
+							<div style="background-color:#ffffff; padding: 10px; padding-top: 20px; padding-bottom: 20px; border-bottom: #f0f0f0 1px dotted;">
 							{% else %}
-							<div style="background-color:#f0f0f0; padding: 10px;">
+							<div style="background-color:#ffffff; padding: 10px; padding-top: 20px; padding-bottom: 20px; border-bottom: #f0f0f0 1px dotted;">
 							{% endif %}
 
                                  {% if goal.object.is_link %}
@@ -292,7 +316,7 @@ $(document).ready(function(){
     {% else %}
         <div id="ideas" class="panel panel-default col-md-5 block-content" style="border: none; padding: 0px; padding-left: 6px; padding-right: 0px;">
     {% endif %}
-            <div class="panel-heading" style="border-bottom: 1px dotted;">
+            <div class="panel-heading" style="border-bottom: 1px dotted; background-color: #ffffff;">
 				<!--<a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>-->&nbsp;
 				<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "idea-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "suggest a solution" %}</a></b>
                 <!-- drop-down
@@ -320,9 +344,9 @@ $(document).ready(function(){
                     {% if idea.translation %} {# if idea translated #}
 
 						{% if forloop.counter|divisibleby:2 %}
-						<div style="background-color:#f9f9f9; padding: 10px;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #f0f0f0 1px dotted;">
 						{% else %}
-						<div style="background-color:#f0f0f0; padding: 10px;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #f0f0f0 1px dotted;">
 						{% endif %}
 
                             {% if idea.object.is_link %}
@@ -401,7 +425,7 @@ $(document).ready(function(){
     {% else %}
         <div id="plans" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; padding-left: 6px;">
     {% endif %}
-            <div class="panel-heading" style="border-bottom: 1px dotted;">
+            <div class="panel-heading" style="border-bottom: 1px dotted; background-color: #ffffff;">
 				<!--<a href="{% url "plan-list" %}">{% trans "Plans" %}</a>-->&nbsp;
                 <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; -
 				<b><a href="{% url "plan-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "start a project" %}</a></b>
@@ -429,9 +453,9 @@ $(document).ready(function(){
                     {% if plan.translation %}  {# if plan translated #}
 
 						{% if forloop.counter|divisibleby:2 %}
-						<div style="background-color:#f9f9f9; padding: 10px;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #f0f0f0 1px dotted;">
 						{% else %}
-						<div style="background-color:#f0f0f0; padding: 10px;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #f0f0f0 1px dotted;">
 						{% endif %}
 
                             {% if plan.object.is_link %}
