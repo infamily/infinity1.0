@@ -102,7 +102,7 @@
       <style>
       @media screen and (max-width:650px){    
       #searchbox {
-	       max-width: 300px;
+	       max-width: 150px;
           }
       }
 	  </style>
@@ -257,9 +257,9 @@ $(document).ready(function(){
 
 						    <!-- card style -->
 							{% if forloop.counter|divisibleby:2 %}
-							<div style="background-color:#ffffff; padding: 10px; padding-top: 20px; padding-bottom: 20px; border-bottom: #f0f0f0 1px dotted;">
+							<div style="background-color:#ffffff; padding: 10px; padding-top: 20px; padding-bottom: 20px; border-bottom: #e0e0e0 1px dotted;">
 							{% else %}
-							<div style="background-color:#ffffff; padding: 10px; padding-top: 20px; padding-bottom: 20px; border-bottom: #f0f0f0 1px dotted;">
+							<div style="background-color:#ffffff; padding: 10px; padding-top: 20px; padding-bottom: 20px; border-bottom: #e0e0e0 1px dotted;">
 							{% endif %}
 
                                  {% if goal.object.is_link %}
@@ -344,9 +344,9 @@ $(document).ready(function(){
                     {% if idea.translation %} {# if idea translated #}
 
 						{% if forloop.counter|divisibleby:2 %}
-						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #f0f0f0 1px dotted;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #e0e0e0 1px dotted;">
 						{% else %}
-						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #f0f0f0 1px dotted;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #e0e0e0 1px dotted;">
 						{% endif %}
 
                             {% if idea.object.is_link %}
@@ -453,9 +453,9 @@ $(document).ready(function(){
                     {% if plan.translation %}  {# if plan translated #}
 
 						{% if forloop.counter|divisibleby:2 %}
-						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #f0f0f0 1px dotted;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #e0e0e0 1px dotted;">
 						{% else %}
-						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #f0f0f0 1px dotted;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #e0e0e0 1px dotted;">
 						{% endif %}
 
                             {% if plan.object.is_link %}
