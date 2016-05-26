@@ -14,7 +14,8 @@ window.onclick = function(event) {
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
       if (openDropdown.classList.contains('show')) {
-        if (!event.target.matches('#sharelink')) {
+        if ( (!event.target.matches('#sharelink')) &
+             (!event.target.matches('#sharelinkbtn')) ) {
           openDropdown.classList.remove('show');
         }
       }

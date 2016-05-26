@@ -67,8 +67,25 @@ $(document).ready( function() {
 
               <div id="myDropdown" class="dropdown-content">
                 <div style="margin:20px;">
-                    <input id="sharelink" style="width: 13em;" type="text" value="http://{{request.META.HTTP_HOST}}/g/{{ object.id }}/{{ request.GET.lang }}" onclick="this.select();" onmouseover="this.select();"></div>
+					<table>
+						<tr>
+							<td>
+								<input id="sharelink" style="width: 13em; display:inline;" type="text" value="http://{{request.META.HTTP_HOST}}/g/{{ object.id }}/{{ request.GET.lang }}" onclick="this.select();" onmouseover="this.select();">
+					        </td>
+							<td>
+								<input id="sharelinkbtn" type="button" value="{% trans "copy" %}" style="margin-left: 5px;" onclick="document.getElementById('sharelink').select(); document.execCommand('copy');">
+					        </td>
+					</table>
+                    <!-- qr code -->
+					<script type="text/javascript" src="{% static "js/jquery.qrcode.js" %}"></script>
+					<script type="text/javascript" src="{% static "js/qrcode.js" %}"></script>
+					<div align="center" id="qrcode" style="padding-top: 15px;"></div>
+					<script>
+					jQuery('#qrcode').qrcode("http://{{request.META.HTTP_HOST}}/g/{{ object.id }}/{{ request.GET.lang }}");
+					</script>
+				</div>
               </div>
+
           </div>
 	  </div>
 
