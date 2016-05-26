@@ -182,7 +182,7 @@ class DetailViewWrapper(DetailView):
             form = self.get_form_class()
 
         conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
-            'object_name': self.obj.__class__.__name__,
+            'object_name': self.obj.__class__.__name__.lower(),
             'object_id': self.obj.id
         }) + next_url
 
