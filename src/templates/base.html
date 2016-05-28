@@ -85,21 +85,31 @@
         <div class="collapse navbar-collapse">
         {% load i18n %}
 
-        <script>
+		<script>
+
+        // Swaps JSON keys with values
+        function swap(json){
+            var ret = {};
+            for(var key in json){
+                ret[json[key]] = key;
+            }
+            return ret;
+        }
+
         function langDomainRedirect(it) {
 
-            var target_language = $(it).closest('form').find("select option:selected").val().split("-")[0];
+            var target_language = $(it).closest('form').find("select option:selected").val();
             // from settings.LANGUAGES_DOMAINS
 
             var base_domain = "{{ base_domain }}";
-            var languages_domains = {{ languages_domains|jsonify|safe }};
+            var languages_domains = swap({{ languages_domains|jsonify|safe }});
             var current_domain = "{{ request.META.HTTP_HOST }}";
 
             if (target_language in languages_domains) {
                 window.location.href = 'https://'+languages_domains[target_language]+'{{ request.get_full_path }}';
             }
             else if (current_domain != base_domain) {
-                window.location.href = 'http://'+base_domain+'/set-lang/'+target_language+'/?next={{ request.path }}';
+                window.location.href = 'https://'+base_domain+'/set-lang/'+target_language.split("-")[0]+'/?next={{ request.path }}';
             }
             else {
                 $(it).closest('form').submit();
