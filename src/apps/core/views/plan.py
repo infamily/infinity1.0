@@ -1,8 +1,12 @@
+import json
+
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.views.generic import DeleteView
+
+import stepio
 
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
@@ -12,25 +16,33 @@ from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
-from ..utils import CreateViewWrapper
-from ..forms import PlanCreateForm
-from ..forms import PlanUpdateForm
-from ..utils import UpdateViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import DeleteViewWrapper
-from ..utils import ViewTypeWrapper
-from ..utils import CommentsContentTypeWrapper
-from ..filters import PlanListViewFilter1
-from ..filters import PlanListViewFilter2
-from ..models import Plan
-from ..models import Idea
-from ..models import Step
+from ..forms import (
+    PlanCreateForm,
+    PlanUpdateForm,
+)
 
-from ..utils import get_plandf_dict
-from ..utils import JsonView
+from ..utils import (
+    UpdateViewWrapper,
+    DetailViewWrapper,
+    DeleteViewWrapper,
+    ViewTypeWrapper,
+    CommentsContentTypeWrapper,
+)
 
-import json
-import stepio
+
+from ..models import (
+    Plan,
+    Idea,
+    Step,
+)
+
+from ..utils import (
+    get_plandf_dict,
+    JsonView,
+    CreateViewWrapper
+)
+
+from ..filters import PlanListViewFilter
 
 
 class AjaxStepIncludeView(JsonView):
@@ -63,7 +75,7 @@ class AjaxPlanStepsGraphDataView(JsonView):
             print 'username: ', None
         #steps = Step.objects.filter(plan__id=request.POST['id']).order_by('priority')
         #plan_tuples = [(step.investables, step.deliverables) for step in steps]
-        plan_tuples = [] 
+        plan_tuples = []
         for step in steps:
             try:
                 stepio.parse(step.investables)
@@ -74,30 +86,6 @@ class AjaxPlanStepsGraphDataView(JsonView):
                 pass
         plan_dict = get_plandf_dict(plan_tuples)
         return self.json(plan_dict)
-
-
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class PlanListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-
-    template_name = "plan/list1.html"
-    model = Plan
-    paginate_by = 10
-    orderable_columns = [
-        "name",
-        "created_at",
-        "updated_at",
-        "idea",
-        "deliverable",
-        "user",
-        "situation",
-    ]
-    orderable_columns_default = "-id"
-    filter_set = PlanListViewFilter1
-
-    def get_base_queryset(self):
-        queryset = super(PlanListView1, self).get_base_queryset()
-        queryset = queryset.filter(idea__pk=self.kwargs['idea'])
-        return queryset
 
 
 class PlanUpdateView(UpdateViewWrapper):
@@ -165,9 +153,9 @@ class PlanDeleteView(DeleteViewWrapper):
         return reverse("idea-detail", args=[self.object.idea.pk, ])
 
 
-class PlanListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
+class PlanListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    template_name = "plan/list2.html"
+    template_name = "plan/list.html"
     model = Plan
     paginate_by = 1000
     orderable_columns = [
@@ -180,7 +168,7 @@ class PlanListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         "situation",
     ]
     orderable_columns_default = "-id"
-    filter_set = PlanListViewFilter2
+    filter_set = PlanListViewFilter
 
 
 class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
@@ -199,7 +187,7 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         else:
             steps = Step.objects.filter(plan=kwargs.get('object'), included=True).order_by('priority')
         #plan_tuples = [(step.investables, step.deliverables) for step in steps]
-        plan_tuples = [] 
+        plan_tuples = []
         for step in steps:
             try:
                 stepio.parse(step.investables)

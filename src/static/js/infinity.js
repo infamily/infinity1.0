@@ -1,5 +1,12 @@
 /* Project specific Javascript goes here. */
 
+var app = (function($) {
+  var config = $("#config"),
+      app = JSON.parse(config.text());
+
+  return app;
+})(jQuery);
+
 try{
   setTimeout(function(){
     if($ && $.fn && $.fn.select2){
