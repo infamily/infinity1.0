@@ -1,4 +1,5 @@
 from itertools import chain
+from urlparse import urljoin
 
 from django.db.models import Q
 from django.shortcuts import redirect
@@ -30,7 +31,8 @@ from ..models import Work
 
 class SetLanguageView(RedirectView):
 
-    url = '/'
+    def get_redirect_url(self, *args, **kwargs):
+        return urljoin('/', self.request.GET.get('next'))
 
     def get(self, request, *args, **kwargs):
         response = super(SetLanguageView, self).get(request, *args, **kwargs)

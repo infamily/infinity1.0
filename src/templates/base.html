@@ -83,11 +83,39 @@
 
         <div class="collapse navbar-collapse">
         {% load i18n %}
+
+        <script>
+        function langDomainRedirect(it) {
+
+            var target_language = $(it).closest('form').find("select option:selected").val();
+
+            // from settings.LANGUAGE_DOMAINS
+            var main_domain = "infty.xyz";
+			var language_domains = {"lt": "sumanymai.lt",
+		                            "zh-hans": "nsiku.com"};
+            var current_domain = "{{ request.META.HTTP_HOST }}";
+
+            // if we have language domain
+            if (target_language in language_domains) {
+                // redirect to other language domain version
+                window.location.href = 'https://'+language_domains[target_language]+'{{ request.get_full_path }}';
+            }
+            else if (current_domain != main_domain) {
+            // else if not in infty.xyz -- redirect to infty.xyz/set-lang/<lang>?next=/../...
+                window.location.href = 'http://'+main_domain+'/set-lang/'+target_language+'/?next={{ request.get_path }}';
+            }
+            else {
+                // if in infty.xyz -- just submit form as before:
+                $(it).closest('form').submit();
+            }
+        }
+        </script>
+
         <form class="navbar-form navbar-right" action="{% url 'set_language' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <input class="form-control" name="next" type="hidden" value="{{ redirect_to }}" />
-                <select class="form-control" onchange="$(this).closest('form').submit();" name="language">
+                <select class="form-control" onchange="langDomainRedirect(this);" name="language">
                     {% get_language_info_list for LANGUAGES as languages %}
                     {% for language in languages %}
                     <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
