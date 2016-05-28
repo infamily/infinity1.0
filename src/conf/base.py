@@ -198,6 +198,7 @@ TEMPLATES = [
                 'django.core.context_processors.request',
 
                 'constance.context_processors.config',
+                'core.context_processors.language_domains',
             ],
             'debug': DEBUG,
         },

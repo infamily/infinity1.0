@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load country_isocode %}
+{% load extra_filters %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -87,25 +88,20 @@
         <script>
         function langDomainRedirect(it) {
 
-            var target_language = $(it).closest('form').find("select option:selected").val();
+            var target_language = $(it).closest('form').find("select option:selected").val().split("-")[0];
+            // from settings.LANGUAGES_DOMAINS
 
-            // from settings.LANGUAGE_DOMAINS
-            var main_domain = "infty.xyz";
-			var language_domains = {"lt": "sumanymai.lt",
-		                            "zh-hans": "nsiku.com"};
+            var main_domain = "{{ main_domain }}";
+            var languages_domains = {{ languages_domains|jsonify|safe }};
             var current_domain = "{{ request.META.HTTP_HOST }}";
 
-            // if we have language domain
-            if (target_language in language_domains) {
-                // redirect to other language domain version
-                window.location.href = 'https://'+language_domains[target_language]+'{{ request.get_full_path }}';
+            if (target_language in languages_domains) {
+                window.location.href = 'https://'+languages_domains[target_language]+'{{ request.get_full_path }}';
             }
             else if (current_domain != main_domain) {
-            // else if not in infty.xyz -- redirect to infty.xyz/set-lang/<lang>?next=/../...
-                window.location.href = 'http://'+main_domain+'/set-lang/'+target_language+'/?next={{ request.get_path }}';
+                window.location.href = 'http://'+main_domain+'/set-lang/'+target_language+'/?next={{ request.path }}';
             }
             else {
-                // if in infty.xyz -- just submit form as before:
                 $(it).closest('form').submit();
             }
         }
