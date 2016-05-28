@@ -91,15 +91,15 @@
             var target_language = $(it).closest('form').find("select option:selected").val().split("-")[0];
             // from settings.LANGUAGES_DOMAINS
 
-            var main_domain = "{{ main_domain }}";
+            var base_domain = "{{ base_domain }}";
             var languages_domains = {{ languages_domains|jsonify|safe }};
             var current_domain = "{{ request.META.HTTP_HOST }}";
 
             if (target_language in languages_domains) {
                 window.location.href = 'https://'+languages_domains[target_language]+'{{ request.get_full_path }}';
             }
-            else if (current_domain != main_domain) {
-                window.location.href = 'http://'+main_domain+'/set-lang/'+target_language+'/?next={{ request.path }}';
+            else if (current_domain != base_domain) {
+                window.location.href = 'http://'+base_domain+'/set-lang/'+target_language+'/?next={{ request.path }}';
             }
             else {
                 $(it).closest('form').submit();

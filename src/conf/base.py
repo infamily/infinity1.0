@@ -62,6 +62,7 @@ LANGUAGE_CODE = 'en-us'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = None
+BASE_DOMAIN = 'infty.xyz'
 MAIN_DOMAIN = _('infty.xyz')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
