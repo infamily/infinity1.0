@@ -4,6 +4,18 @@ from django.contrib import messages
 from django.views.generic import DeleteView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
+from django.shortcuts import redirect
+from django.contrib.contenttypes.models import ContentType
+
+from users.decorators import ForbiddenUser
+
+from ..models import Translation
+
+from ..forms import (
+    TranslationCreateForm,
+    TranslationUpdateForm,
+)
+
 
 try:
     # django >= 1.7
@@ -16,14 +28,6 @@ except ImportError:
     def get_model(app_label, model_name):
         return get_model(app_label, model_name)
 
-from django.shortcuts import redirect
-from django.contrib.contenttypes.models import ContentType
-
-from users.decorators import ForbiddenUser
-
-from ..models import Translation
-from ..forms import TranslationCreateForm
-from ..forms import TranslationUpdateForm
 
 
 @ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])

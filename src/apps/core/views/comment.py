@@ -1,18 +1,27 @@
-from django.views.generic import View
-from django.views.generic import UpdateView
-from django.views.generic import DeleteView
-from django.contrib import messages
-from django.utils.translation import ugettext as _
 import re
 
-from ..forms import CommentUpdateForm
-from ..models import Comment, Vote
+from django.contrib import messages
+from django.utils.translation import ugettext as _
+from django.views.generic import (
+    View,
+    UpdateView,
+    DeleteView,
+)
+
 from users.mixins import OwnerMixin
 
-from ..utils import JsonView
-from ..utils import update_child_paypal_transactions
-from ..utils import google_translate
+from ..models import (
+    Comment,
+    Vote,
+)
 
+from ..forms import CommentUpdateForm
+
+from ..utils import (
+    JsonView,
+    update_child_paypal_transactions,
+    google_translate,
+)
 
 class AjaxCommentTranslateView(JsonView):
     """

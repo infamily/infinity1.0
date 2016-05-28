@@ -13,46 +13,29 @@ from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
+from ..forms import (
+    StepCreateForm,
+    StepUpdateForm,
+    ChangePriorityForm,
+)
+
+from ..utils import (
+    UpdateViewWrapper,
+    DetailViewWrapper,
+    ViewTypeWrapper,
+    CommentsContentTypeWrapper,
+    JsonView,
+    DeleteViewWrapper,
+)
+
+from ..models import (
+    Plan,
+    Step,
+    Task,
+)
+
 from ..utils import CreateViewWrapper
-from ..forms import StepCreateForm
-from ..forms import StepUpdateForm
-from ..forms import ChangePriorityForm
-from ..utils import UpdateViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import ViewTypeWrapper
-from ..utils import CommentsContentTypeWrapper
-from ..utils import JsonView
-from ..utils import DeleteViewWrapper
-from ..filters import StepListViewFilter1
-from ..filters import StepListViewFilter2
-from ..models import Plan
-from ..models import Step
-from ..models import Task
-
-
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class StepListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name = "step/list1.html"
-    model = Step
-    paginate_by = 10
-    orderable_columns = [
-        "user",
-        "name",
-        "created_at",
-        "updated_at",
-        "deliverables",
-        "priority",
-        "plan",
-        "objective",
-        "investables",
-    ]
-    orderable_columns_default = "-id"
-    filter_set = StepListViewFilter1
-
-    def get_base_queryset(self):
-        queryset = super(StepListView1, self).get_base_queryset()
-        queryset = queryset.filter(plan__pk=self.kwargs['plan'])
-        return queryset
+from ..filters import StepListViewFilter
 
 
 class StepUpdateView(UpdateViewWrapper):
@@ -115,9 +98,9 @@ class StepDeleteView(DeleteViewWrapper):
         return reverse("plan-detail", args=[self.object.plan.pk, ])
 
 
-class StepListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
+class StepListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
 
-    template_name = "step/list2.html"
+    template_name = "step/list.html"
     model = Step
     paginate_by = 1000
     orderable_columns = [
@@ -132,10 +115,10 @@ class StepListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         "investables",
     ]
     orderable_columns_default = "-id"
-    filter_set = StepListViewFilter2
+    filter_set = StepListViewFilter
 
     def get_base_queryset(self):
-        queryset = super(StepListView2, self).get_base_queryset()
+        queryset = super(StepListView, self).get_base_queryset()
         queryset = queryset.filter(user=self.request.user.pk)
         return queryset
 

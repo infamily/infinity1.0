@@ -2,25 +2,38 @@ import json
 
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, CreateView
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.views.generic import CreateView
 from django.http import HttpResponse
 
 from enhanced_cbv.views import ListFilteredView
 from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
 
-from ..utils import CommentsContentTypeWrapper
-from ..utils import ViewTypeWrapper, DetailViewWrapper
-from ..utils import WikiDataSearch
-from ..utils import UpdateViewWrapper
-from ..models import Definition, Language, Need
-from ..forms import DefinitionUpdateForm, DefinitionCreateForm
-from ..filters import DefinitionListViewFilter
 from users.forms import ConversationInviteForm
+
+from ..utils import (
+    CommentsContentTypeWrapper,
+    ViewTypeWrapper,
+    DetailViewWrapper,
+    WikiDataSearch,
+    UpdateViewWrapper,
+)
+
+from ..models import (
+    Definition,
+    Language,
+    Need,
+)
+
+from ..forms import (
+    DefinitionUpdateForm,
+    DefinitionCreateForm,
+)
+
+from ..filters import DefinitionListViewFilter
 
 
 class DefinitionUpdateView(UpdateViewWrapper):

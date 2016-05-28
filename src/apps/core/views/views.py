@@ -4,29 +4,36 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.views.generic import FormView
-from django.views.generic import TemplateView
-from django.views.generic import RedirectView
 from django.utils import timezone
-from django.conf import settings
 from django.utils import translation as trans_settings
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.views.generic import (
+    FormView,
+    TemplateView,
+    RedirectView,
+)
 
 from users.decorators import ForbiddenUser
 from users.models import User
 from hours.models import HourValue
 from core.models import Language
 
-from ..forms import ContentTypeSubscribeForm
-from ..forms import SearchForm
-from ..models import Translation
-from ..models import Need
-from ..models import Goal
-from ..models import Idea
-from ..models import Plan
-from ..models import Step
-from ..models import Task
-from ..models import Work
+from ..forms import (
+    ContentTypeSubscribeForm,
+    SearchForm,
+)
+
+from ..models import (
+    Translation,
+    Need,
+    Goal,
+    Idea,
+    Plan,
+    Step,
+    Task,
+    Work,
+)
 
 
 class SetLanguageView(RedirectView):

@@ -9,6 +9,8 @@ from pure_pagination.mixins import PaginationMixin
 from braces.views import OrderableListMixin
 from enhanced_cbv.views import ListFilteredView
 
+from users.models import User
+
 from ..forms import (
     GoalCreateForm,
     GoalUpdateForm
@@ -24,10 +26,8 @@ from ..utils import (
     LookupCreateDefinition
 )
 
-from ..filters import (
-    GoalListViewFilter1,
-    GoalListViewFilter2
-)
+from ..filters import GoalListViewFilter
+
 from ..models import (
     Goal,
     Idea,
@@ -35,8 +35,6 @@ from ..models import (
     Language,
     Definition,
 )
-
-from users.models import User
 
 
 class GoalCreateView(CreateViewWrapper):
@@ -129,23 +127,6 @@ class GoalCreateView(CreateViewWrapper):
         return kwargs
 
 
-class GoalListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name = "goal/list1.html"
-    model = Goal
-    paginate_by = 10
-    orderable_columns = [
-        "name",
-        "personal",
-        "created_at",
-        "updated_at",
-        "reason",
-        "user",
-        "definition",
-    ]
-    orderable_columns_default = "-id"
-    filter_set = GoalListViewFilter1
-
-
 class GoalDeleteView(DeleteViewWrapper):
 
     """Goal delete view"""
@@ -190,15 +171,15 @@ class GoalDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
         return context
 
 
-class GoalListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name = "goal/list2.html"
+class GoalListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
+    template_name = "goal/list.html"
     model = Goal
     paginate_by = 1000
     orderable_columns = [
         "id",
     ]
     orderable_columns_default = "-id"
-    filter_set = GoalListViewFilter2
+    filter_set = GoalListViewFilter
 
     # def get_base_queryset(self):
     #     queryset = super(GoalListView2, self).get_base_queryset()

@@ -9,21 +9,28 @@ from django.views.generic import DeleteView
 from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
-
-from ..utils import CreateViewWrapper
-from ..utils import LookupCreateDefinition
-from ..utils import DeleteViewWrapper
-from ..forms import NeedCreateForm
-from ..forms import NeedUpdateForm
-from ..utils import UpdateViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import CommentsContentTypeWrapper
-from ..models import Goal
-from ..models import Need
-from ..models import Definition
-from ..models import Language
-
 from users.models import User
+
+from ..utils import (
+    CreateViewWrapper,
+    LookupCreateDefinition,
+    DeleteViewWrapper,
+    UpdateViewWrapper,
+    DetailViewWrapper,
+    CommentsContentTypeWrapper,
+)
+
+from ..forms import (
+    NeedCreateForm,
+    NeedUpdateForm,
+)
+
+from ..models import (
+    Goal,
+    Need,
+    Definition,
+    Language,
+)
 
 
 class NeedCreateView(CreateViewWrapper):

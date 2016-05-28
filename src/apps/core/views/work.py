@@ -12,42 +12,26 @@ from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
 from ..utils import CreateViewWrapper
-from ..forms import WorkCreateForm
-from ..forms import WorkUpdateForm
-from ..utils import UpdateViewWrapper
-from ..utils import DeleteViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import ViewTypeWrapper
-from ..utils import CommentsContentTypeWrapper
-from ..filters import WorkListViewFilter1
-from ..filters import WorkListViewFilter2
-from ..models import Task
-from ..models import Work
 
+from ..forms import (
+    WorkCreateForm,
+    WorkUpdateForm,
+)
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class WorkListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name = "work/list1.html"
-    model = Work
-    paginate_by = 10
-    orderable_columns = [
-        "task",
-        "name",
-        "url",
-        "created_at",
-        "updated_at",
-        "user",
-        "file",
-        "parent_work_id",
-        "description",
-    ]
-    orderable_columns_default = "-id"
-    filter_set = WorkListViewFilter1
+from ..utils import (
+    UpdateViewWrapper,
+    DeleteViewWrapper,
+    DetailViewWrapper,
+    ViewTypeWrapper,
+    CommentsContentTypeWrapper,
+)
 
-    def get_base_queryset(self):
-        queryset = super(WorkListView1, self).get_base_queryset()
-        queryset = queryset.filter(task__pk=self.kwargs['task'])
-        return queryset
+from ..models import (
+    Task,
+    Work,
+)
+
+from ..filters import WorkListViewFilter
 
 
 class WorkUpdateView(UpdateViewWrapper):
@@ -110,8 +94,8 @@ class WorkDeleteView(DeleteViewWrapper):
         return reverse("task-detail", args=[self.object.task.pk, ])
 
 
-class WorkListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name = "work/list2.html"
+class WorkListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
+    template_name = "work/list.html"
     model = Work
     paginate_by = 1000
     orderable_columns = [
@@ -126,7 +110,7 @@ class WorkListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         "description",
     ]
     orderable_columns_default = "-id"
-    filter_set = WorkListViewFilter2
+    filter_set = WorkListViewFilter
 
 
 class WorkDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
