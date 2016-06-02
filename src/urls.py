@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^select2/', include('django_select2.urls')),
     url(r'^invite/', include('invitation.urls', namespace='invite')),
+    url(r'^landing/$', TemplateView.as_view(template_name='landing.html'),
+        name="landing"),
     url(r'^help/$', TemplateView.as_view(template_name='help.html'),
         name="help"),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'),

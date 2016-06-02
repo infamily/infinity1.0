@@ -87,6 +87,9 @@ class ContentTypeSubscribeFormView(FormView):
         return super(ContentTypeSubscribeFormView, self).form_valid(form)
 
 
+class LandingView(TemplateView):
+    template_name = 'landing.html'
+
 class IndexView(TemplateView):
     template_name = 'home.html'
     dropdown_list = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
