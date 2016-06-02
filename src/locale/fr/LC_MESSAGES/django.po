@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-26 05:06-0700\n"
+"POT-Creation-Date: 2016-06-02 02:01-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -488,20 +488,22 @@ msgstr ""
 msgid "reply"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:221
+#: src/apps/core/templates/comment/list.html:222
+#: src/apps/core/templates/comment/list.html:223
 msgid "Invite a friend to help!"
 msgstr ""
 
-#: src/apps/core/templates/create_menu_links.html:60 src/templates/home.html:97
+#: src/apps/core/templates/create_menu_links.html:60 src/templates/home.html:99
 msgid "Problem"
 msgstr ""
 
-#: src/apps/core/templates/create_menu_links.html:68 src/templates/home.html:98
+#: src/apps/core/templates/create_menu_links.html:68
+#: src/templates/home.html:100
 msgid "Solution"
 msgstr ""
 
 #: src/apps/core/templates/create_menu_links.html:76
-#: src/apps/core/templates/step/create.html:15 src/templates/home.html.py:99
+#: src/apps/core/templates/step/create.html:15 src/templates/home.html:101
 msgid "Project"
 msgstr ""
 
@@ -517,8 +519,8 @@ msgstr ""
 msgid "Practice"
 msgstr ""
 
-#: src/apps/core/templates/definition/create.html:57 src/templates/home.html:74
-#: src/templates/home.html.py:80 src/templates/home.html:83
+#: src/apps/core/templates/definition/create.html:57 src/templates/home.html:76
+#: src/templates/home.html.py:82 src/templates/home.html:85
 msgid "Video"
 msgstr ""
 
@@ -545,8 +547,8 @@ msgstr ""
 #: src/apps/core/templates/plan/detail.html:556
 #: src/apps/core/templates/step/detail.html:188
 #: src/apps/core/templates/task/detail.html:160
-#: src/apps/core/templates/work/detail.html:180 src/templates/home.html:269
-#: src/templates/home.html.py:356 src/templates/home.html:465
+#: src/apps/core/templates/work/detail.html:180 src/templates/home.html:271
+#: src/templates/home.html.py:358 src/templates/home.html:467
 msgid "link"
 msgstr ""
 
@@ -557,8 +559,8 @@ msgstr ""
 #: src/apps/core/templates/plan/detail.html:582
 #: src/apps/core/templates/step/detail.html:200
 #: src/apps/core/templates/task/detail.html:172
-#: src/apps/core/templates/work/detail.html:192 src/templates/home.html:388
-#: src/templates/home.html.py:492
+#: src/apps/core/templates/work/detail.html:192 src/templates/home.html:390
+#: src/templates/home.html.py:494
 msgid "Private"
 msgstr ""
 
@@ -701,10 +703,10 @@ msgstr ""
 #: src/apps/core/templates/plan/detail.html:223
 #: src/apps/core/templates/step/detail.html:128
 #: src/apps/core/templates/task/detail.html:127
-#: src/apps/core/templates/work/detail.html:128 src/templates/home.html:267
-#: src/templates/home.html.py:273 src/templates/home.html:354
-#: src/templates/home.html.py:360 src/templates/home.html:463
-#: src/templates/home.html.py:469
+#: src/apps/core/templates/work/detail.html:128 src/templates/home.html:269
+#: src/templates/home.html.py:275 src/templates/home.html:356
+#: src/templates/home.html.py:362 src/templates/home.html:465
+#: src/templates/home.html.py:471
 msgid "historical"
 msgstr ""
 
@@ -727,7 +729,7 @@ msgstr ""
 
 #: src/apps/core/templates/goal/detail.html:177
 #: src/apps/core/templates/idea/list2.html:6
-#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:320
+#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:322
 msgid "Ideas"
 msgstr ""
 
@@ -742,7 +744,7 @@ msgstr ""
 
 #: src/apps/core/templates/goal/list2.html:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:165 src/templates/home.html:237
+#: src/apps/core/templates/need/detail.html:165 src/templates/home.html:239
 msgid "Goals"
 msgstr ""
 
@@ -804,7 +806,7 @@ msgstr ""
 
 #: src/apps/core/templates/idea/detail.html:185
 #: src/apps/core/templates/plan/list2.html:6
-#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:429
+#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:431
 msgid "Plans"
 msgstr ""
 
@@ -1205,40 +1207,40 @@ msgstr ""
 msgid "User succesfully updated"
 msgstr ""
 
-#: src/conf/base.py:65
+#: src/conf/base.py:66
 msgid "infty.xyz"
 msgstr ""
 
-#: src/conf/base.py:72
+#: src/conf/base.py:73
 msgid "English"
 msgstr ""
 
-#: src/conf/base.py:73
+#: src/conf/base.py:74
 msgid "Russian"
 msgstr ""
 
-#: src/conf/base.py:76
+#: src/conf/base.py:77
 msgid "Chinese"
 msgstr ""
 
-#: src/conf/base.py:78
+#: src/conf/base.py:79
 msgid "Lithuanian"
 msgstr ""
 
-#: src/conf/base.py:80
+#: src/conf/base.py:81
 msgid "Croatian"
 msgstr ""
 
-#: src/conf/base.py:81
+#: src/conf/base.py:82
 msgid "Japanese"
 msgstr ""
 
-#: src/templates/about.html:55 src/templates/base.html.py:113
+#: src/templates/about.html:55 src/templates/base.html.py:147
 #: src/templates/data.html:10
 msgid "Open Data"
 msgstr ""
 
-#: src/templates/about.html:56 src/templates/base.html.py:115
+#: src/templates/about.html:56 src/templates/base.html.py:149
 #: src/templates/dev.html:10
 msgid "Open Source"
 msgstr ""
@@ -1377,7 +1379,7 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: src/templates/account/login.html:10 src/templates/base.html.py:137
+#: src/templates/account/login.html:10 src/templates/base.html.py:171
 msgid "Sign in"
 msgstr ""
 
@@ -1589,27 +1591,27 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: src/templates/base.html:81
+#: src/templates/base.html:82
 msgid "Solving Problems"
 msgstr ""
 
-#: src/templates/base.html:133 src/templates/base.html.py:160
+#: src/templates/base.html:167 src/templates/base.html.py:194
 msgid "About"
 msgstr ""
 
-#: src/templates/base.html:160
+#: src/templates/base.html:194
 msgid "Terms of Service"
 msgstr ""
 
-#: src/templates/base.html:160
+#: src/templates/base.html:194
 msgid "Operation Policy"
 msgstr ""
 
-#: src/templates/base.html:160
+#: src/templates/base.html:194
 msgid "Development"
 msgstr ""
 
-#: src/templates/base.html:160
+#: src/templates/base.html:194
 msgid "Logout"
 msgstr ""
 
@@ -1676,66 +1678,70 @@ msgstr ""
 msgid "Economic & Innovation Forum"
 msgstr ""
 
-#: src/templates/home.html:61
+#: src/templates/home.html:63
 msgid "invitations"
 msgstr ""
 
-#: src/templates/home.html:61
+#: src/templates/home.html:63
 msgid "write bugs"
 msgstr ""
 
-#: src/templates/home.html:61
+#: src/templates/home.html:63
 msgid "time value"
 msgstr ""
 
-#: src/templates/home.html:64 src/templates/home.html.py:66
+#: src/templates/home.html:66 src/templates/home.html.py:68
 msgid "invite a friend"
 msgstr ""
 
-#: src/templates/home.html:69 src/templates/home.html.py:73
+#: src/templates/home.html:71 src/templates/home.html.py:75
 msgid "Intro"
 msgstr ""
 
-#: src/templates/home.html:70
+#: src/templates/home.html:72
 msgid "Help"
 msgstr ""
 
-#: src/templates/home.html:92
+#: src/templates/home.html:94
 msgid "compose"
 msgstr ""
 
-#: src/templates/home.html:238
+#: src/templates/home.html:240
 msgid "define a problem"
 msgstr ""
 
-#: src/templates/home.html:296 src/templates/home.html.py:404
-#: src/templates/home.html:505
+#: src/templates/home.html:288
+msgid "comments"
+msgstr ""
+
+#: src/templates/home.html:298 src/templates/home.html.py:406
+#: src/templates/home.html:507
 msgid "see more"
 msgstr ""
 
-#: src/templates/home.html:300
+#: src/templates/home.html:302
 msgid "Oops! You have no goals!"
 msgstr ""
 
-#: src/templates/home.html:301
+#: src/templates/home.html:303
 msgid "Add a problem"
 msgstr ""
 
-#: src/templates/home.html:302 src/templates/home.html.py:411
-#: src/templates/home.html:512
+#: src/templates/home.html:304 src/templates/home.html.py:413
+#: src/templates/home.html:514
 msgid "...or view"
 msgstr ""
 
-#: src/templates/home.html:302
+#: src/templates/home.html:304
 msgid "all problems"
 msgstr ""
 
-#: src/templates/home.html:305 src/templates/home.html.py:414
-#: src/templates/home.html:515
+#: src/templates/home.html:307 src/templates/home.html.py:416
+#: src/templates/home.html:517
 msgid "Example:"
 msgstr ""
 
-#: src/templates/home.html:306
+#: src/templates/home.html:308
 msgid ""
 "\n"
 "                    <p><b>Omelette Supply Problem</b></p>\n"
@@ -1745,19 +1751,19 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:321
+#: src/templates/home.html:323
 msgid "suggest a solution"
 msgstr ""
 
-#: src/templates/home.html:410
+#: src/templates/home.html:412
 msgid "Add a solution"
 msgstr ""
 
-#: src/templates/home.html:411
+#: src/templates/home.html:413
 msgid "all solutions"
 msgstr ""
 
-#: src/templates/home.html:415
+#: src/templates/home.html:417
 msgid ""
 "\n"
 "                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>\n"
@@ -1768,23 +1774,23 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:431
+#: src/templates/home.html:433
 msgid "start a project"
 msgstr ""
 
-#: src/templates/home.html:510
+#: src/templates/home.html:512
 msgid "Oops! You have no plans!"
 msgstr ""
 
-#: src/templates/home.html:511
+#: src/templates/home.html:513
 msgid "Add a project"
 msgstr ""
 
-#: src/templates/home.html:512
+#: src/templates/home.html:514
 msgid "all projects"
 msgstr ""
 
-#: src/templates/home.html:516
+#: src/templates/home.html:518
 msgid ""
 "\n"
 "                <p><b>$ 0.00 Omelette Microfarm Project</b></p>\n"
@@ -1794,7 +1800,7 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:526
+#: src/templates/home.html:528
 msgid "People-centric economy."
 msgstr ""
 
