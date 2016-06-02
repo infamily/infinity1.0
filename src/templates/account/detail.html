@@ -57,7 +57,7 @@
 
             <div align="right">
 
-        <button type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" item.comment.id %}'"><font color="#c0c0c0">{{ item.comment.invest_remains }} ħ </font>{% trans '<i class="fa fa-dollar"></i> INVEST' %}</button>
+                <button {% if not request.user.is_staff %}disabled {% endif %}type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" item.comment.id %}'"><font color="#c0c0c0">{{ item.comment.invest_remains }} ħ </font>{% if request.user.is_staff %}{% trans '<i class="fa fa-dollar"></i> INVEST' %}{% endif %}</button>
 
                 <br/>--[{{ item.comment.user.username }}],
                 <a href="{% if item.comment.content_type.name == "need" %}
