@@ -35,6 +35,7 @@
     }
 </script>
 
+<!--
 {% if user.is_anonymous %}
 	<style>
 	@media screen and (max-width:740px){
@@ -52,6 +53,7 @@
 	}
 	</style>
 {% endif %}
+-->
 
 <div id="toprightbuttons" class="alignright">
 {% if not user.is_anonymous %}
@@ -106,7 +108,7 @@
           }
       }
 	  </style>
-      <form action="{{request.get_full_path}}" method="get" style="display: inline; margin-left:10px;">
+	  <form action="{{request.get_full_path}}" method="get" style="display: {% if not request.user.is_staff %}none;{% endif %}inline; margin-left:10px;">
       <input id="searchbox" name="s" autocomplete="off" class="btn-lg" tabindex="-1" type="text" aria-hidden="true" size="33" style="display: inline; border-radius: 0px; height: 46px; font-weight: normal; text-transform: none; color: blue; background-color: #f0f0f0;font-size: 18px; font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif"><input class="btn-lg" type="submit" value="🔍" style="margin-left: 5px; margin-bottom: 2px; height: 48px; color: GrayText; background-color: #f0f0f0;">
       </form>
       <!--
@@ -283,7 +285,7 @@ $(document).ready(function(){
                                  
                                  <a {% if goal.is_new %}style="font-weight: bold"{% endif %} href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
 
-                            ({{goal.object.comment_count}} comments) 
+								 ({{goal.object.comment_count}} {% trans "comments" %}) 
 
                             <br/>
 
@@ -371,7 +373,7 @@ $(document).ready(function(){
 
                         <a {% if idea.is_new%}style="font-weight: bold"{% endif %} href="{% url "idea-detail" idea.object.pk %}?lang={{idea.translation.language.language_code}}#{{idea.object.commented_at|date:"U"}}">{{ idea.translation.name }}</a>
 
-                        ({{idea.object.comment_count}} comments</a>)
+						({{idea.object.comment_count}} {% trans "comments" %}</a>)
 
                         <br/>
                             <span style="font-variant:small-caps;">
@@ -480,7 +482,7 @@ $(document).ready(function(){
 
                     <a {% if plan.is_new%}style="font-weight: bold"{% endif %} href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.translation.name }}</a>
 
-                    ({{plan.object.comment_count}} comments)
+					({{plan.object.comment_count}} {% trans "comments" %})
 
                     <br/>
                             <span style="font-variant:small-caps;">
