@@ -6,7 +6,7 @@
 {% block content %}
 <h1>Tasks</h1>
 
-<div class="search-block" style="text-align: center;">
+<div class="search-block" style="text-align: center;{% if not user.is_staff %} display:none;{% endif %}">
 {% crispy filter.form %}
 </div>
 <br/>

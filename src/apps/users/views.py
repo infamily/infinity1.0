@@ -199,7 +199,8 @@ class UserDetailView(DetailView):
 
         comment_list = []
         goals_hash = md5(u'').hexdigest()
-        comments = user.comment_set.filter(hours_claimed__gt=Decimal(0.)).order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]
+        #comments = user.comment_set.filter(hours_claimed__gt=Decimal(0.)).order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]
+        comments = user.comment_set.order_by('-created_at')[:config.MAX_COMMENTS_IN_USER_PROFILE][::-1]
         interest_counts = {}
 
         for comment in comments:

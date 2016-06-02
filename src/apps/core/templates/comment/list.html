@@ -18,6 +18,13 @@
   {% endif %}
 {% endblock extra_css %}
 
+{% if not request.user.is_staff %}
+<style>
+    #div_id_monetary {
+    display:none;
+    }
+</style>
+{% endif %}
 
 <script>
 function getfocus() {
