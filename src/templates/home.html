@@ -304,7 +304,7 @@ $(document).ready(function(){
                         <p>{% trans "...or view" %} <a href="{% url "goal-list" %}">{% trans "all problems" %}</a>.</p>
                     </center>
 
-                    {% if not user.is_anonymous %}
+					{% if request.get_full_path == "/i" %}
 					<p><i><u>{% trans "Example:" %}</u></i></p>
                     {% blocktrans %}
                     <p><b>Omelette Supply Problem</b></p>
@@ -415,7 +415,7 @@ $(document).ready(function(){
                     <p>{% trans "...or view" %} <a href="{% url "idea-list" %}">{% trans "all solutions" %}</a>.</p>
                 </center>
 
-                {% if not user.is_anonymous %}
+				{% if request.get_full_path == "/i" %}
 				<p><i><u>{% trans "Example:" %}</u></i></p>
                 {% blocktrans %}
                 <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>
@@ -517,7 +517,7 @@ $(document).ready(function(){
                     <p>{% trans "...or view" %} <a href="{% url "plan-list" %}">{% trans "all projects" %}</a>.</p>
                 </center>
 
-                {% if not user.is_anonymous %}
+				{% if request.get_full_path == "/i" %}
 				<p><i><u>{% trans "Example:" %}</u></i></p>
                 {% blocktrans %}
                 <p><b>$ 0.00 Omelette Microfarm Project</b></p>
