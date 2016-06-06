@@ -45,6 +45,13 @@ function showLess(){
 	  <div class="alignleft">
           <div class="dropdown" >
               <button onclick="showLink()" type="button" class="dropbtn" style="color: white; background-color: #76c85a; border-color: #76c85a; border-radius: 5px 5px 5px 5px;">{% trans "Share link" %} <i class="fa fa-caret-down"></i></button>
+              <button onclick="window.print()" type="button" style="border-radius: 5px 5px 5px 5px;"><i class="fa fa-print"></i></button>
+              <script language="javascript">
+                    function emailCurrentPage(){
+                     window.location.href="mailto:?subject="+document.title+"&body="+escape('http://{{request.META.HTTP_HOST}}/w/{{ object.id }}/{{ request.GET.lang }}');
+                    }
+              </script>
+              <button onclick="javascript:emailCurrentPage()" type="button" style="border-radius: 5px 5px 5px 5px;"><i class="fa fa-envelope"></i></button>
 
               <div id="myDropdown" class="dropdown-content">
                 <div style="margin:20px;">
