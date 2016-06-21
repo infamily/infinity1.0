@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-02 02:01-0700\n"
+"POT-Creation-Date: 2016-06-21 10:25-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -391,105 +391,105 @@ msgid ""
 "published on GitHub, so others could easily replicate."
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:48
+#: src/apps/core/templates/comment/list.html:55
 msgid "New comment"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:50
+#: src/apps/core/templates/comment/list.html:57
 msgid "Auto-Translate"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:56
-#: src/apps/core/templates/comment/list.html:215
+#: src/apps/core/templates/comment/list.html:63
+#: src/apps/core/templates/comment/list.html:224
 msgid "Sign in to comment"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:82
+#: src/apps/core/templates/comment/list.html:89
 #: src/apps/payments/templates/paypal/transaction/list.html:36
 msgid "tx:"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:83
+#: src/apps/core/templates/comment/list.html:90
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "initiated"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:83
+#: src/apps/core/templates/comment/list.html:90
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "completed"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:83
+#: src/apps/core/templates/comment/list.html:90
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "incomplete"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:83
+#: src/apps/core/templates/comment/list.html:90
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "error"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:83
+#: src/apps/core/templates/comment/list.html:90
 #: src/apps/payments/templates/paypal/transaction/list.html:37
 msgid "reversalerror"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:94
+#: src/apps/core/templates/comment/list.html:101
 #: src/templates/account/detail.html:60
 msgid "<i class=\"fa fa-dollar\"></i> INVEST"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:109
-#: src/apps/core/templates/comment/list.html:114
-#: src/apps/core/templates/comment/list.html:119
-#: src/apps/core/templates/comment/list.html:125
+#: src/apps/core/templates/comment/list.html:116
+#: src/apps/core/templates/comment/list.html:121
+#: src/apps/core/templates/comment/list.html:126
+#: src/apps/core/templates/comment/list.html:132
 msgid "Vote Up"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:110
-#: src/apps/core/templates/comment/list.html:115
-#: src/apps/core/templates/comment/list.html:120
-#: src/apps/core/templates/comment/list.html:126
+#: src/apps/core/templates/comment/list.html:117
+#: src/apps/core/templates/comment/list.html:122
+#: src/apps/core/templates/comment/list.html:127
+#: src/apps/core/templates/comment/list.html:133
 msgid "Vote Down"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:157
+#: src/apps/core/templates/comment/list.html:164
 msgid "credit"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:164
-#: src/apps/core/templates/goal/detail.html:161
-#: src/apps/core/templates/idea/detail.html:168
-#: src/apps/core/templates/need/detail.html:149
-#: src/apps/core/templates/plan/detail.html:231
-#: src/apps/core/templates/plan/detail.html:574
-#: src/apps/core/templates/plan/detail.html:586
-#: src/apps/core/templates/step/detail.html:136
-#: src/apps/core/templates/task/detail.html:135
+#: src/apps/core/templates/comment/list.html:171
+#: src/apps/core/templates/goal/detail.html:169
+#: src/apps/core/templates/idea/detail.html:175
+#: src/apps/core/templates/need/detail.html:156
+#: src/apps/core/templates/plan/detail.html:238
+#: src/apps/core/templates/plan/detail.html:581
+#: src/apps/core/templates/plan/detail.html:593
+#: src/apps/core/templates/step/detail.html:143
+#: src/apps/core/templates/task/detail.html:142
 #: src/apps/core/templates/translation/update.html:19
-#: src/apps/core/templates/work/detail.html:136
+#: src/apps/core/templates/work/detail.html:143
 #: src/templates/account/detail.html:12
 msgid "edit"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:164
-#: src/apps/core/templates/goal/detail.html:161
-#: src/apps/core/templates/idea/detail.html:168
-#: src/apps/core/templates/need/detail.html:149
-#: src/apps/core/templates/plan/detail.html:231
-#: src/apps/core/templates/step/detail.html:136
-#: src/apps/core/templates/task/detail.html:135
-#: src/apps/core/templates/work/detail.html:136
+#: src/apps/core/templates/comment/list.html:171
+#: src/apps/core/templates/goal/detail.html:169
+#: src/apps/core/templates/idea/detail.html:175
+#: src/apps/core/templates/need/detail.html:156
+#: src/apps/core/templates/plan/detail.html:238
+#: src/apps/core/templates/step/detail.html:143
+#: src/apps/core/templates/task/detail.html:142
+#: src/apps/core/templates/work/detail.html:143
 msgid "delete"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:167
-#: src/apps/core/templates/comment/list.html:169
+#: src/apps/core/templates/comment/list.html:174
+#: src/apps/core/templates/comment/list.html:176
 msgid "reply"
 msgstr ""
 
-#: src/apps/core/templates/comment/list.html:222
-#: src/apps/core/templates/comment/list.html:223
+#: src/apps/core/templates/comment/list.html:231
+#: src/apps/core/templates/comment/list.html:232
 msgid "Invite a friend to help!"
 msgstr ""
 
@@ -541,42 +541,42 @@ msgid "vessel or machine designed to fly in outer space"
 msgstr ""
 
 #: src/apps/core/templates/definition/detail.html:57
-#: src/apps/core/templates/goal/detail.html:183
-#: src/apps/core/templates/idea/detail.html:191
-#: src/apps/core/templates/need/detail.html:172
-#: src/apps/core/templates/plan/detail.html:556
-#: src/apps/core/templates/step/detail.html:188
-#: src/apps/core/templates/task/detail.html:160
-#: src/apps/core/templates/work/detail.html:180 src/templates/home.html:271
-#: src/templates/home.html.py:358 src/templates/home.html:467
+#: src/apps/core/templates/goal/detail.html:191
+#: src/apps/core/templates/idea/detail.html:198
+#: src/apps/core/templates/need/detail.html:179
+#: src/apps/core/templates/plan/detail.html:563
+#: src/apps/core/templates/step/detail.html:195
+#: src/apps/core/templates/task/detail.html:167
+#: src/apps/core/templates/work/detail.html:187 src/templates/home.html:275
+#: src/templates/home.html.py:369 src/templates/home.html:484
 msgid "link"
 msgstr ""
 
 #: src/apps/core/templates/definition/detail.html:69
-#: src/apps/core/templates/goal/detail.html:195
-#: src/apps/core/templates/idea/detail.html:203
-#: src/apps/core/templates/need/detail.html:184
-#: src/apps/core/templates/plan/detail.html:582
-#: src/apps/core/templates/step/detail.html:200
-#: src/apps/core/templates/task/detail.html:172
-#: src/apps/core/templates/work/detail.html:192 src/templates/home.html:390
-#: src/templates/home.html.py:494
+#: src/apps/core/templates/goal/detail.html:203
+#: src/apps/core/templates/idea/detail.html:210
+#: src/apps/core/templates/need/detail.html:191
+#: src/apps/core/templates/plan/detail.html:589
+#: src/apps/core/templates/step/detail.html:207
+#: src/apps/core/templates/task/detail.html:179
+#: src/apps/core/templates/work/detail.html:199 src/templates/home.html:401
+#: src/templates/home.html.py:511
 msgid "Private"
 msgstr ""
 
 #: src/apps/core/templates/definition/detail.html:69
-#: src/apps/core/templates/goal/detail.html:117
+#: src/apps/core/templates/goal/detail.html:125
 msgid "need"
 msgstr ""
 
 #: src/apps/core/templates/definition/detail.html:70
-#: src/apps/core/templates/goal/detail.html:196
-#: src/apps/core/templates/idea/detail.html:204
-#: src/apps/core/templates/need/detail.html:185
-#: src/apps/core/templates/plan/detail.html:583
-#: src/apps/core/templates/step/detail.html:201
-#: src/apps/core/templates/task/detail.html:173
-#: src/apps/core/templates/work/detail.html:193
+#: src/apps/core/templates/goal/detail.html:204
+#: src/apps/core/templates/idea/detail.html:211
+#: src/apps/core/templates/need/detail.html:192
+#: src/apps/core/templates/plan/detail.html:590
+#: src/apps/core/templates/step/detail.html:208
+#: src/apps/core/templates/task/detail.html:180
+#: src/apps/core/templates/work/detail.html:200
 msgid "Request access:"
 msgstr ""
 
@@ -588,35 +588,35 @@ msgid ""
 msgstr ""
 
 #: src/apps/core/templates/goal/detail.html:37
-#: src/apps/core/templates/goal/detail.html:102
+#: src/apps/core/templates/goal/detail.html:110
 #: src/apps/core/templates/idea/detail.html:35
-#: src/apps/core/templates/idea/detail.html:101
+#: src/apps/core/templates/idea/detail.html:108
 #: src/apps/core/templates/need/detail.html:35
-#: src/apps/core/templates/need/detail.html:100
+#: src/apps/core/templates/need/detail.html:107
 #: src/apps/core/templates/plan/detail.html:107
-#: src/apps/core/templates/plan/detail.html:173
+#: src/apps/core/templates/plan/detail.html:180
 msgid "needs"
 msgstr ""
 
 #: src/apps/core/templates/goal/detail.html:37
-#: src/apps/core/templates/goal/detail.html:102
+#: src/apps/core/templates/goal/detail.html:110
 #: src/apps/core/templates/idea/detail.html:35
-#: src/apps/core/templates/idea/detail.html:101
+#: src/apps/core/templates/idea/detail.html:108
 #: src/apps/core/templates/need/detail.html:35
-#: src/apps/core/templates/need/detail.html:100
+#: src/apps/core/templates/need/detail.html:107
 #: src/apps/core/templates/plan/detail.html:107
-#: src/apps/core/templates/plan/detail.html:173
+#: src/apps/core/templates/plan/detail.html:180
 msgid "for funding"
 msgstr ""
 
 #: src/apps/core/templates/goal/detail.html:37
-#: src/apps/core/templates/goal/detail.html:102
+#: src/apps/core/templates/goal/detail.html:110
 #: src/apps/core/templates/idea/detail.html:35
-#: src/apps/core/templates/idea/detail.html:101
+#: src/apps/core/templates/idea/detail.html:108
 #: src/apps/core/templates/need/detail.html:35
-#: src/apps/core/templates/need/detail.html:100
+#: src/apps/core/templates/need/detail.html:107
 #: src/apps/core/templates/plan/detail.html:107
-#: src/apps/core/templates/plan/detail.html:173
+#: src/apps/core/templates/plan/detail.html:180
 msgid "hours"
 msgstr ""
 
@@ -630,121 +630,121 @@ msgstr ""
 msgid "Share link"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:76
-#: src/apps/core/templates/idea/detail.html:75
-#: src/apps/core/templates/need/detail.html:74
-#: src/apps/core/templates/plan/detail.html:147
-#: src/apps/core/templates/step/detail.html:58
-#: src/apps/core/templates/task/detail.html:57
-#: src/apps/core/templates/work/detail.html:57
+#: src/apps/core/templates/goal/detail.html:84
+#: src/apps/core/templates/idea/detail.html:82
+#: src/apps/core/templates/need/detail.html:81
+#: src/apps/core/templates/plan/detail.html:154
+#: src/apps/core/templates/step/detail.html:65
+#: src/apps/core/templates/task/detail.html:64
+#: src/apps/core/templates/work/detail.html:64
 msgid "copy"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:96
-#: src/apps/core/templates/idea/detail.html:95
-#: src/apps/core/templates/need/detail.html:94
-#: src/apps/core/templates/plan/detail.html:167
-#: src/apps/core/templates/step/detail.html:78
-#: src/apps/core/templates/task/detail.html:77
-#: src/apps/core/templates/work/detail.html:77
+#: src/apps/core/templates/goal/detail.html:104
+#: src/apps/core/templates/idea/detail.html:102
+#: src/apps/core/templates/need/detail.html:101
+#: src/apps/core/templates/plan/detail.html:174
+#: src/apps/core/templates/step/detail.html:85
+#: src/apps/core/templates/task/detail.html:84
+#: src/apps/core/templates/work/detail.html:84
 msgid "Unsubscribe"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:96
-#: src/apps/core/templates/idea/detail.html:95
-#: src/apps/core/templates/need/detail.html:94
-#: src/apps/core/templates/plan/detail.html:167
-#: src/apps/core/templates/step/detail.html:78
-#: src/apps/core/templates/task/detail.html:77
-#: src/apps/core/templates/work/detail.html:77
+#: src/apps/core/templates/goal/detail.html:104
+#: src/apps/core/templates/idea/detail.html:102
+#: src/apps/core/templates/need/detail.html:101
+#: src/apps/core/templates/plan/detail.html:174
+#: src/apps/core/templates/step/detail.html:85
+#: src/apps/core/templates/task/detail.html:84
+#: src/apps/core/templates/work/detail.html:84
 msgid "Subscribe"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:106
-#: src/apps/core/templates/need/detail.html:104
+#: src/apps/core/templates/goal/detail.html:114
+#: src/apps/core/templates/need/detail.html:111
 msgid "hyper-equity"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:107
-#: src/apps/core/templates/need/detail.html:105
+#: src/apps/core/templates/goal/detail.html:115
+#: src/apps/core/templates/need/detail.html:112
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much goal creator owns of all projects under this "
 "problem."
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:112
+#: src/apps/core/templates/goal/detail.html:120
 msgid "category:"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:112
+#: src/apps/core/templates/goal/detail.html:120
 msgid "related need:"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:117
-#: src/apps/core/templates/idea/detail.html:120
-#: src/apps/core/templates/plan/detail.html:187
-#: src/apps/core/templates/step/detail.html:92
-#: src/apps/core/templates/task/detail.html:91
-#: src/apps/core/templates/work/detail.html:91
+#: src/apps/core/templates/goal/detail.html:125
+#: src/apps/core/templates/idea/detail.html:127
+#: src/apps/core/templates/plan/detail.html:194
+#: src/apps/core/templates/step/detail.html:99
+#: src/apps/core/templates/task/detail.html:98
+#: src/apps/core/templates/work/detail.html:98
 msgid "private"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:123
-#: src/apps/core/templates/idea/detail.html:128
-#: src/apps/core/templates/need/detail.html:111
-#: src/apps/core/templates/plan/detail.html:194
+#: src/apps/core/templates/goal/detail.html:131
+#: src/apps/core/templates/idea/detail.html:135
+#: src/apps/core/templates/need/detail.html:118
+#: src/apps/core/templates/plan/detail.html:201
 msgid "translations:"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:153
-#: src/apps/core/templates/idea/detail.html:160
-#: src/apps/core/templates/need/detail.html:141
-#: src/apps/core/templates/plan/detail.html:223
-#: src/apps/core/templates/step/detail.html:128
-#: src/apps/core/templates/task/detail.html:127
-#: src/apps/core/templates/work/detail.html:128 src/templates/home.html:269
-#: src/templates/home.html.py:275 src/templates/home.html:356
-#: src/templates/home.html.py:362 src/templates/home.html:465
-#: src/templates/home.html.py:471
+#: src/apps/core/templates/goal/detail.html:161
+#: src/apps/core/templates/idea/detail.html:167
+#: src/apps/core/templates/need/detail.html:148
+#: src/apps/core/templates/plan/detail.html:230
+#: src/apps/core/templates/step/detail.html:135
+#: src/apps/core/templates/task/detail.html:134
+#: src/apps/core/templates/work/detail.html:135 src/templates/home.html:273
+#: src/templates/home.html.py:279 src/templates/home.html:367
+#: src/templates/home.html.py:373 src/templates/home.html:482
+#: src/templates/home.html.py:488
 msgid "historical"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:157
-#: src/apps/core/templates/idea/detail.html:164
-#: src/apps/core/templates/need/detail.html:145
-#: src/apps/core/templates/plan/detail.html:227
-#: src/apps/core/templates/step/detail.html:132
-#: src/apps/core/templates/task/detail.html:131
-#: src/apps/core/templates/work/detail.html:132
+#: src/apps/core/templates/goal/detail.html:165
+#: src/apps/core/templates/idea/detail.html:171
+#: src/apps/core/templates/need/detail.html:152
+#: src/apps/core/templates/plan/detail.html:234
+#: src/apps/core/templates/step/detail.html:139
+#: src/apps/core/templates/task/detail.html:138
+#: src/apps/core/templates/work/detail.html:139
 msgid "Source:"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:174
-#: src/apps/core/templates/idea/detail.html:181
-#: src/apps/core/templates/need/detail.html:162
-#: src/apps/core/templates/plan/detail.html:253
+#: src/apps/core/templates/goal/detail.html:182
+#: src/apps/core/templates/idea/detail.html:188
+#: src/apps/core/templates/need/detail.html:169
+#: src/apps/core/templates/plan/detail.html:260
 msgid "shared with:"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:177
+#: src/apps/core/templates/goal/detail.html:185
 #: src/apps/core/templates/idea/list2.html:6
-#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:322
+#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:329
 msgid "Ideas"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:195
-#: src/apps/core/templates/plan/detail.html:187
+#: src/apps/core/templates/goal/detail.html:203
+#: src/apps/core/templates/plan/detail.html:194
 msgid "idea"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:205
+#: src/apps/core/templates/goal/detail.html:213
 msgid "+New Idea"
 msgstr ""
 
 #: src/apps/core/templates/goal/list2.html:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:165 src/templates/home.html:239
+#: src/apps/core/templates/need/detail.html:172 src/templates/home.html:239
 msgid "Goals"
 msgstr ""
 
@@ -784,38 +784,38 @@ msgstr ""
 msgid "Goal"
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:106
+#: src/apps/core/templates/idea/detail.html:113
 msgid "super-equity"
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:107
+#: src/apps/core/templates/idea/detail.html:114
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much idea creator owns of all projects under this idea."
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:114
-#: src/apps/core/templates/need/detail.html:110
+#: src/apps/core/templates/idea/detail.html:121
+#: src/apps/core/templates/need/detail.html:117
 msgid "want:"
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:120
-#: src/apps/core/templates/need/detail.html:184
+#: src/apps/core/templates/idea/detail.html:127
+#: src/apps/core/templates/need/detail.html:191
 msgid "goal"
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:185
+#: src/apps/core/templates/idea/detail.html:192
 #: src/apps/core/templates/plan/list2.html:6
-#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:431
+#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:444
 msgid "Plans"
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:203
-#: src/apps/core/templates/step/detail.html:92
+#: src/apps/core/templates/idea/detail.html:210
+#: src/apps/core/templates/step/detail.html:99
 msgid "plan"
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:213
+#: src/apps/core/templates/idea/detail.html:220
 msgid "+New Plan"
 msgstr ""
 
@@ -827,7 +827,7 @@ msgstr ""
 msgid "Write a public letter to society, or a personal one to friends."
 msgstr ""
 
-#: src/apps/core/templates/need/detail.html:194
+#: src/apps/core/templates/need/detail.html:201
 msgid "+Add Goal"
 msgstr ""
 
@@ -843,84 +843,84 @@ msgid ""
 msgstr ""
 
 #: src/apps/core/templates/plan/detail.html:35
-#: src/apps/core/templates/plan/detail.html:561
+#: src/apps/core/templates/plan/detail.html:568
 msgid "exclude"
 msgstr ""
 
 #: src/apps/core/templates/plan/detail.html:36
-#: src/apps/core/templates/plan/detail.html:561
+#: src/apps/core/templates/plan/detail.html:568
 msgid "Exclude from our plan."
 msgstr ""
 
 #: src/apps/core/templates/plan/detail.html:40
-#: src/apps/core/templates/plan/detail.html:563
+#: src/apps/core/templates/plan/detail.html:570
 msgid "include"
 msgstr ""
 
 #: src/apps/core/templates/plan/detail.html:41
-#: src/apps/core/templates/plan/detail.html:563
+#: src/apps/core/templates/plan/detail.html:570
 msgid "Include into our plan."
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:176
+#: src/apps/core/templates/plan/detail.html:183
 msgid "members:"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:176
+#: src/apps/core/templates/plan/detail.html:183
 msgid "equity"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:177
+#: src/apps/core/templates/plan/detail.html:184
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much project <u>shareholders</u> own of all results "
 "under this project. The rest is owned by contributing users."
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:181
+#: src/apps/core/templates/plan/detail.html:188
 msgid "approach to realizing idea"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:234
+#: src/apps/core/templates/plan/detail.html:241
 msgid "deliverable"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:242
+#: src/apps/core/templates/plan/detail.html:249
 msgid "situation"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:538
+#: src/apps/core/templates/plan/detail.html:545
 msgid "Steps by:"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:540
+#: src/apps/core/templates/plan/detail.html:547
 msgid "our plan"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:550
+#: src/apps/core/templates/plan/detail.html:557
 msgid "Steps"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:550
+#: src/apps/core/templates/plan/detail.html:557
 msgid "reload"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:582
-#: src/apps/core/templates/task/detail.html:91
+#: src/apps/core/templates/plan/detail.html:589
+#: src/apps/core/templates/task/detail.html:98
 msgid "step"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:605
+#: src/apps/core/templates/plan/detail.html:612
 msgid "+New Step"
 msgstr ""
 
-#: src/apps/core/templates/step/detail.html:200
-#: src/apps/core/templates/work/detail.html:91
+#: src/apps/core/templates/step/detail.html:207
+#: src/apps/core/templates/work/detail.html:98
 msgid "task"
 msgstr ""
 
-#: src/apps/core/templates/task/detail.html:172
-#: src/apps/core/templates/work/detail.html:192
+#: src/apps/core/templates/task/detail.html:179
+#: src/apps/core/templates/work/detail.html:199
 msgid "work"
 msgstr ""
 
@@ -1203,7 +1203,7 @@ msgstr ""
 msgid "User with this name already exists"
 msgstr ""
 
-#: src/apps/users/views.py:279
+#: src/apps/users/views.py:280
 msgid "User succesfully updated"
 msgstr ""
 
@@ -1710,38 +1710,43 @@ msgstr ""
 msgid "define a problem"
 msgstr ""
 
-#: src/templates/home.html:288
+#: src/templates/home.html:256
+msgid "Think Problems"
+msgstr ""
+
+#: src/templates/home.html:292 src/templates/home.html.py:387
+#: src/templates/home.html:502
 msgid "comments"
 msgstr ""
 
-#: src/templates/home.html:298 src/templates/home.html.py:406
-#: src/templates/home.html:507
+#: src/templates/home.html:302 src/templates/home.html.py:417
+#: src/templates/home.html:524
 msgid "see more"
 msgstr ""
 
-#: src/templates/home.html:302
+#: src/templates/home.html:306
 msgid "Oops! You have no goals!"
 msgstr ""
 
-#: src/templates/home.html:303
+#: src/templates/home.html:307
 msgid "Add a problem"
 msgstr ""
 
-#: src/templates/home.html:304 src/templates/home.html.py:413
-#: src/templates/home.html:514
+#: src/templates/home.html:308 src/templates/home.html.py:424
+#: src/templates/home.html:531
 msgid "...or view"
 msgstr ""
 
-#: src/templates/home.html:304
+#: src/templates/home.html:308
 msgid "all problems"
 msgstr ""
 
-#: src/templates/home.html:307 src/templates/home.html.py:416
-#: src/templates/home.html:517
+#: src/templates/home.html:312 src/templates/home.html.py:428
+#: src/templates/home.html:535
 msgid "Example:"
 msgstr ""
 
-#: src/templates/home.html:308
+#: src/templates/home.html:313
 msgid ""
 "\n"
 "                    <p><b>Omelette Supply Problem</b></p>\n"
@@ -1751,19 +1756,23 @@ msgid ""
 "                    "
 msgstr ""
 
-#: src/templates/home.html:323
+#: src/templates/home.html:330
 msgid "suggest a solution"
 msgstr ""
 
-#: src/templates/home.html:412
+#: src/templates/home.html:348
+msgid "Discuss Solutions"
+msgstr ""
+
+#: src/templates/home.html:423
 msgid "Add a solution"
 msgstr ""
 
-#: src/templates/home.html:413
+#: src/templates/home.html:424
 msgid "all solutions"
 msgstr ""
 
-#: src/templates/home.html:417
+#: src/templates/home.html:429
 msgid ""
 "\n"
 "                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>\n"
@@ -1774,33 +1783,37 @@ msgid ""
 "                "
 msgstr ""
 
-#: src/templates/home.html:433
+#: src/templates/home.html:446
 msgid "start a project"
 msgstr ""
 
-#: src/templates/home.html:512
+#: src/templates/home.html:464
+msgid "Run Projects"
+msgstr ""
+
+#: src/templates/home.html:529
 msgid "Oops! You have no plans!"
 msgstr ""
 
-#: src/templates/home.html:513
+#: src/templates/home.html:530
 msgid "Add a project"
 msgstr ""
 
-#: src/templates/home.html:514
+#: src/templates/home.html:531
 msgid "all projects"
 msgstr ""
 
-#: src/templates/home.html:518
+#: src/templates/home.html:536
 msgid ""
 "\n"
 "                <p><b>$ 0.00 Omelette Microfarm Project</b></p>\n"
 "                We expect to have a microfarm solutions provider, which "
 "sustains itself via a business model based on demand and supply, based on "
 "simple-to-install construction kits supply chain for home owners.</p>\n"
-"                "
+"\t\t\t\t"
 msgstr ""
 
-#: src/templates/home.html:528
+#: src/templates/home.html:548
 msgid "People-centric economy."
 msgstr ""
 

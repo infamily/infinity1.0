@@ -233,9 +233,15 @@ $(document).ready(function(){
 -->
     <div class="row row-horizon">
 
+<style>
+.panel-body:hover {
+    background-color: #e0e0e0;
+}
+</style>
+
     <! -- Start of Goals -- >
         <div id="goals" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; margin-left:15px;">
-            <div class="panel-heading" style="border-bottom: 1px dotted; background-color: #ffffff;">
+            <div id="goals-heading" class="panel-heading" style="display: none; border-bottom: 1px dotted; background-color: #ffffff;">
 				<!-- <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>-->
 				&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "goal-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "define a problem" %}</a></b>
                 <!-- drop-down
@@ -252,6 +258,10 @@ $(document).ready(function(){
             </div>
 
             <div class="panel-body" style="padding: 0; margin-top: 0px;">
+                <div class="goal-hide" style="text-align: center; margin-top: 50%; margin-bottom: 50%;">
+                    <a href="#" style="font-size: 40px;" onclick="$('.goal-list,#goals-heading').show(); $('.goal-hide').hide();">{% trans "Think Problems" %}</a>
+                </div>
+                <div class="goal-list" style="display:none;">
                 {% if goal_list %}
                     {% for goal in goal_list %}
 
@@ -311,6 +321,7 @@ $(document).ready(function(){
                     <p>Omelette is a healthy and delicious food, which can be flavored in desired tastes. I like it, and I would like to eat omelete every morning, without any extra expenses.</p>
                     {% endblocktrans %}
                     {% endif %}
+                </div>
             </div>
         </div>
 
@@ -320,7 +331,7 @@ $(document).ready(function(){
     {% else %}
         <div id="ideas" class="panel panel-default col-md-5 block-content" style="border: none; padding: 0px; padding-left: 6px; padding-right: 0px;">
     {% endif %}
-            <div class="panel-heading" style="border-bottom: 1px dotted; background-color: #ffffff;">
+            <div id="ideas-heading" class="panel-heading" style="display:none; border-bottom: 1px dotted; background-color: #ffffff;">
 				<!--<a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>-->&nbsp;
 				<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "idea-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "suggest a solution" %}</a></b>
                 <!-- drop-down
@@ -338,7 +349,11 @@ $(document).ready(function(){
 				-->
             </div>
 
-            <div class="panel-body" style="padding: 0;  margin-top: -10px;">
+            <div class="panel-body" style="padding: 0;  margin-top: -10px; border-color: green; border: 10px;">
+                <div class="idea-hide" style="text-align: center; margin-top: 42.5%; margin-bottom: 40%;">
+                    <a href="#" style="font-size: 40px;" onclick="$('.idea-list,#ideas-heading').show(); $('.idea-hide').hide();">{% trans "Discuss Solutions" %}</a>
+                </div>
+                <div class="idea-list" style="display:none;">
                 {% if idea_list %}
                 <p align="center">
                 </p>
@@ -422,6 +437,7 @@ $(document).ready(function(){
                 <p>Hens don't really require much human work to maintain. Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, spicers, cookers and dispensers - and have a self-sustaining supply of fresh omelete.</p>
                 {% endblocktrans %}
                 {% endif %}
+                </div>
             </div>
         </div>
 
@@ -430,7 +446,7 @@ $(document).ready(function(){
     {% else %}
         <div id="plans" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; padding-left: 6px;">
     {% endif %}
-            <div class="panel-heading" style="border-bottom: 1px dotted; background-color: #ffffff;">
+            <div id="plans-heading" class="panel-heading" style="display: none; border-bottom: 1px dotted; background-color: #ffffff;">
 				<!--<a href="{% url "plan-list" %}">{% trans "Plans" %}</a>-->&nbsp;
                 <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; -
 				<b><a href="{% url "plan-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "start a project" %}</a></b>
@@ -448,8 +464,12 @@ $(document).ready(function(){
                 </div>
 				-->
             </div>
-
+            
             <div class="panel-body" style="padding: 0; margin-top: 0px;">
+                <div class="plan-hide" style="text-align: center; margin-top: 50%; margin-bottom: 50%;">
+                    <a href="#" style="font-size: 40px;" onclick="$('.plan-list,#plans-heading').show(); $('.plan-hide').hide();">{% trans "Run Projects" %}</a>
+                </div>
+                <div class="plan-list" style="display:none;">
                 {% if plan_list %}
 
                 {% for plan in plan_list %}
@@ -524,6 +544,7 @@ $(document).ready(function(){
                 We expect to have a microfarm solutions provider, which sustains itself via a business model based on demand and supply, based on simple-to-install construction kits supply chain for home owners.</p>
 				{% endblocktrans %}
                 {% endif %}
+                </div>
             </div>
         </div>
 
