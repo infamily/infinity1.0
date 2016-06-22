@@ -1,0 +1,67 @@
+.brcrm { 
+	list-style: none; 
+	overflow: hidden; 
+	font: 18px Helvetica, Arial, Sans-Serif;
+}
+.brcrm li { 
+	float: left; 
+}
+.brcrm li a {
+	color: white;
+	text-decoration: none; 
+	padding: 10px 0 10px 55px;
+	background: grey;                   /* fallback color */
+	background: rgba(120,120,120,1); 
+	position: relative; 
+	display: block;
+	float: left;
+}
+.brcrm li a:after { 
+	content: " "; 
+	display: block; 
+	width: 0; 
+	height: 0;
+	border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+	border-bottom: 50px solid transparent;
+	border-left: 30px solid rgba(120,120,120,1);
+	position: absolute;
+	top: 50%;
+	margin-top: -50px; 
+	left: 100%;
+	z-index: 2; 
+}	
+.brcrm li a:before { 
+	content: " "; 
+	display: block; 
+	width: 0; 
+	height: 0;
+	border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+	border-bottom: 50px solid transparent;
+	border-left: 30px solid white;
+	position: absolute;
+	top: 50%;
+	margin-top: -50px; 
+	margin-left: 1px;
+	left: 100%;
+	z-index: 1; 
+}	
+.brcrm li:first-child a {
+	padding-left: 10px;
+}
+.brcrm li:nth-child(2) a       { background:        rgba(150,150,150,1); }
+.brcrm li:nth-child(2) a:after { border-left-color: rgba(150,150,150,1); }
+.brcrm li:nth-child(3) a       { background:        rgba(180,180,180,1); }
+.brcrm li:nth-child(3) a:after { border-left-color: rgba(180,180,180,1); }
+.brcrm li:nth-child(4) a       { background:        rgba(200,200,200,1); }
+.brcrm li:nth-child(4) a:after { border-left-color: rgba(200,200,200,1); }
+.brcrm li:nth-child(5) a       { background:        rgba(220,220,220,1); }
+.brcrm li:nth-child(5) a:after { border-left-color: rgba(220,200,220,1); }
+.brcrm li:last-child a {
+	background: transparent !important;
+	color: black;
+	pointer-events: none;
+	cursor: default;
+}
+.brcrm li:last-child a:after { border: 0; }
+.brcrm li a:hover { background: rgba(100,100,100,1); }
+.brcrm li a:hover:after { border-left-color: rgba(100,100,100,1) !important; }
