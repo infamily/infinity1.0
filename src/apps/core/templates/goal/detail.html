@@ -21,6 +21,7 @@
 
 {% block extra_css %}
    <link rel="stylesheet" href="{% static "css/sharelink.css" %}">
+   <link rel="stylesheet" href="{% static "css/breadcrumb.css" %}">
 {% endblock extra_css %}
 
 
@@ -58,6 +59,11 @@ $(document).ready( function() {
   }
 </style>
 {% endif %}
+
+<ul class="brcrm" style="margin-top: -20px; margin-bottom:20px; margin-left:-35px;">
+	<li><a style="height:42px;" href="{% url "home" %}">&nbsp;&nbsp;<i class="glyphicon glyphicon-home"></i></i></a></li>
+	<li><a href="#"></a></li>
+</ul>
 
 <div class="panel panel-default box col-sm-12 col-md-7">
   <div class="panel-body">
