@@ -258,10 +258,14 @@ $(document).ready(function(){
             </div>
 
             <div class="panel-body" style="padding: 0; margin-top: 0px;">
-                <div class="goal-hide" style="text-align: center; margin-top: 50%; margin-bottom: 50%;">
-                    <a href="#" style="font-size: 40px;" onclick="$('.goal-list,#goals-heading').show(); $('.goal-hide').hide();">{% trans "Think Problems" %}</a>
-                </div>
-                <div class="goal-list" style="display:none;">
+				{% if request.get_full_path == "/i" %}
+                    <div class="goal-list">
+                {% else %}
+                    <div class="goal-hide" style="text-align: center; margin-top: 50%; margin-bottom: 50%;">
+                        <a href="#" style="font-size: 40px;" onclick="$('.goal-list,#goals-heading').show(); $('.goal-hide').hide();">{% trans "Think Problems" %}</a>
+                    </div>
+                    <div class="goal-list" style="display:none;">
+                {% endif %}
                 {% if goal_list %}
                     {% for goal in goal_list %}
 
@@ -350,10 +354,14 @@ $(document).ready(function(){
             </div>
 
             <div class="panel-body" style="padding: 0;  margin-top: -10px; border-color: green; border: 10px;">
-                <div class="idea-hide" style="text-align: center; margin-top: 42.5%; margin-bottom: 40%;">
-                    <a href="#" style="font-size: 40px;" onclick="$('.idea-list,#ideas-heading').show(); $('.idea-hide').hide();">{% trans "Discuss Solutions" %}</a>
-                </div>
-                <div class="idea-list" style="display:none;">
+				{% if request.get_full_path == "/i" %}
+                    <div class="idea-list">
+				{% else %}
+                    <div class="idea-hide" style="text-align: center; margin-top: 42.5%; margin-bottom: 40%;">
+                        <a href="#" style="font-size: 40px;" onclick="$('.idea-list,#ideas-heading').show(); $('.idea-hide').hide();">{% trans "Discuss Solutions" %}</a>
+                    </div>
+                    <div class="idea-list" style="display:none;">
+                {% endif %}
                 {% if idea_list %}
                 <p align="center">
                 </p>
@@ -466,10 +474,14 @@ $(document).ready(function(){
             </div>
             
             <div class="panel-body" style="padding: 0; margin-top: 0px;">
-                <div class="plan-hide" style="text-align: center; margin-top: 50%; margin-bottom: 50%;">
-                    <a href="#" style="font-size: 40px;" onclick="$('.plan-list,#plans-heading').show(); $('.plan-hide').hide();">{% trans "Run Projects" %}</a>
-                </div>
-                <div class="plan-list" style="display:none;">
+				{% if request.get_full_path == "/i" %}
+                    <div class="plan-list">
+                {% else %}
+                    <div class="plan-hide" style="text-align: center; margin-top: 50%; margin-bottom: 50%;">
+                        <a href="#" style="font-size: 40px;" onclick="$('.plan-list,#plans-heading').show(); $('.plan-hide').hide();">{% trans "Run Projects" %}</a>
+                    </div>
+                    <div class="plan-list" style="display:none;">
+                {% endif %}
                 {% if plan_list %}
 
                 {% for plan in plan_list %}
