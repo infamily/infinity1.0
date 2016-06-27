@@ -75,7 +75,8 @@ class InvitationsAdapter(DefaultAccountAdapter):
         if social_account:
             social_account = social_account.get('account')
             if social_account:
-                if social_account.get('provider') == 'github':
+                if social_account.get('provider') == 'github' or \
+                   social_account.get('provider') == 'linkedin':
                     return True
 
         if hasattr(request, 'session') and request.session.get('invitation'):
