@@ -212,3 +212,6 @@ class IndexView(TemplateView):
         context.update(kwargs)
 
         return context
+
+class QarmonView(TemplateView):
+    template_name = 'qarmon.html'
