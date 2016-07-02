@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from core.views import IndexView, DefinitionCreateView, SetLanguageView
+from core.views import IndexView, QarmonView, DefinitionCreateView, SetLanguageView
 
 from django.contrib import admin
 admin.autodiscover()
@@ -11,6 +11,7 @@ admin.autodiscover()
 urlpatterns = [
     url(r'^set-lang/(?P<lang>\w+)/$', SetLanguageView.as_view(pattern_name='home'), name='lang_redirect'),
     url(r'^$', IndexView.as_view(), name='home'),
+    url(r'^q$', QarmonView.as_view(), name='hometest'),
     url(r'^[!]$', IndexView.as_view(), name='index'),
     url(r'^i$', IndexView.as_view(), name='inbox'),
     url(r'', include('apps.core.urls')),
@@ -20,6 +21,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^select2/', include('django_select2.urls')),
     url(r'^invite/', include('invitation.urls', namespace='invite')),
+    url(r'^landing/$', TemplateView.as_view(template_name='landing.html'),
+        name="landing"),
     url(r'^help/$', TemplateView.as_view(template_name='help.html'),
         name="help"),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'),

@@ -31,16 +31,6 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-3">
-                <form action="{% url "home" %}" id="search-form" role="search" class="navbar-form" method="get">
-                    <div class="input-group">
-                        <input class="form-control" id="id_s" placeholder="Find what you need..." name="s" type="text">
-                        <div class="input-group-btn">
-                            <button type="submit" form="search-form" class="btn btn-primary" value="Search"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
             <ul class="nav navbar-nav navbar-right">
                 {% if request.get_full_path == "/dev/" %}
                 <!-- <li><a href="{% url "data" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Data" %}</a></li>-->

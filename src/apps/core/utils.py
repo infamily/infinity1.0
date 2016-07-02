@@ -70,7 +70,9 @@ def notify_mentioned_users(comment_instance):
     url = "%s/%s/detail/#comment-%s" % (comment_instance.content_type,
                                         comment_instance.content_object.id,
                                         comment_instance.id)
-    link = path.join(path.join('https://', Site.objects.get_current().domain), url)
+    # Getting domain to use in notification mail
+    # Site.objects.get_current().domain without request object fails.
+    link = path.join(path.join('https://', _(settings.MAIN_DOMAIN)), url)
 
     mentioned_users = User.objects.filter(username__in=usernames)
 
@@ -180,7 +182,7 @@ class DetailViewWrapper(DetailView):
             form = self.get_form_class()
 
         conversation_form.helper.form_action = reverse('user-conversation-invite', kwargs={
-            'object_name': self.obj.__class__.__name__,
+            'object_name': self.obj.__class__.__name__.lower(),
             'object_id': self.obj.id
         }) + next_url
 
@@ -284,7 +286,9 @@ def notify_new_sharewith_users(list_of_users, object_instance):
     email_template_path = 'mail/content/sharewith_notification.html'
     url = '%s/%s/detail' % (object_instance.__class__.__name__.lower(),
                             object_instance.id)
-    link = path.join(path.join('http://', Site.objects.get_current().domain), url)
+    # Getting domain to use in notification mail
+    # Site.objects.get_current().domain without request object fails.
+    link = path.join(path.join('http://', _(settings.MAIN_DOMAIN)), url)
 
     for user in list_of_users:
         send_mail_template(subject_template_path,

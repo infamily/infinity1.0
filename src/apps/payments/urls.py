@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .views import *
 
@@ -11,7 +12,9 @@ urlpatterns = [
     ),
     url(
         r'^paypal/(?P<comment_id>\d+)/$',
-        PayPalTransactionView.as_view(),
+        staff_member_required(
+            PayPalTransactionView.as_view(),
+        ),
         name='transaction_paypal'
     ),
     url(

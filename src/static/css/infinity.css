@@ -352,6 +352,33 @@ a:visited{
     margin-bottom: 7px;
 }
 
+body {
+    font-family: "Open Sans", serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+
+#id_member_email, 
+#id_name,
+#id_content,
+#id_summary,
+#id_description,
+#id_reason,
+#id_objective,
+#id_situation,
+#id_deliverable,
+#id_investables,
+#id_deliverables,
+#id_text {
+    font-size: 17px;
+    font-family: "Open Sans", serif;
+}
+
+.textarea {
+    font-size: 17px;
+    font-family: "Open Sans", serif;
+}
+
 .container {
     width: 100%;
 }

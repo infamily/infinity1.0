@@ -5,6 +5,8 @@ from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 from decimal import Decimal
 
+from django.utils.translation import ugettext_lazy as _
+
 import dj_database_url
 
 # PATH CONFIGURATION
@@ -59,7 +61,9 @@ TIME_ZONE = 'America/Los_Angeles'
 LANGUAGE_CODE = 'en-us'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
-SITE_ID = 1
+SITE_ID = None
+BASE_DOMAIN = 'infty.xyz'
+MAIN_DOMAIN = _('infty.xyz')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
@@ -77,6 +81,12 @@ LANGUAGES = (
     ('hr', _('Croatian')),
     ('ja', _('Japanese')),
 )
+
+LANGUAGES_DOMAINS = {
+    #'infty.xyz': 'en',
+    'sumanymai.lt': 'lt',
+    'nsiku.com': 'zh-hans',
+}
 
 import os
 LOCALE_PATHS = (
@@ -189,6 +199,7 @@ TEMPLATES = [
                 'django.core.context_processors.request',
 
                 'constance.context_processors.config',
+                'core.context_processors.language_domains',
             ],
             'debug': DEBUG,
         },
@@ -199,7 +210,7 @@ TEMPLATES = [
 
 # MIDDLEWARE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#middleware-classes
-MIDDLEWARE_CLASSES = (
+DJANGO_MIDDLEWARE_CLASSES = (
     # Default Django middleware.
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -328,6 +339,8 @@ DJANGO_APPS += (
 # Allauth providers
 DJANGO_APPS += (
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.linkedin',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -370,7 +383,7 @@ FRED_KEY = '0a90ca7b5204b2ed6e998d9f6877187e'
 FRED_SERIES = 'CES0500000003'
 
 # GOOGLE TRANSLATE API KEY
-GOOGLE_TRANSLATE_API_KEY = 'AIzaSyAB6vr4qys2T5fCmAcerIXDjhAYefunatg'
+GOOGLE_TRANSLATE_API_KEY = 'AIzaSyCgzrDm1HPL0a1t-j55sPTCYi5wwlqlpB4'
 
 # END AUTHORISATION/AUTHENTICATION CONFIGURATION
 
@@ -388,10 +401,13 @@ SHORT_DATETIME_FORMAT = 'Y-m-d H:i'
 
 # APP CONFIGURATION
 from .app import LOCAL_APPS
+from .app import LOCAL_MIDDLEWARE_CLASSES
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 # END APP CONFIGURATION
+
+MIDDLEWARE_CLASSES = DJANGO_MIDDLEWARE_CLASSES + LOCAL_MIDDLEWARE_CLASSES
 
 # App settings have bigger priority
 from .app import *

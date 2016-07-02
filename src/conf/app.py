@@ -6,6 +6,10 @@ LOCAL_APPS = (
     'hours',
 )
 
+LOCAL_MIDDLEWARE_CLASSES = (
+    'core.middleware.language.DomainLocaleMiddleware',
+)
+
 CONVERSATION_EMAIL_TEMPLATE = """
 Hi [{{invited_user}}],
 

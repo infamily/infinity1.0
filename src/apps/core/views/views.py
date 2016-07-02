@@ -1,4 +1,5 @@
 from itertools import chain
+from urlparse import urljoin
 
 from django.db.models import Q
 from django.shortcuts import redirect
@@ -38,7 +39,8 @@ from ..models import (
 
 class SetLanguageView(RedirectView):
 
-    url = '/'
+    def get_redirect_url(self, *args, **kwargs):
+        return urljoin('/', self.request.GET.get('next'))
 
     def get(self, request, *args, **kwargs):
         response = super(SetLanguageView, self).get(request, *args, **kwargs)
@@ -92,6 +94,9 @@ class ContentTypeSubscribeFormView(FormView):
 
         return super(ContentTypeSubscribeFormView, self).form_valid(form)
 
+
+class LandingView(TemplateView):
+    template_name = 'landing.html'
 
 class IndexView(TemplateView):
     template_name = 'home.html'
@@ -216,3 +221,6 @@ class IndexView(TemplateView):
         context.update(kwargs)
 
         return context
+
+class QarmonView(TemplateView):
+    template_name = 'qarmon.html'

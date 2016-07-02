@@ -30,7 +30,7 @@
 <!-- display user's contributions -->
 <!--<button class="btn">{{ object.username }} is interested in</button> : {% for key,value in interest_counts.items %} <button class="btn btn-default">{{ key }}: {{ value }}</button> {% endfor %}-->
 <div class="panel panel-default" style="border-width: 1px 1px 1px 1px; background-color:#fcfcfc;">
-    <center><h2 style="font-family:Courier New; color: grey; font-size:20px;">{% trans "Comments with positive time claimed:"%}</h2></center>
+    <center><h2 style="font-family:Courier New; color: grey; font-size:20px; display:none;">{% trans "Comments with positive time claimed:"%}</h2></center>
 {% for comment_group in comment_list reversed %}
 {% if comment_group.items  %}
 <div class="panel-heading">{% if comment_group.goals %}<u>Problems</u>: {% for goal in comment_group.goals %} <a href="">{{ goal.type.name }}: {{ goal.name }}</a>{%if not forloop.last%}, {%endif%}{% endfor %} {% endif %}</div>
@@ -57,7 +57,7 @@
 
             <div align="right">
 
-        <button type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" item.comment.id %}'"><font color="#c0c0c0">{{ item.comment.invest_remains }} ħ </font>{% trans '<i class="fa fa-dollar"></i> INVEST' %}</button>
+                <button {% if not request.user.is_staff %}disabled {% endif %}type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" item.comment.id %}'"><font color="#c0c0c0">{{ item.comment.invest_remains }} ħ </font>{% if request.user.is_staff %}{% trans '<i class="fa fa-dollar"></i> INVEST' %}{% endif %}</button>
 
                 <br/>--[{{ item.comment.user.username }}],
                 <a href="{% if item.comment.content_type.name == "need" %}

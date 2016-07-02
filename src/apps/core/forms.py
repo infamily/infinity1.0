@@ -152,7 +152,6 @@ class CommentCreateFormDetail(forms.ModelForm):
         self.fields['currency'].label = _('Currency')
         self.fields['amount'].initial = Decimal(0)
         self.helper = FormHelper(self)
-        self.fields['text'].widget.attrs.update({'style': 'font-size: 14px; text-shadow: 1px 0 #c0c0c0;'})
 
         self.helper.layout.append(Submit('save', _('Send Comment')))
 
