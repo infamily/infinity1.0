@@ -72,6 +72,7 @@
           <center>
           <h1>{% trans "Problems" %}</h1>
           <p>{% trans "Where people share and discuss the world's issues." %}</p>
+          <p><a href="{% url "goal-create" %}" style="text-decoration: none;">{% trans "Add a problem" %}</a></p>
           </center>
           <hr>
                 {% if goal_list %}
@@ -120,8 +121,12 @@
 					<!--<a href="{% url "goal-list" %}">{% trans "see more" %}</a>-->
                 {% else %}
                 {% endif %}
+				    <!--
                     <center>
+		                <br>
+                        <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
                     </center>
+					-->
 
 					{% if request.get_full_path == "/i" %}
 					<p><i><u>{% trans "Example:" %}</u></i></p>
@@ -139,6 +144,7 @@
         <div class="paragraph" style="overflow:scroll;">
           <center><h1>{% trans "Solutions" %}</h1></center>
           <center><p>{% trans "Where people share and discuss ideas how to solve them." %}</p></center>
+		  <center><p><a href="{% url "idea-create" %}" style="text-decoration: none;">{% trans "Add a solution" %}</a></p></center>
           <hr>
                 <div class="idea-list">
                 {% if idea_list %}
@@ -211,10 +217,12 @@
 
                 {% else %}
                 {% endif %}
+				<!--
                 <center>
 					<br>
                     <p><a href="{% url "idea-create" %}">{% trans "Add a solution" %}</a></p>
                 </center>
+				-->
 
 				{% if request.get_full_path == "/i" %}
 				<p><i><u>{% trans "Example:" %}</u></i></p>
@@ -237,6 +245,7 @@
           <center>
           <h1>{% trans "Projects" %}</h1>
           <p>{% trans "Where people start initiatives to realize them." %}</p>
+		  <p><a href="{% url "plan-create" %}" style="text-decoration: none;">{% trans "Add a project" %}</a></p>
           </center>
           <hr>
                 <div class="plan-list">
@@ -301,10 +310,13 @@
 
                 {% else %}
                 {% endif %}
+				<!--
                 <center>
-					<p><!--{% trans "Oops! You have no plans!" %}--></p>
+					<p>{% trans "Oops! You have no plans!" %}</p>
+					<br>
                     <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
                 </center>
+				-->
 
 				{% if request.get_full_path == "/i" %}
 				<p><i><u>{% trans "Example:" %}</u></i></p>

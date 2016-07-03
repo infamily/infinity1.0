@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 10:25-0700\n"
-"PO-Revision-Date: 2016-06-21 17:30+0000\n"
+"POT-Creation-Date: 2016-07-02 18:39-0700\n"
+"PO-Revision-Date: 2016-07-03 01:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -498,12 +498,12 @@ msgid "credit"
 msgstr "kreditas"
 
 #: src/apps/core/templates/comment/list.html:171
-#: src/apps/core/templates/goal/detail.html:169
-#: src/apps/core/templates/idea/detail.html:175
+#: src/apps/core/templates/goal/detail.html:175
+#: src/apps/core/templates/idea/detail.html:196
 #: src/apps/core/templates/need/detail.html:156
-#: src/apps/core/templates/plan/detail.html:238
-#: src/apps/core/templates/plan/detail.html:581
-#: src/apps/core/templates/plan/detail.html:593
+#: src/apps/core/templates/plan/detail.html:267
+#: src/apps/core/templates/plan/detail.html:610
+#: src/apps/core/templates/plan/detail.html:622
 #: src/apps/core/templates/step/detail.html:143
 #: src/apps/core/templates/task/detail.html:142
 #: src/apps/core/templates/translation/update.html:19
@@ -513,10 +513,10 @@ msgid "edit"
 msgstr "redaguoti"
 
 #: src/apps/core/templates/comment/list.html:171
-#: src/apps/core/templates/goal/detail.html:169
-#: src/apps/core/templates/idea/detail.html:175
+#: src/apps/core/templates/goal/detail.html:175
+#: src/apps/core/templates/idea/detail.html:196
 #: src/apps/core/templates/need/detail.html:156
-#: src/apps/core/templates/plan/detail.html:238
+#: src/apps/core/templates/plan/detail.html:267
 #: src/apps/core/templates/step/detail.html:143
 #: src/apps/core/templates/task/detail.html:142
 #: src/apps/core/templates/work/detail.html:143
@@ -533,17 +533,16 @@ msgstr "atsakyti"
 msgid "Invite a friend to help!"
 msgstr "Pakviesti draugą."
 
-#: src/apps/core/templates/create_menu_links.html:60 src/templates/home.html:99
+#: src/apps/core/templates/create_menu_links.html:60
 msgid "Problem"
 msgstr "Problema"
 
 #: src/apps/core/templates/create_menu_links.html:68
-#: src/templates/home.html:100
 msgid "Solution"
 msgstr "Sprendimas"
 
 #: src/apps/core/templates/create_menu_links.html:76
-#: src/apps/core/templates/step/create.html:15 src/templates/home.html:101
+#: src/apps/core/templates/step/create.html:15
 msgid "Project"
 msgstr "Projektas"
 
@@ -559,8 +558,7 @@ msgstr "Teorija"
 msgid "Practice"
 msgstr "Praktika"
 
-#: src/apps/core/templates/definition/create.html:57 src/templates/home.html:76
-#: src/templates/home.html.py:82 src/templates/home.html:85
+#: src/apps/core/templates/definition/create.html:57
 msgid "Video"
 msgstr "Video"
 
@@ -581,43 +579,43 @@ msgid "vessel or machine designed to fly in outer space"
 msgstr "transporto priemonė skirta skrydžiams į kosmosą"
 
 #: src/apps/core/templates/definition/detail.html:57
-#: src/apps/core/templates/goal/detail.html:191
-#: src/apps/core/templates/idea/detail.html:198
+#: src/apps/core/templates/goal/detail.html:197
+#: src/apps/core/templates/idea/detail.html:219
 #: src/apps/core/templates/need/detail.html:179
-#: src/apps/core/templates/plan/detail.html:563
+#: src/apps/core/templates/plan/detail.html:592
 #: src/apps/core/templates/step/detail.html:195
 #: src/apps/core/templates/task/detail.html:167
-#: src/apps/core/templates/work/detail.html:187 src/templates/home.html:275
-#: src/templates/home.html.py:369 src/templates/home.html:484
+#: src/apps/core/templates/work/detail.html:187 src/templates/home.html:93
+#: src/templates/home.html.py:164 src/templates/home.html:262
 msgid "link"
 msgstr "adaptuotas"
 
 #: src/apps/core/templates/definition/detail.html:69
-#: src/apps/core/templates/goal/detail.html:203
-#: src/apps/core/templates/idea/detail.html:210
+#: src/apps/core/templates/goal/detail.html:209
+#: src/apps/core/templates/idea/detail.html:231
 #: src/apps/core/templates/need/detail.html:191
-#: src/apps/core/templates/plan/detail.html:589
+#: src/apps/core/templates/plan/detail.html:618
 #: src/apps/core/templates/step/detail.html:207
 #: src/apps/core/templates/task/detail.html:179
-#: src/apps/core/templates/work/detail.html:199 src/templates/home.html:401
-#: src/templates/home.html.py:511
+#: src/apps/core/templates/work/detail.html:199 src/templates/home.html:196
+#: src/templates/home.html.py:289
 #, fuzzy
 #| msgid "private inbox"
 msgid "Private"
 msgstr "Privačios"
 
 #: src/apps/core/templates/definition/detail.html:69
-#: src/apps/core/templates/goal/detail.html:125
+#: src/apps/core/templates/goal/detail.html:131
 #, fuzzy
 #| msgid "needs"
 msgid "need"
 msgstr "reikia"
 
 #: src/apps/core/templates/definition/detail.html:70
-#: src/apps/core/templates/goal/detail.html:204
-#: src/apps/core/templates/idea/detail.html:211
+#: src/apps/core/templates/goal/detail.html:210
+#: src/apps/core/templates/idea/detail.html:232
 #: src/apps/core/templates/need/detail.html:192
-#: src/apps/core/templates/plan/detail.html:590
+#: src/apps/core/templates/plan/detail.html:619
 #: src/apps/core/templates/step/detail.html:208
 #: src/apps/core/templates/task/detail.html:180
 #: src/apps/core/templates/work/detail.html:200
@@ -636,85 +634,85 @@ msgstr ""
 "i></center>\n"
 "\n"
 
-#: src/apps/core/templates/goal/detail.html:37
-#: src/apps/core/templates/goal/detail.html:110
-#: src/apps/core/templates/idea/detail.html:35
-#: src/apps/core/templates/idea/detail.html:108
+#: src/apps/core/templates/goal/detail.html:38
+#: src/apps/core/templates/goal/detail.html:116
+#: src/apps/core/templates/idea/detail.html:36
+#: src/apps/core/templates/idea/detail.html:129
 #: src/apps/core/templates/need/detail.html:35
 #: src/apps/core/templates/need/detail.html:107
-#: src/apps/core/templates/plan/detail.html:107
-#: src/apps/core/templates/plan/detail.html:180
+#: src/apps/core/templates/plan/detail.html:108
+#: src/apps/core/templates/plan/detail.html:209
 msgid "needs"
 msgstr "reikia"
 
-#: src/apps/core/templates/goal/detail.html:37
-#: src/apps/core/templates/goal/detail.html:110
-#: src/apps/core/templates/idea/detail.html:35
-#: src/apps/core/templates/idea/detail.html:108
+#: src/apps/core/templates/goal/detail.html:38
+#: src/apps/core/templates/goal/detail.html:116
+#: src/apps/core/templates/idea/detail.html:36
+#: src/apps/core/templates/idea/detail.html:129
 #: src/apps/core/templates/need/detail.html:35
 #: src/apps/core/templates/need/detail.html:107
-#: src/apps/core/templates/plan/detail.html:107
-#: src/apps/core/templates/plan/detail.html:180
+#: src/apps/core/templates/plan/detail.html:108
+#: src/apps/core/templates/plan/detail.html:209
 msgid "for funding"
 msgstr "finansuoti"
 
-#: src/apps/core/templates/goal/detail.html:37
-#: src/apps/core/templates/goal/detail.html:110
-#: src/apps/core/templates/idea/detail.html:35
-#: src/apps/core/templates/idea/detail.html:108
+#: src/apps/core/templates/goal/detail.html:38
+#: src/apps/core/templates/goal/detail.html:116
+#: src/apps/core/templates/idea/detail.html:36
+#: src/apps/core/templates/idea/detail.html:129
 #: src/apps/core/templates/need/detail.html:35
 #: src/apps/core/templates/need/detail.html:107
-#: src/apps/core/templates/plan/detail.html:107
-#: src/apps/core/templates/plan/detail.html:180
+#: src/apps/core/templates/plan/detail.html:108
+#: src/apps/core/templates/plan/detail.html:209
 msgid "hours"
 msgstr "valandų"
 
-#: src/apps/core/templates/goal/detail.html:66
-#: src/apps/core/templates/idea/detail.html:65
+#: src/apps/core/templates/goal/detail.html:72
+#: src/apps/core/templates/idea/detail.html:86
 #: src/apps/core/templates/need/detail.html:64
-#: src/apps/core/templates/plan/detail.html:137
+#: src/apps/core/templates/plan/detail.html:166
 #: src/apps/core/templates/step/detail.html:48
 #: src/apps/core/templates/task/detail.html:47
 #: src/apps/core/templates/work/detail.html:47
 msgid "Share link"
 msgstr "Pasidalinti nuoroda"
 
-#: src/apps/core/templates/goal/detail.html:84
-#: src/apps/core/templates/idea/detail.html:82
+#: src/apps/core/templates/goal/detail.html:90
+#: src/apps/core/templates/idea/detail.html:103
 #: src/apps/core/templates/need/detail.html:81
-#: src/apps/core/templates/plan/detail.html:154
+#: src/apps/core/templates/plan/detail.html:183
 #: src/apps/core/templates/step/detail.html:65
 #: src/apps/core/templates/task/detail.html:64
 #: src/apps/core/templates/work/detail.html:64
 msgid "copy"
 msgstr "kopijuoti"
 
-#: src/apps/core/templates/goal/detail.html:104
-#: src/apps/core/templates/idea/detail.html:102
+#: src/apps/core/templates/goal/detail.html:110
+#: src/apps/core/templates/idea/detail.html:123
 #: src/apps/core/templates/need/detail.html:101
-#: src/apps/core/templates/plan/detail.html:174
+#: src/apps/core/templates/plan/detail.html:203
 #: src/apps/core/templates/step/detail.html:85
 #: src/apps/core/templates/task/detail.html:84
 #: src/apps/core/templates/work/detail.html:84
 msgid "Unsubscribe"
 msgstr "Atsisakyti komentarų"
 
-#: src/apps/core/templates/goal/detail.html:104
-#: src/apps/core/templates/idea/detail.html:102
+#: src/apps/core/templates/goal/detail.html:110
+#: src/apps/core/templates/idea/detail.html:123
 #: src/apps/core/templates/need/detail.html:101
-#: src/apps/core/templates/plan/detail.html:174
+#: src/apps/core/templates/plan/detail.html:203
 #: src/apps/core/templates/step/detail.html:85
 #: src/apps/core/templates/task/detail.html:84
 #: src/apps/core/templates/work/detail.html:84
 msgid "Subscribe"
 msgstr "Užsisakyti komentarus"
 
-#: src/apps/core/templates/goal/detail.html:114
+#: src/apps/core/templates/goal/detail.html:120
 #: src/apps/core/templates/need/detail.html:111
 msgid "hyper-equity"
 msgstr "hyper-marža"
 
-#: src/apps/core/templates/goal/detail.html:115
+#: src/apps/core/templates/goal/detail.html:121
 #: src/apps/core/templates/need/detail.html:112
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
@@ -722,17 +720,20 @@ msgid ""
 "problem."
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:120
+#: src/apps/core/templates/goal/detail.html:126
 msgid "category:"
 msgstr "sritis:"
 
-#: src/apps/core/templates/goal/detail.html:120
+#: src/apps/core/templates/goal/detail.html:126
 msgid "related need:"
 msgstr "susijęs noras:"
 
-#: src/apps/core/templates/goal/detail.html:125
-#: src/apps/core/templates/idea/detail.html:127
-#: src/apps/core/templates/plan/detail.html:194
+#: src/apps/core/templates/goal/detail.html:131
+#: src/apps/core/templates/idea/detail.html:70
+#: src/apps/core/templates/idea/detail.html:148
+#: src/apps/core/templates/plan/detail.html:141
+#: src/apps/core/templates/plan/detail.html:153
+#: src/apps/core/templates/plan/detail.html:223
 #: src/apps/core/templates/step/detail.html:99
 #: src/apps/core/templates/task/detail.html:98
 #: src/apps/core/templates/work/detail.html:98
@@ -741,61 +742,62 @@ msgstr "susijęs noras:"
 msgid "private"
 msgstr "Privačios"
 
-#: src/apps/core/templates/goal/detail.html:131
-#: src/apps/core/templates/idea/detail.html:135
+#: src/apps/core/templates/goal/detail.html:137
+#: src/apps/core/templates/idea/detail.html:156
 #: src/apps/core/templates/need/detail.html:118
-#: src/apps/core/templates/plan/detail.html:201
+#: src/apps/core/templates/plan/detail.html:230
 msgid "translations:"
 msgstr "vertimai:"
 
-#: src/apps/core/templates/goal/detail.html:161
-#: src/apps/core/templates/idea/detail.html:167
+#: src/apps/core/templates/goal/detail.html:167
+#: src/apps/core/templates/idea/detail.html:188
 #: src/apps/core/templates/need/detail.html:148
-#: src/apps/core/templates/plan/detail.html:230
+#: src/apps/core/templates/plan/detail.html:259
 #: src/apps/core/templates/step/detail.html:135
 #: src/apps/core/templates/task/detail.html:134
-#: src/apps/core/templates/work/detail.html:135 src/templates/home.html:273
-#: src/templates/home.html.py:279 src/templates/home.html:367
-#: src/templates/home.html.py:373 src/templates/home.html:482
-#: src/templates/home.html.py:488
+#: src/apps/core/templates/work/detail.html:135 src/templates/home.html:91
+#: src/templates/home.html.py:97 src/templates/home.html:162
+#: src/templates/home.html.py:168 src/templates/home.html:260
+#: src/templates/home.html.py:266
 msgid "historical"
 msgstr "istorinis"
 
-#: src/apps/core/templates/goal/detail.html:165
-#: src/apps/core/templates/idea/detail.html:171
+#: src/apps/core/templates/goal/detail.html:171
+#: src/apps/core/templates/idea/detail.html:192
 #: src/apps/core/templates/need/detail.html:152
-#: src/apps/core/templates/plan/detail.html:234
+#: src/apps/core/templates/plan/detail.html:263
 #: src/apps/core/templates/step/detail.html:139
 #: src/apps/core/templates/task/detail.html:138
 #: src/apps/core/templates/work/detail.html:139
 msgid "Source:"
 msgstr "Šaltinis:"
 
-#: src/apps/core/templates/goal/detail.html:182
-#: src/apps/core/templates/idea/detail.html:188
+#: src/apps/core/templates/goal/detail.html:188
+#: src/apps/core/templates/idea/detail.html:209
 #: src/apps/core/templates/need/detail.html:169
-#: src/apps/core/templates/plan/detail.html:260
+#: src/apps/core/templates/plan/detail.html:289
 msgid "shared with:"
 msgstr "Dalinamasi su:"
 
-#: src/apps/core/templates/goal/detail.html:185
+#: src/apps/core/templates/goal/detail.html:191
 #: src/apps/core/templates/idea/list2.html:6
-#: src/apps/core/templates/idea/list2.html:9 src/templates/home.html.py:329
+#: src/apps/core/templates/idea/list2.html:9
 msgid "Ideas"
 msgstr "Idėjos"
 
-#: src/apps/core/templates/goal/detail.html:203
-#: src/apps/core/templates/plan/detail.html:194
+#: src/apps/core/templates/goal/detail.html:209
+#: src/apps/core/templates/plan/detail.html:153
+#: src/apps/core/templates/plan/detail.html:223
 msgid "idea"
 msgstr ""
 
-#: src/apps/core/templates/goal/detail.html:213
+#: src/apps/core/templates/goal/detail.html:219
 msgid "+New Idea"
 msgstr "+Nauja idėja"
 
 #: src/apps/core/templates/goal/list2.html:6
 #: src/apps/core/templates/goal/list2.html:9
-#: src/apps/core/templates/need/detail.html:172 src/templates/home.html:239
+#: src/apps/core/templates/need/detail.html:172
 msgid "Goals"
 msgstr "Tikslai"
 
@@ -841,38 +843,40 @@ msgstr ""
 msgid "Goal"
 msgstr "Tikslas"
 
-#: src/apps/core/templates/idea/detail.html:113
+#: src/apps/core/templates/idea/detail.html:70
+#: src/apps/core/templates/idea/detail.html:148
+#: src/apps/core/templates/need/detail.html:191
+#: src/apps/core/templates/plan/detail.html:141
+msgid "goal"
+msgstr ""
+
+#: src/apps/core/templates/idea/detail.html:134
 msgid "super-equity"
 msgstr "super-marža"
 
-#: src/apps/core/templates/idea/detail.html:114
+#: src/apps/core/templates/idea/detail.html:135
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much idea creator owns of all projects under this idea."
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:121
+#: src/apps/core/templates/idea/detail.html:142
 #: src/apps/core/templates/need/detail.html:117
 msgid "want:"
 msgstr "norim:"
 
-#: src/apps/core/templates/idea/detail.html:127
-#: src/apps/core/templates/need/detail.html:191
-msgid "goal"
-msgstr ""
-
-#: src/apps/core/templates/idea/detail.html:192
+#: src/apps/core/templates/idea/detail.html:213
 #: src/apps/core/templates/plan/list2.html:6
-#: src/apps/core/templates/plan/list2.html:9 src/templates/home.html.py:444
+#: src/apps/core/templates/plan/list2.html:9
 msgid "Plans"
 msgstr "Planai"
 
-#: src/apps/core/templates/idea/detail.html:210
+#: src/apps/core/templates/idea/detail.html:231
 #: src/apps/core/templates/step/detail.html:99
 msgid "plan"
 msgstr ""
 
-#: src/apps/core/templates/idea/detail.html:220
+#: src/apps/core/templates/idea/detail.html:241
 msgid "+New Plan"
 msgstr "+Naujas planas"
 
@@ -904,74 +908,74 @@ msgstr ""
 "font></i></center>\n"
 
 #: src/apps/core/templates/plan/detail.html:35
-#: src/apps/core/templates/plan/detail.html:568
+#: src/apps/core/templates/plan/detail.html:597
 msgid "exclude"
 msgstr "išimti"
 
 #: src/apps/core/templates/plan/detail.html:36
-#: src/apps/core/templates/plan/detail.html:568
+#: src/apps/core/templates/plan/detail.html:597
 msgid "Exclude from our plan."
 msgstr "Išimti iš mūsų plano."
 
 #: src/apps/core/templates/plan/detail.html:40
-#: src/apps/core/templates/plan/detail.html:570
+#: src/apps/core/templates/plan/detail.html:599
 msgid "include"
 msgstr "įtraukti"
 
 #: src/apps/core/templates/plan/detail.html:41
-#: src/apps/core/templates/plan/detail.html:570
+#: src/apps/core/templates/plan/detail.html:599
 msgid "Include into our plan."
 msgstr "įtraukti į mūsų planą."
 
-#: src/apps/core/templates/plan/detail.html:183
+#: src/apps/core/templates/plan/detail.html:212
 msgid "members:"
 msgstr "nariai:"
 
-#: src/apps/core/templates/plan/detail.html:183
+#: src/apps/core/templates/plan/detail.html:212
 msgid "equity"
 msgstr "marža"
 
-#: src/apps/core/templates/plan/detail.html:184
+#: src/apps/core/templates/plan/detail.html:213
 msgid ""
 "A fixed percentage of all the future <b>ḥ</b> (<u>time and money spent</u>), "
 "which indicates how much project <u>shareholders</u> own of all results "
 "under this project. The rest is owned by contributing users."
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:188
+#: src/apps/core/templates/plan/detail.html:217
 msgid "approach to realizing idea"
 msgstr "būdas įgyvendinti idėją"
 
-#: src/apps/core/templates/plan/detail.html:241
+#: src/apps/core/templates/plan/detail.html:270
 msgid "deliverable"
 msgstr "tikimasis rezultatas"
 
-#: src/apps/core/templates/plan/detail.html:249
+#: src/apps/core/templates/plan/detail.html:278
 msgid "situation"
 msgstr "situacija"
 
-#: src/apps/core/templates/plan/detail.html:545
+#: src/apps/core/templates/plan/detail.html:574
 msgid "Steps by:"
 msgstr "Uždaviniai pagal:"
 
-#: src/apps/core/templates/plan/detail.html:547
+#: src/apps/core/templates/plan/detail.html:576
 msgid "our plan"
 msgstr "mūsų planas"
 
-#: src/apps/core/templates/plan/detail.html:557
+#: src/apps/core/templates/plan/detail.html:586
 msgid "Steps"
 msgstr "Uždaviniai"
 
-#: src/apps/core/templates/plan/detail.html:557
+#: src/apps/core/templates/plan/detail.html:586
 msgid "reload"
 msgstr "perkrauti"
 
-#: src/apps/core/templates/plan/detail.html:589
+#: src/apps/core/templates/plan/detail.html:618
 #: src/apps/core/templates/task/detail.html:98
 msgid "step"
 msgstr ""
 
-#: src/apps/core/templates/plan/detail.html:612
+#: src/apps/core/templates/plan/detail.html:641
 msgid "+New Step"
 msgstr "+Naujas uždavinys"
 
@@ -1470,12 +1474,12 @@ msgstr ""
 "Neturite paskyros? Galite susikurti paskyrą <a href=\"/user/signup/\">čia</"
 "a>.\n"
 
-#: src/templates/account/login.html:19
-#: src/templates/account/signup_closed.html:17
+#: src/templates/account/login.html:21
+#: src/templates/account/signup_closed.html:19
 msgid "octocats get a free pass"
 msgstr ""
 
-#: src/templates/account/login.html:32
+#: src/templates/account/login.html:34
 msgid "Forgot password?"
 msgstr "Pamiršote slaptažodį?"
 
@@ -1766,77 +1770,36 @@ msgstr ""
 msgid "Economic & Innovation Forum"
 msgstr "Sumanymai.lt: atviras financinis inovacijų forumas."
 
-#: src/templates/home.html:63
-msgid "invitations"
-msgstr "pakvietimai"
-
-#: src/templates/home.html:63
-msgid "write bugs"
-msgstr "pranešti apie klaidas"
-
-#: src/templates/home.html:63
-msgid "time value"
-msgstr "laiko vertė"
-
-#: src/templates/home.html:66 src/templates/home.html.py:68
-msgid "invite a friend"
-msgstr "Pakviesti draugų"
-
-#: src/templates/home.html:71 src/templates/home.html.py:75
-msgid "Intro"
-msgstr "Įvadas"
-
-#: src/templates/home.html:72
-msgid "Help"
-msgstr "Pagalba"
-
-#: src/templates/home.html:94
-msgid "compose"
-msgstr "Rašyti"
-
-#: src/templates/home.html:240
-msgid "define a problem"
+#: src/templates/home.html:73
+msgid "Problems"
 msgstr "Problemos"
 
-#: src/templates/home.html:256
-msgid "Think Problems"
-msgstr "Rask problemą"
+#: src/templates/home.html:74
+msgid "Where people share and discuss the world's issues."
+msgstr "&nbsp;&nbsp;&nbsp;Kur žmonės dalinasi ir kalba apie pasaulio iššūkius."
 
-#: src/templates/home.html:292 src/templates/home.html.py:387
-#: src/templates/home.html:502
+#: src/templates/home.html:110 src/templates/home.html.py:182
+#: src/templates/home.html:280
 #, fuzzy
 #| msgid "comment"
 msgid "comments"
 msgstr "Komentaras"
 
-#: src/templates/home.html:302 src/templates/home.html.py:417
-#: src/templates/home.html:524
+#: src/templates/home.html:120 src/templates/home.html.py:212
+#: src/templates/home.html:302
 msgid "see more"
 msgstr "skaityti daugiau..."
 
-#: src/templates/home.html:306
-msgid "Oops! You have no goals!"
-msgstr "Jūs dar neturite tikslų!"
-
-#: src/templates/home.html:307
+#: src/templates/home.html:125
 msgid "Add a problem"
-msgstr "Apibrėžkite problemą"
+msgstr "Apibrėžti problemą."
 
-#: src/templates/home.html:308 src/templates/home.html.py:424
-#: src/templates/home.html:531
-msgid "...or view"
-msgstr "...arba žr.:"
-
-#: src/templates/home.html:308
-msgid "all problems"
-msgstr "visos problemos"
-
-#: src/templates/home.html:312 src/templates/home.html.py:428
-#: src/templates/home.html:535
+#: src/templates/home.html:129 src/templates/home.html.py:222
+#: src/templates/home.html:312
 msgid "Example:"
 msgstr "Pavyzdys:"
 
-#: src/templates/home.html:313
+#: src/templates/home.html:130
 msgid ""
 "\n"
 "                    <p><b>Omelette Supply Problem</b></p>\n"
@@ -1853,23 +1816,21 @@ msgstr ""
 "pastangų.</p>\n"
 "                    "
 
-#: src/templates/home.html:330
-msgid "suggest a solution"
-msgstr "Sprendimai"
+#: src/templates/home.html:142
+msgid "Solutions"
+msgstr "Sumanymai"
 
-#: src/templates/home.html:348
-msgid "Discuss Solutions"
-msgstr "Siūlyk sprendimus"
+#: src/templates/home.html:143
+msgid "Where people share and discuss ideas how to solve them."
+msgstr ""
+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kur žmonės dalinasi ir kalba apie "
+"idėjas, kaip problemas išspręsti."
 
-#: src/templates/home.html:423
+#: src/templates/home.html:218
 msgid "Add a solution"
-msgstr "Pridėkite sumanymą"
+msgstr "Pridėti sumanymą."
 
-#: src/templates/home.html:424
-msgid "all solutions"
-msgstr "visi sprendimai"
-
-#: src/templates/home.html:429
+#: src/templates/home.html:223
 msgid ""
 "\n"
 "                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>\n"
@@ -1889,27 +1850,25 @@ msgstr ""
 "kiaušinienės tiekimo šaltinį. </p>\n"
 "                "
 
-#: src/templates/home.html:446
-msgid "start a project"
+#: src/templates/home.html:240
+msgid "Projects"
 msgstr "Projektai"
 
-#: src/templates/home.html:464
-msgid "Run Projects"
-msgstr "Pradėk projektą"
+#: src/templates/home.html:241
+msgid "Where people start initiatives to realize them."
+msgstr ""
+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kur žmonės pradeda iniciatyvas idėjoms "
+"įgyvendinti."
 
-#: src/templates/home.html:529
+#: src/templates/home.html:307
 msgid "Oops! You have no plans!"
 msgstr "Jūs dar neturite planų!"
 
-#: src/templates/home.html:530
+#: src/templates/home.html:308
 msgid "Add a project"
-msgstr "Pradėkite projektą"
+msgstr "Pradėti projektą."
 
-#: src/templates/home.html:531
-msgid "all projects"
-msgstr "visi projektai"
-
-#: src/templates/home.html:536
+#: src/templates/home.html:313
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1933,10 +1892,6 @@ msgstr ""
 "lengvai instaliuojamų mikrofermų konstruktoriaus platinimo sistemos pagalba."
 "</p>\n"
 "                "
-
-#: src/templates/home.html:548
-msgid "People-centric economy."
-msgstr "— ekonomika žmogui —"
 
 #: src/templates/invitations/email/email_invite_message.txt:3
 #, python-format
@@ -2161,6 +2116,63 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Prisiminti"
+
+#~ msgid "invitations"
+#~ msgstr "pakvietimai"
+
+#~ msgid "write bugs"
+#~ msgstr "pranešti apie klaidas"
+
+#~ msgid "time value"
+#~ msgstr "laiko vertė"
+
+#~ msgid "invite a friend"
+#~ msgstr "Pakviesti draugų"
+
+#~ msgid "Intro"
+#~ msgstr "Įvadas"
+
+#~ msgid "Help"
+#~ msgstr "Pagalba"
+
+#~ msgid "compose"
+#~ msgstr "Rašyti"
+
+#~ msgid "define a problem"
+#~ msgstr "Problemos"
+
+#~ msgid "Think Problems"
+#~ msgstr "Rask problemą"
+
+#~ msgid "Oops! You have no goals!"
+#~ msgstr "Jūs dar neturite tikslų!"
+
+#~ msgid "...or view"
+#~ msgstr "...arba žr.:"
+
+#~ msgid "all problems"
+#~ msgstr "visos problemos"
+
+#~ msgid "suggest a solution"
+#~ msgstr "Sprendimai"
+
+#~ msgid "Discuss Solutions"
+#~ msgstr "Siūlyk sprendimus"
+
+#~ msgid "all solutions"
+#~ msgstr "visi sprendimai"
+
+#~ msgid "start a project"
+#~ msgstr "Projektai"
+
+#~ msgid "Run Projects"
+#~ msgstr "Pradėk projektą"
+
+#~ msgid "all projects"
+#~ msgstr "visi projektai"
+
+#~ msgid "People-centric economy."
+#~ msgstr "— ekonomika žmogui —"
 
 #~ msgid "<u>index</u>"
 #~ msgstr "<u>viešą turinį</u>"
