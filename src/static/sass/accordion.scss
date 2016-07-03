@@ -8,10 +8,10 @@
 /* Variables */
 
 $backgroundColor: transparent;
-$list: #6dc5dd;
-$border: #5ab2ca;
+$list: #c0c0c0;
+$border: #f0f0f0;
 $geneicons: #fff;
-
+$tabwidth: 60px;
 
 @font-face {
   font-family: 'Genericons';
@@ -43,9 +43,7 @@ $geneicons: #fff;
   *display: inline;
 }
 
-.container {
-  margin: 100px auto;
-}
+
 
 .accordion {
   background: $border;
@@ -54,7 +52,7 @@ $geneicons: #fff;
   display: block;
   list-style-type: none;
   overflow: hidden;
-  height: 200px;
+  height: 95vh;
   font-size: 0;
 }
 
@@ -62,8 +60,8 @@ $geneicons: #fff;
   display: inline-block;
   background-color: $list;
   border-right: $border 1px solid;
-  width: 80px;
-  height: 200px;
+  width: $tabwidth;
+  height: 95vh;
   overflow: hidden;
   position: relative;
   margin: 0;
@@ -71,7 +69,7 @@ $geneicons: #fff;
   @include transition( all 0.4s 0.1s ease-in-out );
 
   &:hover {
-    width: 450px;
+    width: 1450px; /* 1450px; */
 
     .social-links {
       a {
@@ -88,10 +86,10 @@ $geneicons: #fff;
 
   .paragraph {
     position: relative;
-    width: 360px;
-    margin-left: 80px;
+    width: 1400px; /* controls the width of content item, default was: 1320px; */
+    margin-left: $tabwidth;
     padding: 50px 0 0 10px;
-    height: 200px;
+    height: 95vh;
     background: #fff;
 
     h1 {
@@ -118,12 +116,12 @@ $geneicons: #fff;
 
     &:before, &:after {
       @include transition( all 0.4s 0.1s ease-in-out );
-      width: 80px;
-      height: 200px;
+      width: $tabwidth;
+      height: 95vh;
       position: absolute;
       text-indent: 0;
       padding-top: 90px;
-      padding-left: 25px;
+      padding-left: 15px; /*reduces the distance of non-hover left margin to icon, default was: 25px*/
       display: block;
       font: normal 30px Genericons;
       color: $geneicons;
@@ -131,8 +129,8 @@ $geneicons: #fff;
 
     &:after {
       font-size: 48px;
-      padding-left: 20px;
-      padding-top: 80px;
+      padding-left: 10px; /*reduces the distance of hover left margin to icon, defaullt was: 20px*/
+      padding-top: $tabwidth;
       margin-left: 85px;
     }
   }
@@ -141,11 +139,11 @@ $geneicons: #fff;
 .twitter-icon {
   a {
     &:before, &:after {
-      content: '\f202';
+      content: '\f100';
     }
 
     &:after {
-      @include background-image(linear-gradient(#7adcf9, #4bc9f5));
+     /* @include background-image(linear-gradient(#7adcf9, #4bc9f5));*/
     }
   }
 }
@@ -153,11 +151,11 @@ $geneicons: #fff;
 .facebook-icon {
   a {
     &:before, &:after {
-      content: '\f204';
+      content: '\f216';
     }
 
     &:after {
-      @include background-image(linear-gradient(#548abf, #295b9e));
+    /* @include background-image(linear-gradient(#548abf, #295b9e));*/
     }
   }
 }
@@ -165,59 +163,12 @@ $geneicons: #fff;
 .linkedin-icon {
   a {
     &:before, &:after {
-      content: '\f208';
+      content: '\f425';
     }
 
     &:after {
-      @include background-image(linear-gradient(#00a9cd, #0083b4));
+    /* @include background-image(linear-gradient(#00a9cd, #0083b4));*/
     }
   }
 }
 
-.insta-icon {
-  a {
-    &:before, &:after {
-      content: '\f215';
-    }
-
-    &:after {
-      @include background-image(linear-gradient(#7fc121, #298733));
-    }
-  }
-}
-
-.youtube-icon {
-  a {
-    &:before, &:after {
-      content: '\f213';
-    }
-
-    &:after {
-      @include background-image(linear-gradient(#df192a, #c41222));
-    }
-  }
-}
-
-.tumblr-icon {
-  a {
-    &:before, &:after {
-      content: '\f214';
-    }
-
-    &:after {
-      @include background-image(linear-gradient(#283e56, #325372));
-    }
-  }
-}
-
-.dribbble-icon {
-  a {
-    &:before, &:after {
-      content: '\f201';
-    }
-
-    &:after {
-      @include background-image(linear-gradient(#e03a70, #f189b8));
-    }
-  }
-}
