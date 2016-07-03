@@ -35,3 +35,4 @@ stepio==0.1
 plandf==0.1.9
 django-bower==5.1.0
 uWSGI==2.0.13.1
+mock==2.0.0
