@@ -121,12 +121,10 @@
 					<!--<a href="{% url "goal-list" %}">{% trans "see more" %}</a>-->
                 {% else %}
                 {% endif %}
-				    <!--
                     <center>
 		                <br>
                         <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
                     </center>
-					-->
 
 					{% if request.get_full_path == "/i" %}
 					<p><i><u>{% trans "Example:" %}</u></i></p>
@@ -217,12 +215,10 @@
 
                 {% else %}
                 {% endif %}
-				<!--
                 <center>
 					<br>
                     <p><a href="{% url "idea-create" %}">{% trans "Add a solution" %}</a></p>
                 </center>
-				-->
 
 				{% if request.get_full_path == "/i" %}
 				<p><i><u>{% trans "Example:" %}</u></i></p>
@@ -310,13 +306,10 @@
 
                 {% else %}
                 {% endif %}
-				<!--
                 <center>
-					<p>{% trans "Oops! You have no plans!" %}</p>
 					<br>
                     <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
                 </center>
-				-->
 
 				{% if request.get_full_path == "/i" %}
 				<p><i><u>{% trans "Example:" %}</u></i></p>
