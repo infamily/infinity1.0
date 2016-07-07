@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-02 18:39-0700\n"
+"POT-Creation-Date: 2016-07-07 08:38-0700\n"
 "PO-Revision-Date: 2016-02-11 04:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -477,7 +477,7 @@ msgid "Auto-Translate"
 msgstr "Prijevodi"
 
 #: src/apps/core/templates/comment/list.html:63
-#: src/apps/core/templates/comment/list.html:224
+#: src/apps/core/templates/comment/list.html:230
 #, fuzzy
 #| msgid "has chosen to email their comment:"
 msgid "Sign in to comment"
@@ -571,8 +571,16 @@ msgstr "izbriši"
 msgid "reply"
 msgstr "Odgovori:"
 
-#: src/apps/core/templates/comment/list.html:231
-#: src/apps/core/templates/comment/list.html:232
+#: src/apps/core/templates/comment/list.html:214
+msgid ""
+"<b>Notice:</b> Please, don't suggest ideas in the comments. Judge the "
+"problem, question the problem: is it important? Should we do it? Is it a "
+"part of a greater problem? If you have ideas <i>how</i> to do it - add them "
+"as ideas, not comments."
+msgstr ""
+
+#: src/apps/core/templates/comment/list.html:237
+#: src/apps/core/templates/comment/list.html:238
 msgid "Invite a friend to help!"
 msgstr "Pozovite prijatelja u pomoć!"
 
@@ -636,8 +644,8 @@ msgstr ""
 #: src/apps/core/templates/plan/detail.html:592
 #: src/apps/core/templates/step/detail.html:195
 #: src/apps/core/templates/task/detail.html:167
-#: src/apps/core/templates/work/detail.html:187 src/templates/home.html:93
-#: src/templates/home.html.py:164 src/templates/home.html:262
+#: src/apps/core/templates/work/detail.html:187 src/templates/home.html:94
+#: src/templates/home.html.py:166 src/templates/home.html:265
 msgid "link"
 msgstr ""
 
@@ -648,8 +656,8 @@ msgstr ""
 #: src/apps/core/templates/plan/detail.html:618
 #: src/apps/core/templates/step/detail.html:207
 #: src/apps/core/templates/task/detail.html:179
-#: src/apps/core/templates/work/detail.html:199 src/templates/home.html:196
-#: src/templates/home.html.py:289
+#: src/apps/core/templates/work/detail.html:199 src/templates/home.html:198
+#: src/templates/home.html.py:292
 msgid "Private"
 msgstr ""
 
@@ -804,10 +812,10 @@ msgstr "prijevodi:"
 #: src/apps/core/templates/plan/detail.html:259
 #: src/apps/core/templates/step/detail.html:135
 #: src/apps/core/templates/task/detail.html:134
-#: src/apps/core/templates/work/detail.html:135 src/templates/home.html:91
-#: src/templates/home.html.py:97 src/templates/home.html:162
-#: src/templates/home.html.py:168 src/templates/home.html:260
-#: src/templates/home.html.py:266
+#: src/apps/core/templates/work/detail.html:135 src/templates/home.html:92
+#: src/templates/home.html.py:98 src/templates/home.html:164
+#: src/templates/home.html.py:170 src/templates/home.html:263
+#: src/templates/home.html.py:269
 msgid "historical"
 msgstr ""
 
@@ -1870,28 +1878,28 @@ msgstr "Rješite vaše probleme."
 msgid "Where people share and discuss the world's issues."
 msgstr ""
 
-#: src/templates/home.html:110 src/templates/home.html.py:182
-#: src/templates/home.html:280
+#: src/templates/home.html:75 src/templates/home.html.py:126
+msgid "Add a problem"
+msgstr "Dodaj problem"
+
+#: src/templates/home.html:111 src/templates/home.html.py:184
+#: src/templates/home.html:283
 #, fuzzy
 #| msgid "Comment"
 msgid "comments"
 msgstr "Komentar"
 
-#: src/templates/home.html:120 src/templates/home.html.py:212
-#: src/templates/home.html:302
+#: src/templates/home.html:121 src/templates/home.html.py:214
+#: src/templates/home.html:305
 msgid "see more"
 msgstr "vidi još"
 
-#: src/templates/home.html:125
-msgid "Add a problem"
-msgstr "Dodaj problem"
-
-#: src/templates/home.html:129 src/templates/home.html.py:222
-#: src/templates/home.html:312
+#: src/templates/home.html:130 src/templates/home.html.py:224
+#: src/templates/home.html:315
 msgid "Example:"
 msgstr ""
 
-#: src/templates/home.html:130
+#: src/templates/home.html:131
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1916,21 +1924,21 @@ msgstr ""
 "ukusima. Sviđa mi se, i htio bih jesti omlet svako jutro, bez dodatnih "
 "troškova. </p>"
 
-#: src/templates/home.html:142
+#: src/templates/home.html:143
 #, fuzzy
 #| msgid "Add a solution"
 msgid "Solutions"
 msgstr "Dodaj rješenje"
 
-#: src/templates/home.html:143
+#: src/templates/home.html:144
 msgid "Where people share and discuss ideas how to solve them."
 msgstr ""
 
-#: src/templates/home.html:218
+#: src/templates/home.html:145 src/templates/home.html.py:220
 msgid "Add a solution"
 msgstr "Dodaj rješenje"
 
-#: src/templates/home.html:223
+#: src/templates/home.html:225
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -1962,25 +1970,21 @@ msgstr ""
 "robotske hranilice, skupljače jaja, perilice, kočnice, tajmirane miksere, "
 "kuhala i dispenzere - i imate samoodrživu opskrbu svježeg omleta. </p>"
 
-#: src/templates/home.html:240
+#: src/templates/home.html:242
 #, fuzzy
 #| msgid "Add a project"
 msgid "Projects"
 msgstr "Dodaj projekt"
 
-#: src/templates/home.html:241
+#: src/templates/home.html:243
 msgid "Where people start initiatives to realize them."
 msgstr ""
 
-#: src/templates/home.html:307
-msgid "Oops! You have no plans!"
-msgstr "Oops! Nema planova!"
-
-#: src/templates/home.html:308
+#: src/templates/home.html:244 src/templates/home.html.py:311
 msgid "Add a project"
 msgstr "Dodaj projekt"
 
-#: src/templates/home.html:313
+#: src/templates/home.html:316
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -2237,6 +2241,9 @@ msgstr "E-mail adresa i/ili lozinka koje ste unijeli nisu točni."
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Zapamti me"
+
+#~ msgid "Oops! You have no plans!"
+#~ msgstr "Oops! Nema planova!"
 
 #~ msgid "invitations"
 #~ msgstr "pozivnice"

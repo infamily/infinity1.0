@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-02 18:39-0700\n"
-"PO-Revision-Date: 2016-07-03 02:06+0000\n"
+"POT-Creation-Date: 2016-07-07 08:38-0700\n"
+"PO-Revision-Date: 2016-07-07 15:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -428,7 +428,7 @@ msgid "Auto-Translate"
 msgstr "自动翻译"
 
 #: src/apps/core/templates/comment/list.html:63
-#: src/apps/core/templates/comment/list.html:224
+#: src/apps/core/templates/comment/list.html:230
 msgid "Sign in to comment"
 msgstr "我来回应"
 
@@ -518,8 +518,19 @@ msgstr "删除"
 msgid "reply"
 msgstr "回复"
 
-#: src/apps/core/templates/comment/list.html:231
-#: src/apps/core/templates/comment/list.html:232
+#: src/apps/core/templates/comment/list.html:214
+msgid ""
+"<b>Notice:</b> Please, don't suggest ideas in the comments. Judge the "
+"problem, question the problem: is it important? Should we do it? Is it a "
+"part of a greater problem? If you have ideas <i>how</i> to do it - add them "
+"as ideas, not comments."
+msgstr ""
+"<b>注意：</b> 请，别给建议如何解决问题在这里的评论中。在评论中请判断问题，质"
+"疑的问题：它真的重要吗？我们应该做的吗？它是一个更大的问题的一部分？如果你有"
+"解决方式，请写个<i>解决方案</i>，不要在评论中写方法。"
+
+#: src/apps/core/templates/comment/list.html:237
+#: src/apps/core/templates/comment/list.html:238
 msgid "Invite a friend to help!"
 msgstr "邀请好友帮忙！"
 
@@ -575,8 +586,8 @@ msgstr "在太空中航行的工具"
 #: src/apps/core/templates/plan/detail.html:592
 #: src/apps/core/templates/step/detail.html:195
 #: src/apps/core/templates/task/detail.html:167
-#: src/apps/core/templates/work/detail.html:187 src/templates/home.html:93
-#: src/templates/home.html.py:164 src/templates/home.html:262
+#: src/apps/core/templates/work/detail.html:187 src/templates/home.html:94
+#: src/templates/home.html.py:166 src/templates/home.html:265
 msgid "link"
 msgstr "链接"
 
@@ -587,8 +598,8 @@ msgstr "链接"
 #: src/apps/core/templates/plan/detail.html:618
 #: src/apps/core/templates/step/detail.html:207
 #: src/apps/core/templates/task/detail.html:179
-#: src/apps/core/templates/work/detail.html:199 src/templates/home.html:196
-#: src/templates/home.html.py:289
+#: src/apps/core/templates/work/detail.html:199 src/templates/home.html:198
+#: src/templates/home.html.py:292
 #, fuzzy
 #| msgid "private inbox"
 msgid "Private"
@@ -744,10 +755,10 @@ msgstr "翻译:"
 #: src/apps/core/templates/plan/detail.html:259
 #: src/apps/core/templates/step/detail.html:135
 #: src/apps/core/templates/task/detail.html:134
-#: src/apps/core/templates/work/detail.html:135 src/templates/home.html:91
-#: src/templates/home.html.py:97 src/templates/home.html:162
-#: src/templates/home.html.py:168 src/templates/home.html:260
-#: src/templates/home.html.py:266
+#: src/apps/core/templates/work/detail.html:135 src/templates/home.html:92
+#: src/templates/home.html.py:98 src/templates/home.html:164
+#: src/templates/home.html.py:170 src/templates/home.html:263
+#: src/templates/home.html.py:269
 msgid "historical"
 msgstr "历史的"
 
@@ -1756,26 +1767,26 @@ msgid "Where people share and discuss the world's issues."
 msgstr ""
 "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当人们分享和讨论全球问题。"
 
-#: src/templates/home.html:110 src/templates/home.html.py:182
-#: src/templates/home.html:280
-msgid "comments"
-msgstr "评论"
-
-#: src/templates/home.html:120 src/templates/home.html.py:212
-#: src/templates/home.html:302
-msgid "see more"
-msgstr "查看更多"
-
-#: src/templates/home.html:125
+#: src/templates/home.html:75 src/templates/home.html.py:126
 msgid "Add a problem"
 msgstr "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加一个问题。"
 
-#: src/templates/home.html:129 src/templates/home.html.py:222
-#: src/templates/home.html:312
+#: src/templates/home.html:111 src/templates/home.html.py:184
+#: src/templates/home.html:283
+msgid "comments"
+msgstr "评论"
+
+#: src/templates/home.html:121 src/templates/home.html.py:214
+#: src/templates/home.html:305
+msgid "see more"
+msgstr "查看更多"
+
+#: src/templates/home.html:130 src/templates/home.html.py:224
+#: src/templates/home.html:315
 msgid "Example:"
 msgstr "如:"
 
-#: src/templates/home.html:130
+#: src/templates/home.html:131
 msgid ""
 "\n"
 "                    <p><b>Omelette Supply Problem</b></p>\n"
@@ -1790,21 +1801,21 @@ msgstr ""
 "味。我喜欢它，想每天早上都吃到美式蛋卷，而且不用付任何额外的费用。</p>\n"
 "                    "
 
-#: src/templates/home.html:142
+#: src/templates/home.html:143
 msgid "Solutions"
 msgstr "解决方案"
 
-#: src/templates/home.html:143
+#: src/templates/home.html:144
 msgid "Where people share and discuss ideas how to solve them."
 msgstr ""
 "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当人们分享和讨论"
 "想法如何解决这些问题。"
 
-#: src/templates/home.html:218
+#: src/templates/home.html:145 src/templates/home.html.py:220
 msgid "Add a solution"
 msgstr "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提出解决方式。"
 
-#: src/templates/home.html:223
+#: src/templates/home.html:225
 msgid ""
 "\n"
 "                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>\n"
@@ -1821,24 +1832,20 @@ msgstr ""
 "可以得到新鲜的可自我维持供应的美式蛋卷。</p>\n"
 "                "
 
-#: src/templates/home.html:240
+#: src/templates/home.html:242
 msgid "Projects"
 msgstr "项目"
 
-#: src/templates/home.html:241
+#: src/templates/home.html:243
 msgid "Where people start initiatives to realize them."
 msgstr ""
 "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当人们开始行动，实现想法。"
 
-#: src/templates/home.html:307
-msgid "Oops! You have no plans!"
-msgstr "啊呀！您还没有计划！"
-
-#: src/templates/home.html:308
+#: src/templates/home.html:244 src/templates/home.html.py:311
 msgid "Add a project"
 msgstr "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开始个项目。"
 
-#: src/templates/home.html:313
+#: src/templates/home.html:316
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -2084,6 +2091,9 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "记住"
+
+#~ msgid "Oops! You have no plans!"
+#~ msgstr "啊呀！您还没有计划！"
 
 #~ msgid "invitations"
 #~ msgstr "个邀请"

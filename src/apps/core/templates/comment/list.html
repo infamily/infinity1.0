@@ -209,6 +209,12 @@ $('[data-toggle="tooltip"]').tooltip();
 {% crispy form %}
 {% markdown_media %}
 </div>
+{% if '/goal/' in request.path %}
+<div style="margin:0px; padding: 10px; background-color: grey; color:white;">
+    <p>{% trans "<b>Notice:</b> Please, don't suggest ideas in the comments. Judge the problem, question the problem: is it important? Should we do it? Is it a part of a greater problem? If you have ideas <i>how</i> to do it - add them as ideas, not comments." %}</p>
+</div>
+{% elif '/idea' in request.path %}
+{% endif %}
 </div>
 
 

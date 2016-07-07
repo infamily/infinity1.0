@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-02 18:39-0700\n"
-"PO-Revision-Date: 2016-07-03 01:53+0000\n"
+"POT-Creation-Date: 2016-07-07 08:38-0700\n"
+"PO-Revision-Date: 2016-07-07 15:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -438,7 +438,7 @@ msgid "Auto-Translate"
 msgstr "Automatinis vertimas"
 
 #: src/apps/core/templates/comment/list.html:63
-#: src/apps/core/templates/comment/list.html:224
+#: src/apps/core/templates/comment/list.html:230
 msgid "Sign in to comment"
 msgstr "Prisijungti ir komentuoti"
 
@@ -528,8 +528,20 @@ msgstr "ištrinti"
 msgid "reply"
 msgstr "atsakyti"
 
-#: src/apps/core/templates/comment/list.html:231
-#: src/apps/core/templates/comment/list.html:232
+#: src/apps/core/templates/comment/list.html:214
+msgid ""
+"<b>Notice:</b> Please, don't suggest ideas in the comments. Judge the "
+"problem, question the problem: is it important? Should we do it? Is it a "
+"part of a greater problem? If you have ideas <i>how</i> to do it - add them "
+"as ideas, not comments."
+msgstr ""
+"<b>Dėmesio:</b> nerašykite sumanymų ir idėjų, kaip spręsti problemą "
+"komentaruose. Svarstykite problemą, kvestionuokite: ar problema yra svarbi? "
+"Ar turėtume ją spręsti? Ar ji yra didesnės problemos dalis? Jei turite idėjų "
+"<i>kaip</i> ją spręsti - pridėkite jas kaip idėjas, nerašykite komentaruose."
+
+#: src/apps/core/templates/comment/list.html:237
+#: src/apps/core/templates/comment/list.html:238
 msgid "Invite a friend to help!"
 msgstr "Pakviesti draugą."
 
@@ -585,8 +597,8 @@ msgstr "transporto priemonė skirta skrydžiams į kosmosą"
 #: src/apps/core/templates/plan/detail.html:592
 #: src/apps/core/templates/step/detail.html:195
 #: src/apps/core/templates/task/detail.html:167
-#: src/apps/core/templates/work/detail.html:187 src/templates/home.html:93
-#: src/templates/home.html.py:164 src/templates/home.html:262
+#: src/apps/core/templates/work/detail.html:187 src/templates/home.html:94
+#: src/templates/home.html.py:166 src/templates/home.html:265
 msgid "link"
 msgstr "adaptuotas"
 
@@ -597,8 +609,8 @@ msgstr "adaptuotas"
 #: src/apps/core/templates/plan/detail.html:618
 #: src/apps/core/templates/step/detail.html:207
 #: src/apps/core/templates/task/detail.html:179
-#: src/apps/core/templates/work/detail.html:199 src/templates/home.html:196
-#: src/templates/home.html.py:289
+#: src/apps/core/templates/work/detail.html:199 src/templates/home.html:198
+#: src/templates/home.html.py:292
 #, fuzzy
 #| msgid "private inbox"
 msgid "Private"
@@ -755,10 +767,10 @@ msgstr "vertimai:"
 #: src/apps/core/templates/plan/detail.html:259
 #: src/apps/core/templates/step/detail.html:135
 #: src/apps/core/templates/task/detail.html:134
-#: src/apps/core/templates/work/detail.html:135 src/templates/home.html:91
-#: src/templates/home.html.py:97 src/templates/home.html:162
-#: src/templates/home.html.py:168 src/templates/home.html:260
-#: src/templates/home.html.py:266
+#: src/apps/core/templates/work/detail.html:135 src/templates/home.html:92
+#: src/templates/home.html.py:98 src/templates/home.html:164
+#: src/templates/home.html.py:170 src/templates/home.html:263
+#: src/templates/home.html.py:269
 msgid "historical"
 msgstr "istorinis"
 
@@ -1778,28 +1790,28 @@ msgstr "Problemos"
 msgid "Where people share and discuss the world's issues."
 msgstr "&nbsp;&nbsp;&nbsp;Kur žmonės dalinasi ir kalba apie pasaulio iššūkius."
 
-#: src/templates/home.html:110 src/templates/home.html.py:182
-#: src/templates/home.html:280
+#: src/templates/home.html:75 src/templates/home.html.py:126
+msgid "Add a problem"
+msgstr "Apibrėžti problemą."
+
+#: src/templates/home.html:111 src/templates/home.html.py:184
+#: src/templates/home.html:283
 #, fuzzy
 #| msgid "comment"
 msgid "comments"
 msgstr "Komentaras"
 
-#: src/templates/home.html:120 src/templates/home.html.py:212
-#: src/templates/home.html:302
+#: src/templates/home.html:121 src/templates/home.html.py:214
+#: src/templates/home.html:305
 msgid "see more"
 msgstr "skaityti daugiau..."
 
-#: src/templates/home.html:125
-msgid "Add a problem"
-msgstr "Apibrėžti problemą."
-
-#: src/templates/home.html:129 src/templates/home.html.py:222
-#: src/templates/home.html:312
+#: src/templates/home.html:130 src/templates/home.html.py:224
+#: src/templates/home.html:315
 msgid "Example:"
 msgstr "Pavyzdys:"
 
-#: src/templates/home.html:130
+#: src/templates/home.html:131
 msgid ""
 "\n"
 "                    <p><b>Omelette Supply Problem</b></p>\n"
@@ -1816,21 +1828,21 @@ msgstr ""
 "pastangų.</p>\n"
 "                    "
 
-#: src/templates/home.html:142
+#: src/templates/home.html:143
 msgid "Solutions"
 msgstr "Sumanymai"
 
-#: src/templates/home.html:143
+#: src/templates/home.html:144
 msgid "Where people share and discuss ideas how to solve them."
 msgstr ""
 "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kur žmonės dalinasi ir kalba apie "
 "idėjas, kaip problemas išspręsti."
 
-#: src/templates/home.html:218
+#: src/templates/home.html:145 src/templates/home.html.py:220
 msgid "Add a solution"
 msgstr "Pridėti sumanymą."
 
-#: src/templates/home.html:223
+#: src/templates/home.html:225
 msgid ""
 "\n"
 "                <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>\n"
@@ -1850,25 +1862,21 @@ msgstr ""
 "kiaušinienės tiekimo šaltinį. </p>\n"
 "                "
 
-#: src/templates/home.html:240
+#: src/templates/home.html:242
 msgid "Projects"
 msgstr "Projektai"
 
-#: src/templates/home.html:241
+#: src/templates/home.html:243
 msgid "Where people start initiatives to realize them."
 msgstr ""
 "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kur žmonės pradeda iniciatyvas idėjoms "
 "įgyvendinti."
 
-#: src/templates/home.html:307
-msgid "Oops! You have no plans!"
-msgstr "Jūs dar neturite planų!"
-
-#: src/templates/home.html:308
+#: src/templates/home.html:244 src/templates/home.html.py:311
 msgid "Add a project"
 msgstr "Pradėti projektą."
 
-#: src/templates/home.html:313
+#: src/templates/home.html:316
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -2116,6 +2124,9 @@ msgstr ""
 #: src/templates/translations.html:14
 msgid "Remember Me"
 msgstr "Prisiminti"
+
+#~ msgid "Oops! You have no plans!"
+#~ msgstr "Jūs dar neturite planų!"
 
 #~ msgid "invitations"
 #~ msgstr "pakvietimai"
