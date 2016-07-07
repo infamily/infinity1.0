@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-07 08:38-0700\n"
-"PO-Revision-Date: 2016-07-07 15:51+0000\n"
+"PO-Revision-Date: 2016-07-07 15:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -538,7 +538,7 @@ msgstr ""
 "<b>Dėmesio:</b> nerašykite sumanymų ir idėjų, kaip spręsti problemą "
 "komentaruose. Svarstykite problemą, kvestionuokite: ar problema yra svarbi? "
 "Ar turėtume ją spręsti? Ar ji yra didesnės problemos dalis? Jei turite idėjų "
-"<i>kaip</i> ją spręsti - pridėkite jas kaip idėjas, nerašykite komentaruose."
+"<i>kaip</i> ją spręsti - pridėkite jas kaip idėjas."
 
 #: src/apps/core/templates/comment/list.html:237
 #: src/apps/core/templates/comment/list.html:238
