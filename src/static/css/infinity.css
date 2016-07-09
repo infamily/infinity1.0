@@ -160,6 +160,11 @@ table.table.centered
     display: inline-block;
 }
 
+.alert {
+    border-width: 0 1px 4px 1px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
 .alert-error {
     background-color: #ff4136;
     border-color: #ff1103;

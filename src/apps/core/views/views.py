@@ -222,5 +222,3 @@ class IndexView(TemplateView):
 
         return context
 
-class QarmonView(TemplateView):
-    template_name = 'qarmon.html'
