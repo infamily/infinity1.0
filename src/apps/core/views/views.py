@@ -211,7 +211,7 @@ class IndexView(TemplateView):
             hour_value = 0
 
         context = {
-			'hour_value': hour_value,
+            'hour_value': hour_value,
             'dropdown_list': self.dropdown_list,
             'items': items,
             'search_form': search_form

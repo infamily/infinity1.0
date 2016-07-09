@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^[!]$', IndexView.as_view(), name='index'),
     url(r'^i$', IndexView.as_view(), name='inbox'),
     url(r'', include('apps.core.urls')),
+    url(r'^api/', include('apps.api.urls', namespace='api')),
     url(r'^user/', include('allauth.urls')),
     url(r'^user/', include('apps.users.urls')),
     url(r'^payments/', include('payments.urls', namespace="payments")),
