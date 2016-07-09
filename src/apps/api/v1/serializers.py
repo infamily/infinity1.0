@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Goal
+from core.models import Goal, Idea
 
 
 class GoalSerializer(serializers.ModelSerializer):
@@ -30,4 +30,37 @@ class GoalSerializer(serializers.ModelSerializer):
             'id'
         ]
 
-        read_only_fields = fields
+
+class IdeaSerializer(serializers.ModelSerializer):
+    detail_url = serializers.SerializerMethodField()
+    comments_count = serializers.SerializerMethodField()
+    short_content = serializers.SerializerMethodField()
+    goal = GoalSerializer(many=True)
+
+    def get_detail_url(self, obj):
+        return obj.get_absolute_url()
+
+    def get_detail_url(self, obj):
+        return obj.get_absolute_url()
+
+    def get_comments_count(self, obj):
+        return obj.comment_count()
+
+    def get_short_content(self, obj):
+        return obj.description[:34]
+
+    class Meta:
+        model = Idea
+        fields = [
+            'detail_url',
+            'comments_count',
+            'short_content',
+            'language',
+            'created_at',
+            'id',
+            'is_link',
+            'is_historical',
+            'name',
+            'goal',
+        ]
+
