@@ -309,7 +309,6 @@ class Comment(models.Model):
 
     def sum_hours_donated(self):
         self.hours_donated = sum([tx.hours for tx in self.paypal_transaction.all()])
-        #+= sum([tx.amount for tx in self.cryptsy_transaction.all()])
         self.match_hours()
         self.save()
 

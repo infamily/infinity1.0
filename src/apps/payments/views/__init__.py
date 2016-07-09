@@ -1,2 +1,2 @@
 from .paypal import *
-from .cryptsy import *
+from .coin import *

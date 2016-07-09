@@ -1092,36 +1092,6 @@ msgstr ""
 msgid "comment:"
 msgstr ""
 
-#: src/apps/payments/views/cryptsy.py:34
-msgid "Coin address succesfully updated"
-msgstr ""
-
-#: src/apps/payments/views/cryptsy.py:51
-msgid "CoinAddress succesfully created"
-msgstr ""
-
-#: src/apps/payments/views/cryptsy.py:61
-msgid "CoinAddress succesfully deleted"
-msgstr ""
-
-#: src/apps/payments/views/cryptsy.py:90
-msgid "Credential succesfully updated"
-msgstr ""
-
-#: src/apps/payments/views/cryptsy.py:137
-msgid "Credential succesfully deleted"
-msgstr ""
-
-#: src/apps/payments/views/cryptsy.py:164
-msgid "Credential succesfully created"
-msgstr ""
-
-#: src/apps/payments/views/cryptsy.py:178
-msgid ""
-"You have not added any credential. Please create a Credential or select "
-"default"
-msgstr ""
-
 #: src/apps/payments/views/paypal.py:130
 msgid ""
 "Internal fault of the payment "

@@ -1222,37 +1222,6 @@ msgstr ""
 msgid "comment:"
 msgstr "Komentar"
 
-#: src/apps/payments/views/cryptsy.py:34
-msgid "Coin address succesfully updated"
-msgstr "Coin adresa uspješno ažurirana"
-
-#: src/apps/payments/views/cryptsy.py:51
-msgid "CoinAddress succesfully created"
-msgstr "Coin adresa uspješno stvorena"
-
-#: src/apps/payments/views/cryptsy.py:61
-msgid "CoinAddress succesfully deleted"
-msgstr "Coin adresa uspješno obrisana"
-
-#: src/apps/payments/views/cryptsy.py:90
-msgid "Credential succesfully updated"
-msgstr "Uvjerenje uspješno ažurirano"
-
-#: src/apps/payments/views/cryptsy.py:137
-msgid "Credential succesfully deleted"
-msgstr "Uvjerenje uspješno obrisano"
-
-#: src/apps/payments/views/cryptsy.py:164
-msgid "Credential succesfully created"
-msgstr "Uvjerenje uspješno stvoreno"
-
-#: src/apps/payments/views/cryptsy.py:178
-msgid ""
-"You have not added any credential. Please create a Credential or select "
-"default"
-msgstr ""
-"Niste dodali uvjerenje. Molimo vas dodajte Uvjerenje ili postavite na zadano"
-
 #: src/apps/payments/views/paypal.py:130
 msgid ""
 "Internal fault of the payment "
