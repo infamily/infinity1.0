@@ -6,19 +6,27 @@ from rest_framework.permissions import IsAuthenticated
 from core.models import Goal, Idea, Plan
 from .pagination_classes import StandardResultsSetPagination
 from django.core.paginator import Paginator as DjangoPaginator
+from django.contrib.contenttypes.models import ContentType
+from core.models import Translation
+from core.models import Language
 
 
 class BaseViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         qs = super(BaseViewSet, self).get_queryset()
-        language_id = self.request.query_params.get('language', None)
+        # language_id = self.request.query_params.get('language', None)
+        content_type = ContentType.objects.get_for_model(qs.model)
+
+        language = Language.objects.get(language_code=self.request.LANGUAGE_CODE)
+
+        translations = Translation.objects.filter(content_type=content_type, language=language)
+
+        qs = qs.filter(id__in=translations.values_list('object_id', flat=True))
 
         query = Q(personal=False)
+
         if self.request.user.is_authenticated():
             query |= Q(personal=True, user=self.request.user) | Q(personal=True, sharewith=self.request.user)
-
-        if language_id is not None:
-            query &= Q(language=language_id)
 
         qs = qs.filter(query)
         qs = qs.order_by('-commented_at')
