@@ -100,4 +100,5 @@ class PlanSerializer(serializers.ModelSerializer):
             'idea',
             'remain_usd',
             'usd',
+            'personal',
         ]

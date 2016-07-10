@@ -1,46 +1,45 @@
+from django.db.models import Q
 from api.v1.serializers import GoalSerializer, IdeaSerializer, PlanSerializer
 from rest_framework import viewsets, generics
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from core.models import Goal, Idea, Plan
 from .pagination_classes import StandardResultsSetPagination
+from django.core.paginator import Paginator as DjangoPaginator
 
 
-class IdeaViewSet(viewsets.ModelViewSet):
+class BaseViewSet(viewsets.ModelViewSet):
+    def get_queryset(self):
+        qs = super(BaseViewSet, self).get_queryset()
+        language_id = self.request.query_params.get('language', None)
+
+        query = Q(personal=False)
+        if self.request.user.is_authenticated():
+            query |= Q(personal=True, user=self.request.user) | Q(personal=True, sharewith=self.request.user)
+
+        if language_id is not None:
+            query &= Q(language=language_id)
+
+        # TODO: Should be distinct here
+        # but distinct does not work properly with pagination
+        qs = qs.filter(query)
+
+        return qs
+
+
+class IdeaViewSet(BaseViewSet):
     serializer_class = IdeaSerializer
     pagination_class = StandardResultsSetPagination
-
-    def get_queryset(self):
-        queryset = Idea.objects.all()
-        language_id = self.request.query_params.get('language', None)
-
-        if language_id is not None:
-            queryset = queryset.filter(language=language_id)
-
-        return queryset
+    queryset = Idea.objects.all()
 
 
-class GoalViewSet(viewsets.ModelViewSet):
+class GoalViewSet(BaseViewSet):
     serializer_class = GoalSerializer
     pagination_class = StandardResultsSetPagination
-
-    def get_queryset(self):
-        queryset = Goal.objects.all()
-        language_id = self.request.query_params.get('language', None)
-
-        if language_id is not None:
-            queryset = queryset.filter(language=language_id)
-
-        return queryset
+    queryset = Goal.objects.all()
 
 
-class PlanViewSet(viewsets.ModelViewSet):
+class PlanViewSet(BaseViewSet):
     serializer_class = PlanSerializer
     pagination_class = StandardResultsSetPagination
-
-    def get_queryset(self):
-        queryset = Plan.objects.all()
-        language_id = self.request.query_params.get('language', None)
-
-        if language_id is not None:
-            queryset = queryset.filter(language=language_id)
-
-        return queryset
+    queryset = Plan.objects.all()
