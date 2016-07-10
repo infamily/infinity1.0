@@ -4,6 +4,7 @@ LOCAL_APPS = (
     'payments',
     'invitation',
     'hours',
+    'api',
 )
 
 LOCAL_MIDDLEWARE_CLASSES = (
