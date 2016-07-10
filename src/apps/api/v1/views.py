@@ -20,9 +20,9 @@ class BaseViewSet(viewsets.ModelViewSet):
         if language_id is not None:
             query &= Q(language=language_id)
 
-        # TODO: Should be distinct here
-        # but distinct does not work properly with pagination
         qs = qs.filter(query)
+        qs = qs.order_by('-commented_at')
+        qs = qs.distinct()
 
         return qs
 
