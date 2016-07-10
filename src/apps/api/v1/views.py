@@ -1,5 +1,5 @@
 from django.db.models import Q
-from api.v1.serializers import GoalSerializer, IdeaSerializer, PlanSerializer
+from .serializers import GoalSerializer, IdeaSerializer, PlanSerializer
 from rest_framework import viewsets, generics
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
