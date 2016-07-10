@@ -256,7 +256,6 @@ DJANGO_APPS += (
     'djmoney_rates',
     'djangobower',
     'rest_framework',
-    'rest_framework_docs',
 )
 
 REST_FRAMEWORK = {
