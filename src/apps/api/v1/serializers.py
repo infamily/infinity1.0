@@ -24,12 +24,18 @@ class GoalSerializer(serializers.ModelSerializer):
 
     def get_title(self, obj):
         language_code = self.context['request'].LANGUAGE_CODE
-        translation = get_object_translation(obj, language_code)
+        try:
+            translation = get_object_translation(obj, language_code)
+        except Translation.DoesNotExist:
+            return obj.name
         return translation.name
 
     def get_short_content(self, obj):
         language_code = self.context['request'].LANGUAGE_CODE
-        translation = get_object_translation(obj, language_code)
+        try:
+            translation = get_object_translation(obj, language_code)
+        except Translation.DoesNotExist:
+            return obj.reason[:34]
         return translation.reason[:34]
 
     class Meta:
@@ -46,11 +52,48 @@ class GoalSerializer(serializers.ModelSerializer):
         ]
 
 
+class NestedGoalSerializer(serializers.ModelSerializer):
+    title = serializers.SerializerMethodField()
+    detail_url = serializers.SerializerMethodField()
+
+    def get_detail_url(self, obj):
+        return obj.get_absolute_url()
+
+    def get_title(self, obj):
+        language_code = self.context['request'].LANGUAGE_CODE
+        try:
+            translation = get_object_translation(obj, language_code)
+        except Translation.DoesNotExist:
+            return obj.name
+        return translation.name
+
+    class Meta:
+        model = Goal
+        fields = ['title', 'detail_url']
+
+
+class NestedIdeaSerializer(serializers.ModelSerializer):
+    title = serializers.SerializerMethodField()
+    detail_url = serializers.SerializerMethodField()
+
+    def get_title(self, obj):
+        language_code = self.context['request'].LANGUAGE_CODE
+        translation = get_object_translation(obj, language_code)
+        return translation.name
+
+    def get_detail_url(self, obj):
+        return obj.get_absolute_url()
+
+    class Meta:
+        model = Idea
+        fields = ['title', 'detail_url']
+
+
 class IdeaSerializer(serializers.ModelSerializer):
     detail_url = serializers.SerializerMethodField()
     comments_count = serializers.SerializerMethodField()
     short_content = serializers.SerializerMethodField()
-    # goal = GoalSerializer(many=True)
+    goal = NestedGoalSerializer(many=True)
     title = serializers.SerializerMethodField()
 
     def get_title(self, obj):
@@ -80,6 +123,7 @@ class IdeaSerializer(serializers.ModelSerializer):
             'is_link',
             'is_historical',
             'title',
+            'goal',
         ]
 
 
@@ -87,7 +131,7 @@ class PlanSerializer(serializers.ModelSerializer):
     detail_url = serializers.SerializerMethodField()
     comments_count = serializers.SerializerMethodField()
     short_content = serializers.SerializerMethodField()
-    # idea = IdeaSerializer()
+    idea = NestedIdeaSerializer()
     remain_usd = serializers.SerializerMethodField()
     usd = serializers.SerializerMethodField()
     title = serializers.SerializerMethodField()
