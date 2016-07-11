@@ -9,9 +9,16 @@ from django.core.paginator import Paginator as DjangoPaginator
 from django.contrib.contenttypes.models import ContentType
 from core.models import Translation
 from core.models import Language
+from rest_framework import permissions
+from .permissions import IsOwnerOrReadOnly
 
 
 class BaseViewSet(viewsets.ModelViewSet):
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly,
+    )
+
     def get_queryset(self):
         qs = super(BaseViewSet, self).get_queryset()
         # language_id = self.request.query_params.get('language', None)
