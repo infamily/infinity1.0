@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "''",
   "scripts": {
-    "build": "webpack -p --config webpack.config.js --progress --profile --colors"
+    "build": "webpack -p --config webpack.config.js --progress --profile --colors",
+    "watch": "webpack -p --config webpack.config.js --progress --profile --colors --watch"
   },
   "repository": {
     "type": "git",
