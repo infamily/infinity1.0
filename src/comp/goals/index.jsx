@@ -3,17 +3,43 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
 
-export class Goals extends React.Component {
+class Goal extends React.Component {
+  render() {
+    return (
+      <div>
+      <a href={this.props.detailUrl}>{this.props.title}</a>
+      </div>
+    )
+  }
+}
+
+
+export class GoalsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: ''
+      goals: []
     };
   }
 
   componentDidMount() {
     this.serverRequest = $.get(this.props.url, function (result) {
-      this.setState({title: result.results[0].title});
+      let goals = result.results.map((item)=>{
+        return (
+          <Goal
+          title={item.title}
+          detailUrl={item.detail_url}
+          createdAt={item.created_at}
+          commentsCount={item.comments_count}
+          isLink={item.is_link}
+          isHistorical={item.is_historical}
+          shortContent={item.short_content}
+          />
+        )
+      });
+
+      this.setState({goals: goals});
+
     }.bind(this));
   }
 
@@ -22,14 +48,13 @@ export class Goals extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
-      Hello, {this.state.title}!
+      {this.state.goals}
       </div>
     )
   }
 }
 
-ReactDOM.render(<Goals url="/api/v1/goals/" />, document.querySelector("#goals"));
+ReactDOM.render(<GoalsList url="/api/v1/goals/" />, document.querySelector("#goals"));
 
