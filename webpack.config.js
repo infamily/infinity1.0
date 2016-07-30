@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = {
   entry: [
-    './src/components/index.js' // Your appʼs entry point
+    './src/comp/index.js' // Your appʼs entry point
   ],
   output: {
     path: path.join(__dirname, 'src/static/bundle'),
