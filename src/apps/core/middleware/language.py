@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.utils import translation
+from django.conf import settings
 
 
 class DomainLocaleMiddleware(object):
@@ -10,15 +11,19 @@ class DomainLocaleMiddleware(object):
     def process_request(self, request):
         # TODO: looks weird, should be refactored later
 
-        if request.META.has_key('HTTP_ACCEPT_LANGUAGE'):
-            # Totally ignore the browser settings...
-            del request.META['HTTP_ACCEPT_LANGUAGE']
+        if settings.DEBUG:
+            translation.activate(settings.LANGUAGE_CODE)
+            request.LANGUAGE_CODE = settings.LANGUAGE_CODE
+        else:
+            if request.META.has_key('HTTP_ACCEPT_LANGUAGE'):
+                # Totally ignore the browser settings...
+                del request.META['HTTP_ACCEPT_LANGUAGE']
 
-        current_domain = request.META.get('HTTP_HOST')
+            current_domain = request.META.get('HTTP_HOST')
 
-        if current_domain:
-            lang_code = settings.LANGUAGES_DOMAINS.get(current_domain)
+            if current_domain:
+                lang_code = settings.LANGUAGES_DOMAINS.get(current_domain)
 
-            if lang_code:
-                translation.activate(lang_code)
-                request.LANGUAGE_CODE = lang_code
+                if lang_code:
+                    translation.activate(lang_code)
+                    request.LANGUAGE_CODE = lang_code
