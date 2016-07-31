@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext as _
 from django.db.models import Q
 from .serializers import GoalSerializer, IdeaSerializer, PlanSerializer
 from rest_framework import viewsets, generics
@@ -13,6 +14,20 @@ from rest_framework import permissions
 
 
 class BaseViewSet(viewsets.ModelViewSet):
+
+    def list(self, request, *args, **kwargs):
+        response = super(BaseViewSet, self).list(request, *args, **kwargs)
+
+        models_map = {
+            Goal: _('Where people share and discuss the world\'s issues.'),
+            Idea: _('Where people share and discuss ideas how to solve them.'),
+            Plan: _('Where people start initiatives to realize them.')
+        }
+
+        response.data['description'] = models_map[self.queryset.model]
+
+        return response
+
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
     )

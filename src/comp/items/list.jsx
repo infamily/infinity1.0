@@ -39,6 +39,7 @@ class GoalsList extends React.Component {
     super(props);
     this.state = {
       goals: [],
+      description: ''
     };
   }
 
@@ -58,7 +59,7 @@ class GoalsList extends React.Component {
         )
       });
 
-      this.setState({goals: goals});
+      this.setState({goals: goals, description: result.description});
 
     }.bind(this));
   }
@@ -74,6 +75,7 @@ class GoalsList extends React.Component {
   render() {
     return (
       <div>
+      <center><h2>{this.state.description}</h2></center>
       {this.state.goals}
       </div>
     )
@@ -85,7 +87,8 @@ class IdeasList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ideas: []
+      ideas: [],
+      description: ''
     };
   }
 
@@ -99,7 +102,7 @@ class IdeasList extends React.Component {
         )
       });
 
-      this.setState({ideas: ideas});
+      this.setState({ideas: ideas, description: result.description});
 
     }.bind(this));
   }
@@ -115,6 +118,7 @@ class IdeasList extends React.Component {
   render() {
     return (
       <div>
+      <center><h2>{this.state.description}</h2></center>
       {this.state.ideas}
       </div>
     )
@@ -126,11 +130,7 @@ class ItemsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      default_component: <GoalsList url="/api/v1/goals/" />,
-      default_description: "Where people share and discuss the world's issues.",
-      is_idea: false,
-      is_goal: true,
-      is_plan: false
+      default_component: <GoalsList url="/api/v1/goals/" />
     };
 
     this.showGoals = this.showGoals.bind(this);
@@ -139,21 +139,13 @@ class ItemsList extends React.Component {
 
   showGoals() {
     this.setState({
-      default_component: <GoalsList url="/api/v1/goals/" />,
-      default_description: "Where people share and discuss the world's issues.",
-      is_idea: false,
-      is_goal: true,
-      is_plan: false
+      default_component: <GoalsList url="/api/v1/goals/" />
     });
   }
 
   showIdeas() {
     this.setState({
-      default_component: <IdeasList url="/api/v1/ideas/" />,
-      default_description: "Where people share and discuss ideas how to solve them.",
-      is_idea: true,
-      is_goal: false,
-      is_plan: false
+      default_component: <IdeasList url="/api/v1/ideas/" />
     });
   }
 
@@ -168,7 +160,7 @@ class ItemsList extends React.Component {
         <a href="#" onClick={this.showIdeas} className="btn btn-default">Ideas</a>
         <a href="#" onClick={this.showPlans} className="btn btn-default">Plans</a>
       </div>
-      <h2>{this.state.default_description}</h2>
+      <h2>{this.state.description}</h2>
       </center>
 
       {this.state.default_component}
