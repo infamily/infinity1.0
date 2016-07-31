@@ -15,7 +15,7 @@ class Goal extends React.Component {
 
     return (
       <div>
-      {is_link}<a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount} comments)
+      {is_link}<a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})
       <p>{this.props.shortContent}</p>
       </div>
     )

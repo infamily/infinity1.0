@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext as _
 from rest_framework import serializers
 from core.models import Goal, Idea, Plan, Translation, Language
 from django.contrib.contenttypes.models import ContentType
@@ -20,7 +21,7 @@ class GoalSerializer(serializers.ModelSerializer):
         return obj.get_absolute_url()
 
     def get_comments_count(self, obj):
-        return obj.comment_count()
+        return _("{count} comments").format(count=obj.comment_count())
 
     def get_title(self, obj):
         language_code = self.context['request'].LANGUAGE_CODE
