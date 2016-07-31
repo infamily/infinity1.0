@@ -20,15 +20,26 @@ class Goal extends React.Component {
 }
 
 
+class Idea extends React.Component {
+  render() {
+    return (
+      <div>
+      {this.props.title}
+      </div>
+    );
+  }
+}
+
+
 class GoalsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      goals: []
+      goals: [],
     };
   }
 
-  componentDidMount() {
+  getGoals() {
     this.serverRequest = $.get(this.props.url, function (result) {
       let goals = result.results.map((item)=>{
         return (
@@ -43,9 +54,14 @@ class GoalsList extends React.Component {
           />
         )
       });
+
       this.setState({goals: goals});
 
     }.bind(this));
+  }
+
+  componentDidMount() {
+    this.getGoals();
   }
 
   componentWillUnmount() {
@@ -62,4 +78,92 @@ class GoalsList extends React.Component {
 }
 
 
-export default GoalsList;
+class IdeasList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ideas: []
+    };
+  }
+
+  getIdeas() {
+    this.serverRequest = $.get(this.props.url, function (result) {
+      let ideas = result.results.map((item)=>{
+        return (
+          <Idea
+          title={item.title}
+          />
+        )
+      });
+
+      this.setState({ideas: ideas});
+
+    }.bind(this));
+  }
+
+  componentDidMount() {
+    this.getIdeas();
+  }
+
+  componentWillUnmount() {
+    this.serverRequest.abort();
+  }
+
+  render() {
+    return (
+      <div>
+      {this.state.ideas}
+      </div>
+    )
+  }
+
+}
+
+class ItemsList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      default_component: <GoalsList url="/api/v1/goals/" />,
+      is_idea: false,
+      is_goal: true,
+      is_plan: false
+    };
+
+    this.showGoals = this.showGoals.bind(this);
+    this.showIdeas = this.showIdeas.bind(this);
+  }
+
+  showGoals() {
+    this.setState({
+      default_component: <GoalsList url="/api/v1/goals/" />,
+      is_idea: false,
+      is_goal: true,
+      is_plan: false
+    });
+  }
+
+  showIdeas() {
+    this.setState({
+      default_component: <IdeasList url="/api/v1/ideas/" />,
+      is_idea: true,
+      is_goal: false,
+      is_plan: false
+    });
+  }
+
+  showPlans() {}
+
+  render() {
+    return(
+      <div>
+      <a href="#" clasName={this.state.is_goal ? "active":"inactive"} onClick={this.showGoals}>Goals</a>
+      <a href="#" onClick={this.showIdeas}>Ideas</a>
+      <a href="#" onClick={this.showPlans}>Plans</a>
+
+      {this.state.default_component}
+      </div>
+    )
+  }
+}
+
+export default ItemsList;
