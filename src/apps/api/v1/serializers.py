@@ -106,7 +106,7 @@ class IdeaSerializer(serializers.ModelSerializer):
         return obj.get_absolute_url()
 
     def get_comments_count(self, obj):
-        return obj.comment_count()
+        return _("{count} comments").format(count=obj.comment_count())
 
     def get_short_content(self, obj):
         language_code = self.context['request'].LANGUAGE_CODE
@@ -152,7 +152,7 @@ class PlanSerializer(serializers.ModelSerializer):
         return obj.get_absolute_url()
 
     def get_comments_count(self, obj):
-        return obj.comment_count()
+        return _("{count} comments").format(count=obj.comment_count())
 
     def get_short_content(self, obj):
         language_code = self.context['request'].LANGUAGE_CODE
