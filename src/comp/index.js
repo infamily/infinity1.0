@@ -34,7 +34,7 @@ jQuery.ajaxSetup({
 // way we can call into scoped objects
 export default {
   app: require('./app'),
-  goals: require('./goals')
+  items: require('./items')
 };
 
 

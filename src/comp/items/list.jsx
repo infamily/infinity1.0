@@ -1,6 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
 
+// Include component styles
+require("./list.css")
+
 
 class Goal extends React.Component {
   render() {
@@ -124,6 +127,7 @@ class ItemsList extends React.Component {
     super(props);
     this.state = {
       default_component: <GoalsList url="/api/v1/goals/" />,
+      default_description: "Where people share and discuss the world's issues.",
       is_idea: false,
       is_goal: true,
       is_plan: false
@@ -136,6 +140,7 @@ class ItemsList extends React.Component {
   showGoals() {
     this.setState({
       default_component: <GoalsList url="/api/v1/goals/" />,
+      default_description: "Where people share and discuss the world's issues.",
       is_idea: false,
       is_goal: true,
       is_plan: false
@@ -145,6 +150,7 @@ class ItemsList extends React.Component {
   showIdeas() {
     this.setState({
       default_component: <IdeasList url="/api/v1/ideas/" />,
+      default_description: "Where people share and discuss ideas how to solve them.",
       is_idea: true,
       is_goal: false,
       is_plan: false
@@ -156,9 +162,14 @@ class ItemsList extends React.Component {
   render() {
     return(
       <div>
-      <a href="#" clasName={this.state.is_goal ? "active":"inactive"} onClick={this.showGoals}>Goals</a>
-      <a href="#" onClick={this.showIdeas}>Ideas</a>
-      <a href="#" onClick={this.showPlans}>Plans</a>
+      <center>
+      <div className="btn-group btn-group-lg" role="group" aria-label="Large button group">
+        <a href="#" onClick={this.showGoals} className="btn btn-default">Goals</a>
+        <a href="#" onClick={this.showIdeas} className="btn btn-default">Ideas</a>
+        <a href="#" onClick={this.showPlans} className="btn btn-default">Plans</a>
+      </div>
+      <h2>{this.state.default_description}</h2>
+      </center>
 
       {this.state.default_component}
       </div>

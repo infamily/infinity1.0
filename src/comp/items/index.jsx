@@ -3,5 +3,5 @@ import ReactDOM from 'react-dom';
 
 import ItemsList from './list';
 
-ReactDOM.render(<ItemsList />, document.querySelector("#goals"));
-
+let elem = document.getElementById("items");
+if (elem) ReactDOM.render(<ItemsList />, elem);

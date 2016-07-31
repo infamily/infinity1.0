@@ -13,5 +13,5 @@ export class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App/>, document.querySelector("#app"));
-
+let elem = document.getElementById("app");
+if (elem) ReactDOM.render(<App/>, elem);
