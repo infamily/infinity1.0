@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var CompressionPlugin = require('compression-webpack-plugin');
 
 var PROD = JSON.parse(process.env.PROD_ENV || '0');
 
@@ -31,9 +32,15 @@ module.exports = {
       }
     ]
   },
-  plugins: PROD ? [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
+  plugins:[
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new CompressionPlugin({
+      asset: "[file].gz",
+      algorithm: "gzip",
+      regExp: /.js$/,
+      threshold: 0,
+      minRatio: 0.8
     })
-  ] : []
+  ] 
 };

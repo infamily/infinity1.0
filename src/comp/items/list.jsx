@@ -5,6 +5,8 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Badge from 'material-ui/Badge';
 import RaisedButton from 'material-ui/RaisedButton';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+import LinearProgress from 'material-ui/LinearProgress';
 
 // Include component styles
 require("./list.css")
@@ -92,7 +94,8 @@ class GoalsList extends React.Component {
     super(props);
     this.state = {
       goals: [],
-      description: ''
+      description: '',
+      loading: true
     };
   }
 
@@ -112,7 +115,7 @@ class GoalsList extends React.Component {
         )
       });
 
-      this.setState({goals: goals, description: result.description});
+      this.setState({goals: goals, description: result.description, loading: false});
 
     }.bind(this));
   }
@@ -126,12 +129,40 @@ class GoalsList extends React.Component {
   }
 
   render() {
-    return (
+    const style = {
+      container: {
+        position: 'relative',
+      },
+      refresh: {
+        display: 'inline-block',
+        position: 'relative',
+        marginLeft: '50%'
+      },
+    };
+
+    let goals = (
       <div>
       <center><h2>{this.state.description}</h2></center>
       {this.state.goals}
       </div>
     )
+
+    let refreshIndicator = (
+      <RefreshIndicator
+      size={50}
+      left={-20}
+      top={0}
+      loadingColor={"#FF9800"}
+      status="loading"
+      style={style.refresh}
+      />
+    )
+
+    if (this.state.loading) {
+      return refreshIndicator;
+    } else {
+      return goals;
+    }
   }
 }
 
@@ -140,7 +171,8 @@ class PlansList extends React.Component {
     super(props);
     this.state = {
       plans: [],
-      description: ''
+      description: '',
+      loading: true
     };
   }
 
@@ -160,7 +192,7 @@ class PlansList extends React.Component {
         )
       });
 
-      this.setState({plans: plans, description: result.description});
+      this.setState({plans: plans, description: result.description, loading: false});
 
     }.bind(this));
   }
@@ -174,12 +206,39 @@ class PlansList extends React.Component {
   }
 
   render() {
-    return (
+    const style = {
+      container: {
+        position: 'relative',
+      },
+      refresh: {
+        display: 'inline-block',
+        position: 'relative',
+        marginLeft: '50%'
+      },
+    };
+    let plans = (
       <div>
       <center><h2>{this.state.description}</h2></center>
       {this.state.plans}
       </div>
     )
+
+    let refreshIndicator = (
+      <RefreshIndicator
+      size={50}
+      left={-20}
+      top={0}
+      loadingColor={"#FF9800"}
+      status="loading"
+      style={style.refresh}
+      />
+    )
+
+    if (this.state.loading) {
+      return refreshIndicator;
+    } else {
+      return plans;
+    }
   }
 
 }
@@ -189,7 +248,8 @@ class IdeasList extends React.Component {
     super(props);
     this.state = {
       ideas: [],
-      description: ''
+      description: '',
+      loading: true
     };
   }
 
@@ -209,7 +269,7 @@ class IdeasList extends React.Component {
         )
       });
 
-      this.setState({ideas: ideas, description: result.description});
+      this.setState({ideas: ideas, description: result.description, loading: false});
 
     }.bind(this));
   }
@@ -223,12 +283,40 @@ class IdeasList extends React.Component {
   }
 
   render() {
-    return (
+    const style = {
+      container: {
+        position: 'relative',
+      },
+      refresh: {
+        display: 'inline-block',
+        position: 'relative',
+        marginLeft: '50%'
+      },
+    };
+
+    let ideas = (
       <div>
       <center><h2>{this.state.description}</h2></center>
       {this.state.ideas}
       </div>
     )
+
+    let refreshIndicator = (
+      <RefreshIndicator
+      size={50}
+      left={-20}
+      top={0}
+      loadingColor={"#FF9800"}
+      status="loading"
+      style={style.refresh}
+      />
+    )
+
+    if (this.state.loading) {
+      return refreshIndicator;
+    } else {
+      return ideas;
+    }
   }
 
 }
