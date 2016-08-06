@@ -1,5 +1,10 @@
 import React from 'react';
 import $ from 'jquery';
+import Paper from 'material-ui/Paper';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Badge from 'material-ui/Badge';
+import RaisedButton from 'material-ui/RaisedButton';
 
 // Include component styles
 require("./list.css")
@@ -47,16 +52,36 @@ class Idea extends React.Component {
   render() {
     let is_link = (()=> {
       if (this.props.isLink) {
-        return <span className="badge">link</span>
+        return (
+          <div>
+          <Badge badgeContent="Link" primary={true} />
+          {this.props.title}
+          </div>
+        )
+      } else {
+        return (<div>{this.props.title}</div>)
       }
     })();
 
+    let get_content = (()=>{
+      return (
+        <div>
+          <p>{this.props.shortContent}</p>
+          <RaisedButton
+            label={this.props.commentsCount}
+            href={this.props.detailUrl}
+          />
+        </div>
+      )
+    })();
+
     return (
-      <div>
-      <hr></hr>
-      {is_link}<a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})
-      <p>{this.props.shortContent}</p>
-      </div>
+      <Card>
+        <CardHeader
+          title={is_link}
+          subtitle={get_content}
+        />
+      </Card>
     )
   }
 }

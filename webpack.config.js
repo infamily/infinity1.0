@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
 
+var PROD = JSON.parse(process.env.PROD_ENV || '0');
+
 module.exports = {
   entry: [
     './src/comp/index.js' // Your appʼs entry point
@@ -29,11 +31,9 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: '"production"'
-    }
-  })
-  ]
+  plugins: PROD ? [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    })
+  ] : []
 };
