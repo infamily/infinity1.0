@@ -7,6 +7,7 @@ import Badge from 'material-ui/Badge';
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import LinearProgress from 'material-ui/LinearProgress';
+import AppBar from 'material-ui/AppBar';
 
 // Include component styles
 require("./list.css")
@@ -142,7 +143,7 @@ class GoalsList extends React.Component {
 
     let goals = (
       <div>
-      <center><h2>{this.state.description}</h2></center>
+      <center><h3>{this.state.description}</h3></center>
       {this.state.goals}
       </div>
     )
@@ -218,7 +219,7 @@ class PlansList extends React.Component {
     };
     let plans = (
       <div>
-      <center><h2>{this.state.description}</h2></center>
+      <center><h3>{this.state.description}</h3></center>
       {this.state.plans}
       </div>
     )
@@ -296,7 +297,7 @@ class IdeasList extends React.Component {
 
     let ideas = (
       <div>
-      <center><h2>{this.state.description}</h2></center>
+      <center><h3>{this.state.description}</h3></center>
       {this.state.ideas}
       </div>
     )
@@ -366,32 +367,39 @@ class ItemsList extends React.Component {
   isActive(menu_item) {
     if (menu_item == "plans") {
       if (this.state.plans_is_active) {
-        return "btn btn-default active";
+        return "btn btn-primary";
       }
-      return "btn btn-default";
+      return "btn";
     }
 
     if (menu_item == "goals") {
       if (this.state.goals_is_active) {
-        return "btn btn-default active";
+        return "btn btn-primary";
       }
-      return "btn btn-default";
+      return "btn";
     }
 
     if (menu_item == "ideas") {
       if (this.state.ideas_is_active) {
-        return "btn btn-default active";
+        return "btn btn-primary";
       }
 
-      return "btn btn-default";
+      return "btn";
     }
   }
 
   render() {
+    const style = {
+      height: 100,
+      width: 100,
+      margin: 20,
+      textAlign: 'center',
+      display: 'inline-block',
+    };
     return(
       <div>
       <center>
-      <div className="btn-group btn-group-lg" role="group">
+      <div className="btn-group btn-group-justified btn-group-raised" role="group">
         <a href="#" onClick={this.showGoals} className={this.isActive("goals")}>Goals</a>
         <a href="#" onClick={this.showIdeas} className={this.isActive("ideas")}>Ideas</a>
         <a href="#" onClick={this.showPlans} className={this.isActive("plans")}>Plans</a>

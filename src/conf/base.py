@@ -138,16 +138,20 @@ BOWER_COMPONENTS_ROOT = os.path.join(SITE_ROOT, 'components')
 BOWER_PATH = '/usr/local/bin/bower'
 
 BOWER_INSTALLED_APPS = [
-    'bootstrap#3.3.6',
+    'bootstrap#3.3.7',
     'bootstrap-datepicker#1.6.0',
     'bootstrap-horizon#0.1.0',
+    'bootstrap-material-design#0.5.10',
+    'bootstrap-sass#3.3.7',
     'bootswatch#3.3.6+1',
     'fancybox#2.1.5',
     'font-awesome#4.5.0',
     'jquery#2.2.0',
     'jquery-migrate#1.3.0',
     'jquery-ui#1.11.4',
+    'tether#1.3.4'
 ]
+
 # END BOWER CONFIGURATIONS
 
 # SECRET CONFIGURATION
