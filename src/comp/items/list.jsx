@@ -8,6 +8,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import LinearProgress from 'material-ui/LinearProgress';
 import AppBar from 'material-ui/AppBar';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 // Include component styles
 require("./list.css")
@@ -17,16 +19,24 @@ class Goal extends React.Component {
   render() {
     let is_link = (()=> {
       if (this.props.isLink) {
-        return <span className="badge">link</span>
+        return (
+          <div>
+          <Badge badgeContent="Link" primary={true} />
+          <a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})
+          </div>
+        )
+      } else {
+        return (<div><a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})</div>)
       }
     })();
 
     return (
-      <div>
-      <hr></hr>
-      {is_link}<a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})
-      <p>{this.props.shortContent}</p>
-      </div>
+      <Card>
+        <CardHeader
+          title={is_link}
+          subtitle={this.props.shortContent}
+        />
+      </Card>
     )
   }
 }
@@ -36,16 +46,24 @@ class Plan extends React.Component {
   render() {
     let is_link = (()=> {
       if (this.props.isLink) {
-        return <span className="badge">link</span>
+        return (
+          <div>
+          <Badge badgeContent="Link" primary={true} />
+          <a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})
+          </div>
+        )
+      } else {
+        return (<div><a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})</div>)
       }
     })();
 
     return (
-      <div>
-      <hr></hr>
-      {is_link}<a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})
-      <p>{this.props.shortContent}</p>
-      </div>
+      <Card>
+        <CardHeader
+          title={is_link}
+          subtitle={this.props.shortContent}
+        />
+      </Card>
     )
   }
 }
@@ -58,31 +76,19 @@ class Idea extends React.Component {
         return (
           <div>
           <Badge badgeContent="Link" primary={true} />
-          {this.props.title}
+          <a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})
           </div>
         )
       } else {
-        return (<div>{this.props.title}</div>)
+        return (<div><a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})</div>)
       }
-    })();
-
-    let get_content = (()=>{
-      return (
-        <div>
-          <p>{this.props.shortContent}</p>
-          <RaisedButton
-            label={this.props.commentsCount}
-            href={this.props.detailUrl}
-          />
-        </div>
-      )
     })();
 
     return (
       <Card>
         <CardHeader
           title={is_link}
-          subtitle={get_content}
+          subtitle={this.props.shortContent}
         />
       </Card>
     )
@@ -390,24 +396,54 @@ class ItemsList extends React.Component {
 
   render() {
     const style = {
-      height: 100,
-      width: 100,
-      margin: 20,
-      textAlign: 'center',
-      display: 'inline-block',
+        margin: 0,
+        top: 'auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        position: 'fixed',
     };
+
+    let create_link = (()=>{
+      if (this.isActive("goals")) {
+        return (
+          <FloatingActionButton style={style} href="/goal-create/">
+          <ContentAdd />
+          </FloatingActionButton>
+        )
+      }
+
+      if (this.isActive("ideas")) {
+        return (
+          <FloatingActionButton style={style} href="/idea-create/">
+          <ContentAdd />
+          </FloatingActionButton>
+        )
+      }
+
+      if (this.isActive("plans")) {
+        return (
+          <FloatingActionButton style={style} href="/plan-create/">
+          <ContentAdd />
+          </FloatingActionButton>
+        )
+      }
+    })();
+
     return(
       <div>
-      <center>
-      <div className="btn-group btn-group-justified btn-group-raised" role="group">
-        <a href="#" onClick={this.showGoals} className={this.isActive("goals")}>Goals</a>
-        <a href="#" onClick={this.showIdeas} className={this.isActive("ideas")}>Ideas</a>
-        <a href="#" onClick={this.showPlans} className={this.isActive("plans")}>Plans</a>
-      </div>
-      <h2>{this.state.description}</h2>
-      </center>
+        <div className="btn-group btn-group-justified btn-group-raised" role="group">
+          <a href="#" onClick={this.showGoals} className={this.isActive("goals")}>Problems</a>
+          <a href="#" onClick={this.showIdeas} className={this.isActive("ideas")}>Solutions</a>
+          <a href="#" onClick={this.showPlans} className={this.isActive("plans")}>Projects</a>
+        </div>
+        <center>
+        <h2>{this.state.description}</h2>
+        </center>
 
-      {this.state.default_component}
+        {this.state.default_component}
+        {create_link}
+
       </div>
     )
   }
