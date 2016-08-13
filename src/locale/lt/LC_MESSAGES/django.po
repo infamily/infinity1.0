@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 04:58-0700\n"
-"PO-Revision-Date: 2016-07-09 11:58+0000\n"
+"PO-Revision-Date: 2016-08-13 16:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -1786,7 +1786,7 @@ msgstr "Sumanymai.lt: atviras financinis inovacijų forumas."
 
 #: src/templates/home.html:74
 msgid "Where people share and discuss the world's issues."
-msgstr "&nbsp;&nbsp;&nbsp;Kur žmonės dalinasi ir kalba apie pasaulio iššūkius."
+msgstr "Kur žmonės dalinasi ir kalba apie pasaulio iššūkius."
 
 #: src/templates/home.html:75 src/templates/home.html.py:126
 msgid "Add a problem"
@@ -1828,9 +1828,7 @@ msgstr ""
 
 #: src/templates/home.html:144
 msgid "Where people share and discuss ideas how to solve them."
-msgstr ""
-"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kur žmonės dalinasi ir kalba apie "
-"idėjas, kaip problemas išspręsti."
+msgstr "Kur žmonės dalinasi ir kalba apie idėjas, kaip problemas išspręsti."
 
 #: src/templates/home.html:145 src/templates/home.html.py:220
 msgid "Add a solution"
@@ -1858,9 +1856,7 @@ msgstr ""
 
 #: src/templates/home.html:243
 msgid "Where people start initiatives to realize them."
-msgstr ""
-"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kur žmonės pradeda iniciatyvas idėjoms "
-"įgyvendinti."
+msgstr "Kur žmonės pradeda iniciatyvas idėjoms įgyvendinti."
 
 #: src/templates/home.html:244 src/templates/home.html.py:311
 msgid "Add a project"

@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/apps/core/forms.py:390 src/apps/core/forms.py:393
-#: src/apps/core/forms.py:1146
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 04:58-0700\n"
-"PO-Revision-Date: 2016-07-03 01:58+0000\n"
+"PO-Revision-Date: 2016-08-13 16:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -1835,8 +1833,7 @@ msgstr "Инфи́нити: экономический инновационны�
 
 #: src/templates/home.html:74
 msgid "Where people share and discuss the world's issues."
-msgstr ""
-"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Там, где люди делятся и обсуждает вопросы мира."
+msgstr "Там, где люди делятся и обсуждает вопросы мира."
 
 #: src/templates/home.html:75 src/templates/home.html.py:126
 msgid "Add a problem"
@@ -1886,8 +1883,7 @@ msgstr ""
 
 #: src/templates/home.html:144
 msgid "Where people share and discuss ideas how to solve them."
-msgstr ""
-"&nbsp;&nbsp;&nbsp;Там, где люди делятся и обсуждает идей, как их решить."
+msgstr "Там, где люди делятся и обсуждает идей, как их решить."
 
 #: src/templates/home.html:145 src/templates/home.html.py:220
 msgid "Add a solution"
@@ -1933,7 +1929,7 @@ msgstr ""
 
 #: src/templates/home.html:243
 msgid "Where people start initiatives to realize them."
-msgstr "&nbsp;&nbsp;&nbsp;Там, где люди начинают инициативы по их реализации."
+msgstr "Там, где люди начинают инициативы по их реализации."
 
 #: src/templates/home.html:244 src/templates/home.html.py:311
 msgid "Add a project"

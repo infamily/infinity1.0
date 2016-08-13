@@ -3,14 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/apps/core/forms.py:390 src/apps/core/forms.py:393
-#: src/apps/core/forms.py:1146
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 04:58-0700\n"
-"PO-Revision-Date: 2016-07-03 02:21+0000\n"
+"PO-Revision-Date: 2016-08-13 16:05+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -1766,9 +1764,7 @@ msgstr "無限: 経済とｲﾉﾍﾞｰｼｮﾝﾌｫｰﾗﾑ"
 
 #: src/templates/home.html:74
 msgid "Where people share and discuss the world's issues."
-msgstr ""
-"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ここでは人々が世"
-"界の問題を共有し、話し合います。"
+msgstr "ここでは人々が世界の問題を共有し、話し合います。"
 
 #: src/templates/home.html:75 src/templates/home.html.py:126
 msgid "Add a problem"
@@ -1801,9 +1797,7 @@ msgstr ""
 
 #: src/templates/home.html:144
 msgid "Where people share and discuss ideas how to solve them."
-msgstr ""
-"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ここでは人々がそ"
-"の解決方法のアイデアを共有し、話し合います。"
+msgstr "ここでは人々がその解決方法のアイデアを共有し、話し合います。"
 
 #: src/templates/home.html:145 src/templates/home.html.py:220
 msgid "Add a solution"
@@ -1822,9 +1816,7 @@ msgstr ""
 
 #: src/templates/home.html:243
 msgid "Where people start initiatives to realize them."
-msgstr ""
-"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ここの人々は、それらを実現するため"
-"の取り組みを開始します。"
+msgstr "ここの人々は、それらを実現するための取り組みを開始します。"
 
 #: src/templates/home.html:244 src/templates/home.html.py:311
 msgid "Add a project"
