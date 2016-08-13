@@ -405,7 +405,7 @@ class ItemsList extends React.Component {
     };
 
     let create_link = (()=>{
-      if (this.isActive("goals")) {
+      if (this.state.goals_is_active) {
         return (
           <FloatingActionButton style={style} href="/goal-create/">
           <ContentAdd />
@@ -413,7 +413,7 @@ class ItemsList extends React.Component {
         )
       }
 
-      if (this.isActive("ideas")) {
+      if (this.state.ideas_is_active) {
         return (
           <FloatingActionButton style={style} href="/idea-create/">
           <ContentAdd />
@@ -421,7 +421,7 @@ class ItemsList extends React.Component {
         )
       }
 
-      if (this.isActive("plans")) {
+      if (this.state.plans_is_active) {
         return (
           <FloatingActionButton style={style} href="/plan-create/">
           <ContentAdd />
