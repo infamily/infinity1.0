@@ -102,7 +102,8 @@ class GoalsList extends React.Component {
     this.state = {
       goals: [],
       description: '',
-      loading: true
+      loading: true,
+      types: {}
     };
   }
 
@@ -122,7 +123,7 @@ class GoalsList extends React.Component {
         )
       });
 
-      this.setState({goals: goals, description: result.description, loading: false});
+      this.setState({goals: goals, description: result.description, loading: false, types: result.types});
 
     }.bind(this));
   }
@@ -179,7 +180,8 @@ class PlansList extends React.Component {
     this.state = {
       plans: [],
       description: '',
-      loading: true
+      loading: true,
+      types: {}
     };
   }
 
@@ -199,7 +201,7 @@ class PlansList extends React.Component {
         )
       });
 
-      this.setState({plans: plans, description: result.description, loading: false});
+      this.setState({plans: plans, description: result.description, loading: false, types: result.types});
 
     }.bind(this));
   }
@@ -256,7 +258,8 @@ class IdeasList extends React.Component {
     this.state = {
       ideas: [],
       description: '',
-      loading: true
+      loading: true,
+      types: {}
     };
   }
 
@@ -276,7 +279,7 @@ class IdeasList extends React.Component {
         )
       });
 
-      this.setState({ideas: ideas, description: result.description, loading: false});
+      this.setState({ideas: ideas, description: result.description, loading: false, types: result.types});
 
     }.bind(this));
   }
@@ -335,12 +338,17 @@ class ItemsList extends React.Component {
       default_component: <GoalsList url="/api/v1/goals/" />,
       plans_is_active: false,
       goals_is_active: true,
-      ideas_is_active: false
+      ideas_is_active: false,
+      types: {}
     };
 
     this.showGoals = this.showGoals.bind(this);
     this.showIdeas = this.showIdeas.bind(this);
     this.showPlans = this.showPlans.bind(this);
+
+    this.serverRequest = $.get("/api/v1/goals/", function (result) {
+      this.setState({types: result.types});
+    }.bind(this));
   }
 
   showGoals() {
@@ -433,13 +441,10 @@ class ItemsList extends React.Component {
     return(
       <div>
         <div className="btn-group btn-group-justified btn-group-raised" role="group">
-          <a href="#" onClick={this.showGoals} className={this.isActive("goals")}>Problems</a>
-          <a href="#" onClick={this.showIdeas} className={this.isActive("ideas")}>Solutions</a>
-          <a href="#" onClick={this.showPlans} className={this.isActive("plans")}>Projects</a>
+          <a href="#" onClick={this.showGoals} className={this.isActive("goals")}>{this.state.types.problem}</a>
+          <a href="#" onClick={this.showIdeas} className={this.isActive("ideas")}>{this.state.types.solution}</a>
+          <a href="#" onClick={this.showPlans} className={this.isActive("plans")}>{this.state.types.project}</a>
         </div>
-        <center>
-        <h2>{this.state.description}</h2>
-        </center>
 
         {this.state.default_component}
         {create_link}

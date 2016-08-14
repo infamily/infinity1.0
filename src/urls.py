@@ -3,17 +3,14 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from core.views import IndexView, DefinitionCreateView, SetLanguageView
+from core.views import DefinitionCreateView, SetLanguageView
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^set-lang/(?P<lang>\w+)/$', SetLanguageView.as_view(pattern_name='home'), name='lang_redirect'),
-    url(r'^$', IndexView.as_view(), name='home'),
-    url(r'api-static/$', TemplateView.as_view(template_name="api-static.html")),
-    url(r'^[!]$', IndexView.as_view(), name='index'),
-    url(r'^i$', IndexView.as_view(), name='inbox'),
+    url(r'^$', TemplateView.as_view(template_name="api-static.html"), name='home'),
     url(r'', include('apps.core.urls')),
     url(r'^api/', include('apps.api.urls', namespace='api')),
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),

@@ -19,12 +19,36 @@ class BaseViewSet(viewsets.ModelViewSet):
         response = super(BaseViewSet, self).list(request, *args, **kwargs)
 
         models_map = {
-            Goal: _('Where people share and discuss the world\'s issues.'),
-            Idea: _('Where people share and discuss ideas how to solve them.'),
-            Plan: _('Where people start initiatives to realize them.')
+            Goal: {
+                'description': _('Where people share and discuss the world\'s issues.'),
+                'types': {
+                    'project': _('Projects'),
+                    'solution': _('Solutions'),
+                    'problem': _('Problems'),
+                    'current': _('Problem')
+                }
+            },
+            Idea: {
+                'description': _('Where people share and discuss ideas how to solve them.'),
+                'types': {
+                    'project': _('Projects'),
+                    'solution': _('Solutions'),
+                    'problem': _('Problems'),
+                    'current': _('Solution')
+                }
+            },
+            Plan: {
+                'description': _('Where people start initiatives to realize them.'),
+                'types': {
+                    'project': _('Projects'),
+                    'solution': _('Solutions'),
+                    'problem': _('Problems'),
+                    'current': _('Project')
+                }
+            }
         }
 
-        response.data['description'] = models_map[self.queryset.model]
+        response.data.update(models_map[self.queryset.model])
 
         return response
 
