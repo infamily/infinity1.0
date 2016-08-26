@@ -223,6 +223,8 @@ DJANGO_MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 )
 # END MIDDLEWARE CONFIGURATION
 
@@ -260,6 +262,7 @@ DJANGO_APPS += (
     'djmoney_rates',
     'djangobower',
     'rest_framework',
+    'corsheaders',
 )
 
 REST_FRAMEWORK = {
@@ -332,6 +335,8 @@ LOGGING = {
 CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # WSGI CONFIGURATION
