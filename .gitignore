@@ -56,4 +56,4 @@ Thumbs.db
 Desktop.ini
 
 node_modules
-src/static/bundle
+# src/static/bundle

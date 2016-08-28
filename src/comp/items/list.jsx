@@ -10,6 +10,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import AppBar from 'material-ui/AppBar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ReactMarkdown from 'react-markdown';
 
 // Include component styles
 require("./list.css")
@@ -30,11 +31,13 @@ class Goal extends React.Component {
       }
     })();
 
+    let shortContent = <ReactMarkdown source={this.props.shortContent} />;
+
     return (
       <Card>
         <CardHeader
           title={is_link}
-          subtitle={this.props.shortContent}
+          subtitle={shortContent}
         />
       </Card>
     )
@@ -57,11 +60,13 @@ class Plan extends React.Component {
       }
     })();
 
+    let shortContent = <ReactMarkdown source={this.props.shortContent} />;
+
     return (
       <Card>
         <CardHeader
           title={is_link}
-          subtitle={this.props.shortContent}
+          subtitle={shortContent}
         />
       </Card>
     )
@@ -84,11 +89,13 @@ class Idea extends React.Component {
       }
     })();
 
+    let shortContent = <ReactMarkdown source={this.props.shortContent} />;
+
     return (
       <Card>
         <CardHeader
           title={is_link}
-          subtitle={this.props.shortContent}
+          subtitle={shortContent}
         />
       </Card>
     )
