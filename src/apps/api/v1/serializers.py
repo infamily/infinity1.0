@@ -4,6 +4,8 @@ from core.models import Goal, Idea, Plan, Translation, Language
 from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import truncatewords_html
 
+from .utils import truncate_markdown
+
 
 def get_object_translation(obj, language_code):
     language = Language.objects.get(language_code=language_code)
@@ -37,8 +39,8 @@ class GoalSerializer(serializers.ModelSerializer):
         try:
             translation = get_object_translation(obj, language_code)
         except Translation.DoesNotExist:
-            return truncatewords_html(obj.reason, 34)
-        return truncatewords_html(translation.reason, 34)
+            return truncate_markdown(obj.reason, 250)
+        return truncate_markdown(translation.reason, 250)
 
     class Meta:
         model = Goal
@@ -112,7 +114,7 @@ class IdeaSerializer(serializers.ModelSerializer):
     def get_short_content(self, obj):
         language_code = self.context['request'].LANGUAGE_CODE
         translation = get_object_translation(obj, language_code)
-        return truncatewords_html(translation.summary, 34)
+        return truncate_markdown(translation.summary, 250)
 
     class Meta:
         model = Idea
@@ -158,7 +160,7 @@ class PlanSerializer(serializers.ModelSerializer):
     def get_short_content(self, obj):
         language_code = self.context['request'].LANGUAGE_CODE
         translation = get_object_translation(obj, language_code)
-        return truncatewords_html(translation.deliverable, 34)
+        return truncate_markdown(translation.deliverable, 250)
 
     class Meta:
         model = Plan
