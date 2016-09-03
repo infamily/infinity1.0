@@ -5,28 +5,36 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.views.generic import FormView
-from django.views.generic import TemplateView
-from django.views.generic import RedirectView
 from django.utils import timezone
-from django.conf import settings
 from django.utils import translation as trans_settings
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.views.generic import (
+    FormView,
+    TemplateView,
+    RedirectView,
+)
 
 from users.decorators import ForbiddenUser
 from users.models import User
 from hours.models import HourValue
 from core.models import Language
 
-from ..forms import ContentTypeSubscribeForm
-from ..models import Translation
-from ..models import Need
-from ..models import Goal
-from ..models import Idea
-from ..models import Plan
-from ..models import Step
-from ..models import Task
-from ..models import Work
+from ..forms import (
+    ContentTypeSubscribeForm,
+    SearchForm,
+)
+
+from ..models import (
+    Translation,
+    Need,
+    Goal,
+    Idea,
+    Plan,
+    Step,
+    Task,
+    Work,
+)
 
 
 class SetLanguageView(RedirectView):
@@ -87,9 +95,6 @@ class ContentTypeSubscribeFormView(FormView):
         return super(ContentTypeSubscribeFormView, self).form_valid(form)
 
 
-class LandingView(TemplateView):
-    template_name = 'landing.html'
-
 class IndexView(TemplateView):
     template_name = 'home.html'
     dropdown_list = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
@@ -139,10 +144,10 @@ class IndexView(TemplateView):
             if self.request.session.get('%s_number' % key):
                 items[key] = self.request.session['%s_number' % key]
 
-        # Basic search by name in original language
-        if 's' in self.request.GET:
-            s = self.request.GET['s']
-            q_search = Q(name__icontains=s)
+        search_form = SearchForm(self.request.GET or None)
+        if search_form.is_valid():
+            search_query = search_form.cleaned_data.get('s')
+            q_search = Q(name__icontains=search_query)
         else:
             q_search = Q()
 
@@ -203,9 +208,10 @@ class IndexView(TemplateView):
             hour_value = 0
 
         context = {
-			'hour_value': hour_value,
+            'hour_value': hour_value,
             'dropdown_list': self.dropdown_list,
             'items': items,
+            'search_form': search_form
         }
 
         context.update(instances_list)
@@ -213,3 +219,6 @@ class IndexView(TemplateView):
 
         return context
 
+
+class LandingView(TemplateView):
+    template_name = 'landing.html'

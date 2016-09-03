@@ -12,42 +12,27 @@ from users.decorators import ForbiddenUser
 from users.mixins import OwnerMixin
 from users.forms import ConversationInviteForm
 
-from ..utils import CreateViewWrapper
-from ..utils import ViewTypeWrapper
-from ..utils import UpdateViewWrapper
-from ..utils import DetailViewWrapper
-from ..utils import CommentsContentTypeWrapper
-from ..utils import DeleteViewWrapper
-from ..filters import IdeaListViewFilter1
-from ..filters import IdeaListViewFilter2
-from ..models import Goal
-from ..models import Idea
-from ..models import Plan
-from ..forms import IdeaUpdateForm
-from ..forms import IdeaCreateForm
+from ..utils import (
+    CreateViewWrapper,
+    ViewTypeWrapper,
+    UpdateViewWrapper,
+    DetailViewWrapper,
+    CommentsContentTypeWrapper,
+    DeleteViewWrapper,
+)
 
+from ..models import (
+    Goal,
+    Idea,
+    Plan,
+)
 
-@ForbiddenUser(forbidden_usertypes=[u'AnonymousUser'])
-class IdeaListView1(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name = "idea/list1.html"
-    model = Idea
-    paginate_by = 10
-    orderable_columns = [
-        "description",
-        "name",
-        "created_at",
-        "updated_at",
-        "summary",
-        "user",
-        "goal",
-    ]
-    orderable_columns_default = "-id"
-    filter_set = IdeaListViewFilter1
+from ..forms import (
+    IdeaUpdateForm,
+    IdeaCreateForm
+)
 
-    def get_base_queryset(self):
-        queryset = super(IdeaListView1, self).get_base_queryset()
-        queryset = queryset.filter(goal__pk=self.kwargs['goal'])
-        return queryset
+from ..filters import IdeaListViewFilter
 
 
 class IdeaUpdateView(UpdateViewWrapper):
@@ -120,8 +105,8 @@ class IdeaDeleteView(DeleteViewWrapper):
         return reverse('inbox')
 
 
-class IdeaListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
-    template_name = "idea/list2.html"
+class IdeaListView(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFilteredView):
+    template_name = "idea/list.html"
     model = Idea
     paginate_by = 1000
     orderable_columns = [
@@ -134,7 +119,7 @@ class IdeaListView2(ViewTypeWrapper, PaginationMixin, OrderableListMixin, ListFi
         "goal",
     ]
     orderable_columns_default = "-id"
-    filter_set = IdeaListViewFilter2
+    filter_set = IdeaListViewFilter
 
 
 class IdeaDetailView(DetailViewWrapper, CommentsContentTypeWrapper):

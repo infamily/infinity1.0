@@ -1,17 +1,29 @@
+export PYTHONWARNINGS=ignore
+export DJANGO_SETTINGS_MODULE=conf.local
+
 env:
 	virtualenv .env
 	pip install -r requirements.txt
 	npm install -g bower
 
 prepare:
-	.env/bin/python src/manage.py bower install --settings=conf.local
-	.env/bin/python src/manage.py collectstatic --noinput --settings=conf.local
+	.env/bin/python src/manage.py bower install
+	.env/bin/python src/manage.py collectstatic
 
 shell:
-	.env/bin/python src/manage.py shell --settings=conf.local
+	.env/bin/python src/manage.py shell
 
 runserver:
-	.env/bin/python src/manage.py runserver --settings=conf.local
+	.env/bin/python src/manage.py runserver
+
+test:
+	.env/bin/python src/manage.py test --settings=conf.test
+
+coverage:
+	coverage run src/manage.py test --settings=conf.test
+
+coverage-report:
+	coverage html
 
 wsgi:
 	uwsgi\

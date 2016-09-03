@@ -34,3 +34,8 @@ https://github.com/WeFindX/pygtaw/archive/master.zip
 stepio==0.1
 plandf==0.1.9
 django-bower==5.1.0
+uWSGI==2.0.13.1
+mock==2.0.0
+djangorestframework==3.3.3
+django-cors-headers==1.1.0
+

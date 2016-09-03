@@ -178,14 +178,6 @@ class FriendFollowingView(DetailView):
         return context
 
 
-class UserCryptsyNotificationToken(View):
-    def get(self, request, *args, **kwargs):
-        content = json.dumps({
-            'result': True
-        })
-        return HttpResponse(content, content_type='application/json')
-
-
 class UserDetailView(DetailView):
 
     """User detail view"""

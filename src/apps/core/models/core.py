@@ -1,7 +1,11 @@
+# coding: utf-8
+
+from __future__ import unicode_literals
 from re import finditer
 from decimal import Decimal
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
@@ -189,7 +193,9 @@ class BaseContentModel(models.Model):
         return unicode(self.name[:50])
 
     def get_absolute_url(self):
-        return "/"
+        class_name = self.__class__.__name__.lower()
+        url = "{class_name}-detail".format(class_name=class_name)
+        return reverse(url, kwargs={'slug': self.pk})
 
     def get_usd(self):
         return self.total_donated*HourValue.objects.latest('created_at').value
@@ -205,7 +211,7 @@ class BaseContentModel(models.Model):
                 object_id=self.pk
             ).exclude(default=True)
             return translations
-        except:
+        except Translation.DoesNotExist:
             return False
 
 
@@ -309,7 +315,6 @@ class Comment(models.Model):
 
     def sum_hours_donated(self):
         self.hours_donated = sum([tx.hours for tx in self.paypal_transaction.all()])
-        #+= sum([tx.amount for tx in self.cryptsy_transaction.all()])
         self.match_hours()
         self.save()
 

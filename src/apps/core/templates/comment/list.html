@@ -92,15 +92,10 @@ $(window).bind('scroll', function () {
         {% endfor %}
 
 
-        {% for transaction in object.cryptsy_transaction.all %}
-		<div class="transaction" name="transaction-{{transaction.id}}"{% if not user.is_staff %} style="display:none;" {% endif %}><b>+ {{transaction.amount}} {{transaction.address.currency_code}}</b> [{{transaction.sender_credential.user}}] → [{{transaction.address.user}}] <b>via</b> Cryptsy [{{transaction.created_on}}]
-        </div>
-        {% endfor %}
 		<div align="right">
         {% if object.hours_claimed or object.hours_assumed %}
 		<button {% if not user.is_staff %}disabled {% endif %}type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" object.id %}'"><font color="#c0c0c0">{{ object.invest_remains }} ħ </font>{% if user.is_staff %}{% trans '<i class="fa fa-dollar"></i> INVEST' %}{% endif %}</button>
   <!--  [<a href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> PayPal</a>,
-        <a href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Cryptsy</a>]-->
         {% endif %}
         </div>
     </div>
