@@ -76,16 +76,37 @@ class Plan extends React.Component {
 
 class Idea extends React.Component {
   render() {
+
+    let goal_link_style = {
+      fontSize: "11pt",
+      color: "#757575",
+      textDecoration: "underline",
+      fontVariant: "small-caps"
+    };
+
+    let goals = this.props.goals.map((item)=> {
+      return (
+        <a href="{item.detail_url}" style={goal_link_style}>{item.title}</a>
+      );
+    });
+
     let is_link = (()=> {
       if (this.props.isLink) {
         return (
           <div>
           <Badge badgeContent="Link" primary={true} />
           <a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})
+          <br></br>
+          {goals}
           </div>
         )
       } else {
-        return (<div><a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})</div>)
+        return (
+          <div>
+            <a href={this.props.detailUrl}>{this.props.title}</a> ({this.props.commentsCount})
+            <br></br>
+            {goals}
+          </div>)
       }
     })();
 
@@ -266,7 +287,7 @@ class IdeasList extends React.Component {
       ideas: [],
       description: '',
       loading: true,
-      types: {}
+      types: {},
     };
   }
 
@@ -282,6 +303,7 @@ class IdeasList extends React.Component {
           isLink={item.is_link}
           isHistorical={item.is_historical}
           shortContent={item.short_content}
+          goals={item.goal}
           />
         )
       });
