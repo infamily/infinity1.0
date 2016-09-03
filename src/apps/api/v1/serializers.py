@@ -5,13 +5,18 @@ from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import truncatewords_html
 
 from .utils import truncate_markdown
+import logging
 
 
 def get_object_translation(obj, language_code):
     language = Language.objects.get(language_code=language_code)
     content_type = ContentType.objects.get_for_model(obj)
-    translation = Translation.objects.get(language=language, content_type=content_type, object_id=obj.id)
-    return translation
+    try:
+        translation = Translation.objects.get(language=language, content_type=content_type, object_id=obj.id)
+        return translation
+    except Exception as e:
+        logging.exception('Translation not found. Returning actual object.')
+        return obj
 
 
 class GoalSerializer(serializers.ModelSerializer):
@@ -21,7 +26,12 @@ class GoalSerializer(serializers.ModelSerializer):
     title = serializers.SerializerMethodField()
 
     def get_detail_url(self, obj):
-        return obj.get_absolute_url()
+        absolute_url = obj.get_absolute_url()
+        if hasattr(self.context['request'],'LANGUAGE_CODE'):
+            language_code = self.context['request'].LANGUAGE_CODE
+            return "%s?lang=%s" % (absolute_url, language_code)
+        else:
+            return absolute_url
 
     def get_comments_count(self, obj):
         return _("{count} comments").format(count=obj.comment_count())
@@ -61,7 +71,12 @@ class NestedGoalSerializer(serializers.ModelSerializer):
     detail_url = serializers.SerializerMethodField()
 
     def get_detail_url(self, obj):
-        return obj.get_absolute_url()
+        absolute_url = obj.get_absolute_url()
+        if hasattr(self.context['request'],'LANGUAGE_CODE'):
+            language_code = self.context['request'].LANGUAGE_CODE
+            return "%s?lang=%s" % (absolute_url, language_code)
+        else:
+            return absolute_url
 
     def get_title(self, obj):
         language_code = self.context['request'].LANGUAGE_CODE
@@ -86,7 +101,12 @@ class NestedIdeaSerializer(serializers.ModelSerializer):
         return translation.name
 
     def get_detail_url(self, obj):
-        return obj.get_absolute_url()
+        absolute_url = obj.get_absolute_url()
+        if hasattr(self.context['request'],'LANGUAGE_CODE'):
+            language_code = self.context['request'].LANGUAGE_CODE
+            return "%s?lang=%s" % (absolute_url, language_code)
+        else:
+            return absolute_url
 
     class Meta:
         model = Idea
@@ -106,7 +126,12 @@ class IdeaSerializer(serializers.ModelSerializer):
         return translation.name
 
     def get_detail_url(self, obj):
-        return obj.get_absolute_url()
+        absolute_url = obj.get_absolute_url()
+        if hasattr(self.context['request'],'LANGUAGE_CODE'):
+            language_code = self.context['request'].LANGUAGE_CODE
+            return "%s?lang=%s" % (absolute_url, language_code)
+        else:
+            return absolute_url
 
     def get_comments_count(self, obj):
         return _("{count} comments").format(count=obj.comment_count())
@@ -152,7 +177,12 @@ class PlanSerializer(serializers.ModelSerializer):
         return obj.get_usd()
 
     def get_detail_url(self, obj):
-        return obj.get_absolute_url()
+        absolute_url = obj.get_absolute_url()
+        if hasattr(self.context['request'],'LANGUAGE_CODE'):
+            language_code = self.context['request'].LANGUAGE_CODE
+            return "%s?lang=%s" % (absolute_url, language_code)
+        else:
+            return absolute_url
 
     def get_comments_count(self, obj):
         return _("{count} comments").format(count=obj.comment_count())
