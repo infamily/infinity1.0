@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from users.views import *
 
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 urlpatterns = [
     url(
@@ -19,18 +21,17 @@ urlpatterns = [
         name='follow'
     ),
     url(
-        r'^(?P<username>.*)/cryptsy/(?P<credential_id>\d+)/checkpoint/$',
-        UserCryptsyNotificationToken.as_view(),
-        name='cryptsy_notification_token'
-    ),
-    url(
         r'^i/(?P<object_name>.*)/(?P<object_id>\d+)/$',
-        ConversationInviteView.as_view(),
+        staff_member_required(
+            ConversationInviteView.as_view(),
+        ),
         name="user-conversation-invite"
     ),
     url(
         r'^i/(?P<token>.*)/$',
-        ConversationInviteView.as_view(),
+        staff_member_required(
+            ConversationInviteView.as_view(),
+        ),
         name="user-conversation-invite"
     ),
     url(

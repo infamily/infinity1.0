@@ -1,11 +1,20 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load django_markdown %}
+{% load get_translation %}
 
 
-{% block title %}t: {{ object.name }}{% endblock title %}
+{% block extra_js %}
+   <script src="{% static "js/sharelink.js" %}"></script>
+{% endblock extra_js %}
+{% block extra_css %}
+   <link rel="stylesheet" href="{% static "css/sharelink.css" %}">
+{% endblock extra_css %}
+
+{% block title %}t: {% if not translation %}{{ object.name }}{% else %}{{ translation.name }}{% endif %}{% endblock title %}
 
 {% block content %}
 
@@ -32,7 +41,41 @@ function showLess(){
 
 <div class="panel panel-default box col-sm-12 col-md-7">
 <div class="panel-body">
-    <div class="alignleft"><a href="#id_name" onclick="getfocus()"><i class="fa fa-share"></i></a></div>
+
+	  <div class="alignleft">
+          <div class="dropdown" >
+              <button onclick="showLink()" type="button" class="dropbtn" style="color: white; background-color: #76c85a; border-color: #76c85a; border-radius: 5px 5px 5px 5px;">{% trans "Share link" %} <i class="fa fa-caret-down"></i></button>
+              <button onclick="window.print()" type="button" style="border-radius: 5px 5px 5px 5px;"><i class="fa fa-print"></i></button>
+              <script language="javascript">
+                    function emailCurrentPage(){
+                     window.location.href="mailto:?subject="+document.title+"&body="+escape('http://{{request.META.HTTP_HOST}}/t/{{ object.id }}/{{ request.GET.lang }}');
+                    }
+              </script>
+              <button onclick="javascript:emailCurrentPage()" type="button" style="border-radius: 5px 5px 5px 5px;"><i class="fa fa-envelope"></i></button>
+
+              <div id="myDropdown" class="dropdown-content">
+                <div style="margin:20px;">
+					<table>
+						<tr>
+							<td>
+								<input id="sharelink" style="width: 13em; display:inline;" type="text" value="http://{{request.META.HTTP_HOST}}/t/{{ object.id }}/{{ request.GET.lang }}" onclick="this.select();" onmouseover="this.select();">
+					        </td>
+							<td>
+								<input id="sharelinkbtn" type="button" value="{% trans "copy" %}" style="margin-left: 5px;" onclick="document.getElementById('sharelink').select(); document.execCommand('copy');">
+					        </td>
+					</table>
+                    <!-- qr code -->
+					<script type="text/javascript" src="{% static "js/jquery.qrcode.js" %}"></script>
+					<script type="text/javascript" src="{% static "js/qrcode.js" %}"></script>
+					<div align="center" id="qrcode" style="padding-top: 15px;"></div>
+					<script>
+					jQuery('#qrcode').qrcode("http://{{request.META.HTTP_HOST}}/t/{{ object.id }}/{{ request.GET.lang }}");
+					</script>
+				</div>
+              </div>
+
+          </div>
+	  </div>
 
       <div class="alignright">
           <form style="text-align: right;" action="/subscribe/" method="post" accept-charset="utf-8">{% csrf_token %}
@@ -50,12 +93,12 @@ function showLess(){
           
 		  {% if object.step.personal %}
 		    {% if request.user in object.step.sharewith or request.user == object.step.user %}
-		       {{ object.step }}
+               {% get_translation object.step request.LANGUAGE_CODE "name" %}
 		    {% else %}
                {% trans "private" %} {% trans "step" %} (by {{ object.step.user.username }})
 			{% endif %}
 		  {% else %}
-		  {{ object.step }}
+          {% get_translation object.step request.LANGUAGE_CODE "name" %}
 		  {% endif %}
       
       </a><br/>
@@ -130,15 +173,15 @@ function showLess(){
                 <i class="fa {% if object.user == request.user %}fa-lock{% else %}fa-flag{% endif %}"></i>
                 {% endif %}
                 {% if request.user in object.sharewith or request.user == object.user %}
-                    <a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
-                    <p>{{object.description|markdown|truncatewords_html:35}}</p>
+                <a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% get_translation object request.LANGUAGE_CODE "name" %}</a>
+                    <p>{% get_translation object request.LANGUAGE_CODE "description" as detail %}{{detail|markdown|truncatewords_html:35 }}</p>
                 {% else %}
 					<a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% trans "Private" %} {% trans "work" %}.</a>
 					<p>{% trans "Request access:" %} [<a href="{% url 'user-detail' object.user.username %}">{{object.user.username}}</a>]</p>
                 {% endif %}
             {% else %}
-                <a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{{object.name}}</a>
-                <p>{{object.description|markdown|truncatewords_html:35}}</p>
+            <a href="{% url "work-detail" object.pk %}?lang={{ request.LANGUAGE_CODE }}">{% get_translation object request.LANGUAGE_CODE "name" %}</a>
+                <p>{% get_translation object request.LANGUAGE_CODE "description" as detail %}{{detail|markdown|truncatewords_html:35 }}</p>
             {% endif %}
 
       </li>

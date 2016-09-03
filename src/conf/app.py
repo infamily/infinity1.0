@@ -4,6 +4,11 @@ LOCAL_APPS = (
     'payments',
     'invitation',
     'hours',
+    'api',
+)
+
+LOCAL_MIDDLEWARE_CLASSES = (
+    'core.middleware.language.DomainLocaleMiddleware',
 )
 
 CONVERSATION_EMAIL_TEMPLATE = """

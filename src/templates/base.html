@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load country_isocode %}
+{% load extra_filters %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,13 +12,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    {% include "includes/_config.html" %}
-
     {% block head %}{% endblock head %}
 
     <!-- Le styles -->
     <link href="{% static "bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "bootswatch/lumen/bootstrap.min.css" %}" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-material-design/dist/css/bootstrap-material-design.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-material-design/dist/css/ripples.min.css" %}">
+
     <link href="{% static "bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" %}" rel="stylesheet">
     <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
     <link href="{% static "jquery-ui/themes/smoothness/jquery-ui.min.css" %}" rel="stylesheet">
@@ -70,9 +73,115 @@
 
   <body>
 
-      {% include "includes/_navbar_new.html" %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container" id="navigation" >
+        <div class="navbar-header">
 
-    <div class="container top-space" >
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+		  <a class="navbar-brand" href="{% url "home" %}"><span class='brand'>{% trans "Solving Problems" %}</span><!--<span class="infin">&infin;</span><span class='ity'>.xyz</span>--></a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+        {% load i18n %}
+
+		<script>
+
+        // Swaps JSON keys with values
+        function swap(json){
+            var ret = {};
+            for(var key in json){
+                ret[json[key]] = key;
+            }
+            return ret;
+        }
+
+        function langDomainRedirect(it) {
+
+            var target_language = $(it).closest('form').find("select option:selected").val();
+            // from settings.LANGUAGES_DOMAINS
+
+            var base_domain = "{{ base_domain }}";
+            var languages_domains = swap({{ languages_domains|jsonify|safe }});
+            var current_domain = "{{ request.META.HTTP_HOST }}";
+
+            if (target_language in languages_domains) {
+                window.location.href = 'https://'+languages_domains[target_language]+'{{ request.get_full_path }}';
+            }
+            else if (current_domain != base_domain) {
+                window.location.href = 'https://'+base_domain+'/set-lang/'+target_language.split("-")[0]+'/?next={{ request.path }}';
+            }
+            else {
+                $(it).closest('form').submit();
+            }
+        }
+        </script>
+
+        <form class="navbar-form navbar-right" action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" name="next" type="hidden" value="{{ redirect_to }}" />
+                <select class="form-control" onchange="langDomainRedirect(this);" name="language">
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                    </option>
+                    {% endfor %}
+                </select>
+                <!-- Support Us
+                <ul class="nav navbar-right" style="float:right;margin-top:0px;">
+                    <li>&nbsp;<a href="{% url "dev" %}" class="btn-sm" style="height:38px;color: white; background-color: grey; font-variant: small-caps;">XYZ</a>&nbsp;</li>
+                </ul>
+                Support Us -->
+            </div>
+        </form>
+
+
+          <ul class="nav navbar-nav">
+
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+              {% if request.get_full_path == "/dev/" %}
+			  <!-- <li><a href="{% url "data" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Data" %}</a></li>-->
+              {% elif request.get_full_path == "/data/" %}
+                <li><a href="{% url "dev" %}" class="btn-lg" style="color: white; background-color: grey;">{% trans "Open Source" %}</a></li>
+              {% else %}
+              {% endif %}
+
+              {% if request.user.is_authenticated %}
+              <li>
+              <a href="{% url "inbox" %}"><b>[{{ request.user }}]</b></a>
+              </li>
+			  <!--
+              <li>
+              <a href="{% url "user-detail" request.user.username %}"><span id="credit">{{ request.user.get_comment_credit|floatformat:1 }}</span> <b>ħ</b></a>
+              </li>
+              <li>
+              <a href="{% url "payments:transaction_paypal_list_view" %}"><span id="credit">{{ request.user.get_matched_hours|floatformat:2 }}</span> <b>ḥ</b></a>
+              </li>
+			  -->
+              {% else %}
+			  <li>
+			  <a href="{% url "about" %}"><b>{% trans "About" %}</b></a>
+			  </li>
+
+              <li>
+              <a href="{% url "account_login" %}"><b>{% trans "Sign in" %}</b></a>
+              </li>
+
+              {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+
+      </div>
+    </div>
+    <div class="container top-space">
     {% for message in messages %}
         <div class="alert alert-{{ message.tags }}" role="alert">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>

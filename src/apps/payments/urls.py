@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .views import *
 
@@ -11,38 +12,15 @@ urlpatterns = [
     ),
     url(
         r'^paypal/(?P<comment_id>\d+)/$',
-        PayPalTransactionView.as_view(),
+        staff_member_required(
+            PayPalTransactionView.as_view(),
+        ),
         name='transaction_paypal'
     ),
     url(
         r'^paypal/success/$',
         PayPalTransactionSuccessView.as_view(),
         name='transaction_paypal_success'
-    ),
-    url(
-        r'^cryptsy/(?P<comment_id>\d+)/$',
-        CryptsyTransactionCreateView.as_view(),
-        name='transaction_cryptsy'
-    ),
-    url(
-        r'^cryptsy/credential/create/$',
-        CryptsyCredentialCreateView.as_view(),
-        name='cryptsy_credential_create'
-    ),
-    url(
-        r'^cryptsy/credential/update/(?P<pk>\d+)/$',
-        CryptsyCredentialUpdateView.as_view(),
-        name='cryptsy_credential_update'
-    ),
-    url(
-        r'^cryptsy/credential/list/$',
-        CryptsyCredentialListView.as_view(),
-        name='cryptsy_credential_list'
-    ),
-    url(
-        r'^cryptsy/credential/delete/(?P<pk>\d+)/$',
-        CryptsyCredentialDeleteView.as_view(),
-        name='cryptsy_credential_delete'
     ),
     url(
         r'^coin/address/list/$',

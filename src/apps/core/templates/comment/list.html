@@ -18,6 +18,13 @@
   {% endif %}
 {% endblock extra_css %}
 
+{% if not request.user.is_staff %}
+<style>
+    #div_id_monetary {
+    display:none;
+    }
+</style>
+{% endif %}
 
 <script>
 function getfocus() {
@@ -53,7 +60,7 @@ $(window).bind('scroll', function () {
 <br/>
 <br/>
 {% else %}
-<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">comment</button></a>
+<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button" style="color: white; background-color: #444444; border-color: #444444; border-radius: 5px 5px 5px 5px;">{% trans "Sign in to comment" %} <i class="fa fa-github"></i></button></a>
 <br/>
 <br/>
 {% endif %}
@@ -72,7 +79,7 @@ $(window).bind('scroll', function () {
 
 
         {% for transaction in object.paypal_transaction.all|dictsort:"id" %}
-        <div class="transaction" name="transaction-{{transaction.id}}" style="line-height: 80%;"><b>
+		<div class="transaction" name="transaction-{{transaction.id}}" style="{% if not user.is_staff %}display:none;{% endif %}line-height: 80%;"><b>
                 {% if transaction.hours_matched %}
                 <span style="color:#a0a0a0; font-weight: normal; text-decoration:underline;" data-toggle="tooltip" title="{{transaction.hours_matched}} ḥ">
                 {% else %}
@@ -85,35 +92,17 @@ $(window).bind('scroll', function () {
         {% endfor %}
 
 
-        {% for transaction in object.cryptsy_transaction.all %}
-        <div class="transaction" name="transaction-{{transaction.id}}"><b>+ {{transaction.amount}} {{transaction.address.currency_code}}</b> [{{transaction.sender_credential.user}}] → [{{transaction.address.user}}] <b>via</b> Cryptsy [{{transaction.created_on}}]
-        </div>
-        {% endfor %}
-        <div align="right">
+		<div align="right">
         {% if object.hours_claimed or object.hours_assumed %}
-        <button type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" object.id %}'"><font color="#c0c0c0">{{ object.invest_remains }} ħ </font>{% trans '<i class="fa fa-dollar"></i> INVEST' %}</button>
+		<button {% if not user.is_staff %}disabled {% endif %}type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" object.id %}'"><font color="#c0c0c0">{{ object.invest_remains }} ħ </font>{% if user.is_staff %}{% trans '<i class="fa fa-dollar"></i> INVEST' %}{% endif %}</button>
   <!--  [<a href="{% url "payments:transaction_paypal" object.id %}"><i class="fa fa-paypal"></i> PayPal</a>,
-        <a href="{% url "payments:transaction_cryptsy" object.id %}"><i class="fa fa-btc"></i> Cryptsy</a>]-->
         {% endif %}
         </div>
     </div>
 
     <div class="actions">
-    <div class="alignright date">
-
-        --[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}<br/>
-        <div class="alignright">
-            {% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
-            {% else %}
-            {% if request.user.is_authenticated %}
-            <button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
-            {% else %}
-                <a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">{% trans "reply" %}</button></a>
-            {% endif %}
-            {% endif %}
-        </div>
-    </div>
-        <div style="float:left;">	
+		<br>
+        <div style="float:left; margin-top:-10px;">	
 			<span id="total-votes-{{object.id}}">{{ object.votes }}</span> - 
 
 			{% if request.user.is_authenticated %}
@@ -169,6 +158,23 @@ $(window).bind('scroll', function () {
 
 			- {% trans "credit" %} <span id="comment-credit-{{object.id}}">{{ object.comment_credit|floatformat:1 }}</span> ħ
         </div>
+
+		<div class="alignright date">
+
+			--[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}<br/>
+			<div class="alignright">
+				{% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
+				{% else %}
+				{% if request.user.is_authenticated %}
+				<button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
+				{% else %}
+					<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">{% trans "reply" %}</button></a>
+				{% endif %}
+				{% endif %}
+			</div>
+		</div>
+
+		<br>
     </div>
 
     <br>
@@ -198,18 +204,31 @@ $('[data-toggle="tooltip"]').tooltip();
 {% crispy form %}
 {% markdown_media %}
 </div>
+{% if '/goal/' in request.path %}
+<div style="margin:0px; padding: 10px; background-color: grey; color:white;">
+    <p>{% trans "<b>Notice:</b> Please, don't suggest ideas in the comments. Judge the problem, question the problem: is it important? Should we do it? Is it a part of a greater problem? If you have ideas <i>how</i> to do it - add them as ideas, not comments." %}</p>
+</div>
+{% elif '/idea' in request.path %}
+{% endif %}
 </div>
 
-<div class="panel panel-default">
+
+<div class="panel panel-default" style="{% if not request.user.is_staff %}display:none;{% endif %}">
     <div class="panel-body">
         {% crispy conversation_form %}
     </div>
 </div>
+
 {% else %}
 <!-- logged out end of comment list -->
+    {% if object_list %}
+	<div align="left" style="display:block"><a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button" style="color: white; background-color: #888888; border-color: #888888; border-radius: 5px 5px 5px 5px;">{% trans "Sign in to comment" %} <i class="fa fa-github"></i></button></a></div>
+    {% endif %}
 {% endif %}
 
 
 {% if request.user.is_authenticated %}
-<div class="invite_fd"><b><a href="#id_name" onclick="getfocus()" style="color:white; text-decoration: none;">{% trans "Invite a friend to help!" %}</a></b></div>
+<!-- for now, let's simply use the traditional invites -->
+<!-- <div class="invite_fd"><b><a href="#id_name" onclick="getfocus()" style="color:white; text-decoration: none;">{% trans "Invite a friend to help!" %}</a></b></div> -->
+<div class="invite_fd"><b><a href="{% url "invite:send"  %}" style="color:white; text-decoration: none;">{% trans "Invite a friend to help!" %}</a></b></div>
 {% endif %}

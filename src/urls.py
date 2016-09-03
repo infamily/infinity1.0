@@ -3,23 +3,25 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from core.views import IndexView, DefinitionCreateView, SetLanguageView
+from core.views import DefinitionCreateView, SetLanguageView
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^set-lang/(?P<lang>\w+)/$', SetLanguageView.as_view(pattern_name='home'), name='lang_redirect'),
-    url(r'^$', IndexView.as_view(), name='home'),
-    url(r'^[!]$', IndexView.as_view(), name='index'),
-    url(r'^i$', IndexView.as_view(), name='inbox'),
+    url(r'^$', TemplateView.as_view(template_name="api-static.html"), name='home'),
     url(r'', include('apps.core.urls')),
+    url(r'^api/', include('apps.api.urls', namespace='api')),
+    url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^user/', include('allauth.urls')),
     url(r'^user/', include('apps.users.urls')),
     url(r'^payments/', include('payments.urls', namespace="payments")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^select2/', include('django_select2.urls')),
     url(r'^invite/', include('invitation.urls', namespace='invite')),
+    url(r'^landing/$', TemplateView.as_view(template_name='landing.html'),
+        name="landing"),
     url(r'^help/$', TemplateView.as_view(template_name='help.html'),
         name="help"),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'),

@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.views.generic import RedirectView
 
 from core.views import *
 
@@ -274,5 +275,19 @@ urlpatterns = [
         r'^heavy_data_definition_complete/$',
         heavy_data_definition_complete,
         name="heavy_data_definition_complete"
-    )
+    ),
+    url(r'^n/(?P<id>\d+)/$', RedirectView.as_view(url='/need/%(id)s/detail')),
+    url(r'^g/(?P<id>\d+)/$', RedirectView.as_view(url='/goal/%(id)s/detail')),
+    url(r'^i/(?P<id>\d+)/$', RedirectView.as_view(url='/idea/%(id)s/detail')),
+    url(r'^p/(?P<id>\d+)/$', RedirectView.as_view(url='/plan/%(id)s/detail')),
+    url(r'^s/(?P<id>\d+)/$', RedirectView.as_view(url='/step/%(id)s/detail')),
+    url(r'^t/(?P<id>\d+)/$', RedirectView.as_view(url='/task/%(id)s/detail')),
+    url(r'^w/(?P<id>\d+)/$', RedirectView.as_view(url='/work/%(id)s/detail')),
+    url(r'^n/(?P<id>\d+)/(?P<lang>[a-zA-Z-_0-9]+)/$', RedirectView.as_view(url='/need/%(id)s/detail/?lang=%(lang)s')),
+    url(r'^g/(?P<id>\d+)/(?P<lang>[a-zA-Z-_0-9]+)/$', RedirectView.as_view(url='/goal/%(id)s/detail/?lang=%(lang)s')),
+    url(r'^i/(?P<id>\d+)/(?P<lang>[a-zA-Z-_0-9]+)/$', RedirectView.as_view(url='/idea/%(id)s/detail/?lang=%(lang)s')),
+    url(r'^p/(?P<id>\d+)/(?P<lang>[a-zA-Z-_0-9]+)/$', RedirectView.as_view(url='/plan/%(id)s/detail/?lang=%(lang)s')),
+    url(r'^s/(?P<id>\d+)/(?P<lang>[a-zA-Z-_0-9]+)/$', RedirectView.as_view(url='/step/%(id)s/detail/?lang=%(lang)s')),
+    url(r'^t/(?P<id>\d+)/(?P<lang>[a-zA-Z-_0-9]+)/$', RedirectView.as_view(url='/task/%(id)s/detail/?lang=%(lang)s')),
+    url(r'^w/(?P<id>\d+)/(?P<lang>[a-zA-Z-_0-9]+)/$', RedirectView.as_view(url='/work/%(id)s/detail/?lang=%(lang)s')),
 ]

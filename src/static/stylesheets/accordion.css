@@ -1,0 +1,224 @@
+/* Updated version - 24th Nov 2014 */
+/* line 5, ../../../../../../../../../usr/lib/ruby/gems/2.3.0/gems/compass-1.0.3/vendor/bundle/ruby/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* line 22, ../../../../../../../../../usr/lib/ruby/gems/2.3.0/gems/compass-1.0.3/vendor/bundle/ruby/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../../../usr/lib/ruby/gems/2.3.0/gems/compass-1.0.3/vendor/bundle/ruby/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../../../usr/lib/ruby/gems/2.3.0/gems/compass-1.0.3/vendor/bundle/ruby/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../../../usr/lib/ruby/gems/2.3.0/gems/compass-1.0.3/vendor/bundle/ruby/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../../../usr/lib/ruby/gems/2.3.0/gems/compass-1.0.3/vendor/bundle/ruby/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../../../usr/lib/ruby/gems/2.3.0/gems/compass-1.0.3/vendor/bundle/ruby/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../../../usr/lib/ruby/gems/2.3.0/gems/compass-1.0.3/vendor/bundle/ruby/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../../../usr/lib/ruby/gems/2.3.0/gems/compass-1.0.3/vendor/bundle/ruby/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* Variables */
+@font-face {
+  font-family: 'Genericons';
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/genericons-regular-webfont.eot");
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/genericons-regular-webfont.woff") format("woff"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/genericons-regular-webfont.eot") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 25, ../sass/accordion.scss */
+[class*="genericon"] {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  line-height: 1;
+  font-family: 'Genericons';
+  text-decoration: inherit;
+  font-weight: normal;
+  font-style: normal;
+  vertical-align: top;
+}
+
+/* IE7 */
+/* line 40, ../sass/accordion.scss */
+[class*="genericon"] {
+  *overflow: auto;
+  *zoom: 1;
+  *display: inline;
+}
+
+/* line 48, ../sass/accordion.scss */
+.accordion {
+  background: #f0f0f0;
+  width: 100%;
+  min-width: 950px;
+  display: block;
+  list-style-type: none;
+  overflow: hidden;
+  height: 95vh;
+  font-size: 0;
+}
+
+/* line 59, ../sass/accordion.scss */
+.tabs {
+  display: inline-block;
+  background-color: #c0c0c0;
+  border-right: #f0f0f0 1px solid;
+  width: 60px;
+  height: 95vh;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  font-size: 16px;
+  -moz-transition: all 0.4s ease-in-out 0.1s;
+  -o-transition: all 0.4s ease-in-out 0.1s;
+  -webkit-transition: all 0.4s ease-in-out;
+  -webkit-transition-delay: 0.1s;
+  transition: all 0.4s ease-in-out 0.1s;
+}
+/* line 71, ../sass/accordion.scss */
+/*.tabs:hover {
+  width: 91.5vw!important;
+}
+*/
+  /* 1450px; */
+/* line 76, ../sass/accordion.scss */
+.tabs:hover .social-links a:before {
+  margin-left: -100px;
+}
+/* line 80, ../sass/accordion.scss */
+.tabs:hover .social-links a:after {
+  margin-left: -5px;
+}
+/* line 87, ../sass/accordion.scss */
+.tabs .paragraph {
+  position: relative;
+  width: auto;
+  /* 1400 px; */
+  /* controls the width of content item, default was: 1320px; */
+  margin-left: 60px;
+  padding: 50px 0 0 10px;
+  height: 95vh;
+  background: #fff;
+}
+/* line 95, ../sass/accordion.scss */
+.tabs .paragraph h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+/* line 100, ../sass/accordion.scss */
+.tabs .paragraph p {
+  font-size: 0.88em;
+  line-height: 1.5em;
+  padding-right: 30px;
+}
+
+/* line 108, ../sass/accordion.scss */
+.social-links {
+  display: block;
+}
+/* line 111, ../sass/accordion.scss */
+.social-links a {
+  display: block;
+  text-indent: -9999px;
+  font-size: 0;
+  line-height: 0;
+}
+/* line 117, ../sass/accordion.scss */
+.social-links a:before, .social-links a:after {
+  -moz-transition: all 0.1s ease-in-out 0.1s;
+  -o-transition: all 0.1s ease-in-out 0.1s;
+  -webkit-transition: all 0.1s ease-in-out;
+  -webkit-transition-delay: 0.1s;
+  transition: all 0.1s ease-in-out 0.1s;
+  width: 60px;
+  height: 95vh;
+  position: absolute;
+  text-indent: 0;
+  padding-top: 90px;
+  padding-left: 15px;
+  /*reduces the distance of non-hover left margin to icon, default was: 25px*/
+  display: block;
+  font: normal 30px Genericons;
+  color: #fff;
+}
+/* line 130, ../sass/accordion.scss */
+.social-links a:after {
+  font-size: 48px;
+  padding-left: 10px;
+  /*reduces the distance of hover left margin to icon, defaullt was: 20px*/
+  padding-top: 60px;
+  margin-left: 85px;
+}
+
+/* line 141, ../sass/accordion.scss */
+.twitter-icon a:before, .twitter-icon a:after {
+  content: '\f100';
+}
+/* line 145, ../sass/accordion.scss */
+.twitter-icon a:after {
+  /* @include background-image(linear-gradient(#7adcf9, #4bc9f5));*/
+}
+
+/* line 153, ../sass/accordion.scss */
+.facebook-icon a:before, .facebook-icon a:after {
+  content: '\f216';
+}
+/* line 157, ../sass/accordion.scss */
+.facebook-icon a:after {
+  /* @include background-image(linear-gradient(#548abf, #295b9e));*/
+}
+
+/* line 165, ../sass/accordion.scss */
+.linkedin-icon a:before, .linkedin-icon a:after {
+  content: '\f425';
+}
+/* line 169, ../sass/accordion.scss */
+.linkedin-icon a:after {
+  /* @include background-image(linear-gradient(#00a9cd, #0083b4));*/
+}

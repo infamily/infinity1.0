@@ -7,73 +7,10 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 
 from .models import PayPalTransaction
-from .models import CryptsyCredential
-from .models import CoinAddress
-from .models import CryptsyTransaction
-from .cryptsy import v2
 from .exceptions import PayPalException
 
 from constance import config
 
-
-class CryptsyPay(object):
-    def __init__(self, publickey):
-        self.credential = CryptsyCredential.objects.get(
-            publickey=publickey
-        )
-
-        self.private_key = self.credential.privatekey
-        self.public_key = self.credential.publickey
-        self.trade_key = self.credential.tradekey
-        current_site = Site.objects.get_current()
-        notificationtoken = 'http://%s%s' % (
-            current_site.domain, reverse('cryptsy_notification_token', kwargs={
-                'username': self.credential.user.username,
-                'credential_id': self.credential.id
-            })
-        )
-        self.notification_token = notificationtoken
-
-    def make_payment(self, comment_object, address, amount, currency_id):
-        cryptsy = v2.Cryptsy(self.public_key, self.private_key)
-        result = cryptsy.withdraw(
-            self.trade_key,
-            address,
-            amount,
-            self.notification_token,
-            currency_id
-        )
-
-        currency = (item for item in cryptsy.currencies()['data']
-                    if item["id"] == str(currency_id)).next()
-
-        try:
-            destination_address = CoinAddress.objects.get(
-                address=address
-            )
-        except CoinAddress.DoesNotExist:
-            destination_address = CoinAddress.objects.create(
-                address=address,
-                currency_code=currency['code']
-            )
-
-        transaction = cryptsy.withdrawals(limit=1)
-        transaction = transaction["data"][0]
-
-        if result['success']:
-            CryptsyTransaction.objects.create(
-                address=destination_address,
-                amount=amount,
-                message=result['data']['withdraw_id'],
-                timestamp=transaction['timestamp'],
-                datetime=transaction['datetime'],
-                fee=transaction['fee'],
-                timezone=transaction['timezone'],
-                comment=comment_object,
-                sender_credential=self.credential
-            )
-
-        return result
 
 
 class PayPal(object):

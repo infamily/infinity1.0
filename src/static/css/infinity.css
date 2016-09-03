@@ -160,6 +160,11 @@ table.table.centered
     display: inline-block;
 }
 
+.alert {
+    border-width: 0 1px 4px 1px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
 .alert-error {
     background-color: #ff4136;
     border-color: #ff1103;
@@ -235,8 +240,12 @@ table.table.centered
     bottom:0;
 }
 
+a, a:hover, a:focus {
+        color: #551a8b;
+}
+
 a:visited{
-         color: #551a8b;
+        color: #353535;
 }
 
 .block-content {
@@ -352,6 +361,56 @@ a:visited{
     margin-bottom: 7px;
 }
 
+body {
+    font-family: "Open Sans", serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+
+#id_member_email, 
+#id_name,
+#id_content,
+#id_summary,
+#id_description,
+#id_reason,
+#id_objective,
+#id_situation,
+#id_deliverable,
+#id_investables,
+#id_deliverables,
+#id_text {
+    font-size: 17px;
+    font-family: "Open Sans", serif;
+}
+
+.textarea {
+    font-size: 17px;
+    font-family: "Open Sans", serif;
+}
+
 .container {
     width: 100%;
 }
+
+#navigation {
+    background-color: #8a8a8a;
+}
+.navbar-brand {
+    background-color: #8a8a8a;
+}
+
+.navbar-header {
+    background-color: #8a8a8a;
+}
+.navbar-collapse {
+    background-color: #8a8a8a;
+}
+
+.btn.btn-raised.btn-primary, .input-group-btn .btn.btn-raised.btn-primary, .btn.btn-fab.btn-primary, .input-group-btn .btn.btn-fab.btn-primary, .btn-group-raised .btn.btn-primary, .btn-group-raised .input-group-btn .btn.btn-primary {
+    background-color: #757575;
+}
+
+.btn.btn-raised:not(.btn-link):hover.btn-primary, .input-group-btn .btn.btn-raised:not(.btn-link):hover.btn-primary, .btn-group-raised .btn:not(.btn-link):hover.btn-primary, .btn-group-raised .input-group-btn .btn:not(.btn-link):hover.btn-primary, .btn.btn-raised:not(.btn-link):focus.btn-primary, .input-group-btn .btn.btn-raised:not(.btn-link):focus.btn-primary, .btn-group-raised .btn:not(.btn-link):focus.btn-primary, .btn-group-raised .input-group-btn .btn:not(.btn-link):focus.btn-primary, .btn.btn-raised:not(.btn-link).active.btn-primary, .input-group-btn .btn.btn-raised:not(.btn-link).active.btn-primary, .btn-group-raised .btn:not(.btn-link).active.btn-primary, .btn-group-raised .input-group-btn .btn:not(.btn-link).active.btn-primary, .btn.btn-raised:not(.btn-link):active.btn-primary, .input-group-btn .btn.btn-raised:not(.btn-link):active.btn-primary, .btn-group-raised .btn:not(.btn-link):active.btn-primary, .btn-group-raised .input-group-btn .btn:not(.btn-link):active.btn-primary  {
+    background-color: #757575;
+}
+

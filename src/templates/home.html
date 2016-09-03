@@ -4,159 +4,77 @@
 {% load staticfiles %}
 {% load django_markdown %}
 {% load country_isocode %}
+{% load get_translation %}
 
-{% load crispy_forms_tags %}
-
-{% block title %}Index{% endblock %}
+{% block title %}{% trans "Economic & Innovation Forum" %}{% endblock %}
 
 {% block page_title %}Index{% endblock page_title %}
 
 {% block content %}
 
-<!-- for pop-up video -->
-<script type="text/javascript" src="{% static "jquery-migrate/jquery-migrate.min.js" %}"></script>
-<script type="text/javascript" src="{% static "fancybox/source/jquery.fancybox.pack.js" %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static "fancybox/source/jquery.fancybox.css" %}" media="screen" />
-<script type="text/javascript" src="{% static "js/video.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static "stylesheets/accordion.css" %}" />
 
-<!-- for hiding button -->
-<script type="text/javascript">
-    function hideshow(which){
-    if (!document.getElementById)
-    return
-    if (which.style.display=="inline")
-    which.style.display="none"
-    else
-    which.style.display="inline"
-    }
-</script>
+<script type="text/javascript" src="{% static "js/accordion.js" %}"></script>
 
 <style>
-#ithink:hover {
-    text-shadow: 0 0 25px #F6358A;
+    .container {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
 }
-#ichart:hover {
-    text-shadow: 0 0 25px lime;
+    #navigation {
+    padding-left: 15px;
+    padding-right: 15px;
 }
-#icreate:hover {
-    text-shadow: 0 0 25px yellow;
+
+/* the rest below is for accordion link styles, because: */
+/* putting these lines to css/accordion.css makes icons disappear */
+
+.social-links:hover a:after {
+  color: black;
+  background-color: #b0b0b0;
+}
+
+/* line 141, ../sass/accordion.scss */
+.goal-icon a:before, .goal-icon a:after {
+  content: '\f100';
+}
+/* line 145, ../sass/accordion.scss */
+.goal-icon a:after {
+  /* @include background-image(linear-gradient(#7adcf9, #4bc9f5));*/
+}
+
+/* line 153, ../sass/accordion.scss */
+.idea-icon a:before, .idea-icon a:after {
+  content: '\f216';
+}
+/* line 157, ../sass/accordion.scss */
+.idea-icon a:after {
+  /* @include background-image(linear-gradient(#548abf, #295b9e));*/
+}
+
+/* line 165, ../sass/accordion.scss */
+.plan-icon a:before, .plan-icon a:after {
+  content: '\f425';
+}
+/* line 169, ../sass/accordion.scss */
+.plan-icon a:after {
+  /* @include background-image(linear-gradient(#00a9cd, #0083b4));*/
 }
 </style>
-<script>
 
-$(document).ready(function(){
-
-    // keep the scope in session
-	//var scope = localStorage['scope'];
-    localStorage['scope'] = "ichart";
-
-	if (!scope) {
-		localStorage['scope'] = "ichart";
-	}
-    $('#'.concat(scope)).css('color', 'black');
-
-    if (scope=='ithink') {
-      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
-      $('#'.concat(scope)).css('text-shadow', '0 0 15px #F6358A');
-	  $('#goals').removeClass('col-md-4').addClass('col-md-5');
-	  $('#ideas').removeClass('col-md-5').addClass('col-md-4');
-	  $('#plans').removeClass('col-md-5').addClass('col-md-4');
-    }
-    else if (scope=='ichart') {
-      $( "div.row-horizon" ).scrollLeft( $(window).width()*1.01 );
-      $('#'.concat(scope)).css('text-shadow', '0 0 15px lime');
-	  $('#goals').removeClass('col-md-5').addClass('col-md-4');
-	  $('#ideas').removeClass('col-md-4').addClass('col-md-5');
-	  $('#plans').removeClass('col-md-5').addClass('col-md-4');
-    }
-    else if (scope=='icreate') {
-      $( "div.row-horizon" ).scrollLeft( $(window).width()*2.01 );
-      $('#'.concat(scope)).css('text-shadow', '0 0 15px yellow');
-	  $('#goals').removeClass('col-md-5').addClass('col-md-4');
-	  $('#ideas').removeClass('col-md-5').addClass('col-md-4');
-	  $('#plans').removeClass('col-md-4').addClass('col-md-5');
-    } 
-});
-
-// Click Actions
-    $('#ithink').on("click",function(event){
-      $( "div.row-horizon" ).scrollLeft( -($(window).width()*2/3) );
-      $('#ithink').css('color', 'black');
-      $('#ithink').css('text-shadow', '0 0 15px #F6358A');
-      $('#ichart').css('color', 'grey');
-      $('#ichart').css('text-shadow', 'none');
-      $('#icreate').css('color', 'grey');
-      $('#icreate').css('text-shadow', 'none');
-
-	  $('#goals').removeClass('col-md-4').addClass('col-md-5');
-	  $('#ideas').removeClass('col-md-5').addClass('col-md-4');
-	  $('#plans').removeClass('col-md-5').addClass('col-md-4');
-	  localStorage['scope'] = 'ithink';
-		event.preventDefault();
-    });
-
-    $('#ichart').on("click",function(event){
-      $( "div.row-horizon" ).scrollLeft( $(window).width()*1.01 );
-      $('#ithink').css('color', 'grey');
-      $('#ithink').css('text-shadow', 'none');
-      $('#ichart').css('color', 'black');
-      $('#ichart').css('text-shadow', '0 0 15px lime');
-      $('#icreate').css('color', 'grey');
-      $('#icreate').css('text-shadow', 'none');
-
-	  $('#goals').removeClass('col-md-5').addClass('col-md-4');
-	  $('#ideas').removeClass('col-md-4').addClass('col-md-5');
-	  $('#plans').removeClass('col-md-5').addClass('col-md-4');
-	  localStorage['scope'] = 'ichart';
-		event.preventDefault();
-    });
-
-    $('#icreate').on("click",function(event){
-      $( "div.row-horizon" ).scrollLeft( $(window).width()*2.01 );
-      $('#ithink').css('color', 'grey');
-      $('#ithink').css('text-shadow', 'none');
-      $('#ichart').css('color', 'grey');
-      $('#ichart').css('text-shadow', 'none');
-      $('#icreate').css('color', 'black');
-      $('#icreate').css('text-shadow', '0 0 15px yellow');
-
-	  $('#goals').removeClass('col-md-5').addClass('col-md-4');
-	  $('#ideas').removeClass('col-md-5').addClass('col-md-4');
-	  $('#plans').removeClass('col-md-4').addClass('col-md-5');
-	  localStorage['scope'] = 'icreate';
-		event.preventDefault();
-    });
-</script>
-
-<div style="clear:both;">
-    <br/>
-
-    <link rel="stylesheet" href="{% static "bootstrap-horizon/bootstrap-horizon.css" %}">
-<!--
-    <div id="scroll_arrowleft"></div>
-    <div id="scroll_arrowright"></div>
--->
-    <div class="row row-horizon">
-
-    <! -- Start of Goals -- >
-        <div id="goals" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; margin-left:15px;">
-            <div class="panel-heading" style="border-bottom: 1px dotted;">
-				<!-- <a href="{% url "goal-list" %}">{% trans "Goals" %}</a>-->
-				&nbsp; <a href="{% url "goal-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "goal-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "define a problem" %}</a></b>
-                <!-- drop-down
-                <div style="display:inline-block; float: right;">
-                    <form method="post" style="display:inline;">{% csrf_token %}
-                        <select name="goals" onchange="this.form.submit()">
-                            {% for value in dropdown_list %}
-                            <option value="{{ value }}" {% if items.goals == value %}selected{% endif %}>{{ value }}</option>
-                            {% endfor %}
-                        </select>
-                    </form>
-                </div>
-				-->
-            </div>
-
-            <div class="panel-body" style="padding: 0; margin-top: 0px;">
+    <ul class="accordion" style="margin-left: 0px; margin-right:0px;">
+      <li class="tabs" id="goals">
+        <div class="social-links goal-icon">
+          <a href="#">Goals</a>
+        </div>
+        <div class="paragraph" style="overflow:scroll;"> 
+          <center>
+          <h1>{% trans "Problems" %}</h1>
+          <p>{% trans "Where people share and discuss the world's issues." %}</p>
+          <p><a href="{% url "goal-create" %}" style="text-decoration: none;">{% trans "Add a problem" %}</a></p>
+          </center>
+          <hr>
                 {% if goal_list %}
                     {% for goal in goal_list %}
 
@@ -164,9 +82,9 @@ $(document).ready(function(){
 
 						    <!-- card style -->
 							{% if forloop.counter|divisibleby:2 %}
-							<div style="background-color:#f9f9f9; padding: 10px;">
+							<div style="background-color:#ffffff; padding: 10px; padding-top: 20px; padding-bottom: 20px; border-bottom: #e0e0e0 1px dotted;">
 							{% else %}
-							<div style="background-color:#f0f0f0; padding: 10px;">
+							<div style="background-color:#ffffff; padding: 10px; padding-top: 20px; padding-bottom: 20px; border-bottom: #e0e0e0 1px dotted;">
 							{% endif %}
 
                                  {% if goal.object.is_link %}
@@ -190,7 +108,7 @@ $(document).ready(function(){
                                  
                                  <a {% if goal.is_new %}style="font-weight: bold"{% endif %} href="{% url "goal-detail" goal.object.pk %}?lang={{goal.translation.language.language_code}}#{{goal.object.commented_at|date:"U"}}">{{ goal.translation.name }}</a>
 
-                            ({{goal.object.comment_count}} comments) 
+								 ({{goal.object.comment_count}} {% trans "comments" %}) 
 
                             <br/>
 
@@ -204,44 +122,29 @@ $(document).ready(function(){
                 {% else %}
                 {% endif %}
                     <center>
-						<p><!--{% trans "Oops! You have no goals!" %}--></p>
+		                <br>
                         <p><a href="{% url "goal-create" %}">{% trans "Add a problem" %}</a></p>
-                        <p>{% trans "...or view" %} <a href="{% url "goal-list" %}">{% trans "all problems" %}</a>.</p>
                     </center>
 
+					{% if request.get_full_path == "/i" %}
 					<p><i><u>{% trans "Example:" %}</u></i></p>
                     {% blocktrans %}
                     <p><b>Omelette Supply Problem</b></p>
                     <p>Omelette is a healthy and delicious food, which can be flavored in desired tastes. I like it, and I would like to eat omelete every morning, without any extra expenses.</p>
                     {% endblocktrans %}
-            </div>
+                    {% endif %}
         </div>
-
-	<!-- Start of Idea -->
-    {% if request.get_full_path == '/i' %}
-        <div id="ideas" class="panel panel-default col-md-5 block-content" style="border: none; padding: 0px; padding-left: 6px; padding-right: 0px;">
-    {% else %}
-        <div id="ideas" class="panel panel-default col-md-5 block-content" style="border: none; padding: 0px; padding-left: 6px; padding-right: 0px;">
-    {% endif %}
-            <div class="panel-heading" style="border-bottom: 1px dotted;">
-				<!--<a href="{% url "idea-list" %}">{% trans "Ideas" %}</a>-->&nbsp;
-				<a href="{% url "idea-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; - <b><a href="{% url "idea-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "suggest a solution" %}</a></b>
-                <!-- drop-down
-				<div style="display:inline-block; float: right;">
-					<form method="post" style="display:inline;">{% csrf_token %}
-						<select name="ideas" onchange="this.form.submit()">
-							{% for value in dropdown_list %}
-							<option value="{{ value }}" {% if items.ideas == value %}selected{% endif %}>
-							{{ value }}
-							</option>
-							{% endfor %}
-						</select>
-					</form>
-				</div>
-				-->
-            </div>
-
-            <div class="panel-body" style="padding: 0;  margin-top: -10px;">
+      </li>
+      <li class="tabs" id="ideas">
+        <div class="social-links idea-icon">
+          <a href="#">Ideas</a>
+        </div>
+        <div class="paragraph" style="overflow:scroll;">
+          <center><h1>{% trans "Solutions" %}</h1></center>
+          <center><p>{% trans "Where people share and discuss ideas how to solve them." %}</p></center>
+		  <center><p><a href="{% url "idea-create" %}" style="text-decoration: none;">{% trans "Add a solution" %}</a></p></center>
+          <hr>
+                <div class="idea-list">
                 {% if idea_list %}
                 <p align="center">
                 </p>
@@ -251,9 +154,9 @@ $(document).ready(function(){
                     {% if idea.translation %} {# if idea translated #}
 
 						{% if forloop.counter|divisibleby:2 %}
-						<div style="background-color:#f9f9f9; padding: 10px;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #e0e0e0 1px dotted;">
 						{% else %}
-						<div style="background-color:#f0f0f0; padding: 10px;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #e0e0e0 1px dotted;">
 						{% endif %}
 
                             {% if idea.object.is_link %}
@@ -278,7 +181,7 @@ $(document).ready(function(){
 
                         <a {% if idea.is_new%}style="font-weight: bold"{% endif %} href="{% url "idea-detail" idea.object.pk %}?lang={{idea.translation.language.language_code}}#{{idea.object.commented_at|date:"U"}}">{{ idea.translation.name }}</a>
 
-                        ({{idea.object.comment_count}} comments</a>)
+						({{idea.object.comment_count}} {% trans "comments" %}</a>)
 
                         <br/>
                             <span style="font-variant:small-caps;">
@@ -288,15 +191,15 @@ $(document).ready(function(){
 								{% if goal.personal %}
 									{% if request.user in goal.sharewith or request.user == goal.user %}
 
-										<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}?lang={{request.LANGUAGE_CODE}}">{% get_translation goal request.LANGUAGE_CODE "name" %}</a>{% if forloop.last %}{% else %}, {%endif%} 
 
 									{% else %}
 
-									<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{% trans "Private" %} (u:{{goal.user.username}})</a>{% if forloop.last %}{% else %}, {%endif%} 
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}?lang={{request.LANGUAGE_CODE}}">{% trans "Private" %} (u:{{goal.user.username}})</a>{% if forloop.last %}{% else %}, {%endif%} 
 
 									{% endif %}
 								{% else %}
-									<a style="color:grey;" href="{% url "goal-detail" goal.id %}">{{ goal.name }}</a>{% if forloop.last %}{% else %}, {%endif%} 
+									<a style="color:grey;" href="{% url "goal-detail" goal.id %}?lang={{request.LANGUAGE_CODE}}">{% get_translation goal request.LANGUAGE_CODE "name" %}</a>{% if forloop.last %}{% else %}, {%endif%} 
 								{% endif %}
 
 							{% endfor %}
@@ -315,43 +218,33 @@ $(document).ready(function(){
                 <center>
 					<br>
                     <p><a href="{% url "idea-create" %}">{% trans "Add a solution" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "idea-list" %}">{% trans "all solutions" %}</a>.</p>
                 </center>
 
+				{% if request.get_full_path == "/i" %}
 				<p><i><u>{% trans "Example:" %}</u></i></p>
                 {% blocktrans %}
                 <p><b>Roof Mini-Farm With Automated Egg Processor</b></p>
                 <p>Hens don't really require much human work to maintain. Set up the robotic feeders, egg collectors, washers, breakers, timed mixers, spicers, cookers and dispensers - and have a self-sustaining supply of fresh omelete.</p>
                 {% endblocktrans %}
-
-            </div>
-        </div>
-
-    {% if request.get_full_path == '/i' %}
-        <div id="plans" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; padding-left: 6px;">
-    {% else %}
-        <div id="plans" class="panel panel-default col-md-4 block-content" style="border: none; padding: 0px; padding-left: 6px;">
-    {% endif %}
-            <div class="panel-heading" style="border-bottom: 1px dotted;">
-				<!--<a href="{% url "plan-list" %}">{% trans "Plans" %}</a>-->&nbsp;
-                <a href="{% url "plan-create" %}"><i class="fa fa-plus-circle"></i></a>&nbsp; -
-				<b><a href="{% url "plan-list" %}" style="color:black; text-decoration: none; cursor: default">{% trans "start a project" %}</a></b>
-                <!--
-                <div style="display:inline-block; float: right;">
-                    <form method="post" style="display:inline;">{% csrf_token %}
-                        <select name="plans" onchange="this.form.submit()">
-                            {% for value in dropdown_list %}
-                            <option value="{{ value }}" {% if items.plans == value %}selected{% endif %}>
-                            {{ value }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                    </form>
+                {% endif %}
                 </div>
-				-->
-            </div>
 
-            <div class="panel-body" style="padding: 0; margin-top: 0px;">
+
+
+        </div>
+      </li>
+      <li class="tabs" id="plans">
+        <div class="social-links plan-icon">
+           <a href="#">Plans</a>
+        </div>
+        <div class="paragraph" style="overflow:scroll;">
+          <center>
+          <h1>{% trans "Projects" %}</h1>
+          <p>{% trans "Where people start initiatives to realize them." %}</p>
+		  <p><a href="{% url "plan-create" %}" style="text-decoration: none;">{% trans "Add a project" %}</a></p>
+          </center>
+          <hr>
+                <div class="plan-list">
                 {% if plan_list %}
 
                 {% for plan in plan_list %}
@@ -360,9 +253,9 @@ $(document).ready(function(){
                     {% if plan.translation %}  {# if plan translated #}
 
 						{% if forloop.counter|divisibleby:2 %}
-						<div style="background-color:#f9f9f9; padding: 10px;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #e0e0e0 1px dotted;">
 						{% else %}
-						<div style="background-color:#f0f0f0; padding: 10px;">
+						<div style="background-color:#ffffff; padding: 10px; padding-bottom: 20px; padding-top: 20px; border-bottom: #e0e0e0 1px dotted;">
 						{% endif %}
 
                             {% if plan.object.is_link %}
@@ -387,19 +280,19 @@ $(document).ready(function(){
 
                     <a {% if plan.is_new%}style="font-weight: bold"{% endif %} href="{% url "plan-detail" plan.object.pk %}?lang={{plan.translation.language.language_code}}#{{plan.object.commented_at|date:"U"}}">{{ plan.translation.name }}</a>
 
-                    ({{plan.object.comment_count}} comments)
+					({{plan.object.comment_count}} {% trans "comments" %})
 
                     <br/>
                             <span style="font-variant:small-caps;">
 								<!--<i class="fa fa-paper-plane"></i>-->
 							{% if plan.object.idea.personal %}
 							    {% if request.user in plan.object.idea.sharewith or request.user == plan.object.idea.user %}
-        							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
+								<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}?lang={{request.LANGUAGE_CODE}}">{% get_translation plan.object.idea request.LANGUAGE_CODE "name" %}</a></span> 
  							    {% else %}
-								<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{% trans "Private" %} (u:{{plan.object.idea.user.username}})</a></span> 
+								<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}?lang={{request.LANGUAGE_CODE}}">{% trans "Private" %} (u:{{plan.object.idea.user.username}})</a></span> 
 								{% endif %}
 							{% else %}
-    							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}">{{ plan.object.idea.name }}</a></span> 
+							<a style="color:grey;" href="{% url "idea-detail" plan.object.idea.id %}?lang={{request.LANGUAGE_CODE}}">{% get_translation plan.object.idea request.LANGUAGE_CODE "name" %}</a></span> 
 							{% endif %}
 							<br/>
 
@@ -414,23 +307,21 @@ $(document).ready(function(){
                 {% else %}
                 {% endif %}
                 <center>
-					<p><!--{% trans "Oops! You have no plans!" %}--></p>
+					<br>
                     <p><a href="{% url "plan-create" %}">{% trans "Add a project" %}</a></p>
-                    <p>{% trans "...or view" %} <a href="{% url "plan-list" %}">{% trans "all projects" %}</a>.</p>
                 </center>
 
+				{% if request.get_full_path == "/i" %}
 				<p><i><u>{% trans "Example:" %}</u></i></p>
                 {% blocktrans %}
                 <p><b>$ 0.00 Omelette Microfarm Project</b></p>
                 We expect to have a microfarm solutions provider, which sustains itself via a business model based on demand and supply, based on simple-to-install construction kits supply chain for home owners.</p>
-                {% endblocktrans %}
-            </div>
+				{% endblocktrans %}
+                {% endif %}
+                </div>
+
         </div>
+      </li>
+    </ul>
 
-
-
-    </div>
-    <div align="center">{% trans "People-centric economy." %}</div>
-
-</div>
 {% endblock content %}

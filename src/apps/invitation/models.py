@@ -10,6 +10,14 @@ from core.models import Language
 from .app_settings import app_settings
 
 
+from django.utils.translation import ugettext as _
+
+try:
+    from django.utils.encoding import force_text
+except ImportError:
+    from django.utils.encoding import force_unicode as force_text
+
+
 UserModelName = settings.AUTH_USER_MODEL
 
 
@@ -51,9 +59,10 @@ class Invitation(models.Model):
     def get_invitation_url(self):
         from django.contrib.sites.models import Site
         from django.core.urlresolvers import reverse
-        site = Site.objects.get_current()
+        #site = Site.objects.get_current()
         return "http://%s%s" % (
-            site.domain,
+            #site.domain,
+            _(settings.MAIN_DOMAIN),
             reverse('invite:token', kwargs={'token': self.token})
         )
 
@@ -66,7 +75,8 @@ class InvitationsAdapter(DefaultAccountAdapter):
         if social_account:
             social_account = social_account.get('account')
             if social_account:
-                if social_account.get('provider') == 'github':
+                if social_account.get('provider') == 'github' or \
+                   social_account.get('provider') == 'linkedin':
                     return True
 
         if hasattr(request, 'session') and request.session.get('invitation'):
@@ -77,6 +87,12 @@ class InvitationsAdapter(DefaultAccountAdapter):
         else:
             # Site is open to signup
             return True
+
+    # Overriding a method, since original is calling
+    #  site = get_current_site()
+    # without request parameter, resulting in error.
+    def format_email_subject(self, subject):
+        return "%s: %s" % (_(settings.MAIN_DOMAIN), force_text(subject))
 
 
 def _invitation_created(sender, instance, created, *args, **kwargs):
