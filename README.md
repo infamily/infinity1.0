@@ -15,7 +15,7 @@ pip install -r requirements.txt
 
 ```
 create database, e.g., infty
-psql infty < infty.sql (if have dump, or migrate: python src/manage.py migrate)
+psql infty < infty.sql (if have dump, or migrate: `python src/manage.py migrate`)
 # edit src/conf/local.py to set the existing database name / user in DATABASES
 ```
 
