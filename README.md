@@ -32,3 +32,9 @@ python src/manage.py bower_install
 ```
 python src/manage.py runserver
 ```
+
+## add site, if needed
+```
+>>> from django.contrib.sites.models import Site
+>>> Site.objects.create(name='localhost', domain='localhost')
+```
