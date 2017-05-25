@@ -48,16 +48,16 @@ if DEBUG:
     # TOOLBAR CONFIGURATION
     # See:
     # http://django-debug-toolbar.readthedocs.org/en/latest/installation.html#explicit-setup
-    if 'debug_toolbar' not in INSTALLED_APPS:
-        INSTALLED_APPS += (
-            'debug_toolbar',
-        )
+    # if 'debug_toolbar' not in INSTALLED_APPS:
+    #     INSTALLED_APPS += (
+    #         'debug_toolbar',
+    #     )
 
-    MIDDLEWARE_CLASSES += (
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    )
+    # MIDDLEWARE_CLASSES += (
+    #     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # )
 
-    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+    # DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
     # http://django-debug-toolbar.readthedocs.org/en/latest/installation.html
     INTERNAL_IPS = ('127.0.0.1',)
