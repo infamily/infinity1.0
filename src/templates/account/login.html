@@ -10,17 +10,17 @@
 <h1>{% trans "Sign in" %}</h1>
 
 {% blocktrans %}
-Have no account? Sign up <a href="/user/signup/">here</a>.
+Have no account?
 {% endblocktrans %}
 <center>
     <div>
+    	<p class="linkedin-label">Log-in with LinkedIn.</p>
         <a class="octocat-login" href="{% provider_login_url "linkedin" %}"><i class="fa fa-linkedin"></i></a>
         <br>
-        <a class="octocat-login" href="{% provider_login_url "github" %}"><i class="fa fa-github"></i></a>
     </div>
     <!-- <span style="font-variant: small-caps;">{% trans "octocats get a free pass" %}</span> -->
 </center>
-
+<div class="custom-login-form">
 {% comment %}
 <a href="{% provider_login_url "github"  %}" class="btn btn-primary">github</a>
     
@@ -31,8 +31,8 @@ Have no account? Sign up <a href="/user/signup/">here</a>.
 <br/>
 {% crispy form %}
 <br/>
-<a href="{% url 'account_reset_password' %}">{% trans "Forgot password?" %}</a>
-
+<a id="forget-password-link" href="{% url 'account_reset_password' %}">{% trans "Forgot password?" %}</a>
+</div>
 
 
 {% endblock content %}
