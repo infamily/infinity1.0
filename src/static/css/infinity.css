@@ -414,3 +414,54 @@ body {
     background-color: #757575;
 }
 
+label[for='id_login'], label[for='id_password'] {
+    margin: 0 !important;
+    color: #333333;
+}
+#id_login, #id_password {
+    background-image: linear-gradient(#009688, #009688), linear-gradient(#333333, #333333);
+}
+label[for='id_remember'], .checkbox label{
+    padding-left: 20px;
+}
+#id_remember , .checkbox input[type='checkbox']{
+    opacity: 1;
+    width: initial;
+    height: initial;
+    bottom: 5px;
+    z-index: 5;
+}
+#div_id_remember label, #div_id_member_email label, #div_id_language label, #div_id_email_body label{
+    color: #333333;
+}
+.form-group label[for] {
+    color: #333333;
+}
+#submit-id-login_form {
+    margin-top: 30px;
+    margin-left: 16.66%;
+    background: #76c85a;
+    color: white;
+}
+#submit-id-save, #submit-id-submit, input[type='submit'] {
+    color: white !important;
+    background: #76c85a;
+}
+#submit-id-login_form:hover, #submit-id-save:hover , #submit-id-submit:hover, input[type='submit']:hover {
+    background-color: rgba(118, 200, 90, 0.7); 
+}
+.custom-login-form {
+    position: relative;
+}
+#forget-password-link {
+    position: absolute;
+    left: 30%;
+    bottom: 40px;
+}
+select[name='language'] option {
+    color: #333333; 
+}
+input[type='text'],textarea, input[type='email']{
+    border: 1px solid #d2d2d2 !important;
+    background: #f9f9f9 !important;
+}
