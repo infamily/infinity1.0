@@ -253,7 +253,7 @@ a:visited{
 }
 
 #div_id_sharewith {
-    display: none;
+    display: inline;
 }
 
 #div_id_define {
