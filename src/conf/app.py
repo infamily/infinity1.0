@@ -61,7 +61,7 @@ AUTH_USER_MODEL = "users.User"
 
 LOGIN_URL = '/user/login/'
 
-INVITATIONS_INVITATION_ONLY = True
+INVITATIONS_INVITATION_ONLY = False
 
 # Request e-mail address from 3rd party account provider?
 # E.g. using OpenID AX
