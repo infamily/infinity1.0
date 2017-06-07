@@ -73,6 +73,7 @@ class LoginForm(AllAuthLoginForm):
 
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
+        self.fields['login'].widget.attrs.pop("autofocus", None)
 
         self.helper = FormHelper(self)
         self.helper.layout.append(Submit('login_form', _('Login')))
