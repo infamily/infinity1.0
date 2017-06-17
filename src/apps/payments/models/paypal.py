@@ -114,10 +114,10 @@ def comment_save_signal(sender, instance, created, **kwargs):
     instance.comment.sum_hours_donated()
     instance.comment.match_hours()
     instance.comment.content_object.sum_hours()
-    
+
     if created:
         from django.contrib.sites.models import Site
-        base_url = "https://{}".format(Site.objects.get_current().domain)
+        base_url = "https://{}".format(Site.objects.get(name='infty.xyz').domain)
         send_mail_template('mail/transactions/paypal_transaction_receipt_subject.txt',
                            'mail/transactions/paypal_transaction_receipt.html',
                            recipient_list=[instance.sender_user.email,
