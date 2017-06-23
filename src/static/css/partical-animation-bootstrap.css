@@ -1,0 +1,27 @@
+/* ANIMATION */
+.navbar-header,
+.navbar-form,
+.progress,
+#source-title,
+#translation-title,
+button,
+.actions,
+.comment > div
+{
+	position:relative;
+	z-index: 9999;
+}
+
+#source-title h1{
+	color:#fff;
+}
+
+.navbar-form {
+	cursor:pointer;
+}
+
+/* SHADOWS */
+/* Shadows (from mdl http://www.getmdl.io/) */
+body {
+  background-color: #8a8a8a;
+}

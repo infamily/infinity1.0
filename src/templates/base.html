@@ -19,6 +19,10 @@
     <link href="{% static "bootswatch/lumen/bootstrap.min.css" %}" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="{% static "bootstrap-material-design/dist/css/bootstrap-material-design.css" %}">
+    {% if '/engage/' in request.get_full_path %}
+    <!-- [ Background Effect ] -->
+    <link rel="stylesheet" href="{% static "css/partical-animation-bootstrap.css" %}">
+    {% endif %}
     <link rel="stylesheet" type="text/css" href="{% static "bootstrap-material-design/dist/css/ripples.min.css" %}">
 
     <link href="{% static "bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" %}" rel="stylesheet">
@@ -55,6 +59,11 @@
 
     <script src="{% static "js/infinity.js" %}"></script>
 
+    {% if '/engage/' in request.get_full_path %}
+    <!-- [ Background Effect ] -->
+    <link rel="stylesheet" href="{% static "css/partical-animation.css" %}">
+    {% endif %}
+
     <script type="text/javascript">
 
     $(document).ready(function(){
@@ -85,6 +94,10 @@
 
 		  <a class="navbar-brand" href="{% url "home" %}"><span class='brand'>{% trans "Solving Problems" %}</span><!--<span class="infin">&infin;</span><span class='ity'>.xyz</span>--></a>
         </div>
+
+        {% if '/engage/' in request.get_full_path %}
+        <div id="particles-js"><canvas class="particles-js-canvas-el" width="1600" height="754" style="width: 100%; height: 100%;"></canvas></div>
+        {% endif %}
 
         <div class="collapse navbar-collapse">
         {% load i18n %}
@@ -199,6 +212,12 @@
 
       {% block javascript %}
       {% endblock javascript %}
+
+      {% if '/engage/' in request.get_full_path %}
+      <!-- [ Background Effect ] -->
+      <script src="{% static "particles.js/particles.min.js" %}"></script>
+      <script src="{% static "js/partical-animation.js" %}"></script>
+      {% endif %}
 
     </div> <!-- /container -->
 
