@@ -240,6 +240,11 @@ urlpatterns = [
         PlanDetailView.as_view(),
         name="plan-detail"
     ),
+    url(
+        r'^plan/(?P<slug>[a-zA-Z-_0-9]+)/engage/$',
+        PlanEngageView.as_view(),
+        name="plan-engage"
+    ),
 
     url(
         r'^translation/create/(?P<model_name>\w+)/(?P<object_id>\d+)/$',

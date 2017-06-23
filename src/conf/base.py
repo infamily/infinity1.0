@@ -149,7 +149,8 @@ BOWER_INSTALLED_APPS = [
     'jquery#2.2.0',
     'jquery-migrate#1.3.0',
     'jquery-ui#1.11.4',
-    'tether#1.3.4'
+    'tether#1.3.4',
+    'particles.js#2.0.0',
 ]
 
 # END BOWER CONFIGURATIONS

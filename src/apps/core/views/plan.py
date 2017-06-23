@@ -27,6 +27,7 @@ from ..utils import (
     DeleteViewWrapper,
     ViewTypeWrapper,
     CommentsContentTypeWrapper,
+    CommentsEngageContentTypeWrapper,
 )
 
 
@@ -180,6 +181,41 @@ class PlanDetailView(DetailViewWrapper, CommentsContentTypeWrapper):
 
     def get_context_data(self, **kwargs):
         context = super(PlanDetailView, self).get_context_data(**kwargs)
+
+        username = self.request.GET.get('user', None)
+        if username:
+            steps = Step.objects.filter(plan=kwargs.get('object'), user__username=username).order_by('user_priority')
+        else:
+            steps = Step.objects.filter(plan=kwargs.get('object'), included=True).order_by('priority')
+        #plan_tuples = [(step.investables, step.deliverables) for step in steps]
+        plan_tuples = []
+        for step in steps:
+            try:
+                stepio.parse(step.investables)
+                stepio.parse(step.deliverables)
+                plan_tuples.append((step.investables, step.deliverables))
+            except:
+                """ skipping un-parse-able step """
+                pass
+        user_set = set([step.user for step in  Step.objects.filter(plan=kwargs.get('object'))])
+        context.update({
+            'step_list': steps,
+            'plan_json': json.dumps(get_plandf_dict(plan_tuples)),
+            'user_set': user_set
+        })
+
+        return context
+
+
+class PlanEngageView(DetailViewWrapper, CommentsEngageContentTypeWrapper):
+
+    """Plan engage view"""
+    model = Plan
+    slug_field = "pk"
+    template_name = "plan/engage.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(PlanEngageView, self).get_context_data(**kwargs)
 
         username = self.request.GET.get('user', None)
         if username:

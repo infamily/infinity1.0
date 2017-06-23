@@ -31,6 +31,7 @@ from .forms import CommentCreateFormDetail
 from .models import Comment
 from .models import Translation
 from .models import Definition
+from .models import Plan, Step, Task, Work
 
 from users.mixins import OwnerMixin
 from copy import copy
@@ -278,6 +279,71 @@ class CommentsContentTypeWrapper(CreateView):
 
         return super(CommentsContentTypeWrapper, self).form_valid(form)
 
+
+class CommentsEngageContentTypeWrapper(CreateView):
+    model_for_list = Comment
+
+    form_class = CommentCreateFormDetail
+
+    def get_success_url(self):
+        messages.success(
+            self.request, _(
+                "%s succesfully created" %
+                self.form_class._meta.model.__name__))
+        success_url = "%s#comment-%d" % (self.request.path, self.object.id)
+        return success_url
+
+    @property
+    def object_list(self):
+
+        plan_id = self.get_object().pk
+
+        ids = {"plan": set(), "step": set(), "task": set(), "work": set()}
+        ids['plan'].add(plan_id)
+
+        for step in Plan.objects.get(pk=plan_id).plan_steps.all():
+            ids['step'].add(step.pk)
+            for task in step.step_tasks.all():
+                ids['task'].add(task.pk)
+                for work in task.task_works.all():
+                    ids['work'].add(work.pk)
+
+        comments_plan = Comment.objects.filter(content_type=ContentType.objects.get_for_model(Plan), object_id__in=ids['plan']).all()
+        comments_step = Comment.objects.filter(content_type=ContentType.objects.get_for_model(Step), object_id__in=ids['step']).all()
+        comments_task = Comment.objects.filter(content_type=ContentType.objects.get_for_model(Task), object_id__in=ids['task']).all()
+        comments_work = Comment.objects.filter(content_type=ContentType.objects.get_for_model(Work), object_id__in=ids['work']).all()
+
+        object_list = object_list = comments_plan | comments_step | comments_task | comments_work
+
+        return object_list.filter(hours_claimed__gt=0).order_by('id')
+
+    def form_valid(self, form):
+        """
+        If the form is valid, save the associated model.
+        """
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.content_type = ContentType.objects.get_for_model(self.get_object())
+        self.object.object_id = self.get_object().id
+        self.object.save()
+
+        notify_mentioned_users(self.object)
+
+        # temporary: subscribe commenter
+        self.object.content_object.subscribers.add(self.request.user)
+        self.object.content_object.save()
+
+        # payments fields
+        amount = form.cleaned_data.get('amount', False)
+        currency = form.cleaned_data.get('currency', False)
+
+
+        if amount and currency:
+            self.request.session['amount'] = str(amount)
+            self.request.session['currency'] = currency
+            return redirect(reverse("payments:transaction_paypal", kwargs={'comment_id': self.object.id}))
+
+        return super(CommentsContentTypeWrapper, self).form_valid(form)
 
 def notify_new_sharewith_users(list_of_users, object_instance):
 

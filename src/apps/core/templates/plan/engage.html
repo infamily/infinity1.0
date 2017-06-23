@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% load crispy_forms_tags %}
+{% load django_markdown %}
+
+{% load staticfiles %}
+{% load country_isocode %}
+{% load get_translation %}
+{% load step_io %}
+
+{% block extra_js %}
+
+  {% if request|get_country_by_ip != 'CN' %}
+   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  {% else %}  
+   <script src="{% static "cdn/jqueryui/1.11.2/jquery-ui.min.js" %}"></script>
+  {% endif %}
+
+{% endblock extra_js %}
+
+{% block extra_css %}
+   <link rel="stylesheet" href="{% static "css/sharelink.css" %}">
+{% endblock extra_css %}
+
+{% block title %}p: {% if not translation %}{{ object.name }}{% else %}{{ translation.name }}{% endif %}{% endblock title %}
+
+{% block content %}
+
+<center>
+<div id="source-title"><h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1></div>
+<div id="translation-title"></div>
+
+    {% trans "approach to realizing idea" %} <a href="{% url "idea-detail" object.idea.pk %}?lang={{request.LANGUAGE_CODE}}">
+        
+		  {% if object.idea.personal %}
+		    {% if request.user in object.idea.sharewith or request.user == object.idea.user %}
+            {% get_translation object.idea request.LANGUAGE_CODE "name" %}
+		    {% else %}
+               {% trans "private" %} {% trans "idea" %} (by {{ object.idea.user.username }})
+			{% endif %}
+		  {% else %}
+		  {% get_translation object.idea request.LANGUAGE_CODE "name" %}
+		  {% endif %}
+    </a>
+</center>
+<br/><br/><br/>
+
+{# Include comment list with transactions #}
+{% include "comment/engage.html" %}
+
+{% endblock content %}

@@ -1,0 +1,265 @@
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load staticfiles %}
+{% load vote_extras %}
+{% load django_markdown %}
+{% load country_isocode %}
+
+{% block extra_js %}
+  <script src="{% static 'js/comment_vote.js' %}"></script>
+  <script src="{% static 'js/comment_translate.js' %}"></script>
+{% endblock extra_js %}
+
+{% block extra_css %}
+  {% if request|get_country_by_ip != 'CN' %}
+   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+  {% else %}
+   <link rel="stylesheet" href="{% static "cdn/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" %}" />
+  {% endif %}
+{% endblock extra_css %}
+
+{% if not request.user.is_staff %}
+<style>
+    #div_id_monetary {
+    display:none;
+    }
+</style>
+{% endif %}
+
+<script>
+function getfocus() {
+    document.getElementById("id_name").focus();
+}
+
+function fillfocus(text) {
+    document.getElementById("id_text").value = text;
+    document.getElementById("id_text").focus();
+}
+</script>
+{% if request.user.is_authenticated %}
+<script>
+/* Dynamic top menu positioning */
+
+var num = 0; //number of pixels before modifying styles
+
+$(window).bind('scroll', function () {
+    if ($(window).scrollTop() > num) {
+        $('.invite_fd').addClass('invite_fx');
+    } else {
+        $('.invite_fd').removeClass('invite_fx');
+    }
+});
+</script>
+
+<center>
+
+    <div class="progress" style="width: 50%">
+        <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{20}}%;">
+            <span style="line-height: 35px;">{{25.241|floatformat:1}} ḥ {{ object.get_remain_usd|floatformat:2 }}</span>
+            
+        </div>
+    </div>
+
+    <button type="button" onclick="window.location.href = '#invest';">{% trans "INVEST MONEY" %}</button>
+    <!--<button id="translate" type="button" onclick="get_translations();" style="float:right">{% trans "Auto-Translate" %}</button>-->
+
+</center>
+
+    <button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('');">{% trans "INVEST TIME" %}</button>
+    <!--<button id="translate" type="button" onclick="get_translations();" style="float:right">{% trans "Auto-Translate" %}</button>-->
+
+<br/>
+<br/>
+{% else %}
+<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button" style="color: white; background-color: #444444; border-color: #444444; border-radius: 5px 5px 5px 5px;">{% trans "Sign in to comment" %} <i class="fa fa-github"></i></button></a>
+<br/>
+<br/>
+{% endif %}
+
+
+<style>
+.progress {background: rgba(184,184,184, 1); border: 0px solid rgba(163, 157, 157, 1); border-radius: 0px; height: 39px;}
+.progress-bar-custom {background: rgba(84, 84, 84, 0.7);} 
+.progress-striped .progress-bar-custom {background-color: rgba(136, 147, 156, 1); background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255, 255, 255, 0.15),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255, 255, 255, 0.15)),color-stop(0.75,rgba(255, 255, 255, 0.15)),color-stop(0.75,transparent),to(transparent))); background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent); background-image: linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent); background-size: 35px 35px;}
+.progress .progress-bar {
+    background-color: #707090;
+}
+</style>
+
+<a name="invest"></a>
+
+{% for object in object_list reversed %}
+
+<a href="/{{object.content_type.name}}/{{object.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{object.id}}">
+<div class="progress">
+    <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{object.percent_matched}}%;">
+        <span style="line-height: 35px;">{{object.hours_matched|floatformat:4}} ḥ</span>
+    </div>
+</div>
+</a>
+
+<div id="comment-{{object.id}}" class="comment">
+
+	<div id="source-{{object.id}}">
+       {{object.text|markdown}}
+    </div>
+	<div id="translation-{{object.id}}" class="translation">
+    </div>
+
+    <div class="actions">
+
+
+        {% for transaction in object.paypal_transaction.all|dictsort:"id" %}
+		<div class="transaction" name="transaction-{{transaction.id}}" style="{% if not user.is_staff %}display:none;{% endif %}line-height: 80%;"><b>
+                {% if transaction.hours_matched %}
+                <span style="color:#a0a0a0; font-weight: normal; text-decoration:underline;" data-toggle="tooltip" title="{{transaction.hours_matched}} ḥ">
+                {% else %}
+                <span style="color:#c0c0c0; font-weight: normal;">
+                {% endif %}
+                    +{{transaction.hours|floatformat:2}} <a href="https://research.stlouisfed.org/fred2/series/CES0500000003" style="color:#c0c0c0;" target="_blank">ħ</a></span> {{transaction.amount}} {{transaction.currency}}</b> [{{transaction.sender_user}}] → [{{transaction.receiver_user}}]  
+            <span style="color:#c0c0c0; font-weight: normal; font-variant: small-caps;">[<i class="fa fa-cc-paypal"></i> <a name="pptx-{{transaction.id}}" href="#pptx-{{transaction.id}}">{%trans "tx:"%}</a> 
+                {% if transaction.paymentExecStatus == 'CREATED' %}<span style="color: orange;">{% trans "initiated" %}</span>{% elif transaction.paymentExecStatus == 'COMPLETED' %}<span style="color: green;">{% trans "completed" %}</span>{% elif transaction.paymentExecStatus == 'INCOMPLETE' %}<span style="color: brown;">{% trans "incomplete" %}</span>{% elif transaction.paymentExecStatus == 'ERROR' %}<span style="color: red;">{% trans "error" %}</span>{% elif transaction.paymentExecStatus == 'REVERSALERROR' %}<span style="color: red;">{% trans "reversalerror" %}</span>{% endif %}]</span>
+                </div>
+        {% endfor %}
+
+
+		<div align="right">
+        {% if object.hours_claimed or object.hours_assumed %}
+		<button {% if not user.is_staff %}disabled {% endif %}type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" object.id %}'"><font color="#c0c0c0">{{ object.invest_remains }} ħ </font>{% if user.is_staff %}{% trans '<i class="fa fa-dollar"></i> INVEST' %}{% endif %}</button>
+  
+        {% endif %}
+        </div>
+    </div>
+
+    <div class="actions">
+		<br>
+        <div style="float:left; margin-top:-10px;">	
+			<span id="total-votes-{{object.id}}">{{ object.votes }}</span> - 
+
+			{% if request.user.is_authenticated %}
+			<!-- neutral vote -->
+			{% if object|user_vote_info:request.user == 0 %}
+			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
+			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+
+			<!-- positive vote -->
+			{% elif object|user_vote_info:request.user == 1 %}
+			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});"></i> |
+			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+
+			<!-- negative vote -->
+			{% elif object|user_vote_info:request.user == -1 %}
+			<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" class="fa fa-thumbs-o-up" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': 1});" style="hover { background-color: black"></i> |
+			<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-down" onclick="send_vote({'comment_id': {{object.id}}, 'vote_value': -1});"></i>
+			{% endif %}
+
+			{% else %} <!--not logged in-->
+
+				<i id="thumb-up-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Up" %}" title="Vote Up" class="fa fa-thumbs-o-up" onclick="location.href = '{% url "account_login" %}';"></i> |
+				<i id="thumb-down-{{object.id}}" data-toggle="tooltip" title="{% trans "Vote Down" %}" class="fa fa-thumbs-o-down" onclick="location.href = '{% url "account_login" %}';"></i>
+				<script>
+
+				var original_up = $("#thumb-up-{{object.id}}").attr("class");
+				var original_down = $("#thumb-down-{{object.id}}").attr("class");
+
+				// visual feedback for thumbs down
+				$("#thumb-up-{{object.id}}").hover(
+				function () {
+					$(this).removeClass(original_up);
+					$(this).addClass("fa fa-thumbs-up");
+				},
+				function () {
+					$(this).removeClass("fa fa-thumbs-up");
+					$(this).addClass(original_up);
+				});
+
+				// visual feedback for thumbs down
+				$("#thumb-down-{{object.id}}").hover(
+				function () {
+					$(this).removeClass(original_down);
+					$(this).addClass("fa fa-thumbs-down");
+				},
+				function () {
+					$(this).removeClass("fa fa-thumbs-down");
+					$(this).addClass(original_down);
+				});
+				</script>
+
+			{% endif %}
+
+			- {% trans "credit" %} <span id="comment-credit-{{object.id}}">{{ object.comment_credit|floatformat:1 }}</span> ħ
+        </div>
+
+		<div class="alignright date">
+
+			--[<a href="{% url "user-detail" object.user.username %}">{{object.user.username}}</a>], {{object.created_at}}<br/>
+			<div class="alignright">
+				{% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
+				{% else %}
+				{% if request.user.is_authenticated %}
+				<button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
+				{% else %}
+					<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">{% trans "reply" %}</button></a>
+				{% endif %}
+				{% endif %}
+			</div>
+		</div>
+
+		<br>
+    </div>
+
+    <br>
+    <hr>
+</div>
+{% endfor %}
+
+<script>
+// tooltip
+$(document).ready(function(){
+$('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+
+<!-- this style should not be moved to global styles, as it will hide amount/currency fields elsewhere-->
+<style>
+    #div_id_amount {
+        display: none;
+    }
+    #div_id_currency {
+        display: none;
+    }
+</style>
+{% if request.user.is_authenticated %}
+<div id="comment" class="panel panel-default input-comment">
+<div id="comment-{{ object_list.last.id|add:1 }}" class="panel-body">
+{% crispy form %}
+{% markdown_media %}
+</div>
+{% if '/goal/' in request.path %}
+<div style="margin:0px; padding: 10px; background-color: grey; color:white;">
+    <p>{% trans "<b>Notice:</b> Please, don't suggest ideas in the comments. Judge the problem, question the problem: is it important? Should we do it? Is it a part of a greater problem? If you have ideas <i>how</i> to do it - add them as ideas, not comments." %}</p>
+</div>
+{% elif '/idea' in request.path %}
+{% endif %}
+</div>
+
+
+<div class="panel panel-default" style="{% if not request.user.is_staff %}display:none;{% endif %}">
+    <div class="panel-body">
+        {% crispy conversation_form %}
+    </div>
+</div>
+
+{% else %}
+<!-- logged out end of comment list -->
+    {% if object_list %}
+	<div align="left" style="display:block"><a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button" style="color: white; background-color: #888888; border-color: #888888; border-radius: 5px 5px 5px 5px;">{% trans "Sign in to comment" %} <i class="fa fa-github"></i></button></a></div>
+    {% endif %}
+{% endif %}
+
+
+{% if request.user.is_authenticated %}
+<!-- for now, let's simply use the traditional invites -->
+<!-- <div class="invite_fd"><b><a href="#id_name" onclick="getfocus()" style="color:white; text-decoration: none;">{% trans "Invite a friend to help!" %}</a></b></div> -->
+<div class="invite_fd"><b><a href="{% url "invite:send"  %}" style="color:white; text-decoration: none;">{% trans "Invite a friend to help!" %}</a></b></div>
+{% endif %}

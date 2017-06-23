@@ -367,10 +367,15 @@ class Comment(models.Model):
     def comment_credit(self):
         return min([self.hours_claimed, self.votes()]) or Decimal(0.)
 
+    def time_total(self):
+        return self.hours_assumed+self.hours_claimed
+
     def invest_remains(self):
-        return max(Decimal(0), round((self.hours_assumed+
-                                      self.hours_claimed-
+        return max(Decimal(0), round((self.time_total()-
                                       self.hours_donated),2))
+    def percent_matched(self):
+        return 100*round(self.hours_matched/self.time_total(), 2)
+
 
 class Vote(models.Model):
 
