@@ -19,10 +19,6 @@
     <link href="{% static "bootswatch/lumen/bootstrap.min.css" %}" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="{% static "bootstrap-material-design/dist/css/bootstrap-material-design.css" %}">
-    {% if '/engage/' in request.get_full_path %}
-    <!-- [ Background Effect ] -->
-    <link rel="stylesheet" href="{% static "css/partical-animation-bootstrap.css" %}">
-    {% endif %}
     <link rel="stylesheet" type="text/css" href="{% static "bootstrap-material-design/dist/css/ripples.min.css" %}">
 
     <link href="{% static "bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" %}" rel="stylesheet">
@@ -48,6 +44,10 @@
     </style>
     <!-- This file store project specific CSS -->
     <link href="{% static "css/infinity.css" %}" rel="stylesheet">
+    {% if '/engage/' in request.get_full_path %}
+    <!-- [ Background Effect ] -->
+    <link rel="stylesheet" href="{% static "css/partical-animation-bootstrap.css" %}">
+    {% endif %}
 
     <!-- Use this to quickly test CSS changes in a template, then move to infinity.css -->
     {% block extra_css %}{% endblock extra_css %}

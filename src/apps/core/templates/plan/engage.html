@@ -20,7 +20,6 @@
 {% endblock extra_js %}
 
 {% block extra_css %}
-   <link rel="stylesheet" href="{% static "css/sharelink.css" %}">
    <link rel="stylesheet" href="{% static "css/partical-animation.css" %}">
 {% endblock extra_css %}
 
@@ -30,7 +29,7 @@
 
 <center>
 <div id="source-title"><h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1></div>
-<div id="translation-title"></div>
+<div id="translation-title">
 
     {% trans "approach to realizing idea" %} <a href="{% url "idea-detail" object.idea.pk %}?lang={{request.LANGUAGE_CODE}}">
         
@@ -44,6 +43,7 @@
 		  {% get_translation object.idea request.LANGUAGE_CODE "name" %}
 		  {% endif %}
     </a>
+</div>
 </center>
 <br/><br/><br/>
 
