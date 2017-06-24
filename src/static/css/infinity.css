@@ -235,6 +235,23 @@ table.table.centered
     border-radius: 4px;
 }
 
+#investbtn {
+    padding:.5em;
+    width:10em;
+    border: 1px solid;
+    border-radius: 4px;
+}
+
+#claimtime {
+    width:13em;
+    right:5px;
+    border: 1px solid;
+    border-radius: 4px;
+    position:absolute;
+    bottom:5px;
+    position:fixed;
+}
+
 .invite_fx {
     position:fixed;
     bottom:0;

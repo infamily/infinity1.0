@@ -27,9 +27,13 @@
 
 {% block content %}
 
+<div style="height: 17vh;"></div>
+
+
 <center>
 <div id="source-title"><h1>{% if not translation %}{{ object.name }}{% else %}{{ translation.name}}{% endif %}</h1></div>
 <div id="translation-title">
+<div style="height: 5vh;"></div>
 
     {% trans "approach to realizing idea" %} <a href="{% url "idea-detail" object.idea.pk %}?lang={{request.LANGUAGE_CODE}}">
         
@@ -44,8 +48,8 @@
 		  {% endif %}
     </a>
 </div>
+<div style="height: 5vh;"></div>
 </center>
-<br/><br/><br/>
 
 {# Include comment list with transactions #}
 {% include "comment/engage.html" %}
