@@ -155,7 +155,7 @@ $(window).bind('scroll', function () {
 
 		<div align="right">
         {% if object.hours_claimed or object.hours_assumed %}
-		<button {% if not user.is_staff %}disabled {% endif %}type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" object.id %}'"><font color="#404040">{{ object.invest_remains }} ħ {% if user.is_staff %}{% trans '<i class="fa fa-dollar"></i> INVEST' %}{% endif %}</font></button>
+        <button {% if not user.is_staff %}disabled {% endif %}type="button" onclick="window.location.href = '{% url "payments:transaction_paypal" object.id %}'" data-toggle="tooltip" title="{%trans "Currently only staff use this option." %}"><font color="{% if user.is_staff %}#404040{%else%}#c0c0c0{% endif %}">{{ object.invest_remains }} ħ {% trans '<i class="fa fa-dollar"></i> INVEST' %}</font></button>
   
         {% endif %}
         </div>
@@ -227,7 +227,7 @@ $(window).bind('scroll', function () {
 				{% if object.user == request.user %}[<a href="{% url "comment-update" object.id %}?next={{ request.path }}#comment-{{object.id }}">{% trans "edit" %}</a>, <a href="{% url "comment-delete" object.id %}?next={{ request.path }}">{% trans "delete" %}</a>]
 				{% else %}
 				{% if request.user.is_authenticated %}
-				<button type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
+				<button style="color:black;" type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('[{{ object.user }}] ')">{% trans "reply" %}</button>
 				{% else %}
 					<a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button">{% trans "reply" %}</button></a>
 				{% endif %}
