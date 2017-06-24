@@ -535,6 +535,13 @@ class Plan(BaseContentModel):
         else:
             return Decimal(0)
 
+    def get_donated_percentage_plus(self):
+        if self.total_donated:
+            default = Decimal(3)
+            return default + Decimal(self.get_donated_percentage())
+        else:
+            return Decimal(0)
+
     def get_total_expected(self):
         return self.total_claimed + self.total_assumed
 

@@ -343,7 +343,7 @@ class CommentsEngageContentTypeWrapper(CreateView):
             self.request.session['currency'] = currency
             return redirect(reverse("payments:transaction_paypal", kwargs={'comment_id': self.object.id}))
 
-        return super(CommentsContentTypeWrapper, self).form_valid(form)
+        return super(CommentsEngageContentTypeWrapper, self).form_valid(form)
 
 def notify_new_sharewith_users(list_of_users, object_instance):
 

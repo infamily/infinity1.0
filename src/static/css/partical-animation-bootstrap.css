@@ -61,3 +61,27 @@ animation: animate-stripes 3s linear infinite;
 .transaction {
     color: #404040;
 }
+
+#claimtime {
+    z-index: 99999;
+}
+
+div {
+    z-index: 99999;
+}
+input {
+    z-index: 999999;
+}
+
+
+.fa-thumbs-o-down:hover {
+	color: white;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.fa-thumbs-o-up:hover {
+	color: white;
+	cursor: pointer;
+	cursor: hand;
+}

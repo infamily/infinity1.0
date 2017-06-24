@@ -44,7 +44,7 @@
     </style>
     <!-- This file store project specific CSS -->
     <link href="{% static "css/infinity.css" %}" rel="stylesheet">
-    {% if '/engage/' in request.get_full_path %}
+    {% if '/engage/' in request.get_full_path and '?next=' not in request.get_full_path %}
     <!-- [ Background Effect ] -->
     <link rel="stylesheet" href="{% static "css/partical-animation-bootstrap.css" %}">
     {% endif %}
@@ -59,7 +59,7 @@
 
     <script src="{% static "js/infinity.js" %}"></script>
 
-    {% if '/engage/' in request.get_full_path %}
+    {% if '/engage/' in request.get_full_path and '?next=' not in request.get_full_path %}
     <!-- [ Background Effect ] -->
     <link rel="stylesheet" href="{% static "css/partical-animation.css" %}">
     {% endif %}
@@ -95,7 +95,7 @@
 		  <a class="navbar-brand" href="{% url "home" %}"><span class='brand'>{% trans "Solving Problems" %}</span><!--<span class="infin">&infin;</span><span class='ity'>.xyz</span>--></a>
         </div>
 
-        {% if '/engage/' in request.get_full_path %}
+        {% if '/engage/' in request.get_full_path and '?next=' not in request.get_full_path %}
         <div id="particles-js"><canvas class="particles-js-canvas-el" width="1600" height="754" style="width: 100%; height: 100%;"></canvas></div>
         {% endif %}
 
@@ -213,7 +213,7 @@
       {% block javascript %}
       {% endblock javascript %}
 
-      {% if '/engage/' in request.get_full_path %}
+      {% if '/engage/' in request.get_full_path and '?next=' not in request.get_full_path %}
       <!-- [ Background Effect ] -->
       <script src="{% static "particles.js/particles.min.js" %}"></script>
       <script src="{% static "js/partical-animation.js" %}"></script>

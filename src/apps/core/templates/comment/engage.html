@@ -41,7 +41,7 @@ function fillfocus(text) {
 <center>
 
     <div class="progress" style="width: 50%; border-radius:7px;">
-        <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 3%;">
+        <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{object.get_donated_percentage_plus}}%;">
             <span style="line-height: 35px;">ḥ</span>
         </div>
         <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="background-color: #6d6767; width: {{object.get_claimed_percentage|floatformat:1}}%;">
@@ -52,7 +52,7 @@ function fillfocus(text) {
         </div>
     </div>
 
-    <p>{{object.total_donated|floatformat:2}} hours funded out of {{object.total_claimed|floatformat:0}} spent, and {{object.total_assumed|floatformat:0}} projected.</p>
+    <p>{{object.total_donated|floatformat:2}} (ḥ) hours matched out of {{object.total_claimed|floatformat:0}} spent, and {{object.total_assumed|floatformat:0}} projected.</p>
 
     <button id="investbtn" type="button" onclick="window.location.href = '#invest';">{% trans "INVEST" %}</button>
     <!--<button id="translate" type="button" onclick="get_translations();" style="float:right">{% trans "Auto-Translate" %}</button>-->
@@ -69,7 +69,16 @@ function fillfocus(text) {
 
 <div style="height: 40vh;"></div>
 
+    {% if request.user.is_authenticated %}
+
     <button id="claimtime" type="button" onclick="window.location.href = '#comment-{{object_list.last.id}}';fillfocus('');">{% trans "CLAIM TIME" %}</button>
+
+    {% else %}
+    <a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button id="claimtime" type="button" onclick="{% url "account_login" %}?next={{ request.path }}#comment">{% trans "Sign in to claim time" %} </button></a>
+
+    {% endif %}
+
+
     <!--<button id="translate" type="button" onclick="get_translations();" style="float:right">{% trans "Auto-Translate" %}</button>-->
 
 
@@ -106,16 +115,18 @@ $(window).bind('scroll', function () {
 </style>
 
 <a name="invest"></a>
+<div style="height: 7vh;"></div>
 
 {% for object in object_list reversed %}
 
-<a href="/{{object.content_type.name}}/{{object.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}#comment-{{object.id}}">
-<div class="progress">
-    <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{object.percent_matched}}%;">
+
+
+<div><a style="color: black;" href="/{{object.content_type.name}}/{{object.content_object.id}}/detail/?lang={{request.LANGUAGE_CODE}}"><button style="border-radius:7px;">{{object.content_type}} #{{object.content_object.id}}</button></a> - <i>{{object.content_object.name}}</i><p></div>
+<div class="progress" style="border-radius:7px;">
+    <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{object.percent_matched}}%; ">
         <span style="line-height: 35px;">{{object.hours_matched|floatformat:4}} ḥ</span>
     </div>
 </div>
-</a>
 
 <div id="comment-{{object.id}}" class="comment">
 
@@ -270,10 +281,6 @@ $('[data-toggle="tooltip"]').tooltip();
 </div>
 
 {% else %}
-<!-- logged out end of comment list -->
-    {% if object_list %}
-	<div align="left" style="display:block"><a style="color:black;" href="{% url "account_login" %}?next={{ request.path }}#comment"><button type="button" style="color: white; background-color: #888888; border-color: #888888; border-radius: 5px 5px 5px 5px;">{% trans "Sign in to comment" %} <i class="fa fa-github"></i></button></a></div>
-    {% endif %}
 {% endif %}
 
 
