@@ -524,10 +524,16 @@ class Plan(BaseContentModel):
         return self.plain_equity*100
 
     def get_claimed_percentage(self):
-        return 100*round(self.total_claimed/(self.total_claimed + self.total_assumed), 2)
+        if self.total_claimed:
+            return 100*round(self.total_claimed/(self.total_claimed + self.total_assumed), 2)
+        else:
+            return Decimal(0)
 
     def get_donated_percentage(self):
-        return 100*round(self.total_donated/(self.total_claimed + self.total_assumed), 2)
+        if self.total_donated:
+            return 100*round(self.total_donated/(self.total_claimed + self.total_assumed), 2)
+        else:
+            return Decimal(0)
 
     def get_total_expected(self):
         return self.total_claimed + self.total_assumed

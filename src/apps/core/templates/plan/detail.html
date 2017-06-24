@@ -170,7 +170,10 @@ $(document).ready( function() {
                      window.location.href="mailto:?subject="+document.title+"&body="+escape('http://{{request.META.HTTP_HOST}}/p/{{ object.id }}/{{ request.GET.lang }}');
                     }
               </script>
+
               <button onclick="javascript:emailCurrentPage()" type="button" style="border-radius: 5px 5px 5px 5px;"><i class="fa fa-envelope"></i></button>
+
+              <button onclick="location.href = 'http://{{request.META.HTTP_HOST}}/plan/{{object.id}}/engage/?lang={{ request.GET.lang }}';" type="button" style="border-radius: 5px 5px 5px 5px;"><i class="fa fa-bar-chart-o"></i></button>
 
               <div id="myDropdown" class="dropdown-content">
                 <div style="margin:20px;">
@@ -197,6 +200,8 @@ $(document).ready( function() {
 	  </div>
 
     <div class="alignright">
+
+
         <form style="text-align: right;" action="/subscribe/" method="post" accept-charset="utf-8">{% csrf_token %}
               <input type="hidden" value="{{ content_type }}" id="id_content_type" name="content_type">
               <input type="hidden" value="{{ object_id }}" id="id_object_id" name="object_id">
